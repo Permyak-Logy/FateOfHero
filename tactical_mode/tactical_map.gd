@@ -1,32 +1,18 @@
 extends Node
+
 class_name TacticalMap
-
 @onready var _tile_map: TileMap = $TileMap
-@onready var _tile_rect: Rect2i = _tile_map.get_used_rect()
 
-const _MOD_CELL_ID = 1000 
-var _astar = AStar2D.new()
+@onready var _astar_board = AStarHexagon2D.new(_tile_map.get_used_cells(0))
+@onready var _astar_walkable: AStarHexagon2D
 
-# Первый набор для чётных Y координат, второй для нечётных
-const DIRECTIONS = [
-	[
-		Vector2i(-1, -1), Vector2i(0, -1),
-		Vector2i(-1, 0), Vector2i(1, 0),
-		Vector2i(-1, 1), Vector2i(0, 1)
-	], [
-		Vector2i(0, -1), Vector2i(1, -1), 
-		Vector2i(-1, 0), Vector2i(1, 0), 
-		Vector2i(0, 1), Vector2i(1, 1)
-	]
-] 
-
-@onready var _active_unit = $CharacterBody2D
+@onready var _active_unit: Unit = $Naris
+@onready var _current_path = PackedVector2Array()
+var blocked_path = false
 
 func _ready():
-	_reinitialize()
-	var array = _flood_fill(to_map($CharacterBody2D.global_position))
-	print(array)
-	draw(1, array, 1, Vector2i(0, 0))
+	_active_unit = $Naris
+	_update_walkable()
 
 func draw(layer: int, array: Array, source_id: int = -1, 
 atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
@@ -39,27 +25,6 @@ func to_map(cell: Vector2) -> Vector2i:
 	
 func to_loc(cell: Vector2i) -> Vector2:
 	return _tile_map.map_to_local(cell)
-
-func mti(cell: Vector2i) -> int:
-	return cell[0] * _MOD_CELL_ID + cell[1] % _MOD_CELL_ID
-
-func itm(cell: int) -> Vector2i:
-	return _astar.get_point_position(cell) as Vector2i
-
-func _reinitialize() -> void:
-	_astar.clear()
-	var cells = _tile_map.get_used_cells(0)
-	for cell in cells:
-		_astar.add_point(mti(cell), cell)
-	for cell in cells:
-		var cell_id = mti(cell) 
-		for direction in DIRECTIONS[cell[1] % 2]:
-			var other = cell + direction
-			if is_within_bounds(other):
-				_astar.connect_points(cell_id, mti(other), false)
-
-func is_within_bounds(cell: Vector2i) -> bool:
-	return _tile_rect.has_point(cell)
 
 func is_occupied(cell: Vector2i) -> bool:
 	return cell in _tile_map.get_used_cells(3)
@@ -77,8 +42,8 @@ func _flood_fill(cell: Vector2i, max_distance: int = 6, cells: int = 1) -> Array
 			distance += 1
 			continue
 		
-		for next_id in _astar.get_point_connections(mti(current)):
-			var next = itm(next_id)
+		for next_id in _astar_board.get_point_connections(_astar_board.mti(current)):
+			var next = _astar_board.itm(next_id)
 			if is_occupied(next):
 				continue
 			if cells == 2 and is_occupied(next + Vector2i(1, 0)):
@@ -91,53 +56,42 @@ func _flood_fill(cell: Vector2i, max_distance: int = 6, cells: int = 1) -> Array
 
 	return array
 
+func _update_walkable():
+	var cells = _flood_fill(to_map(_active_unit.global_position))
+	_astar_walkable = AStarHexagon2D.new(cells)
+	_tile_map.clear_layer(1)
+	draw(1, cells, 3, Vector2i(0, 0))
 
-func _input(event: InputEvent):
-	if event.is_action_pressed("move"):
-		print(event)
-		print(to_map(event.position))
-
-"""
-@export var count_tiles: int = 1
-
-@onready var tile_map: TileMap = $"../../TileMap"
-@onready var animation: AnimationPlayer = $"../AnimationPlayer"
-@onready var root: Node2D = $".."
-
-var astar_grid: AStarGrid2D
-var curent_id_path: Array[Vector2i]
-
-func _ready():
-	astar_grid = AStarGrid2D.new()
-	astar_grid.region = tile_map.get_used_rect()
-	astar_grid.cell_size = Vector2i(64,32)
-	astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_CHEBYSHEV
-	astar_grid.update()
-
+func _update_path(event: InputEventMouseMotion):
+	if _active_unit and _astar_walkable and not blocked_path:
+		var path = _astar_walkable.get_id_path(
+			_astar_walkable.mti(to_map(_active_unit.global_position)),
+			_astar_walkable.mti(to_map(event.global_position))
+		)
+		_current_path.clear()
+		for cell in path:
+			_current_path.append(_astar_walkable.itm(cell))
+		_tile_map.clear_layer(2)
+		draw(2, _current_path, 1, Vector2i(0, 0))
+	
+func _move_active_unit():
+	if not _current_path:
+		return
+	# warning-ignore:return_value_discarded
+	# _units.erase(_active_unit.cell)
+	# _units[new_cell] = _active_unit
+	_tile_map.clear_layer(1)
+	_active_unit.walk_along(_current_path)
+	blocked_path = true
+	await _active_unit.walk_finished
+	blocked_path = false
+	print("Go 2!")
+	_update_walkable()
+	# _clear_active_unit()
 
 func _input(event):
-	if event.is_action_pressed("move") == false:
-		return
-		
-	var id_path = astar_grid.get_id_path(
-		tile_map.local_to_map(root.global_position),
-		tile_map.local_to_map(root.get_global_mouse_position())
-	).slice(1)
-	
-	
-	if id_path.is_empty() == false:
-		curent_id_path = id_path
-		
-		
-func _physics_process(_delta):
-	if curent_id_path.is_empty():
-		animation.play("idle")
-		return
-		
-	var target_position = tile_map.map_to_local(curent_id_path.front())
-	animation.play("run")
-	root.global_position = root.global_position.move_toward(target_position, 3)
-	
-	if root.global_position == target_position:    
-		curent_id_path.pop_front()
-"""
+	if is_instance_of(event, InputEventMouseMotion):
+		_update_path(event)
+
+	if event.is_action_pressed("move"):
+		_move_active_unit()

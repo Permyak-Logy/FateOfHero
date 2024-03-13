@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
-[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/base_unit/Naris/Naris.tscn" id="4_g6y5p"]
+[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/base_unit/Naris/Naris.tscn" id="4_fw2bu"]
 [ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
 
 [node name="TacticalMap" type="Node2D"]
@@ -32,5 +32,5 @@ scale = Vector2(1.6, 1.6)
 texture = ExtResource("7_jbq2n")
 offset = Vector2(305, 175)
 
-[node name="Naris" parent="." instance=ExtResource("4_g6y5p")]
-position = Vector2(66, 182)
+[node name="Naris" parent="." instance=ExtResource("4_fw2bu")]
+position = Vector2(65, 182)

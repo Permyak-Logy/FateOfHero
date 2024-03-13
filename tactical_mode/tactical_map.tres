@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://lbr4c2x4bna0"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://lbr4c2x4bna0"]
 
 [ext_resource type="Texture2D" uid="uid://pco6h1hkkc0o" path="res://tactical_mode/assets/HexagonTile.png" id="1_2kr5i"]
 [ext_resource type="Texture2D" uid="uid://kjp07ke634fy" path="res://tactical_mode/assets/HexagonTileOverlay.png" id="2_07qhm"]
+[ext_resource type="Texture2D" uid="uid://d288n5df0wr0l" path="res://tactical_mode/assets/HexagonTileOverlay2.png" id="3_bdi8i"]
 [ext_resource type="Texture2D" uid="uid://dn4y7srufc0g7" path="res://tactical_mode/assets/HexagonTileWall.png" id="3_v4d7u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n8l8n"]
@@ -18,15 +19,20 @@ texture_region_size = Vector2i(64, 32)
 2:1/0 = 0
 3:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_txlfg"]
-texture = ExtResource("2_07qhm")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mtgjd"]
+texture = ExtResource("3_bdi8i")
+texture_region_size = Vector2i(64, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1wl6d"]
+texture = ExtResource("3_v4d7u")
 texture_region_size = Vector2i(64, 32)
 0:0/next_alternative_id = 2
 0:0/0 = 0
 0:0/1 = 1
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1wl6d"]
-texture = ExtResource("3_v4d7u")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_txlfg"]
+texture = ExtResource("2_07qhm")
 texture_region_size = Vector2i(64, 32)
 0:0/next_alternative_id = 2
 0:0/0 = 0
@@ -36,5 +42,6 @@ texture_region_size = Vector2i(64, 32)
 tile_shape = 3
 tile_size = Vector2i(64, 32)
 sources/0 = SubResource("TileSetAtlasSource_n8l8n")
-sources/1 = SubResource("TileSetAtlasSource_txlfg")
 sources/2 = SubResource("TileSetAtlasSource_1wl6d")
+sources/1 = SubResource("TileSetAtlasSource_mtgjd")
+sources/3 = SubResource("TileSetAtlasSource_txlfg")
