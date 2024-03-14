@@ -60,11 +60,15 @@ _data = {
 "run": SubResource("Animation_8gx8v")
 }
 
-[node name="Naris" type="CharacterBody2D"]
+[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed")]
 z_index = 1
 script = ExtResource("1_7crcm")
+inventory = NodePath("InventoryComponent")
+health = NodePath("StatHealth")
+speed = NodePath("StatSpeed")
 
-[node name="StatComponent" parent="." instance=ExtResource("2_km4jx")]
+[node name="StatHealth" parent="." instance=ExtResource("2_km4jx")]
+default_base = 10.0
 
 [node name="InventoryComponent" parent="." instance=ExtResource("3_yb5u2")]
 
@@ -81,3 +85,6 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_5icws")
 }
+
+[node name="StatSpeed" parent="." instance=ExtResource("2_km4jx")]
+default_base = 100.0
