@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://jgko6igthbun"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_rposf"]
+[ext_resource type="Texture2D" uid="uid://bw48glpfkyl7n" path="res://inventory/icons/apple.png" id="2_8vgnk"]
+
+[resource]
+script = ExtResource("1_rposf")
+name = "apple"
+texture = ExtResource("2_8vgnk")
+max_stack = 100
