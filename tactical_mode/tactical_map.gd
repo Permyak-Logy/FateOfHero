@@ -142,5 +142,5 @@ func _input(event):
 	if is_instance_of(event, InputEventMouseMotion):
 		_update_path(_tile_map.make_input_local(event))
 
-	if event.is_action_pressed("move"):
+	if event.is_action_pressed("lmb"):
 		_move_active_unit()
