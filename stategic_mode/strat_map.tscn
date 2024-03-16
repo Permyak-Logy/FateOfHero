@@ -4087,8 +4087,6 @@ layer_1/tile_data = PackedInt32Array(524285, 2, 65536, 589825, 2, 65536, 393216,
 script = SubResource("GDScript_e0x0d")
 
 [node name="player" type="CharacterBody2D" parent="."]
-collision_layer = 51
-collision_mask = 51
 script = ExtResource("2_eaxqt")
 inventory = ExtResource("4_o5yfv")
 

@@ -73,10 +73,8 @@ func _physics_process(delta):
 	
 	if collision:
 		var collidor = collision.get_collider()
-		print(collidor.activate())
-		
-		#if :
-			#collidor.activate()
+		# currently the only collidable things are descendants of TileEvent 
+		collidor.activate()
 	
 	if global_position == target_position:
 		current_id_path.pop_front()

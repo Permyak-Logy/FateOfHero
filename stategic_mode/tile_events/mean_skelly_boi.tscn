@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dipubwp70sl3s"]
+
+[ext_resource type="PackedScene" uid="uid://bpa53mqxjwk7r" path="res://stategic_mode/tile_events/TileEvent.tscn" id="1_g813s"]
+[ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://stategic_mode/tile_events/sprites/mean_skelly_boi.png" id="2_8svci"]
+
+[node name="MeanSkellyBoi" instance=ExtResource("1_g813s")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_8svci")
