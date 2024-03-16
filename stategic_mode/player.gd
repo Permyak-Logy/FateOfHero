@@ -1,6 +1,8 @@
-extends Node2D
+extends CharacterBody2D
 
 @onready var tilemap =  $"../TileMap"
+@onready var TileEvent = preload("res://stategic_mode/tile_events/TileEvent.tscn")
+
 
 @export var inventory: Inventory
 
@@ -15,6 +17,8 @@ func _ready():
 	astar_grid.cell_size = Vector2(16, 16) 
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.update()
+	collision_mask = 0x0001
+	collision_layer = 0xffff
 	
 	for x in tilemap.get_used_rect().size.x:
 		for y in tilemap.get_used_rect().size.y:
@@ -64,7 +68,15 @@ func _physics_process(delta):
 		print("first_target: ", tilemap.local_to_map(target_position))
 		is_moving = true
 	
-	global_position = global_position.move_toward(target_position, 8 * 16 * delta)
+	var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
+	var collision = move_and_collide(movement)
+	
+	if collision:
+		var collidor = collision.get_collider()
+		print(collidor.activate())
+		
+		#if :
+			#collidor.activate()
 	
 	if global_position == target_position:
 		current_id_path.pop_front()

@@ -44,6 +44,7 @@ func open():
 	is_open = true 
 	visible = true
 	inventory_opened.emit()
+	update()
 	
 func close():
 	is_open = false 

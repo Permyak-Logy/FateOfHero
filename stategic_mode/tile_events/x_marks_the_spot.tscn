@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvk8v36nd7iqw"]
+
+[ext_resource type="PackedScene" uid="uid://bpa53mqxjwk7r" path="res://stategic_mode/tile_events/TileEvent.tscn" id="1_f3f1a"]
+[ext_resource type="Script" path="res://stategic_mode/tile_events/x_marks_the_spot.gd" id="2_6bm3m"]
+[ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://stategic_mode/tile_events/sprites/x_marks_the_spot.png" id="2_desvu"]
+
+[node name="XMarksTheSpot" instance=ExtResource("1_f3f1a")]
+script = ExtResource("2_6bm3m")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_desvu")
