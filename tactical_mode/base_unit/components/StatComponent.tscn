@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drgt6laud5ncn"]
+
+[ext_resource type="Script" path="res://tactical_mode/base_unit/components/StatComponent.gd" id="1_if5fw"]
+
+[node name="StatComponent" type="Node"]
+script = ExtResource("1_if5fw")

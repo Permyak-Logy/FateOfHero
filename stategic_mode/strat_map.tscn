@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://stategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://stategic_mode/strat_map.gd" id="1_vssm8"]
 [ext_resource type="Script" path="res://stategic_mode/player.gd" id="2_eaxqt"]
-[ext_resource type="Texture2D" uid="uid://cqqiuyiowhipy" path="res://stategic_mode/icon.svg" id="3_mfk8b"]
+[ext_resource type="Texture2D" uid="uid://cqqiuyiowhipy" path="res://icon.svg" id="3_mfk8b"]
 [ext_resource type="Script" path="res://stategic_mode/GUI.gd" id="4_0143e"]
 [ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory_gui.tscn" id="4_ar3pl"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="4_o5yfv"]
