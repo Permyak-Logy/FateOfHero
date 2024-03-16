@@ -7,10 +7,12 @@ class_name TacticalMap
 @onready var _astar_walkable: AStarHexagon2D
 
 @onready var _current_path = PackedVector2Array()
-var blocked_path = false
+var _block_input = false
 const _ACT_INDEX_MAX = 10000
 var unit_queue = []
 var acts: int
+
+signal finish
 
 func active_unit() -> Unit:
 	return unit_queue[0][1]
@@ -19,7 +21,8 @@ func _ready():
 	for child in get_children():
 		if is_instance_of(child, Unit):
 			var unit = child as Unit
-			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
+			if unit.speed:
+				unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
 	
@@ -77,9 +80,11 @@ func _start_stepmove():
 	else:
 		acts = 0
 		_update_stepmove()
+	_block_input = false
 
 func _update_stepmove():
 	if acts != 0:
+		_block_input = false
 		_update_walkable()
 		return
 	
@@ -88,6 +93,17 @@ func _update_stepmove():
 		elem[0] -= time
 	unit_queue[0][0] += _ACT_INDEX_MAX / active_unit().speed.cur()
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
+	
+	var any_player_unit = false
+	var any_enemy_unit = false
+	for elem in unit_queue:
+		var unit: Unit = elem[1]
+		if unit.controlled_player:
+			any_player_unit = true
+		else:
+			any_enemy_unit = false
+	if any_player_unit ^ any_enemy_unit:
+		return
 	_start_stepmove()
 
 func _update_walkable():
@@ -97,7 +113,7 @@ func _update_walkable():
 	draw(1, cells, 3, Vector2i(0, 0))
 
 func _update_path(event: InputEventMouseMotion):
-	if active_unit() and _astar_walkable and not blocked_path:
+	if active_unit() and _astar_walkable:
 		var path = _astar_walkable.get_id_path(
 			_astar_walkable.mti(to_map(active_unit().global_position)),
 			_astar_walkable.mti(to_map(event.position))
@@ -111,17 +127,18 @@ func _update_path(event: InputEventMouseMotion):
 func _move_active_unit():
 	if not _current_path:
 		return
+	_block_input = true
 	acts -= 1
 	_tile_map.clear_layer(1)
 	active_unit().walk_along(_current_path)
-	blocked_path = true
 	await active_unit().walk_finished
-	blocked_path = false
 	_tile_map.clear_layer(2)
 	
 	_update_stepmove()
 
 func _input(event):
+	if _block_input:
+		return
 	if is_instance_of(event, InputEventMouseMotion):
 		_update_path(_tile_map.make_input_local(event))
 

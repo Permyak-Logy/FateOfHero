@@ -1,22 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://kj8esabe8qfg"]
+[gd_scene load_steps=4 format=3 uid="uid://kj8esabe8qfg"]
 
 [ext_resource type="Script" path="res://tactical_mode/base_unit/Vendigo/Vendigo.gd" id="1_oj4or"]
-[ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/base_unit/components/InventoryComponent.tscn" id="2_v62ba"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="3_sy0f3"]
 [ext_resource type="Texture2D" uid="uid://yf64rowfciuo" path="res://tactical_mode/base_unit/Vendigo/Vendigo.png" id="4_g6t4h"]
 
 [node name="Vendigo" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed")]
 z_index = 1
 script = ExtResource("1_oj4or")
-inventory = NodePath("InventoryComponent")
+inventory = NodePath("")
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 cells_occupied = 2
 controlled_player = false
 
-[node name="InventoryComponent" parent="." instance=ExtResource("2_v62ba")]
-
 [node name="StatHealth" parent="." instance=ExtResource("3_sy0f3")]
+default_base = 100.0
 
 [node name="StatSpeed" parent="." instance=ExtResource("3_sy0f3")]
 default_base = 101.0

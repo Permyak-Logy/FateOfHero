@@ -3,7 +3,6 @@ extends "res://tactical_mode/base_unit/unit.gd"
 class_name Vendigo
 
 @onready var tile_map = $"../TileMap"
-@onready var animation = $AnimationPlayer
 
 var current_id_path: Array = []
 

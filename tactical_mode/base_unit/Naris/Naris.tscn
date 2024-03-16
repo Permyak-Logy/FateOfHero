@@ -68,7 +68,10 @@ health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 
 [node name="StatHealth" parent="." instance=ExtResource("2_km4jx")]
-default_base = 10.0
+default_base = 100.0
+
+[node name="StatSpeed" parent="." instance=ExtResource("2_km4jx")]
+default_base = 100.0
 
 [node name="InventoryComponent" parent="." instance=ExtResource("3_yb5u2")]
 
@@ -85,6 +88,3 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_5icws")
 }
-
-[node name="StatSpeed" parent="." instance=ExtResource("2_km4jx")]
-default_base = 100.0
