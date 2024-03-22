@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bwx7qmeuapudt" path="res://tactical_mode/base_unit/Skeleton/Enemy.png" id="3_0chvl"]
 
 [node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("health", "speed")]
+z_index = 1
 script = ExtResource("1_ccpxk")
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
@@ -16,4 +17,5 @@ default_base = 100.0
 default_base = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
 texture = ExtResource("3_0chvl")

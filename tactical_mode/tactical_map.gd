@@ -44,7 +44,6 @@ func is_occupied(cell: Vector2i) -> bool:
 	
 func _flood_fill(cell: Vector2i) -> Array:
 	var cells = active_unit().cells_occupied
-	print(active_unit().speed.cur())
 	var max_distance: float = (
 		active_unit().speed.cur() - 100) / 20 + 4
 	var array := [cell]
@@ -74,6 +73,7 @@ func _flood_fill(cell: Vector2i) -> Array:
 	return array
 
 func _start_stepmove():
+	print(active_unit(), unit_queue)
 	acts = active_unit().acts_count
 	if active_unit().controlled_player:
 		_update_walkable()
@@ -101,8 +101,8 @@ func _update_stepmove():
 		if unit.controlled_player:
 			any_player_unit = true
 		else:
-			any_enemy_unit = false
-	if any_player_unit ^ any_enemy_unit:
+			any_enemy_unit = true
+	if any_player_unit != any_enemy_unit:
 		return
 	_start_stepmove()
 
@@ -142,5 +142,5 @@ func _input(event):
 	if is_instance_of(event, InputEventMouseMotion):
 		_update_path(_tile_map.make_input_local(event))
 
-	if event.is_action_pressed("lmb"):
+	if event.is_action_pressed("move"):
 		_move_active_unit()

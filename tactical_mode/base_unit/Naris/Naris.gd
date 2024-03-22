@@ -7,6 +7,9 @@ class_name NarisUnit
 
 var current_id_path: Array = []
 
+func _ready():
+	pass
+
 func walk_along(way: Array):
 	current_id_path = way
 

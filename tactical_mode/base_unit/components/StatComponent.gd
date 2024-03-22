@@ -64,7 +64,7 @@ func reload_mods(save_percent: bool = true):
 	mod.value.clear()
 	if unit and unit.inventory:
 		pass # TODO: Сделать выгрузку баффов из юнита
-	_characteristic.max_ = _characteristic.base * mod.value.mul + mod.value.add
+	_characteristic.max_ = _characteristic.base * (mod.value.mul + 1) + mod.value.add
 	if save_percent:
 		_characteristic.set_cur(_characteristic.max_ * p)
 	else:
