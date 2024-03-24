@@ -4,7 +4,6 @@ class_name NarisUnit
 
 @onready var tile_map = $"../TileMap"
 @onready var animation = $AnimationPlayer
-
 var luck_coin_cls = preload("res://inventory/gears/luck_coin.tres")
 
 var current_id_path: Array = []
@@ -28,5 +27,4 @@ func _physics_process(delta):
 	if global_position == target_position:    
 		current_id_path.pop_front()
 		if not current_id_path:
-			print("go!")
 			walk_finished.emit()

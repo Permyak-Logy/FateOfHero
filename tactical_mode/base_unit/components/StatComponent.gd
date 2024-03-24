@@ -40,7 +40,7 @@ func get_base():
 	return _characteristic.base
 
 func set_cur(value):
-	_characteristic.cur = value
+	_characteristic.set_cur(value)
 	if value == 0:
 		empty.emit()
 	if value == _characteristic.max_:

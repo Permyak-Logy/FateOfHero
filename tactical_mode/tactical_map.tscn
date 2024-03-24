@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=6 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
 [ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/base_unit/Naris/Naris.tscn" id="4_fw2bu"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/base_unit/Vendigo/Vendigo.tscn" id="5_jcnen"]
-[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/base_unit/Skeleton/Skeleton.tscn" id="6_7dasg"]
 [ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
 
 [node name="TacticalMap" type="Node2D"]
@@ -41,11 +40,6 @@ position = Vector2(65, 182)
 
 [node name="Vendigo" parent="." instance=ExtResource("5_jcnen")]
 position = Vector2(768, 182)
-controlled_player = true
-
-[node name="Skeleton" parent="." instance=ExtResource("6_7dasg")]
-position = Vector2(800, 303)
-controlled_player = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

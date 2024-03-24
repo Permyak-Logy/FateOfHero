@@ -9,7 +9,7 @@ class_name TacticalMap
 @onready var _current_path = PackedVector2Array()
 var _block_input = false
 const _ACT_INDEX_MAX = 10000
-var unit_queue = []
+var unit_queue = []  # [(act_index, unit)]
 var units: Array[Unit] = []
 var acts: int
 
@@ -68,7 +68,7 @@ func _flood_fill(cell: Vector2i) -> Array:
 				continue
 			if next in array:
 				continue
-	
+			
 			array.append(next)
 			stack.append(next)
 
@@ -76,18 +76,28 @@ func _flood_fill(cell: Vector2i) -> Array:
 
 func _start_stepmove():
 	print(active_unit(), unit_queue)
+	for unit_data in unit_queue:
+		if unit_data[1].controlled_player:
+			unit_data[1].set_outline_color(Unit.PLAYER_COLOR)
+		else:
+			unit_data[1].set_outline_color(Unit.ENEMY_COLOR)
+	active_unit().set_outline_color(Unit.SELECTED_COLOR)
 	acts = active_unit().acts_count
 	if active_unit().controlled_player:
 		_update_walkable()
+		_block_input = false
 	else:
-		acts = 0
+		_update_walkable(false)
+		active_unit().ai(self)
+		await active_unit().ai_act_finished
 		_update_stepmove()
-	_block_input = false
+	
 
 func _update_stepmove():
-	if acts != 0:
-		_block_input = false
+	print(active_unit().apply_damage(20))
+	if acts != 0 and active_unit().controlled_player:
 		_update_walkable()
+		_block_input = false
 		return
 	
 	var time = unit_queue[0][0]
@@ -117,22 +127,27 @@ func _update_walls():
 		if unit.cells_occupied == 2:
 			_tile_map.set_cell(3, to_map(unit.global_position) + Vector2i(1, 0), 0, Vector2i(2, 0))
 		
-func _update_walkable():
+func _update_walkable(draw=true):
 	_update_walls()
 	var cells = _flood_fill(to_map(active_unit().global_position))
 	_astar_walkable = AStarHexagon2D.new(cells)
 	_tile_map.clear_layer(1)
-	draw(1, cells, 0, Vector2i(3, 0))
+	if draw:
+		draw(1, cells, 0, Vector2i(3, 0))
+
+func get_path_to_cell(map_coords: Vector2i) -> Array:
+	var result = []
+	var path = _astar_walkable.get_id_path(
+			_astar_walkable.mti(to_map(active_unit().global_position)),
+			_astar_walkable.mti(map_coords)
+		)
+	for cell in path:
+		result.append(_astar_walkable.itm(cell))
+	return result
 
 func _update_path(event: InputEventMouseMotion):
 	if active_unit() and _astar_walkable:
-		var path = _astar_walkable.get_id_path(
-			_astar_walkable.mti(to_map(active_unit().global_position)),
-			_astar_walkable.mti(to_map(event.position))
-		)
-		_current_path.clear()
-		for cell in path:
-			_current_path.append(_astar_walkable.itm(cell))
+		_current_path = get_path_to_cell(to_map(event.position))
 		_tile_map.clear_layer(2)
 		draw(2, _current_path, 0, Vector2i(1, 0))
 	
