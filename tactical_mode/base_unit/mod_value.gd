@@ -7,8 +7,13 @@ class_name ModValue
 
 func _init(_add = 0., _mul = 0.):
 	add = _add
-	_mul = _mul
+	mul = _mul
 
 func clear():
 	add = 0
 	mul = 0
+
+func iadd(other: ModValue):
+	add += other.add
+	mul += other.mul
+

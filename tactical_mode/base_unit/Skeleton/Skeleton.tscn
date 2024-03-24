@@ -6,7 +6,9 @@
 
 [node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("health", "speed")]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_ccpxk")
+unit_name = "Скелет"
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 

@@ -4,10 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="3_sy0f3"]
 [ext_resource type="Texture2D" uid="uid://yf64rowfciuo" path="res://tactical_mode/base_unit/Vendigo/Vendigo.png" id="4_g6t4h"]
 
-[node name="Vendigo" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed")]
+[node name="Vendigo" type="CharacterBody2D" node_paths=PackedStringArray("health", "speed")]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_oj4or")
-inventory = NodePath("")
+unit_name = "Вендиго"
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 cells_occupied = 2

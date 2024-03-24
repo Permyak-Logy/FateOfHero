@@ -4,11 +4,41 @@ class_name InventoryComponent
 
 @export var max_abilities = 3
 
-var gears: Dictionary # Dict[Gear.Type, Gear]
-var abilities: Array # List[Ability]
+var _gears: Dictionary # Dict[Gear.Type, [Gear]]
+@onready var limits = {
+	Gear.Type.Ability: max_abilities,
+	Gear.Type.Hands: 2
+}
 
-func use(gear) -> bool:
+func use(gear: Gear) -> bool:
+	var limit = limits.get(gear.type, 1)
+	if not _gears.has(gear.type):
+		_gears[gear.type] = []
+	if len(_gears[gear.type]) >= limit:
+		return false
+	_gears[gear.type].append(gear)
+	return true
+
+func unuse(gear: Gear) -> bool:
+	if not _gears.has(gear.type):
+		return false
 	return false
 
-func unsuse(gear) -> bool:
-	return false
+func get_gears(gear_type: Gear.Type) -> Array:
+	return _gears.get(gear_type, [])
+
+func get_abilities() -> Array:
+	return get_gears(Gear.Type.Ability)
+
+func get_mods() -> Dictionary:
+	var all_mods = {}
+	for gears in _gears.values():
+		for item in gears:
+			var gear: Gear = item
+			var mods = gear.get_mods()
+			for i in mods:
+				var mod: Mod = i
+				if not all_mods.has(mod.type):
+					all_mods[mod.type] = ModValue.new()
+				all_mods[mod.type].iadd(mod.value)
+	return all_mods

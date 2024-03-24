@@ -1,10 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://cw3rkppa44bw8"]
+[gd_scene load_steps=12 format=3 uid="uid://cw3rkppa44bw8"]
 
 [ext_resource type="Script" path="res://tactical_mode/base_unit/Naris/Naris.gd" id="1_7crcm"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="2_km4jx"]
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/base_unit/components/InventoryComponent.tscn" id="3_yb5u2"]
 [ext_resource type="PackedScene" uid="uid://craplwf1wnhvd" path="res://tactical_mode/base_unit/components/ExpirienceComponent.tscn" id="4_sl2hx"]
+[ext_resource type="Shader" path="res://tactical_mode/base_unit/select.gdshader" id="5_r0fnv"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/base_unit/Naris/spritesheet.png" id="6_lj5lu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edmxb"]
+shader = ExtResource("5_r0fnv")
+shader_parameter/outline_color = Color(0, 0, 0.878431, 0.282353)
 
 [sub_resource type="Animation" id="Animation_3w44h"]
 length = 0.001
@@ -62,22 +67,27 @@ _data = {
 
 [node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed")]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_7crcm")
+unit_name = "Нарис"
 inventory = NodePath("InventoryComponent")
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 
 [node name="StatHealth" parent="." instance=ExtResource("2_km4jx")]
 default_base = 100.0
+mod_type = 0
 
 [node name="StatSpeed" parent="." instance=ExtResource("2_km4jx")]
 default_base = 100.0
+mod_type = 1
 
 [node name="InventoryComponent" parent="." instance=ExtResource("3_yb5u2")]
 
 [node name="ExpirienceComponent" parent="." instance=ExtResource("4_sl2hx")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_edmxb")
 position = Vector2(0, -23)
 texture = ExtResource("6_lj5lu")
 hframes = 7

@@ -10,6 +10,7 @@ class_name TacticalMap
 var _block_input = false
 const _ACT_INDEX_MAX = 10000
 var unit_queue = []
+var units: Array[Unit] = []
 var acts: int
 
 signal finish
@@ -23,9 +24,10 @@ func _ready():
 			var unit = child as Unit
 			if unit.speed:
 				unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
+			unit.global_position = to_loc(to_map(unit.global_position))
+			units.append(unit)
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
-	
 
 func draw(layer: int, array: Array, source_id: int = -1, 
 atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
@@ -106,11 +108,21 @@ func _update_stepmove():
 		return
 	_start_stepmove()
 
+func _update_walls():
+	_tile_map.clear_layer(3)
+	for unit in units:
+		if unit == active_unit():
+			continue
+		_tile_map.set_cell(3, to_map(unit.global_position), 0, Vector2i(2, 0))
+		if unit.cells_occupied == 2:
+			_tile_map.set_cell(3, to_map(unit.global_position) + Vector2i(1, 0), 0, Vector2i(2, 0))
+		
 func _update_walkable():
+	_update_walls()
 	var cells = _flood_fill(to_map(active_unit().global_position))
 	_astar_walkable = AStarHexagon2D.new(cells)
 	_tile_map.clear_layer(1)
-	draw(1, cells, 3, Vector2i(0, 0))
+	draw(1, cells, 0, Vector2i(3, 0))
 
 func _update_path(event: InputEventMouseMotion):
 	if active_unit() and _astar_walkable:
@@ -122,7 +134,7 @@ func _update_path(event: InputEventMouseMotion):
 		for cell in path:
 			_current_path.append(_astar_walkable.itm(cell))
 		_tile_map.clear_layer(2)
-		draw(2, _current_path, 1, Vector2i(0, 0))
+		draw(2, _current_path, 0, Vector2i(1, 0))
 	
 func _move_active_unit():
 	if not _current_path:

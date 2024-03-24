@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj862n46y0kv"]
+
+[ext_resource type="Script" path="res://GUI/ability_slot.gd" id="1_c05iq"]
+
+[node name="AbilitySlot" type="Button"]
+script = ExtResource("1_c05iq")
+
+[node name="Background" type="Sprite2D" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
