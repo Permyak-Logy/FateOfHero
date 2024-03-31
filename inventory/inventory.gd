@@ -4,8 +4,14 @@ class_name Inventory
 
 # list of items and counts there of
 @export var items: Dictionary
+var characters: Array[Unit] = []
 # must be equal to number of cells
 const max_stacks_count: int = 50
+const max_character_count: int = 5
+
+func set_def_chars():
+	var nav = preload("res://tactical_mode/base_unit/Naris/Naris.gd")
+	
 
 func get_item_stacks() -> Array[ItemStack]:
 	"""
