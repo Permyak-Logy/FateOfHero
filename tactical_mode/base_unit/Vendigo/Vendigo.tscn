@@ -1,26 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://kj8esabe8qfg"]
+[gd_scene load_steps=7 format=3 uid="uid://kj8esabe8qfg"]
 
 [ext_resource type="Script" path="res://tactical_mode/base_unit/Vendigo/Vendigo.gd" id="1_oj4or"]
-[ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/base_unit/components/InventoryComponent.tscn" id="2_v62ba"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="3_sy0f3"]
+[ext_resource type="Shader" path="res://tactical_mode/base_unit/outline.gdshader" id="3_ws587"]
 [ext_resource type="Texture2D" uid="uid://yf64rowfciuo" path="res://tactical_mode/base_unit/Vendigo/Vendigo.png" id="4_g6t4h"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/stat_progress_bar.tscn" id="5_kxra3"]
 
-[node name="Vendigo" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vyb2c"]
+shader = ExtResource("3_ws587")
+shader_parameter/outline_color = Color(0, 0, 0, 0)
+
+[node name="Vendigo" type="CharacterBody2D" node_paths=PackedStringArray("health", "speed", "sprite_for_outline")]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_oj4or")
-inventory = NodePath("InventoryComponent")
+unit_name = "Вендиго"
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 cells_occupied = 2
 controlled_player = false
-
-[node name="InventoryComponent" parent="." instance=ExtResource("2_v62ba")]
+sprite_for_outline = NodePath("Sprite2D")
 
 [node name="StatHealth" parent="." instance=ExtResource("3_sy0f3")]
+default_base = 100.0
 
 [node name="StatSpeed" parent="." instance=ExtResource("3_sy0f3")]
 default_base = 101.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vyb2c")
 position = Vector2(22, -46)
 texture = ExtResource("4_g6t4h")
+
+[node name="StatProgressBar" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("5_kxra3")]
+anchors_preset = 0
+offset_left = -29.0
+offset_top = -112.0
+offset_right = 71.0
+offset_bottom = -110.0
+stat_component = NodePath("../StatHealth")

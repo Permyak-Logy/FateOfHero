@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh5vq12tjl11n"]
+
+[ext_resource type="Script" path="res://tactical_mode/base_unit/Skeleton/Skeleton.gd" id="1_ccpxk"]
+[ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="2_kl3lq"]
+[ext_resource type="Texture2D" uid="uid://bwx7qmeuapudt" path="res://tactical_mode/base_unit/Skeleton/Enemy.png" id="3_0chvl"]
+[ext_resource type="Shader" path="res://tactical_mode/base_unit/outline.gdshader" id="3_oy1oo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8qku"]
+shader = ExtResource("3_oy1oo")
+shader_parameter/outline_color = null
+
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("health", "speed")]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_ccpxk")
+unit_name = "Скелет"
+health = NodePath("StatHealth")
+speed = NodePath("StatSpeed")
+
+[node name="StatHealth" parent="." instance=ExtResource("2_kl3lq")]
+default_base = 100.0
+
+[node name="StatSpeed" parent="." instance=ExtResource("2_kl3lq")]
+default_base = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_j8qku")
+position = Vector2(0, -24)
+texture = ExtResource("3_0chvl")

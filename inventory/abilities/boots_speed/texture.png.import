@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bppodc4pihpjd"
-path="res://.godot/imported/Enemy2.png-e7a471ace36784dc3456a8e2640f2388.ctex"
+uid="uid://dsu32bll3w580"
+path="res://.godot/imported/texture.png-0d234b11da867aa072f1b33ee7d2bc78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/assets/Enemy2.png"
-dest_files=["res://.godot/imported/Enemy2.png-e7a471ace36784dc3456a8e2640f2388.ctex"]
+source_file="res://inventory/abilities/boots_speed/texture.png"
+dest_files=["res://.godot/imported/texture.png-0d234b11da867aa072f1b33ee7d2bc78.ctex"]
 
 [params]
 

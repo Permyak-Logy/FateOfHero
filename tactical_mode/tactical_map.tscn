@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
 
 [node name="TacticalMap" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_dw5lh")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -19,9 +20,9 @@ layer_1/modulate = Color(1, 1, 1, 0.466667)
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Path"
-layer_2/tile_data = PackedInt32Array(458752, 0, 0)
+layer_2/tile_data = PackedInt32Array()
 layer_3/name = "Walls"
-layer_3/tile_data = PackedInt32Array(851971, 2, 0, 1310721, 2, 0, 1245185, 2, 0, 1179649, 2, 0, 983048, 2, 0, 1048585, 2, 0, 1048586, 2, 0, 1114121, 2, 0, 1114122, 2, 0, 1179659, 2, 0, 1179660, 2, 0, 1245196, 2, 0, 1310733, 2, 0, 524291, 2, 0, 524290, 2, 0, 458755, 2, 0, 458756, 2, 0, 458757, 2, 0, 655362, 2, 0, 589826, 2, 0, 720898, 2, 0, 786435, 2, 0, 917508, 2, 0, 458758, 2, 0, 917511, 2, 0, 393226, 2, 0, 458761, 2, 0, 524297, 2, 0, 589833, 2, 0, 655370, 2, 0, 720905, 2, 0)
+layer_3/tile_data = PackedInt32Array()
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
@@ -39,4 +40,19 @@ position = Vector2(65, 182)
 
 [node name="Vendigo" parent="." instance=ExtResource("5_jcnen")]
 position = Vector2(768, 182)
-controlled_player = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ability 1"

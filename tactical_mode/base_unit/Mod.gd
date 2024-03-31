@@ -1,23 +1,12 @@
-extends Node
+extends Resource
 
 class_name Mod
 
-class Value:
-	var add: float
-	var mul: float
-
-	func _init(_add = 0., _mul = 0.):
-		add = _add
-		_mul = _mul
-	func clear():
-		add = 0
-		mul = 0
-		
 enum Type {Health, Speed, Damage, Defence, None}
 
-var type: Type
-var value: Value
+@export var type: Type = Type.None
+@export var value: ModValue = ModValue.new()
 
-func _init(t: Type, v: Value = Value.new()):
-	type = t
-	value = v
+func _init(mod_type: Mod.Type = Type.None):
+	type = mod_type
+	value = ModValue.new()

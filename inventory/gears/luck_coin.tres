@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Gear" load_steps=6 format=3 uid="uid://bdjmj8k7ev33r"]
+
+[ext_resource type="Script" path="res://tactical_mode/base_unit/mod.gd" id="1_gne7u"]
+[ext_resource type="Script" path="res://inventory/gear.gd" id="1_rbgy5"]
+[ext_resource type="Script" path="res://tactical_mode/base_unit/mod_value.gd" id="2_xdf0t"]
+
+[sub_resource type="Resource" id="Resource_24874"]
+script = ExtResource("2_xdf0t")
+add = 1.0
+mul = 50.0
+
+[sub_resource type="Resource" id="Resource_0nc48"]
+script = ExtResource("1_gne7u")
+type = 1
+value = SubResource("Resource_24874")
+
+[resource]
+script = ExtResource("1_rbgy5")
+type = 1
+_mods = Array[ExtResource("1_gne7u")]([SubResource("Resource_0nc48")])
+name = ""
+max_stack = 0

@@ -1,10 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://cw3rkppa44bw8"]
+[gd_scene load_steps=13 format=3 uid="uid://cw3rkppa44bw8"]
 
 [ext_resource type="Script" path="res://tactical_mode/base_unit/Naris/Naris.gd" id="1_7crcm"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="2_km4jx"]
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/base_unit/components/InventoryComponent.tscn" id="3_yb5u2"]
 [ext_resource type="PackedScene" uid="uid://craplwf1wnhvd" path="res://tactical_mode/base_unit/components/ExpirienceComponent.tscn" id="4_sl2hx"]
+[ext_resource type="Shader" path="res://tactical_mode/base_unit/outline.gdshader" id="5_8uiou"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/base_unit/Naris/spritesheet.png" id="6_lj5lu"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/stat_progress_bar.tscn" id="7_ttvji"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wvbl"]
+shader = ExtResource("5_8uiou")
+shader_parameter/outline_color = null
 
 [sub_resource type="Animation" id="Animation_3w44h"]
 length = 0.001
@@ -60,21 +66,30 @@ _data = {
 "run": SubResource("Animation_8gx8v")
 }
 
-[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed")]
+[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed", "sprite_for_outline")]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_7crcm")
+unit_name = "Нарис"
 inventory = NodePath("InventoryComponent")
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
+sprite_for_outline = NodePath("Sprite2D")
 
 [node name="StatHealth" parent="." instance=ExtResource("2_km4jx")]
-default_base = 10.0
+default_base = 100.0
+mod_type = 0
+
+[node name="StatSpeed" parent="." instance=ExtResource("2_km4jx")]
+default_base = 100.0
+mod_type = 1
 
 [node name="InventoryComponent" parent="." instance=ExtResource("3_yb5u2")]
 
 [node name="ExpirienceComponent" parent="." instance=ExtResource("4_sl2hx")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8wvbl")
 position = Vector2(0, -23)
 texture = ExtResource("6_lj5lu")
 hframes = 7
@@ -86,5 +101,8 @@ libraries = {
 "": SubResource("AnimationLibrary_5icws")
 }
 
-[node name="StatSpeed" parent="." instance=ExtResource("2_km4jx")]
-default_base = 100.0
+[node name="StatProgressBar" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("7_ttvji")]
+anchors_preset = 0
+offset_top = -56.0
+offset_bottom = -54.0
+stat_component = NodePath("../StatHealth")

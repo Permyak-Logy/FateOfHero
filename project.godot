@@ -12,9 +12,6 @@ config_version=5
 
 config/name="Fate of hero"
 run/main_scene="res://Game.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
-<<<<<<<HEADrun/main_scene="res://stategic_mode/strat_map.tscn"
 
 [debug]
 
@@ -22,14 +19,19 @@ gdscript/warnings/integer_division=0
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=400
+window/size/viewport_width=960
+window/size/viewport_height=540
 window/size/window_width_override=1280
 window/size/window_height_override=800
 window/stretch/mode="canvas_items"
 
 [input]
 
+move={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(186, 15),"global_position":Vector2(190, 56),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
 lmb={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(154, 20),"global_position":Vector2(158, 61),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
