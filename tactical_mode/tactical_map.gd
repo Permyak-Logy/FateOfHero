@@ -37,6 +37,8 @@ func reinit(array: Array[Unit]):
 func get_player_units() -> Array[Unit]:
 	return []
 
+func get_enemy_units() -> Array[Unit]:
+	return []
 
 func draw(layer: int, array: Array, source_id: int = -1, 
 atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
