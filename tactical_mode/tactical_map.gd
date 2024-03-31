@@ -13,6 +13,8 @@ var unit_queue = []  # [(act_index, unit)]
 var units: Array[Unit] = []
 var acts: int
 
+var win = null
+
 signal finish
 
 func active_unit() -> Unit:
@@ -28,6 +30,13 @@ func _ready():
 			units.append(unit)
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
+
+func reinit(array: Array[Unit]):
+	pass
+
+func get_player_units() -> Array[Unit]:
+	return []
+
 
 func draw(layer: int, array: Array, source_id: int = -1, 
 atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):

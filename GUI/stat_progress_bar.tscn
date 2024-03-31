@@ -9,7 +9,6 @@ bg_color = Color(0.294118, 0, 0, 1)
 bg_color = Color(1, 0, 0, 1)
 
 [node name="StatProgressBar" type="ProgressBar"]
-anchors_preset = -1
 offset_left = -22.0
 offset_top = -1.0
 offset_right = 22.0
