@@ -102,7 +102,6 @@ libraries = {
 }
 
 [node name="StatProgressBar" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("7_ttvji")]
-anchors_preset = 0
 offset_top = -56.0
 offset_bottom = -54.0
 stat_component = NodePath("../StatHealth")

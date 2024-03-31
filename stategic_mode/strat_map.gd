@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name StratMap
+
 func pause():
 	get_tree().paused = true
 	

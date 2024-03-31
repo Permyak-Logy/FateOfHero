@@ -7,10 +7,12 @@ class_name Inventory
 var characters: Array[Unit] = []
 # must be equal to number of cells
 const max_stacks_count: int = 50
-const max_character_count: int = 5
+#const max_character_count: int = 5
 
 func set_def_chars():
-	var nav = preload("res://tactical_mode/base_unit/Naris/Naris.gd")
+	var nav = load("res://tactical_mode/base_unit/Naris/Naris.tscn").instantiate()
+	var nav2 = load("res://tactical_mode/base_unit/Naris/Naris.tscn").instantiate()
+	characters = [nav, nav2]
 	
 
 func get_item_stacks() -> Array[ItemStack]:
@@ -65,5 +67,9 @@ func remove(item: Item, count: int):
 	items[item] -= count 
 	if items[item] == 0:
 		items.erase(item) 
-
-
+#
+#func get_characters():
+	#return characters
+	#
+#func set_characters(new_characters: Array[Unit]):
+	#characters = new_characters
