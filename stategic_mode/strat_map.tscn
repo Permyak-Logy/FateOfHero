@@ -4071,7 +4071,7 @@ func trigger():
 	pass
 "
 
-[node name="strat_map" type="Node2D"]
+[node name="StratMap" type="Node2D"]
 script = ExtResource("1_vssm8")
 
 [node name="TileMap" type="TileMap" parent="."]

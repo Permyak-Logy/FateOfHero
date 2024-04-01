@@ -9,8 +9,8 @@ class_name NarisUnit
 var current_id_path: Array = []
 
 func _ready():
-	if !inventory:
-		return
+	#if !inventory:
+		#return
 	if inventory.use(luck_coin_cls):
 		print("ok")
 		reload_all_mods()

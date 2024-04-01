@@ -35,12 +35,8 @@ offset = Vector2(305, 175)
 offset = Vector2(-16, -8)
 anchor_mode = 0
 
-[node name="Naris" parent="." node_paths=PackedStringArray("inventory", "health", "speed", "sprite_for_outline") instance=ExtResource("4_fw2bu")]
+[node name="Naris" parent="." instance=ExtResource("4_fw2bu")]
 position = Vector2(65, 182)
-inventory = NodePath("")
-health = NodePath("")
-speed = NodePath("")
-sprite_for_outline = NodePath("")
 
 [node name="Vendigo" parent="." instance=ExtResource("5_jcnen")]
 position = Vector2(768, 182)

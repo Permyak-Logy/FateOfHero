@@ -20,5 +20,6 @@ func to_tact_mode():
 	
 func to_strat_mode():
 	deactivate(tactical_map)
+	
 	activate(strat_map)
 	
