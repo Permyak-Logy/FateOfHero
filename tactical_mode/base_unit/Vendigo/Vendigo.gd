@@ -9,7 +9,7 @@ var current_id_path: Array = []
 func walk_along(way: Array):
 	current_id_path = way
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if current_id_path.is_empty():
 		return
 		
@@ -31,4 +31,3 @@ func ai(map: TacticalMap):
 				rng.randi_range(-3, 3), rng.randi_range(-3, 3)))
 	walk_along(path)
 	await walk_finished
-	ai_act_finished.emit()

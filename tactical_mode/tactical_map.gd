@@ -14,25 +14,69 @@ var units: Array[Unit] = []
 var acts: int
 
 var win = null
+var cur_ability: Ability = null
 
 signal finish
+
+var Naris = preload("res://tactical_mode/base_unit/Naris/Naris.tscn")
+var Vendigo = preload("res://tactical_mode/base_unit/Vendigo/Vendigo.tscn")
+var Skelet = preload("res://tactical_mode/base_unit/Skeleton/Skeleton.tscn")
 
 func active_unit() -> Unit:
 	return unit_queue[0][1]
 
 func _ready():
+	reinit([
+		Naris.instantiate(),
+		Naris.instantiate(),
+		Vendigo.instantiate(),
+		Skelet.instantiate(),
+		Skelet.instantiate(),
+		Skelet.instantiate(),
+		Skelet.instantiate()])
+
+func clear():
 	for child in get_children():
 		if is_instance_of(child, Unit):
-			var unit = child as Unit
-			if unit.speed:
-				unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
-			unit.global_position = to_loc(to_map(unit.global_position))
-			units.append(unit)
+			remove_child(child)
+	win = false
+	cur_ability = null
+	units.clear()
+	unit_queue.clear()
+	_block_input = false
+
+func reinit(array: Array[Unit] = []):
+	clear()
+	var p_units: Array[Unit] = []
+	var e_units: Array[Unit] = []
+	for unit in array:
+		add_child(unit)
+		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
+		units.append(unit)
+		if unit.controlled_player:
+			p_units.append(unit)
+		else:
+			e_units.append(unit)
+	
+	var center = (_astar_board.bottom - _astar_board.top) / 2 + _astar_board.top
+	
+	var step_p = min((_astar_board.bottom - _astar_board.top) / len(p_units), 6)
+	var start_p = center - len(p_units) * step_p / 2 + step_p / 2
+	for i in range(len(p_units)):
+		var y = start_p + i * step_p
+		move_unit_to(p_units[i], _astar_board.left + (y + 1) % 2, y)
+	
+	var step_e = min((_astar_board.bottom - _astar_board.top) / len(e_units), 6)
+	var start_e = center - len(e_units) * step_e / 2 + step_e / 2
+	for i in range(len(e_units)):
+		var y = start_e + i * step_e
+		move_unit_to(e_units[i],  _astar_board.right - e_units[i].cells_occupied, y)
+	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
 
-func reinit(array: Array[Unit]):
-	pass
+func move_unit_to(unit: Unit, x: int, y: int):
+	unit.global_position = to_loc(Vector2i(x, y))
 
 func get_player_units() -> Array[Unit]:
 	return []
@@ -86,7 +130,6 @@ func _flood_fill(cell: Vector2i) -> Array:
 	return array
 
 func _start_stepmove():
-	print(active_unit(), unit_queue)
 	for unit_data in unit_queue:
 		if unit_data[1].controlled_player:
 			unit_data[1].set_outline_color(Unit.PLAYER_COLOR)
@@ -99,13 +142,11 @@ func _start_stepmove():
 		_block_input = false
 	else:
 		_update_walkable(false)
-		active_unit().ai(self)
-		await active_unit().ai_act_finished
+		await active_unit().ai(self)
 		_update_stepmove()
 	
 
 func _update_stepmove():
-	print(active_unit().apply_damage(20))
 	if acts != 0 and active_unit().controlled_player:
 		_update_walkable()
 		_block_input = false
@@ -138,16 +179,18 @@ func _update_walls():
 		if unit.cells_occupied == 2:
 			_tile_map.set_cell(3, to_map(unit.global_position) + Vector2i(1, 0), 0, Vector2i(2, 0))
 		
-func _update_walkable(draw=true):
+func _update_walkable(show=true):
 	_update_walls()
 	var cells = _flood_fill(to_map(active_unit().global_position))
 	_astar_walkable = AStarHexagon2D.new(cells)
 	_tile_map.clear_layer(1)
-	if draw:
+	if show:
 		draw(1, cells, 0, Vector2i(3, 0))
 
 func get_path_to_cell(map_coords: Vector2i) -> Array:
 	var result = []
+	if not _astar_walkable.has_cell(map_coords):
+		return []
 	var path = _astar_walkable.get_id_path(
 			_astar_walkable.mti(to_map(active_unit().global_position)),
 			_astar_walkable.mti(map_coords)
@@ -179,6 +222,18 @@ func _input(event):
 		return
 	if is_instance_of(event, InputEventMouseMotion):
 		_update_path(_tile_map.make_input_local(event))
-
-	if event.is_action_pressed("move"):
-		_move_active_unit()
+	
+	if event.is_pressed():
+		return _key_press_event(event)
+		
+func _key_press_event(event):
+	if cur_ability:
+		pass
+	else:
+		if event.is_action_pressed("move"):
+			_move_active_unit()
+		if event.as_text().is_valid_int():
+				var i = (int(event.as_text) + 9) % 10
+				var abilities = active_unit().get_abilities()
+				if len(abilities) > i:
+					cur_ability = abilities[i]

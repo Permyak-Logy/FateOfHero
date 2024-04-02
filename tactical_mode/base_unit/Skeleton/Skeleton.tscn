@@ -16,6 +16,7 @@ script = ExtResource("1_ccpxk")
 unit_name = "Скелет"
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
+controlled_player = false
 
 [node name="StatHealth" parent="." instance=ExtResource("2_kl3lq")]
 default_base = 100.0
