@@ -138,12 +138,12 @@ func _update_walls():
 		if unit.cells_occupied == 2:
 			_tile_map.set_cell(3, to_map(unit.global_position) + Vector2i(1, 0), 0, Vector2i(2, 0))
 		
-func _update_walkable(draw=true):
+func _update_walkable(do_draw=true):
 	_update_walls()
 	var cells = _flood_fill(to_map(active_unit().global_position))
 	_astar_walkable = AStarHexagon2D.new(cells)
 	_tile_map.clear_layer(1)
-	if draw:
+	if do_draw:
 		draw(1, cells, 0, Vector2i(3, 0))
 
 func get_path_to_cell(map_coords: Vector2i) -> Array:

@@ -9,7 +9,7 @@ var current_id_path: Array = []
 func walk_along(way: Array):
 	current_id_path = way
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if current_id_path.is_empty():
 		return
 		

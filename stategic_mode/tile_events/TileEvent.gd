@@ -1,7 +1,7 @@
 extends Node2D
 
-
 func activate():
+	print("TODO -- redefine activate")
 	remove()
 
 func remove():

@@ -9,6 +9,7 @@ extends CharacterBody2D
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
+var last_position: Vector2
 var is_moving: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,11 +41,13 @@ func _input(event):
 	#print("mouse_position", get_global_mouse_position())
 	#print("clicked at: ",tilemap.local_to_map(get_global_mouse_position()))
 	if is_moving:
-		print(target_position)
+		print("stopping")
+		target_position = last_position
 		id_path = astar_grid.get_id_path(
-			tilemap.local_to_map(target_position),
-			tilemap.local_to_map(get_global_mouse_position())
-		)
+			tilemap.local_to_map(global_position),
+			tilemap.local_to_map(target_position)
+		).slice(1)
+		is_moving = false
 	else:
 		id_path = astar_grid.get_id_path(
 			tilemap.local_to_map(global_position),
@@ -79,6 +82,7 @@ func _physics_process(delta):
 	if global_position == target_position:
 		current_id_path.pop_front()
 		if not current_id_path.is_empty():
+			last_position = target_position
 			target_position = tilemap.map_to_local(current_id_path.front())
 			target_position[0] -= 8
 			target_position[1] -= 8

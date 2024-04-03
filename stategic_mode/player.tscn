@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cqqiuyiowhipy" path="res://icon.svg" id="3_sxuig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4123s"]
-size = Vector2(12, 12)
+size = Vector2(16, 16)
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_xumpg")
