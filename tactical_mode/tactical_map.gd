@@ -26,14 +26,15 @@ func active_unit() -> Unit:
 	return unit_queue[0][1]
 
 func _ready():
-	reinit([
-		Naris.instantiate(),
-		Naris.instantiate(),
-		Vendigo.instantiate(),
-		Skelet.instantiate(),
-		Skelet.instantiate(),
-		Skelet.instantiate(),
-		Skelet.instantiate()])
+	print([Naris,
+		Naris])
+	reinit([Naris,
+		Naris],
+		[Vendigo,
+		Skelet,
+		Skelet,
+		Skelet,
+		Skelet])
 
 func clear():
 	for child in get_children():
@@ -45,19 +46,27 @@ func clear():
 	unit_queue.clear()
 	_block_input = false
 
-func reinit(array: Array[Unit] = []):
-	clear()
-	var p_units: Array[Unit] = []
-	var e_units: Array[Unit] = []
-	for unit in array:
+func init_scene_array(packed: Array[PackedScene]):
+	var ret: Array[Unit] = []
+	for i in packed:
+		var scene: Unit = i.instantiate()
+		ret.append(scene)
+	return ret
+
+func add_to_queue(units):
+	print(units)
+	for unit in units:
+		print(unit)
 		add_child(unit)
 		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
-		units.append(unit)
-		if unit.controlled_player:
-			p_units.append(unit)
-		else:
-			e_units.append(unit)
-	
+		
+
+func reinit(characters_packed: Array[PackedScene], enemies_packed: Array[PackedScene]):
+	clear()
+	var p_units: Array[Unit] = init_scene_array(characters_packed)
+	var e_units: Array[Unit] = init_scene_array(enemies_packed)
+	add_to_queue(p_units)
+	add_to_queue(e_units)
 	var center = (_astar_board.bottom - _astar_board.top) / 2 + _astar_board.top
 	
 	var step_p = min((_astar_board.bottom - _astar_board.top) / len(p_units), 6)

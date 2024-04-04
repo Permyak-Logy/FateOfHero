@@ -2,8 +2,6 @@ extends CharacterBody2D
 
 @onready var tilemap =  $"../TileMap"
 @onready var TileEvent = preload("res://stategic_mode/tile_events/TileEvent.tscn")
-
-
 @export var inventory: Inventory
 
 var astar_grid: AStarGrid2D

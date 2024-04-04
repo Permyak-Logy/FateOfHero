@@ -4,16 +4,10 @@ class_name Inventory
 
 # list of items and counts there of
 @export var items: Dictionary
-var characters: Array[Unit] = []
+@export var characters: Array[PackedScene]
 # must be equal to number of cells
 const max_stacks_count: int = 50
 #const max_character_count: int = 5
-
-func set_def_chars():
-	var nav = load("res://tactical_mode/base_unit/Naris/Naris.tscn").instantiate()
-	var nav2 = load("res://tactical_mode/base_unit/Naris/Naris.tscn").instantiate()
-	characters = [nav, nav2]
-	
 
 func get_item_stacks() -> Array[ItemStack]:
 	"""

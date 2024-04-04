@@ -2,6 +2,7 @@ extends Node2D
 
 class_name StratMap
 
+@onready var player = $player
 
 
 func pause():
