@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://stategic_mode/tile_events/sprites/mean_skelly_boi.png" id="2_8svci"]
 [ext_resource type="Script" path="res://stategic_mode/tile_events/mean_skelly_boi.gd" id="2_txtyl"]
 
-[node name="MeanSkellyBoi" instance=ExtResource("1_g813s")]
+[node name="MeanSkellyBoi" node_paths=PackedStringArray("enemies") instance=ExtResource("1_g813s")]
 script = ExtResource("2_txtyl")
+enemies = []
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_8svci")

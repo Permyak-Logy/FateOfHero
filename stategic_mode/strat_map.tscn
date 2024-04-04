@@ -4041,9 +4041,6 @@ texture = ExtResource("1_san24")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_kxa7c"]
 scenes/1/scene = ExtResource("3_yiy5h")
-scenes/2/scene = ExtResource("4_ve1hs")
-scenes/3/scene = ExtResource("5_8gg2d")
-scenes/4/scene = ExtResource("6_simf5")
 
 [sub_resource type="TileSet" id="TileSet_vu85p"]
 physics_layer_0/collision_layer = 0
@@ -4065,29 +4062,12 @@ sources/2 = SubResource("TileSetScenesCollectionSource_kxa7c")
 
 [sub_resource type="GDScript" id="GDScript_e0x0d"]
 script/source = "extends TileMap
+\"\"\"
+only collectables that can't be customized should go here
+\"\"\"
 
-var levers: Array[LeverTileEntity]
-
-func collect_tile_enteties():
-	\"\"\"
-	it is impossible to give a specific tile custom data, so i have to use this workaround
-	\"\"\"
-	TileSetScenesCollectionSource
-	print(get_child_count(true))
-	for tile_event in get_children():
-		print(tile_event)
-		pass
-	for tile_pos in get_used_cells(1):
-		#get_child(1)
-		pass
-	pass
-
-
-func update_levers(id: int):
-	pass
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	collect_tile_enteties()
 	pass # Replace with function body.
 
 
@@ -4107,7 +4087,15 @@ layer_1/name = "Structures"
 layer_1/tile_data = PackedInt32Array(524285, 2, 65536, 589825, 2, 65536, 393216, 2, 65536, 65533, 2, 196608, 262140, 2, 131072)
 script = SubResource("GDScript_e0x0d")
 
-[node name="PuzzleMaster" type="Node2D" parent="."]
+[node name="CombatEncounters" type="Node" parent="."]
+
+[node name="MeanSkellyBoi2" parent="CombatEncounters" instance=ExtResource("4_ve1hs")]
+position = Vector2(-130, 22)
+
+[node name="MeanSkellyBoi" parent="CombatEncounters" instance=ExtResource("4_ve1hs")]
+position = Vector2(-111, 92)
+
+[node name="PuzzleMaster" type="Node" parent="."]
 
 [node name="LeverPuzzle 1" type="Node" parent="PuzzleMaster"]
 script = ExtResource("7_rcyvo")
@@ -4121,6 +4109,11 @@ position = Vector2(27, -55)
 
 [node name="Gate" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("8_byobl")]
 position = Vector2(-24, -8)
+
+[node name="OtherTileEvents" type="Node" parent="."]
+
+[node name="HouseCity" parent="OtherTileEvents" instance=ExtResource("5_8gg2d")]
+position = Vector2(138, 79)
 
 [node name="player" parent="." instance=ExtResource("5_whmy4")]
 
