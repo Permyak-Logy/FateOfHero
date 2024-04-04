@@ -31,4 +31,3 @@ func ai(map: TacticalMap):
 				rng.randi_range(-3, 3), rng.randi_range(-3, 3)))
 	walk_along(path)
 	await walk_finished
-	ai_act_finished.emit()

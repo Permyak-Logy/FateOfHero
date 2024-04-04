@@ -48,7 +48,7 @@ func can_use() -> bool:
 func auto_select() -> bool:
 	return false
 
-func can_select(node: Node) -> bool:
+func can_select(_node: Node) -> bool:
 	return false
 
 func can_apply() -> bool:

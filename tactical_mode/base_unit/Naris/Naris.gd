@@ -12,7 +12,6 @@ func _ready():
 	#if !inventory:
 		#return
 	if inventory.use(luck_coin_cls):
-		print("ok")
 		reload_all_mods()
 
 func walk_along(way: Array):

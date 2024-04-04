@@ -71,7 +71,6 @@ func reload_mods(save_percent: bool = true):
 		_characteristic.set_cur(_characteristic.max_ * p)
 	else:
 		_characteristic.set_cur(_characteristic.cur)
-	print(self, cur())
 
 
 

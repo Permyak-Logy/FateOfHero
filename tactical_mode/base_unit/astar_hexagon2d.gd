@@ -18,10 +18,20 @@ const DIRECTIONS = [
 
 var _cells: Array
 
+var top = 1_000_000
+var left = 1_000_000
+var right = 0
+var bottom = 0
+
 func _init(cells: Array):
 	_cells = cells
 	for cell in cells:
 		add_point(mti(cell), cell)
+		top = min(top, cell[1])
+		left = min(left, cell[0])
+		right = max(right, cell[0])
+		bottom = max(bottom, cell[1])
+	
 	for cell in cells:
 		var cell_id = mti(cell) 
 		for direction in DIRECTIONS[cell[1] % 2]:
