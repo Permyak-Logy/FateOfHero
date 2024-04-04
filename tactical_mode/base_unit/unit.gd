@@ -15,7 +15,7 @@ class_name Unit extends CharacterBody2D
 @export var sprite_for_outline: Sprite2D = null
 @export var max_attack_distance = 1
 
-signal death
+signal death(Unit)
 
 var effects: Array[Effect] = []
 
@@ -29,7 +29,6 @@ var outline_shader = preload("res://tactical_mode/base_unit/outline_shader.tres"
 @onready var attack_ability = AttackAbility.new(max_attack_distance)
 
 func _ready():
-	print("Ready from ", self)
 	if sprite_for_outline:
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
 	if health:
@@ -81,15 +80,18 @@ func init_fight():
 func premove_update():
 	for ability in get_abilities():
 		ability.update()
-	death.emit(self)
 
 func play(name: String, args=null):
 	return
 
-func on_death():
+func on_death(component: StatComponent):
+	print(component)
 	set_outline_color(Vector4(10, 0, 0, 100))
 	play("death")
+	death.emit(self)
 
+func is_death() -> bool:
+	return not health or health.cur() <= 0
 
 func _on_toggle_select(viewport, event: InputEvent, shape_idx: int):
 	if event.is_action_pressed("select"):

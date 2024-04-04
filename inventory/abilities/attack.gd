@@ -34,5 +34,9 @@ func can_select(node):
 	var unit = node as Unit
 	if not unit:
 		return false
+	if unit.is_death():
+		return false
+	if get_map().is_player(owner) != get_map().is_enemy(node):
+		return false
 	var cur_dist = get_map().distance_between_cells(owner.get_cell(), unit.get_cell())
 	return cur_dist <= distance

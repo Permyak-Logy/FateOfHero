@@ -39,7 +39,12 @@ func clear():
 	_block_input = false
 
 func on_kill(unit: Unit):
-	pass
+	for i in range(len(unit_queue)):
+		if unit_queue[i][1] == unit:
+			unit_queue.pop_at(i)
+			break
+	unit.set_outline_color(Unit.DEFAULT_COLOR)
+	print("Killed ", unit)
 
 func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
 	if not is_node_ready():
@@ -56,6 +61,7 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
 	for unit in _p_units + _e_units:
 		add_child(unit)
 		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
+		unit.death.connect(on_kill)
 		units.append(unit)
 		unit.init_fight()
 	
@@ -153,6 +159,20 @@ func _start_stepmove():
 
 func _update_stepmove():
 	cur_ability = null
+	_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
+	
+	var killed_player_units = _p_units.all(func (x): return x.is_death())
+	var killed_enemy_units = _e_units.all(func (x): return x.is_death())
+	
+	if killed_player_units != killed_enemy_units:
+		_tile_map.clear_layer(OVERLAY_LAYER)
+		_tile_map.clear_layer(PATH_LAYER)
+		win = true
+		# _block_input = true
+		print("*** FINISH! ***")
+		finish.emit()
+		return
+	
 	if acts != 0 and active_unit().controlled_player:
 		_update_walkable()
 		_block_input = false
@@ -164,23 +184,14 @@ func _update_stepmove():
 	unit_queue[0][0] += _ACT_INDEX_MAX / active_unit().speed.cur()
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	
-	var any_player_unit = false
-	var any_enemy_unit = false
-	for elem in unit_queue:
-		var unit: Unit = elem[1]
-		if unit.controlled_player:
-			any_player_unit = true
-		else:
-			any_enemy_unit = true
-	if any_player_unit != any_enemy_unit:
-		finish.emit()
-		return
 	_start_stepmove()
 
 func _update_walls():
 	_tile_map.clear_layer(WALLS_LAYER)
 	for unit in units:
 		if unit == active_unit():
+			continue
+		if unit.is_death():
 			continue
 		_tile_map.set_cell(3, to_map(unit.global_position), 0, Vector2i(2, 0))
 		if unit.cells_occupied == 2:
@@ -238,11 +249,13 @@ func _key_press_event(event):
 	if cur_ability:
 		if event.is_action_pressed("apply_ability"):
 			if cur_ability.can_apply():
+				_block_input = true
 				await cur_ability.apply()
 				cur_ability.after_apply()
 				_update_stepmove()
 		if event.is_action_pressed("cancel_ability"):
 			cur_ability.clear()
+			_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
 			cur_ability = null
 	else:
 		if event.is_action_pressed("move"):
@@ -253,6 +266,7 @@ func _key_press_event(event):
 			if len(abilities) > i and abilities[i].can_use():
 				cur_ability = abilities[i]
 				cur_ability.auto_select()
+				_tile_map.set_layer_enabled(OVERLAY_LAYER, false)
 				_tile_map.clear_layer(PATH_LAYER)
 
 func distance_between_cells(a: Vector2i, b: Vector2i) -> int:

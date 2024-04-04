@@ -12,8 +12,8 @@ class_name StatComponent
 @onready var unit: Unit
 @onready var _characteristic = Characteristic.new(default_base, default_cur, default_max)
 
-signal empty
-signal full
+signal empty(StatComponent)
+signal full(StatComponent)
 
 
 func _ready():
@@ -39,10 +39,10 @@ func get_base():
 
 func set_cur(value):
 	_characteristic.set_cur(value)
-	if value == 0:
-		empty.emit()
-	if value == _characteristic.max_:
-		full.emit()
+	if cur() == 0:
+		empty.emit(self)
+	if cur() == get_max():
+		full.emit(self)
 
 func add(value: float):
 	set_cur(_characteristic.cur + value)
