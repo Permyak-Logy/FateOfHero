@@ -24,6 +24,18 @@ var selected: Array[Node] = []
 func _init(_count: int = count):
 	count = _count
 
+func set_owner(_owner: Unit = null):
+	owner = _owner
+
+func select(node):
+	selected.append(node)
+
+func unselect(node):
+	selected.erase(node)
+
+func clear():
+	selected.clear()
+
 func reset():
 	cooldown_time = 0
 	if count < 0:
@@ -42,8 +54,10 @@ func can_use() -> bool:
 	if cooldown_time > 0:
 		return false
 	if has_uses == 0 and limit > 0:
-		return false 
-	return false
+		return false
+	if get_map().acts < acts:
+		return false
+	return true
 	
 func auto_select() -> bool:
 	return false
@@ -55,12 +69,19 @@ func can_apply() -> bool:
 	return len(selected) == targets
 
 func apply() -> bool:
-	if not can_apply():
-		return false
-	return true
+	return can_apply()
+
+func get_map() -> TacticalMap:
+	return owner.get_parent() as TacticalMap
 
 func after_apply():
 	cooldown_time = cooldown
 	has_uses -= 1
 	if count >= 0:
 		count -= 1
+	var map = get_map()
+	if final_act:
+		map.acts = 0
+	else:
+		map.acts -= acts
+		

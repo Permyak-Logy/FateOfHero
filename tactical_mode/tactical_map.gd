@@ -12,6 +12,13 @@ const _ACT_INDEX_MAX = 10000
 var unit_queue = []  # [(act_index, unit)]
 var units: Array[Unit] = []
 var acts: int
+var _p_units: Array[Unit] = []
+var _e_units: Array[Unit] = []
+
+const GRID_LAYER = 0
+const OVERLAY_LAYER = 1
+const PATH_LAYER = 2
+const WALLS_LAYER = 3
 
 var win = null
 var cur_ability: Ability = null
@@ -45,32 +52,36 @@ func clear():
 	unit_queue.clear()
 	_block_input = false
 
+func on_kill(unit: Unit):
+	pass
+
 func reinit(array: Array[Unit] = []):
 	clear()
-	var p_units: Array[Unit] = []
-	var e_units: Array[Unit] = []
+	_p_units.clear()
+	_e_units.clear()
 	for unit in array:
 		add_child(unit)
 		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 		units.append(unit)
+		unit.init_fight()
 		if unit.controlled_player:
-			p_units.append(unit)
+			_p_units.append(unit)
 		else:
-			e_units.append(unit)
+			_e_units.append(unit)
 	
 	var center = (_astar_board.bottom - _astar_board.top) / 2 + _astar_board.top
 	
-	var step_p = min((_astar_board.bottom - _astar_board.top) / len(p_units), 6)
-	var start_p = center - len(p_units) * step_p / 2 + step_p / 2
-	for i in range(len(p_units)):
+	var step_p = min((_astar_board.bottom - _astar_board.top) / len(_p_units), 6)
+	var start_p = center - len(_p_units) * step_p / 2 + step_p / 2
+	for i in range(len(_p_units)):
 		var y = start_p + i * step_p
-		move_unit_to(p_units[i], _astar_board.left + (y + 1) % 2, y)
+		move_unit_to(_p_units[i], _astar_board.left + (y + 1) % 2, y)
 	
-	var step_e = min((_astar_board.bottom - _astar_board.top) / len(e_units), 6)
-	var start_e = center - len(e_units) * step_e / 2 + step_e / 2
-	for i in range(len(e_units)):
+	var step_e = min((_astar_board.bottom - _astar_board.top) / len(_e_units), 6)
+	var start_e = center - len(_e_units) * step_e / 2 + step_e / 2
+	for i in range(len(_e_units)):
 		var y = start_e + i * step_e
-		move_unit_to(e_units[i],  _astar_board.right - e_units[i].cells_occupied, y)
+		move_unit_to(_e_units[i],  _astar_board.right - _e_units[i].cells_occupied, y)
 	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
@@ -79,10 +90,10 @@ func move_unit_to(unit: Unit, x: int, y: int):
 	unit.global_position = to_loc(Vector2i(x, y))
 
 func get_player_units() -> Array[Unit]:
-	return []
+	return _p_units
 
 func get_enemy_units() -> Array[Unit]:
-	return []
+	return _e_units
 
 func draw(layer: int, array: Array, source_id: int = -1, 
 atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
@@ -130,6 +141,7 @@ func _flood_fill(cell: Vector2i) -> Array:
 	return array
 
 func _start_stepmove():
+	cur_ability = null
 	for unit_data in unit_queue:
 		if unit_data[1].controlled_player:
 			unit_data[1].set_outline_color(Unit.PLAYER_COLOR)
@@ -137,6 +149,7 @@ func _start_stepmove():
 			unit_data[1].set_outline_color(Unit.ENEMY_COLOR)
 	active_unit().set_outline_color(Unit.SELECTED_COLOR)
 	acts = active_unit().acts_count
+	(active_unit() as Unit).premove_update()
 	if active_unit().controlled_player:
 		_update_walkable()
 		_block_input = false
@@ -147,6 +160,7 @@ func _start_stepmove():
 	
 
 func _update_stepmove():
+	cur_ability = null
 	if acts != 0 and active_unit().controlled_player:
 		_update_walkable()
 		_block_input = false
@@ -167,11 +181,12 @@ func _update_stepmove():
 		else:
 			any_enemy_unit = true
 	if any_player_unit != any_enemy_unit:
+		finish.emit()
 		return
 	_start_stepmove()
 
 func _update_walls():
-	_tile_map.clear_layer(3)
+	_tile_map.clear_layer(WALLS_LAYER)
 	for unit in units:
 		if unit == active_unit():
 			continue
@@ -183,9 +198,10 @@ func _update_walkable(show=true):
 	_update_walls()
 	var cells = _flood_fill(to_map(active_unit().global_position))
 	_astar_walkable = AStarHexagon2D.new(cells)
-	_tile_map.clear_layer(1)
+	_tile_map.clear_layer(OVERLAY_LAYER)
 	if show:
-		draw(1, cells, 0, Vector2i(3, 0))
+		draw(OVERLAY_LAYER, cells, 0, Vector2i(3, 0))
+		_select_path_to(to_map(_tile_map.get_local_mouse_position()))
 
 func get_path_to_cell(map_coords: Vector2i) -> Array:
 	var result = []
@@ -199,21 +215,20 @@ func get_path_to_cell(map_coords: Vector2i) -> Array:
 		result.append(_astar_walkable.itm(cell))
 	return result
 
-func _update_path(event: InputEventMouseMotion):
+func _select_path_to(cell: Vector2i):
 	if active_unit() and _astar_walkable:
-		_current_path = get_path_to_cell(to_map(event.position))
-		_tile_map.clear_layer(2)
-		draw(2, _current_path, 0, Vector2i(1, 0))
+		_current_path = get_path_to_cell(cell)
+		_tile_map.clear_layer(PATH_LAYER)
+		draw(PATH_LAYER, _current_path, 0, Vector2i(1, 0))
 	
 func _move_active_unit():
 	if not _current_path:
 		return
 	_block_input = true
 	acts -= 1
-	_tile_map.clear_layer(1)
-	active_unit().walk_along(_current_path)
-	await active_unit().walk_finished
-	_tile_map.clear_layer(2)
+	_tile_map.clear_layer(OVERLAY_LAYER)
+	await active_unit().play("walk", _current_path)
+	_tile_map.clear_layer(PATH_LAYER)
 	
 	_update_stepmove()
 
@@ -221,19 +236,34 @@ func _input(event):
 	if _block_input:
 		return
 	if is_instance_of(event, InputEventMouseMotion):
-		_update_path(_tile_map.make_input_local(event))
+		if not cur_ability:
+			_select_path_to(to_map(_tile_map.make_input_local(event).position))
 	
 	if event.is_pressed():
-		return _key_press_event(event)
+		return await _key_press_event(event)
 		
 func _key_press_event(event):
 	if cur_ability:
-		pass
+		if event.is_action_pressed("apply_ability"):
+			if cur_ability.can_apply():
+				await cur_ability.apply()
+				cur_ability.after_apply()
+				_update_stepmove()
+		if event.is_action_pressed("cancel_ability"):
+			cur_ability = null
 	else:
 		if event.is_action_pressed("move"):
 			_move_active_unit()
 		if event.as_text().is_valid_int():
-				var i = (int(event.as_text) + 9) % 10
+				# print(is_instance_of(event.as_text, String))
+				var i = (event.as_text().to_int() + 9) % 10
 				var abilities = active_unit().get_abilities()
-				if len(abilities) > i:
+				if len(abilities) > i and abilities[i].can_use():
 					cur_ability = abilities[i]
+					cur_ability.auto_select()
+					_tile_map.clear_layer(PATH_LAYER)
+
+func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
+	var path = _astar_board.get_id_path(_astar_board.mti(a), _astar_board.mti(b))
+	return len(path)
+

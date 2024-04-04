@@ -70,6 +70,9 @@ inventory = NodePath("InventoryComponent")
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 damage = NodePath("StatDamage")
+acts_count = null
+cells_occupied = null
+controlled_player = null
 sprite_for_outline = NodePath("Sprite2D")
 max_attack_distance = 5
 

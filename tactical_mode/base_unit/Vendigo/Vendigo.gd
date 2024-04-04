@@ -1,13 +1,15 @@
-extends "res://tactical_mode/base_unit/unit.gd"
-
-class_name Vendigo
+class_name Vendigo extends Unit
 
 @onready var tile_map = $"../TileMap"
 
 var current_id_path: Array = []
 
-func walk_along(way: Array):
-	current_id_path = way
+signal walk_finished
+
+func play(name, args=null):
+	if name == "walk":
+		current_id_path = args
+		await walk_finished
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():
@@ -29,5 +31,4 @@ func ai(map: TacticalMap):
 		path = map.get_path_to_cell(
 			map.to_map(global_position) + Vector2i(
 				rng.randi_range(-3, 3), rng.randi_range(-3, 3)))
-	walk_along(path)
-	await walk_finished
+	await play("walk", path)

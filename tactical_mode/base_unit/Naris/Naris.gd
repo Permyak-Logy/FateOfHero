@@ -1,6 +1,4 @@
-extends Unit
-
-class_name NarisUnit
+class_name NarisUnit extends Unit
 
 @onready var tile_map = $"../TileMap"
 @onready var animation = $AnimationPlayer
@@ -8,12 +6,19 @@ var luck_coin_cls = preload("res://inventory/gears/luck_coin.tres")
 
 var current_id_path: Array = []
 
+signal walk_finished
+
 func _ready():
+	super._ready()
 	if inventory.use(luck_coin_cls):
 		reload_all_mods()
 
-func walk_along(way: Array):
-	current_id_path = way
+func play(name, params=null):
+	if name == "walk":
+		current_id_path = params
+		await walk_finished
+	else:
+		super.play(name)
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():

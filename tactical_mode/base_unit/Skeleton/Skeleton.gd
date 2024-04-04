@@ -5,9 +5,12 @@ class_name Skeleton
 @onready var tile_map = $"../TileMap"
 
 var current_id_path: Array = []
+signal walk_finished
 
-func walk_along(way: Array):
-	current_id_path = way
+func play(name, args=null):
+	if name == "walk":
+		current_id_path = args
+		await walk_finished
 
 func _physics_process(delta):
 	if current_id_path.is_empty():
