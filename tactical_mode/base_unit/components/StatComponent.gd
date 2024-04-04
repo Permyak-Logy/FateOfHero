@@ -9,10 +9,8 @@ class_name StatComponent
 @export var mod_type: Mod.Type = Mod.Type.None
 
 @onready var mod = Mod.new(mod_type)
-@onready var _characteristic = Characteristic.new(
-	default_base, default_cur, default_max)
-
 @onready var unit: Unit
+@onready var _characteristic = Characteristic.new(default_base, default_cur, default_max)
 
 signal empty
 signal full

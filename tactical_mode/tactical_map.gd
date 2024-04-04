@@ -25,22 +25,8 @@ var cur_ability: Ability = null
 
 signal finish
 
-var Naris = preload("res://tactical_mode/base_unit/Naris/Naris.tscn")
-var Vendigo = preload("res://tactical_mode/base_unit/Vendigo/Vendigo.tscn")
-var Skelet = preload("res://tactical_mode/base_unit/Skeleton/Skeleton.tscn")
-
 func active_unit() -> Unit:
 	return unit_queue[0][1]
-
-func _ready():
-	reinit([
-		Naris.instantiate(),
-		Naris.instantiate(),
-		Vendigo.instantiate(),
-		Skelet.instantiate(),
-		Skelet.instantiate(),
-		Skelet.instantiate(),
-		Skelet.instantiate()])
 
 func clear():
 	for child in get_children():
@@ -55,33 +41,39 @@ func clear():
 func on_kill(unit: Unit):
 	pass
 
-func reinit(array: Array[Unit] = []):
+func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
+	if not is_node_ready():
+		await ready
 	clear()
 	_p_units.clear()
 	_e_units.clear()
-	for unit in array:
+	for p in player:
+		_p_units.append(p.instantiate())
+		
+	for e in enemy:
+		_e_units.append(e.instantiate())
+		
+	for unit in _p_units + _e_units:
 		add_child(unit)
 		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 		units.append(unit)
 		unit.init_fight()
-		if unit.controlled_player:
-			_p_units.append(unit)
-		else:
-			_e_units.append(unit)
 	
 	var center = (_astar_board.bottom - _astar_board.top) / 2 + _astar_board.top
 	
-	var step_p = min((_astar_board.bottom - _astar_board.top) / len(_p_units), 6)
-	var start_p = center - len(_p_units) * step_p / 2 + step_p / 2
-	for i in range(len(_p_units)):
-		var y = start_p + i * step_p
-		move_unit_to(_p_units[i], _astar_board.left + (y + 1) % 2, y)
+	if _p_units:
+		var step_p = min((_astar_board.bottom - _astar_board.top) / len(_p_units), 6)
+		var start_p = center - len(_p_units) * step_p / 2 + step_p / 2
+		for i in range(len(_p_units)):
+			var y = start_p + i * step_p
+			move_unit_to(_p_units[i], _astar_board.left + (y + 1) % 2, y)
 	
-	var step_e = min((_astar_board.bottom - _astar_board.top) / len(_e_units), 6)
-	var start_e = center - len(_e_units) * step_e / 2 + step_e / 2
-	for i in range(len(_e_units)):
-		var y = start_e + i * step_e
-		move_unit_to(_e_units[i],  _astar_board.right - _e_units[i].cells_occupied, y)
+	if _e_units:
+		var step_e = min((_astar_board.bottom - _astar_board.top) / len(_e_units), 6)
+		var start_e = center - len(_e_units) * step_e / 2 + step_e / 2
+		for i in range(len(_e_units)):
+			var y = start_e + i * step_e
+			move_unit_to(_e_units[i],  _astar_board.right - _e_units[i].cells_occupied, y)
 	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()

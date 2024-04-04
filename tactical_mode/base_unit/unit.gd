@@ -24,11 +24,11 @@ const SELECTED_COLOR = Vector4(0, 0, 255, 100)
 const ENEMY_COLOR = Vector4(255, 0, 0, 100)
 const DEFAULT_COLOR = Vector4(0, 0, 0, 100)
 
-@onready var attack_ability: Ability = AttackAbility.new(max_attack_distance)
-
 var outline_shader = preload("res://tactical_mode/base_unit/outline_shader.tres")
+@onready var attack_ability = AttackAbility.new(max_attack_distance)
 
 func _ready():
+	print("Ready from ", self)
 	if sprite_for_outline:
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
 	if health:
