@@ -2,13 +2,12 @@ extends CharacterBody2D
 
 @onready var tilemap =  $"../TileMap"
 @onready var TileEvent = preload("res://stategic_mode/tile_events/TileEvent.tscn")
-
-
 @export var inventory: Inventory
 
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
+var last_position: Vector2
 var is_moving: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,15 +35,17 @@ func _input(event):
 		return 
 		
 	var id_path
-	print("global_position", global_position)
-	print("mouse_position", get_global_mouse_position())
-	print("clicked at: ",tilemap.local_to_map(get_global_mouse_position()))
+	#print("global_position", global_position)
+	#print("mouse_position", get_global_mouse_position())
+	#print("clicked at: ",tilemap.local_to_map(get_global_mouse_position()))
 	if is_moving:
-		print(target_position)
+		print("stopping")
+		target_position = last_position
 		id_path = astar_grid.get_id_path(
-			tilemap.local_to_map(target_position),
-			tilemap.local_to_map(get_global_mouse_position())
-		)
+			tilemap.local_to_map(global_position),
+			tilemap.local_to_map(target_position)
+		).slice(1)
+		is_moving = false
 	else:
 		id_path = astar_grid.get_id_path(
 			tilemap.local_to_map(global_position),
@@ -63,9 +64,9 @@ func _physics_process(delta):
 		target_position = tilemap.map_to_local(current_id_path.front())
 		target_position[0] -= 8
 		target_position[1] -= 8
-		print("abs tp: ", target_position)
-		print("map tp: ", current_id_path.front())
-		print("first_target: ", tilemap.local_to_map(target_position))
+		#print("abs tp: ", target_position)
+		#print("map tp: ", current_id_path.front())
+		#print("first_target: ", tilemap.local_to_map(target_position))
 		is_moving = true
 	
 	var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
@@ -79,12 +80,13 @@ func _physics_process(delta):
 	if global_position == target_position:
 		current_id_path.pop_front()
 		if not current_id_path.is_empty():
+			last_position = target_position
 			target_position = tilemap.map_to_local(current_id_path.front())
 			target_position[0] -= 8
 			target_position[1] -= 8
-			print("next_target: ", tilemap.local_to_map(target_position))
+			#print("next_target: ", tilemap.local_to_map(target_position))
 		else:
 			is_moving = false
-			print("movement ended")
+			#print("movement ended")
 			
 

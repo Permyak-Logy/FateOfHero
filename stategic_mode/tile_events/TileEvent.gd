@@ -1,7 +1,8 @@
 extends Node2D
 
 func activate():
-	pass	
+	print("TODO -- redefine activate")
+	remove()
 
 func remove():
 	var host = get_parent()

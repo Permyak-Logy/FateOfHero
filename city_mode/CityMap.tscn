@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://ftb7kac1q6vt"]
+
+[ext_resource type="Script" path="res://city_mode/CityMap.gd" id="1_8qc0h"]
+
+[node name="CityMap" type="Node2D"]
+script = ExtResource("1_8qc0h")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 106.0
+offset_top = 39.0
+offset_right = 583.0
+offset_bottom = 332.0
+text = "TODO
+this is a singleton scene for city
+you should implement 
+ - city changer
+ - add return to the start map"

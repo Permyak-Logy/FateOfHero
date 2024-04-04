@@ -4,8 +4,10 @@ class_name Inventory
 
 # list of items and counts there of
 @export var items: Dictionary
+@export var characters: Array[PackedScene]
 # must be equal to number of cells
 const max_stacks_count: int = 50
+#const max_character_count: int = 5
 
 func get_item_stacks() -> Array[ItemStack]:
 	"""
@@ -59,5 +61,9 @@ func remove(item: Item, count: int):
 	items[item] -= count 
 	if items[item] == 0:
 		items.erase(item) 
-
-
+#
+#func get_characters():
+	#return characters
+	#
+#func set_characters(new_characters: Array[Unit]):
+	#characters = new_characters

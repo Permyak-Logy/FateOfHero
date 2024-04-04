@@ -2,7 +2,7 @@ class_name NarisUnit extends Unit
 
 @onready var tile_map = $"../TileMap"
 @onready var animation = $AnimationPlayer
-var luck_coin_cls = preload("res://inventory/gears/luck_coin.tres")
+@onready var luck_coin_cls = preload("res://inventory/gears/luck_coin.tres")
 
 var current_id_path: Array = []
 
