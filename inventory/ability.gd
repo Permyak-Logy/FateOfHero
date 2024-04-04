@@ -8,7 +8,7 @@ class_name Ability
 @export var limit: int = 0
 @export var count: int = -1
 
-@export var targets: int = 0
+@export var targets: int = 1
 
 var description: String = ""
 
@@ -29,11 +29,20 @@ func set_owner(_owner: Unit = null):
 
 func select(node):
 	selected.append(node)
+	if len(selected) > targets:
+		unselect(selected[0])
+	if is_instance_of(node, Unit):
+		(node as Unit).set_outline_color(Unit.SELECTED_COLOR)
 
 func unselect(node):
 	selected.erase(node)
+	if is_instance_of(node, Unit):
+		get_map().reset_outline_color(node)
 
 func clear():
+	for node in selected:
+		if is_instance_of(node, Unit):
+			get_map().reset_outline_color(node)
 	selected.clear()
 
 func reset():
@@ -60,7 +69,9 @@ func can_use() -> bool:
 	return true
 	
 func auto_select() -> bool:
-	return false
+	clear()
+	select(owner)	
+	return true
 
 func can_select(_node: Node) -> bool:
 	return false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cw3rkppa44bw8"]
+[gd_scene load_steps=12 format=3 uid="uid://cw3rkppa44bw8"]
 
 [ext_resource type="Script" path="res://tactical_mode/base_unit/Naris/Naris.gd" id="1_7crcm"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="2_km4jx"]
@@ -61,9 +61,14 @@ _data = {
 "run": SubResource("Animation_8gx8v")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pcowp"]
+radius = 12.0
+height = 58.0
+
 [node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed", "damage", "sprite_for_outline")]
 z_index = 1
 y_sort_enabled = true
+input_pickable = true
 script = ExtResource("1_7crcm")
 unit_name = "Нарис"
 inventory = NodePath("InventoryComponent")
@@ -111,3 +116,9 @@ libraries = {
 offset_top = -56.0
 offset_bottom = -54.0
 stat_component = NodePath("../StatHealth")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -23)
+shape = SubResource("CapsuleShape2D_pcowp")
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]

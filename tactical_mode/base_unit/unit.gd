@@ -20,6 +20,7 @@ signal death
 var effects: Array[Effect] = []
 
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
+const CUR_COLOR = Vector4(255, 255, 255, 100)
 const SELECTED_COLOR = Vector4(0, 0, 255, 100)
 const ENEMY_COLOR = Vector4(255, 0, 0, 100)
 const DEFAULT_COLOR = Vector4(0, 0, 0, 100)
@@ -88,3 +89,16 @@ func play(name: String, args=null):
 func on_death():
 	set_outline_color(Vector4(10, 0, 0, 100))
 	play("death")
+
+
+func _on_toggle_select(viewport, event: InputEvent, shape_idx: int):
+	if event.is_action_pressed("select"):
+		var ability = get_map().cur_ability
+		if not ability:
+			return
+		if not ability.can_select(self):
+			return
+		if self in ability.selected:
+			ability.unselect(self)
+		else:
+			ability.select(self)

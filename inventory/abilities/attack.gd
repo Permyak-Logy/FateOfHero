@@ -27,9 +27,7 @@ func auto_select():
 	for unit in units:
 		if can_select(unit):
 			select(unit)
-			print("Selected", unit)
 			return true
-	print("Not selected unit")
 	return false
 
 func can_select(node):

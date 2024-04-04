@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://kj8esabe8qfg"]
+[gd_scene load_steps=8 format=3 uid="uid://kj8esabe8qfg"]
 
 [ext_resource type="Script" path="res://tactical_mode/base_unit/Vendigo/Vendigo.gd" id="1_oj4or"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="3_sy0f3"]
@@ -10,9 +10,13 @@
 shader = ExtResource("3_ws587")
 shader_parameter/outline_color = Color(0, 0, 0, 0)
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_mjml1"]
+points = PackedVector2Array(-30, 5, -30, -100, 50, -100, 80, 10)
+
 [node name="Vendigo" type="CharacterBody2D" node_paths=PackedStringArray("health", "speed", "sprite_for_outline")]
 z_index = 1
 y_sort_enabled = true
+input_pickable = true
 script = ExtResource("1_oj4or")
 unit_name = "Вендиго"
 health = NodePath("StatHealth")
@@ -38,3 +42,8 @@ offset_top = -112.0
 offset_right = 71.0
 offset_bottom = -110.0
 stat_component = NodePath("../StatHealth")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_mjml1")
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]

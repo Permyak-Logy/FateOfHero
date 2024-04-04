@@ -32,3 +32,5 @@ func _physics_process(_delta):
 		current_id_path.pop_front()
 		if not current_id_path:
 			walk_finished.emit()
+
+
