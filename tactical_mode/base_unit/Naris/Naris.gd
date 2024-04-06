@@ -10,7 +10,7 @@ signal walk_finished
 
 func _ready():
 	super._ready()
-	if inventory.use(luck_coin_cls):
+	if $InventoryComponent.use(luck_coin_cls):
 		reload_all_mods()
 
 func play(name, params=null):
@@ -27,10 +27,14 @@ func _physics_process(_delta):
 
 	var target_position = tile_map.map_to_local(current_id_path.front())
 	animation.play("run")
-	global_position = global_position.move_toward(target_position, 3)
+	var old_global_position = global_position
+	global_position = global_position.move_toward(target_position, 5)
+	if ((global_position - old_global_position)[0] < 0) != ($Sprite2D.scale[0] < 0):
+		$Sprite2D.scale[0] = -$Sprite2D.scale[0]
 	if global_position == target_position:    
 		current_id_path.pop_front()
 		if not current_id_path:
+			$Sprite2D.scale = Vector2(1, 1)
 			walk_finished.emit()
 
 

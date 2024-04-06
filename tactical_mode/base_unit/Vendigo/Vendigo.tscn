@@ -18,18 +18,20 @@ z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_oj4or")
-unit_name = "Вендиго"
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
-cells_occupied = 2
-controlled_player = false
 sprite_for_outline = NodePath("Sprite2D")
+controlled_player = false
 
 [node name="StatHealth" parent="." instance=ExtResource("3_sy0f3")]
 default_base = 100.0
 
 [node name="StatSpeed" parent="." instance=ExtResource("3_sy0f3")]
 default_base = 101.0
+
+[node name="StatDamage" parent="." instance=ExtResource("3_sy0f3")]
+default_base = 50.0
+mod_type = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_vyb2c")

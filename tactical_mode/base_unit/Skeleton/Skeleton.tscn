@@ -9,13 +9,14 @@
 shader = ExtResource("3_oy1oo")
 shader_parameter/outline_color = null
 
-[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("health", "speed")]
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("health", "speed", "sprite_for_outline")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_ccpxk")
 unit_name = "Скелет"
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
+sprite_for_outline = NodePath("Sprite2D")
 controlled_player = false
 
 [node name="StatHealth" parent="." instance=ExtResource("2_kl3lq")]

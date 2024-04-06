@@ -1,23 +1,24 @@
-class_name Unit extends CharacterBody2D
+class_name Unit extends Node2D
 
 @export var unit_name: String = "Unit"
 
+@export_group("Components")
 @export var inventory: InventoryComponent = null
 @export var health: StatComponent = null
 @export var defence: StatComponent = null
 @export var speed: StatComponent = null
 @export var damage: StatComponent = null
+@export var sprite_for_outline: Sprite2D = null
 
-
+@export_group("Unit stats")
 @export var acts_count: int = 1
 @export var cells_occupied: int = 1
 @export var controlled_player: bool = true
-@export var sprite_for_outline: Sprite2D = null
 @export var max_attack_distance = 1
 
 signal death(Unit)
 
-var effects: Array[Effect] = []
+var _effects: Array[Effect] = []
 
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
 const CUR_COLOR = Vector4(255, 255, 255, 100)
@@ -42,12 +43,21 @@ func set_outline_color(color: Vector4):
 		"outline_color", color)
 		
 func apply_damage(damage: float, _instigator: Unit = null):
+	for effect in _instigator.get_effects():
+		damage = effect.update_on_attack(damage, self)
+	
 	if not health:
 		return 0
+	
 	if defence:
 		damage = damage - defence.cur()
+	
+	for effect in get_effects():
+		damage = effect.update_on_damage(damage, _instigator)
+	
 	damage = max(damage, 0)
 	health.sub(damage)
+	
 	return damage
 
 func reload_all_mods():
@@ -80,12 +90,13 @@ func init_fight():
 func premove_update():
 	for ability in get_abilities():
 		ability.update()
+	for effect in get_effects():
+		effect.update_on_move()
 
 func play(name: String, args=null):
 	return
 
 func on_death(component: StatComponent):
-	print(component)
 	set_outline_color(Vector4(10, 0, 0, 100))
 	play("death")
 	death.emit(self)
@@ -104,3 +115,17 @@ func _on_toggle_select(viewport, event: InputEvent, shape_idx: int):
 			ability.unselect(self)
 		else:
 			ability.select(self)
+
+func get_effects() -> Array[Effect]:
+	return _effects
+
+func add_effect(effect: Effect):
+	_effects.append(effect)
+	effect.set_owner(self)
+	effect.finished.connect(remove_effect)
+	effect.updated_mods.connect(reload_all_mods)
+
+func remove_effect(effect: Effect):
+	_effects.erase(effect)
+	effect.finished.disconnect(remove_effect)
+	effect.updated_mods.disconnect(reload_all_mods)

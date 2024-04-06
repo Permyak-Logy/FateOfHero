@@ -70,13 +70,11 @@ z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_7crcm")
-unit_name = "Нарис"
 inventory = NodePath("InventoryComponent")
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 damage = NodePath("StatDamage")
 sprite_for_outline = NodePath("Sprite2D")
-max_attack_distance = 50
 
 [node name="StatHealth" parent="." instance=ExtResource("2_km4jx")]
 default_base = 100.0

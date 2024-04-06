@@ -60,7 +60,9 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
 		
 	for unit in _p_units + _e_units:
 		add_child(unit)
-		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
+		print(unit.is_node_ready(), unit)
+		if unit.speed:
+			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 		unit.death.connect(on_kill)
 		units.append(unit)
 		unit.init_fight()
