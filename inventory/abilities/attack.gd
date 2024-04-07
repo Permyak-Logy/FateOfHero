@@ -11,7 +11,7 @@ func _init(_distance=1):
 func apply():
 	if owner.damage:
 		await owner.play("preattack")
-		print("Damaged", (selected[0] as Unit).apply_damage(owner.damage.cur()), "for", selected[0])
+		print("Damaged", (selected[0] as Unit).apply_damage(owner.damage.cur(), owner), "for", selected[0])
 		await owner.play("postattack")
 		return true
 	return false
@@ -27,7 +27,9 @@ func auto_select():
 	for unit in units:
 		if can_select(unit):
 			select(unit)
+			print("Selected ", unit)
 			return true
+	print("Not selected")
 	return false
 
 func can_select(node):

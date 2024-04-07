@@ -75,6 +75,7 @@ health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 damage = NodePath("StatDamage")
 sprite_for_outline = NodePath("Sprite2D")
+max_attack_distance = 50
 
 [node name="StatHealth" parent="." instance=ExtResource("2_km4jx")]
 default_base = 100.0
@@ -89,7 +90,7 @@ default_max = 100.0
 mod_type = 1
 
 [node name="StatDamage" parent="." instance=ExtResource("2_km4jx")]
-default_base = 1000.0
+default_base = 20.0
 mod_type = 2
 
 [node name="InventoryComponent" parent="." instance=ExtResource("3_yb5u2")]

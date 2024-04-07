@@ -43,8 +43,9 @@ func set_outline_color(color: Vector4):
 		"outline_color", color)
 		
 func apply_damage(damage: float, _instigator: Unit = null):
-	for effect in _instigator.get_effects():
-		damage = effect.update_on_attack(damage, self)
+	if _instigator:
+		for effect in _instigator.get_effects():
+			damage = effect.update_on_attack(damage, self)
 	
 	if not health:
 		return 0
