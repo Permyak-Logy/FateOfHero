@@ -4,7 +4,7 @@ extends Node
 @onready var gate = $Gate
 
 var lever_count = 2
-var current_state: Array[bool] = expected_state # it'll change in _ready()
+var current_state: Array[bool] = expected_state.duplicate() # it'll change in _ready()
 
 func _ready():
 	for node in get_children():
