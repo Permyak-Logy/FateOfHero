@@ -36,5 +36,3 @@ func _physics_process(_delta):
 		if not current_id_path:
 			$Sprite2D.scale = Vector2(1, 1)
 			walk_finished.emit()
-
-

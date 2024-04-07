@@ -10,4 +10,9 @@ func activate():
 	var characters = inventory.characters
 	game.tactical_map.reinit(characters, enemies)
 	game.to_tact_mode()
+	game.tactical_map.finish.connect(on_finish_tactical_map)
+	
+func on_finish_tactical_map(): #characters: Array[PackedScene], result): # TODO: Исправить
+	# inventory.characters = characters
+	game.to_strat_mode()
 	remove()

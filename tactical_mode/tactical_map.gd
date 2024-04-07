@@ -60,7 +60,6 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
 		
 	for unit in _p_units + _e_units:
 		add_child(unit)
-		print(unit.is_node_ready(), unit)
 		if unit.speed:
 			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 		unit.death.connect(on_kill)
@@ -94,6 +93,9 @@ func get_player_units() -> Array[Unit]:
 
 func get_enemy_units() -> Array[Unit]:
 	return _e_units
+
+func get_packed_player_units():
+	pass
 
 func draw(layer: int, array: Array, source_id: int = -1, 
 atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
@@ -170,7 +172,7 @@ func _update_stepmove():
 		_tile_map.clear_layer(OVERLAY_LAYER)
 		_tile_map.clear_layer(PATH_LAYER)
 		win = true
-		# _block_input = true
+		_block_input = true
 		print("*** FINISH! ***")
 		finish.emit()
 		return
