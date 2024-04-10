@@ -8,7 +8,7 @@ class_name StratMap
 
 @onready var player: Player = $player
 
-signal time_changed
+signal time_changed(time)
 
 func pause():
 	get_tree().paused = true
@@ -19,7 +19,7 @@ func unpause():
 func move_time(delta: int):
 	time += delta
 	time = time % 1440
-	time_changed.emit()
+	time_changed.emit(time)
 
 
 func _on_inventory_gui_inventory_opened():

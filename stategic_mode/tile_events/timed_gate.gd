@@ -9,8 +9,8 @@ func _ready():
 	strat_map.time_changed.connect(update_time)
 	pass
 	
-func update_time():
-	if open_time_start <= strat_map.time and strat_map.time <= open_time_end:
+func update_time(time: int):
+	if open_time_start <= time and time <= open_time_end:
 		open()
 	else:
 		close()

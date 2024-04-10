@@ -27,7 +27,7 @@ func activate():
 	game.to_tact_mode()
 	game.tactical_map.finish.connect(on_finish_tactical_map)
 	
-func on_finish_tactical_map(characters: Array[PackedScene], result):
-	inventory.characters = characters
+func on_finish_tactical_map(): # TODO: characters: Array[PackedScene], result):
+	#inventory.characters = characters
 	game.to_strat_mode()
 	remove()
