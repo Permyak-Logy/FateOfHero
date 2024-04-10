@@ -1,18 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=20 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://stategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://stategic_mode/strat_map.gd" id="1_vssm8"]
 [ext_resource type="PackedScene" uid="uid://dvk8v36nd7iqw" path="res://stategic_mode/tile_events/x_marks_the_spot.tscn" id="3_yiy5h"]
 [ext_resource type="Script" path="res://stategic_mode/GUI.gd" id="4_0143e"]
 [ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory_gui.tscn" id="4_ar3pl"]
-[ext_resource type="PackedScene" uid="uid://dipubwp70sl3s" path="res://stategic_mode/tile_events/mean_skelly_boi.tscn" id="4_ve1hs"]
+[ext_resource type="PackedScene" uid="uid://dipubwp70sl3s" path="res://stategic_mode/tile_events/encounter.tscn" id="4_ve1hs"]
+[ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://stategic_mode/tile_events/sprites/mean_skelly_boi.png" id="5_1yukr"]
 [ext_resource type="PackedScene" uid="uid://b7ihy2t1pwtq2" path="res://stategic_mode/tile_events/house_city.tscn" id="5_8gg2d"]
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/base_unit/Skeleton/Skeleton.tscn" id="5_r3hyg"]
 [ext_resource type="PackedScene" uid="uid://cf0rrbb0c6pik" path="res://stategic_mode/player.tscn" id="5_whmy4"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/base_unit/Vendigo/Vendigo.tscn" id="6_0wgum"]
-[ext_resource type="PackedScene" uid="uid://bohhuirs02xds" path="res://stategic_mode/tile_events/lever_tile_event.tscn" id="6_simf5"]
+[ext_resource type="PackedScene" uid="uid://bohhuirs02xds" path="res://stategic_mode/tile_events/lever.tscn" id="6_simf5"]
 [ext_resource type="Script" path="res://stategic_mode/LeverPuzzle 1.gd" id="7_rcyvo"]
 [ext_resource type="PackedScene" uid="uid://d17julguc6lr2" path="res://stategic_mode/tile_events/gate.tscn" id="8_byobl"]
+[ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://stategic_mode/tile_events/sprites/x_marks_the_spot.png" id="8_q21qa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4091,12 +4093,14 @@ script = SubResource("GDScript_e0x0d")
 
 [node name="CombatEncounters" type="Node" parent="."]
 
-[node name="MeanSkellyBoi2" parent="CombatEncounters" instance=ExtResource("4_ve1hs")]
+[node name="MeanSkellyBoi" parent="CombatEncounters" instance=ExtResource("4_ve1hs")]
 position = Vector2(-130, 22)
+texture = ExtResource("5_1yukr")
 enemies = Array[PackedScene]([ExtResource("5_r3hyg"), ExtResource("5_r3hyg"), ExtResource("6_0wgum")])
 
-[node name="MeanSkellyBoi" parent="CombatEncounters" instance=ExtResource("4_ve1hs")]
+[node name="ambush" parent="CombatEncounters" instance=ExtResource("4_ve1hs")]
 position = Vector2(-111, 92)
+texture = ExtResource("8_q21qa")
 enemies = Array[PackedScene]([ExtResource("6_0wgum")])
 
 [node name="PuzzleMaster" type="Node" parent="."]

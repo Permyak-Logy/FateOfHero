@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bohhuirs02xds"]
 
 [ext_resource type="PackedScene" uid="uid://bpa53mqxjwk7r" path="res://stategic_mode/tile_events/TileEvent.tscn" id="1_dl446"]
-[ext_resource type="Script" path="res://stategic_mode/tile_events/lever_tile_event.gd" id="2_7wvgx"]
+[ext_resource type="Script" path="res://stategic_mode/tile_events/lever.gd" id="2_7wvgx"]
 [ext_resource type="Texture2D" uid="uid://de24xxwvg4ggm" path="res://stategic_mode/tile_events/sprites/lever.png" id="3_htat7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61iwg"]
