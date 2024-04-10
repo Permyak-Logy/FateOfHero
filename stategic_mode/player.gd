@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+@onready var strat_map: StratMap = $".."
 @onready var tilemap =  $"../TileMap"
 @onready var TileEvent = preload("res://stategic_mode/tile_events/TileEvent.tscn")
 @export var inventory: Inventory
@@ -84,6 +86,7 @@ func _physics_process(delta):
 			target_position = tilemap.map_to_local(current_id_path.front())
 			target_position[0] -= 8
 			target_position[1] -= 8
+			strat_map.move_time(30)
 			#print("next_target: ", tilemap.local_to_map(target_position))
 		else:
 			is_moving = false

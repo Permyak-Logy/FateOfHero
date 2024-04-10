@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=21 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://stategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://stategic_mode/strat_map.gd" id="1_vssm8"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://stategic_mode/LeverPuzzle 1.gd" id="7_rcyvo"]
 [ext_resource type="PackedScene" uid="uid://d17julguc6lr2" path="res://stategic_mode/tile_events/gate.tscn" id="8_byobl"]
 [ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://stategic_mode/tile_events/sprites/x_marks_the_spot.png" id="8_q21qa"]
+[ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://stategic_mode/tile_events/timed_gate.tscn" id="16_u0x0p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4105,6 +4106,9 @@ enemies = Array[PackedScene]([ExtResource("6_0wgum")])
 
 [node name="PuzzleMaster" type="Node" parent="."]
 
+[node name="TimedGate" parent="PuzzleMaster" instance=ExtResource("16_u0x0p")]
+position = Vector2(-51, 57)
+
 [node name="LeverPuzzle 1" type="Node" parent="PuzzleMaster"]
 script = ExtResource("7_rcyvo")
 
@@ -4124,6 +4128,7 @@ position = Vector2(-24, -8)
 position = Vector2(138, 79)
 
 [node name="player" parent="." instance=ExtResource("5_whmy4")]
+top_level = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 process_mode = 3

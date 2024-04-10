@@ -6,7 +6,6 @@
 
 [node name="Gate" instance=ExtResource("1_8n2o0")]
 script = ExtResource("2_ghlwe")
-is_open = false
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_mx0xg")
