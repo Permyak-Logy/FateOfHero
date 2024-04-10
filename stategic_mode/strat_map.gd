@@ -1,4 +1,4 @@
-git extends Node2D
+extends Node2D
 
 class_name StratMap
 
