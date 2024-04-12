@@ -16,8 +16,30 @@ func apply():
 		return true
 	return false
 
-func auto_select():
-	clear()
+func tab_next(prev=false):
+	if not selectable_tab:
+		return
+	
+	if not prev:
+		for i in range(selectable_tab.find(selected[0]) + 1, len(selectable_tab)):
+			if not selectable_tab[i] in selected:
+				select(selectable_tab[i])
+				return
+		for i in range(selectable_tab.find(selected[0])):
+			if not selectable_tab[i] in selected:
+				select(selectable_tab[i])
+				return
+	else:
+		for i in range(selectable_tab.find(selected[0]) - 1, -1, -1):
+			if not selectable_tab[i] in selected:
+				select(selectable_tab[i])
+				return
+		for i in range(len(selectable_tab) - 1, selectable_tab.find(selected[0]), -1):
+			if not selectable_tab[i] in selected:
+				select(selectable_tab[i])
+				return
+
+func find_all_selectable_tab_targets():
 	var map = owner.get_parent() as TacticalMap
 	var units: Array[Unit]
 	if owner.controlled_player:
@@ -26,11 +48,7 @@ func auto_select():
 		units = map.get_player_units()
 	for unit in units:
 		if can_select(unit):
-			select(unit)
-			print("Selected ", unit)
-			return true
-	print("Not selected")
-	return false
+			selectable_tab.append(unit)
 
 func can_select(node):
 	var unit = node as Unit

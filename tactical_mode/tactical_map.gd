@@ -261,6 +261,12 @@ func _key_press_event(event):
 			cur_ability.clear()
 			_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
 			cur_ability = null
+			
+		if event.is_action_pressed("prev_target"):
+			cur_ability.tab_prev()
+		elif event.is_action_pressed("next_target"):
+			cur_ability.tab_next()
+		
 	else:
 		if event.is_action_pressed("move"):
 			_move_active_unit()
@@ -269,6 +275,7 @@ func _key_press_event(event):
 			var abilities = active_unit().get_abilities()
 			if len(abilities) > i and abilities[i].can_use():
 				cur_ability = abilities[i]
+				cur_ability.find_all_selectable_tab_targets()
 				cur_ability.auto_select()
 				_tile_map.set_layer_enabled(OVERLAY_LAYER, false)
 				_tile_map.clear_layer(PATH_LAYER)

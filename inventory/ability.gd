@@ -20,6 +20,8 @@ var cooldown_time = 0
 var has_uses = 0
 
 var selected: Array[Node] = []
+var select_history: Array[Node] = []
+var selectable_tab: Array[Node] = []
 
 func _init(_count: int = count):
 	count = _count
@@ -40,12 +42,14 @@ func unselect(node):
 		get_map().reset_outline_color(node)
 
 func clear():
-	for node in selected:
+	while selected:
+		var node = selected.pop_front()
 		if is_instance_of(node, Unit):
 			get_map().reset_outline_color(node)
-	selected.clear()
+	selectable_tab.clear()
 
 func reset():
+	clear()
 	cooldown_time = 0
 	if count < 0:
 		has_uses = limit
@@ -69,10 +73,39 @@ func can_use() -> bool:
 	return true
 	
 func auto_select() -> bool:
-	clear()
-	select(owner)	
-	return true
+	if len(selectable_tab) > 0:
+		select(selectable_tab[0])
+		return true
+	return false
 
+func tab_next(prev=false):
+	if not selectable_tab:
+		return
+	for i in range(selectable_tab.find(selected[0]) + 1, len(selectable_tab)):
+		if not selectable_tab[i] in selected:
+			select(selectable_tab[i])
+			return
+	for i in range(selectable_tab.find(selected[0])):
+		if not selectable_tab[i] in selected:
+			select(selectable_tab[i])
+			return
+
+
+func tab_prev():
+	if not selectable_tab:
+		return
+	for i in range(selectable_tab.find(selected[0]) - 1, -1, -1):
+		if not selectable_tab[i] in selected:
+			select(selectable_tab[i])
+			return
+	for i in range(len(selectable_tab) - 1, selectable_tab.find(selected[0]), -1):
+		if not selectable_tab[i] in selected:
+			select(selectable_tab[i])
+			return
+
+func find_all_selectable_tab_targets():
+	pass
+ 
 func can_select(_node: Node) -> bool:
 	return false
 
@@ -95,4 +128,4 @@ func after_apply():
 		map.acts = 0
 	else:
 		map.acts -= acts
-		
+	clear()
