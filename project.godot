@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Fate of hero"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://tactical_mode/tactical_map.tscn"
 config/features=PackedStringArray("4.2")
 
 [debug]
@@ -25,6 +25,16 @@ window/size/viewport_height=540
 window/size/window_width_override=1280
 window/size/window_height_override=800
 window/stretch/mode="canvas_items"
+
+[file_customization]
+
+folder_colors={
+"res://GUI/": "green",
+"res://city_mode/": "blue",
+"res://inventory/": "yellow",
+"res://stategic_mode/": "red",
+"res://tactical_mode/": "pink"
+}
 
 [input]
 
@@ -63,6 +73,16 @@ select={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(264, 13),"global_position":Vector2(268, 54),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+next_target={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+prev_target={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -71,3 +91,4 @@ select={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_vertices_to_pixel=true

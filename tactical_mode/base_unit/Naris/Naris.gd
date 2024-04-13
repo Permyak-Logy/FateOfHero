@@ -2,23 +2,23 @@ class_name NarisUnit extends Unit
 
 @onready var tile_map = $"../TileMap"
 @onready var animation = $AnimationPlayer
-@onready var luck_coin_cls = preload("res://inventory/gears/luck_coin.tres")
 
 var current_id_path: Array = []
 
 signal walk_finished
 
-func _ready():
-	super._ready()
-	if $InventoryComponent.use(luck_coin_cls):
-		reload_all_mods()
+var my_defense_ability = MyDefenseAbility.new()
+var hidden_armor_ability = HiddenArmorAbility.new()
 
-func play(name, params=null):
-	if name == "walk":
-		current_id_path = params
+func get_abilities():
+	return [attack_ability, my_defense_ability, hidden_armor_ability] + inventory.get_abilities()
+
+func play(_name, _params=null):
+	if _name == "walk":
+		current_id_path = _params
 		await walk_finished
 	else:
-		super.play(name)
+		super.play(_name)
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():
@@ -27,10 +27,16 @@ func _physics_process(_delta):
 
 	var target_position = tile_map.map_to_local(current_id_path.front())
 	animation.play("run")
-	var old_global_position = global_position
-	global_position = global_position.move_toward(target_position, 5)
-	if ((global_position - old_global_position)[0] < 0) != ($Sprite2D.scale[0] < 0):
+	
+	if ((target_position - global_position)[0] < 0) != ($Sprite2D.scale[0] < 0):
 		$Sprite2D.scale[0] = -$Sprite2D.scale[0]
+	
+	if ((target_position - global_position) as Vector2).length() < 2:
+		global_position = target_position
+	else:
+		($"." as CharacterBody2D).velocity = ((target_position - global_position) as Vector2).normalized() * 200
+		($"." as CharacterBody2D).move_and_slide()
+	
 	if global_position == target_position:    
 		current_id_path.pop_front()
 		if not current_id_path:

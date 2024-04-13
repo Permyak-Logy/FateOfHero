@@ -1,8 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d3khyiv2e8vo7"]
-
-[ext_resource type="Shader" path="res://tactical_mode/base_unit/outline.gdshader" id="1_38lbn"]
-
-[resource]
-resource_local_to_scene = true
-shader = ExtResource("1_38lbn")
-shader_parameter/outline_color = null
