@@ -6,9 +6,9 @@ var current_id_path: Array = []
 
 signal walk_finished
 
-func play(name, args=null):
-	if name == "walk":
-		current_id_path = args
+func play(_name, _args=null):
+	if _name == "walk":
+		current_id_path = _args
 		await walk_finished
 
 func _physics_process(_delta):
@@ -16,7 +16,6 @@ func _physics_process(_delta):
 		return
 		
 	var target_position = tile_map.map_to_local(current_id_path.front())
-
 	global_position = global_position.move_toward(target_position, 3)
 	if global_position == target_position:    
 		current_id_path.pop_front()

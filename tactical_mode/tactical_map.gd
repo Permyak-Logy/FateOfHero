@@ -19,47 +19,26 @@ const GRID_LAYER = 0
 const OVERLAY_LAYER = 1
 const PATH_LAYER = 2
 const WALLS_LAYER = 3
+const EFFECTS_LAYER = 4
 
 var win = null
 var cur_ability: Ability = null
 
 signal finish
 
-func active_unit() -> Unit:
-	return unit_queue[0][1]
+func _ready():
+	_p_units = [
+		$Naris,
+		$SmolItto
+	]
+	_e_units = [
+		$Vendigo,
+		$Skeleton
+	]
+	start_battle()
 
-func clear():
-	for child in get_children():
-		if is_instance_of(child, Unit):
-			remove_child(child)
-	win = false
-	cur_ability = null
-	units.clear()
-	unit_queue.clear()
-	_block_input = false
-
-func on_kill(unit: Unit):
-	for i in range(len(unit_queue)):
-		if unit_queue[i][1] == unit:
-			unit_queue.pop_at(i)
-			break
-	unit.set_outline_color(Unit.DEFAULT_COLOR)
-	print("Killed ", unit)
-
-func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
-	if not is_node_ready():
-		await ready
-	clear()
-	_p_units.clear()
-	_e_units.clear()
-	for p in player:
-		_p_units.append(p.instantiate())
-		
-	for e in enemy:
-		_e_units.append(e.instantiate())
-		
+func start_battle():
 	for unit in _p_units + _e_units:
-		add_child(unit)
 		if unit.speed:
 			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 		unit.death.connect(on_kill)
@@ -84,6 +63,43 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
 	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
+
+func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
+	if not is_node_ready():
+		await ready
+	clear()
+	_p_units.clear()
+	_e_units.clear()
+	for p in player:
+		_p_units.append(p.instantiate())
+		
+	for e in enemy:
+		_e_units.append(e.instantiate())
+	
+	for unit in _p_units + _e_units:
+		add_child(unit)
+	start_battle()
+
+func active_unit() -> Unit:
+	return unit_queue[0][1]
+
+func clear():
+	for child in get_children():
+		if is_instance_of(child, Unit):
+			remove_child(child)
+	win = false
+	cur_ability = null
+	units.clear()
+	unit_queue.clear()
+	_block_input = false
+
+func on_kill(unit: Unit):
+	for i in range(len(unit_queue)):
+		if unit_queue[i][1] == unit:
+			unit_queue.pop_at(i)
+			break
+	unit.set_outline_color(Unit.DEFAULT_COLOR)
+	print("Killed ", unit)
 
 func move_unit_to(unit: Unit, x: int, y: int):
 	unit.global_position = to_loc(Vector2i(x, y))
@@ -145,7 +161,7 @@ func _flood_fill(cell: Vector2i) -> Array:
 func _start_stepmove():
 	cur_ability = null
 	for unit_data in unit_queue:
-		if unit_data[1].controlled_player:
+		if is_player(unit_data[1]):
 			unit_data[1].set_outline_color(Unit.PLAYER_COLOR)
 		else:
 			unit_data[1].set_outline_color(Unit.ENEMY_COLOR)

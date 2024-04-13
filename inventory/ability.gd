@@ -9,6 +9,7 @@ class_name Ability
 @export var count: int = -1
 
 @export var targets: int = 1
+@export var max_targets: int = 0
 
 var description: String = ""
 
@@ -78,7 +79,7 @@ func auto_select() -> bool:
 		return true
 	return false
 
-func tab_next(prev=false):
+func tab_next():
 	if not selectable_tab:
 		return
 	for i in range(selectable_tab.find(selected[0]) + 1, len(selectable_tab)):
@@ -104,16 +105,25 @@ func tab_prev():
 			return
 
 func find_all_selectable_tab_targets():
-	pass
+	var map = owner.get_parent() as TacticalMap
+	for unit in map.units:
+		if can_select(unit):
+			selectable_tab.append(unit)
  
 func can_select(_node: Node) -> bool:
 	return false
 
 func can_apply() -> bool:
-	return len(selected) == targets
+	if len(selected) < targets:
+		return false
+	if len(selected) > max_targets and max_targets > 0:
+		return false
+	if len(selected) != targets and max_targets == 0:
+		return false
+	return true
 
 func apply() -> bool:
-	return can_apply()
+	return false
 
 func get_map() -> TacticalMap:
 	return owner.get_parent() as TacticalMap
