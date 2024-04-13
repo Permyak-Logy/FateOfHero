@@ -12,12 +12,21 @@ class_name CharacterPanel
 var current_character: Unit
 
 func update_gear(gear: Array[Item]):
+	#print(current_character.inventory.get_gears())
 	pass 
 
 func update_skills():
 	pass 
 
+
 func update_bars():
+	print(current_character.health.cur)
+	hp_bar.value = current_character.health.cur()
+	hp_bar.max_value = current_character.health.get_max()
+	hp_bar.label = str(current_character.health.get_cur()) + "/" + str(current_character.health.get_max())
+	#exp_bar.value = current_character.tpr.get_cur()
+	#exp_bar.max_value = current_character.tpr.get_max()
+	#exp_bar.label = str(current_character.tpr.get_cur()) + "/" + str(current_character.health.get_max())
 	pass 
 
 func update_repr():
@@ -34,10 +43,10 @@ func update_repr():
 	
 
 func update():
+	update_repr()
+	#update_bars()
 	#update_gear()
 	#update_skills()
-	#update_bars()
-	update_repr()
 	pass
 
 

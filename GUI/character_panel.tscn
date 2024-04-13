@@ -106,6 +106,13 @@ stretch_margin_bottom = 1
 texture_under = ExtResource("5_h8vfo")
 texture_progress = ExtResource("7_6oy03")
 
+[node name="Label" type="Label" parent="HBoxContainer/Character/CenterContainer/ExpProgressBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "none/10"
+
 [node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer/Character"]
 layout_mode = 2
 
@@ -120,6 +127,12 @@ stretch_margin_right = 1
 stretch_margin_bottom = 1
 texture_under = ExtResource("5_h8vfo")
 texture_progress = ExtResource("6_10go1")
+
+[node name="Label" type="Label" parent="HBoxContainer/Character/CenterContainer2/HealthBar"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "5/10"
 
 [node name="Skills" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
