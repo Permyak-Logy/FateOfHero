@@ -1,6 +1,5 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
-class_name Player
 @onready var strat_map: StratMap = $".."
 @onready var tilemap =  $"../TileMap"
 @onready var TileEvent = preload("res://stategic_mode/tile_events/TileEvent.tscn")

@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=9 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
+[ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/base_unit/Vendigo/Vendigo.tscn" id="4_dhhnm"]
+[ext_resource type="Script" path="res://tactical_mode/FPS_COUNTER.gd" id="4_fhbfl"]
+[ext_resource type="PackedScene" uid="uid://bjcjl3qla8b62" path="res://tactical_mode/base_unit/SmolItto/SmolItto.tscn" id="5_nrx87"]
+[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/base_unit/Naris/Naris.tscn" id="6_1btoa"]
 [ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
+[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/base_unit/Skeleton/Skeleton.tscn" id="7_oxa7b"]
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
@@ -22,6 +27,8 @@ layer_2/tile_data = PackedInt32Array()
 layer_3/name = "Walls"
 layer_3/enabled = false
 layer_3/tile_data = PackedInt32Array()
+layer_4/name = "Effects"
+layer_4/tile_data = PackedInt32Array()
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
@@ -35,7 +42,6 @@ offset = Vector2(-16, -8)
 anchor_mode = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
@@ -44,9 +50,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
-layout_mode = 2
+[node name="FPS_COUNTER" type="Label" parent="CanvasLayer"]
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 963.0
+offset_bottom = 25.0
+text = "100"
+script = ExtResource("4_fhbfl")
 
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Ability 1"
+[node name="Vendigo" parent="." instance=ExtResource("4_dhhnm")]
+position = Vector2(775, 229)
+controlled_player = true
+
+[node name="Naris" parent="." instance=ExtResource("6_1btoa")]
+position = Vector2(95, 398)
+
+[node name="Skeleton" parent="." instance=ExtResource("7_oxa7b")]
+position = Vector2(833, 375)
+
+[node name="SmolItto" parent="." instance=ExtResource("5_nrx87")]
+position = Vector2(96, 254)

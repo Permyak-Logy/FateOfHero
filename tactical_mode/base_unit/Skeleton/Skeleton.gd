@@ -7,9 +7,9 @@ class_name Skeleton
 var current_id_path: Array = []
 signal walk_finished
 
-func play(name, args=null):
-	if name == "walk":
-		current_id_path = args
+func play(_name, _args=null):
+	if _name == "walk":
+		current_id_path = _args
 		await walk_finished
 
 func _physics_process(delta):
