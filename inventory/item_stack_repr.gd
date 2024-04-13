@@ -1,5 +1,8 @@
 extends Panel
 
+"""
+represents item_stack as a picture and a number
+"""
 
 class_name ItemStackRepr 
 

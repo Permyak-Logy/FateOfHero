@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn5u6v7ibmq7d"]
+[gd_scene load_steps=7 format=3 uid="uid://bn5u6v7ibmq7d"]
 
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/InventoryRect.png" id="1_g736v"]
 [ext_resource type="Script" path="res://GUI/character_panel.gd" id="2_6h620"]
-[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/slot.tscn" id="3_lmm4b"]
 [ext_resource type="Texture2D" uid="uid://bpygsmt8liy5q" path="res://GUI/back_tpr.png" id="4_1x6s5"]
 [ext_resource type="Texture2D" uid="uid://c6rlqfgx2y7mt" path="res://GUI/new_assets/empty_bar.png" id="5_m24si"]
 [ext_resource type="Texture2D" uid="uid://bc88c0hbnlvul" path="res://GUI/new_assets/XP_bar.png" id="6_jqmcy"]
@@ -33,22 +32,7 @@ alignment = 1
 
 [node name="Gear" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="Slot" parent="HBoxContainer/Gear" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
-
-[node name="Slot2" parent="HBoxContainer/Gear" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
-
-[node name="Slot3" parent="HBoxContainer/Gear" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
-
-[node name="Slot4" parent="HBoxContainer/Gear" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
-
-[node name="Slot5" parent="HBoxContainer/Gear" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
+theme_override_constants/separation = 16
 
 [node name="Character" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -108,9 +92,12 @@ texture_progress = ExtResource("6_jqmcy")
 
 [node name="Label" type="Label" parent="HBoxContainer/Character/CenterContainer/ExpProgressBar"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -6.5
+offset_bottom = 6.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -135,9 +122,12 @@ texture_progress = ExtResource("7_o43m1")
 
 [node name="Label" type="Label" parent="HBoxContainer/Character/CenterContainer2/HealthBar"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -6.5
+offset_bottom = 6.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -147,19 +137,4 @@ horizontal_alignment = 1
 
 [node name="Skills" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="Slot" parent="HBoxContainer/Skills" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
-
-[node name="Slot2" parent="HBoxContainer/Skills" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
-
-[node name="Slot3" parent="HBoxContainer/Skills" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
-
-[node name="Slot4" parent="HBoxContainer/Skills" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
-
-[node name="Slot5" parent="HBoxContainer/Skills" instance=ExtResource("3_lmm4b")]
-layout_mode = 2
+theme_override_constants/separation = 16

@@ -18,4 +18,5 @@ value = SubResource("Resource_knwum")
 [resource]
 script = ExtResource("3_o56fg")
 texture = ExtResource("4_5h4qo")
-mods = [SubResource("Resource_57huo")]
+mods = Array[ExtResource("1_qtpol")]([SubResource("Resource_57huo")])
+destroy_on_death_instigator = false

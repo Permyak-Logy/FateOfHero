@@ -2,7 +2,16 @@ extends Node
 
 class_name InventoryComponent
 
+# for number of slots on the left 
 @export var max_abilities = 3
+
+# for number of slots on the right
+@export var gear_slots: Dictionary = {
+	Gear.Type.Head : 1,
+	Gear.Type.Body : 1, 
+	Gear.Type.Hands : 2, 
+	Gear.Type.Legs : 1, 
+}
 
 var _gears: Dictionary # Dict[Gear.Type, [Gear]]
 @onready var limits = {

@@ -14,19 +14,18 @@ signal inventory_closed
 
 
 @onready var inv_slots: Array = inventory_panel.slots
-@onready var character_buttons: Array = []
-@onready var gear_slots: Array = character_panel.gear_slots
-@onready var skill_slots: Array = character_panel.skill_slots
-#@onready var slots = inv_slots + gear_slots + skill_slots
+# these will be defined in `_ready()`
+var character_buttons: Array = []
+var gear_slots: Array = []
 
 var active_char_id: int = 0
 var item_stack_in_hand: ItemStackRepr
 
 func _ready():
-	
 	character_selection_panel.init(inventory.characters.size())
 	character_buttons = character_selection_panel.buttons
 	character_panel.change_character(inventory.characters[0])
+	gear_slots = character_panel.gear_slots
 	connect_slots()
 	connect_buttons()
 	visible = false

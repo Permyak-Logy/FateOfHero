@@ -3,6 +3,7 @@ extends Resource
 represents the thing you pick in the inventory
 item - stack of that item
 size - number of items in the stack RIGHT NOW
+note, that it is just data. It cannot be seen on it's own
 """
 class_name ItemStack
 

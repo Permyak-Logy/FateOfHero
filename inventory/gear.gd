@@ -1,4 +1,4 @@
-extends "res://inventory/item.gd"
+extends Item
 
 class_name Gear
 

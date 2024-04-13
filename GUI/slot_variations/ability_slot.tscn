@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfnwrkg2ewxtv"]
+
+[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/slot.tscn" id="1_xmyo5"]
+
+[node name="AbilitySlot" instance=ExtResource("1_xmyo5")]
