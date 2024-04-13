@@ -6,8 +6,11 @@ signal inventory_opened
 signal inventory_closed
 
 @onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
-@onready var slots: Array = $NinePatchRect/GridContainer.get_children()
+@onready var inventory_panel: InventoryPanel = $HBoxContainer/VBoxContainer/InventoryPanel 
+@onready var inv_slots: Array = inventory_panel.slots
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
+
+@onready var slots = inv_slots
 
 var item_stack_in_hand: ItemStackRepr
 
@@ -24,27 +27,16 @@ func connectSlots():
 	
 
 func update():
-	for slot in slots:
-		slot.item_stack_repr = null
-		slot.update()
-	var item_stacks = inventory.get_item_stacks()
-	for i in range(min(item_stacks.size(), slots.size())):
-		var item_stack: ItemStack = item_stacks[i]
-		var item_stack_repr: ItemStackRepr = slots[i].item_stack_repr
-		if not item_stack_repr:
-			item_stack_repr = ItemStackReprClass.instantiate()
-			slots[i].insert(item_stack_repr)
-		item_stack_repr.item_stack = item_stack
-		item_stack_repr.update()
+	var item_stacks: Array[ItemStack] = inventory.get_item_stacks()
+	inventory_panel.update(item_stacks)
 	
-	for slot in slots:
-		slot.update()
+	
 		
 func open():
 	is_open = true 
 	visible = true
-	inventory_opened.emit()
 	update()
+	inventory_opened.emit()
 	
 func close():
 	is_open = false 
@@ -54,7 +46,6 @@ func close():
 func on_slot_clicked(slot):
 	if slot.is_empty() and item_stack_in_hand and item_stack_in_hand.item_stack:
 		var item_stack: ItemStack = item_stack_in_hand.item_stack
-		#item_stack_in_hand.top_level = false
 		remove_child(item_stack_in_hand)
 		item_stack_in_hand = null 
 		inventory.insert(item_stack.item, item_stack.size)

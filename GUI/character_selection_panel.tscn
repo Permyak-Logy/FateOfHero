@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4t2ssb8xsd48"]
+
+[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/InventoryRect.png" id="1_5k17o"]
+
+[node name="CharacterSelectionPanel" type="NinePatchRect"]
+custom_minimum_size = Vector2(0, 40)
+texture = ExtResource("1_5k17o")
+region_rect = Rect2(0, 0, 19, 19)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+metadata/_edit_use_anchors_ = true
