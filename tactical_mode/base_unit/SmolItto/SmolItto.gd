@@ -1,7 +1,5 @@
 class_name SmolIttoUnit extends Unit
 
-@onready var tile_map = $"../TileMap"
-
 var current_id_path: Array = []
 
 signal walk_finished
@@ -23,7 +21,7 @@ func _physics_process(_delta):
 	if current_id_path.is_empty():
 		return
 
-	var target_position = tile_map.map_to_local(current_id_path.front())
+	var target_position = $"../TileMap".map_to_local(current_id_path.front())
 	if ((target_position - global_position)[0] < 0) != ($Sprite2D.scale[0] < 0):
 		$Sprite2D.scale[0] = -$Sprite2D.scale[0]
 	

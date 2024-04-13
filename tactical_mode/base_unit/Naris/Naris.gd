@@ -1,6 +1,5 @@
 class_name NarisUnit extends Unit
 
-@onready var tile_map = $"../TileMap"
 @onready var animation = $AnimationPlayer
 
 var current_id_path: Array = []
@@ -25,7 +24,7 @@ func _physics_process(_delta):
 		animation.play("idle")
 		return
 
-	var target_position = tile_map.map_to_local(current_id_path.front())
+	var target_position = $"../TileMap".map_to_local(current_id_path.front())
 	animation.play("run")
 	
 	if ((target_position - global_position)[0] < 0) != ($Sprite2D.scale[0] < 0):
