@@ -1,5 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjecl55jierv"]
+[gd_scene load_steps=3 format=3 uid="uid://cjecl55jierv"]
 
 [ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/slot.tscn" id="1_1hhvx"]
+[ext_resource type="Texture2D" uid="uid://llfeaef0hix1" path="res://GUI/new_assets/hands.png" id="2_iu4b2"]
 
 [node name="ArmSlot" instance=ExtResource("1_1hhvx")]
+
+[node name="background" parent="." index="0"]
+texture = ExtResource("2_iu4b2")

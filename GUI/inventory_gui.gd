@@ -108,6 +108,8 @@ func on_inventory_slot_clicked(slot):
 func on_character_slot_clicked(slot):
 	if slot.is_empty() and item_stack_in_hand and item_stack_in_hand.item_stack:
 		var item_stack: ItemStack = item_stack_in_hand.item_stack
+		if not is_instance_of(item_stack.item, Gear):
+			return
 		var fit = character_panel.current_character.inventory.use(item_stack.item)
 		if fit:
 			remove_child(item_stack_in_hand)
