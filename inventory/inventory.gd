@@ -18,7 +18,6 @@ func get_item_stacks() -> Array[ItemStack]:
 	keys.sort_custom(Item.less)
 	for item in keys:
 		var count = items[item]
-		print(item)
 		for i in range(count / item.max_stack):
 			item_stacks.push_back(ItemStack.new(item, item.max_stack))
 		if count % item.max_stack:

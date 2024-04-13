@@ -24,7 +24,8 @@ sprite_for_outline = NodePath("Sprite2D")
 acts_count = 2
 
 [node name="StatHealth" parent="." instance=ExtResource("2_di4o0")]
-default_base = 100.0
+default_base = 200.0
+default_cur = 200.0
 mod_type = 0
 
 [node name="StatDefence" parent="." instance=ExtResource("2_di4o0")]

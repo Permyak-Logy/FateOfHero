@@ -14,16 +14,18 @@ signal inventory_closed
 
 
 @onready var inv_slots: Array = inventory_panel.slots
-@onready var character_buttons: Array = character_selection_panel.buttons
+@onready var character_buttons: Array = []
 @onready var gear_slots: Array = character_panel.gear_slots
 @onready var skill_slots: Array = character_panel.skill_slots
 #@onready var slots = inv_slots + gear_slots + skill_slots
 
+var active_char_id: int = 0
 var item_stack_in_hand: ItemStackRepr
 
 func _ready():
 	
 	character_selection_panel.init(inventory.characters.size())
+	character_buttons = character_selection_panel.buttons
 	character_panel.change_character(inventory.characters[0])
 	connect_slots()
 	connect_buttons()
@@ -37,7 +39,9 @@ func connect_slots():
 		slot.pressed.connect(callable)
 	
 func connect_buttons():
+	print("binding buttons")
 	for button in character_buttons:
+		print("char - ", button.id, " - ", inventory.characters[button.id])
 		var callable = Callable(on_char_button_pressed)
 		callable = callable.bind(button.id)
 		button.pressed.connect(callable)
@@ -61,7 +65,8 @@ func close():
 	inventory_closed.emit()
 
 func on_char_button_pressed(id: int):
-	character_panel.change_character(inventory.characters[id])
+	inventory.characters[active_char_id] = character_panel.change_character(inventory.characters[id])
+	active_char_id = id
 	print("changed to character ", id)
 
 func on_slot_clicked(slot):
