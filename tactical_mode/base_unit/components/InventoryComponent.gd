@@ -13,7 +13,7 @@ class_name InventoryComponent
 	Gear.Type.Legs : 1, 
 }
 
-var _gears: Dictionary # Dict[Gear.Type, [Gear]]
+@export var _gears: Dictionary # Dict[Gear.Type, [Gear]]
 @onready var limits = {
 	Gear.Type.Ability: max_abilities,
 	Gear.Type.Hands: 2

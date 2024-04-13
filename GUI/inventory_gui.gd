@@ -27,17 +27,19 @@ func _ready():
 	character_panel.change_character(inventory.characters[0])
 	gear_slots = character_panel.gear_slots
 	ability_slots =character_panel.ability_slots
-	connect_slots()
+	connect_inventory_slots()
 	connect_buttons()
+	connect_character_slots()
 	visible = false
 	update()
 
-func connect_slots():
+func connect_inventory_slots():
 	for slot in inv_slots:
 		var callable = Callable(on_inventory_slot_clicked)
 		callable = callable.bind(slot)
 		slot.pressed.connect(callable)
-	
+
+func connect_character_slots():
 	for slot in gear_slots + ability_slots:
 		var callable = Callable(on_character_slot_clicked)
 		callable = callable.bind(slot)
@@ -71,6 +73,9 @@ func close():
 
 func on_char_button_pressed(id: int):
 	inventory.characters[active_char_id] = character_panel.change_character(inventory.characters[id])
+	gear_slots = character_panel.gear_slots
+	ability_slots = character_panel.ability_slots
+	connect_character_slots()
 	active_char_id = id
 	print("changed to character ", id)
 

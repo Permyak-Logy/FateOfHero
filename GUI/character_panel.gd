@@ -121,10 +121,20 @@ func update():
 	update_gear()
 	update_abilities()
 
+func print_inventory():
+	print(current_character.name, "'s inventory") 
+	print(" - Gear.Type.Head:    ", current_character.inventory.get_gears(Gear.Type.Head))
+	print(" - Gear.Type.Body:    ", current_character.inventory.get_gears(Gear.Type.Body))
+	print(" - Gear.Type.Hands:   ", current_character.inventory.get_gears(Gear.Type.Hands))
+	print(" - Gear.Type.Legs:    ", current_character.inventory.get_gears(Gear.Type.Legs))
+	print(" - Gear.Type.Ability: ", current_character.inventory.get_gears(Gear.Type.Ability))
+	
+	
 
 func change_character(character: PackedScene) -> PackedScene:
 	var old_char = null
 	if current_character:
+		print_inventory()
 		old_char = PackedScene.new()
 		current_character.visible = true
 		sprite_holder.remove_child(current_character)
@@ -133,12 +143,20 @@ func change_character(character: PackedScene) -> PackedScene:
 	current_character = character.instantiate()
 	current_character.visible = false
 	sprite_holder.add_child(current_character)
+	
+	
+	
+	
 	remake_stots()
 	print("changed displayed character to <",current_character.name ,">" )
 	update()
 	return old_char
 	
 func _process(delta):
+	if !sprite:
+		return
+	if sprite.hframes < 3:
+		return
 	t += delta
 	if t > 1:
 		sprite.frame = 1 + (sprite.frame  % 3) 
