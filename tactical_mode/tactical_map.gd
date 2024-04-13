@@ -24,7 +24,7 @@ const EFFECTS_LAYER = 4
 var win = null
 var cur_ability: Ability = null
 
-signal finish
+signal finish(live, death)
 
 func _ready():
 	_p_units = [
@@ -190,7 +190,17 @@ func _update_stepmove():
 		win = true
 		_block_input = true
 		print("*** FINISH! ***")
-		finish.emit()
+		var packed_live: Array[PackedScene] = []
+		var packed_death: Array[PackedScene] = []
+		for unit in _p_units:
+			
+			var pack = PackedScene.new()
+			pack.pack(unit)
+			if unit.is_death():
+				packed_death.append(pack)
+			else:
+				packed_live.append(pack)
+		finish.emit(packed_live, packed_death)
 		return
 	
 	if acts != 0 and active_unit().controlled_player:
