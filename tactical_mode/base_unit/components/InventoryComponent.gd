@@ -17,12 +17,15 @@ func use(gear: Gear) -> bool:
 	if len(_gears[gear.type]) >= limit:
 		return false
 	_gears[gear.type].append(gear)
+	($'..' as Unit).reload_all_mods()
 	return true
 
 func unuse(gear: Gear) -> bool:
 	if not _gears.has(gear.type):
 		return false
-	return false
+	_gears[gear.type].erase(gear)
+	($'..' as Unit).reload_all_mods()
+	return true
 
 func get_gears(gear_type: Gear.Type) -> Array:
 	return _gears.get(gear_type, [])

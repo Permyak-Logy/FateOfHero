@@ -33,10 +33,12 @@ func _ready():
 	if sprite_for_outline:
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
 	if health:
+		print(self)
 		health.empty.connect(on_death)
 	set_outline_color(DEFAULT_COLOR)
 
 func set_outline_color(color: Vector4):
+	# print(self, color)
 	if (sprite_for_outline == null):
 		return
 	(sprite_for_outline.material as ShaderMaterial).set_shader_parameter(
@@ -67,7 +69,13 @@ func reload_all_mods():
 			node.reload_mods()
 
 func get_mods() -> Dictionary:
-	var all_mods = inventory.get_mods()
+	var all_mods: Dictionary = inventory.get_mods()
+	for effect in _effects:
+		for mod in effect.get_mods():
+			if mod.type in all_mods:
+				all_mods[(mod as Mod).type].iadd((mod as Mod).value)
+			else:
+				all_mods[(mod as Mod).type] = (mod as Mod).value
 	return all_mods
 
 func get_abilities() -> Array[Ability]:
@@ -86,6 +94,9 @@ func get_map() -> TacticalMap:
 	return get_parent() as TacticalMap
 
 func init_fight():
+	while _effects:
+		remove_effect(_effects[0])
+	
 	reload_all_mods()
 	for ability in get_abilities():
 		ability.set_owner(self)
@@ -101,7 +112,8 @@ func play(_name: String, _args=null):
 	return
 
 func on_death(_component: StatComponent):
-	set_outline_color(Vector4(10, 0, 0, 100))
+	print("Death ", self)
+	set_outline_color(DEFAULT_COLOR)
 	play("death")
 	death.emit(self)
 
@@ -128,8 +140,10 @@ func add_effect(effect: Effect):
 	effect.set_owner(self)
 	effect.finished.connect(remove_effect)
 	effect.updated_mods.connect(reload_all_mods)
+	reload_all_mods()
 
 func remove_effect(effect: Effect):
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)
+	reload_all_mods()
