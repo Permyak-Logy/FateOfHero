@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://tactical_mode/base_unit/mod.gd" id="1_qtpol"]
 [ext_resource type="Script" path="res://tactical_mode/base_unit/mod_value.gd" id="2_hdj0h"]
-[ext_resource type="Script" path="res://effect.gd" id="3_o56fg"]
+[ext_resource type="Script" path="res://tactical_mode/effect.gd" id="3_o56fg"]
 [ext_resource type="Texture2D" uid="uid://dsu32bll3w580" path="res://inventory/abilities/boots_speed/texture.png" id="4_5h4qo"]
 
 [sub_resource type="Resource" id="Resource_knwum"]
