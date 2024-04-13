@@ -19,6 +19,6 @@ value = SubResource("Resource_a487s")
 script = ExtResource("1_4gqg0")
 type = 0
 _mods = Array[ExtResource("1_pba5c")]([SubResource("Resource_7kq8a")])
-name = "Супер яблоко!"
+name = "Super Apple"
 texture = ExtResource("2_vb2x3")
 max_stack = 1
