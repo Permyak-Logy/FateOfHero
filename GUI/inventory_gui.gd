@@ -17,7 +17,7 @@ signal inventory_closed
 # these will be defined in `_ready()`
 var character_buttons: Array = []
 var gear_slots: Array = []
-
+var ability_slots: Array = []
 var active_char_id: int = 0
 var item_stack_in_hand: ItemStackRepr
 
@@ -26,6 +26,7 @@ func _ready():
 	character_buttons = character_selection_panel.buttons
 	character_panel.change_character(inventory.characters[0])
 	gear_slots = character_panel.gear_slots
+	ability_slots =character_panel.ability_slots
 	connect_slots()
 	connect_buttons()
 	visible = false
@@ -33,7 +34,12 @@ func _ready():
 
 func connect_slots():
 	for slot in inv_slots:
-		var callable = Callable(on_slot_clicked)
+		var callable = Callable(on_inventory_slot_clicked)
+		callable = callable.bind(slot)
+		slot.pressed.connect(callable)
+	
+	for slot in gear_slots + ability_slots:
+		var callable = Callable(on_character_slot_clicked)
 		callable = callable.bind(slot)
 		slot.pressed.connect(callable)
 	
@@ -68,12 +74,16 @@ func on_char_button_pressed(id: int):
 	active_char_id = id
 	print("changed to character ", id)
 
-func on_slot_clicked(slot):
+func on_inventory_slot_clicked(slot):
 	if slot.is_empty() and item_stack_in_hand and item_stack_in_hand.item_stack:
 		var item_stack: ItemStack = item_stack_in_hand.item_stack
-		remove_child(item_stack_in_hand)
-		item_stack_in_hand = null 
-		inventory.insert(item_stack.item, item_stack.size)
+		var remaining = inventory.insert(item_stack.item, item_stack.size)
+		if !remaining:
+			remove_child(item_stack_in_hand)
+			item_stack_in_hand = null 
+		else:
+			print("remaining")
+			item_stack_in_hand.item_stack.size = remaining
 		update()
 		return
 		
@@ -90,8 +100,29 @@ func on_slot_clicked(slot):
 		update_item_in_hand()
 		return
 
-	
-	
+func on_character_slot_clicked(slot):
+	if slot.is_empty() and item_stack_in_hand and item_stack_in_hand.item_stack:
+		var item_stack: ItemStack = item_stack_in_hand.item_stack
+		var fit = character_panel.current_character.inventory.use(item_stack.item)
+		if fit:
+			remove_child(item_stack_in_hand)
+			item_stack_in_hand = null 
+		update()
+		return
+		
+	if not item_stack_in_hand:
+		if not slot.item_stack_repr:
+			return
+		item_stack_in_hand = slot.item_stack_repr
+		slot.container.remove_child(item_stack_in_hand)
+		add_child(item_stack_in_hand)
+		slot.item_stack_repr = null
+		var item_stack = item_stack_in_hand.item_stack
+		character_panel.current_character.inventory.unuse(item_stack.item)
+		update()
+		update_item_in_hand()
+		return
+
 func take_item_from_slot(slot):
 	item_stack_in_hand = slot.take_item()
 	add_child(item_stack_in_hand)

@@ -16,6 +16,13 @@ class_name CharacterPanel
 var current_character: Unit = null
 var gear_slots = []
 var ability_slots = []
+var slots = {
+	Gear.Type.Head : [],
+	Gear.Type.Body : [],
+	Gear.Type.Hands : [],
+	Gear.Type.Legs : [],
+	Gear.Type.Ability : [],
+}
 var t = 0
 
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
@@ -34,6 +41,7 @@ func remake_gear_slots():
 		for i in range(current_character.inventory.gear_slots[type]):
 			var slot = special_slots[type].instantiate()
 			gear_holder.add_child(slot)
+			slots[type].append(slot)
 	gear_slots = gear_holder.get_children()
 	
 
@@ -43,34 +51,48 @@ func remake_ability_slots():
 	for i in range(current_character.inventory.max_abilities):
 		var slot = special_slots[Gear.Type.Ability].instantiate()
 		ability_holder.add_child(slot)
+		slots[Gear.Type.Ability].append(slot)
+		
 	ability_slots = ability_holder.get_children()
+
+func remake_stots():
+	slots.clear()
+	slots[Gear.Type.Head] = []
+	slots[Gear.Type.Body] = []
+	slots[Gear.Type.Hands] = []
+	slots[Gear.Type.Legs] = []
+	slots[Gear.Type.Ability] = []
+	remake_gear_slots()
+	remake_ability_slots()
 	
 func update_gear():
-	print("updating gear")	
-	for type in current_character.inventory.gear_slots:
-		print(" - ", type)
+	for slot in gear_slots:
+		slot.item_stack_repr = null
+		slot.update()
+	for type in current_character.inventory.gear_slots.keys():
+		var i = 0
 		for item in current_character.inventory.get_gears(type):
-			print("-", item)
 			var item_stack = ItemStack.new(item, 1)
 			var isr = ItemStackReprClass.instantiate()
+			slots[type][i].insert(isr)
 			isr.item_stack = item_stack
 			isr.update()
+			i += 1
 
 func update_abilities():
-	print("updating abilities")
+	for slot in ability_slots:
+		slot.item_stack_repr = null
+		slot.update()
+	var i = 0
 	for item in current_character.inventory.get_abilities():
-		print("-", item)		
 		var slot = special_slots[Gear.Type.Ability].instantiate()
 		var item_stack = ItemStack.new(item, 1)
 		var isr = ItemStackReprClass.instantiate()
 		isr.item_stack = item_stack
-		isr.update()
+		slots[Gear.Type.Ability][i].insert(isr)
 		ability_holder.add_child(slot)
+		i += 1
 	ability_slots = ability_holder.get_children()
-	
-	
-	
-
 
 func update_bars():
 	hp_bar.max_value = current_character.health.get_max()
@@ -85,7 +107,6 @@ func update_repr():
 	name_label.text = current_character.name
 	if sprite_holder.get_child_count():
 		sprite_holder.remove_child(sprite)
-		
 	
 	sprite = current_character.sprite_for_outline.duplicate()
 	sprite.centered = false
@@ -99,8 +120,6 @@ func update():
 	update_bars()
 	update_gear()
 	update_abilities()
-	pass
-
 
 
 func change_character(character: PackedScene) -> PackedScene:
@@ -110,12 +129,11 @@ func change_character(character: PackedScene) -> PackedScene:
 		current_character.visible = true
 		sprite_holder.remove_child(current_character)
 		old_char.pack(current_character)
-		  
+	
 	current_character = character.instantiate()
 	current_character.visible = false
 	sprite_holder.add_child(current_character)
-	remake_gear_slots()
-	remake_ability_slots()
+	remake_stots()
 	print("changed displayed character to <",current_character.name ,">" )
 	update()
 	return old_char
