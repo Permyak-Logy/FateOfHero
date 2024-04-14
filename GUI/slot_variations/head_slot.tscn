@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://fjb6rgpxaqtr"]
 
 [ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/slot.tscn" id="1_eb5tf"]
-[ext_resource type="Texture2D" uid="uid://b56v58lxcc25c" path="res://GUI/new_assets/Head.png" id="2_jm72c"]
+[ext_resource type="Texture2D" uid="uid://n64jagg0d1tk" path="res://GUI/new_assets/Head.png" id="2_jm72c"]
 
 [node name="HeadSlot" instance=ExtResource("1_eb5tf")]
 
