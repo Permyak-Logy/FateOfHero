@@ -3,16 +3,16 @@
 [ext_resource type="Script" path="res://external_puzzles/puzzles/safe_path/player.gd" id="1_ovbjj"]
 [ext_resource type="Texture2D" uid="uid://bqk0byfcbhfeq" path="res://external_puzzles/puzzles/safe_path/tpr_char.png" id="2_5xqce"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_483hw"]
-size = Vector2(13, 16)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbgoo"]
+size = Vector2(12, 16)
 
 [node name="player" type="CharacterBody2D"]
-motion_mode = 1
 script = ExtResource("1_ovbjj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_5xqce")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_483hw")
+shape = SubResource("RectangleShape2D_nbgoo")
+
+[node name="Camera2D" type="Camera2D" parent="."]

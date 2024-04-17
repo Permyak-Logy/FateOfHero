@@ -6,12 +6,15 @@ extends "res://stategic_mode/tile_events/TileEvent.gd"
 @export var puzzle: PackedScene
 @export var texture: Texture2D
 
+"""
+this activator cannot start a puzzle that might result in a combat encounter
+"""
+
 func _ready():
 	sprite.texture = texture
 
 func activate():
 	var puzzle_scene: BasePuzzle = puzzle.instantiate()
-	puzzle_scene.start()
 	puzzle_scene.solved.connect(on_done)
 	remove()
 	game.external_puzzle_container.add_child(puzzle_scene)
