@@ -31,6 +31,7 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://GUI/": "green",
 "res://city_mode/": "blue",
+"res://external_puzzles/": "purple",
 "res://inventory/": "yellow",
 "res://stategic_mode/": "red",
 "res://tactical_mode/": "pink"

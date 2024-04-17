@@ -4,6 +4,9 @@ class_name Game
 @onready var strat_map: StratMap = load("res://stategic_mode/strat_map.tscn").instantiate()
 @onready var tactical_map: TacticalMap = load("res://tactical_mode/tactical_map.tscn").instantiate() 
 @onready var city_map: CityMap = load("res://city_mode/CityMap.tscn").instantiate()
+@onready var external_puzzle_container: ExternalPuzzleContainer = \
+load("res://external_puzzles/external_puzzle_container.tscn").instantiate()
+
 var active_scene = null
 
 func _ready():
@@ -26,4 +29,6 @@ func to_strat_mode():
 	
 func to_city_mode():	
 	activate(city_map)
-	
+
+func to_puzzle_mode():
+	activate(external_puzzle_container)	

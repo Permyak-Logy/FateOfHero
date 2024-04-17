@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=24 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://stategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://stategic_mode/strat_map.gd" id="1_vssm8"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" path="res://stategic_mode/LeverPuzzle 1.gd" id="7_rcyvo"]
 [ext_resource type="PackedScene" uid="uid://d17julguc6lr2" path="res://stategic_mode/tile_events/gate.tscn" id="8_byobl"]
 [ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://stategic_mode/tile_events/sprites/x_marks_the_spot.png" id="8_q21qa"]
+[ext_resource type="PackedScene" uid="uid://bgpgpnh8l6avg" path="res://stategic_mode/tile_events/external_puzzle_activator.tscn" id="13_6eqeo"]
+[ext_resource type="PackedScene" uid="uid://bse1mhf87c40h" path="res://external_puzzles/puzzles/safe_path/safe_path.tscn" id="13_33saf"]
+[ext_resource type="Texture2D" uid="uid://dpxxyv64x368h" path="res://stategic_mode/tile_events/sprites/tpr_safe_path.png" id="15_dmsjl"]
 [ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://stategic_mode/tile_events/timed_gate.tscn" id="16_u0x0p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
@@ -4121,6 +4124,13 @@ position = Vector2(27, -55)
 
 [node name="Gate" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("8_byobl")]
 position = Vector2(-24, -8)
+
+[node name="ExternalPuzzles" type="Node" parent="PuzzleMaster"]
+
+[node name="ExternalPuzzleActivator" parent="PuzzleMaster/ExternalPuzzles" instance=ExtResource("13_6eqeo")]
+position = Vector2(97, 82)
+puzzle = ExtResource("13_33saf")
+texture = ExtResource("15_dmsjl")
 
 [node name="OtherTileEvents" type="Node" parent="."]
 
