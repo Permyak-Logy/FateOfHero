@@ -7,8 +7,8 @@ class_name wasd_player
 
 @onready var pos: Vector2i = Vector2i(5, 13)
 @onready var moving: bool = false
-@onready var speed = 1000
-
+#var speed = 20 * puzzle.tilemap.tile_set.tile_size
+var speed = 1000
 var next_move = null
 
 func wasd_move(event):
@@ -28,7 +28,7 @@ func _physics_process(delta):
 	var target_position = puzzle.tilemap.map_to_local(pos)
 	if global_position != target_position:
 		moving = true
-		var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
+		var movement = global_position.move_toward(target_position, speed * delta) - global_position
 		move_and_collide(movement)
 	else:
 		if not puzzle.tilemap.get_cell_tile_data(0, pos).get_custom_data("safe"):

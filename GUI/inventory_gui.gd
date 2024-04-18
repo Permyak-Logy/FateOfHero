@@ -72,6 +72,8 @@ func close():
 	inventory_closed.emit()
 
 func on_char_button_pressed(id: int):
+	if id == active_char_id:
+		return
 	inventory.characters[active_char_id] = character_panel.change_character(inventory.characters[id])
 	gear_slots = character_panel.gear_slots
 	ability_slots = character_panel.ability_slots

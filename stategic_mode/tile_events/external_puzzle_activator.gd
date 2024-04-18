@@ -7,7 +7,14 @@ extends "res://stategic_mode/tile_events/TileEvent.gd"
 @export var texture: Texture2D
 
 """
-this activator cannot start a puzzle that might result in a combat encounter
+represents external puzzle
+you must put an instance of this scene into the strat_map scene
+then you should define puzzle that will be activated 
+(just drag the scene into the slot)
+and texture 
+(again, just drag the texture into the slot)
+
+ ! this activator cannot start a puzzle that might result in a combat encounter
 """
 
 func _ready():
