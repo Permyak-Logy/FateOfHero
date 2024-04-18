@@ -29,7 +29,11 @@ func _physics_process(delta):
 	if global_position != target_position:
 		moving = true
 		var movement = global_position.move_toward(target_position, speed * delta) - global_position
-		move_and_collide(movement)
+		var collision = move_and_collide(movement)
+		if collision:
+			var collidor = collision.get_collider()
+			if is_instance_of(collidor.get_parent(), SafePathWinConditionPoint):
+				puzzle.end_successfully()
 	else:
 		if not puzzle.tilemap.get_cell_tile_data(0, pos).get_custom_data("safe"):
 			puzzle.start_fight()

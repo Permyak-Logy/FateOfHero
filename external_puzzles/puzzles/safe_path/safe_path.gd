@@ -5,17 +5,19 @@ class_name SafePath
 @onready var tilemap: TileMap = $TileMap
 @onready var player = $player
 @onready var game: Game = get_tree().root.get_child(0)
+@onready var wc: SafePathWinConditionPoint = load("res://external_puzzles/puzzles/safe_path/win_condition_point.tscn").instantiate()
 
 var enemies: Array[PackedScene]
 
 var field_size: Vector2i = Vector2i(11, 14)
-var end_pos: Vector2i = Vector2i(0, 5)
+var end_pos: Vector2i = Vector2i(5, 0)
 var curve_count: int = 3
-var curve_prescision: int = 1000
+var curve_prescision: int = 100_000
 
 var danger_tile_atlas_coords = Vector2i(0, 0)
 
-
+func flip(v: Vector2i) -> Vector2i:
+	return Vector2i(v.y, v.x)
 
 func p_less(p1:Vector2i, p2:Vector2i) -> bool:
 	if (p1[1] < p2[1]):
@@ -73,8 +75,7 @@ func gen_field():
 		for x in range(field_size.x):
 			column.append(true)
 		field.append(column)
-		print(y, column)
-	
+	print("_______________________________________________________")
 	print("curve 0: p1:", start, ", p2: ", off_curve_points[0], ", p3: ", on_curve_points[0])
 	print("tilevise curve 0: p1:", tilemap.local_to_map(start), 
 	", p2: ", tilemap.local_to_map(off_curve_points[0]), 
@@ -85,8 +86,12 @@ func gen_field():
 			field[pos.y][pos.x] = false
 	
 	for cid in range(1, on_curve_point_count):
+		print("_______________________________________________________")
 		print("curve ", cid, ": p1:", on_curve_points[cid - 1], ", p2: ", off_curve_points[cid], ", p3: ", on_curve_points[cid])
 		
+		print("tilevise curve ", cid, ": p1:", tilemap.local_to_map(on_curve_points[cid-1]), 
+		", p2: ", tilemap.local_to_map(off_curve_points[cid]), 
+		", p3: ", tilemap.local_to_map(on_curve_points[cid]))
 		var curve: Array[Vector2] = bezier_curve(on_curve_points[cid - 1], 
 		off_curve_points[cid], on_curve_points[cid], curve_prescision)
 		for point in curve:
@@ -95,36 +100,35 @@ func gen_field():
 				field[pos.y][pos.x] = false
 	
 	
+	print("_______________________________________________________")
 	print("curve ", curve_count - 1, ": p1:", on_curve_points[-1], ", p2: ", off_curve_points[-1], ", p3: ", end)
-	
 	print("tilevise curve ", curve_count - 1, ": p1:", tilemap.local_to_map(on_curve_points[-1]), 
 	", p2: ", tilemap.local_to_map(off_curve_points[-1]), 
 	", p3: ", tilemap.local_to_map(end))
 	
 	for point in bezier_curve(on_curve_points[-1], off_curve_points[-1], end, curve_prescision):
 		var pos = tilemap.local_to_map(point)
-		if field[pos.x][pos.y]: 
-			field[pos.x][pos.y] = false
+		if field[pos.y][pos.x]: 
+			field[pos.y][pos.x] = false
 	
-	var free = []
 	for y in range(field_size.y):
 		print(y, ": ", field[y])
 		for x in range(field_size.x):
 			var pos = Vector2i(x, y)
 			if field[y][x]:
 				tilemap.set_cell(0, pos, 0, danger_tile_atlas_coords)
-			else:
-				free.append(pos)
-				#print(pos)
-
-	
-	pass
 
 func _ready():
 	gen_field()
+	add_child(wc)
+	wc.global_position = tilemap.map_to_local(end_pos)
 	player.global_position = tilemap.map_to_local(player.pos)
 	player.speed = 8 * tilemap.tile_set.tile_size.length()
 
+func end_successfully():
+	solved.emit()
+	game.to_strat_mode()
+	
 func start_fight():
 	var characters = inventory.characters
 	game.tactical_map.reinit(characters, enemies)
