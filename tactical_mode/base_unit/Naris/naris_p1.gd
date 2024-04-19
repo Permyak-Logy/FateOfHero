@@ -1,1 +1,0 @@
-class_name NarisP1Effect extends Effect

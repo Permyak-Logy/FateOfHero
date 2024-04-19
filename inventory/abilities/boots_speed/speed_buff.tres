@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Effect" load_steps=7 format=3 uid="uid://b6wlm2yof2ukd"]
 
-[ext_resource type="Script" path="res://tactical_mode/base_unit/mod.gd" id="1_qtpol"]
-[ext_resource type="Script" path="res://tactical_mode/base_unit/mod_value.gd" id="2_hdj0h"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_qtpol"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_hdj0h"]
 [ext_resource type="Script" path="res://tactical_mode/effect.gd" id="3_o56fg"]
 [ext_resource type="Texture2D" uid="uid://dsu32bll3w580" path="res://inventory/abilities/boots_speed/texture.png" id="4_5h4qo"]
 
