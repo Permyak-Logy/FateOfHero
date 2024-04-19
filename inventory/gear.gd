@@ -8,4 +8,5 @@ enum Type {Head, Body, Hands, Legs, Ability}
 @export var _mods: Array[Mod]
 
 func get_mods() -> Array[Mod]:
+	
 	return _mods

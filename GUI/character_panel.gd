@@ -37,8 +37,10 @@ var t = 0
 func remake_gear_slots():
 	for child in gear_holder.get_children():
 		gear_holder.remove_child(child)
-	for type in current_character.inventory.gear_slots:
-		for i in range(current_character.inventory.gear_slots[type]):
+	for type in Gear.Type.values():
+		if type == Gear.Type.Ability:
+			continue
+		for i in range(current_character.inventory.gear_slots.get(type, InventoryComponent.DEFAULT_COUNT_SLOTS)):
 			var slot = special_slots[type].instantiate()
 			gear_holder.add_child(slot)
 			slots[type].append(slot)

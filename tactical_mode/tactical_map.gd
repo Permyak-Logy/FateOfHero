@@ -27,6 +27,8 @@ var cur_ability: Ability = null
 signal finish(live, death)
 
 func _ready():
+	if $"..":  # Выходим если мы запускаем сразу карту боя
+		return
 	_p_units = [
 		$Naris,
 		$SmolItto
@@ -38,6 +40,7 @@ func _ready():
 	start_battle()
 
 func start_battle():
+	print("*** Start battle ***")
 	for unit in _p_units + _e_units:
 		if unit.speed:
 			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
@@ -97,8 +100,8 @@ func on_kill(unit: Unit):
 	for i in range(len(unit_queue)):
 		if unit_queue[i][1] == unit:
 			unit_queue.pop_at(i)
+			print("Poped ", unit)
 			break
-	unit.set_outline_color(Unit.DEFAULT_COLOR)
 	print("Killed ", unit)
 
 func move_unit_to(unit: Unit, x: int, y: int):
@@ -159,12 +162,10 @@ func _flood_fill(cell: Vector2i) -> Array:
 	return array
 
 func _start_stepmove():
+	print("* Start stepmove (unit: ", active_unit().unit_name, ") *")
 	cur_ability = null
 	for unit_data in unit_queue:
-		if is_player(unit_data[1]):
-			unit_data[1].set_outline_color(Unit.PLAYER_COLOR)
-		else:
-			unit_data[1].set_outline_color(Unit.ENEMY_COLOR)
+		reset_outline_color(unit_data[1])
 	active_unit().set_outline_color(Unit.CUR_COLOR)
 	acts = active_unit().acts_count
 	(active_unit() as Unit).premove_update()
@@ -178,6 +179,7 @@ func _start_stepmove():
 	
 
 func _update_stepmove():
+	print("* Update stepmove *")
 	cur_ability = null
 	_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
 	
@@ -207,6 +209,8 @@ func _update_stepmove():
 		_update_walkable()
 		_block_input = false
 		return
+		
+	print("* End stepmove *")
 	
 	var time = unit_queue[0][0]
 	for elem in unit_queue:
@@ -319,6 +323,8 @@ func is_enemy(unit: Unit):
 func reset_outline_color(unit: Unit):
 	if active_unit() == unit:
 		unit.set_outline_color(Unit.CUR_COLOR)
+	elif unit.is_death():
+		unit.set_outline_color(Unit.DEFAULT_COLOR)
 	elif is_player(unit):
 		unit.set_outline_color(Unit.PLAYER_COLOR)
 	elif is_enemy(unit):
