@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Inventory" load_steps=6 format=3 uid="uid://bf6q272lgp3nh"]
 
-[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/unit/Naris/Naris.tscn" id="1_a6ekf"]
+[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/base_unit/Naris/Naris.tscn" id="1_a6ekf"]
 [ext_resource type="Resource" uid="uid://jgko6igthbun" path="res://inventory/items/apple.tres" id="1_silny"]
 [ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="2_pdvuu"]
 [ext_resource type="Script" path="res://inventory/inventory.gd" id="3_ih5tw"]
