@@ -91,7 +91,6 @@ func tab_next():
 			select(selectable_tab[i])
 			return
 
-
 func tab_prev():
 	if not selectable_tab:
 		return
