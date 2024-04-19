@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
-[ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/base_unit/Vendigo/Vendigo.tscn" id="4_dhhnm"]
+[ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/Vendigo/Vendigo.tscn" id="4_dhhnm"]
 [ext_resource type="Script" path="res://tactical_mode/FPS_COUNTER.gd" id="4_fhbfl"]
-[ext_resource type="PackedScene" uid="uid://bjcjl3qla8b62" path="res://tactical_mode/base_unit/SmolItto/SmolItto.tscn" id="5_nrx87"]
-[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/base_unit/Naris/Naris.tscn" id="6_1btoa"]
+[ext_resource type="PackedScene" uid="uid://bjcjl3qla8b62" path="res://tactical_mode/unit/SmolItto/SmolItto.tscn" id="5_nrx87"]
+[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/unit/Naris/Naris.tscn" id="6_1btoa"]
 [ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
-[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/base_unit/Skeleton/Skeleton.tscn" id="7_oxa7b"]
+[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="7_oxa7b"]
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true

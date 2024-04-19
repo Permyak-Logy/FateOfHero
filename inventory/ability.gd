@@ -21,7 +21,6 @@ var cooldown_time = 0
 var has_uses = 0
 
 var selected: Array[Node] = []
-var select_history: Array[Node] = []
 var selectable_tab: Array[Node] = []
 
 func _init(_count: int = count):
@@ -32,10 +31,10 @@ func set_owner(_owner: Unit = null):
 
 func select(node):
 	selected.append(node)
-	if len(selected) > targets:
+	if len(selected) > targets and targets > 0:
 		unselect(selected[0])
 	if is_instance_of(node, Unit):
-		(node as Unit).set_outline_color(Unit.SELECTED_COLOR)
+		get_map().reset_outline_color(node)
 
 func unselect(node):
 	selected.erase(node)
@@ -75,7 +74,16 @@ func can_use() -> bool:
 	
 func auto_select() -> bool:
 	if len(selectable_tab) > 0:
-		select(selectable_tab[0])
+		var to_select: int
+		if max_targets == 0:
+			if targets == 0:
+				to_select = len(selectable_tab)
+			else:
+				to_select = min(len(selectable_tab), targets)
+		else:
+			to_select = min(len(selectable_tab), max_targets)
+		for i in range(to_select):
+			select(selectable_tab[i])
 		return true
 	return false
 
@@ -113,13 +121,12 @@ func can_select(_node: Node) -> bool:
 	return false
 
 func can_apply() -> bool:
-	if len(selected) < targets:
-		return false
-	if len(selected) > max_targets and max_targets > 0:
-		return false
-	if len(selected) != targets and max_targets == 0:
-		return false
-	return true
+	var up_bound: int
+	if max_targets == 0:
+		up_bound = targets if targets > 0 else len(selected)
+	else:
+		up_bound = max_targets
+	return targets <= len(selected) and len(selected) <= up_bound
 
 func apply() -> bool:
 	return false
