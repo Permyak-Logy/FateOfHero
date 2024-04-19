@@ -11,7 +11,7 @@
 radius = 11.0
 height = 54.0
 
-[node name="SmolItto" type="Node2D" node_paths=PackedStringArray("inventory", "health", "defence", "speed", "damage", "sprite_for_outline")]
+[node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "defence", "speed", "damage", "sprite_for_outline")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_btidl")
