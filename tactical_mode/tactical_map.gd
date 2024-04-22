@@ -27,6 +27,8 @@ var cur_ability: Ability = null
 signal finish(live, death)
 
 func _ready():
+	if is_instance_of($"..", Game):
+		return
 	_p_units = [
 		$Naris,
 		$SmolItto
@@ -38,6 +40,7 @@ func _ready():
 	start_battle()
 
 func start_battle():
+	print("*** Start battle ***")
 	for unit in _p_units + _e_units:
 		if unit.speed:
 			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
@@ -97,8 +100,8 @@ func on_kill(unit: Unit):
 	for i in range(len(unit_queue)):
 		if unit_queue[i][1] == unit:
 			unit_queue.pop_at(i)
+			print("Poped ", unit)
 			break
-	unit.set_outline_color(Unit.DEFAULT_COLOR)
 	print("Killed ", unit)
 
 func move_unit_to(unit: Unit, x: int, y: int):
@@ -159,15 +162,15 @@ func _flood_fill(cell: Vector2i) -> Array:
 	return array
 
 func _start_stepmove():
+	print("* Start stepmove (unit: ", active_unit().unit_name, ") *")
 	cur_ability = null
 	for unit_data in unit_queue:
-		if is_player(unit_data[1]):
-			unit_data[1].set_outline_color(Unit.PLAYER_COLOR)
-		else:
-			unit_data[1].set_outline_color(Unit.ENEMY_COLOR)
+		reset_outline_color(unit_data[1])
 	active_unit().set_outline_color(Unit.CUR_COLOR)
 	acts = active_unit().acts_count
 	(active_unit() as Unit).premove_update()
+	for effect in active_unit().get_effects():
+		effect.update_on_move()
 	if active_unit().controlled_player:
 		_update_walkable()
 		_block_input = false
@@ -180,6 +183,7 @@ func level_up():
 	pass 
 
 func _update_stepmove():
+	print("* Update stepmove *")
 	cur_ability = null
 	_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
 	
@@ -210,6 +214,8 @@ func _update_stepmove():
 		_update_walkable()
 		_block_input = false
 		return
+		
+	print("* End stepmove *")
 	
 	var time = unit_queue[0][0]
 	for elem in unit_queue:
@@ -311,7 +317,7 @@ func _key_press_event(event):
 
 func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
 	var path = _astar_board.get_id_path(_astar_board.mti(a), _astar_board.mti(b))
-	return len(path)
+	return len(path) - 1
 
 func is_player(unit: Unit):
 	return unit in _p_units
@@ -320,13 +326,15 @@ func is_enemy(unit: Unit):
 	return unit in _e_units
 
 func reset_outline_color(unit: Unit):
-	if active_unit() == unit:
+	if cur_ability and unit in cur_ability.selected:
+		unit.set_outline_color(Unit.SELECTED_COLOR)
+	elif unit.is_death():
+		unit.set_outline_color(Unit.DEFAULT_COLOR)
+	elif active_unit() == unit:
 		unit.set_outline_color(Unit.CUR_COLOR)
 	elif is_player(unit):
 		unit.set_outline_color(Unit.PLAYER_COLOR)
 	elif is_enemy(unit):
 		unit.set_outline_color(Unit.ENEMY_COLOR)
-	elif cur_ability and unit in cur_ability.selected:
-		unit.set_outline_color(Unit.SELECTED_COLOR)
 	else:
 		unit.set_outline_color(Unit.DEFAULT_COLOR)

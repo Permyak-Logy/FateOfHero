@@ -10,9 +10,10 @@ signal finished
 signal updated_mods
 
 var owner: Unit = null
-var instigator: Node = null
+var instigator: Node
+var is_negative: bool
 
-func _init(_instigator: Node):
+func _init(_instigator: Node = null, is_negative: bool = false):
 	instigator = _instigator
 
 func _ready():

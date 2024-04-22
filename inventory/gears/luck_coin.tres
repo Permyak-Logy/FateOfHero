@@ -1,24 +1,24 @@
 [gd_resource type="Resource" script_class="Gear" load_steps=7 format=3 uid="uid://bdjmj8k7ev33r"]
 
-[ext_resource type="Script" path="res://tactical_mode/base_unit/mod.gd" id="1_gne7u"]
 [ext_resource type="Script" path="res://inventory/gear.gd" id="1_rbgy5"]
-[ext_resource type="Script" path="res://tactical_mode/base_unit/mod_value.gd" id="2_xdf0t"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_whgx3"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_i1axt"]
 [ext_resource type="Texture2D" uid="uid://bhbtjmc4gb6yh" path="res://inventory/icons/coin.png" id="4_7ssxl"]
 
-[sub_resource type="Resource" id="Resource_24874"]
-script = ExtResource("2_xdf0t")
-add = 1.0
-mul = 50.0
+[sub_resource type="Resource" id="Resource_53tc1"]
+script = ExtResource("2_i1axt")
+add = 0.0
+mul = 100.0
 
-[sub_resource type="Resource" id="Resource_0nc48"]
-script = ExtResource("1_gne7u")
-type = 1
-value = SubResource("Resource_24874")
+[sub_resource type="Resource" id="Resource_xlgn3"]
+script = ExtResource("1_whgx3")
+type = 2
+value = SubResource("Resource_53tc1")
 
 [resource]
 script = ExtResource("1_rbgy5")
 type = 1
-_mods = Array[ExtResource("1_gne7u")]([SubResource("Resource_0nc48")])
+_mods = Array[ExtResource("1_whgx3")]([SubResource("Resource_xlgn3")])
 name = "Lucky coin"
 texture = ExtResource("4_7ssxl")
 max_stack = 1
