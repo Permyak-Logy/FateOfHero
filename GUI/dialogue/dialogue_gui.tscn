@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3 uid="uid://f0wurwqxx0qh"]
+
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/dialogue/dialogue_gui_theme.tres" id="1_t2d8w"]
+[ext_resource type="Script" path="res://GUI/dialogue/dialogue_gui.gd" id="2_bda6k"]
+[ext_resource type="StyleBox" uid="uid://c2c74ou71elg4" path="res://GUI/styles/highlight_panel.tres" id="3_88sc5"]
+
+[node name="DialogGui" type="Panel"]
+custom_minimum_size = Vector2(240, 320)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -180.0
+offset_right = 240.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("1_t2d8w")
+script = ExtResource("2_bda6k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 7
+
+[node name="TitleHighlight" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(220, 30)
+layout_mode = 2
+theme = ExtResource("1_t2d8w")
+theme_override_styles/panel = ExtResource("3_88sc5")
+
+[node name="Title" type="Label" parent="VBoxContainer/TitleHighlight"]
+custom_minimum_size = Vector2(220, 20)
+layout_mode = 2
+offset_top = 2.0
+offset_right = 220.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 20
+text = "Lorem Ipsum Dolor
+"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BodyHighlight" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(440, 160)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_88sc5")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/BodyHighlight"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -70.0
+offset_right = 110.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam diam augue, viverra ut urna vitae, dictum bibendum sem. Aenean eleifend diam nec eros mollis, eget hendrerit turpis ultrices. Mauris vel pharetra est, et placerat libero. Nunc interdum auctor felis, id rutrum sapien molestie eu. Donec lacinia vulputate congue. Aliquam erat volutpat. Praesent eu volutpat orci. Cras pulvinar diam nec sem porttitor cursus. Duis consectetur dignissim viverra. Etiam luctus dolor vel finibus suscipit. Vestibulum ultrices rhoncus tempus. Morbi eleifend ante vel ante varius tincidunt. Nunc vel dapibus nisi. "
+fit_content = true
+scroll_active = false
+
+[node name="OptionContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="test" type="Button" parent="VBoxContainer/OptionContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Lorem Ipsum Dolor"
+
+[node name="test2" type="Button" parent="VBoxContainer/OptionContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Lorem Ipsum Dolor"
+
+[node name="test3" type="Button" parent="VBoxContainer/OptionContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Lorem Ipsum Dolor"

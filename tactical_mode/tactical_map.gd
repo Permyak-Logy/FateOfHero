@@ -176,6 +176,8 @@ func _start_stepmove():
 		await active_unit().ai(self)
 		_update_stepmove()
 	
+func level_up():
+	pass 
 
 func _update_stepmove():
 	cur_ability = null
@@ -190,6 +192,7 @@ func _update_stepmove():
 		win = true
 		_block_input = true
 		print("*** FINISH! ***")
+		level_up()
 		var packed_live: Array[PackedScene] = []
 		var packed_death: Array[PackedScene] = []
 		for unit in _p_units:

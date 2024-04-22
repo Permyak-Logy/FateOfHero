@@ -2,7 +2,6 @@ extends "res://stategic_mode/tile_events/external_puzzle_activator.gd"
 
 class_name CombatCapablePuzzleActivator
 """
-
 represents external puzzle
 you must put an instance of this scene into the strat_map scene
 then you should define puzzle that will be activated,

@@ -1,4 +1,4 @@
-extends Control
+class_name InventoryGUI extends Control
 
 var is_open:bool = false 
 

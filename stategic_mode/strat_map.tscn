@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=25 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://stategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://stategic_mode/strat_map.gd" id="1_vssm8"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dq3cyu2npqu84" path="res://stategic_mode/tile_events/cc_external_puzzle_activator.tscn" id="13_uwixs"]
 [ext_resource type="Texture2D" uid="uid://dpxxyv64x368h" path="res://stategic_mode/tile_events/sprites/tpr_safe_path.png" id="15_dmsjl"]
 [ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://stategic_mode/tile_events/timed_gate.tscn" id="16_u0x0p"]
+[ext_resource type="PackedScene" uid="uid://f0wurwqxx0qh" path="res://GUI/dialogue/dialogue_gui.tscn" id="20_3rv6h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4151,6 +4152,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+
+[node name="DialogGui" parent="GUI" instance=ExtResource("20_3rv6h")]
 
 [connection signal="inventory_closed" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_closed"]
 [connection signal="inventory_opened" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_opened"]
