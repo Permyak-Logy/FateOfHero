@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://kn0koccqa28q"]
 
-[ext_resource type="Script" path="res://GUI/inventory_gui.gd" id="1_c5uxj"]
-[ext_resource type="PackedScene" uid="uid://c4t2ssb8xsd48" path="res://GUI/character_selection_panel.tscn" id="2_0fsi5"]
-[ext_resource type="PackedScene" uid="uid://c21wpigb0wbsp" path="res://GUI/inventory_panel.tscn" id="3_344xr"]
-[ext_resource type="PackedScene" uid="uid://bn5u6v7ibmq7d" path="res://GUI/character_panel.tscn" id="4_gllpg"]
+[ext_resource type="Script" path="res://GUI/inventory/inventory_gui.gd" id="1_c5uxj"]
+[ext_resource type="PackedScene" uid="uid://c4t2ssb8xsd48" path="res://GUI/inventory/character_selection_panel.tscn" id="2_0fsi5"]
+[ext_resource type="PackedScene" uid="uid://c21wpigb0wbsp" path="res://GUI/inventory/inventory_panel.tscn" id="3_344xr"]
+[ext_resource type="PackedScene" uid="uid://bn5u6v7ibmq7d" path="res://GUI/inventory/character_panel.tscn" id="4_gllpg"]
 
 [node name="InventoryGUI" type="Control"]
 layout_mode = 3

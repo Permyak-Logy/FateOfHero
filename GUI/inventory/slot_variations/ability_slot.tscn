@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfnwrkg2ewxtv"]
+
+[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/inventory/slot.tscn" id="1_xmyo5"]
+[ext_resource type="Texture2D" uid="uid://dbyb7rw1ngyq7" path="res://GUI/inventory/new_assets/abilka.png" id="2_nmmhn"]
+
+[node name="AbilitySlot" instance=ExtResource("1_xmyo5")]
+
+[node name="background" parent="." index="0"]
+texture = ExtResource("2_nmmhn")

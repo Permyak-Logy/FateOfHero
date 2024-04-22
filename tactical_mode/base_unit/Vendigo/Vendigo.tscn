@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/base_unit/components/StatComponent.tscn" id="3_sy0f3"]
 [ext_resource type="Shader" path="res://tactical_mode/assets/outline.gdshader" id="3_ws587"]
 [ext_resource type="Texture2D" uid="uid://yf64rowfciuo" path="res://tactical_mode/base_unit/Vendigo/Vendigo.png" id="4_g6t4h"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/stat_progress_bar.tscn" id="5_kxra3"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="5_kxra3"]
 [ext_resource type="Texture2D" uid="uid://b45l2fsxtf6v6" path="res://tactical_mode/assets/Big_Shadow.png" id="6_8rh12"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vyb2c"]

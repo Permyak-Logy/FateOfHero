@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pg0t8p3rqvb0"
-path="res://.godot/imported/inventorySlot.png-abdf3373304979383cb05fc4ab43b237.ctex"
+uid="uid://dsuf4wh5xm6qq"
+path="res://.godot/imported/torso.png-a0e361ba72501d0259319cf1ebdfb904.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GUI/inventorySlot.png"
-dest_files=["res://.godot/imported/inventorySlot.png-abdf3373304979383cb05fc4ab43b237.ctex"]
+source_file="res://GUI/inventory/new_assets/torso.png"
+dest_files=["res://.godot/imported/torso.png-a0e361ba72501d0259319cf1ebdfb904.ctex"]
 
 [params]
 

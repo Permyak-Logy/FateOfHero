@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cge1377fuys03"
-path="res://.godot/imported/InventoryRect.png-09730a1292906f9d3ea1b5045a01e701.ctex"
+uid="uid://dbyb7rw1ngyq7"
+path="res://.godot/imported/abilka.png-d47f95bddf86278021fed146e1eaa752.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GUI/InventoryRect.png"
-dest_files=["res://.godot/imported/InventoryRect.png-09730a1292906f9d3ea1b5045a01e701.ctex"]
+source_file="res://GUI/inventory/new_assets/abilka.png"
+dest_files=["res://.godot/imported/abilka.png-d47f95bddf86278021fed146e1eaa752.ctex"]
 
 [params]
 

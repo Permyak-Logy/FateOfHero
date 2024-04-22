@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/base_unit/components/InventoryComponent.tscn" id="3_yurj5"]
 [ext_resource type="Texture2D" uid="uid://b7oowqmoun462" path="res://tactical_mode/base_unit/SmolItto/Smoltto.png" id="4_n8og0"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="5_th3mn"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/stat_progress_bar.tscn" id="6_7tt4r"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="6_7tt4r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v1vj"]
 radius = 11.0

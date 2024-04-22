@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://rafeorxgdhgt"]
 
-[ext_resource type="Script" path="res://GUI/character_button.gd" id="1_a7grn"]
-[ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventorySlot.png" id="1_lci63"]
+[ext_resource type="Script" path="res://GUI/inventory/character_button.gd" id="1_a7grn"]
+[ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="1_lci63"]
 
 [node name="CharacterButton" type="Button"]
 custom_minimum_size = Vector2(20, 20)

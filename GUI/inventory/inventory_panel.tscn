@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c21wpigb0wbsp"]
 
-[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/InventoryRect.png" id="1_b4jrx"]
-[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/slot.tscn" id="2_foo87"]
-[ext_resource type="Script" path="res://GUI/inventory_panel.gd" id="2_jfvwl"]
+[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_b4jrx"]
+[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/inventory/slot.tscn" id="2_foo87"]
+[ext_resource type="Script" path="res://GUI/inventory/inventory_panel.gd" id="2_jfvwl"]
 
 [node name="InventoryPanel" type="NinePatchRect"]
 custom_minimum_size = Vector2(256, 140)

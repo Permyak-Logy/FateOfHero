@@ -3,7 +3,7 @@ extends NinePatchRect
 class_name CharacterSelectionPanel
 
 @onready var container = $HBoxContainer
-@onready var button_scene = preload("res://GUI/character_button.tscn")
+@onready var button_scene = preload("res://GUI/inventory/character_button.tscn")
 var buttons = []
 
 func init(char_count: int):

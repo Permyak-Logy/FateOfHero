@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/base_unit/components/InventoryComponent.tscn" id="3_yb5u2"]
 [ext_resource type="PackedScene" uid="uid://craplwf1wnhvd" path="res://tactical_mode/base_unit/components/ExpirienceComponent.tscn" id="4_sl2hx"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/base_unit/Naris/spritesheet.png" id="6_lj5lu"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/stat_progress_bar.tscn" id="7_ttvji"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="7_ttvji"]
 
 [sub_resource type="Animation" id="Animation_3w44h"]
 length = 0.001

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4t2ssb8xsd48"]
 
-[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/InventoryRect.png" id="1_5k17o"]
-[ext_resource type="Script" path="res://GUI/character_selection_panel.gd" id="2_6ldto"]
+[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_5k17o"]
+[ext_resource type="Script" path="res://GUI/inventory/character_selection_panel.gd" id="2_6ldto"]
 
 [node name="CharacterSelectionPanel" type="NinePatchRect"]
 custom_minimum_size = Vector2(256, 40)

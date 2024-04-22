@@ -27,11 +27,11 @@ var t = 0
 
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
 @onready var special_slots = {
-	Gear.Type.Head : preload("res://GUI/slot_variations/head_slot.tscn"),
-	Gear.Type.Body : preload("res://GUI/slot_variations/body_slot.tscn"),
-	Gear.Type.Hands : preload("res://GUI/slot_variations/arm_slot.tscn"),
-	Gear.Type.Legs : preload("res://GUI/slot_variations/legs_slot.tscn"),
-	Gear.Type.Ability : preload("res://GUI/slot_variations/ability_slot.tscn")
+	Gear.Type.Head : preload("res://GUI/inventory/slot_variations/head_slot.tscn"),
+	Gear.Type.Body : preload("res://GUI/inventory/slot_variations/body_slot.tscn"),
+	Gear.Type.Hands : preload("res://GUI/inventory/slot_variations/arm_slot.tscn"),
+	Gear.Type.Legs : preload("res://GUI/inventory/slot_variations/legs_slot.tscn"),
+	Gear.Type.Ability : preload("res://GUI/inventory/slot_variations/ability_slot.tscn")
 }
 
 func remake_gear_slots():

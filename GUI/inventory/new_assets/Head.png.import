@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6rlqfgx2y7mt"
-path="res://.godot/imported/empty_bar.png-c5a3975823db0518fe203e17f69d6751.ctex"
+uid="uid://n64jagg0d1tk"
+path="res://.godot/imported/Head.png-b958dbdc291f935c0c2485b47b53c514.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GUI/new_assets/empty_bar.png"
-dest_files=["res://.godot/imported/empty_bar.png-c5a3975823db0518fe203e17f69d6751.ctex"]
+source_file="res://GUI/inventory/new_assets/Head.png"
+dest_files=["res://.godot/imported/Head.png-b958dbdc291f935c0c2485b47b53c514.ctex"]
 
 [params]
 

@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddcf28b7y534a"]
-
-[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/slot.tscn" id="1_12c0p"]
-[ext_resource type="Texture2D" uid="uid://dsuf4wh5xm6qq" path="res://GUI/new_assets/torso.png" id="2_immnr"]
-
-[node name="BodySlot" instance=ExtResource("1_12c0p")]
-
-[node name="background" parent="." index="0"]
-texture = ExtResource("2_immnr")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6aifhkqv5w40"]
+
+[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/inventory/slot.tscn" id="1_xm15j"]
+[ext_resource type="Texture2D" uid="uid://c574l2ysql2y0" path="res://GUI/inventory/new_assets/legs2.png" id="2_7pfcx"]
+
+[node name="LegsSlot" instance=ExtResource("1_xm15j")]
+
+[node name="background" parent="." index="0"]
+texture = ExtResource("2_7pfcx")
