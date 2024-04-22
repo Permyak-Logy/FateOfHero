@@ -1,0 +1,140 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn5u6v7ibmq7d"]
+
+[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_g736v"]
+[ext_resource type="Script" path="res://GUI/inventory/character_panel.gd" id="2_6h620"]
+[ext_resource type="Texture2D" uid="uid://bpygsmt8liy5q" path="res://GUI/inventory/back_tpr.png" id="4_1x6s5"]
+[ext_resource type="Texture2D" uid="uid://c6rlqfgx2y7mt" path="res://GUI/inventory/new_assets/empty_bar.png" id="5_m24si"]
+[ext_resource type="Texture2D" uid="uid://bc88c0hbnlvul" path="res://GUI/inventory/new_assets/XP_bar.png" id="6_jqmcy"]
+[ext_resource type="Texture2D" uid="uid://cptyve4cfbe25" path="res://GUI/inventory/new_assets/HP_bar.png" id="7_o43m1"]
+
+[node name="CharacterPanel" type="NinePatchRect"]
+custom_minimum_size = Vector2(160, 184)
+texture = ExtResource("1_g736v")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("2_6h620")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -58.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Gear" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Character" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="HBoxContainer/Character"]
+custom_minimum_size = Vector2(80, 10)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "The Coolest Character Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 2
+
+[node name="PictureBack" type="NinePatchRect" parent="HBoxContainer/Character"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("4_1x6s5")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Holder" type="CenterContainer" parent="HBoxContainer/Character/PictureBack"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterSprite" type="Sprite2D" parent="HBoxContainer/Character/PictureBack/Holder"]
+offset = Vector2(40, 72)
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/Character"]
+layout_mode = 2
+
+[node name="ExpProgressBar" type="TextureProgressBar" parent="HBoxContainer/Character/CenterContainer"]
+custom_minimum_size = Vector2(80, 16)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 5
+stretch_margin_top = 5
+stretch_margin_right = 5
+stretch_margin_bottom = 5
+texture_under = ExtResource("5_m24si")
+texture_progress = ExtResource("6_jqmcy")
+
+[node name="Label" type="Label" parent="HBoxContainer/Character/CenterContainer/ExpProgressBar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -6.5
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "none/10"
+horizontal_alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer/Character"]
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="HBoxContainer/Character/CenterContainer2"]
+custom_minimum_size = Vector2(80, 16)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 5
+stretch_margin_top = 5
+stretch_margin_right = 5
+stretch_margin_bottom = 5
+texture_under = ExtResource("5_m24si")
+texture_progress = ExtResource("7_o43m1")
+
+[node name="Label" type="Label" parent="HBoxContainer/Character/CenterContainer2/HealthBar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -6.5
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "5/10"
+horizontal_alignment = 1
+
+[node name="Skills" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16

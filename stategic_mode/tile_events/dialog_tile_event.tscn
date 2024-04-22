@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://vkc4blghswms"]
+
+[ext_resource type="PackedScene" uid="uid://bpa53mqxjwk7r" path="res://stategic_mode/tile_events/TileEvent.tscn" id="1_dpafa"]
+[ext_resource type="Script" path="res://stategic_mode/tile_events/dialog_tile_event.gd" id="2_bsbyj"]
+[ext_resource type="Texture2D" uid="uid://b17f6qarbeypr" path="res://stategic_mode/tile_events/sprites/default_dialog.png" id="3_lwhwb"]
+
+[node name="DialogTileEvent" instance=ExtResource("1_dpafa")]
+script = ExtResource("2_bsbyj")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_lwhwb")

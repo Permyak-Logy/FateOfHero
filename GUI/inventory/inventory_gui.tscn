@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://kn0koccqa28q"]
+
+[ext_resource type="Script" path="res://GUI/inventory/inventory_gui.gd" id="1_c5uxj"]
+[ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory/inventory_gui.tscn" id="2_0fsi5"]
+[ext_resource type="PackedScene" uid="uid://c21wpigb0wbsp" path="res://GUI/inventory/inventory_panel.tscn" id="3_344xr"]
+[ext_resource type="PackedScene" uid="uid://bn5u6v7ibmq7d" path="res://GUI/inventory/character_panel.tscn" id="4_gllpg"]
+
+[node name="InventoryGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c5uxj")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="CharacterSelectionPanel" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_0fsi5")]
+layout_mode = 2
+
+[node name="InventoryPanel" parent="HBoxContainer/VBoxContainer" instance=ExtResource("3_344xr")]
+layout_mode = 2
+
+[node name="CharacterPanel" parent="HBoxContainer" instance=ExtResource("4_gllpg")]
+layout_mode = 2

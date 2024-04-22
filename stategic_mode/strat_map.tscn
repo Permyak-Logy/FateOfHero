@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://stategic_mode/strat_map.gd" id="1_vssm8"]
 [ext_resource type="PackedScene" uid="uid://dvk8v36nd7iqw" path="res://stategic_mode/tile_events/x_marks_the_spot.tscn" id="3_yiy5h"]
 [ext_resource type="Script" path="res://stategic_mode/GUI.gd" id="4_0143e"]
-[ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory_gui.tscn" id="4_ar3pl"]
+[ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory/inventory_gui.tscn" id="4_ar3pl"]
 [ext_resource type="PackedScene" uid="uid://dipubwp70sl3s" path="res://stategic_mode/tile_events/encounter.tscn" id="4_ve1hs"]
 [ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://stategic_mode/tile_events/sprites/mean_skelly_boi.png" id="5_1yukr"]
 [ext_resource type="PackedScene" uid="uid://b7ihy2t1pwtq2" path="res://stategic_mode/tile_events/house_city.tscn" id="5_8gg2d"]
