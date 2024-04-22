@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://GUI/dialogue/dialogue_gui.gd" id="2_bda6k"]
 [ext_resource type="StyleBox" uid="uid://c2c74ou71elg4" path="res://GUI/styles/highlight_panel.tres" id="3_88sc5"]
 
-[node name="DialogGui" type="Panel"]
+[node name="DialogueGui" type="Panel"]
 custom_minimum_size = Vector2(240, 320)
 anchors_preset = 8
 anchor_left = 0.5
@@ -76,7 +76,7 @@ offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 12
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam diam augue, viverra ut urna vitae, dictum bibendum sem. Aenean eleifend diam nec eros mollis, eget hendrerit turpis ultrices. Mauris vel pharetra est, et placerat libero. Nunc interdum auctor felis, id rutrum sapien molestie eu. Donec lacinia vulputate congue. Aliquam erat volutpat. Praesent eu volutpat orci. Cras pulvinar diam nec sem porttitor cursus. Duis consectetur dignissim viverra. Etiam luctus dolor vel finibus suscipit. Vestibulum ultrices rhoncus tempus. Morbi eleifend ante vel ante varius tincidunt. Nunc vel dapibus nisi. "
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam diam augue, viverra ut urna vitae, dictum bibendum sem. Aenean eleifend diam nec eros mollis, eget hendrerit turpis ultrices. Mauris vel pharetra est, et placerat libero. Nunc interdum auctor felis, id rutrum sapien molestie eu. Donec lacinia vulputate congue. Aliquam erat volutpat. Praesent eu volutpat orci. "
 fit_content = true
 scroll_active = false
 

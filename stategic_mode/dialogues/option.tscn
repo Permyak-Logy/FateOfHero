@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cydllsqgilpi1"]
+
+[ext_resource type="Script" path="res://stategic_mode/dialogues/option.gd" id="1_h66as"]
+
+[node name="Option" type="Node"]
+script = ExtResource("1_h66as")

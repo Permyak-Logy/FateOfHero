@@ -3,7 +3,7 @@ class_name StratMap extends Node2D
 
 # ingame time in minutes; changes by 30 every time player moves; when it reaches 1440 becomes zero 
 @onready var time: int = 0
-
+@onready var gui: StratMapGUI = $GUI
 @onready var player: Player = $player
 
 signal time_changed(time)
