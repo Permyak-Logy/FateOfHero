@@ -1,6 +1,11 @@
 class_name DialogueGUI extends Control
 
 """
+Dialog window 
+It does not own itself
+you must create it and destroy it
+when dialog is ower, signal dialog finished will be emitted
+note, that it is not flexable
 """
 
 @onready var option_container: VBoxContainer = $VBoxContainer/OptionContainer
@@ -21,21 +26,24 @@ func change_dialogue(dialogue: Dialogue):
 	for opt in dialogue.options:
 		var option = opt.instantiate()
 		var btn = Button.new()
+		btn.add_child(option)
 		option_container.add_child(btn)
+		if not option.is_awailable():
+			option_container.remove_child(btn)
+			continue
 		btn.text = option.msg 
 		var callable = Callable(on_option_pressed)
 		callable = callable.bind(option)
 		btn.pressed.connect(callable)
 
 func on_option_pressed(option: DialogueOption):
+	option.dialog_action_done.connect(on_dialog_action_done)
+	visible = false
 	option.activate()
-	if option.next_dialogue:
-		change_dialogue(option.next_dialogue)
-	else:
-		
-		dialogue_finished.emit()
-		
 
-#func _ready():
-	#visible = false
-	
+func on_dialog_action_done(next_dialogue: Dialogue):
+	visible = true
+	if next_dialogue:
+		change_dialogue(next_dialogue)
+	else:
+		dialogue_finished.emit()
