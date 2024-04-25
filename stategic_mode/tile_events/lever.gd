@@ -28,11 +28,9 @@ func _on_area_2d_body_entered(body):
 	if not is_instance_of(body, CharacterBody2D): return
 	print(global_position)
 	player_present = true
-	pass # Replace with function body.
 
 
 func _on_area_2d_body_exited(body):
 	if not is_instance_of(body, CharacterBody2D): return	
 	print(global_position)
 	player_present = false
-	pass # Replace with function body.

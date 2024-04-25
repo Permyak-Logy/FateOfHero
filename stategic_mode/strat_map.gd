@@ -5,6 +5,7 @@ class_name StratMap extends Node2D
 @onready var time: int = 0
 @onready var gui: StratMapGUI = $GUI
 @onready var player: Player = $player
+@onready var timemap: TileMap = $TileMap
 
 signal time_changed(time)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=27 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://stategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://stategic_mode/strat_map.gd" id="1_vssm8"]
@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://stategic_mode/tile_events/timed_gate.tscn" id="16_u0x0p"]
 [ext_resource type="Resource" uid="uid://bmupad5oq83pg" path="res://stategic_mode/dialogues/example_dialogue/example_hello.tres" id="21_hc15a"]
 [ext_resource type="PackedScene" uid="uid://y4fch07ijvb1" path="res://stategic_mode/tile_events/dialogue_trigger.tscn" id="21_wx1y1"]
+[ext_resource type="PackedScene" uid="uid://bpajsk8dbrjpg" path="res://stategic_mode/tile_events/manual_dialogue_trigger.tscn" id="22_erct1"]
+[ext_resource type="Resource" uid="uid://dsxkbiqm0ixd1" path="res://stategic_mode/dialogues/teleport_example_dialogue/teleport_hello.tres" id="23_qyd5u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4109,7 +4111,7 @@ id = 1
 position = Vector2(27, -55)
 
 [node name="Gate" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("8_byobl")]
-position = Vector2(-24, -8)
+position = Vector2(-11, -101)
 
 [node name="ExternalPuzzles" type="Node" parent="PuzzleMaster"]
 
@@ -4141,6 +4143,11 @@ anchor_bottom = 0.5
 [node name="DialogueTrigger" parent="." instance=ExtResource("21_wx1y1")]
 position = Vector2(81, 85)
 dialogue = ExtResource("21_hc15a")
+texture = ExtResource("5_1yukr")
+
+[node name="ManualDialogueTrigger" parent="." instance=ExtResource("22_erct1")]
+position = Vector2(-183, -39)
+dialogue = ExtResource("23_qyd5u")
 texture = ExtResource("5_1yukr")
 
 [connection signal="inventory_closed" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_closed"]

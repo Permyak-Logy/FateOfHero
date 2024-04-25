@@ -1,5 +1,10 @@
 extends "res://stategic_mode/tile_events/TileEvent.gd"
 
+"""
+starts a dialogue on contact
+will disapear when dialog is over
+"""
+
 @export var dialogue: Dialogue
 @export var texture: Texture2D
 

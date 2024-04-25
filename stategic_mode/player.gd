@@ -92,3 +92,12 @@ func _physics_process(delta):
 			#print("movement ended")
 			
 
+# moves player to a new position and stops him
+func move_to(new_pos: Vector2i):
+	var new_local_pos = tilemap.map_to_local(new_pos) + Vector2(8, 8)
+	last_position = global_position
+	global_position = new_local_pos
+	current_id_path = []
+	target_position = new_pos
+	is_moving = false
+	pass
