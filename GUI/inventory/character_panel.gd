@@ -100,9 +100,9 @@ func update_bars():
 	hp_bar.max_value = current_character.health.get_max()
 	hp_bar.value = current_character.health.cur()
 	hp_label.text = str(current_character.health.cur()) + "/" + str(current_character.health.get_max())
-	#exp_bar.max_value = current_character.tpr.get_max()
-	#exp_bar.value = current_character.tpr.cur()
-	#exp_label.text = str(current_character.tpr.cur()) + "/" + str(current_character.health.get_max())
+	exp_bar.max_value = current_character.expirience.get_exp_to_next_lvl()
+	exp_bar.value = current_character.expirience.expirience
+	exp_label.text = str(current_character.expirience.expirience) + "/" + str(current_character.health.get_max())
 	pass 
 
 func update_repr():
