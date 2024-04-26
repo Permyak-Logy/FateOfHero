@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cw3rkppa44bw8"]
+[gd_scene load_steps=13 format=3 uid="uid://cw3rkppa44bw8"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/Naris/Naris.gd" id="1_w6p3a"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="2_46tem"]
+[ext_resource type="Resource" uid="uid://bwniqjpng72w8" path="res://tactical_mode/unit/MagicAttackAbility.tres" id="2_yylj0"]
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="3_ewjxc"]
 [ext_resource type="PackedScene" uid="uid://craplwf1wnhvd" path="res://tactical_mode/unit/components/ExpirienceComponent.tscn" id="4_cdwq4"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/Naris/spritesheet.png" id="5_pc56j"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/stat_progress_bar.tscn" id="6_7y8up"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="6_7y8up"]
 
 [sub_resource type="Animation" id="Animation_3w44h"]
 length = 0.001
@@ -70,14 +71,14 @@ z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_w6p3a")
+unit_name = "Naris"
 inventory = NodePath("InventoryComponent")
 health = NodePath("StatHealth")
 speed = NodePath("StatSpeed")
 damage = NodePath("StatDamage")
 expirience = NodePath("ExpirienceComponent")
 sprite_for_outline = NodePath("Sprite2D")
-acts_count = 2
-max_attack_distance = 50
+attack_ability = ExtResource("2_yylj0")
 
 [node name="StatHealth" parent="." instance=ExtResource("2_46tem")]
 default_base = 100.0

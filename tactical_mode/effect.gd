@@ -23,6 +23,9 @@ func _ready():
 func set_owner(_owner: Unit):
 	owner = _owner
 
+func set_instigator(_i: Node):
+	instigator = _i
+
 func update_on_move():
 	pass
 

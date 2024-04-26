@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AttackAbility" load_steps=3 format=3 uid="uid://bwniqjpng72w8"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/attack.gd" id="1_cqlb3"]
+[ext_resource type="Texture2D" uid="uid://bnrh1hg6sh3ww" path="res://inventory/abilities/magic_attack/texture.png" id="2_mkivq"]
+
+[resource]
+script = ExtResource("1_cqlb3")
+distance = 50
+acts = 1
+final_act = true
+cooldown = 0
+limit = 0
+count = -1
+targets = 1
+max_targets = 0
+type = 4
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Магическая атака"
+texture = ExtResource("2_mkivq")
+max_stack = 0

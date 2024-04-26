@@ -9,10 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="7_oxa7b"]
 
-[node name="TacticalMap" type="Node2D" node_paths=PackedStringArray("w_row_abilities")]
+[node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_dw5lh")
-w_row_abilities = NodePath("CanvasLayer/MarginContainer")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_5tyj1")

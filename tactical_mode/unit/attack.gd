@@ -1,14 +1,6 @@
 class_name AttackAbility extends Ability
 @export var distance: int = 1
 
-func _init(_distance=distance):
-	distance = _distance
-
-	acts = 1
-	final_act = true
-	targets = 1
-	name = "Атака"
-
 func apply():
 	if owner.damage:
 		await owner.play("preattack")

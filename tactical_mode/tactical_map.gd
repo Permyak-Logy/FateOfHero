@@ -1,6 +1,6 @@
-extends Node
+class_name TacticalMap extends Node
 
-class_name TacticalMap
+@export var w_row_abilities: MarginContainer = $CanvasLayer/MarginContainer
 @onready var _tile_map: TileMap = $TileMap
 
 @onready var _astar_board = AStarHexagon2D.new(_tile_map.get_used_cells(0))
@@ -21,12 +21,16 @@ const PATH_LAYER = 2
 const WALLS_LAYER = 3
 const EFFECTS_LAYER = 4
 
+var escape_ability: EscapeAbility = EscapeAbility.new()
+
 var win = null
+var escape = false
 var cur_ability: Ability = null
 
 signal finish(live, death)
 
 func _ready():
+	escape_ability.set_owner(self)
 	if is_instance_of($"..", Game):
 		return
 	_p_units = [
@@ -41,6 +45,7 @@ func _ready():
 
 func start_battle():
 	print("*** Start battle ***")
+	escape = false
 	for unit in _p_units + _e_units:
 		if unit.speed:
 			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
@@ -171,14 +176,20 @@ func _start_stepmove():
 	(active_unit() as Unit).premove_update()
 	for effect in active_unit().get_effects():
 		effect.update_on_move()
+	
+	while w_row_abilities.get_child_count():
+		w_row_abilities.remove_child(w_row_abilities.get_child(0))
+	
 	if active_unit().controlled_player:
+		for ability in active_unit().get_abilities():
+			w_row_abilities.add_child(W_AbilitySlot.new(ability))
 		_update_walkable()
 		_block_input = false
 	else:
 		_update_walkable(false)
 		await active_unit().ai(self)
 		_update_stepmove()
-	
+
 func level_up():
 	pass 
 
@@ -190,10 +201,10 @@ func _update_stepmove():
 	var killed_player_units = _p_units.all(func (x): return x.is_death())
 	var killed_enemy_units = _e_units.all(func (x): return x.is_death())
 	
-	if killed_player_units != killed_enemy_units:
+	if killed_player_units != killed_enemy_units or escape:
 		_tile_map.clear_layer(OVERLAY_LAYER)
 		_tile_map.clear_layer(PATH_LAYER)
-		win = true
+		win = not escape
 		_block_input = true
 		print("*** FINISH! ***")
 		level_up()
@@ -287,34 +298,44 @@ func _input(event):
 func _key_press_event(event):
 	if cur_ability:
 		if event.is_action_pressed("apply_ability"):
-			if cur_ability.can_apply():
-				_block_input = true
-				await cur_ability.apply()
-				cur_ability.after_apply()
-				_update_stepmove()
+			_apply_ability()
 		if event.is_action_pressed("cancel_ability"):
-			cur_ability.clear()
-			_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
-			cur_ability = null
-			
+			_cancel_ability()
 		if event.is_action_pressed("prev_target"):
 			cur_ability.tab_prev()
 		elif event.is_action_pressed("next_target"):
 			cur_ability.tab_next()
 		
-	else:
-		if event.is_action_pressed("move"):
-			_move_active_unit()
-		if event.as_text().is_valid_int():
-			var i = (event.as_text().to_int() + 9) % 10
-			var abilities = active_unit().get_abilities()
-			if len(abilities) > i and abilities[i].can_use():
-				cur_ability = abilities[i]
-				cur_ability.find_all_selectable_tab_targets()
-				cur_ability.auto_select()
-				_tile_map.set_layer_enabled(OVERLAY_LAYER, false)
-				_tile_map.clear_layer(PATH_LAYER)
+	elif event.is_action_pressed("move"):
+		_move_active_unit()
+	elif event.is_action_pressed("escape_fight"):
+		_prepare_ability(escape_ability)
+	elif event.as_text().is_valid_int():
+		var i = (event.as_text().to_int() + 9) % 10
+		var abilities = active_unit().get_abilities()
+		if len(abilities) > i and abilities[i].can_use():
+			_prepare_ability(abilities[i])
 
+func _prepare_ability(ability: Ability):
+	cur_ability = ability
+	cur_ability.find_all_selectable_tab_targets()
+	cur_ability.auto_select()
+	_tile_map.set_layer_enabled(OVERLAY_LAYER, false)
+	_tile_map.clear_layer(PATH_LAYER)
+
+func _cancel_ability():
+	cur_ability.clear()
+	_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
+	cur_ability = null
+
+func _apply_ability():
+	if cur_ability.can_apply():
+		_block_input = true
+		await cur_ability.apply()
+		cur_ability.after_apply()
+		_update_stepmove()
+
+	
 func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
 	var path = _astar_board.get_id_path(_astar_board.mti(a), _astar_board.mti(b))
 	return len(path) - 1

@@ -1,6 +1,4 @@
-extends Gear
-
-class_name Ability
+class_name Ability extends Gear
 
 @export var acts: int = 0
 @export var final_act: bool = false
@@ -13,7 +11,7 @@ class_name Ability
 
 var description: String = ""
 
-var owner: Unit
+var owner: Node
 
 signal ready
 
@@ -23,10 +21,14 @@ var has_uses = 0
 var selected: Array[Node] = []
 var selectable_tab: Array[Node] = []
 
+var only_unit_owner = true
+
 func _init(_count: int = count):
 	count = _count
 
-func set_owner(_owner: Unit = null):
+func set_owner(_owner: Node = null):
+	if not is_instance_of(_owner, Unit) and only_unit_owner:
+		print("Warning! Owner ", _owner, " is not unit for ability ", self)
 	owner = _owner
 
 func select(node):
@@ -112,11 +114,18 @@ func tab_prev():
 			return
 
 func find_all_selectable_tab_targets():
-	var map = owner.get_parent() as TacticalMap
+	var map = get_map()
 	for unit in map.units:
 		if can_select(unit):
 			selectable_tab.append(unit)
- 
+
+func get_map() -> TacticalMap:
+	if is_instance_of(owner, Unit):
+		return owner.get_parent() as TacticalMap
+	if is_instance_of(owner, TacticalMap):
+		return owner as TacticalMap
+	return null
+
 func can_select(_node: Node) -> bool:
 	return false
 
@@ -130,9 +139,6 @@ func can_apply() -> bool:
 
 func apply() -> bool:
 	return false
-
-func get_map() -> TacticalMap:
-	return owner.get_parent() as TacticalMap
 
 func after_apply():
 	cooldown_time = cooldown
