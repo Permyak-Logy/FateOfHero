@@ -1,7 +1,8 @@
 class_name TacticalMap extends Node
 
-@export var w_row_abilities: MarginContainer = $CanvasLayer/MarginContainer
+@onready var gui: TacticalModeGUI = $TacticalModeGui
 @onready var _tile_map: TileMap = $TileMap
+@onready var ability_btn = preload("res://GUI/tactical_mode/BtnAbility.tscn")
 
 @onready var _astar_board = AStarHexagon2D.new(_tile_map.get_used_cells(0))
 @onready var _astar_walkable: AStarHexagon2D
@@ -26,9 +27,16 @@ var escape_ability: EscapeAbility = EscapeAbility.new()
 
 var win = null
 var escape = false
-var cur_ability: Ability = null
 
-signal finish(live, death)
+var __cur_ability: Ability
+var cur_ability: Ability :
+	get:
+		return __cur_ability
+	set(value):
+		gui._on_selected(value)
+		__cur_ability = value
+
+signal finish(live: Array[PackedScene], death: Array[PackedScene])
 enum relation {Equal, Friend, Enemy, Neutral}
 
 func _ready():
@@ -197,12 +205,8 @@ func _start_stepmove():
 	for effect in active_unit().get_effects():
 		effect.update_on_move()
 	
-	while w_row_abilities.get_child_count():
-		w_row_abilities.remove_child(w_row_abilities.get_child(0))
-	
 	if active_unit().controlled_player:
-		for ability in active_unit().get_abilities():
-			w_row_abilities.add_child(W_AbilitySlot.new(ability))
+		gui.show_abilities(active_unit())
 		_update_walkable()
 		_block_input = false
 	else:
@@ -300,6 +304,7 @@ func _move_active_unit():
 	_block_input = true
 	acts -= 1
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
+	gui.clear_abilities()
 	await active_unit().play("walk", _current_path)
 	_tile_map.clear_layer(PATH_LAYER)
 	
@@ -316,9 +321,7 @@ func _input(event):
 			if (cur_ability as AoEAbility).can_select_cell(cell):
 				(cur_ability as AoEAbility).select_cell(cell)
 				draw_aoe_overlay()
-				# print("preview cell ", cell, cur_ability.about_cells, cur_ability.overlay_atlas_coords)
 				
-	
 	if event.is_pressed():
 		return await _key_press_event(event)
 
@@ -358,7 +361,10 @@ func _key_press_event(event):
 
 func _prepare_ability(ability: Ability):
 	print("-> Selected ", ability)
+	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
+	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	cur_ability = ability
+	cur_ability.clear()
 	if is_instance_of(cur_ability, DirectedAbility):
 		cur_ability.find_all_selectable_tab_targets()
 		cur_ability.auto_select()
@@ -371,7 +377,8 @@ func _prepare_ability(ability: Ability):
 	_tile_map.clear_layer(PATH_LAYER)
 
 func _cancel_ability():
-	cur_ability.clear()
+	if not cur_ability:
+		return
 	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	cur_ability = null
@@ -384,6 +391,7 @@ func _apply_ability(cell=Vector2i(0, 0)):
 	if cur_ability.can_apply():
 		_block_input = true
 		_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
+		gui.clear_abilities()
 		await cur_ability.apply()
 		cur_ability.after_apply()
 		_update_stepmove()
