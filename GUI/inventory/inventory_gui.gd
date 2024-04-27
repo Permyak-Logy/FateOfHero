@@ -22,15 +22,23 @@ var active_char_id: int = 0
 var item_stack_in_hand: ItemStackRepr
 
 func _ready():
+	connect_inventory_slots()
+	reinit()
+	visible = false
+
+func reinit():
+	character_buttons = []
+	gear_slots = []
+	ability_slots = []
+	active_char_id = 0
+	
 	character_selection_panel.init(inventory.characters.size())
 	character_buttons = character_selection_panel.buttons
 	character_panel.change_character(inventory.characters[0])
 	gear_slots = character_panel.gear_slots
-	ability_slots =character_panel.ability_slots
-	connect_inventory_slots()
+	ability_slots = character_panel.ability_slots
 	connect_buttons()
 	connect_character_slots()
-	visible = false
 	update()
 
 func connect_inventory_slots():
@@ -61,9 +69,9 @@ func update():
 	
 	
 func open():
+	reinit()
 	is_open = true 
 	visible = true
-	update()
 	inventory_opened.emit()
 	
 func close():
