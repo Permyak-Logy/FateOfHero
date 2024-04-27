@@ -1,6 +1,4 @@
-extends Item
-
-class_name Gear
+class_name Gear extends Item
 
 enum Type {Head, Body, Hands, Legs, Ability}
 

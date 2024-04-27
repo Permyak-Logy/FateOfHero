@@ -1,22 +1,51 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjcjl3qla8b62"]
+[gd_scene load_steps=14 format=3 uid="uid://bjcjl3qla8b62"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/SmolItto/SmolItto.gd" id="1_btidl"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="2_di4o0"]
+[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_xx0d3"]
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="3_yurj5"]
 [ext_resource type="Texture2D" uid="uid://b7oowqmoun462" path="res://tactical_mode/unit/SmolItto/Smoltto.png" id="4_n8og0"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="5_th3mn"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/stat_progress_bar.tscn" id="6_7tt4r"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="6_7tt4r"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="7_cpjad"]
+
+[sub_resource type="Resource" id="Resource_48y4m"]
+resource_name = "Itto Attack Ability"
+script = ExtResource("2_xx0d3")
+distance = 1
+targets = 1
+max_targets = 0
+acts = 1
+final_act = true
+cooldown = 0
+limit = 0
+count = -1
+type = 4
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = ""
+max_stack = 0
+
+[sub_resource type="Gradient" id="Gradient_ns4pf"]
+offsets = PackedFloat32Array(0, 0.992327)
+colors = PackedColorArray(1, 1, 0.788235, 1, 0.133333, 0.133333, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j8q1x"]
+gradient = SubResource("Gradient_ns4pf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_74otp"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_j8q1x")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v1vj"]
 radius = 11.0
 height = 54.0
 
-[node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "defence", "speed", "damage", "expirience", "sprite_for_outline")]
+[node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "defence", "speed", "damage", "expirience", "sprite_for_outline", "trail_particles")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_btidl")
-unit_name = "Итто"
+unit_name = "Smol Itto"
 inventory = NodePath("InventoryComponent")
 health = NodePath("StatHealth")
 defence = NodePath("StatDefence")
@@ -24,7 +53,8 @@ speed = NodePath("StatSpeed")
 damage = NodePath("StatDamage")
 expirience = NodePath("ExpirienceComponent")
 sprite_for_outline = NodePath("Sprite2D")
-acts_count = 2
+trail_particles = NodePath("Sprite2D/GPUParticles2D")
+attack_ability = SubResource("Resource_48y4m")
 
 [node name="StatHealth" parent="." instance=ExtResource("2_di4o0")]
 default_base = 200.0
@@ -47,6 +77,13 @@ mod_type = 2
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -26)
 texture = ExtResource("4_n8og0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+z_index = -1
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_74otp")
+texture = ExtResource("4_n8og0")
+lifetime = 0.5
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -24)

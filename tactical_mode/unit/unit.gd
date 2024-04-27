@@ -10,12 +10,16 @@ class_name Unit extends Node2D
 @export var damage: StatComponent = null
 @export var expirience: ExpirienceComponent = null
 @export var sprite_for_outline: Sprite2D = null
+@export var trail_particles: GPUParticles2D = null
 
 @export_group("Unit stats")
 @export var acts_count: int = 1
 @export var cells_occupied: int = 1
 @export var controlled_player: bool = true
-@export var max_attack_distance = 1
+
+@export_group("Unit abilities")
+@export var attack_ability: AttackAbility
+@export var private_abilities: Array[Ability] = []
 
 signal death(Unit)
 signal walk_finished
@@ -23,21 +27,25 @@ signal walk_finished
 var current_id_path: Array = []
 
 var _effects: Array[Effect] = []
+var flipped: bool = false
+var timer_for_walk_trail: SceneTreeTimer = null
 
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
 const CUR_COLOR = Vector4(255, 255, 255, 100)
 const SELECTED_COLOR = Vector4(0, 0, 255, 100)
 const ENEMY_COLOR = Vector4(255, 0, 0, 100)
 const DEFAULT_COLOR = Vector4(0, 0, 0, 100)
+const ESCAPE_COLOR = Vector4(255, 255, 0, 100)
 
 var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
-@onready var attack_ability = AttackAbility.new(max_attack_distance)
 
 func _ready():
 	if sprite_for_outline:
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
 	if health:
 		health.empty.connect(on_death)
+	if trail_particles:
+		trail_particles.hide()
 	set_outline_color(DEFAULT_COLOR)
 
 func set_outline_color(color: Vector4):
@@ -86,8 +94,8 @@ func get_abilities() -> Array[Ability]:
 		res += inventory.get_abilities()
 	return res
 
-func get_passives() -> Array[Effect]:
-	return []
+func apply_passives():
+	return
 
 func ai(map: TacticalMap):
 	map.acts = 0
@@ -108,16 +116,25 @@ func init_fight():
 		ability.set_owner(self)
 		ability.reset()
 		print("Ability: ", ability)
-	for effect in get_passives():
-		print("Passive: ", effect)
-		add_effect(effect)
-	sprite_for_outline.scale = Vector2(idle_direction(), 1)
+	apply_passives()
+	flip_unit(idle_direction_bool())
 
 func premove_update():
 	for ability in get_abilities():
 		ability.update()
 	for effect in get_effects():
 		effect.update_on_move()
+
+func flip_unit(toggle: bool):
+	if toggle == flipped:
+		return
+	flipped = toggle
+	if trail_particles:
+		var i: Image = trail_particles.texture.get_image()
+		i.flip_x()
+		trail_particles.texture = ImageTexture.create_from_image(i)
+	sprite_for_outline.flip_h = flipped
+	
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():
@@ -127,24 +144,36 @@ func _physics_process(_delta):
 	var target_position = $"../TileMap".map_to_local(current_id_path.front())
 	play("run")
 	
-	if ((target_position - global_position)[0] < 0) != (sprite_for_outline.scale[0] < 0):
-		sprite_for_outline.scale[0] = -sprite_for_outline.scale[0]
 	
+	if (target_position - global_position)[0] == 0:
+		flip_unit(idle_direction_bool())
+	else:
+		flip_unit((target_position - global_position)[0] < 0)
+
 	global_position = global_position.move_toward(target_position, 3)
 	
 	if global_position == target_position:    
 		current_id_path.pop_front()
 		if not current_id_path:
-			sprite_for_outline.scale = Vector2(idle_direction(), 1)
+			flip_unit(idle_direction_bool())
 			walk_finished.emit()
 
-func idle_direction():
-	return -1 if get_map().is_enemy(self) else 1
+func idle_direction_bool():
+	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
 	if _name == "walk":
+		if trail_particles:
+			if timer_for_walk_trail:
+				timer_for_walk_trail.timeout.disconnect(trail_particles.hide)
+			trail_particles.show()
 		current_id_path = _params
+		
 		await walk_finished
+		
+		if trail_particles:
+			timer_for_walk_trail = get_tree().create_timer(trail_particles.lifetime)
+			timer_for_walk_trail.timeout.connect(trail_particles.hide)
 
 func on_death(_component: StatComponent):
 	print("Death ", self)
@@ -157,7 +186,7 @@ func is_death() -> bool:
 func _on_toggle_select(_viewport, event: InputEvent, _shape_idx: int):
 	if event.is_action_pressed("select"):
 		var ability = get_map().cur_ability
-		if not ability:
+		if not ability or not is_instance_of(ability, DirectedAbility):
 			return
 		if not ability.can_select(self):
 			return
@@ -170,6 +199,7 @@ func get_effects() -> Array[Effect]:
 	return _effects
 
 func add_effect(effect: Effect):
+	print("=> ", self, "получил эффект", effect)
 	_effects.append(effect)
 	effect.set_owner(self)
 	effect.finished.connect(remove_effect)
@@ -177,7 +207,12 @@ func add_effect(effect: Effect):
 	reload_all_mods()
 
 func remove_effect(effect: Effect):
+	print("=> ", self, "кончилось действие", effect)
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)
 	reload_all_mods()
+
+func kill():
+	if health:
+		health.set_cur(0)

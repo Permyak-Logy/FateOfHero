@@ -1,4 +1,4 @@
-class_name IttoA2 extends Ability
+class_name IttoA2 extends DirectedAbility
 
 @export var power: float = 100
  

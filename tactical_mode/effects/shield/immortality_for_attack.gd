@@ -13,3 +13,6 @@ func update_on_damage(_damage: float, _instigator: Node = null) -> float:
 	if count <= 0:
 		finished.emit(self)
 	return 0
+
+func is_active():
+	return count > 0
