@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=6 format=3 uid="uid://bf6q272lgp3nh"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=8 format=3 uid="uid://bf6q272lgp3nh"]
 
-[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/base_unit/Naris/Naris.tscn" id="1_a6ekf"]
+[ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/unit/Naris/Naris.tscn" id="1_a6ekf"]
 [ext_resource type="Resource" uid="uid://jgko6igthbun" path="res://inventory/items/apple.tres" id="1_silny"]
+[ext_resource type="PackedScene" uid="uid://bjcjl3qla8b62" path="res://tactical_mode/unit/SmolItto/SmolItto.tscn" id="2_hcdk1"]
 [ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="2_pdvuu"]
+[ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/MainHero/Vamp/GGVamp.tscn" id="3_5wp4s"]
 [ext_resource type="Script" path="res://inventory/inventory.gd" id="3_ih5tw"]
 [ext_resource type="Resource" uid="uid://bdjmj8k7ev33r" path="res://inventory/gears/luck_coin.tres" id="4_2tk2p"]
 
@@ -13,4 +15,4 @@ ExtResource("1_silny"): 5,
 ExtResource("2_pdvuu"): 999,
 ExtResource("4_2tk2p"): 1
 }
-characters = Array[PackedScene]([ExtResource("1_a6ekf"), ExtResource("1_a6ekf")])
+characters = Array[PackedScene]([ExtResource("1_a6ekf"), ExtResource("2_hcdk1"), ExtResource("3_5wp4s")])
