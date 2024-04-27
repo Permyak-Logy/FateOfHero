@@ -16,10 +16,11 @@ var _p_units: Array[Unit] = []
 var _e_units: Array[Unit] = []
 
 const GRID_LAYER = 0
-const OVERLAY_LAYER = 1
+const OVERLAY_PATH_LAYER = 1
 const PATH_LAYER = 2
 const WALLS_LAYER = 3
 const EFFECTS_LAYER = 4
+const OVERLAY_ABILITY_LAYER = 5
 
 var escape_ability: EscapeAbility = EscapeAbility.new()
 
@@ -28,12 +29,14 @@ var escape = false
 var cur_ability: Ability = null
 
 signal finish(live, death)
+enum relation {Equal, Friend, Enemy, Neutral}
 
 func _ready():
 	escape_ability.set_owner(self)
 	if is_instance_of($"..", Game):
 		return
 	_p_units = [
+		$GgVamp,
 		$Naris,
 		$SmolItto
 	]
@@ -91,6 +94,26 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
 func active_unit() -> Unit:
 	return unit_queue[0][1]
 
+func get_relation(unit_a: Unit, unit_b: Unit) -> relation:
+	if unit_a == unit_b:
+		return relation.Equal
+	if is_player(unit_a) and is_player(unit_b):
+		return relation.Friend
+	if is_enemy(unit_a) and is_enemy(unit_b):
+		return relation.Friend
+	if is_player(unit_a) and is_enemy(unit_b):
+		return relation.Enemy
+	if is_enemy(unit_a) and is_player(unit_b):
+		return relation.Enemy
+	return relation.Neutral
+
+func get_units_with_relation(unit: Unit, r: relation) -> Array[Unit]:
+	var result: Array[Unit] = []
+	for other in units:
+		if get_relation(unit, other) == r:
+			result.append(other)
+	return result
+
 func clear():
 	for child in get_children():
 		if is_instance_of(child, Unit):
@@ -117,9 +140,6 @@ func get_player_units() -> Array[Unit]:
 
 func get_enemy_units() -> Array[Unit]:
 	return _e_units
-
-func get_packed_player_units():
-	pass
 
 func draw(layer: int, array: Array, source_id: int = -1, 
 atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
@@ -196,13 +216,13 @@ func level_up():
 func _update_stepmove():
 	print("* Update stepmove *")
 	cur_ability = null
-	_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
+	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	
 	var killed_player_units = _p_units.all(func (x): return x.is_death())
 	var killed_enemy_units = _e_units.all(func (x): return x.is_death())
 	
 	if killed_player_units != killed_enemy_units or escape:
-		_tile_map.clear_layer(OVERLAY_LAYER)
+		_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 		_tile_map.clear_layer(PATH_LAYER)
 		win = not escape
 		_block_input = true
@@ -251,9 +271,9 @@ func _update_walkable(show=true):
 	_update_walls()
 	var cells = _flood_fill(to_map(active_unit().global_position))
 	_astar_walkable = AStarHexagon2D.new(cells)
-	_tile_map.clear_layer(OVERLAY_LAYER)
+	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	if show:
-		draw(OVERLAY_LAYER, cells, 0, Vector2i(3, 0))
+		draw(OVERLAY_PATH_LAYER, cells, 0, Vector2i(3, 0))
 		_select_path_to(to_map(_tile_map.get_local_mouse_position()))
 
 func get_path_to_cell(map_coords: Vector2i) -> Array:
@@ -279,7 +299,7 @@ func _move_active_unit():
 		return
 	_block_input = true
 	acts -= 1
-	_tile_map.clear_layer(OVERLAY_LAYER)
+	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	await active_unit().play("walk", _current_path)
 	_tile_map.clear_layer(PATH_LAYER)
 	
@@ -289,22 +309,42 @@ func _input(event):
 	if _block_input:
 		return
 	if is_instance_of(event, InputEventMouseMotion):
+		var cell: Vector2i = to_map(_tile_map.make_input_local(event).position)
 		if not cur_ability:
-			_select_path_to(to_map(_tile_map.make_input_local(event).position))
+			_select_path_to(cell)
+		elif is_instance_of(cur_ability, AoEAbility) and (cur_ability as AoEAbility).cell != cell:
+			if (cur_ability as AoEAbility).can_select_cell(cell):
+				(cur_ability as AoEAbility).select_cell(cell)
+				draw_aoe_overlay()
+				# print("preview cell ", cell, cur_ability.about_cells, cur_ability.overlay_atlas_coords)
+				
 	
 	if event.is_pressed():
 		return await _key_press_event(event)
-		
+
+func draw_aoe_overlay():
+	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
+	draw(
+		OVERLAY_ABILITY_LAYER, 
+		(cur_ability as AoEAbility).about_cells, 
+		0, 
+		(cur_ability as AoEAbility).overlay_atlas_coords
+	)
+
 func _key_press_event(event):
 	if cur_ability:
-		if event.is_action_pressed("apply_ability"):
-			_apply_ability()
 		if event.is_action_pressed("cancel_ability"):
 			_cancel_ability()
-		if event.is_action_pressed("prev_target"):
-			cur_ability.tab_prev()
-		elif event.is_action_pressed("next_target"):
-			cur_ability.tab_next()
+		if is_instance_of(cur_ability, DirectedAbility):
+			if event.is_action_pressed("apply_ability"):
+				_apply_ability()
+			if event.is_action_pressed("prev_target"):
+				cur_ability.tab_prev()
+			if event.is_action_pressed("next_target"):
+				cur_ability.tab_next()
+		if is_instance_of(cur_ability, AoEAbility):
+			if event.is_action_pressed("apply_aoe_ability"):
+				_apply_ability(to_map(_tile_map.make_input_local(event).position))
 		
 	elif event.is_action_pressed("move"):
 		_move_active_unit()
@@ -317,20 +357,33 @@ func _key_press_event(event):
 			_prepare_ability(abilities[i])
 
 func _prepare_ability(ability: Ability):
+	print("-> Selected ", ability)
 	cur_ability = ability
-	cur_ability.find_all_selectable_tab_targets()
-	cur_ability.auto_select()
-	_tile_map.set_layer_enabled(OVERLAY_LAYER, false)
+	if is_instance_of(cur_ability, DirectedAbility):
+		cur_ability.find_all_selectable_tab_targets()
+		cur_ability.auto_select()
+	if is_instance_of(cur_ability, AoEAbility):
+		var cell: Vector2i = to_map(_tile_map.get_local_mouse_position())
+		if (cur_ability as AoEAbility).can_select_cell(cell):
+			(cur_ability as AoEAbility).select_cell(cell)
+			draw_aoe_overlay()
+	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, false)
 	_tile_map.clear_layer(PATH_LAYER)
 
 func _cancel_ability():
 	cur_ability.clear()
-	_tile_map.set_layer_enabled(OVERLAY_LAYER, true)
+	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
+	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	cur_ability = null
 
-func _apply_ability():
+func _apply_ability(cell=Vector2i(0, 0)):
+	if is_instance_of(cur_ability, DirectedAbility) and cell:
+		if cur_ability.can_select_cell():
+			cur_ability.select_cell(cell)
+	
 	if cur_ability.can_apply():
 		_block_input = true
+		_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 		await cur_ability.apply()
 		cur_ability.after_apply()
 		_update_stepmove()

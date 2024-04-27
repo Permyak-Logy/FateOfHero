@@ -186,7 +186,7 @@ func is_death() -> bool:
 func _on_toggle_select(_viewport, event: InputEvent, _shape_idx: int):
 	if event.is_action_pressed("select"):
 		var ability = get_map().cur_ability
-		if not ability:
+		if not ability or not is_instance_of(ability, DirectedAbility):
 			return
 		if not ability.can_select(self):
 			return
@@ -199,6 +199,7 @@ func get_effects() -> Array[Effect]:
 	return _effects
 
 func add_effect(effect: Effect):
+	print("=> ", self, "получил эффект", effect)
 	_effects.append(effect)
 	effect.set_owner(self)
 	effect.finished.connect(remove_effect)
@@ -206,6 +207,7 @@ func add_effect(effect: Effect):
 	reload_all_mods()
 
 func remove_effect(effect: Effect):
+	print("=> ", self, "кончилось действие", effect)
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)

@@ -27,16 +27,19 @@ func set_instigator(_i: Node):
 	instigator = _i
 
 func update_on_move():
+	"""Вызывается перед каждым ходом (но не действием)"""
 	pass
 
 func update_on_damage(damage: float, _instigator: Node = null) -> float:
+	"""Вызывается перед получением любого урона. Возвращает новый урон."""
 	return damage
 
 func update_on_attack(damage: float, _recipient: Node = null) -> float:
+	"""Вызывается перед каждой производимой атакой. Возвращает новый урон атаки."""
 	return damage
 	
-func is_active():
-	return
+func is_active() -> bool:
+	return true
 
 func get_mods() -> Array[Mod]:
 	return mods

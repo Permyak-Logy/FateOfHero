@@ -1,13 +1,29 @@
-[gd_scene load_steps=13 format=3 uid="uid://bjcjl3qla8b62"]
+[gd_scene load_steps=14 format=3 uid="uid://bjcjl3qla8b62"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/SmolItto/SmolItto.gd" id="1_btidl"]
-[ext_resource type="Resource" uid="uid://bwniqjpng72w8" path="res://tactical_mode/unit/MagicAttackAbility.tres" id="2_232v1"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="2_di4o0"]
+[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_xx0d3"]
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="3_yurj5"]
 [ext_resource type="Texture2D" uid="uid://b7oowqmoun462" path="res://tactical_mode/unit/SmolItto/Smoltto.png" id="4_n8og0"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="5_th3mn"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="6_7tt4r"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="7_cpjad"]
+
+[sub_resource type="Resource" id="Resource_48y4m"]
+resource_name = "Itto Attack Ability"
+script = ExtResource("2_xx0d3")
+distance = 1
+targets = 1
+max_targets = 0
+acts = 1
+final_act = true
+cooldown = 0
+limit = 0
+count = -1
+type = 4
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = ""
+max_stack = 0
 
 [sub_resource type="Gradient" id="Gradient_ns4pf"]
 offsets = PackedFloat32Array(0, 0.992327)
@@ -38,7 +54,7 @@ damage = NodePath("StatDamage")
 expirience = NodePath("ExpirienceComponent")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("Sprite2D/GPUParticles2D")
-attack_ability = ExtResource("2_232v1")
+attack_ability = SubResource("Resource_48y4m")
 
 [node name="StatHealth" parent="." instance=ExtResource("2_di4o0")]
 default_base = 200.0

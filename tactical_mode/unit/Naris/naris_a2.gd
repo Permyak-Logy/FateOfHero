@@ -1,4 +1,4 @@
-class_name NarisA2 extends Ability
+class_name NarisA2 extends DirectedAbility
 
 @export var power: int = 1
 

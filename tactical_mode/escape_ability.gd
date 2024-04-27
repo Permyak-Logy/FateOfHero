@@ -1,4 +1,4 @@
-class_name EscapeAbility extends Ability
+class_name EscapeAbility extends DirectedAbility
 
 func _init():
 	super(-1)

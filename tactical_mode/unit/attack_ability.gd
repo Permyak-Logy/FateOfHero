@@ -1,4 +1,4 @@
-class_name AttackAbility extends Ability
+class_name AttackAbility extends DirectedAbility
 @export var distance: int = 1
 
 func apply():
