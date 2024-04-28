@@ -22,3 +22,4 @@ _mods = Array[ExtResource("1_whgx3")]([SubResource("Resource_xlgn3")])
 name = "Lucky coin"
 texture = ExtResource("4_7ssxl")
 max_stack = 1
+recipe = Array[Resource("res://inventory/item.gd")]([])

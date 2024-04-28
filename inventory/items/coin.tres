@@ -7,4 +7,5 @@
 script = ExtResource("1_awnyd")
 name = "Coin"
 texture = ExtResource("2_pbkp4")
-max_stack = 1000
+max_stack = 99
+recipe = Array[ExtResource("1_awnyd")]([])
