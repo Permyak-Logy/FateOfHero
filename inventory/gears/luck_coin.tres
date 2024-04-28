@@ -23,3 +23,5 @@ name = "Lucky coin"
 texture = ExtResource("4_7ssxl")
 max_stack = 1
 recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0
+descript = ""
