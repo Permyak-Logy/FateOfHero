@@ -71,7 +71,10 @@ func update_gear():
 	for slot in gear_slots:
 		slot.item_stack_repr = null
 		slot.update()
-	for type in current_character.inventory.gear_slots.keys():
+	
+	for type in Gear.Type.values():
+		if type == Gear.Type.Ability:
+			continue
 		var i = 0
 		for item in current_character.inventory.get_gears(type):
 			var item_stack = ItemStack.new(item, 1)
@@ -80,6 +83,7 @@ func update_gear():
 			isr.item_stack = item_stack
 			isr.update()
 			i += 1
+		
 
 func update_abilities():
 	for slot in ability_slots:
