@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://strategic_mode/player.gd" id="1_xumpg"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_piksu"]
-[ext_resource type="Texture2D" uid="uid://cqqiuyiowhipy" path="res://strategic_mode/icon.svg" id="3_sxuig"]
+[ext_resource type="Texture2D" uid="uid://cqqiuyiowhipy" path="res://icon.svg" id="3_sxuig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4123s"]
 size = Vector2(16, 16)
@@ -13,6 +13,9 @@ inventory = ExtResource("2_piksu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(8, 8)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, 8)
