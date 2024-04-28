@@ -64,10 +64,6 @@ z_index = -1
 process_material = SubResource("ParticleProcessMaterial_fk72q")
 texture = ExtResource("3_684jl")
 
-[node name="Shadow" type="Sprite2D" parent="Body"]
-position = Vector2(0, 2)
-texture = ExtResource("4_a1b3c")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CapsuleShape2D_plq5k")
 
@@ -96,5 +92,9 @@ offset_top = -57.0
 offset_bottom = -55.0
 stat_component = NodePath("../StatHealth")
 metadata/_edit_use_anchors_ = true
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(1, -24)
+texture = ExtResource("4_a1b3c")
 
 [connection signal="input_event" from="." to="." method="_on_toggle_select"]
