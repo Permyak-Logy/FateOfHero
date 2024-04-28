@@ -1,7 +1,25 @@
 extends Node2D
 
 class_name CityMap
+@onready var game: Game = get_tree().root.get_child(0)
+#@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _on_button_exit_pressed():
+	game.to_strat_mode()
+
+func _on_button_crafting_pressed():
+	get_tree().change_scene_to_file("res://city_mode/crafting/crafting.tscn")
+
+
+func _on_button_trading_pressed():
+	get_tree().change_scene_to_file("res://city_mode/trading/trading.tscn")
+#@onready var inventory: InventoryGUI = $InventoryGUI
+
+
+#func _input(event):
+#	if event.is_action_pressed("inv_button"): 
+#		if not inventory.is_open:
+#			inventory.open()
+#		else:
+#			inventory.close()
+

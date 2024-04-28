@@ -1,11 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://ftb7kac1q6vt"]
+[gd_scene load_steps=10 format=3 uid="uid://sgkba57dbbe7"]
 
 [ext_resource type="Script" path="res://city_mode/CityMap.gd" id="1_8qc0h"]
+[ext_resource type="Texture2D" uid="uid://dlvrvoxv04o4m" path="res://city_mode/Assets/Geraldinia_0.png" id="2_ag5vs"]
+[ext_resource type="Texture2D" uid="uid://driq1yr2csc7w" path="res://city_mode/Assets/Geraldinia_1.png" id="3_xi1ob"]
+[ext_resource type="Texture2D" uid="uid://cbedbpjj3nvgi" path="res://city_mode/Assets/Geraldinia_kuzna.png" id="4_6wssm"]
+[ext_resource type="Texture2D" uid="uid://ddb8hbfesc0l8" path="res://city_mode/Assets/Geraldinia_prilav.png" id="5_gnfag"]
+[ext_resource type="Texture2D" uid="uid://bprnl1hqncimr" path="res://city_mode/Assets/Geraldinia_prodav.png" id="6_ptojv"]
+[ext_resource type="Texture2D" uid="uid://t7ukvod3pjr1" path="res://city_mode/Assets/Geraldinia_road.png" id="7_k7bxc"]
+[ext_resource type="Texture2D" uid="uid://bwiu4xmfedlef" path="res://city_mode/Assets/Geraldinia_shop_0.png" id="8_inye0"]
+[ext_resource type="Texture2D" uid="uid://8nm7q5k4a66k" path="res://city_mode/Assets/Geraldinia_shop_1.png" id="9_tljxf"]
 
 [node name="CityMap" type="Node2D"]
 script = ExtResource("1_8qc0h")
 
 [node name="TextEdit" type="TextEdit" parent="."]
+visible = false
 offset_left = 106.0
 offset_top = 39.0
 offset_right = 583.0
@@ -15,3 +24,78 @@ this is a singleton scene for city
 you should implement 
  - city changer
  - add return to the start map"
+
+[node name="backgraund" type="Sprite2D" parent="."]
+position = Vector2(480, 273)
+scale = Vector2(4.13333, 4.07407)
+texture = ExtResource("2_ag5vs")
+
+[node name="GeraldiniaRoad" type="Sprite2D" parent="."]
+position = Vector2(475.5, 270.5)
+scale = Vector2(4.09583, 4.08148)
+texture = ExtResource("7_k7bxc")
+
+[node name="trading" type="Node2D" parent="."]
+
+[node name="GeraldiniaShop0" type="Sprite2D" parent="trading"]
+position = Vector2(529, 262.437)
+scale = Vector2(3.65, 3.91759)
+texture = ExtResource("8_inye0")
+
+[node name="GeraldiniaShop1" type="Sprite2D" parent="trading"]
+position = Vector2(504.25, 263)
+scale = Vector2(3.96875, 3.28889)
+texture = ExtResource("9_tljxf")
+
+[node name="GeraldiniaPrilav" type="Sprite2D" parent="trading"]
+position = Vector2(534, 246.25)
+scale = Vector2(3.39167, 3.45556)
+texture = ExtResource("5_gnfag")
+
+[node name="GeraldiniaProdav" type="Sprite2D" parent="trading"]
+position = Vector2(583, 268)
+scale = Vector2(2.55313, 2.87037)
+texture = ExtResource("6_ptojv")
+
+[node name="Button" type="Button" parent="trading"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 604.0
+offset_top = 137.0
+offset_right = 894.0
+offset_bottom = 437.0
+
+[node name="crafting" type="Node2D" parent="."]
+
+[node name="GeraldiniaKuzna" type="Sprite2D" parent="crafting"]
+position = Vector2(467.5, 233.312)
+scale = Vector2(3.94583, 3.56018)
+texture = ExtResource("4_6wssm")
+
+[node name="Button" type="Button" parent="crafting"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 95.0
+offset_top = 146.0
+offset_right = 352.0
+offset_bottom = 457.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Exit" type="Node2D" parent="."]
+position = Vector2(465, 313)
+scale = Vector2(2.17917, 2.37037)
+
+[node name="Geraldinia1" type="Sprite2D" parent="Exit"]
+texture = ExtResource("3_xi1ob")
+
+[node name="Button" type="Button" parent="Exit"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -14.0
+offset_top = -18.0
+offset_right = 14.0
+offset_bottom = 24.0
+
+[connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
+[connection signal="pressed" from="crafting/Button" to="." method="_on_button_crafting_pressed"]
+[connection signal="pressed" from="Exit/Button" to="." method="_on_button_exit_pressed"]

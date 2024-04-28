@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dqdvaxckrca60"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_yiayg"]
+[ext_resource type="Texture2D" uid="uid://c1sfelakxy4oe" path="res://inventory/icons/egg.png" id="2_qhoof"]
+
+[resource]
+script = ExtResource("1_yiayg")
+name = ""
+texture = ExtResource("2_qhoof")
+max_stack = 10
+recipe = Array[ExtResource("1_yiayg")]([])
+price = 0
+descript = ""

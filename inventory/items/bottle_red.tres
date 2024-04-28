@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://bn6fdo3m5610r"]
+
+[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_1ijj5"]
+[ext_resource type="Resource" uid="uid://dp7v2ukib0ut1" path="res://inventory/items/pepper.tres" id="2_m50ph"]
+[ext_resource type="Script" path="res://inventory/item.gd" id="3_du6t0"]
+[ext_resource type="Texture2D" uid="uid://dhfeku8egs81o" path="res://inventory/icons/bottle_red.png" id="4_oeadd"]
+
+[resource]
+script = ExtResource("3_du6t0")
+name = "bottle_red"
+texture = ExtResource("4_oeadd")
+max_stack = 10
+recipe = Array[ExtResource("3_du6t0")]([ExtResource("1_1ijj5"), ExtResource("2_m50ph")])
+price = 0
+descript = "Повышает макс. hp персонажа на 20% на ближайший бой"

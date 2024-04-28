@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://cnbar3w7hii5p"]
+
+[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_iquq5"]
+[ext_resource type="Resource" uid="uid://doqtu33sxqbhu" path="res://inventory/items/skin.tres" id="2_e5gcg"]
+[ext_resource type="Script" path="res://inventory/item.gd" id="3_gce7m"]
+[ext_resource type="Texture2D" uid="uid://cdqukvrhlwfli" path="res://inventory/icons/bottle_green.png" id="4_sgpqi"]
+
+[resource]
+script = ExtResource("3_gce7m")
+name = ""
+texture = ExtResource("4_sgpqi")
+max_stack = 10
+recipe = Array[ExtResource("3_gce7m")]([ExtResource("1_iquq5"), ExtResource("2_e5gcg")])
+price = 0
+descript = "Повышает силу атаки на 20% на ближайший бой"

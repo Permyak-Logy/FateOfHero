@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://bpucxqd3g08kp"]
+
+[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_n3wd6"]
+[ext_resource type="Resource" uid="uid://dqdvaxckrca60" path="res://inventory/items/egg.tres" id="2_0rcrf"]
+[ext_resource type="Script" path="res://inventory/item.gd" id="3_kt3l7"]
+[ext_resource type="Texture2D" uid="uid://dyi5oqj5vuudu" path="res://inventory/icons/bottle_yellow.png" id="4_esg6q"]
+
+[resource]
+script = ExtResource("3_kt3l7")
+name = ""
+texture = ExtResource("4_esg6q")
+max_stack = 10
+recipe = Array[ExtResource("3_kt3l7")]([ExtResource("1_n3wd6"), ExtResource("2_0rcrf")])
+price = 0
+descript = "Повышает скорость персонажа на 20% на ближайший бой"

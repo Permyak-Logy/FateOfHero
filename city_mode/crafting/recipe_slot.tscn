@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://douwpwsc16lq5"]
+
+[ext_resource type="Script" path="res://city_mode/crafting/recipe_slot.gd" id="1_8vkbh"]
+[ext_resource type="Texture2D" uid="uid://brp35s6t3kbro" path="res://GUI/inventory/new_assets/sprait_craft.png" id="2_k5582"]
+
+[node name="RecipeSlot" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 20)
+offset_right = 45.0
+offset_bottom = 44.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_8vkbh")
+
+[node name="back" type="Sprite2D" parent="."]
+position = Vector2(20, 19)
+scale = Vector2(1.36364, 1.36364)
+texture = ExtResource("2_k5582")
+vframes = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

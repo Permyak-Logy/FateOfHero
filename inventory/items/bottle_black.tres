@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://b740ckyrxhwfj"]
+
+[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_taygh"]
+[ext_resource type="Resource" uid="uid://xplppy8t3gmi" path="res://inventory/items/oil.tres" id="2_vlr58"]
+[ext_resource type="Script" path="res://inventory/item.gd" id="3_8pop4"]
+[ext_resource type="Texture2D" uid="uid://bexjkhmi7opnt" path="res://inventory/icons/bottle_black.png" id="4_gm6b6"]
+
+[resource]
+script = ExtResource("3_8pop4")
+name = ""
+texture = ExtResource("4_gm6b6")
+max_stack = 10
+recipe = Array[ExtResource("3_8pop4")]([ExtResource("1_taygh"), ExtResource("2_vlr58")])
+price = 0
+descript = "Повышает защиту персонажа на 20% на ближайший бой"
