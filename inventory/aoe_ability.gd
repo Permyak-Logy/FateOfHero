@@ -9,6 +9,10 @@ func select_cell(_cell: Vector2i):
 	cell = _cell
 	find_about_cells()
 
+func unselect_cell():
+	cell = Vector2i(-1, -1)
+	about_cells.clear()
+
 func apply():
 	for unit in get_map().units:
 		var cell = unit.get_cell()

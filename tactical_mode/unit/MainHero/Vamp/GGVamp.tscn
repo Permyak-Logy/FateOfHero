@@ -42,6 +42,7 @@ height = 58.0
 
 [node name="GgVamp" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "defence", "speed", "damage", "expirience", "sprite_for_outline", "trail_particles")]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_jny1x")
 unit_name = "Фиди (Вапир)"
 inventory = NodePath("InventoryComponent")

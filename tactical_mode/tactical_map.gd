@@ -318,15 +318,17 @@ func _input(event):
 		if not cur_ability:
 			_select_path_to(cell)
 		elif is_instance_of(cur_ability, AoEAbility) and (cur_ability as AoEAbility).cell != cell:
+			_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 			if (cur_ability as AoEAbility).can_select_cell(cell):
 				(cur_ability as AoEAbility).select_cell(cell)
 				draw_aoe_overlay()
+			else:
+				(cur_ability as AoEAbility).unselect_cell()
 				
 	if event.is_pressed():
 		return await _key_press_event(event)
 
 func draw_aoe_overlay():
-	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 	draw(
 		OVERLAY_ABILITY_LAYER, 
 		(cur_ability as AoEAbility).about_cells, 
