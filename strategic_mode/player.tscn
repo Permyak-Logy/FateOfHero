@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf0rrbb0c6pik"]
+
+[ext_resource type="Script" path="res://strategic_mode/player.gd" id="1_xumpg"]
+[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_piksu"]
+[ext_resource type="Texture2D" uid="uid://cqqiuyiowhipy" path="res://icon.svg" id="3_sxuig"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4123s"]
+size = Vector2(16, 16)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_xumpg")
+inventory = ExtResource("2_piksu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(8, 8)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_sxuig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_4123s")

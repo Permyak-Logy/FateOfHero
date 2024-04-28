@@ -7,6 +7,9 @@ class_name CharacterSelectionPanel
 var buttons = []
 
 func init(char_count: int):
+	for c in container.get_children():
+		container.remove_child(c) 
+	
 	for i in range(char_count):
 		var btn = button_scene.instantiate()
 		container.add_child(btn)
