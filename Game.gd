@@ -1,7 +1,7 @@
 extends Node2D
 
 class_name Game
-@onready var strat_map: StratMap = load("res://stategic_mode/strat_map.tscn").instantiate()
+@onready var strat_map: StratMap = load("res://strategic_mode/strat_map.tscn").instantiate()
 @onready var tactical_map: TacticalMap = load("res://tactical_mode/tactical_map.tscn").instantiate() 
 @onready var city_map: CityMap = load("res://city_mode/CityMap.tscn").instantiate()
 @onready var external_puzzle_container: ExternalPuzzleContainer = \

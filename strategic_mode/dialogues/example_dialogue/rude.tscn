@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmlfmfgjguyh2"]
+
+[ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://strategic_mode/dialogues/option.tscn" id="1_0klk6"]
+[ext_resource type="Resource" uid="uid://ccps450et4mtl" path="res://strategic_mode/dialogues/example_dialogue/example_bye_rude.tres" id="2_pgyxr"]
+
+[node name="Option" instance=ExtResource("1_0klk6")]
+msg = "fuck you"
+next_dialogue = ExtResource("2_pgyxr")

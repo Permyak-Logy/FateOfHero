@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://m0if6uiuigcx"]
-
-[ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://stategic_mode/dialogues/option.tscn" id="1_4i1jx"]
-
-[node name="Option" instance=ExtResource("1_4i1jx")]
-msg = "ok"
