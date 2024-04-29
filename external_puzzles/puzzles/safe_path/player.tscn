@@ -16,3 +16,6 @@ texture = ExtResource("2_5xqce")
 shape = SubResource("RectangleShape2D_nbgoo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_left_margin = 0.05
+drag_top_margin = 0.05

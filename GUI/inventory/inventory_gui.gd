@@ -177,6 +177,8 @@ func take_from(slot:InventorySlot):
 	 
 
 func _input(event):
+	if not is_open:
+		return
 	update_item_in_hand()
 	if event.is_action_pressed("lmb"):
 		if not hovering_slot:
