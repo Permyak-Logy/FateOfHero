@@ -105,7 +105,7 @@ func update_item_in_hand():
 
 
 func put_item_to_inv_slot(slot: InventorySlot):
-	if not (slot.is_empty() and item_stack_in_hand and item_stack_in_hand.item_stack):
+	if not (item_stack_in_hand and item_stack_in_hand.item_stack):
 		return
 	var item_stack: ItemStack = item_stack_in_hand.item_stack
 	var remaining = inventory.insert(item_stack.item, item_stack.size)
@@ -182,13 +182,12 @@ func _input(event):
 		if not hovering_slot:
 			return
 		take_from(hovering_slot)
+		item_stack_in_hand_origin = hovering_slot
 	
 	if event.is_action_released("lmb"):
 		var target_slot = hovering_slot
 		if not hovering_slot or not hovering_slot.is_empty():
 			target_slot = item_stack_in_hand_origin
-		if not target_slot:
-			return
 		put_to(target_slot)
 		
 
