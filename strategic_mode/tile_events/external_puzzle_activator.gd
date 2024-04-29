@@ -28,5 +28,7 @@ func activate():
 	game.to_puzzle_mode()
 
 func on_done():
+	for child in game.external_puzzle_container.get_children():
+		game.external_puzzle_container.remove_child(child)
 	game.to_strat_mode()
 	pass

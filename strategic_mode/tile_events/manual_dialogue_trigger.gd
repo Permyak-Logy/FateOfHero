@@ -42,11 +42,9 @@ func on_dialogue_finished():
 
 
 func _on_area_2d_body_exited(body):
-	if not is_instance_of(body, CharacterBody2D): return	
-	print(global_position)
+	if not is_instance_of(body, Player): return	
 	player_present = false
 	
 func _on_area_2d_body_entered(body):
-	if not is_instance_of(body, CharacterBody2D): return
-	print(global_position)
+	if not is_instance_of(body, Player): return
 	player_present = true

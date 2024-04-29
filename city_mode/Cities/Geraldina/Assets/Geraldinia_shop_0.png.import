@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwiu4xmfedlef"
-path="res://.godot/imported/Geraldinia_shop_0.png-a262e580235c304f9ff83abccffd22a6.ctex"
+path="res://.godot/imported/Geraldinia_shop_0.png-09e72a3e6e2d2964fea19da2e9f8ceca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://city_mode/Assets/Geraldinia_shop_0.png"
-dest_files=["res://.godot/imported/Geraldinia_shop_0.png-a262e580235c304f9ff83abccffd22a6.ctex"]
+source_file="res://city_mode/Cities/Geraldina/Assets/Geraldinia_shop_0.png"
+dest_files=["res://.godot/imported/Geraldinia_shop_0.png-09e72a3e6e2d2964fea19da2e9f8ceca.ctex"]
 
 [params]
 

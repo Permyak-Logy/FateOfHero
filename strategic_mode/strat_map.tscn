@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory/inventory_gui.tscn" id="4_ar3pl"]
 [ext_resource type="PackedScene" uid="uid://dipubwp70sl3s" path="res://strategic_mode/tile_events/encounter.tscn" id="4_ve1hs"]
 [ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://strategic_mode/tile_events/sprites/mean_skelly_boi.png" id="5_1yukr"]
-[ext_resource type="PackedScene" uid="uid://b7ihy2t1pwtq2" path="res://strategic_mode/tile_events/house_city.tscn" id="5_8gg2d"]
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="5_r3hyg"]
 [ext_resource type="PackedScene" uid="uid://cf0rrbb0c6pik" path="res://strategic_mode/player.tscn" id="5_whmy4"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/Vendigo/Vendigo.tscn" id="6_0wgum"]
@@ -15,13 +14,14 @@
 [ext_resource type="Script" path="res://strategic_mode/LeverPuzzle 1.gd" id="7_rcyvo"]
 [ext_resource type="PackedScene" uid="uid://d17julguc6lr2" path="res://strategic_mode/tile_events/gate.tscn" id="8_byobl"]
 [ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://strategic_mode/tile_events/sprites/x_marks_the_spot.png" id="8_q21qa"]
-[ext_resource type="PackedScene" uid="uid://bse1mhf87c40h" path="res://external_puzzles/puzzles/safe_path/safe_path.tscn" id="13_33saf"]
 [ext_resource type="PackedScene" uid="uid://dq3cyu2npqu84" path="res://strategic_mode/tile_events/cc_external_puzzle_activator.tscn" id="13_uwixs"]
-[ext_resource type="Texture2D" uid="uid://dpxxyv64x368h" path="res://strategic_mode/tile_events/sprites/tpr_safe_path.png" id="15_dmsjl"]
 [ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://strategic_mode/tile_events/timed_gate.tscn" id="16_u0x0p"]
 [ext_resource type="Resource" uid="uid://bmupad5oq83pg" path="res://strategic_mode/dialogues/example_dialogue/example_hello.tres" id="21_hc15a"]
+[ext_resource type="PackedScene" uid="uid://b7jg3r6hr02df" path="res://strategic_mode/tile_events/town_tile_event.tscn" id="21_vylki"]
 [ext_resource type="PackedScene" uid="uid://y4fch07ijvb1" path="res://strategic_mode/tile_events/dialogue_trigger.tscn" id="21_wx1y1"]
 [ext_resource type="PackedScene" uid="uid://bpajsk8dbrjpg" path="res://strategic_mode/tile_events/manual_dialogue_trigger.tscn" id="22_erct1"]
+[ext_resource type="PackedScene" uid="uid://sgkba57dbbe7" path="res://city_mode/Cities/Geraldina/Geraldina.tscn" id="22_t3kb4"]
+[ext_resource type="Texture2D" uid="uid://bgqjde0lpoh7w" path="res://strategic_mode/tile_events/sprites/house.png" id="23_qm7dp"]
 [ext_resource type="Resource" uid="uid://dsxkbiqm0ixd1" path="res://strategic_mode/dialogues/teleport_example_dialogue/teleport_hello.tres" id="23_qyd5u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
@@ -4118,13 +4118,8 @@ position = Vector2(-11, -101)
 [node name="CombatCapablePuzzleActivator" parent="PuzzleMaster/ExternalPuzzles" instance=ExtResource("13_uwixs")]
 position = Vector2(132, 20)
 enemies = Array[PackedScene]([ExtResource("5_r3hyg")])
-puzzle = ExtResource("13_33saf")
-texture = ExtResource("15_dmsjl")
 
 [node name="OtherTileEvents" type="Node" parent="."]
-
-[node name="HouseCity" parent="OtherTileEvents" instance=ExtResource("5_8gg2d")]
-position = Vector2(138, 79)
 
 [node name="player" parent="." instance=ExtResource("5_whmy4")]
 top_level = true
@@ -4149,6 +4144,11 @@ texture = ExtResource("5_1yukr")
 position = Vector2(-183, -39)
 dialogue = ExtResource("23_qyd5u")
 texture = ExtResource("5_1yukr")
+
+[node name="TownTileEvent" parent="." instance=ExtResource("21_vylki")]
+position = Vector2(88, 48)
+city = ExtResource("22_t3kb4")
+texture = ExtResource("23_qm7dp")
 
 [connection signal="inventory_closed" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_closed"]
 [connection signal="inventory_opened" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_opened"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://74426675p6qr"]
 
-[ext_resource type="Script" path="res://city_mode/trading/trade_item.gd" id="1_cym07"]
+[ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/trade_item.gd" id="1_cym07"]
 [ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="2_3ejm0"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_malmt"]
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="4_odn4n"]
-[ext_resource type="Script" path="res://city_mode/trading/buy.gd" id="4_xanvi"]
+[ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/buy.gd" id="4_xanvi"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c5fl7"]
 

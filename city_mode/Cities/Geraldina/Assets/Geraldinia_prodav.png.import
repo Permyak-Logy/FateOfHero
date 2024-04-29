@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t7ukvod3pjr1"
-path="res://.godot/imported/Geraldinia_road.png-87a9b77f1a9c250e34f4a753b7d1ea02.ctex"
+uid="uid://bprnl1hqncimr"
+path="res://.godot/imported/Geraldinia_prodav.png-71e27a5660dedde432f9d3a19b0f5fed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://city_mode/Assets/Geraldinia_road.png"
-dest_files=["res://.godot/imported/Geraldinia_road.png-87a9b77f1a9c250e34f4a753b7d1ea02.ctex"]
+source_file="res://city_mode/Cities/Geraldina/Assets/Geraldinia_prodav.png"
+dest_files=["res://.godot/imported/Geraldinia_prodav.png-71e27a5660dedde432f9d3a19b0f5fed.ctex"]
 
 [params]
 

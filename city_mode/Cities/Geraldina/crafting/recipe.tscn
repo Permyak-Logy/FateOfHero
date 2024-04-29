@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://blxk4ex3fpwq8"]
 
-[ext_resource type="Script" path="res://city_mode/crafting/recipe.gd" id="1_c3sk5"]
-[ext_resource type="PackedScene" uid="uid://douwpwsc16lq5" path="res://city_mode/crafting/recipe_slot.tscn" id="1_d288w"]
+[ext_resource type="Script" path="res://city_mode/Cities/Geraldina/crafting/recipe.gd" id="1_c3sk5"]
+[ext_resource type="PackedScene" uid="uid://douwpwsc16lq5" path="res://city_mode/Cities/Geraldina/crafting/recipe_slot.tscn" id="1_d288w"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_40380"]
-[ext_resource type="Texture2D" uid="uid://brp35s6t3kbro" path="res://GUI/inventory/new_assets/sprait_craft.png" id="4_0od4a"]
+[ext_resource type="Texture2D" path="res://GUI/inventory/new_assets/sprait_craft.png" id="4_0od4a"]
 
 [sub_resource type="Theme" id="Theme_7g0g1"]
 

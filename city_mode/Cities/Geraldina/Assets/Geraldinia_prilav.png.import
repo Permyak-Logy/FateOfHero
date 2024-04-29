@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlvrvoxv04o4m"
-path="res://.godot/imported/Geraldinia_0.png-83c9dabc5563973767f3d6586ec78326.ctex"
+uid="uid://ddb8hbfesc0l8"
+path="res://.godot/imported/Geraldinia_prilav.png-0404b9ceaf1d725301a34fb1c1b79573.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://city_mode/Assets/Geraldinia_0.png"
-dest_files=["res://.godot/imported/Geraldinia_0.png-83c9dabc5563973767f3d6586ec78326.ctex"]
+source_file="res://city_mode/Cities/Geraldina/Assets/Geraldinia_prilav.png"
+dest_files=["res://.godot/imported/Geraldinia_prilav.png-0404b9ceaf1d725301a34fb1c1b79573.ctex"]
 
 [params]
 

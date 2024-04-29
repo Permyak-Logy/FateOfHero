@@ -16,6 +16,10 @@ position = Vector2(8, 8)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+drag_left_margin = 0.05
+drag_top_margin = 0.05
+drag_right_margin = 0.05
+drag_bottom_margin = 0.05
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, 8)

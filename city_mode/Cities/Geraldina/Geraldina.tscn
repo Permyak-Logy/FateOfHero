@@ -1,17 +1,17 @@
 [gd_scene load_steps=10 format=3 uid="uid://sgkba57dbbe7"]
 
-[ext_resource type="Script" path="res://city_mode/CityMap.gd" id="1_8qc0h"]
-[ext_resource type="Texture2D" uid="uid://dlvrvoxv04o4m" path="res://city_mode/Assets/Geraldinia_0.png" id="2_ag5vs"]
-[ext_resource type="Texture2D" uid="uid://driq1yr2csc7w" path="res://city_mode/Assets/Geraldinia_1.png" id="3_xi1ob"]
-[ext_resource type="Texture2D" uid="uid://cbedbpjj3nvgi" path="res://city_mode/Assets/Geraldinia_kuzna.png" id="4_6wssm"]
-[ext_resource type="Texture2D" uid="uid://ddb8hbfesc0l8" path="res://city_mode/Assets/Geraldinia_prilav.png" id="5_gnfag"]
-[ext_resource type="Texture2D" uid="uid://bprnl1hqncimr" path="res://city_mode/Assets/Geraldinia_prodav.png" id="6_ptojv"]
-[ext_resource type="Texture2D" uid="uid://t7ukvod3pjr1" path="res://city_mode/Assets/Geraldinia_road.png" id="7_k7bxc"]
-[ext_resource type="Texture2D" uid="uid://bwiu4xmfedlef" path="res://city_mode/Assets/Geraldinia_shop_0.png" id="8_inye0"]
-[ext_resource type="Texture2D" uid="uid://8nm7q5k4a66k" path="res://city_mode/Assets/Geraldinia_shop_1.png" id="9_tljxf"]
+[ext_resource type="Script" path="res://city_mode/Cities/Geraldina/Geraldina.gd" id="1_jacgh"]
+[ext_resource type="Texture2D" uid="uid://dlvrvoxv04o4m" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_0.png" id="2_415n5"]
+[ext_resource type="Texture2D" uid="uid://t7ukvod3pjr1" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_road.png" id="3_b0yoh"]
+[ext_resource type="Texture2D" uid="uid://bwiu4xmfedlef" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_shop_0.png" id="4_xrghq"]
+[ext_resource type="Texture2D" uid="uid://8nm7q5k4a66k" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_shop_1.png" id="5_yvdni"]
+[ext_resource type="Texture2D" uid="uid://ddb8hbfesc0l8" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_prilav.png" id="6_q5a6y"]
+[ext_resource type="Texture2D" uid="uid://bprnl1hqncimr" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_prodav.png" id="7_ntw7p"]
+[ext_resource type="Texture2D" uid="uid://cbedbpjj3nvgi" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_kuzna.png" id="8_nmo70"]
+[ext_resource type="Texture2D" uid="uid://driq1yr2csc7w" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_1.png" id="9_bwaig"]
 
 [node name="CityMap" type="Node2D"]
-script = ExtResource("1_8qc0h")
+script = ExtResource("1_jacgh")
 
 [node name="TextEdit" type="TextEdit" parent="."]
 visible = false
@@ -28,34 +28,34 @@ you should implement
 [node name="backgraund" type="Sprite2D" parent="."]
 position = Vector2(480, 273)
 scale = Vector2(4.13333, 4.07407)
-texture = ExtResource("2_ag5vs")
+texture = ExtResource("2_415n5")
 
 [node name="GeraldiniaRoad" type="Sprite2D" parent="."]
 position = Vector2(475.5, 270.5)
 scale = Vector2(4.09583, 4.08148)
-texture = ExtResource("7_k7bxc")
+texture = ExtResource("3_b0yoh")
 
 [node name="trading" type="Node2D" parent="."]
 
 [node name="GeraldiniaShop0" type="Sprite2D" parent="trading"]
 position = Vector2(529, 262.437)
 scale = Vector2(3.65, 3.91759)
-texture = ExtResource("8_inye0")
+texture = ExtResource("4_xrghq")
 
 [node name="GeraldiniaShop1" type="Sprite2D" parent="trading"]
 position = Vector2(504.25, 263)
 scale = Vector2(3.96875, 3.28889)
-texture = ExtResource("9_tljxf")
+texture = ExtResource("5_yvdni")
 
 [node name="GeraldiniaPrilav" type="Sprite2D" parent="trading"]
 position = Vector2(534, 246.25)
 scale = Vector2(3.39167, 3.45556)
-texture = ExtResource("5_gnfag")
+texture = ExtResource("6_q5a6y")
 
 [node name="GeraldiniaProdav" type="Sprite2D" parent="trading"]
 position = Vector2(583, 268)
 scale = Vector2(2.55313, 2.87037)
-texture = ExtResource("6_ptojv")
+texture = ExtResource("7_ntw7p")
 
 [node name="Button" type="Button" parent="trading"]
 modulate = Color(1, 1, 1, 0)
@@ -70,7 +70,7 @@ offset_bottom = 437.0
 [node name="GeraldiniaKuzna" type="Sprite2D" parent="crafting"]
 position = Vector2(467.5, 233.312)
 scale = Vector2(3.94583, 3.56018)
-texture = ExtResource("4_6wssm")
+texture = ExtResource("8_nmo70")
 
 [node name="Button" type="Button" parent="crafting"]
 modulate = Color(1, 1, 1, 0)
@@ -86,7 +86,7 @@ position = Vector2(465, 313)
 scale = Vector2(2.17917, 2.37037)
 
 [node name="Geraldinia1" type="Sprite2D" parent="Exit"]
-texture = ExtResource("3_xi1ob")
+texture = ExtResource("9_bwaig")
 
 [node name="Button" type="Button" parent="Exit"]
 modulate = Color(1, 1, 1, 0)

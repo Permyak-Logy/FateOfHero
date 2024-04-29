@@ -1,6 +1,4 @@
-extends Node2D
-
-class_name CityMap
+class_name Geraldina extends City
 @onready var game: Game = get_tree().root.get_child(0)
 #@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
 
