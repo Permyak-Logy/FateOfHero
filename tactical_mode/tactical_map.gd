@@ -8,14 +8,19 @@ class_name TacticalMap extends Node
 @onready var _astar_walkable: AStarHexagon2D
 
 @onready var _current_path = PackedVector2Array()
+var Rock = preload("res://tactical_mode/unit/nature/Rock.tscn")
+
 var _block_input = false
 const _ACT_INDEX_MAX = 10000
 var unit_queue = []  # [(act_index, unit)]
-var units: Array[Unit] = []
+
 var acts: int
 var _p_units: Array[Unit] = []
 var _e_units: Array[Unit] = []
-
+var _n_units: Array[Unit] = []
+var units:
+	get:
+		return _p_units + _e_units + _n_units
 const GRID_LAYER = 0
 const OVERLAY_PATH_LAYER = 1
 const PATH_LAYER = 2
@@ -40,6 +45,7 @@ signal finish(live: Array[PackedScene], death: Array[PackedScene])
 enum relation {Equal, Friend, Enemy, Neutral}
 
 func _ready():
+	""""""
 	escape_ability.set_owner(self)
 	if is_instance_of($"..", Game):
 		return
@@ -52,18 +58,29 @@ func _ready():
 		$Vendigo,
 		$Skeleton
 	]
+	_n_units = [
+		$Rock,
+		$Rock2,
+		$Rock3,
+		$Rock4,
+		$Rock5,
+		$Rock6
+	]
 	start_battle()
 
 func start_battle():
 	print("*** Start battle ***")
 	escape = false
-	for unit in _p_units + _e_units:
+	for unit in units:	
+		unit.death.connect(on_kill)
 		if unit.speed:
 			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
-		unit.death.connect(on_kill)
-		units.append(unit)
-		unit.init_fight()
+			unit.init_fight()
 	
+	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
+	_start_stepmove()
+
+func arrange_units():
 	var center = (_astar_board.bottom - _astar_board.top) / 2 + _astar_board.top
 	
 	if _p_units:
@@ -71,19 +88,24 @@ func start_battle():
 		var start_p = center - len(_p_units) * step_p / 2 + step_p / 2
 		for i in range(len(_p_units)):
 			var y = start_p + i * step_p
-			move_unit_to(_p_units[i], _astar_board.left + (y + 1) % 2, y)
+			var left_shift = 0
+			for cell in _p_units[i].get_occupied_cells():
+				left_shift = max(left_shift, (cell - _p_units[i].get_cell())[0])
+			move_unit_to(_p_units[i], _astar_board.left + (y + 1) % 2 + left_shift, y)
 	
 	if _e_units:
 		var step_e = min((_astar_board.bottom - _astar_board.top) / len(_e_units), 6)
 		var start_e = center - len(_e_units) * step_e / 2 + step_e / 2
 		for i in range(len(_e_units)):
 			var y = start_e + i * step_e
-			move_unit_to(_e_units[i],  _astar_board.right - _e_units[i].cells_occupied, y)
+			
+			var right_shift = 0
+			for cell in _e_units[i].get_occupied_cells():
+				right_shift = max(right_shift, (cell - _e_units[i].get_cell())[0])
+			move_unit_to(_e_units[i],  _astar_board.right - right_shift - 1, y)
 	
-	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
-	_start_stepmove()
 
-func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
+func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], count_nature_obj: int=-1):
 	if not is_node_ready():
 		await ready
 	clear()
@@ -97,6 +119,23 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = []):
 	
 	for unit in _p_units + _e_units:
 		add_child(unit)
+	arrange_units()
+	if count_nature_obj < 0:
+		count_nature_obj = randi_range(0, 30)
+	for i in range(count_nature_obj):
+		_update_walls()
+		var obj: Node2D = Rock.instantiate()
+		_n_units.append(obj)
+		add_child(obj)
+		while true:
+			var pos = Vector2i(
+				randi_range(_astar_board.left, _astar_board.right),
+				randi_range(_astar_board.bottom, _astar_board.top)
+			)
+			if not is_occupied(pos):
+				obj.global_position = to_loc(pos)
+				break
+	
 	start_battle()
 
 func active_unit() -> Unit:
@@ -128,7 +167,11 @@ func clear():
 			remove_child(child)
 	win = false
 	cur_ability = null
-	units.clear()
+	
+	_p_units.clear()
+	_e_units.clear()
+	_n_units.clear()
+	
 	unit_queue.clear()
 	_block_input = false
 
@@ -162,10 +205,10 @@ func to_loc(cell: Vector2i) -> Vector2:
 	return _tile_map.map_to_local(cell)
 
 func is_occupied(cell: Vector2i) -> bool:
-	return cell in _tile_map.get_used_cells(3)
+	return cell in _tile_map.get_used_cells(WALLS_LAYER)
 	
-func _flood_fill(cell: Vector2i) -> Array:
-	var cells = active_unit().cells_occupied
+func _flood_fill() -> Array:
+	var cell = active_unit().get_cell()
 	var max_distance: float = (
 		active_unit().speed.cur() - 100) / 20 + 4
 	var array := [cell]
@@ -181,11 +224,16 @@ func _flood_fill(cell: Vector2i) -> Array:
 		
 		for next_id in _astar_board.get_point_connections(_astar_board.mti(current)):
 			var next = _astar_board.itm(next_id)
-			if is_occupied(next):
+
+			var blocked = false
+			for occ in active_unit().get_occupied_cells():
+				var delta = occ - cell
+				if is_occupied(next + delta) or not _astar_board.has_cell(next + delta):
+					blocked = true
+					break
+			if blocked:
 				continue
-			if cells == 2 and (is_occupied(next + Vector2i(1, 0)) or
-			not _astar_board.has_cell(next + Vector2i(1, 0))):
-				continue
+			
 			if next in array:
 				continue
 			
@@ -263,17 +311,14 @@ func _update_stepmove():
 func _update_walls():
 	_tile_map.clear_layer(WALLS_LAYER)
 	for unit in units:
-		if unit == active_unit():
-			continue
 		if unit.is_death():
 			continue
-		_tile_map.set_cell(3, to_map(unit.global_position), 0, Vector2i(2, 0))
-		if unit.cells_occupied == 2:
-			_tile_map.set_cell(3, to_map(unit.global_position) + Vector2i(1, 0), 0, Vector2i(2, 0))
+		for cell in unit.get_occupied_cells():
+			_tile_map.set_cell(3, cell, 0, Vector2i(2, 0))
 		
 func _update_walkable(show=true):
 	_update_walls()
-	var cells = _flood_fill(to_map(active_unit().global_position))
+	var cells = _flood_fill()
 	_astar_walkable = AStarHexagon2D.new(cells)
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	if show:
@@ -285,7 +330,7 @@ func get_path_to_cell(map_coords: Vector2i) -> Array:
 	if not _astar_walkable.has_cell(map_coords):
 		return []
 	var path = _astar_walkable.get_id_path(
-			_astar_walkable.mti(to_map(active_unit().global_position)),
+			_astar_walkable.mti(active_unit().get_cell()),
 			_astar_walkable.mti(map_coords)
 		)
 	for cell in path:
@@ -337,9 +382,20 @@ func draw_aoe_overlay():
 	)
 
 func _key_press_event(event):
-	if cur_ability:
+	if event.as_text().is_valid_int():
+		var i = (event.as_text().to_int() + 9) % 10
+		var abilities = active_unit().get_abilities()
+		if len(abilities) > i and abilities[i].can_use():
+			_prepare_ability(abilities[i])
+	elif cur_ability:
 		if event.is_action_pressed("cancel_ability"):
 			_cancel_ability()
+		if event.is_action_pressed("next_ability"):
+			var abilities = active_unit().get_abilities()
+			_prepare_ability(abilities[(abilities.find(cur_ability) + 1) % len(abilities)])
+		if event.is_action_pressed("prev_ability"):
+			var abilities = active_unit().get_abilities()
+			_prepare_ability(abilities[(abilities.find(cur_ability) - 1 + len(abilities)) % len(abilities)])
 		if is_instance_of(cur_ability, DirectedAbility):
 			if event.is_action_pressed("apply_ability"):
 				_apply_ability()
@@ -350,19 +406,14 @@ func _key_press_event(event):
 		if is_instance_of(cur_ability, AoEAbility):
 			if event.is_action_pressed("apply_aoe_ability"):
 				_apply_ability(to_map(_tile_map.make_input_local(event).position))
-		
 	elif event.is_action_pressed("move"):
 		_move_active_unit()
 	elif event.is_action_pressed("escape_fight"):
 		_prepare_ability(escape_ability)
-	elif event.as_text().is_valid_int():
-		var i = (event.as_text().to_int() + 9) % 10
-		var abilities = active_unit().get_abilities()
-		if len(abilities) > i and abilities[i].can_use():
-			_prepare_ability(abilities[i])
 
 func _prepare_ability(ability: Ability):
 	print("-> Selected ", ability)
+	_cancel_ability()
 	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	cur_ability = ability
@@ -381,6 +432,7 @@ func _prepare_ability(ability: Ability):
 func _cancel_ability():
 	if not cur_ability:
 		return
+	cur_ability.clear()
 	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	cur_ability = null
@@ -398,7 +450,6 @@ func _apply_ability(cell=Vector2i(0, 0)):
 		cur_ability.after_apply()
 		_update_stepmove()
 
-	
 func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
 	var path = _astar_board.get_id_path(_astar_board.mti(a), _astar_board.mti(b))
 	return len(path) - 1

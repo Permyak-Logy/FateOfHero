@@ -42,7 +42,9 @@ func prev_ability():
 	pass
 
 func _on_pressed():
-	map._cancel_ability()
-	var pressed_btn = btn_group.get_pressed_button()
+	var pressed_btn: W_BtnAbility = btn_group.get_pressed_button()
 	if pressed_btn:
-		map._prepare_ability((pressed_btn as W_BtnAbility).ability)
+		if pressed_btn.ability != map.cur_ability:
+			map._prepare_ability((pressed_btn as W_BtnAbility).ability)
+	else:
+		map._cancel_ability()

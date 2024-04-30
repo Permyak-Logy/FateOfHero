@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=11 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="7_oxa7b"]
 [ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
 [ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/MainHero/Vamp/GGVamp.tscn" id="9_qoism"]
+[ext_resource type="PackedScene" uid="uid://dwgsmj0qo4gcw" path="res://tactical_mode/unit/nature/Rock.tscn" id="10_vqnje"]
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
@@ -47,17 +48,35 @@ anchor_mode = 0
 [node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
 
 [node name="Vendigo" parent="." instance=ExtResource("4_dhhnm")]
-position = Vector2(775, 229)
+position = Vector2(448, 323)
 controlled_player = true
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(96, 402)
+position = Vector2(98, 446)
 
 [node name="Skeleton" parent="." instance=ExtResource("7_oxa7b")]
-position = Vector2(833, 375)
+position = Vector2(575, 325)
 
 [node name="SmolItto" parent="." instance=ExtResource("5_nrx87")]
-position = Vector2(96, 210)
+position = Vector2(858, 452)
 
 [node name="GgVamp" parent="." instance=ExtResource("9_qoism")]
-position = Vector2(94, 302)
+position = Vector2(447, 185)
+
+[node name="Rock" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(318, 283)
+
+[node name="Rock2" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(511, 375)
+
+[node name="Rock3" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(607, 256)
+
+[node name="Rock4" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(320, 471)
+
+[node name="Rock5" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(667, 448)
+
+[node name="Rock6" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(672, 353)
