@@ -121,7 +121,7 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], cou
 		add_child(unit)
 	arrange_units()
 	if count_nature_obj < 0:
-		count_nature_obj = randi_range(0, 30)
+		count_nature_obj = randi_range(0, 16)
 	for i in range(count_nature_obj):
 		_update_walls()
 		var obj: Node2D = Rock.instantiate()

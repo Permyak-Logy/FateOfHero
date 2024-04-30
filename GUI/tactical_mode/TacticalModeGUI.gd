@@ -4,11 +4,15 @@ class_name TacticalModeGUI extends CanvasLayer
 @onready var btn_ability = preload("res://GUI/tactical_mode/BtnAbility.tscn")
 @onready var map: TacticalMap = $".."
 @onready var btn_group: ButtonGroup = preload("res://GUI/tactical_mode/abilities_button_group.tres")
+@onready var lbl_name: Label = $AbilityPanel/GridContainer/LabelName
+@onready var lbl_desc: Label = $AbilityPanel/GridContainer/LabelDesc
+@onready var ability_panel: Panel = $AbilityPanel
 
 var selected: int = -1
 
 func _ready():
 	btn_group.pressed.connect(_on_pressed)
+	ability_panel.hide()
 
 func show_abilities(unit: Unit):
 	clear_abilities()
@@ -18,8 +22,18 @@ func show_abilities(unit: Unit):
 		btn.set_ability(ability)
 		btn.button_group = btn_group
 		btn.pressed.connect(_on_pressed)
+		btn.mouse_entered.connect(func(): mouse_entered(ability))
+		btn.mouse_exited.connect(mouse_exited)
 		hbox.add_child(btn)
 		i += 1
+
+func mouse_entered(ability: Ability):
+	lbl_name.text = ability.name
+	lbl_desc.text = ability.description
+	ability_panel.show()
+
+func mouse_exited():
+	ability_panel.hide()
 
 func clear_abilities():
 	for btn in hbox.get_children():
@@ -34,12 +48,6 @@ func _on_selected(new_ability):
 		var btn = btn_group.get_pressed_button()
 		if btn:
 			btn.set_pressed_no_signal(false)
-
-func next_ability():
-	pass
-
-func prev_ability():
-	pass
 
 func _on_pressed():
 	var pressed_btn: W_BtnAbility = btn_group.get_pressed_button()
