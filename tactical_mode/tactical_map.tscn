@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="7_oxa7b"]
 [ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
 [ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/MainHero/Vamp/GGVamp.tscn" id="9_qoism"]
-[ext_resource type="PackedScene" uid="uid://dwgsmj0qo4gcw" path="res://tactical_mode/unit/nature/Rock.tscn" id="10_vqnje"]
+[ext_resource type="PackedScene" uid="uid://cwccmvlw1ghah" path="res://tactical_mode/nature/Rock.tscn" id="10_m7p5y"]
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
@@ -48,35 +48,38 @@ anchor_mode = 0
 [node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
 
 [node name="Vendigo" parent="." instance=ExtResource("4_dhhnm")]
-position = Vector2(448, 323)
+position = Vector2(606, 204)
 controlled_player = true
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(98, 446)
+position = Vector2(96, 353)
 
 [node name="Skeleton" parent="." instance=ExtResource("7_oxa7b")]
-position = Vector2(575, 325)
+position = Vector2(609, 398)
 
 [node name="SmolItto" parent="." instance=ExtResource("5_nrx87")]
-position = Vector2(858, 452)
+position = Vector2(193, 424)
 
 [node name="GgVamp" parent="." instance=ExtResource("9_qoism")]
-position = Vector2(447, 185)
+position = Vector2(221, 210)
 
-[node name="Rock" parent="." instance=ExtResource("10_vqnje")]
-position = Vector2(318, 283)
+[node name="Rock" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(511, 329)
 
-[node name="Rock2" parent="." instance=ExtResource("10_vqnje")]
-position = Vector2(511, 375)
+[node name="Rock2" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(706, 281)
 
-[node name="Rock3" parent="." instance=ExtResource("10_vqnje")]
-position = Vector2(607, 256)
+[node name="Rock3" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(290, 210)
 
-[node name="Rock4" parent="." instance=ExtResource("10_vqnje")]
-position = Vector2(320, 471)
+[node name="Rock4" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(417, 163)
 
-[node name="Rock5" parent="." instance=ExtResource("10_vqnje")]
-position = Vector2(667, 448)
+[node name="Rock5" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(450, 234)
 
-[node name="Rock6" parent="." instance=ExtResource("10_vqnje")]
-position = Vector2(672, 353)
+[node name="Rock6" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(355, 306)
+
+[node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(542, 210)

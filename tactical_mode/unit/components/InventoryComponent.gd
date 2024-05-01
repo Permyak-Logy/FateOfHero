@@ -29,11 +29,17 @@ func unuse(gear: Gear) -> bool:
 	($'..' as Unit).reload_all_mods()
 	return true
 
-func get_gears(gear_type: Gear.Type) -> Array:
-	return _gears.get(gear_type, [])
+func get_gears(gear_type: Gear.Type) -> Array[Gear]:
+	var res: Array[Gear] = []
+	for elem in  _gears.get(gear_type, []):
+		res.append(elem)
+	return res
 
-func get_abilities() -> Array:
-	return get_gears(Gear.Type.Ability)
+func get_abilities() -> Array[Ability]:
+	var res: Array[Ability] = []
+	for elem in get_gears(Gear.Type.Ability):
+		res.append(elem)
+	return res
 
 func get_mods() -> Dictionary:
 	var all_mods = {}

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GGVampA3" load_steps=2 format=3 uid="uid://di4u67c7nk826"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/MainHero/Vamp/gg_vamp_a3.gd" id="1_ccfav"]
+
+[resource]
+script = ExtResource("1_ccfav")
+power_self = 0.1
+power_target = 2.0
+targets = 1
+max_targets = 0
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = ""
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0
+descript = ""

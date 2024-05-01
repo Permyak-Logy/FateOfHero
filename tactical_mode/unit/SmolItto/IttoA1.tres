@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="IttoA1" load_steps=2 format=3 uid="uid://bfvhjwkefx6ky"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/SmolItto/itto_a1.gd" id="1_3sd5q"]
+
+[resource]
+script = ExtResource("1_3sd5q")
+power = 100.0
+targets = 1
+max_targets = 0
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = ""
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0
+descript = ""

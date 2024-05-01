@@ -3,14 +3,6 @@ class_name GGVampA3 extends DirectedAbility
 @export var power_self: float = 0.1
 @export var power_target: float = 2
 
-func _init():
-	super(-1)
-
-	acts = 1
-	final_act = true
-	targets = 1
-	name = "Кровопускание"
-
 func apply():
 	var unit = selected[0] as Unit
 	

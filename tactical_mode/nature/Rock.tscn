@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwccmvlw1ghah"]
+
+[ext_resource type="Script" path="res://tactical_mode/actor.gd" id="1_t1mcr"]
+[ext_resource type="Texture2D" uid="uid://xw5i1k2yrvnx" path="res://tactical_mode/nature/Rock.png" id="2_4kbu1"]
+
+[node name="Rock" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_t1mcr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -16)
+texture = ExtResource("2_4kbu1")

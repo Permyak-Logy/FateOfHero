@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="GGVampA2" load_steps=2 format=3 uid="uid://csshoxe7yf51e"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/MainHero/Vamp/gg_vamp_a2.gd" id="1_12dbk"]
+
+[resource]
+script = ExtResource("1_12dbk")
+power = 0.2
+overlay_atlas_coords = Vector2i(1, 0)
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = ""
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0
+descript = ""

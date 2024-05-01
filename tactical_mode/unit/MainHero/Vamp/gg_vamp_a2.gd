@@ -2,13 +2,6 @@ class_name GGVampA2 extends AoEAbility
 
 @export var power: float = 0.2
 
-func _init():
-	super(-1)
-
-	acts = 1
-	final_act = true
-	name = "Гурман"
-
 func find_about_cells():
 	var map = get_map()
 	

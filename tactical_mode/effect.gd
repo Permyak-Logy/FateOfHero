@@ -1,6 +1,4 @@
-extends Resource
-
-class_name Effect
+class_name Effect extends Resource
 
 @export var texture: Texture2D
 @export var mods: Array[Mod] = []
@@ -9,20 +7,26 @@ class_name Effect
 signal finished
 signal updated_mods
 
-var name_effect: String = "Эффект"
-var owner: Unit = null
-var instigator: Node
-var is_negative: bool
+@export var effect_name: String = "Эффект"
+@export var is_negative: bool = false
 
-func _init(_instigator: Node = null, is_negative: bool = false):
-	instigator = _instigator
+var _owner: Unit = null
+var owner:
+	get:
+		return _owner
+	set(value):
+		var old = _owner
+		_owner = value
+		on_set_owner(old, _owner)
+
+var instigator: Node = null
 
 func _ready():
 	if destroy_on_death_instigator and is_instance_of(instigator, Unit):
 		(instigator as Unit).death.connect(func (_x) : finished.emit(self))
 
-func set_owner(_owner: Unit):
-	owner = _owner
+func on_set_owner(old: Unit, new: Unit):
+	pass
 
 func set_instigator(_i: Node):
 	instigator = _i

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=2 format=3 uid="uid://bimxy6owu2yfe"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/apply_effect_ability.gd" id="1_sjwrv"]
+
+[resource]
+script = ExtResource("1_sjwrv")
+apply_on = 0
+targets = 1
+max_targets = 0
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = ""
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0
+descript = ""

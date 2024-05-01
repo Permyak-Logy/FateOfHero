@@ -1,17 +1,16 @@
 [gd_scene load_steps=14 format=3 uid="uid://kj8esabe8qfg"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/Vendigo/Vendigo.gd" id="1_oj4or"]
-[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_u8ut3"]
+[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_26r6h"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="3_sy0f3"]
 [ext_resource type="Shader" path="res://tactical_mode/assets/outline.gdshader" id="3_ws587"]
 [ext_resource type="Texture2D" uid="uid://yf64rowfciuo" path="res://tactical_mode/unit/Vendigo/Vendigo.png" id="4_g6t4h"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="5_kxra3"]
 [ext_resource type="Texture2D" uid="uid://b45l2fsxtf6v6" path="res://tactical_mode/assets/Big_Shadow.png" id="6_8rh12"]
 
-[sub_resource type="Resource" id="Resource_q568r"]
-resource_name = "Vendigo Attack Ability"
-script = ExtResource("2_u8ut3")
-distance = 50
+[sub_resource type="Resource" id="Resource_x273b"]
+script = ExtResource("2_26r6h")
+distance = 1
 targets = 1
 max_targets = 0
 acts = 1
@@ -57,7 +56,7 @@ damage = NodePath("StatDamage")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("Sprite2D/GPUParticles2D")
 controlled_player = false
-attack_ability = SubResource("Resource_q568r")
+private_abilities = Array[Resource("res://inventory/ability.gd")]([SubResource("Resource_x273b")])
 
 [node name="StatHealth" parent="." instance=ExtResource("3_sy0f3")]
 default_base = 100.0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xw5i1k2yrvnx"
-path="res://.godot/imported/Rock.png-825c9c5b7012b3aeaff017680994f419.ctex"
+uid="uid://dkxujvupkucv6"
+path="res://.godot/imported/Rock2.png-96edca631a74f534c4b22d12c05ca8ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/unit/nature/Rock.png"
-dest_files=["res://.godot/imported/Rock.png-825c9c5b7012b3aeaff017680994f419.ctex"]
+source_file="res://tactical_mode/nature/Rock2.png"
+dest_files=["res://.godot/imported/Rock2.png-96edca631a74f534c4b22d12c05ca8ad.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-class_name Unit extends Node2D
+class_name Unit extends Actor
 
 @export var unit_name: String = "Unit"
 
@@ -17,9 +17,10 @@ class_name Unit extends Node2D
 @export var controlled_player: bool = true
 
 @export_group("Unit abilities")
-@export var attack_ability: AttackAbility
 @export var private_abilities: Array[Ability] = []
+@export var private_passives: Array[Effect] = []
 
+var _abilities: Array[Ability] = []
 signal death(Unit)
 signal walk_finished
 
@@ -43,6 +44,8 @@ func _ready():
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
 	if health:
 		health.empty.connect(on_death)
+	for ability in private_abilities:
+		_abilities.append(ability.duplicate(true))
 	if trail_particles:
 		trail_particles.hide()
 	set_outline_color(DEFAULT_COLOR)
@@ -88,28 +91,24 @@ func get_mods() -> Dictionary:
 	return all_mods
 
 func get_abilities() -> Array[Ability]:
-	var res: Array[Ability] = [attack_ability]
 	if inventory:
-		res += inventory.get_abilities()
-	return res
+		return _abilities + inventory.get_abilities()
+	return _abilities
 
 func apply_passives():
-	return
+	for effect in private_passives:
+		var passive: Effect = effect.duplicate(true)
+		passive.instigator = self
+		add_effect(passive)
 
 func ai(map: TacticalMap):
 	map.acts = 0
 
-func get_cell() -> Vector2i:
-	return get_map().to_map(global_position)
-
 func get_occupied_cells() -> Array[Vector2i]:
 	return [get_cell()]
 
-func get_map() -> TacticalMap:
-	return get_parent() as TacticalMap
-
-func init_fight():
-	print("=> Init: ", unit_name)
+func prepare_fight():
+	print("=> Prepare: ", unit_name)
 	while _effects:
 		remove_effect(_effects[0])
 	
@@ -117,7 +116,6 @@ func init_fight():
 	for ability in get_abilities():
 		ability.set_owner(self)
 		ability.reset()
-		print("Ability: ", ability)
 	apply_passives()
 	flip_unit(idle_direction_bool())
 
@@ -203,15 +201,15 @@ func get_effects() -> Array[Effect]:
 	return _effects
 
 func add_effect(effect: Effect):
-	print("=> ", self.unit_name, " получил эффект ", effect.name_effect)
+	print("=> ", self.unit_name, " получил эффект ", effect.effect_name)
 	_effects.append(effect)
-	effect.set_owner(self)
+	effect.owner = self
 	effect.finished.connect(remove_effect)
 	effect.updated_mods.connect(reload_all_mods)
 	reload_all_mods()
 
 func remove_effect(effect: Effect):
-	print("=> ", self.unit_name, " кончился эффект ", effect.name_effect)
+	print("=> ", self.unit_name, " кончился эффект ", effect.effect_name)
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)

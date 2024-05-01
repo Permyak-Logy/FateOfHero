@@ -1,16 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://cw3rkppa44bw8"]
+[gd_scene load_steps=17 format=3 uid="uid://cw3rkppa44bw8"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/Naris/Naris.gd" id="1_w6p3a"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="2_46tem"]
-[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_c6ipj"]
+[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_hn0ko"]
+[ext_resource type="Resource" uid="uid://bd0bpu457k5k0" path="res://tactical_mode/unit/Naris/NarisA1.tres" id="3_1dlhn"]
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="3_ewjxc"]
 [ext_resource type="PackedScene" uid="uid://craplwf1wnhvd" path="res://tactical_mode/unit/components/ExpirienceComponent.tscn" id="4_cdwq4"]
+[ext_resource type="Resource" uid="uid://bimxy6owu2yfe" path="res://tactical_mode/unit/Naris/NarisA2.tres" id="4_wm2aj"]
+[ext_resource type="Resource" uid="uid://cyfoggmu0xu82" path="res://tactical_mode/unit/Naris/NarisP1.tres" id="5_giyk0"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/Naris/spritesheet.png" id="5_pc56j"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="6_7y8up"]
 
-[sub_resource type="Resource" id="Resource_80w0f"]
-resource_name = "Naris Attack Ability"
-script = ExtResource("2_c6ipj")
+[sub_resource type="Resource" id="Resource_ojaga"]
+script = ExtResource("2_hn0ko")
 distance = 50
 targets = 1
 max_targets = 0
@@ -97,7 +99,8 @@ speed = NodePath("StatSpeed")
 damage = NodePath("StatDamage")
 expirience = NodePath("ExpirienceComponent")
 sprite_for_outline = NodePath("Sprite2D")
-attack_ability = SubResource("Resource_80w0f")
+private_abilities = Array[Resource("res://inventory/ability.gd")]([SubResource("Resource_ojaga"), ExtResource("3_1dlhn"), ExtResource("4_wm2aj")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("5_giyk0")])
 
 [node name="StatHealth" parent="." instance=ExtResource("2_46tem")]
 default_base = 100.0

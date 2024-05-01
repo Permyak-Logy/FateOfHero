@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NarisP1Effect" load_steps=2 format=3 uid="uid://cyfoggmu0xu82"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/Naris/naris_p1.gd" id="1_nsjir"]
+
+[resource]
+script = ExtResource("1_nsjir")
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+name_effect = "Эффект"
+is_negative = false

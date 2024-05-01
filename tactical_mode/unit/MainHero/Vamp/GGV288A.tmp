@@ -1,36 +1,18 @@
-[gd_scene load_steps=19 format=3 uid="uid://d1jk2a04wq33q"]
+[gd_scene load_steps=18 format=3 uid="uid://d1jk2a04wq33q"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_cobyf"]
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="2_cm71t"]
-[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_rrop8"]
+[ext_resource type="Resource" uid="uid://bwniqjpng72w8" path="res://tactical_mode/unit/MagicAttackAbility.tres" id="2_olxes"]
 [ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="3_5sawt"]
 [ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/MainHero/Vamp/GGVamp.png" id="3_684jl"]
-[ext_resource type="Resource" uid="uid://b6t1ic5ep435a" path="res://tactical_mode/unit/MainHero/Vamp/GGVampA1.tres" id="3_kae5q"]
+[ext_resource type="Resource" uid="uid://b71jg3dfl483p" path="res://tactical_mode/unit/MainHero/Vamp/GGVampA1.tres" id="3_va2qo"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="4_a1b3c"]
-[ext_resource type="Resource" uid="uid://csshoxe7yf51e" path="res://tactical_mode/unit/MainHero/Vamp/GGVampA2.tres" id="4_km5yc"]
+[ext_resource type="Resource" uid="uid://byct4paaodfah" path="res://tactical_mode/unit/MainHero/Vamp/GGVampA2.tres" id="4_ovp7n"]
+[ext_resource type="Resource" uid="uid://cyd2me41c0umd" path="res://tactical_mode/unit/MainHero/Vamp/GGVampA3.tres" id="5_cpus2"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_gi1p0"]
-[ext_resource type="Resource" uid="uid://di4u67c7nk826" path="res://tactical_mode/unit/MainHero/Vamp/GGVampA3.tres" id="5_ll4fg"]
-[ext_resource type="Resource" uid="uid://5d8bwek6gx45" path="res://tactical_mode/unit/MainHero/Vamp/GGVampP1.tres" id="6_c4y0i"]
-[ext_resource type="Resource" uid="uid://drtfi4k16ej2g" path="res://tactical_mode/unit/MainHero/Vamp/GGVampP2.tres" id="7_m88hv"]
+[ext_resource type="Resource" uid="uid://u7ra5jlagxjm" path="res://tactical_mode/unit/MainHero/Vamp/GGVampP1.tres" id="6_6lveg"]
+[ext_resource type="Resource" uid="uid://bie0ljpumw6u6" path="res://tactical_mode/unit/MainHero/Vamp/GGVampP2.tres" id="7_77e65"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="8_fjxje"]
-
-[sub_resource type="Resource" id="Resource_ojaga"]
-script = ExtResource("2_rrop8")
-distance = 50
-targets = 1
-max_targets = 0
-acts = 1
-final_act = true
-cooldown = 0
-limit = 0
-count = -1
-type = 4
-_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
-name = ""
-max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
-price = 0
-descript = ""
 
 [sub_resource type="Gradient" id="Gradient_h44pd"]
 colors = PackedColorArray(1, 0.933333, 0.945098, 1, 0.254902, 0, 0, 0)
@@ -60,8 +42,8 @@ damage = NodePath("StatDamage")
 expirience = NodePath("ExpirienceComponent")
 sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("Body/GPUParticles2D")
-private_abilities = Array[Resource("res://inventory/ability.gd")]([SubResource("Resource_ojaga"), ExtResource("3_kae5q"), ExtResource("4_km5yc"), ExtResource("5_ll4fg")])
-private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_c4y0i"), ExtResource("7_m88hv")])
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("2_olxes"), ExtResource("3_va2qo"), ExtResource("4_ovp7n"), ExtResource("5_cpus2")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_6lveg"), ExtResource("7_77e65")])
 
 [node name="Body" type="Sprite2D" parent="."]
 position = Vector2(1, -26)

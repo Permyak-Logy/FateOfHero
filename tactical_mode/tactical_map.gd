@@ -8,7 +8,7 @@ class_name TacticalMap extends Node
 @onready var _astar_walkable: AStarHexagon2D
 
 @onready var _current_path = PackedVector2Array()
-var Rock = preload("res://tactical_mode/unit/nature/Rock.tscn")
+var Rock = preload("res://tactical_mode/nature/Rock.tscn")
 
 var _block_input = false
 const _ACT_INDEX_MAX = 10000
@@ -17,10 +17,9 @@ var unit_queue = []  # [(act_index, unit)]
 var acts: int
 var _p_units: Array[Unit] = []
 var _e_units: Array[Unit] = []
-var _n_units: Array[Unit] = []
 var units:
 	get:
-		return _p_units + _e_units + _n_units
+		return _p_units + _e_units
 const GRID_LAYER = 0
 const OVERLAY_PATH_LAYER = 1
 const PATH_LAYER = 2
@@ -40,16 +39,7 @@ var inited:
 		return _inited
 	set(value):
 		_inited = value
-		if entered and inited:
-			if not is_node_ready():
-				await ready
-			start_battle()
-var entered:
-	get:
-		return _entered
-	set(value):
-		_entered = value
-		if inited and entered:
+		if is_inside_tree() and inited:
 			if not is_node_ready():
 				await ready
 			start_battle()
@@ -68,14 +58,15 @@ signal finish(live: Array[PackedScene], death: Array[PackedScene])
 enum relation {Equal, Friend, Enemy, Neutral}
 
 func _enter_tree():
-	entered = true
+	if inited:
+		if not is_node_ready():
+			await ready
+		start_battle()
 
 func _exit_tree():
-	entered = false
 	clear()
 
 func _ready():
-	""""""
 	escape_ability.set_owner(self)
 	if is_instance_of($"..", Game):
 		return
@@ -88,19 +79,11 @@ func _ready():
 		$Vendigo,
 		$Skeleton
 	]
-	_n_units = [
-		$Rock,
-		$Rock2,
-		$Rock3,
-		$Rock4,
-		$Rock5,
-		$Rock6
-	]
 	inited = true
 
 func start_battle():
 	print("*** Start battle ***")
-	gen_nature()
+	align_actors()
 	escape = false
 	for unit in units:	
 		if not unit.is_node_ready():
@@ -108,10 +91,15 @@ func start_battle():
 		unit.death.connect(on_kill)
 		if unit.speed:
 			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
-			unit.init_fight()
+			unit.prepare_fight()
 	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
+
+func align_actors():
+	for child in get_children():
+		if is_instance_of(child, Actor):
+			child.global_position = to_loc(child.get_cell())
 
 func arrange_units():
 	if not is_node_ready():
@@ -142,6 +130,7 @@ func arrange_units():
 
 func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], count_nature_obj: int=-1):
 	clear()
+	
 	for p in player:
 		_p_units.append(p.instantiate())
 	for e in enemy:
@@ -149,16 +138,17 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], cou
 	for unit in _p_units + _e_units:
 		add_child(unit)
 	arrange_units()
-	nature_count = count_nature_obj
+	if count_nature_obj < 0:
+		nature_count = randi_range(0, 16)
+	else:
+		nature_count = count_nature_obj
+	gen_nature()
 	inited = true
 
-func gen_nature(count: int = -1):
-	if count < 0:
-		count = randi_range(0, 16)
-	for i in range(count):
-		_update_walls()
+func gen_nature():
+	for i in range(nature_count):
+		await _update_walls()
 		var obj: Node2D = Rock.instantiate()
-		_n_units.append(obj)
 		add_child(obj)
 		while true:
 			var pos = Vector2i(
@@ -195,14 +185,13 @@ func get_units_with_relation(unit: Unit, r: relation) -> Array[Unit]:
 func clear():
 	inited = false
 	for child in get_children():
-		if is_instance_of(child, Unit):
+		if is_instance_of(child, Actor):
 			remove_child(child)
 	win = false
 	cur_ability = null
 	
 	_p_units.clear()
 	_e_units.clear()
-	_n_units.clear()
 	
 	unit_queue.clear()
 	_block_input = false
@@ -341,15 +330,20 @@ func _update_stepmove():
 	_start_stepmove()
 
 func _update_walls():
+	if not is_node_ready():
+		await ready
 	_tile_map.clear_layer(WALLS_LAYER)
-	for unit in units:
-		if not unit.is_node_ready():
-			await unit.ready
-		if unit.is_death():
-			continue
-		for cell in unit.get_occupied_cells():
-			_tile_map.set_cell(3, cell, 0, Vector2i(2, 0))
-		
+
+	for child in get_children():
+		if is_instance_of(child, Unit):
+			if not child.is_node_ready():
+				await child.ready
+			if child.is_death():
+				continue
+		if is_instance_of(child, Actor):
+			for cell in child.get_occupied_cells():
+				_tile_map.set_cell(3, cell, 0, Vector2i(2, 0))
+
 func _update_walkable(show=true):
 	_update_walls()
 	var cells = _flood_fill()
