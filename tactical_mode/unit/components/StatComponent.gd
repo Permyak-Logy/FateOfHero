@@ -7,7 +7,6 @@ class_name StatComponent extends Resource
 signal empty(comp: StatComponent)
 signal full(comp: StatComponent)
 signal change(comp: StatComponent, old: float, new, float)
-var unit: Unit
 var mod: Mod
 
 func _init():
@@ -50,10 +49,10 @@ func rebase(value: float, save_percent: bool = true):
 	if save_percent:
 		characteristic.cur = characteristic.max_ * p
 
-func reload_mods(save_percent: bool = true):
+func reload_mods(unit: Unit, save_percent: bool = true):
 	var p = percent()
 	mod.value.clear()
-	if unit and unit.inventory:
+	if unit.inventory:
 		var _mods = unit.inventory.get_mods()
 		var _mod = _mods.get(mod_type, ModValue.new())
 		mod.value.iadd(_mod)

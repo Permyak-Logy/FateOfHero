@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_eeq7w")
 distance = 50
+power_p = 1.0
 targets = 1
 max_targets = 0
 acts = 0
@@ -12,10 +13,11 @@ final_act = false
 cooldown = 0
 limit = 0
 count = -1
-type = 0
+scaling_type = 4
+type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Атака"
+description = "Атаковать выбранную цель"
 max_stack = 0
 recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0
-descript = ""

@@ -50,7 +50,7 @@ func remake_gear_slots():
 func remake_ability_slots():
 	for child in ability_holder.get_children():
 		ability_holder.remove_child(child)
-	for i in range(current_character.inventory.max_abilities):
+	for i in range(current_character.inventory.gear_slots.get(Gear.Type.Ability, InventoryComponent.DEFAULT_COUNT_SLOTS)):
 		var slot = special_slots[Gear.Type.Ability].instantiate()
 		ability_holder.add_child(slot)
 		slots[Gear.Type.Ability].append(slot)

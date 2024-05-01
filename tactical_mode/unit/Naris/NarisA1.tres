@@ -14,10 +14,10 @@ is_negative = false
 [resource]
 script = ExtResource("1_lbl2a")
 effect = SubResource("Resource_7ifd1")
-apply_on = Array[int]([])
+apply_on = Array[int]([0, 1])
 targets = 1
 max_targets = 0
-acts = 0
+acts = 1
 final_act = true
 cooldown = 0
 limit = 0

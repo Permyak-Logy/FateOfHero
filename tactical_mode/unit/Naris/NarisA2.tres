@@ -14,7 +14,7 @@ is_negative = false
 [resource]
 script = ExtResource("1_sjwrv")
 effect = SubResource("Resource_rao28")
-apply_on = Array[int]([])
+apply_on = Array[int]([1, 0])
 targets = 1
 max_targets = 0
 acts = 0

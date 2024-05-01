@@ -139,6 +139,7 @@ func put_item_to_char_slot(slot: InventorySlot) -> bool:
 	if not is_instance_of(item_stack.item, Gear):
 		return false
 	var fit = character_panel.current_character.inventory.use(item_stack.item)
+	character_panel.current_character.reload_all_mods()
 	if fit:
 		print("equipped: ", item_stack.item.name)
 		remove_child(item_stack_in_hand)
@@ -158,6 +159,7 @@ func take_item_form_char_slot(slot: InventorySlot) -> bool:
 	slot.item_stack_repr = null
 	var item_stack = item_stack_in_hand.item_stack
 	character_panel.current_character.inventory.unuse(item_stack.item)
+	character_panel.current_character.reload_all_mods()
 	update()
 	update_item_in_hand()
 	return true

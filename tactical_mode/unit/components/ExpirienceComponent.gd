@@ -1,15 +1,24 @@
-class_name ExpirienceComponent extends Node
+class_name ExpirienceComponent extends Resource
 
-var level: int = 1
-var expirience: int = 0
+@export var level: int = 1
+@export var expirience: int = 0
+@export var ups: int = 0
+
+signal can_level_up
 
 func get_exp_to_next_lvl() -> int:
 	return 100
 
 func add_exp(_exp: int):
 	expirience += _exp
+	
 	while expirience >= get_exp_to_next_lvl():
-		level_up()
+		expirience -= get_exp_to_next_lvl()
+		
+		level += 1
+	
+	if ups:
+		can_level_up.emit()
 
-func level_up():
+func accept_level_up():
 	pass

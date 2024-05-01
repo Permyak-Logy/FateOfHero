@@ -53,6 +53,7 @@ func _ready():
 		trail_particles.hide()
 	set_outline_color(DEFAULT_COLOR)
 
+
 func set_outline_color(color: Vector4):
 	if (sprite_for_outline == null):
 		return
@@ -81,7 +82,7 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 func reload_all_mods():
 	for node in get_children():
 		if is_instance_of(node, StatComponent):
-			node.reload_mods()
+			node.reload_mods(self)
 
 func get_mods() -> Dictionary:
 	var all_mods: Dictionary = inventory.get_mods()

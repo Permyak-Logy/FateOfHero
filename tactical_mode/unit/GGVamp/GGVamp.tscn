@@ -1,19 +1,27 @@
-[gd_scene load_steps=27 format=3 uid="uid://d1jk2a04wq33q"]
+[gd_scene load_steps=29 format=3 uid="uid://d1jk2a04wq33q"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_302np"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_bwpqf"]
 [ext_resource type="Resource" uid="uid://bhkcohkp7d0tj" path="res://tactical_mode/unit/GGVamp/GGVampA0.tres" id="2_mra2f"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_o87t4"]
 [ext_resource type="Resource" uid="uid://di1372ucdkekv" path="res://tactical_mode/unit/GGVamp/GGVampA1.tres" id="3_csil1"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_emqlv"]
 [ext_resource type="Resource" uid="uid://csshoxe7yf51e" path="res://tactical_mode/unit/GGVamp/GGVampA2.tres" id="4_c6nq2"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_ebbsm"]
 [ext_resource type="Resource" uid="uid://di4u67c7nk826" path="res://tactical_mode/unit/GGVamp/GGVampA3.tres" id="5_g6ixl"]
 [ext_resource type="Resource" uid="uid://5d8bwek6gx45" path="res://tactical_mode/unit/GGVamp/GGVampP1.tres" id="6_mkxlh"]
 [ext_resource type="Resource" uid="uid://drtfi4k16ej2g" path="res://tactical_mode/unit/GGVamp/GGVampP2.tres" id="7_d5rej"]
 [ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/GGVamp/GGVamp.png" id="8_ncdny"]
-[ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="9_xvyg2"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="11_typxt"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="12_sdjyg"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="13_e2fdk"]
+
+[sub_resource type="Resource" id="Resource_gxg75"]
+script = ExtResource("2_bwpqf")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 1
+}
 
 [sub_resource type="Resource" id="Resource_ywk01"]
 script = ExtResource("2_o87t4")
@@ -59,6 +67,12 @@ script = ExtResource("3_emqlv")
 mod_type = 2
 characteristic = SubResource("Resource_2j2qp")
 
+[sub_resource type="Resource" id="Resource_iw2g7"]
+script = ExtResource("5_ebbsm")
+level = 1
+expirience = 0
+ups = 0
+
 [sub_resource type="Gradient" id="Gradient_h44pd"]
 colors = PackedColorArray(1, 0.933333, 0.945098, 1, 0.254902, 0, 0, 0)
 
@@ -74,17 +88,17 @@ color_ramp = SubResource("GradientTexture1D_htaen")
 radius = 13.0
 height = 58.0
 
-[node name="GgVamp" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "expirience", "sprite_for_outline", "trail_particles", "health_bar_pb")]
+[node name="GgVamp" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_302np")
 unit_name = "Фиди (Вапир)"
-inventory = NodePath("InventoryComponent")
+inventory = SubResource("Resource_gxg75")
 health = SubResource("Resource_8hokp")
 defence = SubResource("Resource_m422q")
 speed = SubResource("Resource_go4ob")
 damage = SubResource("Resource_ngsv5")
-expirience = NodePath("ExpirienceComponent")
+expirience = SubResource("Resource_iw2g7")
 sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("Body/GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
@@ -102,11 +116,6 @@ texture = ExtResource("8_ncdny")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CapsuleShape2D_plq5k")
-
-[node name="InventoryComponent" parent="." instance=ExtResource("9_xvyg2")]
-
-[node name="ExpirienceComponent" type="Node" parent="."]
-script = ExtResource("11_typxt")
 
 [node name="StatProgressBar" parent="." instance=ExtResource("12_sdjyg")]
 offset_top = -57.0

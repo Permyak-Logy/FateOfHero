@@ -47,6 +47,45 @@ anchor_mode = 0
 
 [node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
 
+[node name="Vendigo" parent="." instance=ExtResource("4_dhhnm")]
+position = Vector2(606, 204)
+health = null
+speed = null
+damage = null
+controlled_player = true
+
+[node name="Naris" parent="." instance=ExtResource("6_1btoa")]
+position = Vector2(96, 353)
+
+[node name="Skeleton" parent="." instance=ExtResource("7_oxa7b")]
+position = Vector2(609, 398)
+health = null
+speed = null
+
+[node name="SmolItto" parent="." instance=ExtResource("5_nrx87")]
+position = Vector2(193, 424)
+inventory = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://tactical_mode/unit/components/InventoryComponent.gd"),"_gears":{},"gear_slots":{
+2: 2,
+4: 1
+})
+
+health = null
+defence = null
+speed = null
+damage = null
+
+[node name="GgVamp" parent="." instance=ExtResource("9_qoism")]
+position = Vector2(221, 210)
+inventory = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://tactical_mode/unit/components/InventoryComponent.gd"),"_gears":{},"gear_slots":{
+2: 2,
+4: 1
+})
+
+health = null
+defence = null
+speed = null
+damage = null
+
 [node name="Rock" parent="." instance=ExtResource("10_m7p5y")]
 position = Vector2(511, 329)
 
@@ -67,20 +106,3 @@ position = Vector2(355, 306)
 
 [node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
 position = Vector2(542, 210)
-
-[node name="Vendigo" parent="." instance=ExtResource("4_dhhnm")]
-position = Vector2(736, 205)
-
-[node name="SmolItto" parent="." instance=ExtResource("5_nrx87")]
-position = Vector2(97, 207)
-expirience = null
-
-[node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(161, 254)
-
-[node name="GgVamp" parent="." instance=ExtResource("9_qoism")]
-position = Vector2(126, 324)
-expirience = null
-
-[node name="Skeleton" parent="." instance=ExtResource("7_oxa7b")]
-position = Vector2(833, 371)
