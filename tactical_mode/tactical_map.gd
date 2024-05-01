@@ -33,16 +33,46 @@ var escape_ability: EscapeAbility = EscapeAbility.new()
 var win = null
 var escape = false
 
+var _inited = false
+var _entered = false
+var inited:
+	get:
+		return _inited
+	set(value):
+		_inited = value
+		if entered and inited:
+			if not is_node_ready():
+				await ready
+			start_battle()
+var entered:
+	get:
+		return _entered
+	set(value):
+		_entered = value
+		if inited and entered:
+			if not is_node_ready():
+				await ready
+			start_battle()
+
 var __cur_ability: Ability
 var cur_ability: Ability :
 	get:
 		return __cur_ability
 	set(value):
+		if cur_ability == value:
+			return
 		gui._on_selected(value)
 		__cur_ability = value
-
+var nature_count: int = -1
 signal finish(live: Array[PackedScene], death: Array[PackedScene])
 enum relation {Equal, Friend, Enemy, Neutral}
+
+func _enter_tree():
+	entered = true
+
+func _exit_tree():
+	entered = false
+	clear()
 
 func _ready():
 	""""""
@@ -66,12 +96,15 @@ func _ready():
 		$Rock5,
 		$Rock6
 	]
-	start_battle()
+	inited = true
 
 func start_battle():
 	print("*** Start battle ***")
+	gen_nature()
 	escape = false
 	for unit in units:	
+		if not unit.is_node_ready():
+			await unit.ready
 		unit.death.connect(on_kill)
 		if unit.speed:
 			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
@@ -81,6 +114,8 @@ func start_battle():
 	_start_stepmove()
 
 func arrange_units():
+	if not is_node_ready():
+		await ready
 	var center = (_astar_board.bottom - _astar_board.top) / 2 + _astar_board.top
 	
 	if _p_units:
@@ -106,23 +141,21 @@ func arrange_units():
 	
 
 func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], count_nature_obj: int=-1):
-	if not is_node_ready():
-		await ready
 	clear()
-	_p_units.clear()
-	_e_units.clear()
 	for p in player:
 		_p_units.append(p.instantiate())
-		
 	for e in enemy:
 		_e_units.append(e.instantiate())
-	
 	for unit in _p_units + _e_units:
 		add_child(unit)
 	arrange_units()
-	if count_nature_obj < 0:
-		count_nature_obj = randi_range(0, 16)
-	for i in range(count_nature_obj):
+	nature_count = count_nature_obj
+	inited = true
+
+func gen_nature(count: int = -1):
+	if count < 0:
+		count = randi_range(0, 16)
+	for i in range(count):
 		_update_walls()
 		var obj: Node2D = Rock.instantiate()
 		_n_units.append(obj)
@@ -135,8 +168,6 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], cou
 			if not is_occupied(pos):
 				obj.global_position = to_loc(pos)
 				break
-	
-	start_battle()
 
 func active_unit() -> Unit:
 	return unit_queue[0][1]
@@ -162,6 +193,7 @@ func get_units_with_relation(unit: Unit, r: relation) -> Array[Unit]:
 	return result
 
 func clear():
+	inited = false
 	for child in get_children():
 		if is_instance_of(child, Unit):
 			remove_child(child)
@@ -311,6 +343,8 @@ func _update_stepmove():
 func _update_walls():
 	_tile_map.clear_layer(WALLS_LAYER)
 	for unit in units:
+		if not unit.is_node_ready():
+			await unit.ready
 		if unit.is_death():
 			continue
 		for cell in unit.get_occupied_cells():
@@ -346,6 +380,7 @@ func _select_path_to(cell: Vector2i):
 func _move_active_unit():
 	if not _current_path:
 		return
+	print("=> ", active_unit().unit_name, " передвигается")
 	_block_input = true
 	acts -= 1
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)

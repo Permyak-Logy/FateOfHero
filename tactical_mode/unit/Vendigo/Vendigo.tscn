@@ -23,6 +23,9 @@ type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = ""
 max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0
+descript = ""
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vyb2c"]
 shader = ExtResource("3_ws587")

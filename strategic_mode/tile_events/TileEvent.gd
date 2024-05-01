@@ -7,6 +7,7 @@ func activate():
 
 func remove():
 	var host = get_parent()
-	host.remove_child(self)
+	if host:
+		host.remove_child(self)
 
 

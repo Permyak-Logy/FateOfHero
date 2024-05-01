@@ -9,6 +9,7 @@ class_name Effect
 signal finished
 signal updated_mods
 
+var name_effect: String = "Эффект"
 var owner: Unit = null
 var instigator: Node
 var is_negative: bool

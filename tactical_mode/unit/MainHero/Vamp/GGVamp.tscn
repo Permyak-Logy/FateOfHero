@@ -24,6 +24,9 @@ type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = ""
 max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0
+descript = ""
 
 [sub_resource type="Gradient" id="Gradient_h44pd"]
 colors = PackedColorArray(1, 0.933333, 0.945098, 1, 0.254902, 0, 0, 0)

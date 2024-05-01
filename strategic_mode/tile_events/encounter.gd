@@ -24,8 +24,8 @@ func _ready():
 func activate():
 	var characters = inventory.characters
 	game.tactical_map.reinit(characters, enemies)
-	game.to_tact_mode()
 	game.tactical_map.finish.connect(on_finish_tactical_map)
+	game.to_tact_mode()
 	
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive

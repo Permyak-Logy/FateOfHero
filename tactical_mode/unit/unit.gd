@@ -203,7 +203,7 @@ func get_effects() -> Array[Effect]:
 	return _effects
 
 func add_effect(effect: Effect):
-	print("=> ", self, "получил эффект", effect)
+	print("=> ", self.unit_name, " получил эффект ", effect.name_effect)
 	_effects.append(effect)
 	effect.set_owner(self)
 	effect.finished.connect(remove_effect)
@@ -211,7 +211,7 @@ func add_effect(effect: Effect):
 	reload_all_mods()
 
 func remove_effect(effect: Effect):
-	print("=> ", self, "кончилось действие", effect)
+	print("=> ", self.unit_name, " кончился эффект ", effect.name_effect)
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)
