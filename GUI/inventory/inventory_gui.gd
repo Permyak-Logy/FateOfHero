@@ -165,6 +165,8 @@ func take_item_form_char_slot(slot: InventorySlot) -> bool:
 	return true
 
 func put_to(slot: InventorySlot):
+	if not slot: # TODO: Исправь костыль на переключение персонажей в инвентаре.
+		return
 	if slot.name.begins_with("Slot"):
 		put_item_to_inv_slot(slot)
 	else:
