@@ -9,11 +9,16 @@ func select_cell(_cell: Vector2i):
 	cell = _cell
 	find_about_cells()
 
+func unselect_cell():
+	cell = Vector2i(-1, -1)
+	about_cells.clear()
+
 func apply():
 	for unit in get_map().units:
-		var cell = unit.get_cell()
-		if cell in about_cells or (unit.cells_occupied == 2 and cell + Vector2i(1, 0) in about_cells):
-			apply_on_unit(unit)
+		for cell in unit.get_occupied_cells():
+			if cell in about_cells:
+				apply_on_unit(unit)
+				break
 
 func apply_on_unit(unit: Unit):
 	pass

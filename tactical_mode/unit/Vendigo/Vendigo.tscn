@@ -53,7 +53,6 @@ speed = NodePath("StatSpeed")
 damage = NodePath("StatDamage")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("Sprite2D/GPUParticles2D")
-cells_occupied = 2
 controlled_player = false
 attack_ability = SubResource("Resource_q568r")
 

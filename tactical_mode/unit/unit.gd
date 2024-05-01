@@ -14,7 +14,6 @@ class_name Unit extends Node2D
 
 @export_group("Unit stats")
 @export var acts_count: int = 1
-@export var cells_occupied: int = 1
 @export var controlled_player: bool = true
 
 @export_group("Unit abilities")
@@ -103,6 +102,9 @@ func ai(map: TacticalMap):
 func get_cell() -> Vector2i:
 	return get_map().to_map(global_position)
 
+func get_occupied_cells() -> Array[Vector2i]:
+	return [get_cell()]
+
 func get_map() -> TacticalMap:
 	return get_parent() as TacticalMap
 
@@ -144,7 +146,7 @@ func _physics_process(_delta):
 	var target_position = $"../TileMap".map_to_local(current_id_path.front())
 	play("run")
 	
-	
+
 	if (target_position - global_position)[0] == 0:
 		flip_unit(idle_direction_bool())
 	else:
@@ -181,7 +183,9 @@ func on_death(_component: StatComponent):
 	death.emit(self)
 
 func is_death() -> bool:
-	return not health or health.cur() <= 0
+	if not health:
+		return false
+	return health.cur() <= 0
 
 func _on_toggle_select(_viewport, event: InputEvent, _shape_idx: int):
 	if event.is_action_pressed("select"):

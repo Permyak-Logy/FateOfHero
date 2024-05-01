@@ -1,19 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=11 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/Vendigo/Vendigo.tscn" id="4_dhhnm"]
-[ext_resource type="Script" path="res://tactical_mode/FPS_COUNTER.gd" id="4_fhbfl"]
 [ext_resource type="PackedScene" uid="uid://bjcjl3qla8b62" path="res://tactical_mode/unit/SmolItto/SmolItto.tscn" id="5_nrx87"]
 [ext_resource type="PackedScene" uid="uid://cw3rkppa44bw8" path="res://tactical_mode/unit/Naris/Naris.tscn" id="6_1btoa"]
 [ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="7_oxa7b"]
+[ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
 [ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/MainHero/Vamp/GGVamp.tscn" id="9_qoism"]
+[ext_resource type="PackedScene" uid="uid://dwgsmj0qo4gcw" path="res://tactical_mode/unit/nature/Rock.tscn" id="10_vqnje"]
 
-[node name="TacticalMap" type="Node2D" node_paths=PackedStringArray("w_row_abilities")]
+[node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_dw5lh")
-w_row_abilities = NodePath("CanvasLayer/MarginContainer")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_5tyj1")
@@ -45,39 +45,38 @@ offset = Vector2(305, 175)
 offset = Vector2(-16, -8)
 anchor_mode = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 128.0
-offset_top = 508.0
-offset_right = -120.0
-offset_bottom = -7.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FPS_COUNTER" type="Label" parent="CanvasLayer"]
-offset_left = 3.0
-offset_top = 2.0
-offset_right = 963.0
-offset_bottom = 25.0
-text = "100"
-script = ExtResource("4_fhbfl")
+[node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
 
 [node name="Vendigo" parent="." instance=ExtResource("4_dhhnm")]
-position = Vector2(775, 229)
+position = Vector2(448, 323)
 controlled_player = true
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(96, 402)
+position = Vector2(98, 446)
 
 [node name="Skeleton" parent="." instance=ExtResource("7_oxa7b")]
-position = Vector2(833, 375)
+position = Vector2(575, 325)
 
 [node name="SmolItto" parent="." instance=ExtResource("5_nrx87")]
-position = Vector2(96, 210)
+position = Vector2(858, 452)
 
 [node name="GgVamp" parent="." instance=ExtResource("9_qoism")]
-position = Vector2(94, 302)
+position = Vector2(447, 185)
+
+[node name="Rock" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(318, 283)
+
+[node name="Rock2" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(511, 375)
+
+[node name="Rock3" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(607, 256)
+
+[node name="Rock4" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(320, 471)
+
+[node name="Rock5" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(667, 448)
+
+[node name="Rock6" parent="." instance=ExtResource("10_vqnje")]
+position = Vector2(672, 353)
