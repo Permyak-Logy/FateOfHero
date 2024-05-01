@@ -77,7 +77,8 @@ func _ready():
 	]
 	_e_units = [
 		$Vendigo,
-		$Skeleton
+		$Skeleton,
+		$Skeleton2
 	]
 	inited = true
 

@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dh5vq12tjl11n"]
+[gd_scene load_steps=18 format=3 uid="uid://dh5vq12tjl11n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/Skeleton/Skeleton.gd" id="1_ccpxk"]
-[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_as3g2"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_nan3x"]
 [ext_resource type="Texture2D" uid="uid://bwx7qmeuapudt" path="res://tactical_mode/unit/Skeleton/Enemy.png" id="3_0chvl"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_8i0i0"]
 [ext_resource type="Shader" path="res://tactical_mode/assets/outline.gdshader" id="3_oy1oo"]
+[ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/Skeleton/SkeletonA0.tres" id="4_71lrp"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="5_1d1s4"]
 
 [sub_resource type="Resource" id="Resource_ws37b"]
@@ -52,26 +52,6 @@ script = ExtResource("3_8i0i0")
 mod_type = 2
 characteristic = SubResource("Resource_sfnud")
 
-[sub_resource type="Resource" id="Resource_x273b"]
-script = ExtResource("2_as3g2")
-distance = 1
-power_p = 1.0
-targets = 1
-max_targets = 0
-acts = 1
-final_act = true
-cooldown = 0
-limit = 0
-count = -1
-scaling_type = 4
-type = 4
-_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
-name = ""
-description = ""
-max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
-price = 0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j8qku"]
 shader = ExtResource("3_oy1oo")
 shader_parameter/outline_color = null
@@ -92,7 +72,7 @@ damage = SubResource("Resource_h68g5")
 sprite_for_outline = NodePath("Sprite2D")
 health_bar_pb = NodePath("StatProgressBar")
 controlled_player = false
-private_abilities = Array[Resource("res://inventory/ability.gd")]([SubResource("Resource_x273b")])
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("4_71lrp")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_j8qku")

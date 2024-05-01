@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://di7auu4d2dl2"]
+[gd_scene load_steps=26 format=3 uid="uid://di7auu4d2dl2"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_fkgsn"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/Naris/spritesheet.png" id="1_n5uvs"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://bd0bpu457k5k0" path="res://tactical_mode/unit/Naris/NarisA1.tres" id="7_5dfrg"]
 [ext_resource type="Resource" uid="uid://bimxy6owu2yfe" path="res://tactical_mode/unit/Naris/NarisA2.tres" id="8_w3k2y"]
 [ext_resource type="Resource" uid="uid://ck7fh83303x0w" path="res://tactical_mode/unit/Naris/NarisP1.tres" id="9_o8m50"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="11_x5l8q"]
 
 [sub_resource type="Resource" id="Resource_wmcn0"]
 script = ExtResource("2_kvuu5")
@@ -112,7 +113,9 @@ _data = {
 "run": SubResource("Animation_eeqfk")
 }
 
-[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline")]
+[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb")]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_fkgsn")
 unit_name = "Беррета Нарис"
 inventory = SubResource("Resource_wmcn0")
@@ -122,6 +125,7 @@ speed = SubResource("Resource_35spq")
 damage = SubResource("Resource_pivhi")
 expirience = SubResource("Resource_endnl")
 sprite_for_outline = NodePath("Sprite2D")
+health_bar_pb = NodePath("StatProgressBar")
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_ahqu3"), ExtResource("7_5dfrg"), ExtResource("8_w3k2y")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_o8m50")])
 
@@ -129,7 +133,6 @@ private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource
 position = Vector2(1, -26)
 texture = ExtResource("1_n5uvs")
 hframes = 6
-frame = 3
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 visible = false
@@ -142,3 +145,7 @@ texture = ExtResource("1_n5uvs")
 libraries = {
 "": SubResource("AnimationLibrary_nhtg4")
 }
+
+[node name="StatProgressBar" parent="." instance=ExtResource("11_x5l8q")]
+offset_top = -55.0
+offset_bottom = -53.0

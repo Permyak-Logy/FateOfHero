@@ -1,10 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://kj8esabe8qfg"]
+[gd_scene load_steps=22 format=3 uid="uid://kj8esabe8qfg"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/Vendigo/Vendigo.gd" id="1_oj4or"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_0v47j"]
-[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_26r6h"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_ujhj8"]
 [ext_resource type="Shader" path="res://tactical_mode/assets/outline.gdshader" id="3_ws587"]
+[ext_resource type="Resource" uid="uid://crecdgxj4lurs" path="res://tactical_mode/unit/Vendigo/VendigoA0.tres" id="4_2r87o"]
 [ext_resource type="Texture2D" uid="uid://yf64rowfciuo" path="res://tactical_mode/unit/Vendigo/Vendigo.png" id="4_g6t4h"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="5_kxra3"]
 [ext_resource type="Texture2D" uid="uid://b45l2fsxtf6v6" path="res://tactical_mode/assets/Big_Shadow.png" id="6_8rh12"]
@@ -22,8 +22,8 @@ characteristic = SubResource("Resource_a2xc1")
 
 [sub_resource type="Resource" id="Resource_8lhts"]
 script = ExtResource("2_0v47j")
-base = 500.0
-cur = 500.0
+base = 0.0
+cur = 0.0
 max_ = 500.0
 
 [sub_resource type="Resource" id="Resource_bdi2p"]
@@ -52,26 +52,6 @@ max_ = 70.0
 script = ExtResource("3_ujhj8")
 mod_type = 2
 characteristic = SubResource("Resource_naao2")
-
-[sub_resource type="Resource" id="Resource_x273b"]
-script = ExtResource("2_26r6h")
-distance = 1
-power_p = 1.0
-targets = 1
-max_targets = 0
-acts = 1
-final_act = true
-cooldown = 0
-limit = 0
-count = -1
-scaling_type = 4
-type = 4
-_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
-name = ""
-description = ""
-max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
-price = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vyb2c"]
 shader = ExtResource("3_ws587")
@@ -105,7 +85,7 @@ sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("Sprite2D/GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 controlled_player = false
-private_abilities = Array[Resource("res://inventory/ability.gd")]([SubResource("Resource_x273b")])
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("4_2r87o")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_vyb2c")

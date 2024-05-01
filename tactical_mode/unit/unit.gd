@@ -41,6 +41,7 @@ const ESCAPE_COLOR = Vector4(255, 255, 0, 100)
 var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 
 func _ready():
+	_setcopy_resources()
 	if sprite_for_outline:
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
 	if health:
@@ -53,6 +54,19 @@ func _ready():
 		trail_particles.hide()
 	set_outline_color(DEFAULT_COLOR)
 
+func _setcopy_resources():
+	if inventory:
+		inventory = inventory.duplicate(true)
+	if health:
+		health = health.duplicate(true)
+	if defence:
+		defence = defence.duplicate(true)
+	if speed:
+		speed = speed.duplicate(true)
+	if damage:
+		damage = damage.duplicate(true)
+	if expirience:
+		expirience = expirience.duplicate(true)
 
 func set_outline_color(color: Vector4):
 	if (sprite_for_outline == null):
