@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Fate of hero"
-run/main_scene="res://tactical_mode/tactical_map.tscn"
+run/main_scene="res://Game.tscn"
 config/features=PackedStringArray("4.2")
 
 [debug]
@@ -37,6 +37,10 @@ folder_colors={
 "res://strategic_mode/": "red",
 "res://tactical_mode/": "pink"
 }
+
+[filesystem]
+
+import/blender/enabled=false
 
 [input]
 

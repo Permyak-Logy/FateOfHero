@@ -6,7 +6,7 @@ class_name Ability extends Gear
 @export var limit: int = 0
 @export var count: int = -1
 
-var description: String = ""
+@export var scaling_type: Mod.Type = Mod.Type.None
 
 var owner: Node
 

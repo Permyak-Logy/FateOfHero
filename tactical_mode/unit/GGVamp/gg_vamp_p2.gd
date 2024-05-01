@@ -1,6 +1,6 @@
 class_name GGVampP2 extends Effect
 
-var power: float = 0.25
+@export var power: float = 0.25
 
 func update_on_attack(_damage: float, _instigator: Node = null) -> float:
 	var count = 0

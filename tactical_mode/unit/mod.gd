@@ -1,6 +1,4 @@
-extends Resource
-
-class_name Mod
+class_name Mod extends Resource
 
 enum Type {Health, Speed, Damage, Defence, None}
 

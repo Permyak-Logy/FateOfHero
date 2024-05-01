@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GGVampA2" load_steps=2 format=3 uid="uid://csshoxe7yf51e"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/MainHero/Vamp/gg_vamp_a2.gd" id="1_12dbk"]
+[ext_resource type="Script" path="res://tactical_mode/unit/GGVamp/gg_vamp_a2.gd" id="1_12dbk"]
 
 [resource]
 script = ExtResource("1_12dbk")

@@ -1,10 +1,21 @@
-[gd_resource type="Resource" script_class="NarisP1Effect" load_steps=2 format=3 uid="uid://cyfoggmu0xu82"]
+[gd_resource type="Resource" script_class="ReplicateEffect" load_steps=4 format=3 uid="uid://ck7fh83303x0w"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/Naris/naris_p1.gd" id="1_nsjir"]
+[ext_resource type="Script" path="res://tactical_mode/effects/multiply_effect.gd" id="1_avptq"]
+[ext_resource type="Script" path="res://tactical_mode/effects/shield_effect.gd" id="2_ew2o5"]
 
-[resource]
-script = ExtResource("1_nsjir")
+[sub_resource type="Resource" id="Resource_gvm22"]
+script = ExtResource("2_ew2o5")
+power = 10.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
-name_effect = "Эффект"
+effect_name = "Щит"
+is_negative = false
+
+[resource]
+script = ExtResource("1_avptq")
+to_replicate_effect = SubResource("Resource_gvm22")
+apply_to = Array[int]([1, 0])
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+effect_name = "Глязный щит"
 is_negative = false

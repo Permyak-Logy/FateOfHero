@@ -10,5 +10,5 @@ cooldown = 0
 cooldown_time = 3
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
-name_effect = "Эффект"
+effect_name = "Стадное чуство"
 is_negative = false

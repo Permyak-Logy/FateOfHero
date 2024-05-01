@@ -1,0 +1,90 @@
+[gd_scene load_steps=18 format=3 uid="uid://d1jk2a04wq33q"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_302np"]
+[ext_resource type="Resource" uid="uid://bhkcohkp7d0tj" path="res://tactical_mode/unit/GGVamp/GGVampA0.tres" id="2_mra2f"]
+[ext_resource type="Resource" uid="uid://di1372ucdkekv" path="res://tactical_mode/unit/GGVamp/GGVampA1.tres" id="3_csil1"]
+[ext_resource type="Resource" uid="uid://csshoxe7yf51e" path="res://tactical_mode/unit/GGVamp/GGVampA2.tres" id="4_c6nq2"]
+[ext_resource type="Resource" uid="uid://di4u67c7nk826" path="res://tactical_mode/unit/GGVamp/GGVampA3.tres" id="5_g6ixl"]
+[ext_resource type="Resource" uid="uid://5d8bwek6gx45" path="res://tactical_mode/unit/GGVamp/GGVampP1.tres" id="6_mkxlh"]
+[ext_resource type="Resource" uid="uid://drtfi4k16ej2g" path="res://tactical_mode/unit/GGVamp/GGVampP2.tres" id="7_d5rej"]
+[ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/GGVamp/GGVamp.png" id="8_ncdny"]
+[ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="9_xvyg2"]
+[ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="10_eigeh"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="11_typxt"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="12_sdjyg"]
+[ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="13_e2fdk"]
+
+[sub_resource type="Gradient" id="Gradient_h44pd"]
+colors = PackedColorArray(1, 0.933333, 0.945098, 1, 0.254902, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_htaen"]
+gradient = SubResource("Gradient_h44pd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fk72q"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_htaen")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_plq5k"]
+radius = 13.0
+height = 58.0
+
+[node name="GgVamp" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "defence", "speed", "damage", "expirience", "sprite_for_outline", "trail_particles")]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_302np")
+unit_name = "Фиди (Вапир)"
+inventory = NodePath("InventoryComponent")
+health = NodePath("StatHealth")
+defence = NodePath("StatDefence")
+speed = NodePath("StatSpeed")
+damage = NodePath("StatDamage")
+expirience = NodePath("ExpirienceComponent")
+sprite_for_outline = NodePath("Body")
+trail_particles = NodePath("Body/GPUParticles2D")
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("2_mra2f"), ExtResource("3_csil1"), ExtResource("4_c6nq2"), ExtResource("5_g6ixl")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_mkxlh"), ExtResource("7_d5rej")])
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(1, -26)
+texture = ExtResource("8_ncdny")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Body"]
+z_index = -1
+process_material = SubResource("ParticleProcessMaterial_fk72q")
+texture = ExtResource("8_ncdny")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource("CapsuleShape2D_plq5k")
+
+[node name="InventoryComponent" parent="." instance=ExtResource("9_xvyg2")]
+
+[node name="StatHealth" parent="." instance=ExtResource("10_eigeh")]
+default_base = 100.0
+mod_type = 0
+
+[node name="StatDefence" parent="." instance=ExtResource("10_eigeh")]
+mod_type = 3
+
+[node name="StatSpeed" parent="." instance=ExtResource("10_eigeh")]
+default_base = 105.0
+mod_type = 1
+
+[node name="StatDamage" parent="." instance=ExtResource("10_eigeh")]
+default_base = 60.0
+mod_type = 2
+
+[node name="ExpirienceComponent" type="Node" parent="."]
+script = ExtResource("11_typxt")
+
+[node name="StatProgressBar" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("12_sdjyg")]
+offset_top = -57.0
+offset_bottom = -55.0
+stat_component = NodePath("../StatHealth")
+metadata/_edit_use_anchors_ = true
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(1, -24)
+texture = ExtResource("13_e2fdk")
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]

@@ -1,5 +1,6 @@
 class_name AttackAbility extends DirectedAbility
 @export var distance: int = 1
+@export var power_p: float = 1
 
 func apply():
 	if owner.damage:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj46kmpl7b6mg"
-path="res://.godot/imported/GG.png-b0767a19381a2ea884d236ee92930b34.ctex"
+uid="uid://c73d0qj22co6w"
+path="res://.godot/imported/GGVamp.png-1048f08890984dc5ea9ea3693ca21187.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/unit/MainHero/GG.png"
-dest_files=["res://.godot/imported/GG.png-b0767a19381a2ea884d236ee92930b34.ctex"]
+source_file="res://tactical_mode/unit/GGVamp/GGVamp.png"
+dest_files=["res://.godot/imported/GGVamp.png-1048f08890984dc5ea9ea3693ca21187.ctex"]
 
 [params]
 
