@@ -7,18 +7,20 @@ class_name ExpirienceComponent extends Resource
 signal can_level_up
 
 func get_exp_to_next_lvl() -> int:
-	return 100
+	return int(100 * exp((level - 1) / 40))
 
 func add_exp(_exp: int):
 	expirience += _exp
 	
 	while expirience >= get_exp_to_next_lvl():
 		expirience -= get_exp_to_next_lvl()
-		
 		level += 1
+		ups += 1
 	
 	if ups:
 		can_level_up.emit()
 
 func accept_level_up():
-	pass
+	ups -= 1
+	if ups:
+		can_level_up.emit()

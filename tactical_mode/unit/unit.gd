@@ -3,12 +3,24 @@ class_name Unit extends Actor
 @export var unit_name: String = "Unit"
 
 @export_group("Components")
-@export var inventory: InventoryComponent = null
-@export var health: StatComponent = null
-@export var defence: StatComponent = null
-@export var speed: StatComponent = null
-@export var damage: StatComponent = null
-@export var expirience: ExpirienceComponent = null
+@export var inventory: InventoryComponent = null:
+	set(value):
+		inventory = value.duplicate(true) if value else null
+@export var health: StatComponent = null:
+	set(value):
+		health = value.duplicate(true) if value else null
+@export var defence: StatComponent = null:
+	set(value):
+		defence = value.duplicate(true) if value else null
+@export var speed: StatComponent = null:
+	set(value):
+		speed = value.duplicate(true) if value else null
+@export var damage: StatComponent = null:
+	set(value):
+		damage = value.duplicate(true) if value else null
+@export var expirience: ExpirienceComponent = null:
+	set(value):
+		expirience = value.duplicate(true) if value else null
 @export var sprite_for_outline: Sprite2D = null
 @export var trail_particles: GPUParticles2D = null
 @export var health_bar_pb: StatProgressBar = null
@@ -20,7 +32,6 @@ class_name Unit extends Actor
 @export_group("Unit abilities")
 @export var private_abilities: Array[Ability] = []
 @export var private_passives: Array[Effect] = []
-
 var _abilities: Array[Ability] = []
 signal death(Unit)
 signal walk_finished
@@ -41,7 +52,6 @@ const ESCAPE_COLOR = Vector4(255, 255, 0, 100)
 var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 
 func _ready():
-	_setcopy_resources()
 	if sprite_for_outline:
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
 	if health:
@@ -53,20 +63,6 @@ func _ready():
 	if trail_particles:
 		trail_particles.hide()
 	set_outline_color(DEFAULT_COLOR)
-
-func _setcopy_resources():
-	if inventory:
-		inventory = inventory.duplicate(true)
-	if health:
-		health = health.duplicate(true)
-	if defence:
-		defence = defence.duplicate(true)
-	if speed:
-		speed = speed.duplicate(true)
-	if damage:
-		damage = damage.duplicate(true)
-	if expirience:
-		expirience = expirience.duplicate(true)
 
 func set_outline_color(color: Vector4):
 	if (sprite_for_outline == null):
@@ -83,20 +79,20 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 		return 0
 	
 	if defence:
-		_damage = _damage - defence.cur()
+		_damage *= exp(-defence.cur() / 1500)
 	
 	for effect in get_effects():
 		_damage = effect.update_on_damage(_damage, _instigator)
 	
 	_damage = max(_damage, 0)
 	health.sub(_damage)
-	
+	print("=> ", unit_name, " получил ", _damage, " урона от ", _instigator.unit_name)
 	return _damage
 
 func reload_all_mods():
-	for node in get_children():
-		if is_instance_of(node, StatComponent):
-			node.reload_mods(self)
+	for comp in [speed, health, defence, damage]:
+		if comp:
+			comp.reload_mods(self)
 
 func get_mods() -> Dictionary:
 	var all_mods: Dictionary = inventory.get_mods()

@@ -52,7 +52,15 @@ func reload_mods(unit: Unit, save_percent: bool = true):
 		var _mods = unit.inventory.get_mods()
 		var _mod = _mods.get(mod_type, ModValue.new())
 		mod_value.iadd(_mod)
-	characteristic.max_ = characteristic.base * (mod_value.mul / 100 + 1) + mod_value.add
+	for effect in unit.get_effects():
+		var _mods = effect.get_mods()
+		for _mod in _mods:
+			if _mod.type == mod_type:
+				mod_value.iadd(_mod.value)
+	characteristic.max_ = characteristic.base * (mod_value.mul + 1) + mod_value.add
+	
+	if mod_type == Mod.Type.Speed:
+		print(unit.unit_name, " ", mod_value.mul, " ", p, " ", characteristic.max_)
 	if save_percent:
 		characteristic.set_cur(characteristic.max_ * p)
 	else:

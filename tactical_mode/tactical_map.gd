@@ -44,15 +44,13 @@ var inited:
 				await ready
 			start_battle()
 
-var __cur_ability: Ability
-var cur_ability: Ability :
-	get:
-		return __cur_ability
+var cur_ability: Ability = null:
 	set(value):
 		if cur_ability == value:
 			return
 		gui._on_selected(value)
-		__cur_ability = value
+		cur_ability = value
+
 var nature_count: int = -1
 signal finish(live: Array[PackedScene], death: Array[PackedScene])
 enum relation {Equal, Friend, Enemy, Neutral}
@@ -133,11 +131,9 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], cou
 	clear()
 	
 	for p in player:
-		_p_units.append(p.instantiate())
+		_p_units.append(spawn(p, Vector2i(0, 0)))
 	for e in enemy:
-		_e_units.append(e.instantiate())
-	for unit in _p_units + _e_units:
-		add_child(unit)
+		_e_units.append(spawn(e, Vector2i(0, 0)))
 	arrange_units()
 	if count_nature_obj < 0:
 		nature_count = randi_range(0, 16)
@@ -149,15 +145,13 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], cou
 func gen_nature():
 	for i in range(nature_count):
 		await _update_walls()
-		var obj: Node2D = Rock.instantiate()
-		add_child(obj)
 		while true:
 			var pos = Vector2i(
 				randi_range(_astar_board.left, _astar_board.right),
 				randi_range(_astar_board.bottom, _astar_board.top)
 			)
 			if not is_occupied(pos):
-				obj.global_position = to_loc(pos)
+				spawn(Rock, pos)
 				break
 
 func active_unit() -> Unit:
@@ -221,10 +215,14 @@ atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
 			layer, coords, source_id,atlas_coords, alternative_tile)
 
 func to_map(cell: Vector2) -> Vector2i:
-	return _tile_map.local_to_map(cell)
-	
+	if _tile_map:
+		return _tile_map.local_to_map(cell)
+	return Vector2i(0, 0)
+
 func to_loc(cell: Vector2i) -> Vector2:
-	return _tile_map.map_to_local(cell)
+	if _tile_map:
+		return _tile_map.map_to_local(cell)
+	return Vector2(0, 0)
 
 func is_occupied(cell: Vector2i) -> bool:
 	return cell in _tile_map.get_used_cells(WALLS_LAYER)
@@ -265,6 +263,7 @@ func _flood_fill() -> Array:
 	return array
 
 func _start_stepmove():
+	await get_tree().create_timer(0.25).timeout
 	print("* Start stepmove (unit: ", active_unit().unit_name, ") *")
 	cur_ability = null
 	for unit_data in unit_queue:
@@ -272,9 +271,6 @@ func _start_stepmove():
 	active_unit().set_outline_color(Unit.CUR_COLOR)
 	acts = active_unit().acts_count
 	(active_unit() as Unit).premove_update()
-	for effect in active_unit().get_effects():
-		effect.update_on_move()
-	
 	if active_unit().controlled_player:
 		gui.show_abilities(active_unit())
 		_update_walkable()
@@ -283,9 +279,6 @@ func _start_stepmove():
 		_update_walkable(false)
 		await active_unit().ai(self)
 		_update_stepmove()
-
-func level_up():
-	pass 
 
 func _update_stepmove():
 	print("* Update stepmove *")
@@ -301,7 +294,15 @@ func _update_stepmove():
 		win = not escape
 		_block_input = true
 		print("*** FINISH! ***")
-		level_up()
+		for player in get_player_units():
+			if player.is_death():
+				continue
+			var expirience = 0
+			for enemy in get_enemy_units():
+				if enemy.is_death():
+					expirience += int(enemy.health.get_max() / 10)
+			player.expirience.add_exp(expirience)
+			
 		var packed_live: Array[PackedScene] = []
 		var packed_death: Array[PackedScene] = []
 		for unit in _p_units:
@@ -327,7 +328,6 @@ func _update_stepmove():
 		elem[0] -= time
 	unit_queue[0][0] += _ACT_INDEX_MAX / active_unit().speed.cur()
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
-	
 	_start_stepmove()
 
 func _update_walls():
@@ -377,10 +377,14 @@ func _move_active_unit():
 		return
 	print("=> ", active_unit().unit_name, " передвигается")
 	_block_input = true
-	acts -= 1
+	
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	gui.clear_abilities()
-	await active_unit().play("walk", _current_path)
+	if len(_current_path) > 1:
+		acts -= 1
+		await active_unit().play("walk", _current_path)
+	else:
+		acts = 0
 	_tile_map.clear_layer(PATH_LAYER)
 	
 	_update_stepmove()
@@ -491,6 +495,7 @@ func is_enemy(unit: Unit):
 	return unit in _e_units
 
 func reset_outline_color(unit: Unit):
+	# TODO: Поправить баг со смертями персов игрока
 	if cur_ability and unit in cur_ability.selected:
 		unit.set_outline_color(Unit.SELECTED_COLOR)
 	elif unit.is_death():
@@ -503,3 +508,9 @@ func reset_outline_color(unit: Unit):
 		unit.set_outline_color(Unit.ENEMY_COLOR)
 	else:
 		unit.set_outline_color(Unit.DEFAULT_COLOR)
+
+func spawn(actor_ps: PackedScene, cell: Vector2i) -> Actor:
+	var actor: Actor = actor_ps.instantiate()
+	add_child(actor)
+	actor.global_position = to_loc(cell)
+	return actor

@@ -10,14 +10,11 @@ signal updated_mods
 @export var effect_name: String = "Эффект"
 @export var is_negative: bool = false
 
-var _owner: Unit = null
-var owner:
-	get:
-		return _owner
+var owner: Unit = null:
 	set(value):
-		var old = _owner
-		_owner = value
-		on_set_owner(old, _owner)
+		var old = owner
+		owner = value
+		on_set_owner(old, owner)
 
 var instigator: Node = null
 
@@ -27,9 +24,6 @@ func _ready():
 
 func on_set_owner(old: Unit, new: Unit):
 	pass
-
-func set_instigator(_i: Node):
-	instigator = _i
 
 func update_on_move():
 	"""Вызывается перед каждым ходом (но не действием)"""

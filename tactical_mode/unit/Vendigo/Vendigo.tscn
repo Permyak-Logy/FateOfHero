@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://kj8esabe8qfg"]
+[gd_scene load_steps=23 format=3 uid="uid://kj8esabe8qfg"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/Vendigo/Vendigo.gd" id="1_oj4or"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_0v47j"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://crecdgxj4lurs" path="res://tactical_mode/unit/Vendigo/VendigoA0.tres" id="4_2r87o"]
 [ext_resource type="Texture2D" uid="uid://yf64rowfciuo" path="res://tactical_mode/unit/Vendigo/Vendigo.png" id="4_g6t4h"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="5_kxra3"]
+[ext_resource type="Resource" uid="uid://4ugi7m7irspa" path="res://tactical_mode/unit/Vendigo/VendigoP1.tres" id="5_xkgjr"]
 [ext_resource type="Texture2D" uid="uid://b45l2fsxtf6v6" path="res://tactical_mode/assets/Big_Shadow.png" id="6_8rh12"]
 
 [sub_resource type="Resource" id="Resource_a2xc1"]
@@ -33,9 +34,9 @@ characteristic = SubResource("Resource_8lhts")
 
 [sub_resource type="Resource" id="Resource_2nk5s"]
 script = ExtResource("2_0v47j")
-base = 100.0
-cur = 100.0
-max_ = 100.0
+base = 130.0
+cur = 130.0
+max_ = 95.0
 
 [sub_resource type="Resource" id="Resource_lpion"]
 script = ExtResource("3_ujhj8")
@@ -86,6 +87,7 @@ trail_particles = NodePath("Sprite2D/GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 controlled_player = false
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("4_2r87o")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("5_xkgjr")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_vyb2c")
