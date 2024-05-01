@@ -49,19 +49,35 @@ anchor_mode = 0
 
 [node name="Vendigo" parent="." instance=ExtResource("4_dhhnm")]
 position = Vector2(606, 204)
+health = null
+speed = null
+damage = null
 controlled_player = true
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
 position = Vector2(96, 353)
+health = null
+speed = null
+damage = null
 
 [node name="Skeleton" parent="." instance=ExtResource("7_oxa7b")]
 position = Vector2(609, 398)
+health = null
+speed = null
 
 [node name="SmolItto" parent="." instance=ExtResource("5_nrx87")]
 position = Vector2(193, 424)
+health = null
+defence = null
+speed = null
+damage = null
 
 [node name="GgVamp" parent="." instance=ExtResource("9_qoism")]
 position = Vector2(221, 210)
+health = null
+defence = null
+speed = null
+damage = null
 
 [node name="Rock" parent="." instance=ExtResource("10_m7p5y")]
 position = Vector2(511, 329)

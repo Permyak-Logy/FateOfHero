@@ -1,15 +1,49 @@
-[gd_scene load_steps=16 format=3 uid="uid://cw3rkppa44bw8"]
+[gd_scene load_steps=23 format=3 uid="uid://cw3rkppa44bw8"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/Naris/Naris.gd" id="1_w6p3a"]
-[ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="2_46tem"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_b54rh"]
 [ext_resource type="Resource" uid="uid://gcb5kx2gxphd" path="res://tactical_mode/unit/Naris/NarisA0.tres" id="2_ntxbl"]
 [ext_resource type="Resource" uid="uid://bd0bpu457k5k0" path="res://tactical_mode/unit/Naris/NarisA1.tres" id="3_1dlhn"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_2562i"]
 [ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="3_ewjxc"]
 [ext_resource type="PackedScene" uid="uid://craplwf1wnhvd" path="res://tactical_mode/unit/components/ExpirienceComponent.tscn" id="4_cdwq4"]
 [ext_resource type="Resource" uid="uid://bimxy6owu2yfe" path="res://tactical_mode/unit/Naris/NarisA2.tres" id="4_wm2aj"]
 [ext_resource type="Resource" uid="uid://ck7fh83303x0w" path="res://tactical_mode/unit/Naris/NarisP1.tres" id="5_giyk0"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/Naris/spritesheet.png" id="5_pc56j"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="6_7y8up"]
+
+[sub_resource type="Resource" id="Resource_0qnl6"]
+script = ExtResource("2_b54rh")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_6miu6"]
+script = ExtResource("3_2562i")
+mod_type = 0
+characteristic = SubResource("Resource_0qnl6")
+
+[sub_resource type="Resource" id="Resource_3umo5"]
+script = ExtResource("2_b54rh")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_jhyrd"]
+script = ExtResource("3_2562i")
+mod_type = 1
+characteristic = SubResource("Resource_3umo5")
+
+[sub_resource type="Resource" id="Resource_07rbd"]
+script = ExtResource("2_b54rh")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_hkbsc"]
+script = ExtResource("3_2562i")
+mod_type = 2
+characteristic = SubResource("Resource_07rbd")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pcowp"]
 radius = 12.0
@@ -69,36 +103,21 @@ _data = {
 "run": SubResource("Animation_8gx8v")
 }
 
-[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed", "damage", "expirience", "sprite_for_outline")]
+[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "expirience", "sprite_for_outline", "health_bar_pb")]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_w6p3a")
-unit_name = "Naris"
+unit_name = "Беретта Нарис"
 inventory = NodePath("InventoryComponent")
-health = NodePath("StatHealth")
-speed = NodePath("StatSpeed")
-damage = NodePath("StatDamage")
+health = SubResource("Resource_6miu6")
+speed = SubResource("Resource_jhyrd")
+damage = SubResource("Resource_hkbsc")
 expirience = NodePath("ExpirienceComponent")
 sprite_for_outline = NodePath("Sprite2D")
+health_bar_pb = NodePath("StatProgressBar")
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("2_ntxbl"), ExtResource("3_1dlhn"), ExtResource("4_wm2aj")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("5_giyk0")])
-
-[node name="StatHealth" parent="." instance=ExtResource("2_46tem")]
-default_base = 100.0
-default_cur = 100.0
-default_max = 100.0
-mod_type = 0
-
-[node name="StatSpeed" parent="." instance=ExtResource("2_46tem")]
-default_base = 100.0
-default_cur = 100.0
-default_max = 100.0
-mod_type = 1
-
-[node name="StatDamage" parent="." instance=ExtResource("2_46tem")]
-default_base = 20.0
-mod_type = 2
 
 [node name="InventoryComponent" parent="." instance=ExtResource("3_ewjxc")]
 
@@ -120,9 +139,8 @@ libraries = {
 "": SubResource("AnimationLibrary_5icws")
 }
 
-[node name="StatProgressBar" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("6_7y8up")]
+[node name="StatProgressBar" parent="." instance=ExtResource("6_7y8up")]
 offset_top = -56.0
 offset_bottom = -54.0
-stat_component = NodePath("../StatHealth")
 
 [connection signal="input_event" from="." to="." method="_on_toggle_select"]

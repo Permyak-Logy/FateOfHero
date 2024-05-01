@@ -11,6 +11,7 @@ class_name Unit extends Actor
 @export var expirience: ExpirienceComponent = null
 @export var sprite_for_outline: Sprite2D = null
 @export var trail_particles: GPUParticles2D = null
+@export var health_bar_pb: StatProgressBar = null
 
 @export_group("Unit stats")
 @export var acts_count: int = 1
@@ -44,6 +45,8 @@ func _ready():
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
 	if health:
 		health.empty.connect(on_death)
+		if health_bar_pb:
+			health_bar_pb.stat_component = health
 	for ability in private_abilities:
 		_abilities.append(ability.duplicate(true))
 	if trail_particles:
