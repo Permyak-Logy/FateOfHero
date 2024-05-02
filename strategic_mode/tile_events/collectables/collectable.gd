@@ -1,8 +1,8 @@
 extends "res://strategic_mode/tile_events/TileEvent.gd"
 
 """
-simplest of tile events
-prototype for all collectables
+Tile event that can be placed on teh TileMap
+Abstract parent for all collectables
 """
 
 @onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")

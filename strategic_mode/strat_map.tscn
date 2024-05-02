@@ -23,8 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://y4fch07ijvb1" path="res://strategic_mode/tile_events/dialogue_trigger.tscn" id="21_wx1y1"]
 [ext_resource type="PackedScene" uid="uid://bpajsk8dbrjpg" path="res://strategic_mode/tile_events/manual_dialogue_trigger.tscn" id="22_erct1"]
 [ext_resource type="PackedScene" uid="uid://sgkba57dbbe7" path="res://city_mode/Cities/Geraldina/Geraldina.tscn" id="22_t3kb4"]
+[ext_resource type="Resource" path="res://strategic_mode/dialogues/genned_dial/Привет.tres" id="22_trjjb"]
 [ext_resource type="Texture2D" uid="uid://bgqjde0lpoh7w" path="res://strategic_mode/tile_events/sprites/house.png" id="23_qm7dp"]
-[ext_resource type="Resource" uid="uid://dsxkbiqm0ixd1" path="res://strategic_mode/dialogues/teleport_example_dialogue/teleport_hello.tres" id="23_qyd5u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4146,7 +4146,7 @@ texture = ExtResource("5_1yukr")
 
 [node name="ManualDialogueTrigger" parent="." instance=ExtResource("22_erct1")]
 position = Vector2(-183, -39)
-dialogue = ExtResource("23_qyd5u")
+dialogue = ExtResource("22_trjjb")
 texture = ExtResource("5_1yukr")
 
 [node name="TownTileEvent" parent="." instance=ExtResource("21_vylki")]

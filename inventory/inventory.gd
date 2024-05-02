@@ -1,6 +1,13 @@
-extends Resource
+class_name Inventory extends Resource
 
-class_name Inventory
+"""
+Resource for player inventory
+
+Stores items and characters
+
+use get_item_stacks to get inventory as itemstacks
+insert and remove are self explanotory
+"""
 
 # list of items and counts there of
 @export var items: Dictionary
