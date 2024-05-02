@@ -9,7 +9,7 @@ class_name StratMap extends Node2D
 
 
 signal strat_map_loaded
-signal time_changed(time)
+signal time_changed(time: int)
 
 func pause():
 	get_tree().paused = true

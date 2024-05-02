@@ -17,8 +17,10 @@ var target_position: Vector2
 var last_position: Vector2
 var is_moving: bool = false
 
-func update_nav_map():
-	
+func update_nav_map(pos: Vector2i, state: bool):
+	astar_grid.set_point_solid(pos, not state)
+
+func _ready():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16) 
@@ -35,11 +37,8 @@ func update_nav_map():
 			
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
-
-
-func _ready():
-	update_nav_map()
-	tilemap.strat_map_walkability_changed.connect(update_nav_map)
+	
+	tilemap.occupied_changed.connect(update_nav_map)
 		
 func _input(event):
 	if event.is_action_pressed("lmb") == false:
@@ -59,7 +58,7 @@ func _input(event):
 			tilemap.local_to_map(global_position),
 			tilemap.local_to_map(get_global_mouse_position())
 		).slice(1)
-	
+	print("is walkable ", tilemap.get_cell_tile_data(0, tilemap.local_to_map(get_global_mouse_position())).get_custom_data("walkable"))
 	print(id_path)
 	current_id_path = id_path
 

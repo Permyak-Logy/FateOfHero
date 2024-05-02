@@ -1,9 +1,16 @@
 class_name StratTileMap extends TileMap
 
-signal strat_map_walkability_changed
+signal occupied_changed(pos: Vector2i, state: bool)
+
+var occupied: Array[Vector2i] = []
+
 
 func set_walkable(pos: Vector2i, val: bool):
-	if get_cell_tile_data(0, pos).get_custom_data("walkable") == val:
-		return 
-	get_cell_tile_data(0, pos).set_custom_data("walkable", val)
-	strat_map_walkability_changed.emit()
+	var i = occupied.find(pos)
+	if i == -1 and not val:
+		occupied.push_back(pos)
+		occupied_changed.emit(pos, val)
+	if i >= 0 and val:
+		occupied.pop_at(i)
+		occupied_changed.emit(pos, val)
+		
