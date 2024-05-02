@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bpajsk8dbrjpg"]
 
-[ext_resource type="Script" path="res://strategic_mode/tile_events/manual_dialogue_trigger.gd" id="1_ev5ip"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/dialogue_triggers/manual_dialogue_trigger.gd" id="1_ev5ip"]
 [ext_resource type="Texture2D" uid="uid://b5d16b6e1mmjm" path="res://strategic_mode/tile_events/sprites/default_dialogue.png" id="2_rwsrn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3ey6"]

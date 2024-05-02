@@ -1,4 +1,4 @@
-extends "res://strategic_mode/tile_events/external_puzzle_activator.gd"
+extends "res://strategic_mode/tile_events/activators/external_puzzle_activator.gd"
 
 class_name CombatCapablePuzzleActivator
 """
