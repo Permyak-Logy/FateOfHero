@@ -5,8 +5,10 @@ class_name StratMap extends Node2D
 @onready var time: int = 0
 @onready var gui: StratMapGUI = $GUI
 @onready var player: Player = $player
-@onready var timemap: TileMap = $TileMap
+@onready var tilemap: StratTileMap = $StratTileMap
 
+
+signal strat_map_loaded
 signal time_changed(time)
 
 func pause():
@@ -26,3 +28,6 @@ func _on_inventory_gui_inventory_opened():
 
 func _on_inventory_gui_inventory_closed():
 	unpause()
+
+func _ready():
+	strat_map_loaded.emit()

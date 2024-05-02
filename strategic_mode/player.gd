@@ -7,7 +7,7 @@ It finds path among the squares on the tilemap with walkable set to true.
 """
 
 @onready var strat_map: StratMap = $".."
-@onready var tilemap =  $"../TileMap"
+@onready var tilemap: StratTileMap =  $"../StratTileMap"
 @onready var TileEvent = preload("res://strategic_mode/tile_events/TileEvent.tscn")
 @export var inventory: Inventory
 
@@ -17,15 +17,13 @@ var target_position: Vector2
 var last_position: Vector2
 var is_moving: bool = false
 
-
-func _ready():
+func update_nav_map():
+	
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16) 
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.update()
-	collision_mask = 0x0001
-	collision_layer = 0xffff
 	
 	for x in tilemap.get_used_rect().size.x:
 		for y in tilemap.get_used_rect().size.y:
@@ -38,6 +36,11 @@ func _ready():
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
 
+
+func _ready():
+	update_nav_map()
+	tilemap.strat_map_walkability_changed.connect(update_nav_map)
+		
 func _input(event):
 	if event.is_action_pressed("lmb") == false:
 		return 

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx1nyebn7p8p3"]
+
+[ext_resource type="PackedScene" uid="uid://bpa53mqxjwk7r" path="res://strategic_mode/tile_events/TileEvent.tscn" id="1_52os0"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/unwalkables/unwalbale_tile_event.gd" id="2_1oo2u"]
+
+[node name="UnwalkableTileEvent" instance=ExtResource("1_52os0")]
+script = ExtResource("2_1oo2u")
+
+[node name="EventCollider" parent="." index="1"]
+disabled = true
