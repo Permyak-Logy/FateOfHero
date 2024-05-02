@@ -6,9 +6,7 @@ will disapear when dialog is over
 """
 
 @export var dialogue: Dialogue
-@export var texture: Texture2D
 
-@onready var sprite = $Sprite2D
 @onready var strat_map: StratMap = get_tree().root.get_child(0).strat_map
 @onready var DialogueGUIRes = preload("res://GUI/dialogue/dialogue_gui.tscn")
 var dialogue_gui: DialogueGUI

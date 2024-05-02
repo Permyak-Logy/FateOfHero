@@ -1,7 +1,9 @@
 extends "res://strategic_mode/tile_events/TileEvent.gd"
 
-@onready var sprite: Sprite2D = $Sprite2D
 @onready var collider: CollisionShape2D = $EventCollider
+
+func _ready():
+	pass
 
 func open():
 	collider.disabled = true

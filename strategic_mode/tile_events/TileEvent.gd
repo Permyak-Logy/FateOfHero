@@ -1,5 +1,16 @@
 extends Node2D
 
+"""
+Base class for any TileEvents
+"""
+
+@export var texture: Texture2D
+
+@onready var sprite: Sprite2D = $Sprite2D
+
+func _ready():
+	assert(texture != null)
+	sprite.texture = texture
 
 func activate():
 	print("TODO -- redefine activate")

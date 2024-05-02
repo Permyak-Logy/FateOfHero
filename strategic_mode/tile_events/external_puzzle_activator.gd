@@ -1,10 +1,8 @@
 extends "res://strategic_mode/tile_events/TileEvent.gd"
 
-@onready var sprite: Sprite2D = $Sprite2D
 @onready var game: Game = get_tree().root.get_child(0)
 
 @export var puzzle: PackedScene
-@export var texture: Texture2D
 
 """
 represents external puzzle
@@ -16,9 +14,6 @@ and texture
 
  ! this activator cannot start a puzzle that might result in a combat encounter
 """
-
-func _ready():
-	sprite.texture = texture
 
 func activate():
 	var puzzle_scene: BasePuzzle = puzzle.instantiate()

@@ -1,11 +1,9 @@
 extends "res://strategic_mode/tile_events/TileEvent.gd"
 
 class_name Encounter
-@onready var sprite: Sprite2D = $Sprite2D
 @onready var game: Game = get_tree().root.get_child(0)
 @onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
 
-@export var texture: Texture2D 
 @export var enemies: Array[PackedScene]
 
 """
@@ -16,10 +14,6 @@ then you should define opponents in enemies array
 and texture 
 (again, just drag the texture into the slot)
 """
-
-func _ready():
-	sprite.texture = texture
-	pass
 
 func activate():
 	var characters = inventory.characters

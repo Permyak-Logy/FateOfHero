@@ -7,7 +7,6 @@
 [node name="ExternalPuzzleActivator" instance=ExtResource("1_wnsau")]
 script = ExtResource("2_50ykv")
 puzzle = null
-texture = null
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_henvg")

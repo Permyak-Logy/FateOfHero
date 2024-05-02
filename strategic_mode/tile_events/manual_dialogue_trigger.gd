@@ -7,7 +7,6 @@ To use it you should create a dialog
 """
 @export var dialogue: Dialogue
 @export var do_destroy_on_exit: bool = false
-@export var texture: Texture2D
 
 @onready var game: Game = get_tree().root.get_child(0)
 @onready var area: Area2D = $Area2D
@@ -25,9 +24,6 @@ func activate():
 	dialogue_gui.change_dialogue(dialogue)
 	dialogue_gui.dialogue_finished.connect(on_dialogue_finished)
 	strat_map.pause()
-
-func _ready():
-	spite.texture = texture
 
 func _input(event):
 	if event.is_action_pressed("activate") and player_present:

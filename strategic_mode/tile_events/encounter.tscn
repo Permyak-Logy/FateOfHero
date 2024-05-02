@@ -6,7 +6,6 @@
 
 [node name="Encounter" instance=ExtResource("1_g813s")]
 script = ExtResource("2_txtyl")
-texture = null
 enemies = Array[PackedScene]([])
 
 [node name="Sprite2D" parent="." index="0"]

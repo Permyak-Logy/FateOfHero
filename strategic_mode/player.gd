@@ -1,5 +1,11 @@
 class_name Player extends CharacterBody2D
 
+"""
+Represents the character that moves on the strat map.
+It moves itself and activates touch based tile events.
+It finds path among the squares on the tilemap with walkable set to true.
+"""
+
 @onready var strat_map: StratMap = $".."
 @onready var tilemap =  $"../TileMap"
 @onready var TileEvent = preload("res://strategic_mode/tile_events/TileEvent.tscn")
@@ -10,7 +16,8 @@ var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var last_position: Vector2
 var is_moving: bool = false
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
@@ -36,9 +43,6 @@ func _input(event):
 		return 
 		
 	var id_path
-	#print("global_position", global_position)
-	#print("mouse_position", get_global_mouse_position())
-	#print("clicked at: ",tilemap.local_to_map(get_global_mouse_position()))
 	if is_moving:
 		print("stopping")
 		target_position = last_position
@@ -65,9 +69,6 @@ func _physics_process(delta):
 		target_position = tilemap.map_to_local(current_id_path.front())
 		target_position[0] -= 8
 		target_position[1] -= 8
-		#print("abs tp: ", target_position)
-		#print("map tp: ", current_id_path.front())
-		#print("first_target: ", tilemap.local_to_map(target_position))
 		is_moving = true
 	
 	var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
@@ -75,7 +76,6 @@ func _physics_process(delta):
 	
 	if collision:
 		var collidor = collision.get_collider()
-		# currently the only collidable things are descendants of TileEvent 
 		collidor.activate()
 	
 	if global_position == target_position:
@@ -86,13 +86,10 @@ func _physics_process(delta):
 			target_position[0] -= 8
 			target_position[1] -= 8
 			strat_map.move_time(30)
-			#print("next_target: ", tilemap.local_to_map(target_position))
 		else:
 			is_moving = false
-			#print("movement ended")
 			
 
-# moves player to a new position and stops him
 func move_to(new_pos: Vector2i):
 	var new_local_pos = tilemap.map_to_local(new_pos) + Vector2(8, 8)
 	last_position = global_position
@@ -100,4 +97,3 @@ func move_to(new_pos: Vector2i):
 	current_id_path = []
 	target_position = new_pos
 	is_moving = false
-	pass

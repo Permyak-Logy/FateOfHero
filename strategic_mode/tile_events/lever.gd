@@ -4,10 +4,12 @@ class_name LeverTileEntity
 @export var id: int 
 @export var state: bool = false
 
-@onready var sprite = $Sprite2D
 @onready var collider = $EventCollider
 
 var player_present: bool = false 
+
+func _ready():
+	pass
 
 func change_state():
 	state = not state
