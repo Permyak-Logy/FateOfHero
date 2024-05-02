@@ -1,5 +1,7 @@
 class_name Unit extends Actor
 
+var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
+
 @export var unit_name: String = "Unit"
 
 @export_group("Components")
@@ -8,7 +10,11 @@ class_name Unit extends Actor
 		inventory = value.duplicate(true) if value else null
 @export var health: StatComponent = null:
 	set(value):
+		if health:
+			health.empty.disconnect(on_death)
 		health = value.duplicate(true) if value else null
+		if health:		
+			health.empty.connect(on_death)
 @export var defence: StatComponent = null:
 	set(value):
 		defence = value.duplicate(true) if value else null
@@ -21,8 +27,14 @@ class_name Unit extends Actor
 @export var expirience: ExpirienceComponent = null:
 	set(value):
 		expirience = value.duplicate(true) if value else null
-@export var sprite_for_outline: Sprite2D = null
-@export var trail_particles: GPUParticles2D = null
+@export var sprite_for_outline: Sprite2D = null:
+	set(value):
+		sprite_for_outline = value
+		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
+@export var trail_particles: GPUParticles2D = null:
+	set(value):
+		trail_particles = value
+		trail_particles.hide()
 @export var health_bar_pb: StatProgressBar = null
 
 @export_group("Unit stats")
@@ -30,18 +42,31 @@ class_name Unit extends Actor
 @export var controlled_player: bool = true
 
 @export_group("Unit abilities")
-@export var private_abilities: Array[Ability] = []
+@export var private_abilities: Array[Ability] = []:
+	set(value):
+		private_abilities = value.duplicate(true)
 @export var private_passives: Array[Effect] = []
-var _abilities: Array[Ability] = []
-signal death(Unit)
-signal walk_finished
+var _abilities: Array[Ability] = []  # Текущие способности
 
-var current_id_path: Array = []
+signal death(Unit)  # Вызывается при смерти
+signal walk_finished  # Вызывается при завершении передвижения
+
+var current_id_path: Array = []  # Путь для передвижения
 
 var _effects: Array[Effect] = []
-var flipped: bool = false
-var timer_for_walk_trail: SceneTreeTimer = null
 
+var flipped: bool = false:  # Переключатель поворота
+	set(value):
+		if flipped != value:
+			flipped = value
+			on_flip_unit()
+		else:
+			flipped = value
+
+
+var timer_for_walk_trail: SceneTreeTimer = null  # Таймер отключения walk_trail
+
+# Различные цвета для обводки
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
 const CUR_COLOR = Vector4(255, 255, 255, 100)
 const SELECTED_COLOR = Vector4(0, 0, 255, 100)
@@ -49,28 +74,26 @@ const ENEMY_COLOR = Vector4(255, 0, 0, 100)
 const DEFAULT_COLOR = Vector4(0, 0, 0, 100)
 const ESCAPE_COLOR = Vector4(255, 255, 0, 100)
 
-var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
-
 func _ready():
-	if sprite_for_outline:
-		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
-	if health:
-		health.empty.connect(on_death)
-		if health_bar_pb:
-			health_bar_pb.stat_component = health
-	for ability in private_abilities:
-		_abilities.append(ability.duplicate(true))
-	if trail_particles:
-		trail_particles.hide()
+	if health and health_bar_pb:
+		health_bar_pb.stat_component = health
 	set_outline_color(DEFAULT_COLOR)
 
 func set_outline_color(color: Vector4):
+	"""
+	Устанавливает цвет обводки (необходимо чтобы был определён sprite_for_outline)
+	"""
 	if (sprite_for_outline == null):
 		return
 	(sprite_for_outline.material as ShaderMaterial).set_shader_parameter(
 		"outline_color", color)
 		
 func apply_damage(_damage: float, _instigator: Unit = null):
+	"""
+	Применяет урон в размере _damage от _instigator с учётом наложенных эффектов
+	предметов, сопротивлений и т.д.
+	"""
+	
 	if _instigator:
 		for effect in _instigator.get_effects():
 			_damage = effect.update_on_attack(_damage, self)
@@ -90,18 +113,26 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 	return _damage
 
 func reload_all_mods():
+	"""
+	Перезагружает все StatComponents
+	"""
+	
 	for comp in [speed, health, defence, damage]:
 		if comp:
 			comp.reload_mods(self)
 
 func get_mods() -> Dictionary:
-	var all_mods: Dictionary = inventory.get_mods()
+	var all_mods: Dictionary
+	if inventory:
+		all_mods = inventory.get_mods()
+	else:
+		all_mods = {}
 	for effect in _effects:
 		for mod in effect.get_mods():
 			if mod.type in all_mods:
 				all_mods[(mod as Mod).type].iadd((mod as Mod).value)
 			else:
-				all_mods[(mod as Mod).type] = (mod as Mod).value
+				all_mods[(mod as Mod).type] = (mod as Mod).value.duplicate(true)
 	return all_mods
 
 func get_abilities() -> Array[Ability]:
@@ -131,7 +162,7 @@ func prepare_fight():
 		ability.set_owner(self)
 		ability.reset()
 	apply_passives()
-	flip_unit(idle_direction_bool())
+	flipped = idle_direction_bool()
 
 func premove_update():
 	for ability in get_abilities():
@@ -139,16 +170,12 @@ func premove_update():
 	for effect in get_effects():
 		effect.update_on_move()
 
-func flip_unit(toggle: bool):
-	if toggle == flipped:
-		return
-	flipped = toggle
+func on_flip_unit():
 	if trail_particles:
 		var i: Image = trail_particles.texture.get_image()
 		i.flip_x()
 		trail_particles.texture = ImageTexture.create_from_image(i)
 	sprite_for_outline.flip_h = flipped
-	
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():
@@ -160,16 +187,16 @@ func _physics_process(_delta):
 	
 
 	if (target_position - global_position)[0] == 0:
-		flip_unit(idle_direction_bool())
+		flipped = idle_direction_bool()
 	else:
-		flip_unit((target_position - global_position)[0] < 0)
+		flipped = (target_position - global_position)[0] < 0
 
 	global_position = global_position.move_toward(target_position, 3)
 	
 	if global_position == target_position:    
 		current_id_path.pop_front()
 		if not current_id_path:
-			flip_unit(idle_direction_bool())
+			flipped = idle_direction_bool()
 			walk_finished.emit()
 
 func idle_direction_bool():

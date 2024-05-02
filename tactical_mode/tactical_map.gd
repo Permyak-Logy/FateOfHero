@@ -10,49 +10,53 @@ class_name TacticalMap extends Node
 @onready var _current_path = PackedVector2Array()
 var Rock = preload("res://tactical_mode/nature/Rock.tscn")
 
-var _block_input = false
-const _ACT_INDEX_MAX = 10000
+var _block_input = false  # Блокировка пользовательского ввода
+const _ACT_INDEX_MAX = 10000  # Магическая константа для порядка ходов
 var unit_queue = []  # [(act_index, unit)]
 
-var acts: int
-var _p_units: Array[Unit] = []
-var _e_units: Array[Unit] = []
-var units:
+var active_unit: Unit:  # Текущий 
+	get:
+		return unit_queue[0][1]
+
+var acts: int  # Текущее кол-во действий
+var _p_units: Array[Unit] = []  # Список юнитов игрока
+var _e_units: Array[Unit] = []  # Список юнитов оппонента
+var units:  # property список всех юнитов
 	get:
 		return _p_units + _e_units
-const GRID_LAYER = 0
-const OVERLAY_PATH_LAYER = 1
-const PATH_LAYER = 2
-const WALLS_LAYER = 3
-const EFFECTS_LAYER = 4
-const OVERLAY_ABILITY_LAYER = 5
+const GRID_LAYER = 0  # Слой сетки
+const OVERLAY_PATH_LAYER = 1  # Слой оверлея для перемещения
+const PATH_LAYER = 2  # Слой пути
+const WALLS_LAYER = 3  # Слой стен
+const OVERLAY_ABILITY_LAYER = 4  # Слой оверлея для способностей
 
-var escape_ability: EscapeAbility = EscapeAbility.new()
+var escape_ability: EscapeAbility = EscapeAbility.new()  # Способность побега
 
-var win = null
-var escape = false
+var win: bool = false  # True если мы победили и закончили бой, иначе false 
+var escape = false  # True если был активирован побег
+var running = false  # Запущен ли бой
 
-var _inited = false
-var _entered = false
-var inited:
-	get:
-		return _inited
+var inited = true:  # Проинициализирована ли карта
 	set(value):
-		_inited = value
+		inited = value
 		if is_inside_tree() and inited:
 			if not is_node_ready():
 				await ready
 			start_battle()
 
-var cur_ability: Ability = null:
+var cur_ability: Ability = null:  # Текущая выбранная способность
 	set(value):
 		if cur_ability == value:
 			return
 		gui._on_selected(value)
 		cur_ability = value
 
-var nature_count: int = -1
+var nature_count: int = -1  # Кол-во природных actor выступающих в роли стен 
+
+# Вызывается после завершения боя, возвращает списки живых и мёртвых персонажей
 signal finish(live: Array[PackedScene], death: Array[PackedScene])
+
+# Отношения между разными юнитами
 enum relation {Equal, Friend, Enemy, Neutral}
 
 func _enter_tree():
@@ -69,19 +73,25 @@ func _ready():
 	if is_instance_of($"..", Game):
 		return
 	_p_units = [
-		$GgVamp,
-		$Naris,
+		#$GgVamp,
+		#$Naris,
 		$SmolItto
 	]
 	_e_units = [
-		$Vendigo,
-		$Skeleton,
-		$Skeleton2
+		$Vendigo #,
+		#$Skeleton,
+		#$Skeleton2
 	]
 	inited = true
 
 func start_battle():
+	"""
+	Запускает бой, добавляет юнитов во очередь ходов
+	"""
+	if running:
+		return
 	print("*** Start battle ***")
+	running = true
 	align_actors()
 	escape = false
 	for unit in units:	
@@ -96,11 +106,19 @@ func start_battle():
 	_start_stepmove()
 
 func align_actors():
+	"""
+	Выравнивает всех дочерних Actor на карте
+	"""
+	
 	for child in get_children():
 		if is_instance_of(child, Actor):
 			child.global_position = to_loc(child.get_cell())
 
 func arrange_units():
+	"""
+	Выполняет расстановку юнитов из _p_units и _e_units
+	"""
+	
 	if not is_node_ready():
 		await ready
 	var center = (_astar_board.bottom - _astar_board.top) / 2 + _astar_board.top
@@ -128,6 +146,11 @@ func arrange_units():
 	
 
 func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], count_nature_obj: int=-1):
+	"""
+	Сбрасывает прошлые данные и загружает новые, подготавливает бой,
+	запускает бой, если TacticalMap в "SceneTree"
+	"""
+	
 	clear()
 	
 	for p in player:
@@ -143,6 +166,10 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], cou
 	inited = true
 
 func gen_nature():
+	"""
+	Генерирует неуправляемые природные объекты/стены
+	"""
+	
 	for i in range(nature_count):
 		await _update_walls()
 		while true:
@@ -154,10 +181,12 @@ func gen_nature():
 				spawn(Rock, pos)
 				break
 
-func active_unit() -> Unit:
-	return unit_queue[0][1]
 
 func get_relation(unit_a: Unit, unit_b: Unit) -> relation:
+	"""
+	Вернуть relation между юнитами
+	"""
+	
 	if unit_a == unit_b:
 		return relation.Equal
 	if is_player(unit_a) and is_player(unit_b):
@@ -171,6 +200,10 @@ func get_relation(unit_a: Unit, unit_b: Unit) -> relation:
 	return relation.Neutral
 
 func get_units_with_relation(unit: Unit, r: relation) -> Array[Unit]:
+	"""
+	Возращает список всех юнитов которые имеют отношение 'r' к 'unit'
+	"""
+	
 	var result: Array[Unit] = []
 	for other in units:
 		if get_relation(unit, other) == r:
@@ -178,12 +211,17 @@ func get_units_with_relation(unit: Unit, r: relation) -> Array[Unit]:
 	return result
 
 func clear():
+	"""
+	Очистка всех Actor, сброс переменных
+	"""
+	
 	inited = false
 	for child in get_children():
 		if is_instance_of(child, Actor):
 			remove_child(child)
 	win = false
 	cur_ability = null
+	running = false
 	
 	_p_units.clear()
 	_e_units.clear()
@@ -192,6 +230,10 @@ func clear():
 	_block_input = false
 
 func on_kill(unit: Unit):
+	"""
+	Вызывается при смерти любого юнита
+	"""
+	
 	for i in range(len(unit_queue)):
 		if unit_queue[i][1] == unit:
 			unit_queue.pop_at(i)
@@ -199,38 +241,71 @@ func on_kill(unit: Unit):
 			break
 	print("Killed ", unit)
 
-func move_unit_to(unit: Unit, x: int, y: int):
-	unit.global_position = to_loc(Vector2i(x, y))
+func move_unit_to(actor: Actor, x: int, y: int):
+	"""
+	Передвигает юнита на указанную клетку на tilemap
+	"""
+	
+	actor.global_position = to_loc(Vector2i(x, y))
 
 func get_player_units() -> Array[Unit]:
+	"""
+	возвращает список юнитов игрока
+	"""
+	
 	return _p_units
 
 func get_enemy_units() -> Array[Unit]:
+	"""
+	Возвращает список юнитов оппонента
+	"""
+	
 	return _e_units
 
 func draw(layer: int, array: Array, source_id: int = -1, 
 atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
+	"""
+	Отрисовывает тайлы сразу на массиве с одинаковыми параметрами
+	эквивалентно многокрантному использованию TileMap.set_cell
+	"""
+	
 	for coords in array:
 		_tile_map.set_cell(
 			layer, coords, source_id,atlas_coords, alternative_tile)
 
 func to_map(cell: Vector2) -> Vector2i:
+	"""
+	Переводит глобальные координаты в координаты клеток
+	"""
+	
 	if _tile_map:
 		return _tile_map.local_to_map(cell)
 	return Vector2i(0, 0)
 
 func to_loc(cell: Vector2i) -> Vector2:
+	"""
+	Переводит координаты клеток в глобальные координаты
+	"""
+	
 	if _tile_map:
 		return _tile_map.map_to_local(cell)
 	return Vector2(0, 0)
 
 func is_occupied(cell: Vector2i) -> bool:
+	"""
+	Блокируется ли клетка каким-то объектом
+	"""
+	
 	return cell in _tile_map.get_used_cells(WALLS_LAYER)
 	
 func _flood_fill() -> Array:
-	var cell = active_unit().get_cell()
+	"""
+	Возвращает список клеток доступных для перемещения
+	"""
+	
+	var cell = active_unit.get_cell()
 	var max_distance: float = (
-		active_unit().speed.cur() - 100) / 20 + 4
+		active_unit.speed.cur() - 100) / 20 + 4
 	var array := [cell]
 	var stack := [cell, 0]
 	var distance = 0
@@ -246,7 +321,7 @@ func _flood_fill() -> Array:
 			var next = _astar_board.itm(next_id)
 
 			var blocked = false
-			for occ in active_unit().get_occupied_cells():
+			for occ in active_unit.get_occupied_cells():
 				var delta = occ - cell
 				if is_occupied(next + delta) or not _astar_board.has_cell(next + delta):
 					blocked = true
@@ -263,24 +338,32 @@ func _flood_fill() -> Array:
 	return array
 
 func _start_stepmove():
+	"""
+	Вызывается перед каждым ходом юнита (но не действием)
+	"""
+	
 	await get_tree().create_timer(0.25).timeout
-	print("* Start stepmove (unit: ", active_unit().unit_name, ") *")
+	print("* Start stepmove (unit: ", active_unit.unit_name, ") *")
 	cur_ability = null
 	for unit_data in unit_queue:
 		reset_outline_color(unit_data[1])
-	active_unit().set_outline_color(Unit.CUR_COLOR)
-	acts = active_unit().acts_count
-	(active_unit() as Unit).premove_update()
-	if active_unit().controlled_player:
-		gui.show_abilities(active_unit())
+	active_unit.set_outline_color(Unit.CUR_COLOR)
+	acts = active_unit.acts_count
+	(active_unit as Unit).premove_update()
+	if active_unit.controlled_player:
+		gui.show_abilities(active_unit)
 		_update_walkable()
 		_block_input = false
 	else:
 		_update_walkable(false)
-		await active_unit().ai(self)
+		await active_unit.ai(self)
 		_update_stepmove()
 
 func _update_stepmove():
+	"""
+	Вызывается перед каждым действием юнита
+	"""
+	
 	print("* Update stepmove *")
 	cur_ability = null
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
@@ -293,6 +376,7 @@ func _update_stepmove():
 		_tile_map.clear_layer(PATH_LAYER)
 		win = not escape
 		_block_input = true
+		running = false
 		print("*** FINISH! ***")
 		for player in get_player_units():
 			if player.is_death():
@@ -316,7 +400,7 @@ func _update_stepmove():
 		finish.emit(packed_live, packed_death)
 		return
 	
-	if acts != 0 and active_unit().controlled_player:
+	if acts != 0 and active_unit.controlled_player:
 		_update_walkable()
 		_block_input = false
 		return
@@ -326,11 +410,15 @@ func _update_stepmove():
 	var time = unit_queue[0][0]
 	for elem in unit_queue:
 		elem[0] -= time
-	unit_queue[0][0] += _ACT_INDEX_MAX / active_unit().speed.cur()
+	unit_queue[0][0] += _ACT_INDEX_MAX / active_unit.speed.cur()
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
 
 func _update_walls():
+	"""
+	Обновляет слой стен
+	"""
+	
 	if not is_node_ready():
 		await ready
 	_tile_map.clear_layer(WALLS_LAYER)
@@ -346,6 +434,10 @@ func _update_walls():
 				_tile_map.set_cell(3, cell, 0, Vector2i(2, 0))
 
 func _update_walkable(show=true):
+	"""
+	Обнавляет слой оверлея перемещения
+	"""
+	
 	_update_walls()
 	var cells = _flood_fill()
 	_astar_walkable = AStarHexagon2D.new(cells)
@@ -354,12 +446,16 @@ func _update_walkable(show=true):
 		draw(OVERLAY_PATH_LAYER, cells, 0, Vector2i(3, 0))
 		_select_path_to(to_map(_tile_map.get_local_mouse_position()))
 
-func get_path_to_cell(map_coords: Vector2i) -> Array:
-	var result = []
+func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
+	"""
+	Возвращает путь из списка клеток на основе оверлея перемещения
+	"""
+	
+	var result: Array[Vector2i] = []
 	if not _astar_walkable.has_cell(map_coords):
 		return []
 	var path = _astar_walkable.get_id_path(
-			_astar_walkable.mti(active_unit().get_cell()),
+			_astar_walkable.mti(active_unit.get_cell()),
 			_astar_walkable.mti(map_coords)
 		)
 	for cell in path:
@@ -367,22 +463,30 @@ func get_path_to_cell(map_coords: Vector2i) -> Array:
 	return result
 
 func _select_path_to(cell: Vector2i):
-	if active_unit() and _astar_walkable:
+	"""
+	Отрисовывает путь до клетки в оверлее
+	"""
+	
+	if active_unit and _astar_walkable:
 		_current_path = get_path_to_cell(cell)
 		_tile_map.clear_layer(PATH_LAYER)
 		draw(PATH_LAYER, _current_path, 0, Vector2i(1, 0))
 	
 func _move_active_unit():
+	"""
+	Запускает передвижение юнита, завершает действие
+	"""
+	
 	if not _current_path:
 		return
-	print("=> ", active_unit().unit_name, " передвигается")
+	print("=> ", active_unit.unit_name, " передвигается")
 	_block_input = true
 	
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	gui.clear_abilities()
 	if len(_current_path) > 1:
 		acts -= 1
-		await active_unit().play("walk", _current_path)
+		await active_unit.play("walk", _current_path)
 	else:
 		acts = 0
 	_tile_map.clear_layer(PATH_LAYER)
@@ -408,6 +512,10 @@ func _input(event):
 		return await _key_press_event(event)
 
 func draw_aoe_overlay():
+	"""
+	Отрисовка зоны действия AoE способности
+	"""
+	
 	draw(
 		OVERLAY_ABILITY_LAYER, 
 		(cur_ability as AoEAbility).about_cells, 
@@ -416,19 +524,23 @@ func draw_aoe_overlay():
 	)
 
 func _key_press_event(event):
+	"""
+	Событие нажатий клавиатуры
+	"""
+	
 	if event.as_text().is_valid_int():
 		var i = (event.as_text().to_int() + 9) % 10
-		var abilities = active_unit().get_abilities()
+		var abilities = active_unit.get_abilities()
 		if len(abilities) > i and abilities[i].can_use():
 			_prepare_ability(abilities[i])
 	elif cur_ability:
 		if event.is_action_pressed("cancel_ability"):
 			_cancel_ability()
 		if event.is_action_pressed("next_ability"):
-			var abilities = active_unit().get_abilities()
+			var abilities = active_unit.get_abilities()
 			_prepare_ability(abilities[(abilities.find(cur_ability) + 1) % len(abilities)])
 		if event.is_action_pressed("prev_ability"):
-			var abilities = active_unit().get_abilities()
+			var abilities = active_unit.get_abilities()
 			_prepare_ability(abilities[(abilities.find(cur_ability) - 1 + len(abilities)) % len(abilities)])
 		if is_instance_of(cur_ability, DirectedAbility):
 			if event.is_action_pressed("apply_ability"):
@@ -446,6 +558,10 @@ func _key_press_event(event):
 		_prepare_ability(escape_ability)
 
 func _prepare_ability(ability: Ability):
+	"""
+	Подготавливает к использованию способность
+	"""
+	
 	print("-> Selected ", ability)
 	_cancel_ability()
 	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
@@ -464,6 +580,10 @@ func _prepare_ability(ability: Ability):
 	_tile_map.clear_layer(PATH_LAYER)
 
 func _cancel_ability():
+	"""
+	Отменяет использование выбранной способности
+	"""
+	
 	if not cur_ability:
 		return
 	cur_ability.clear()
@@ -472,6 +592,10 @@ func _cancel_ability():
 	cur_ability = null
 
 func _apply_ability(cell=Vector2i(0, 0)):
+	"""
+	Применяет действие выбранной способности, завершает действие
+	"""
+	
 	if is_instance_of(cur_ability, DirectedAbility) and cell:
 		if cur_ability.can_select_cell():
 			cur_ability.select_cell(cell)
@@ -485,22 +609,30 @@ func _apply_ability(cell=Vector2i(0, 0)):
 		_update_stepmove()
 
 func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
+	"""
+	Расстояние между клетками на поле без учёта стен
+	"""
+	
 	var path = _astar_board.get_id_path(_astar_board.mti(a), _astar_board.mti(b))
 	return len(path) - 1
 
-func is_player(unit: Unit):
+func is_player(unit: Unit) -> bool:
 	return unit in _p_units
 
-func is_enemy(unit: Unit):
+func is_enemy(unit: Unit) -> bool:
 	return unit in _e_units
 
 func reset_outline_color(unit: Unit):
+	"""
+	Сбрасывает цвет обводки на основе текущего состояния юнита
+	"""
+	
 	# TODO: Поправить баг со смертями персов игрока
 	if cur_ability and unit in cur_ability.selected:
 		unit.set_outline_color(Unit.SELECTED_COLOR)
 	elif unit.is_death():
 		unit.set_outline_color(Unit.DEFAULT_COLOR)
-	elif active_unit() == unit:
+	elif active_unit == unit:
 		unit.set_outline_color(Unit.CUR_COLOR)
 	elif is_player(unit):
 		unit.set_outline_color(Unit.PLAYER_COLOR)
@@ -510,7 +642,11 @@ func reset_outline_color(unit: Unit):
 		unit.set_outline_color(Unit.DEFAULT_COLOR)
 
 func spawn(actor_ps: PackedScene, cell: Vector2i) -> Actor:
+	"""
+	Спавнит Actor в позиции cell
+	"""
+	
 	var actor: Actor = actor_ps.instantiate()
 	add_child(actor)
-	actor.global_position = to_loc(cell)
+	move_unit_to(actor, cell[0], cell[1])
 	return actor

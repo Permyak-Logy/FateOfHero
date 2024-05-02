@@ -1,29 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=8 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/Vendigo/Vendigo.tscn" id="4_dhhnm"]
 [ext_resource type="PackedScene" uid="uid://bjcjl3qla8b62" path="res://tactical_mode/unit/SmolItto/SmolItto.tscn" id="5_nrx87"]
-[ext_resource type="PackedScene" uid="uid://di7auu4d2dl2" path="res://tactical_mode/unit/Naris/Naris.tscn" id="6_1btoa"]
 [ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
-[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="7_oxa7b"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="9_6j4aw"]
 [ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
-[ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/GGVamp/GGVamp.tscn" id="9_qoism"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="10_3tc35"]
 [ext_resource type="PackedScene" uid="uid://cwccmvlw1ghah" path="res://tactical_mode/nature/Rock.tscn" id="10_m7p5y"]
-
-[sub_resource type="Resource" id="Resource_cb2cx"]
-script = ExtResource("9_6j4aw")
-base = 0.0
-cur = 0.0
-max_ = 0.0
-
-[sub_resource type="Resource" id="Resource_k0kh6"]
-resource_local_to_scene = true
-script = ExtResource("10_3tc35")
-mod_type = 3
-characteristic = SubResource("Resource_cb2cx")
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
@@ -43,11 +26,9 @@ layer_2/tile_data = PackedInt32Array()
 layer_3/name = "Walls"
 layer_3/enabled = false
 layer_3/tile_data = PackedInt32Array()
-layer_4/name = "Effects"
+layer_4/name = "Overlay Ability Layer"
+layer_4/navigation_enabled = false
 layer_4/tile_data = PackedInt32Array()
-layer_5/name = "Overlay Ability Layer"
-layer_5/navigation_enabled = false
-layer_5/tile_data = PackedInt32Array()
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
@@ -88,17 +69,3 @@ position = Vector2(323, 373)
 [node name="SmolItto" parent="." instance=ExtResource("5_nrx87")]
 position = Vector2(97, 207)
 expirience = null
-
-[node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(161, 254)
-defence = SubResource("Resource_k0kh6")
-
-[node name="GgVamp" parent="." instance=ExtResource("9_qoism")]
-position = Vector2(126, 324)
-expirience = null
-
-[node name="Skeleton" parent="." instance=ExtResource("7_oxa7b")]
-position = Vector2(833, 371)
-
-[node name="Skeleton2" parent="." instance=ExtResource("7_oxa7b")]
-position = Vector2(795, 299)
