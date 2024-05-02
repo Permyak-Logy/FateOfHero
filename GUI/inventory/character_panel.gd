@@ -2,6 +2,9 @@ extends NinePatchRect
 
 class_name CharacterPanel
 
+"""
+Panel on the right that represents character and their gear
+"""
 
 @onready var name_label: Label = $HBoxContainer/Character/Name
 @onready var sprite: Sprite2D = $HBoxContainer/Character/PictureBack/Holder/CharacterSprite

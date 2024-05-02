@@ -1,5 +1,10 @@
 class_name InventorySlot extends Button
 
+"""
+The slot class
+reports when hovered
+"""
+
 @onready var backgroundSprite: Sprite2D = $background
 @onready var container: CenterContainer = $CenterContainer
 

@@ -1,5 +1,10 @@
 class_name InventoryGUI extends Control
 
+"""
+Root of inventory gui. It is also a controller in this this gui
+other scenes are just views
+"""
+
 var is_open:bool = false 
 
 signal inventory_opened

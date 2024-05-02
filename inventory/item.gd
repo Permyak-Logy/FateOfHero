@@ -1,5 +1,11 @@
 class_name Item extends Resource
 
+"""
+Resource for item
+It is just a struct for item. It cannot have quantity
+you need to put it inside the ItemStack resource to make it tangeble
+"""
+
 @export var name: String
 @export_multiline var description : String
 
