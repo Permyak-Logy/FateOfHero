@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="GGVampA2" load_steps=2 format=3 uid="uid://csshoxe7yf51e"]
+[gd_resource type="Resource" script_class="GGVampA2" load_steps=3 format=3 uid="uid://csshoxe7yf51e"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/GGVamp/gg_vamp_a2.gd" id="1_12dbk"]
+[ext_resource type="Texture2D" uid="uid://0ic6kao2gme6" path="res://tactical_mode/unit/GGVamp/Vampire_n2.png" id="2_ijakr"]
 
 [resource]
 script = ExtResource("1_12dbk")
@@ -17,6 +18,7 @@ type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Гурман"
 description = "Атакует по области и снимает 20% хп"
+texture = ExtResource("2_ijakr")
 max_stack = 0
 recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="IttoA2" load_steps=2 format=3 uid="uid://cc4ld682tyt0b"]
+[gd_resource type="Resource" script_class="IttoA2" load_steps=3 format=3 uid="uid://cc4ld682tyt0b"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/SmolItto/itto_a2.gd" id="1_kxaln"]
+[ext_resource type="Texture2D" uid="uid://djj62nttvfdlo" path="res://tactical_mode/unit/SmolItto/Itto_n2.png" id="2_v3r1h"]
 
 [resource]
 script = ExtResource("1_kxaln")
@@ -17,6 +18,7 @@ type = 0
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Залитое поле"
 description = "Хилл всего отряда"
+texture = ExtResource("2_v3r1h")
 max_stack = 0
 recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

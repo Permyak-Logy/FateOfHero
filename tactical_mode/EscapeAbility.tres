@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EscapeAbility" load_steps=2 format=3 uid="uid://bnl4dgc6e4goh"]
+
+[ext_resource type="Script" path="res://tactical_mode/escape_ability.gd" id="1_jw5h8"]
+
+[resource]
+script = ExtResource("1_jw5h8")
+targets = 0
+max_targets = 0
+acts = 0
+final_act = true
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+only_unit_owner = false
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Побег"
+description = "Сбежать с боя. Все юниты не находящиеся на крайней левой клетке будут убиты, а те кто сбежали получат 20% чистого урона от ХП."
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0

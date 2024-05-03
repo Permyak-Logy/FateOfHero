@@ -30,7 +30,7 @@ const PATH_LAYER = 2  # Слой пути
 const WALLS_LAYER = 3  # Слой стен
 const OVERLAY_ABILITY_LAYER = 4  # Слой оверлея для способностей
 
-var escape_ability: EscapeAbility = EscapeAbility.new()  # Способность побега
+var escape_ability: EscapeAbility = load("res://tactical_mode/EscapeAbility.tres")  # Способность побега
 
 var win: bool = false  # True если мы победили и закончили бой, иначе false 
 var escape = false  # True если был активирован побег
@@ -68,19 +68,21 @@ func _enter_tree():
 func _exit_tree():
 	clear()
 
-func _ready():
+func _init():
 	escape_ability.set_owner(self)
+
+func _ready():
 	if is_instance_of($"..", Game):
 		return
 	_p_units = [
-		#$GgVamp,
-		#$Naris,
+		$GgVamp,
+		$Naris,
 		$SmolItto
 	]
 	_e_units = [
-		$Vendigo #,
-		#$Skeleton,
-		#$Skeleton2
+		$Vendigo,
+		$Skeleton,
+		$Skeleton2
 	]
 	inited = true
 
@@ -90,7 +92,8 @@ func start_battle():
 	"""
 	if running:
 		return
-	print("*** Start battle ***")
+	gui.tactical_info.clear()
+	write_info("*** Бой начинается ***")
 	running = true
 	align_actors()
 	escape = false
@@ -237,9 +240,8 @@ func on_kill(unit: Unit):
 	for i in range(len(unit_queue)):
 		if unit_queue[i][1] == unit:
 			unit_queue.pop_at(i)
-			print("Poped ", unit)
 			break
-	print("Killed ", unit)
+	write_info("-> " + str(unit) + " убит")
 
 func move_unit_to(actor: Actor, x: int, y: int):
 	"""
@@ -343,7 +345,7 @@ func _start_stepmove():
 	"""
 	
 	await get_tree().create_timer(0.25).timeout
-	print("* Start stepmove (unit: ", active_unit.unit_name, ") *")
+	write_info("* Ходит: " + active_unit.unit_name + " *")
 	cur_ability = null
 	for unit_data in unit_queue:
 		reset_outline_color(unit_data[1])
@@ -364,7 +366,6 @@ func _update_stepmove():
 	Вызывается перед каждым действием юнита
 	"""
 	
-	print("* Update stepmove *")
 	cur_ability = null
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	
@@ -376,11 +377,11 @@ func _update_stepmove():
 		return
 	
 	if acts != 0 and active_unit.controlled_player:
+		
+		write_info("* Ход продолжается *")
 		_update_walkable()
 		_block_input = false
 		return
-		
-	print("* End stepmove *")
 	
 	var time = unit_queue[0][0]
 	for elem in unit_queue:
@@ -395,7 +396,7 @@ func _finalize_fight():
 	win = not escape
 	_block_input = true
 	running = false
-	print("*** FINISH! ***")
+	write_info("*** Бой завершён ***")
 	for player in get_player_units():
 		if player.is_death():
 			continue
@@ -482,7 +483,7 @@ func _move_active_unit():
 	
 	if not _current_path:
 		return
-	print("=> ", active_unit.unit_name, " передвигается")
+	write_info("=> " + active_unit.unit_name + " передвигается")
 	_block_input = true
 	
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
@@ -565,7 +566,7 @@ func _prepare_ability(ability: Ability):
 	Подготавливает к использованию способность
 	"""
 	
-	print("-> Selected ", ability)
+	write_info("-> Выбрана способность '" + ability.name + "'")
 	_cancel_ability()
 	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
@@ -653,3 +654,6 @@ func spawn(actor_ps: PackedScene, cell: Vector2i) -> Actor:
 	add_child(actor)
 	move_unit_to(actor, cell[0], cell[1])
 	return actor
+
+func write_info(text: String):
+	gui.tactical_info.write(text)

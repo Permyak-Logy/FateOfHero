@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0qeiqg68tmo3"
-path="res://.godot/imported/AbilityPressed.png-68e879b7c20112877e35cc25a311363b.ctex"
+uid="uid://djj62nttvfdlo"
+path="res://.godot/imported/Itto_n2.png-078b3406cf1939b9ded6d9ced3b76aaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/assets/AbilityPressed.png"
-dest_files=["res://.godot/imported/AbilityPressed.png-68e879b7c20112877e35cc25a311363b.ctex"]
+source_file="res://tactical_mode/unit/SmolItto/Itto_n2.png"
+dest_files=["res://.godot/imported/Itto_n2.png-078b3406cf1939b9ded6d9ced3b76aaf.ctex"]
 
 [params]
 

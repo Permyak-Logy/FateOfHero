@@ -15,7 +15,7 @@ signal ready
 var cooldown_time = 0
 var has_uses = 0
 
-var only_unit_owner = true
+@export var only_unit_owner = true
 
 func _init(_count: int = count):
 	count = _count

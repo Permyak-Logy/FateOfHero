@@ -1,10 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://dp1h0o6i278p8"]
+[gd_scene load_steps=7 format=3 uid="uid://dp1h0o6i278p8"]
 
 [ext_resource type="Script" path="res://GUI/tactical_mode/TacticalModeGUI.gd" id="1_vx06q"]
+[ext_resource type="PackedScene" uid="uid://dly11cs48am3l" path="res://GUI/tactical_mode/TacticalInfo.tscn" id="2_kb8rs"]
 [ext_resource type="Script" path="res://tactical_mode/FPS_COUNTER.gd" id="2_oqwl6"]
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/dialogue/dialogue_gui_theme.tres" id="3_2ifkt"]
+[ext_resource type="PackedScene" uid="uid://k1m48ayhuf51" path="res://GUI/tactical_mode/BtnAbility.tscn" id="4_dhij6"]
+[ext_resource type="Texture2D" uid="uid://c0xek0kynaf22" path="res://tactical_mode/assets/AbilityEvade.png" id="5_e8urq"]
 
 [node name="TacticalModeGui" type="CanvasLayer"]
 script = ExtResource("1_vx06q")
+
+[node name="TacticalInfo" parent="." instance=ExtResource("2_kb8rs")]
+custom_minimum_size = Vector2(300, 32)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+offset_left = -309.0
+offset_top = -41.0
+offset_right = -9.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="FPS_COUNTER" type="Label" parent="."]
 offset_left = 3.0
@@ -23,9 +39,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -16.0
-offset_top = -40.0
+offset_top = -36.0
 offset_right = 16.0
-offset_bottom = -8.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(16, -8)
@@ -43,6 +59,7 @@ offset_right = 224.0
 offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("3_2ifkt")
 
 [node name="GridContainer" type="GridContainer" parent="AbilityPanel"]
 layout_mode = 1
@@ -54,9 +71,11 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
+theme = ExtResource("3_2ifkt")
 
 [node name="LabelName" type="Label" parent="AbilityPanel/GridContainer"]
 layout_mode = 2
+theme = ExtResource("3_2ifkt")
 text = "Название абилки"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -66,7 +85,20 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme = ExtResource("3_2ifkt")
 text = "Тут типа описание способности которое очень большое для этой панельки что капец."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="EscapeAbility" parent="." instance=ExtResource("4_dhij6")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -45.0
+offset_right = 48.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = ""
+icon = ExtResource("5_e8urq")
