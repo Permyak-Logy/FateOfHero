@@ -3,6 +3,7 @@ class_name Effect extends Resource
 @export var texture: Texture2D
 @export var mods: Array[Mod] = []
 @export var destroy_on_death_instigator: bool = false
+@export var stackable = false
 
 signal finished
 signal updated_mods
@@ -36,7 +37,10 @@ func update_on_damage(damage: float, _instigator: Node = null) -> float:
 func update_on_attack(damage: float, _recipient: Node = null) -> float:
 	"""Вызывается перед каждой производимой атакой. Возвращает новый урон атаки."""
 	return damage
-	
+
+func stack(other: Effect) -> bool:
+	return false
+
 func is_active() -> bool:
 	return true
 
