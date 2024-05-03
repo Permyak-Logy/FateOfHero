@@ -1,15 +1,49 @@
-[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://b740ckyrxhwfj"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=11 format=3 uid="uid://b740ckyrxhwfj"]
 
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_e665g"]
 [ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_taygh"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_k6dut"]
 [ext_resource type="Resource" uid="uid://xplppy8t3gmi" path="res://inventory/items/oil.tres" id="2_vlr58"]
-[ext_resource type="Script" path="res://inventory/item.gd" id="3_8pop4"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="3_la3ks"]
 [ext_resource type="Texture2D" uid="uid://bexjkhmi7opnt" path="res://inventory/icons/bottle_black.png" id="4_gm6b6"]
+[ext_resource type="Script" path="res://inventory/apply_effect_ability.gd" id="6_tq7y7"]
+
+[sub_resource type="Resource" id="Resource_ihroq"]
+script = ExtResource("2_k6dut")
+add = 0.0
+mul = 0.2
+
+[sub_resource type="Resource" id="Resource_xc460"]
+script = ExtResource("1_e665g")
+type = 3
+value = SubResource("Resource_ihroq")
+
+[sub_resource type="Resource" id="Resource_yhyqj"]
+script = ExtResource("3_la3ks")
+moves = 3
+texture = ExtResource("4_gm6b6")
+mods = Array[ExtResource("1_e665g")]([SubResource("Resource_xc460")])
+destroy_on_death_instigator = true
+effect_name = "Чёрная жижа"
+is_negative = false
 
 [resource]
-script = ExtResource("3_8pop4")
-name = ""
+script = ExtResource("6_tq7y7")
+effect = SubResource("Resource_yhyqj")
+apply_on = Array[int]([0])
+targets = 1
+max_targets = 0
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+type = 4
+_mods = Array[ExtResource("1_e665g")]([])
+name = "Чёрная жижа"
+description = "+20% защиты на 3 хода"
 texture = ExtResource("4_gm6b6")
 max_stack = 10
-recipe = Array[ExtResource("3_8pop4")]([ExtResource("1_taygh"), ExtResource("2_vlr58")])
+recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_taygh"), ExtResource("2_vlr58")])
 price = 0
-descript = "Повышает защиту персонажа на 20% на ближайший бой"

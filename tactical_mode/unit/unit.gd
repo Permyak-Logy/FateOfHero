@@ -46,7 +46,6 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 	set(value):
 		private_abilities = value.duplicate(true)
 @export var private_passives: Array[Effect] = []
-var _abilities: Array[Ability] = []  # Текущие способности
 
 signal death(Unit)  # Вызывается при смерти
 signal walk_finished  # Вызывается при завершении передвижения
@@ -137,8 +136,8 @@ func get_mods() -> Dictionary:
 
 func get_abilities() -> Array[Ability]:
 	if inventory:
-		return _abilities + inventory.get_abilities()
-	return _abilities
+		return private_abilities + inventory.get_abilities()
+	return private_abilities
 
 func apply_passives():
 	for effect in private_passives:
