@@ -16,8 +16,11 @@ value = SubResource("Resource_gsuud")
 
 [resource]
 script = ExtResource("1_wkxoy")
+on_stack = 3
+limit_stacks_for_sum_mods = 10
 moves = 3
 mods = Array[ExtResource("1_wiuta")]([SubResource("Resource_e66lu")])
 destroy_on_death_instigator = true
+stackable = true
 effect_name = "Замерзание"
 is_negative = true

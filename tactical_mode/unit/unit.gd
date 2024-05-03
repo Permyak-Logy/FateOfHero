@@ -241,6 +241,14 @@ func get_effects() -> Array[Effect]:
 	return _effects
 
 func add_effect(effect: Effect):
+	if effect.stackable:
+		for other in get_effects():
+			if effect.get_class() == other.get_class() and other.stackable:
+				if other.stack(effect):
+					print("=> ", self.unit_name, " обновил эффект ", other.effect_name)
+					reload_all_mods()
+					return
+	
 	print("=> ", self.unit_name, " получил эффект ", effect.effect_name)
 	_effects.append(effect)
 	effect.owner = self
