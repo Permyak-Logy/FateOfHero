@@ -8,6 +8,7 @@ script = ExtResource("2_ew2o5")
 power = 10.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
+stackable = false
 effect_name = "Щит"
 is_negative = false
 
@@ -17,5 +18,6 @@ to_replicate_effect = SubResource("Resource_gvm22")
 apply_to = Array[int]([1, 0])
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
+stackable = false
 effect_name = "Грязный щит"
 is_negative = false

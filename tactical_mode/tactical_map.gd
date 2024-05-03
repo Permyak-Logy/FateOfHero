@@ -372,32 +372,7 @@ func _update_stepmove():
 	var killed_enemy_units = _e_units.all(func (x): return x.is_death())
 	
 	if killed_player_units != killed_enemy_units or escape:
-		_tile_map.clear_layer(OVERLAY_PATH_LAYER)
-		_tile_map.clear_layer(PATH_LAYER)
-		win = not escape
-		_block_input = true
-		running = false
-		print("*** FINISH! ***")
-		for player in get_player_units():
-			if player.is_death():
-				continue
-			var expirience = 0
-			for enemy in get_enemy_units():
-				if enemy.is_death():
-					expirience += int(enemy.health.get_max() / 10)
-			player.expirience.add_exp(expirience)
-			
-		var packed_live: Array[PackedScene] = []
-		var packed_death: Array[PackedScene] = []
-		for unit in _p_units:
-			
-			var pack = PackedScene.new()
-			pack.pack(unit)
-			if unit.is_death():
-				packed_death.append(pack)
-			else:
-				packed_live.append(pack)
-		finish.emit(packed_live, packed_death)
+		_finalize_fight()
 		return
 	
 	if acts != 0 and active_unit.controlled_player:
@@ -413,6 +388,34 @@ func _update_stepmove():
 	unit_queue[0][0] += _ACT_INDEX_MAX / active_unit.speed.cur()
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
+
+func _finalize_fight():
+	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
+	_tile_map.clear_layer(PATH_LAYER)
+	win = not escape
+	_block_input = true
+	running = false
+	print("*** FINISH! ***")
+	for player in get_player_units():
+		if player.is_death():
+			continue
+		var expirience = 0
+		for enemy in get_enemy_units():
+			if enemy.is_death():
+				expirience += int(enemy.health.get_max() / 10)
+		player.expirience.add_exp(expirience)
+		# player.health.rebase(player.health.get_base() + 20)
+		
+	var packed_live: Array[PackedScene] = []
+	var packed_death: Array[PackedScene] = []
+	for unit in _p_units:
+		var pack = PackedScene.new()
+		pack.pack(unit)
+		if unit.is_death():
+			packed_death.append(pack)
+		else:
+			packed_live.append(pack)
+	finish.emit(packed_live, packed_death)
 
 func _update_walls():
 	"""

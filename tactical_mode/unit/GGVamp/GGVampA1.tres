@@ -9,6 +9,7 @@ power = 0.2
 count = 5
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = true
+stackable = false
 effect_name = "Эффект"
 is_negative = false
 

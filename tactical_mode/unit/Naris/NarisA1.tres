@@ -8,6 +8,7 @@ script = ExtResource("1_3jkel")
 power = 0.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
+stackable = false
 effect_name = "Эффект"
 is_negative = false
 
