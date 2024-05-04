@@ -1,5 +1,6 @@
 class_name StatComponent extends Resource
 
+
 @export var mod_type: Mod.Type = Mod.Type.None
 @export var characteristic: Characteristic
 
