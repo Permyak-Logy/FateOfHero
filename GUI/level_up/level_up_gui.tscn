@@ -65,7 +65,7 @@ text = "Name"
 
 [node name="leveled_up" type="Label" parent="Panel/VBoxContainer/Title"]
 layout_mode = 2
-text = "has leveled Up!"
+text = "получил новый уровень!"
 horizontal_alignment = 1
 
 [node name="PtsMsg" type="HBoxContainer" parent="Panel/VBoxContainer"]
@@ -78,7 +78,7 @@ text = "n"
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/PtsMsg"]
 layout_mode = 2
-text = "points to allocate"
+text = "очков на повышение"
 
 [node name="CenterContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2

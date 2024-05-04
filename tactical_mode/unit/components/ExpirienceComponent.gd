@@ -6,7 +6,7 @@ class_name ExpirienceComponent extends Resource
 
 
 func get_exp_to_next_lvl() -> int:
-	return int(100 * exp((level - 1) / 40))
+	return int(100 * exp((float(level) - 1) / 11))
 
 func add_exp(_exp: int):
 	expirience += _exp

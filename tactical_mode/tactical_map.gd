@@ -2,13 +2,13 @@ class_name TacticalMap extends Node
 
 @onready var gui: TacticalModeGUI = $TacticalModeGui
 @onready var _tile_map: TileMap = $TileMap
-@onready var ability_btn = preload("res://GUI/tactical_mode/BtnAbility.tscn")
-
 @onready var _astar_board = AStarHexagon2D.new(_tile_map.get_used_cells(0))
 @onready var _astar_walkable: AStarHexagon2D
 
 @onready var _current_path = PackedVector2Array()
 var Rock = preload("res://tactical_mode/nature/Rock.tscn")
+var ability_btn = preload("res://GUI/tactical_mode/BtnAbility.tscn")
+var level_up_gui = preload("res://GUI/level_up/level_up_gui.tscn")
 
 var _block_input = false  # Блокировка пользовательского ввода
 const _ACT_INDEX_MAX = 10000  # Магическая константа для порядка ходов
@@ -403,8 +403,17 @@ func _finalize_fight(_win=false):
 			if enemy.is_death():
 				expirience += int(enemy.health.get_max() / 10)
 		player.expirience.add_exp(expirience)
-		# player.health.rebase(player.health.get_base() + 20)
-		
+		print(expirience, " ", player.expirience.get_exp_to_next_lvl())
+		if player.expirience.can_level_up():
+			print("Level up!!!!!!!")
+			var lug: LevelUpGUI = level_up_gui.instantiate()
+			lug.unit = player
+			lug.pts = player.expirience.ups
+			gui.add_child(lug)
+			await lug.done
+			player.expirience.ups = 0
+			gui.remove_child(lug)
+
 	var packed_live: Array[PackedScene] = []
 	var packed_death: Array[PackedScene] = []
 	for unit in _p_units:
@@ -414,6 +423,7 @@ func _finalize_fight(_win=false):
 			packed_death.append(pack)
 		else:
 			packed_live.append(pack)
+	print(packed_live)
 	finish.emit(packed_live, packed_death)
 
 func _update_walls():

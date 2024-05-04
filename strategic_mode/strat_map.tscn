@@ -4096,7 +4096,7 @@ texture = ExtResource("5_1yukr")
 
 [node name="ambush" parent="CombatEncounters" instance=ExtResource("4_ve1hs")]
 position = Vector2(-111, 92)
-enemies = Array[PackedScene]([ExtResource("6_0wgum")])
+enemies = Array[PackedScene]([ExtResource("6_0wgum"), ExtResource("6_0wgum")])
 texture = ExtResource("8_q21qa")
 
 [node name="PuzzleMaster" type="Node" parent="."]

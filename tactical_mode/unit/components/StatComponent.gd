@@ -42,7 +42,7 @@ func sub(value: float):
 func rebase(value: float, save_percent: bool = true):
 	var p = percent()
 	characteristic.base = value
-	characteristic.max_ = characteristic.base * mod_value.mul + mod_value.add
+	characteristic.max_ = characteristic.base * (mod_value.mul + 1) + mod_value.add
 	if save_percent:
 		characteristic.cur = characteristic.max_ * p
 

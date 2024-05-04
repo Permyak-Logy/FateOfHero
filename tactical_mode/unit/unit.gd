@@ -217,7 +217,6 @@ func play(_name: String, _params=null):
 			timer_for_walk_trail = get_tree().create_timer(trail_particles.lifetime)
 			timer_for_walk_trail.timeout.connect(trail_particles.hide)
 	elif animation_player:
-		print("Play ", _name)
 		animation_player.play(_name)
 
 func on_death(_component: StatComponent):

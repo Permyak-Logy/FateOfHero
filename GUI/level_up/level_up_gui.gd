@@ -15,21 +15,21 @@ signal done
 var unit: Unit = null
 var pts: = 0 
 
-var names: Dictionary = {
+@onready var names: Dictionary = {
 	unit.health :  "HP ",
 	unit.speed :   "SPD",
 	unit.defence : "DEF",
 	unit.damage :  "ATK",
 }
 
-var delta: Dictionary = {
+@onready var delta: Dictionary = {
 	unit.health :  0,
 	unit.speed :   0,
 	unit.defence : 0,
 	unit.damage :  0,
 }
 
-var std_d: Dictionary = {
+@onready var std_d: Dictionary = {
 	unit.health :  100,
 	unit.speed :   2,
 	unit.defence : 20,
@@ -39,7 +39,7 @@ var std_d: Dictionary = {
 func setup_stat_card(stat_card: StatCard, comp: StatComponent):
 	print(names[comp])
 	stat_card.set_stat_name(names[comp])
-	stat_card.set_value(comp.cur())
+	stat_card.set_value(comp.get_base())
 	
 	var callable = Callable(increment)
 	callable = callable.bind(comp)
@@ -62,13 +62,15 @@ func _ready():
 	done_button.pressed.connect(commit)
 
 func increment(comp: StatComponent):
-	if pts < 0: return
+	if pts <= 0:
+		return
 	delta[comp] += std_d[comp]
 	pts -= 1
 	update()
 
 func decrement(comp: StatComponent):
-	if delta[comp] == 0: return
+	if delta[comp] == 0:
+		return
 	delta[comp] -= std_d[comp]
 	pts += 1
 	update()
@@ -76,16 +78,16 @@ func decrement(comp: StatComponent):
 
 # graphical update
 func update():
-	health_card.set_value(unit.health.cur() + delta[unit.health])
-	speed_card.set_value(unit.speed.cur() + delta[unit.speed])
-	defence_card.set_value(unit.defence.cur() + delta[unit.defence])
-	damage_card.set_value(unit.damage.cur() + delta[unit.damage])
+	health_card.set_value(unit.health.get_base() + delta[unit.health])
+	speed_card.set_value(unit.speed.get_base() + delta[unit.speed])
+	defence_card.set_value(unit.defence.get_base() + delta[unit.defence])
+	damage_card.set_value(unit.damage.get_base() + delta[unit.damage])
 	pts_label.text = str(pts)
 	
 
 func commit():
-	unit.health.rebase(unit.health.cur() + delta[unit.health])
-	unit.speed.rebase(unit.speed.cur() + delta[unit.speed])
-	unit.defence.rebase(unit.defence.cur() + delta[unit.defence])
-	unit.damage.rebase(unit.damage.cur() + delta[unit.damage])
+	unit.health.rebase(unit.health.get_base() + delta[unit.health])
+	unit.speed.rebase(unit.speed.get_base() + delta[unit.speed])
+	unit.defence.rebase(unit.defence.get_base() + delta[unit.defence])
+	unit.damage.rebase(unit.damage.get_base() + delta[unit.damage])
 	done.emit()

@@ -58,9 +58,9 @@ characteristic = SubResource("Resource_k16fc")
 
 [sub_resource type="Resource" id="Resource_2j2qp"]
 script = ExtResource("2_o87t4")
-base = 50.0
-cur = 50.0
-max_ = 50.0
+base = 1e+06
+cur = 1e+06
+max_ = 1e+06
 
 [sub_resource type="Resource" id="Resource_ngsv5"]
 script = ExtResource("3_emqlv")

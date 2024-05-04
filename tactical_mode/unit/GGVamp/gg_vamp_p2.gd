@@ -5,7 +5,6 @@ class_name GGVampP2 extends Effect
 func update_on_attack(_damage: float, _instigator: Node = null) -> float:
 	var count = 0
 	for elem in owner.get_map().get_units_with_relation(owner, TacticalMap.relation.Friend):
-		print("--------------- ", elem.is_death(), elem)
 		if elem.is_death():
 			count += 1
 	_damage *= (1 + power * count)
