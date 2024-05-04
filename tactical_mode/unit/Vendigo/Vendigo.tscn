@@ -84,28 +84,30 @@ speed = SubResource("Resource_lpion")
 damage = SubResource("Resource_as02u")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("Sprite2D/GPUParticles2D")
-health_bar_pb = NodePath("StatProgressBar")
+health_bar_pb = NodePath("Sprite2D/StatProgressBar")
 controlled_player = false
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("4_2r87o")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("5_xkgjr")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_vyb2c")
 position = Vector2(22, -46)
 texture = ExtResource("4_g6t4h")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 z_index = -1
+y_sort_enabled = true
 amount = 3
 process_material = SubResource("ParticleProcessMaterial_aqvrl")
 texture = ExtResource("4_g6t4h")
 lifetime = 0.5
 
-[node name="StatProgressBar" parent="." instance=ExtResource("5_kxra3")]
-offset_left = -29.0
-offset_top = -112.0
-offset_right = 71.0
-offset_bottom = -110.0
+[node name="StatProgressBar" parent="Sprite2D" instance=ExtResource("5_kxra3")]
+offset_left = -51.0
+offset_top = -66.0
+offset_right = 49.0
+offset_bottom = -64.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("ConvexPolygonShape2D_mjml1")

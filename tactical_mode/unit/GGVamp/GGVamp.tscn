@@ -111,6 +111,7 @@ texture = ExtResource("8_ncdny")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Body"]
 z_index = -1
+y_sort_enabled = true
 process_material = SubResource("ParticleProcessMaterial_fk72q")
 texture = ExtResource("8_ncdny")
 
