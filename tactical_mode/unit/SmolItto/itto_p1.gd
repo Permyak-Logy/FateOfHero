@@ -21,9 +21,15 @@ func update_on_move():
 		if unit == owner:
 			continue
 		if unit.health and 0 < unit.health.percent() and unit.health.percent() <= percent:
+			var diff = -unit.health.cur()
 			unit.health.add(power)
+			diff += unit.health.cur()
 			cooldown = cooldown_time
-			print("=> IttoP1 heal ", power, " for ", unit.unit_name)
+			get_map().write_info(
+				"=> Восстанавливает " + diff + " здоровья у " + 
+				unit.unit_name + " (" + effect_name + ")"
+				)
+			print()
 			return
 	
 

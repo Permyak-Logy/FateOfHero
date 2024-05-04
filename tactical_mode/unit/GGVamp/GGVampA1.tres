@@ -26,6 +26,7 @@ cooldown = 6
 limit = 0
 count = -1
 scaling_type = 0
+only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Упырь"

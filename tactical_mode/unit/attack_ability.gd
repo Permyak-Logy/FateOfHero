@@ -4,10 +4,7 @@ class_name AttackAbility extends DirectedAbility
 
 func apply():
 	if owner.damage:
-		await owner.play("preattack")
 		var damaged = (selected[0] as Unit).apply_damage(owner.damage.cur(), owner)
-		print("=> Attack damage ", damaged, " for ", selected[0].unit_name, " by ", owner.unit_name)
-		await owner.play("postattack")
 		return true
 	return false
 

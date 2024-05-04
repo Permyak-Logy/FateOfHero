@@ -4,11 +4,12 @@ class_name IttoA1 extends DirectedAbility
 
 func apply():
 	var unit = selected[0] as Unit
+	
 	if unit.health:
-		await owner.play("preheal")
+		var diff = -unit.health.cur() 
 		unit.health.add(power)
-		await owner.play("postheal")
-		print("=> IttoA1 heal", power, " for ", unit.unit_name)
+		diff += unit.health.cur()
+		get_map().write_info("=> Востанавливает " + str(diff) + " здоровья у " + unit.unit_name)
 		return true
 	return false
 

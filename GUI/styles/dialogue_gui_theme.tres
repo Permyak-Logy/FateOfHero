@@ -1,12 +1,10 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c3kwn6d20ipja"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c3kwn6d20ipja"]
 
 [ext_resource type="StyleBox" uid="uid://cbtpodd5tuolv" path="res://GUI/styles/button_style_flat_pressed.tres" id="1_oru5m"]
 [ext_resource type="StyleBox" uid="uid://b4a2bmlcq1x1q" path="res://GUI/styles/button_style_flat_normal.tres" id="2_jcy74"]
 [ext_resource type="StyleBox" uid="uid://eve012771uwc" path="res://GUI/styles/panel.tres" id="3_jsako"]
 
 [sub_resource type="SystemFont" id="SystemFont_ddgfa"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6l8vl"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_hknur"]
 color = Color(1, 0.678431, 0.364706, 1)

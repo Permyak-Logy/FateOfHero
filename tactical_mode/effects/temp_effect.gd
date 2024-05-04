@@ -8,6 +8,10 @@ func update_on_move():
 	moves -= 1
 	if moves == 0:
 		finished.emit()
+	else:
+		get_map().write_info(
+			"=> " + owner.unit_name + " под эффектом " + effect_name
+		)
 
 func stack(other: Effect) -> bool:
 	if on_stack & 1:

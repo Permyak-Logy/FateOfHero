@@ -36,6 +36,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 		trail_particles = value
 		trail_particles.hide()
 @export var health_bar_pb: StatProgressBar = null
+@export var animation_player: AnimationPlayer = null
 
 @export_group("Unit stats")
 @export var acts_count: int = 1
@@ -61,7 +62,6 @@ var flipped: bool = false:  # Переключатель поворота
 			on_flip_unit()
 		else:
 			flipped = value
-
 
 var timer_for_walk_trail: SceneTreeTimer = null  # Таймер отключения walk_trail
 
@@ -108,7 +108,9 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 	
 	_damage = max(_damage, 0)
 	health.sub(_damage)
-	print("=> ", unit_name, " получил ", _damage, " урона от ", _instigator.unit_name)
+	get_map().write_info(
+		"=> " + unit_name + " получил " + str(_damage) +" урона от " + _instigator.unit_name
+	)
 	return _damage
 
 func reload_all_mods():
@@ -214,6 +216,9 @@ func play(_name: String, _params=null):
 		if trail_particles:
 			timer_for_walk_trail = get_tree().create_timer(trail_particles.lifetime)
 			timer_for_walk_trail.timeout.connect(trail_particles.hide)
+	elif animation_player:
+		print("Play ", _name)
+		animation_player.play(_name)
 
 func on_death(_component: StatComponent):
 	print("Death ", self)
@@ -245,11 +250,13 @@ func add_effect(effect: Effect):
 		for other in get_effects():
 			if effect.get_class() == other.get_class() and other.stackable:
 				if other.stack(effect):
-					print("=> ", self.unit_name, " обновил эффект ", other.effect_name)
+					get_map().write_info(
+						"=> " + self.unit_name + " обновил эффект " + other.effect_name
+					)
 					reload_all_mods()
 					return
 	
-	print("=> ", self.unit_name, " получил эффект ", effect.effect_name)
+	get_map().write_info("=> " + self.unit_name + " получил эффект " + effect.effect_name)
 	_effects.append(effect)
 	effect.owner = self
 	effect.finished.connect(remove_effect)
@@ -257,7 +264,9 @@ func add_effect(effect: Effect):
 	reload_all_mods()
 
 func remove_effect(effect: Effect):
-	print("=> ", self.unit_name, " кончился эффект ", effect.effect_name)
+	get_map().write_info(
+		"=> " + " Кончился эффект " + effect.effect_name + " (" +unit_name + ")"
+	)
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)

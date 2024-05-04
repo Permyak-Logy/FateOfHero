@@ -128,7 +128,7 @@ _data = {
 "run": SubResource("Animation_eeqfk")
 }
 
-[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb")]
+[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_fkgsn")
@@ -142,6 +142,7 @@ expirience = SubResource("Resource_endnl")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("Sprite2D/GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
+animation_player = NodePath("AnimationPlayer")
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_ahqu3"), ExtResource("7_5dfrg"), ExtResource("8_w3k2y")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_o8m50")])
 

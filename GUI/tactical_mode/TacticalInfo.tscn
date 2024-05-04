@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dly11cs48am3l"]
 
-[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/dialogue/dialogue_gui_theme.tres" id="1_r287j"]
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_r287j"]
 [ext_resource type="Script" path="res://GUI/tactical_mode/TacticalInfo.gd" id="2_b887j"]
 
 [node name="TacticalInfo" type="Panel"]

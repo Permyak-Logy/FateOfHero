@@ -46,3 +46,6 @@ func is_active() -> bool:
 
 func get_mods() -> Array[Mod]:
 	return mods
+
+func get_map() -> TacticalMap:
+	return owner.get_map()

@@ -359,7 +359,6 @@ func _start_stepmove():
 	else:
 		_update_walkable(false)
 		await active_unit.ai(self)
-		_update_stepmove()
 
 func _update_stepmove():
 	"""
@@ -373,11 +372,10 @@ func _update_stepmove():
 	var killed_enemy_units = _e_units.all(func (x): return x.is_death())
 	
 	if killed_player_units != killed_enemy_units or escape:
-		_finalize_fight()
+		_finalize_fight(killed_enemy_units and not escape)
 		return
 	
 	if acts != 0 and active_unit.controlled_player:
-		
 		write_info("* Ход продолжается *")
 		_update_walkable()
 		_block_input = false
@@ -390,10 +388,10 @@ func _update_stepmove():
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
 
-func _finalize_fight():
+func _finalize_fight(_win=false):
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	_tile_map.clear_layer(PATH_LAYER)
-	win = not escape
+	win = _win
 	_block_input = true
 	running = false
 	write_info("*** Бой завершён ***")

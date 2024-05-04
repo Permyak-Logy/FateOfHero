@@ -12,7 +12,9 @@ func find_about_cells():
 			about_cells.append(_cell)
 
 func apply_on_unit(unit: Unit):
-	print("=> Жрёт хп у ", unit, "отнято ", unit.health.cur() * power_attack)
+	get_map().write_info(
+		"=> Жрёт хп у " + unit.unit_name + "отнято " + str(int(unit.health.cur() * power_attack))
+	)
 	unit.health.sub(unit.health.cur() * power_attack)
 
 func can_select_cell(_cell: Vector2i) -> bool:

@@ -13,7 +13,9 @@ func on_set_owner(old, new):
 func on_change_health(comp: StatComponent, old: float, new: float):
 	if new > old:
 		power = min(power_max, power + power_delta)
-		print("=> Падший ангел ", owner, " -> ", power)
+		get_map().write_info(
+			"=> Падший ангел усилен до " + str(int(power*100)) + "% (" + owner.unit_name + ")"
+		)
 
 func update_on_attack(_damage: float, _instigator: Node = null) -> float:
 	_damage *= (1 + power)

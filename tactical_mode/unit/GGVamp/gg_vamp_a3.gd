@@ -10,7 +10,8 @@ func apply():
 	owner.health.sub(heal)
 	heal *= power_target
 	unit.health.add(heal)
-	print("=> GGVampA3 heal", heal, " for ", unit.unit_name)
+	get_map().write_info(
+		"=> " + owner.unit_name + "восстанавливает " + str(heal) + " здоровья " + unit.unit_name)
 	return true
 
 func can_select(node):

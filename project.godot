@@ -27,7 +27,6 @@ window/size/window_width_override=1280
 window/size/window_height_override=800
 window/stretch/mode="canvas_items"
 window/stretch/scale=2.0
-window/vsync/vsync_mode=0
 
 [file_customization]
 
