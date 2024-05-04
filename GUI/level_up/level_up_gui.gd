@@ -13,7 +13,7 @@ class_name LevelUpGUI extends Control
 @onready var done_button = $Panel/VBoxContainer/Done
 signal done
 var unit: Unit = null
-
+var pts: = 0 
 
 var names: Dictionary = {
 	unit.health :  "HP ",
@@ -51,19 +51,26 @@ func setup_stat_card(stat_card: StatCard, comp: StatComponent):
 
 func _ready():
 	assert(unit != null, "pass unit before attaching")
+	assert(pts != 0, "pass levels before attaching")
 	var callable: Callable
 	setup_stat_card(health_card, unit.health)
 	setup_stat_card(speed_card, unit.speed)
 	setup_stat_card(defence_card, unit.defence)
 	setup_stat_card(damage_card, unit.damage)
+	name_label.text = unit.unit_name
+	pts_label.text = str(pts)
 	done_button.pressed.connect(commit)
 
 func increment(comp: StatComponent):
+	if pts < 0: return
 	delta[comp] += std_d[comp]
+	pts -= 1
 	update()
 
 func decrement(comp: StatComponent):
+	if delta[comp] == 0: return
 	delta[comp] -= std_d[comp]
+	pts += 1
 	update()
 
 
@@ -73,6 +80,8 @@ func update():
 	speed_card.set_value(unit.speed.cur() + delta[unit.speed])
 	defence_card.set_value(unit.defence.cur() + delta[unit.defence])
 	damage_card.set_value(unit.damage.cur() + delta[unit.damage])
+	pts_label.text = str(pts)
+	
 
 func commit():
 	unit.health.rebase(unit.health.cur() + delta[unit.health])
