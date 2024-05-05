@@ -51,7 +51,6 @@ func _input(event):
 			moving = true
 		else:
 			next_move = event
-	
 	pass
 
 

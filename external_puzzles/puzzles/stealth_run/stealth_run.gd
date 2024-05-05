@@ -1,7 +1,7 @@
 class_name StealthRun extends BasePuzzle
 
 @onready var tilemap: TileMap = $TileMap
-@onready var player: WASDPlayer
+@onready var player: StealthPlayer = $StealthPlayer
 
 var field_size: Vector2i = Vector2i(20, 15)
 
@@ -9,23 +9,38 @@ var CampfireRes: PackedScene = preload("res://external_puzzles/puzzles/stealth_r
 var TreeRes: PackedScene = preload("res://external_puzzles/puzzles/stealth_run/obstacles/tree.tscn")
 var TentRes: PackedScene = preload("res://external_puzzles/puzzles/stealth_run/obstacles/tent.tscn")
 var EnemyRes: PackedScene = preload("res://external_puzzles/puzzles/stealth_run/obstacles/stealth_enemy.tscn")
+var EPWinConditionRes: PackedScene = preload("res://external_puzzles/puzzles/safe_path/win_condition_point.tscn")
 
 var enemies: Array[PackedScene]
 var pawns: Array[StealthEnemy] = []
+var wc: EPWinCondition = EPWinConditionRes.instantiate()
+
 
 func dist(a: Vector2i, b: Vector2i) -> int:
 	return max(abs(a.x - b.x), abs(a.y - b.y))
 
 func gen_field():
 	var rng = RandomNumberGenerator.new()
-	var campfire = CampfireRes.instantiate()
+	var campfire: StealthCampfire = CampfireRes.instantiate()
 	tilemap.add_child(campfire)
-	campfire.place(field_size / 2 +\
-	 Vector2i(randi_range(-3 , 3), randi_range(-3 , 3)))
-	var ci = EnemyRes.instantiate()
+	campfire.place(Vector2i(randi_range(8 , 12), randi_range(10 , 12)))
 	
+	var ci: StealthEnemy = EnemyRes.instantiate()
+	add_child(ci)
+	ci.place(campfire.pos + Vector2i(0, -2), StealthEnemy.Direction.South)
+	pawns.append(ci)
 	
-	var tents = []
+	ci = EnemyRes.instantiate()
+	add_child(ci)
+	ci.place(campfire.pos + Vector2i(-2, 0), StealthEnemy.Direction.East)
+	pawns.append(ci)
+	
+	ci = EnemyRes.instantiate()
+	add_child(ci)
+	ci.place(campfire.pos + Vector2i(2, 0), StealthEnemy.Direction.West)
+	pawns.append(ci)
+	
+	var tents: Array[StealthTent] = []
 	var tc = 0
 	for i in range(6):
 		var tent: StealthTent = TentRes.instantiate()
@@ -67,8 +82,40 @@ func gen_field():
 		tent.dir = tent.Direction.South
 		tent.place(campfire.pos + Vector2i(5, -1))
 		tents.append(tent)
+	add_child(wc)
+	var tid = randi_range(0, tents.size() - 1)
+	var wc_pos = tents[tid].pos
+	if tents[tid].dir == StealthTent.Direction.North:
+		wc.global_position = tilemap.map_to_local(wc_pos + Vector2i(0, 1))
+	if tents[tid].dir == StealthTent.Direction.South:
+		wc.global_position = tilemap.map_to_local(wc_pos + Vector2i(0, -1))
+	if tents[tid].dir == StealthTent.Direction.West:
+		wc.global_position = tilemap.map_to_local(wc_pos + Vector2i(1, 0))
+	if tents[tid].dir == StealthTent.Direction.East:
+		wc.global_position = tilemap.map_to_local(wc_pos + Vector2i(-1 , 0))
 	
-	var trees = []
+	# for enemies
+	var gi1: StealthEnemy = EnemyRes.instantiate()
+	var gi2: StealthEnemy = EnemyRes.instantiate()
+	add_child(gi1)
+	add_child(gi2)
+	pawns.append(gi1)
+	pawns.append(gi2)
+	if tents[tid].dir == StealthTent.Direction.North:
+		gi1.place(wc_pos + Vector2i(1, -1), gi1.Direction.North)
+		gi2.place(wc_pos + Vector2i(-1, -1), gi1.Direction.North)
+		pass
+	if tents[tid].dir == StealthTent.Direction.South:
+		gi1.place(wc_pos + Vector2i(1, 1), gi1.Direction.South)
+		gi2.place(wc_pos + Vector2i(-1, 1), gi1.Direction.South)
+	if tents[tid].dir == StealthTent.Direction.East:
+		gi1.place(wc_pos + Vector2i(1 , -1), gi1.Direction.East)
+		gi2.place(wc_pos + Vector2i(1 , 1), gi1.Direction.East)
+	if tents[tid].dir == StealthTent.Direction.West:
+		gi1.place(wc_pos + Vector2i(-1 , -1), gi1.Direction.West)
+		gi2.place(wc_pos + Vector2i(-1 , 1), gi1.Direction.West)
+	
+	var trees: Array[StealthTree] = []
 	
 	for i in range(10):
 		var tree = TreeRes.instantiate() 
@@ -92,4 +139,5 @@ func set_enemies(enemies_: Array[PackedScene]):
 	enemies = enemies_
 
 func _ready():
+	player.pos = Vector2i(1, 1)
 	gen_field()
