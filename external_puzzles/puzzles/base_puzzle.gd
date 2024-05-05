@@ -5,4 +5,6 @@ Base class for puzzles
 All the shared logic goes here
 The API must be defined here
 """
-signal solved
+
+@export var rewards: Array[ItemStack] = []
+signal solved(rewards: Array[ItemStack])

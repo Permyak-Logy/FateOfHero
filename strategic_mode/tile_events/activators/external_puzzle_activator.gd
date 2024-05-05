@@ -22,7 +22,9 @@ func activate():
 	game.external_puzzle_container.add_child(puzzle_scene)
 	game.to_puzzle_mode()
 
-func on_done():
+func on_done(rewards: Array[ItemStack]):
+	for reward in rewards:
+		game.strat_map.player.inventory.insert(reward.item, reward.size)
 	for child in game.external_puzzle_container.get_children():
 		game.external_puzzle_container.remove_child(child)
 	game.to_strat_mode()

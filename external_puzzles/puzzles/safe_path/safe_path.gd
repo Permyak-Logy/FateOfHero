@@ -126,7 +126,7 @@ func _ready():
 	player.speed = 8 * tilemap.tile_set.tile_size.length()
 
 func end_successfully():
-	solved.emit()
+	solved.emit(rewards)
 	game.to_strat_mode()
 	
 func start_fight():
@@ -140,5 +140,5 @@ func set_enemies(enemies_: Array[PackedScene]):
 
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive
-	solved.emit()
+	solved.emit(rewards)
 	game.to_strat_mode()
