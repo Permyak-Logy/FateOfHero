@@ -2,7 +2,8 @@ class_name StealthRun extends BasePuzzle
 
 @onready var tilemap: TileMap = $TileMap
 @onready var player: StealthPlayer = $StealthPlayer
-
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory: Inventory = game.strat_map.player.inventory
 var field_size: Vector2i = Vector2i(20, 15)
 
 var CampfireRes: PackedScene = preload("res://external_puzzles/puzzles/stealth_run/obstacles/campfire.tscn")
@@ -138,8 +139,15 @@ func gen_field():
 func set_enemies(enemies_: Array[PackedScene]):
 	enemies = enemies_
 
-func start_combat():
-	pass
+func start_fight():
+	var characters = inventory.characters
+	game.tactical_map.reinit(characters, enemies)
+	game.to_tact_mode()
+	game.tactical_map.finish.connect(on_finish_tactical_map)
+
+func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
+	inventory.characters = alive
+	solved.emit(rewards)
 
 func _ready():
 	player.pos = Vector2i(1, 1)

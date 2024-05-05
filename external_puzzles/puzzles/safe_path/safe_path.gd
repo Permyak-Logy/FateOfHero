@@ -126,18 +126,17 @@ func _ready():
 	player.global_position = tilemap.map_to_local(player.pos)
 	player.speed = 8 * tilemap.tile_set.tile_size.length()
 
+func set_enemies(enemies_: Array[PackedScene]):
+	enemies = enemies_
+
 func end_successfully():
 	solved.emit(rewards)
-	game.to_strat_mode()
-	
+
 func start_fight():
 	var characters = inventory.characters
 	game.tactical_map.reinit(characters, enemies)
 	game.to_tact_mode()
 	game.tactical_map.finish.connect(on_finish_tactical_map)
-
-func set_enemies(enemies_: Array[PackedScene]):
-	enemies = enemies_
 
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive

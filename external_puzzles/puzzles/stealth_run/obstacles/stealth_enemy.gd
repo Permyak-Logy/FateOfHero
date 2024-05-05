@@ -19,6 +19,7 @@ enum State {
 	walking,
 	panic
 }
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var puzzle: StealthRun = $".."
 @onready var tilemap: TileMap =  $"../TileMap"
@@ -40,28 +41,78 @@ var target_position: Vector2
 var last_position: Vector2
 var is_moving: bool = false
 
+var speed = 16 * 1
+
 func place(pos: Vector2i, dir: Direction):
 	self.pos = pos
 	self.original_pos = pos
 	view_direction = dir
 	original_view_direction = dir
 	global_position = puzzle.tilemap.map_to_local(pos)
+	see()
 	pass
+
+
+func set_unsafe(target_pos: Vector2i):
+	tilemap.set_cell(0, target_pos, 0, Vector2i(0, 0)) 
+
+func set_safe(target_pos: Vector2i):
+	tilemap.set_cell(0, target_pos, 0, Vector2i(1, 0)) 
+
+func set_unwalkable(target_pos: Vector2i):
+	tilemap.set_cell(0, target_pos, 0, Vector2i(2, 0)) 
+
+func is_walkable(target_pos: Vector2i):
+	if not tilemap.get_cell_tile_data(0, target_pos):
+		return false
+	return tilemap.get_cell_tile_data(0, target_pos).get_custom_data("walkable")
+
+func get_vect_from_dir(dir: Direction) -> Vector2i:
+	var vec: Vector2i = Vector2i(0, 0)
+	if dir <= 1 or dir == 7:
+		vec += Vector2i(0, -1) 
+	if 1 <= dir and dir <= 3:
+		vec += Vector2i(1, 0)
+	if 3 <= dir and dir <= 5:
+		vec += Vector2i(0, 1)
+	if 5 <= dir and dir <= 7:
+		vec += Vector2i(-1, 0)
+	return vec
+
+func get_dir_from_vect(vect: Vector2i) -> Direction:
+	if vect == Vector2i(0, -1):
+		return Direction.North
+	elif vect == Vector2i(1, -1):
+		return Direction.NorthEast
+	elif vect == Vector2i(1, 0):
+		return Direction.East
+	elif vect == Vector2i(1, 1):
+		return Direction.SouthEast
+	elif vect == Vector2i(0, 1):
+		return Direction.South
+	elif vect == Vector2i(-1, 1):
+		return Direction.SouthWest
+	elif vect == Vector2i(-1, 0):
+		return Direction.West
+	else:
+		return Direction.NorthWest
+	
 
 func update():
 	sprite.frame = view_direction
+	look(view_direction)
 
 func move(delta):
 	if current_id_path.is_empty():
 		return
 	
 	if is_moving == false:
+		view_direction = get_dir_from_vect(current_id_path.front() - pos)
+		update() 
 		target_position = tilemap.map_to_local(current_id_path.front())
-		target_position[0] -= 8
-		target_position[1] -= 8
 		is_moving = true
 	
-	var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
+	var movement = global_position.move_toward(target_position, speed * delta) - global_position
 	var collision = move_and_collide(movement)
 	
 	if collision:
@@ -70,27 +121,47 @@ func move(delta):
 			puzzle.start_combat()
 	
 	if global_position == target_position:
+		unsee()
 		pos = current_id_path.front()
 		current_id_path.pop_front()
 		if not current_id_path.is_empty():
 			last_position = target_position
 			target_position = tilemap.map_to_local(current_id_path.front())
-			var dir = current_id_path.front() - pos
-			if dir.y == -1:
-				view_direction = Direction.North
-			if dir.y == 1:
-				view_direction = Direction.South
-			if dir.x == 1:
-				view_direction = Direction.East
-			if dir.x == -1:
-				view_direction = Direction.West
+			view_direction = get_dir_from_vect(current_id_path.front() - pos)
+			update()
+			see()
 		else:
 			is_moving = false
 			
-
+func unsee():
+	set_safe(pos)
+	for i in range(-1, 2):
+		if is_walkable(pos + get_vect_from_dir((view_direction + 8 + i) % 8)):
+			set_safe(pos + get_vect_from_dir((view_direction + 8 + i) % 8))
+		if is_walkable(pos +  2 * get_vect_from_dir((view_direction + 8 + i) % 8)):
+			set_safe(pos +  2 * get_vect_from_dir((view_direction + 8 + i) % 8))
+		if is_walkable(pos + get_vect_from_dir((view_direction + 8 + i) % 8) + get_vect_from_dir(view_direction)):
+			set_safe((pos + get_vect_from_dir((view_direction + 8 + i) % 8) + get_vect_from_dir(view_direction)))
 
 func see():
-	pass
+	"""
+	i will be dumb and just set the walkable tilesin front of it unsafe
+	and then set in back safe
+	"""
+	set_unsafe(pos)
+	for i in range(-1, 2):
+		if is_walkable(pos + get_vect_from_dir((view_direction + 8 + i) % 8)):
+			set_unsafe(pos + get_vect_from_dir((view_direction + 8 + i) % 8))
+		if is_walkable(pos +  2 * get_vect_from_dir((view_direction + 8 + i) % 8)):
+			set_unsafe(pos +  2 * get_vect_from_dir((view_direction + 8 + i) % 8))
+		if is_walkable(pos + get_vect_from_dir((view_direction + 8 + i) % 8) + get_vect_from_dir(view_direction)):
+			set_unsafe((pos + get_vect_from_dir((view_direction + 8 + i) % 8) + get_vect_from_dir(view_direction)))
+		
+
+func look(dir: Direction):
+	unsee()
+	view_direction = dir 
+	see()
 
 func _physics_process(delta):
 	update()
@@ -99,7 +170,6 @@ func _physics_process(delta):
 	if state == State.sleep:
 		if timer == 0:
 			state = next_state
-	see()
 	if state == State.awake:
 		if clock > 5:
 			clock = 0
@@ -122,7 +192,7 @@ func _physics_process(delta):
 						tilemap.local_to_map(global_position),
 						target_position
 					).slice(1)
-				view_direction = Direction.North
+				look(Direction.North)
 			else:
 				view_direction = original_view_direction
 		
@@ -130,6 +200,7 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed("spacebar"):
 		if player_close:
+			unsee()
 			stealth_suicide.emit(self)
 
 
@@ -143,9 +214,6 @@ func _on_area_2d_body_entered(body):
 		player_close = true
 
 
-func _ready():
-	pass 
-	
 func setup_nav():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
