@@ -14,7 +14,7 @@ var EPWinConditionRes: PackedScene = preload("res://external_puzzles/puzzles/saf
 var enemies: Array[PackedScene]
 var pawns: Array[StealthEnemy] = []
 var wc: EPWinCondition = EPWinConditionRes.instantiate()
-
+var wc_reached: bool = false
 
 func dist(a: Vector2i, b: Vector2i) -> int:
 	return max(abs(a.x - b.x), abs(a.y - b.y))
@@ -141,3 +141,14 @@ func set_enemies(enemies_: Array[PackedScene]):
 func _ready():
 	player.pos = Vector2i(1, 1)
 	gen_field()
+	for pawn in pawns:
+		pawn.stealth_suicide.connect(kill)
+	wc.WCReached.connect(on_wc_activated)
+
+func kill(pawn: StealthEnemy):
+	pawns.pop_at(pawns.find(pawn))
+	remove_child(pawn)
+
+func on_wc_activated():
+	wc_reached = true
+

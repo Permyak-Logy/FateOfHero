@@ -1,5 +1,7 @@
 class_name StealthEnemy extends StaticBody2D
 
+signal stealth_suicide(target: StealthEnemy)
+
 enum Direction {
 	North,
 	NorthEast,
@@ -22,6 +24,7 @@ enum State {
 
 var pos: Vector2i
 var view_direction: Direction = Direction.North
+var player_close: bool = false
 
 func place(pos: Vector2i, dir: Direction):
 	self.pos = pos
@@ -38,3 +41,18 @@ func move():
 func _physics_process(delta):
 	sprite.frame = view_direction
 	pass
+
+func _input(event):
+	if event.is_action_pressed("spacebar"):
+		if player_close:
+			stealth_suicide.emit(self)
+
+
+func _on_area_2d_body_exited(body):
+	if is_instance_of(body, StealthPlayer):
+		player_close = false
+
+
+func _on_area_2d_body_entered(body):
+	if is_instance_of(body, StealthPlayer):
+		player_close = true

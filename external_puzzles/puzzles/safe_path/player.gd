@@ -10,7 +10,6 @@ var next_move = null
 
 func wasd_move(event):
 	var delta = Vector2i(0, 0)
-	print(puzzle.tilemap.get_cell_atlas_coords(0, pos))
 	if event.is_action_pressed("up"):
 		delta[1] -= 1
 	if event.is_action_pressed("down"):

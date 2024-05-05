@@ -4,3 +4,4 @@ signal WCReached
 
 func activate():
 	WCReached.emit()
+	queue_free()
