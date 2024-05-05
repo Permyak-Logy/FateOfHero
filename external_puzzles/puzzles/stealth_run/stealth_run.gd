@@ -13,6 +13,7 @@ var EPWinConditionRes: PackedScene = preload("res://external_puzzles/puzzles/saf
 
 var enemies: Array[PackedScene]
 var pawns: Array[StealthEnemy] = []
+var trees: Array[StealthTree] = []
 var wc: EPWinCondition = EPWinConditionRes.instantiate()
 var wc_reached: bool = false
 
@@ -115,8 +116,6 @@ func gen_field():
 		gi1.place(wc_pos + Vector2i(-1 , -1), gi1.Direction.West)
 		gi2.place(wc_pos + Vector2i(-1 , 1), gi1.Direction.West)
 	
-	var trees: Array[StealthTree] = []
-	
 	for i in range(10):
 		var tree = TreeRes.instantiate() 
 		var pos = Vector2i(randi_range(2, 18), randi_range(2, 13))
@@ -134,15 +133,20 @@ func gen_field():
 			continue
 		tilemap.add_child(tree)
 		tree.place(pos)
+		trees.append(tree)
 
 func set_enemies(enemies_: Array[PackedScene]):
 	enemies = enemies_
+
+func start_combat():
+	pass
 
 func _ready():
 	player.pos = Vector2i(1, 1)
 	gen_field()
 	for pawn in pawns:
 		pawn.stealth_suicide.connect(kill)
+		pawn.setup_nav()
 	wc.WCReached.connect(on_wc_activated)
 
 func kill(pawn: StealthEnemy):
@@ -151,4 +155,7 @@ func kill(pawn: StealthEnemy):
 
 func on_wc_activated():
 	wc_reached = true
+
+func get_random_tree():
+	return trees[randi_range(0, trees.size() - 1)]
 
