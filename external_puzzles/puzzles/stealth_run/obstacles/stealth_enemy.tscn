@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://w7a343fktm8o"]
+
+[ext_resource type="Script" path="res://external_puzzles/puzzles/stealth_run/obstacles/stealth_enemy.gd" id="1_b27ms"]
+[ext_resource type="Texture2D" uid="uid://bwfflepb3oxmt" path="res://external_puzzles/puzzles/stealth_run/obstacles/enemy_rotor.png" id="2_kwyc1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkxkw"]
+size = Vector2(15, 15)
+
+[node name="StealthEnemy" type="StaticBody2D"]
+script = ExtResource("1_b27ms")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_xkxkw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_kwyc1")
+hframes = 8

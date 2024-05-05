@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b6ttnr3qgqf8x"]
 
-[ext_resource type="Texture2D" uid="uid://blfxb7g5x4u8g" path="res://external_puzzles/puzzles/safe_path/tpr_win_condition.png" id="1_21u6m"]
+[ext_resource type="Texture2D" uid="uid://blfxb7g5x4u8g" path="res://external_puzzles/puzzles/stealth_run/tpr_win_condition.png" id="1_21u6m"]
 [ext_resource type="Script" path="res://external_puzzles/puzzles/safe_path/win_condition_point.gd" id="1_q3p87"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_takvm"]

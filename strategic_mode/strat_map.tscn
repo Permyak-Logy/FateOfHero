@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=31 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://strategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://strategic_mode/strat_map.gd" id="1_vssm8"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://sgkba57dbbe7" path="res://city_mode/Cities/Geraldina/Geraldina.tscn" id="22_t3kb4"]
 [ext_resource type="Resource" path="res://strategic_mode/dialogues/genned_dial/Привет.tres" id="22_trjjb"]
 [ext_resource type="Texture2D" uid="uid://bgqjde0lpoh7w" path="res://strategic_mode/tile_events/sprites/house.png" id="23_qm7dp"]
+[ext_resource type="PackedScene" uid="uid://bids4nmirj5aj" path="res://external_puzzles/puzzles/stealth_run/stealth_run.tscn" id="27_pvq2k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4120,7 +4121,7 @@ position = Vector2(-11, -101)
 [node name="ExternalPuzzles" type="Node" parent="PuzzleMaster"]
 
 [node name="CombatCapablePuzzleActivator" parent="PuzzleMaster/ExternalPuzzles" instance=ExtResource("13_uwixs")]
-position = Vector2(132, 20)
+position = Vector2(146, 16)
 enemies = Array[PackedScene]([ExtResource("5_r3hyg")])
 puzzle = ExtResource("14_hlgbt")
 texture = ExtResource("15_kwpve")
@@ -4142,7 +4143,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("21_wx1y1")]
-position = Vector2(81, 85)
+position = Vector2(117, 177)
 dialogue = ExtResource("21_hc15a")
 texture = ExtResource("5_1yukr")
 
@@ -4152,9 +4153,15 @@ dialogue = ExtResource("22_trjjb")
 texture = ExtResource("5_1yukr")
 
 [node name="TownTileEvent" parent="." instance=ExtResource("21_vylki")]
-position = Vector2(88, 48)
+position = Vector2(109, 197)
 city = ExtResource("22_t3kb4")
 texture = ExtResource("23_qm7dp")
+
+[node name="CombatCapablePuzzleActivator" parent="." instance=ExtResource("13_uwixs")]
+position = Vector2(35, 38)
+enemies = Array[PackedScene]([ExtResource("5_r3hyg"), ExtResource("5_r3hyg"), ExtResource("5_r3hyg"), ExtResource("5_r3hyg"), ExtResource("5_r3hyg")])
+puzzle = ExtResource("27_pvq2k")
+texture = ExtResource("15_kwpve")
 
 [connection signal="inventory_closed" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_closed"]
 [connection signal="inventory_opened" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_opened"]

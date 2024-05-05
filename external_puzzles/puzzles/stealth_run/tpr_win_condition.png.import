@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wkhup0ra7l2p"
-path="res://.godot/imported/tpr_win_condition.png-e03bfa4e64ed07bc1f481ea5647cab13.ctex"
+uid="uid://blfxb7g5x4u8g"
+path="res://.godot/imported/tpr_win_condition.png-4aa88899b4e6e572ae95cb5266cce0e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://external_puzzles/puzzles/safe_path/tpr_win_condition.png"
-dest_files=["res://.godot/imported/tpr_win_condition.png-e03bfa4e64ed07bc1f481ea5647cab13.ctex"]
+source_file="res://external_puzzles/puzzles/stealth_run/tpr_win_condition.png"
+dest_files=["res://.godot/imported/tpr_win_condition.png-4aa88899b4e6e572ae95cb5266cce0e4.ctex"]
 
 [params]
 

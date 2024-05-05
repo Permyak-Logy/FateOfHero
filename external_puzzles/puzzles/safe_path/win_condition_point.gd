@@ -1,6 +1,6 @@
-extends Node2D
+class_name EPWinCondition extends Node2D 
 
-class_name SafePathWinConditionPoint
+signal WCReached
 
 func activate():
-	pass
+	WCReached.emit()

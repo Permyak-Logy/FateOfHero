@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dspvx54vf5yaw"]
+
+[ext_resource type="PackedScene" uid="uid://byiv66xh65wju" path="res://external_puzzles/puzzles/stealth_run/obstacles/obstacle.tscn" id="1_3fuwx"]
+[ext_resource type="Script" path="res://external_puzzles/puzzles/stealth_run/obstacles/campfire.gd" id="2_2budr"]
+
+[node name="Campfire" instance=ExtResource("1_3fuwx")]
+script = ExtResource("2_2budr")

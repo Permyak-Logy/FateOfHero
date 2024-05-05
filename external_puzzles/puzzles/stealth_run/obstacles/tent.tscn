@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsekivkhfpg8g"]
+
+[ext_resource type="PackedScene" uid="uid://byiv66xh65wju" path="res://external_puzzles/puzzles/stealth_run/obstacles/obstacle.tscn" id="1_lw14u"]
+[ext_resource type="Script" path="res://external_puzzles/puzzles/stealth_run/obstacles/tent.gd" id="2_fxd5o"]
+
+[node name="Tent" instance=ExtResource("1_lw14u")]
+script = ExtResource("2_fxd5o")

@@ -1,10 +1,7 @@
-extends CharacterBody2D
-
-class_name wasd_player
+class_name WASDPlayer extends CharacterBody2D
 
 
-@onready var puzzle: SafePath = get_parent()
-
+@onready var puzzle = get_parent()
 @onready var pos: Vector2i = Vector2i(5, 13)
 @onready var moving: bool = false
 #var speed = 20 * puzzle.tilemap.tile_set.tile_size
@@ -13,6 +10,7 @@ var next_move = null
 
 func wasd_move(event):
 	var delta = Vector2i(0, 0)
+	print(puzzle.tilemap.get_cell_atlas_coords(0, pos))
 	if event.is_action_pressed("up"):
 		delta[1] -= 1
 	if event.is_action_pressed("down"):
@@ -32,8 +30,8 @@ func _physics_process(delta):
 		var collision = move_and_collide(movement)
 		if collision:
 			var collidor = collision.get_collider()
-			if is_instance_of(collidor.get_parent(), SafePathWinConditionPoint):
-				puzzle.end_successfully()
+			if collidor.get_parent().has_method("activate"):
+				collidor.get_parent().activate()
 	else:
 		if not puzzle.tilemap.get_cell_tile_data(0, pos).get_custom_data("safe"):
 			puzzle.start_fight()
@@ -41,7 +39,8 @@ func _physics_process(delta):
 			wasd_move(next_move)
 			next_move = null
 		moving = false
-				   
+
+
 func _input(event):
 	if event.is_action_pressed("up") \
 	or event.is_action_pressed("down") \
@@ -52,6 +51,8 @@ func _input(event):
 			moving = true
 		else:
 			next_move = event
+	
+	pass
 
 
 func _ready():
