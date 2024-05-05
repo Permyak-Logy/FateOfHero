@@ -158,7 +158,8 @@ func _ready():
 	wc.WCReached.connect(on_wc_activated)
 
 func kill(pawn: StealthEnemy):
-	pawns.pop_back()
+	pawns.pop_at(pawns.find(pawn))
+	enemies.pop_back()
 	remove_child(pawn)
 
 func on_wc_activated():
