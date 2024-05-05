@@ -107,7 +107,7 @@ func move(delta):
 		return
 	
 	if is_moving == false:
-		view_direction = get_dir_from_vect(current_id_path.front() - pos)
+		look(get_dir_from_vect(current_id_path.front() - pos))
 		update() 
 		target_position = tilemap.map_to_local(current_id_path.front())
 		is_moving = true
@@ -194,7 +194,7 @@ func _physics_process(delta):
 					).slice(1)
 				look(Direction.North)
 			else:
-				view_direction = original_view_direction
+				look(original_view_direction)
 		
 
 func _input(event):
