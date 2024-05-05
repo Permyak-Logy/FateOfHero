@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d1jk2a04wq33q"]
+[gd_scene load_steps=30 format=3 uid="uid://d1jk2a04wq33q"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_302np"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_bwpqf"]
@@ -12,8 +12,9 @@
 [ext_resource type="Resource" uid="uid://5d8bwek6gx45" path="res://tactical_mode/unit/GGVamp/GGVampP1.tres" id="6_mkxlh"]
 [ext_resource type="Resource" uid="uid://drtfi4k16ej2g" path="res://tactical_mode/unit/GGVamp/GGVampP2.tres" id="7_d5rej"]
 [ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/GGVamp/GGVamp.png" id="8_ncdny"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="12_sdjyg"]
+[ext_resource type="Resource" uid="uid://chwc8kck316im" path="res://tactical_mode/effects/MainHeroEffect.tres" id="12_cji8v"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="13_e2fdk"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="14_suco2"]
 
 [sub_resource type="Resource" id="Resource_gxg75"]
 script = ExtResource("2_bwpqf")
@@ -25,9 +26,9 @@ gear_slots = {
 
 [sub_resource type="Resource" id="Resource_ywk01"]
 script = ExtResource("2_o87t4")
-base = 100.0
-cur = 100.0
-max_ = 100.0
+base = 10.0
+cur = 10.0
+max_ = 10.0
 
 [sub_resource type="Resource" id="Resource_8hokp"]
 script = ExtResource("3_emqlv")
@@ -91,6 +92,7 @@ height = 58.0
 [node name="GgVamp" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb")]
 z_index = 1
 y_sort_enabled = true
+input_pickable = true
 script = ExtResource("1_302np")
 unit_name = "Фиди (Вапир)"
 inventory = SubResource("Resource_gxg75")
@@ -100,25 +102,23 @@ speed = SubResource("Resource_go4ob")
 damage = SubResource("Resource_ngsv5")
 expirience = SubResource("Resource_iw2g7")
 sprite_for_outline = NodePath("Body")
-trail_particles = NodePath("Body/GPUParticles2D")
+trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("2_mra2f"), ExtResource("3_csil1"), ExtResource("4_c6nq2"), ExtResource("5_g6ixl")])
-private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_mkxlh"), ExtResource("7_d5rej")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_mkxlh"), ExtResource("7_d5rej"), ExtResource("12_cji8v")])
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+y_sort_enabled = true
+position = Vector2(1, -26)
+process_material = SubResource("ParticleProcessMaterial_fk72q")
+texture = ExtResource("8_ncdny")
 
 [node name="Body" type="Sprite2D" parent="."]
 position = Vector2(1, -26)
 texture = ExtResource("8_ncdny")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Body"]
-z_index = -1
-y_sort_enabled = true
-process_material = SubResource("ParticleProcessMaterial_fk72q")
-texture = ExtResource("8_ncdny")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
-shape = SubResource("CapsuleShape2D_plq5k")
-
-[node name="StatProgressBar" parent="." instance=ExtResource("12_sdjyg")]
+[node name="StatProgressBar" parent="." instance=ExtResource("14_suco2")]
 offset_top = -57.0
 offset_bottom = -55.0
 metadata/_edit_use_anchors_ = true
@@ -127,4 +127,10 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(1, -24)
 texture = ExtResource("13_e2fdk")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -26)
+shape = SubResource("CapsuleShape2D_plq5k")
+
 [connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

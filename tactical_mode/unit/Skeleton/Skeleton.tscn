@@ -1,12 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://dh5vq12tjl11n"]
+[gd_scene load_steps=20 format=3 uid="uid://dh5vq12tjl11n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/Skeleton/Skeleton.gd" id="1_ccpxk"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_nan3x"]
 [ext_resource type="Texture2D" uid="uid://bwx7qmeuapudt" path="res://tactical_mode/unit/Skeleton/Enemy.png" id="3_0chvl"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_8i0i0"]
 [ext_resource type="Shader" path="res://tactical_mode/assets/outline.gdshader" id="3_oy1oo"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_5xtwx"]
 [ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/Skeleton/SkeletonA0.tres" id="4_71lrp"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="5_1d1s4"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="7_x8j7o"]
 
 [sub_resource type="Resource" id="Resource_ws37b"]
 script = ExtResource("2_nan3x")
@@ -52,37 +53,49 @@ script = ExtResource("3_8i0i0")
 mod_type = 2
 characteristic = SubResource("Resource_sfnud")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8qku"]
-shader = ExtResource("3_oy1oo")
-shader_parameter/outline_color = null
+[sub_resource type="Resource" id="Resource_li378"]
+script = ExtResource("4_5xtwx")
+level = 1
+expirience = 0
+ups = 0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oqbrs"]
 radius = 11.0
 height = 50.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8qku"]
+shader = ExtResource("3_oy1oo")
+shader_parameter/outline_color = null
+
 [node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb")]
 z_index = 1
 y_sort_enabled = true
+input_pickable = true
 script = ExtResource("1_ccpxk")
 unit_name = "Скелет"
 health = SubResource("Resource_omiyo")
 defence = SubResource("Resource_11jpo")
 speed = SubResource("Resource_8p6jf")
 damage = SubResource("Resource_h68g5")
+expirience = SubResource("Resource_li378")
 sprite_for_outline = NodePath("Sprite2D")
 health_bar_pb = NodePath("StatProgressBar")
 controlled_player = false
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("4_71lrp")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -22)
+shape = SubResource("CapsuleShape2D_oqbrs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_j8qku")
 position = Vector2(0, -24)
 texture = ExtResource("3_0chvl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
-position = Vector2(-1, 2)
-shape = SubResource("CapsuleShape2D_oqbrs")
-
-[node name="StatProgressBar" parent="." instance=ExtResource("5_1d1s4")]
+[node name="StatProgressBar" parent="." instance=ExtResource("7_x8j7o")]
 offset_top = -52.0
 offset_bottom = -50.0
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
