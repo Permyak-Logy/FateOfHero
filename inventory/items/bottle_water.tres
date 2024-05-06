@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_dgr1f")
 name = "bottle_water"
+description = ""
 texture = ExtResource("2_ea01o")
 max_stack = 10
 recipe = Array[ExtResource("1_dgr1f")]([])
 price = 50
-descript = "Для крафта"
