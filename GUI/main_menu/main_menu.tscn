@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlydogsjd8q0v"]
+
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_u8q88"]
+[ext_resource type="Texture2D" uid="uid://c5h33bqr8onrm" path="res://GUI/main_menu/back_tpr.png" id="2_as3v0"]
+[ext_resource type="Script" path="res://GUI/main_menu/main_menu.gd" id="2_nat64"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u8q88")
+script = ExtResource("2_nat64")
+
+[node name="Camera" type="Camera2D" parent="."]
+visible = false
+anchor_mode = 0
+zoom = Vector2(0.5, 0.5)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterContainer"]
+position = Vector2(990, 540)
+texture = ExtResource("2_as3v0")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 892.0
+offset_right = 248.0
+offset_bottom = 900.0
+
+[node name="Campaign" type="Button" parent="Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Campaign"
+
+[node name="Infinite" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Infinnite mode"
+
+[node name="Exit" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Exit"
+
+[node name="SaveMenuComtainer" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 960.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 540.0
+
+[connection signal="pressed" from="Menu/Campaign" to="." method="_on_campaign_pressed"]
+[connection signal="pressed" from="Menu/Infinite" to="." method="_on_infinite_pressed"]
+[connection signal="pressed" from="Menu/Exit" to="." method="_on_exit_pressed"]
