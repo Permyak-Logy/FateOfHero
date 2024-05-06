@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://cal6f73hk5ff7"]
+[gd_scene load_steps=23 format=3 uid="uid://cal6f73hk5ff7"]
 
+[ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/trading.gd" id="1_4omvy"]
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_g6vnm"]
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/inventoryGrid.gd" id="2_0bub4"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="3_juopo"]
@@ -14,6 +15,12 @@
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/page4.gd" id="12_ui67m"]
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/page5.gd" id="13_7jtqw"]
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/description.gd" id="14_3431c"]
+[ext_resource type="Texture2D" uid="uid://dlvrvoxv04o4m" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_0.png" id="15_tp6ud"]
+[ext_resource type="Texture2D" uid="uid://t7ukvod3pjr1" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_road.png" id="16_pxiaj"]
+[ext_resource type="Texture2D" uid="uid://bwiu4xmfedlef" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_shop_0.png" id="17_cqd8i"]
+[ext_resource type="Texture2D" uid="uid://8nm7q5k4a66k" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_shop_1.png" id="18_r075b"]
+[ext_resource type="Texture2D" uid="uid://ddb8hbfesc0l8" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_prilav.png" id="19_2qdq4"]
+[ext_resource type="Texture2D" uid="uid://bprnl1hqncimr" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_prodav.png" id="20_xbkij"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n8vo4"]
 
@@ -28,6 +35,47 @@ offset_right = -7.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="trading" type="Node2D" parent="."]
+script = ExtResource("1_4omvy")
+
+[node name="backgraund" type="Sprite2D" parent="trading"]
+position = Vector2(488, 273)
+scale = Vector2(4.12083, 4.07407)
+texture = ExtResource("15_tp6ud")
+
+[node name="GeraldiniaRoad" type="Sprite2D" parent="trading"]
+position = Vector2(484.5, 270.5)
+scale = Vector2(4.07917, 4.08148)
+texture = ExtResource("16_pxiaj")
+
+[node name="GeraldiniaShop0" type="Sprite2D" parent="trading"]
+position = Vector2(533, 262.437)
+scale = Vector2(3.68333, 3.91759)
+texture = ExtResource("17_cqd8i")
+
+[node name="GeraldiniaShop1" type="Sprite2D" parent="trading"]
+position = Vector2(504.25, 263)
+scale = Vector2(3.96875, 3.28889)
+texture = ExtResource("18_r075b")
+
+[node name="GeraldiniaPrilav" type="Sprite2D" parent="trading"]
+position = Vector2(534, 246.25)
+scale = Vector2(3.39167, 3.45556)
+texture = ExtResource("19_2qdq4")
+
+[node name="GeraldiniaProdav" type="Sprite2D" parent="trading"]
+position = Vector2(583, 268)
+scale = Vector2(2.55313, 2.87037)
+texture = ExtResource("20_xbkij")
+
+[node name="Button" type="Button" parent="trading"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 604.0
+offset_top = 137.0
+offset_right = 894.0
+offset_bottom = 437.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -413,6 +461,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[connection signal="pressed" from="trading/Button" to="trading" method="_on_button_exit_trading_pressed"]
 [connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid" to="HBoxContainer/NinePatchRect/Trades1" method="_on_inventory_grid_item_changed"]
 [connection signal="pressed" from="PageButtons/page1" to="PageButtons/page1" method="_on_pressed"]
 [connection signal="pressed" from="PageButtons/page2" to="PageButtons/page2" method="_on_pressed"]

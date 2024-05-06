@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://sgkba57dbbe7"]
+[gd_scene load_steps=12 format=3 uid="uid://sgkba57dbbe7"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/Geraldina.gd" id="1_jacgh"]
 [ext_resource type="Texture2D" uid="uid://dlvrvoxv04o4m" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_0.png" id="2_415n5"]
@@ -7,27 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://8nm7q5k4a66k" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_shop_1.png" id="5_yvdni"]
 [ext_resource type="Texture2D" uid="uid://ddb8hbfesc0l8" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_prilav.png" id="6_q5a6y"]
 [ext_resource type="Texture2D" uid="uid://bprnl1hqncimr" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_prodav.png" id="7_ntw7p"]
+[ext_resource type="PackedScene" uid="uid://cal6f73hk5ff7" path="res://city_mode/Cities/Geraldina/trading/trading.tscn" id="8_f5vtt"]
 [ext_resource type="Texture2D" uid="uid://cbedbpjj3nvgi" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_kuzna.png" id="8_nmo70"]
 [ext_resource type="Texture2D" uid="uid://driq1yr2csc7w" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_1.png" id="9_bwaig"]
+[ext_resource type="PackedScene" uid="uid://cd1lm7663kkqk" path="res://city_mode/Cities/Geraldina/crafting/crafting.tscn" id="10_kobtr"]
 
 [node name="CityMap" type="Node2D"]
 script = ExtResource("1_jacgh")
 
-[node name="TextEdit" type="TextEdit" parent="."]
-visible = false
-offset_left = 106.0
-offset_top = 39.0
-offset_right = 583.0
-offset_bottom = 332.0
-text = "TODO
-this is a singleton scene for city
-you should implement 
- - city changer
- - add return to the start map"
-
 [node name="backgraund" type="Sprite2D" parent="."]
-position = Vector2(480, 273)
-scale = Vector2(4.13333, 4.07407)
+position = Vector2(480, 270.5)
+scale = Vector2(4.13333, 4.11111)
 texture = ExtResource("2_415n5")
 
 [node name="GeraldiniaRoad" type="Sprite2D" parent="."]
@@ -35,51 +25,30 @@ position = Vector2(475.5, 270.5)
 scale = Vector2(4.09583, 4.08148)
 texture = ExtResource("3_b0yoh")
 
-[node name="trading" type="Node2D" parent="."]
-
-[node name="GeraldiniaShop0" type="Sprite2D" parent="trading"]
+[node name="GeraldiniaShop0" type="Sprite2D" parent="."]
 position = Vector2(529, 262.437)
 scale = Vector2(3.65, 3.91759)
 texture = ExtResource("4_xrghq")
 
-[node name="GeraldiniaShop1" type="Sprite2D" parent="trading"]
+[node name="GeraldiniaShop1" type="Sprite2D" parent="."]
 position = Vector2(504.25, 263)
 scale = Vector2(3.96875, 3.28889)
 texture = ExtResource("5_yvdni")
 
-[node name="GeraldiniaPrilav" type="Sprite2D" parent="trading"]
+[node name="GeraldiniaPrilav" type="Sprite2D" parent="."]
 position = Vector2(534, 246.25)
 scale = Vector2(3.39167, 3.45556)
 texture = ExtResource("6_q5a6y")
 
-[node name="GeraldiniaProdav" type="Sprite2D" parent="trading"]
+[node name="GeraldiniaProdav" type="Sprite2D" parent="."]
 position = Vector2(583, 268)
 scale = Vector2(2.55313, 2.87037)
 texture = ExtResource("7_ntw7p")
 
-[node name="Button" type="Button" parent="trading"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = 604.0
-offset_top = 137.0
-offset_right = 894.0
-offset_bottom = 437.0
-
-[node name="crafting" type="Node2D" parent="."]
-
-[node name="GeraldiniaKuzna" type="Sprite2D" parent="crafting"]
+[node name="GeraldiniaKuzna" type="Sprite2D" parent="."]
 position = Vector2(467.5, 233.312)
 scale = Vector2(3.94583, 3.56018)
 texture = ExtResource("8_nmo70")
-
-[node name="Button" type="Button" parent="crafting"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = 95.0
-offset_top = 146.0
-offset_right = 352.0
-offset_bottom = 457.0
-metadata/_edit_use_anchors_ = true
 
 [node name="Exit" type="Node2D" parent="."]
 position = Vector2(465, 313)
@@ -96,6 +65,26 @@ offset_top = -18.0
 offset_right = 14.0
 offset_bottom = 24.0
 
-[connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
-[connection signal="pressed" from="crafting/Button" to="." method="_on_button_crafting_pressed"]
+[node name="trading" parent="." instance=ExtResource("8_f5vtt")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 0.0
+offset_right = 962.0
+offset_bottom = 529.0
+
+[node name="crafting" parent="." instance=ExtResource("10_kobtr")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -15.0
+offset_right = 964.0
+offset_bottom = 521.0
+
 [connection signal="pressed" from="Exit/Button" to="." method="_on_button_exit_pressed"]

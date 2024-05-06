@@ -1,4 +1,2 @@
-extends Node2D
-
-func _on_button_exit_crafting_pressed():
-	get_tree().change_scene_to_file("res://city_mode/Cities/Geraldina/Geraldina.tscn")
+extends "res://city_mode/Cities/base_city.gd"
+class_name CraftingGUI

@@ -1,13 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://cd1lm7663kkqk"]
+[gd_scene load_steps=23 format=3 uid="uid://cd1lm7663kkqk"]
 
-[ext_resource type="Texture2D" uid="uid://dlvrvoxv04o4m" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_0.png" id="1_jh1ol"]
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_niwie"]
-[ext_resource type="Script" path="res://city_mode/Cities/Geraldina/crafting/crafting.gd" id="1_ttc73"]
-[ext_resource type="Texture2D" uid="uid://t7ukvod3pjr1" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_road.png" id="2_muf4g"]
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/crafting/inventoryGrid.gd" id="2_qqhid"]
 [ext_resource type="PackedScene" uid="uid://d4lrybm6yo1ub" path="res://city_mode/Cities/Geraldina/trading/crafting_slot.tscn" id="2_sd3va"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="3_2qfv2"]
-[ext_resource type="Texture2D" uid="uid://cbedbpjj3nvgi" path="res://city_mode/Cities/Geraldina/Assets/Geraldinia_kuzna.png" id="3_euu8p"]
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/crafting/Recipes.gd" id="6_dkvga"]
 [ext_resource type="PackedScene" uid="uid://blxk4ex3fpwq8" path="res://city_mode/Cities/Geraldina/crafting/recipe.tscn" id="6_twcsm"]
 [ext_resource type="Resource" uid="uid://bn6fdo3m5610r" path="res://inventory/items/bottle_red.tres" id="7_3f4ck"]
@@ -37,39 +33,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 22.0
-offset_right = -20.0
-offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="crafting" type="Node2D" parent="."]
-script = ExtResource("1_ttc73")
-
-[node name="backgraund" type="Sprite2D" parent="crafting"]
-position = Vector2(480, 273)
-scale = Vector2(4.13333, 4.07407)
-texture = ExtResource("1_jh1ol")
-
-[node name="GeraldiniaRoad" type="Sprite2D" parent="crafting"]
-position = Vector2(475.5, 270.5)
-scale = Vector2(4.09583, 4.08148)
-texture = ExtResource("2_muf4g")
-
-[node name="GeraldiniaKuzna" type="Sprite2D" parent="crafting"]
-position = Vector2(467.5, 233.312)
-scale = Vector2(3.94583, 3.56018)
-texture = ExtResource("3_euu8p")
-
-[node name="Button" type="Button" parent="crafting"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = 95.0
-offset_top = 146.0
-offset_right = 352.0
-offset_bottom = 457.0
-metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -579,7 +544,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[connection signal="pressed" from="crafting/Button" to="crafting" method="_on_button_exit_crafting_pressed"]
 [connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid" to="HBoxContainer/craft1/Recipes" method="_on_inventory_grid_item_changed"]
 [connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid" to="HBoxContainer/craft4/Recipes" method="_on_inventory_grid_item_changed"]
 [connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid" to="HBoxContainer/craft3/Recipes" method="_on_inventory_grid_item_changed"]
