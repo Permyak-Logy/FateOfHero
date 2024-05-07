@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://GUI/tactical_mode/TacticalModeGUI.gd" id="1_vx06q"]
 [ext_resource type="PackedScene" uid="uid://dly11cs48am3l" path="res://GUI/tactical_mode/TacticalInfo.tscn" id="2_kb8rs"]
 [ext_resource type="Script" path="res://tactical_mode/FPS_COUNTER.gd" id="2_oqwl6"]
-[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/dialogue/dialogue_gui_theme.tres" id="3_2ifkt"]
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="3_2ifkt"]
 [ext_resource type="PackedScene" uid="uid://k1m48ayhuf51" path="res://GUI/tactical_mode/BtnAbility.tscn" id="4_dhij6"]
-[ext_resource type="Texture2D" uid="uid://c0xek0kynaf22" path="res://tactical_mode/assets/AbilityEvade.png" id="5_e8urq"]
+[ext_resource type="Texture2D" uid="uid://c0xek0kynaf22" path="res://tactical_mode/assets/RunawayAbility.png" id="5_e8urq"]
 
 [node name="TacticalModeGui" type="CanvasLayer"]
 script = ExtResource("1_vx06q")

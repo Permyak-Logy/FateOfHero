@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://jgko6igthbun" path="res://inventory/items/apple.tres" id="1_silny"]
 [ext_resource type="PackedScene" uid="uid://bjcjl3qla8b62" path="res://tactical_mode/unit/SmolItto/SmolItto.tscn" id="2_hcdk1"]
 [ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="2_pdvuu"]
-[ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/GGVamp/GGVamp.tscn" id="3_5wp4s"]
+[ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/Vamp/Vamp.tscn" id="3_5wp4s"]
 [ext_resource type="Script" path="res://inventory/inventory.gd" id="3_ih5tw"]
 [ext_resource type="Resource" uid="uid://bdjmj8k7ev33r" path="res://inventory/gears/luck_coin.tres" id="4_2tk2p"]
 [ext_resource type="Resource" uid="uid://bn6fdo3m5610r" path="res://inventory/items/bottle_red.tres" id="7_86c2h"]

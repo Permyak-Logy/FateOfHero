@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="AttackAbility" load_steps=2 format=3 uid="uid://bfhgjgorox6g3"]
+[gd_resource type="Resource" script_class="AttackAbility" load_steps=3 format=3 uid="uid://bfhgjgorox6g3"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="1_ojiqq"]
+[ext_resource type="Texture2D" uid="uid://dfp6pw6jqp11v" path="res://tactical_mode/assets/AttackAbility.png" id="2_3kgp2"]
 
 [resource]
 script = ExtResource("1_ojiqq")
@@ -14,10 +15,12 @@ cooldown = 0
 limit = 0
 count = -1
 scaling_type = 2
+only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Атака"
 description = "Атаковать выбранного противника"
+texture = ExtResource("2_3kgp2")
 max_stack = 0
 recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

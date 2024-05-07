@@ -75,7 +75,8 @@ func _ready():
 	if is_instance_of($"..", Game):
 		return
 	_p_units = [
-		#$GgVamp,
+		$Berserk,
+		# $Vamp,
 		$Naris #,
 		#$SmolItto
 	]
@@ -512,7 +513,11 @@ func _input(event):
 		var cell: Vector2i = to_map(_tile_map.make_input_local(event).position)
 		if not cur_ability:
 			_select_path_to(cell)
-		elif is_instance_of(cur_ability, AoEAbility) and (cur_ability as AoEAbility).cell != cell:
+		elif is_instance_of(cur_ability, AoEAbility):
+			if (cur_ability as AoEAbility).cell == cell:
+				return
+			if (cur_ability as AoEAbility).only_auto_select:
+				return
 			_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 			if (cur_ability as AoEAbility).can_select_cell(cell):
 				(cur_ability as AoEAbility).select_cell(cell)
@@ -584,7 +589,12 @@ func _prepare_ability(ability: Ability):
 		cur_ability.find_all_selectable_tab_targets()
 		cur_ability.auto_select()
 	if is_instance_of(cur_ability, AoEAbility):
-		var cell: Vector2i = to_map(_tile_map.get_local_mouse_position())
+		var cell: Vector2i
+		if cur_ability.only_auto_select:
+			cell = cur_ability.default_cell()
+		else:
+			cell = to_map(_tile_map.get_local_mouse_position())
+		print(cell)
 		if (cur_ability as AoEAbility).can_select_cell(cell):
 			(cur_ability as AoEAbility).select_cell(cell)
 			draw_aoe_overlay()
@@ -639,8 +649,7 @@ func reset_outline_color(unit: Unit):
 	Сбрасывает цвет обводки на основе текущего состояния юнита
 	"""
 	
-	# TODO: Поправить баг со смертями персов игрока
-	if cur_ability and unit in cur_ability.selected:
+	if cur_ability and is_instance_of(cur_ability, DirectedAbility) and unit in cur_ability.selected:
 		unit.set_outline_color(Unit.SELECTED_COLOR)
 	elif unit.is_death():
 		unit.set_outline_color(Unit.DEFAULT_COLOR)

@@ -58,7 +58,7 @@ characteristic = SubResource("Resource_naao2")
 
 [sub_resource type="Resource" id="Resource_yfvel"]
 script = ExtResource("4_ar7bg")
-level = 50
+level = 1
 expirience = 0
 ups = 0
 
