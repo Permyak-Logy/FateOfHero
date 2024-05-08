@@ -24,6 +24,14 @@ var _e_units: Array[Unit] = []  # Список юнитов оппонента
 var units:  # property список всех юнитов
 	get:
 		return _p_units + _e_units
+
+var actors:
+	get:
+		var res = []
+		for child in get_children():
+			if is_instance_of(child, Actor):
+				res.append(child)
+		return res
 const GRID_LAYER = 0  # Слой сетки
 const OVERLAY_PATH_LAYER = 1  # Слой оверлея для перемещения
 const PATH_LAYER = 2  # Слой пути
@@ -521,24 +529,26 @@ func _input(event):
 			_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 			if (cur_ability as AoEAbility).can_select_cell(cell):
 				(cur_ability as AoEAbility).select_cell(cell)
-				draw_aoe_overlay()
+				draw_ability_overlay()
 			else:
 				(cur_ability as AoEAbility).unselect_cell()
 				
 	if event.is_pressed():
 		return await _key_press_event(event)
 
-func draw_aoe_overlay():
+func draw_ability_overlay():
 	"""
 	Отрисовка зоны действия AoE способности
 	"""
 	
-	draw(
-		OVERLAY_ABILITY_LAYER, 
-		(cur_ability as AoEAbility).about_cells, 
-		0, 
-		(cur_ability as AoEAbility).overlay_atlas_coords
-	)
+	var cells = cur_ability.fill_overlay()
+	if cells:
+		draw(
+			OVERLAY_ABILITY_LAYER, 
+			cells, 
+			0, 
+			cur_ability.overlay_atlas_coords
+		)
 
 func _key_press_event(event):
 	"""
@@ -581,7 +591,7 @@ func _prepare_ability(ability: Ability):
 	
 	write_info("-> Выбрана способность '" + ability.name + "'")
 	_cancel_ability()
-	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
+	
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	cur_ability = ability
 	cur_ability.clear()
@@ -594,10 +604,11 @@ func _prepare_ability(ability: Ability):
 			cell = cur_ability.default_cell()
 		else:
 			cell = to_map(_tile_map.get_local_mouse_position())
-		print(cell)
 		if (cur_ability as AoEAbility).can_select_cell(cell):
 			(cur_ability as AoEAbility).select_cell(cell)
-			draw_aoe_overlay()
+			draw_ability_overlay()
+	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
+	draw_ability_overlay()
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, false)
 	_tile_map.clear_layer(PATH_LAYER)
 

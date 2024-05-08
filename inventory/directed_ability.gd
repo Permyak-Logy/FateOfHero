@@ -3,18 +3,18 @@ class_name DirectedAbility extends Ability
 @export var targets: int = 1
 @export var max_targets: int = 0
 
-var selected: Array[Node] = []
-var selectable_tab: Array[Node] = []
+var selected: Array[Actor] = []
+var selectable_tab: Array[Actor] = []
 
 
-func select(node):
+func select(node: Actor):
 	selected.append(node)
 	if len(selected) > targets and targets > 0:
 		unselect(selected[0])
 	if is_instance_of(node, Unit):
 		get_map().reset_outline_color(node)
 
-func unselect(node):
+func unselect(node: Actor):
 	selected.erase(node)
 	if is_instance_of(node, Unit):
 		get_map().reset_outline_color(node)
@@ -26,6 +26,11 @@ func clear():
 			get_map().reset_outline_color(node)
 	selectable_tab.clear()
 
+func fill_overlay() -> Array[Vector2i]:
+	var cells: Array[Vector2i] = []
+	for actor in selectable_tab:
+		cells.append(actor.get_cell())
+	return cells
 
 func can_use() -> bool:
 	if not owner:
@@ -79,11 +84,11 @@ func tab_prev():
 
 func find_all_selectable_tab_targets():
 	var map = get_map()
-	for unit in map.units:
-		if can_select(unit):
-			selectable_tab.append(unit)
+	for actor in map.actors:
+		if can_select(actor):
+			selectable_tab.append(actor)
 
-func can_select(_node: Node) -> bool:
+func can_select(_node: Actor) -> bool:
 	return true
 
 func get_map() -> TacticalMap:

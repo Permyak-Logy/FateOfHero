@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=4 format=3 uid="uid://bd0bpu457k5k0"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=5 format=3 uid="uid://bd0bpu457k5k0"]
 
 [ext_resource type="Script" path="res://tactical_mode/effects/shield_effect.gd" id="1_3jkel"]
 [ext_resource type="Script" path="res://inventory/apply_effect_ability.gd" id="1_lbl2a"]
+[ext_resource type="Texture2D" uid="uid://b5x878mj5f2fp" path="res://tactical_mode/unit/Naris/Beretta_n1.png" id="3_2y2fy"]
 
 [sub_resource type="Resource" id="Resource_7ifd1"]
 script = ExtResource("1_3jkel")
@@ -18,17 +19,19 @@ effect = SubResource("Resource_7ifd1")
 apply_on = Array[int]([0, 1])
 targets = 1
 max_targets = 0
-acts = 0
+acts = 1
 final_act = true
 cooldown = 0
 limit = 0
 count = -1
 scaling_type = 4
+overlay_atlas_coords = Vector2i(3, 0)
 only_unit_owner = true
 type = 0
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Моя оборона"
 description = "Дать щит союзнику"
+texture = ExtResource("3_2y2fy")
 max_stack = 0
 recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

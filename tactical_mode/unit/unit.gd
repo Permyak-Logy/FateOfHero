@@ -31,10 +31,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 	set(value):
 		sprite_for_outline = value
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
-@export var trail_particles: GPUParticles2D = null:
-	set(value):
-		trail_particles = value
-		trail_particles.hide()
+@export var trail_particles: GPUParticles2D = null
 @export var health_bar_pb: StatProgressBar = null
 @export var animation_player: AnimationPlayer = null
 
@@ -62,8 +59,6 @@ var flipped: bool = false:  # Переключатель поворота
 			on_flip_unit()
 		else:
 			flipped = value
-
-var timer_for_walk_trail: SceneTreeTimer = null  # Таймер отключения walk_trail
 
 # Различные цвета для обводки
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
@@ -154,6 +149,10 @@ func get_occupied_cells() -> Array[Vector2i]:
 	return [get_cell()]
 
 func prepare_fight():
+	if animation_player:
+		animation_player.animation_set_next("attack", "idle")
+		animation_player.animation_set_next("ability", "idle")
+	
 	print("=> Prepare: ", unit_name)
 	while _effects:
 		remove_effect(_effects[0])
@@ -164,6 +163,7 @@ func prepare_fight():
 		ability.reset()
 	apply_passives()
 	flipped = idle_direction_bool()
+	play("idle")
 
 func premove_update():
 	for ability in get_abilities():
@@ -180,7 +180,6 @@ func on_flip_unit():
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():
-		play("idle")
 		return
 
 	var target_position = $"../TileMap".map_to_local(current_id_path.front())
@@ -199,25 +198,18 @@ func _physics_process(_delta):
 		if not current_id_path:
 			flipped = idle_direction_bool()
 			walk_finished.emit()
+			play("idle")
 
 func idle_direction_bool():
 	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
 	if _name == "walk":
-		if trail_particles:
-			if timer_for_walk_trail:
-				timer_for_walk_trail.timeout.disconnect(trail_particles.hide)
-			trail_particles.show()
 		current_id_path = _params
-		
 		await walk_finished
-		
-		if trail_particles:
-			timer_for_walk_trail = get_tree().create_timer(trail_particles.lifetime)
-			timer_for_walk_trail.timeout.connect(trail_particles.hide)
 	elif animation_player:
 		animation_player.play(_name)
+		await animation_player.animation_changed
 
 func on_death(_component: StatComponent):
 	print("Death ", self)

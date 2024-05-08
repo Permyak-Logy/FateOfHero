@@ -5,6 +5,7 @@ class_name ApplyEffectAbility extends DirectedAbility
 
 func apply():
 	for i in range(len(selected)):
+		await owner.play("ability")
 		var unit = selected[i] as Unit
 		var e = effect.duplicate(true)
 		e.instigator = owner

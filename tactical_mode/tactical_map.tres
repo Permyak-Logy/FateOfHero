@@ -1,19 +1,17 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://lbr4c2x4bna0"]
 
-[ext_resource type="Texture2D" uid="uid://dvrcgvjkcd52s" path="res://tactical_mode/assets/tileset.png" id="1_i00je"]
+[ext_resource type="Texture2D" uid="uid://d4cvluslo18pv" path="res://tactical_mode/assets/tilemap.png" id="1_n6voi"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jjtgc"]
-texture = ExtResource("1_i00je")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgni8"]
+texture = ExtResource("1_n6voi")
 texture_region_size = Vector2i(64, 32)
-0:0/next_alternative_id = 2
 0:0/0 = 0
 1:0/0 = 0
-2:0/next_alternative_id = 22
 2:0/0 = 0
-3:0/next_alternative_id = 2
 3:0/0 = 0
 
 [resource]
 tile_shape = 3
 tile_size = Vector2i(64, 32)
-sources/0 = SubResource("TileSetAtlasSource_jjtgc")
+sources/0 = SubResource("TileSetAtlasSource_jgni8")
+tile_proxies/coords_level = [[1, Vector2i(0, 0)], [5, Vector2i(0, 0)], [2, Vector2i(0, 0)], [5, Vector2i(1, 0)], [3, Vector2i(0, 0)], [5, Vector2i(2, 0)], [4, Vector2i(0, 0)], [5, Vector2i(3, 0)]]
