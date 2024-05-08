@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://craplwf1wnhvd"]
-
-[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="1_re7iq"]
-
-[node name="ExpirienceComponent" type="Node"]
-script = ExtResource("1_re7iq")
