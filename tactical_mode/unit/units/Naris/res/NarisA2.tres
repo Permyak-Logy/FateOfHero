@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=5 format=3 uid="uid://bimxy6owu2yfe"]
+
+[ext_resource type="Script" path="res://inventory/apply_effect_ability.gd" id="1_sjwrv"]
+[ext_resource type="Script" path="res://tactical_mode/effects/immortality_for_attack.gd" id="1_wo0u3"]
+[ext_resource type="Texture2D" uid="uid://dbv71s0kcqln3" path="res://tactical_mode/unit/units/Naris/assets/Beretta_n2.png" id="3_yfp7y"]
+
+[sub_resource type="Resource" id="Resource_rao28"]
+script = ExtResource("1_wo0u3")
+count = 1.0
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Неуязвимость"
+is_negative = false
+
+[resource]
+script = ExtResource("1_sjwrv")
+effect = SubResource("Resource_rao28")
+apply_on = Array[int]([1, 0])
+targets = 1
+max_targets = 0
+acts = 1
+final_act = true
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+overlay_atlas_coords = Vector2i(3, 0)
+only_unit_owner = true
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Скрытая броня"
+description = "Дать неуязвимость к следующему получению урона"
+texture = ExtResource("3_yfp7y")
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0
