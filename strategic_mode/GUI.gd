@@ -1,5 +1,8 @@
 class_name StratMapGUI extends CanvasLayer
-
+"""
+invisible node in the strat map
+Any GUI should be it's child.
+"""
 @onready var inventory: InventoryGUI = $InventoryGUI
 
 

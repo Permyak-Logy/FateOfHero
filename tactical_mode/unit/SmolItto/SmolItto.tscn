@@ -1,29 +1,75 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjcjl3qla8b62"]
+[gd_scene load_steps=27 format=3 uid="uid://bjcjl3qla8b62"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/SmolItto/SmolItto.gd" id="1_btidl"]
-[ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="2_di4o0"]
-[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_xx0d3"]
-[ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="3_yurj5"]
+[ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_mm6vi"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_0x5l4"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_tlmj2"]
+[ext_resource type="Resource" uid="uid://bfvhjwkefx6ky" path="res://tactical_mode/unit/SmolItto/IttoA1.tres" id="3_cs53s"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_d7s85"]
+[ext_resource type="Resource" uid="uid://cc4ld682tyt0b" path="res://tactical_mode/unit/SmolItto/IttoA2.tres" id="4_22bg3"]
 [ext_resource type="Texture2D" uid="uid://b7oowqmoun462" path="res://tactical_mode/unit/SmolItto/Smoltto.png" id="4_n8og0"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_4ga04"]
+[ext_resource type="Resource" uid="uid://bu3x836fsv2io" path="res://tactical_mode/unit/SmolItto/IttoP1.tres" id="5_avjec"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="5_th3mn"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="6_7tt4r"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="7_cpjad"]
+[ext_resource type="Resource" uid="uid://bfhgjgorox6g3" path="res://tactical_mode/unit/SmolItto/IttoA0.tres" id="6_hjna3"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="12_hexa5"]
 
-[sub_resource type="Resource" id="Resource_48y4m"]
-resource_name = "Itto Attack Ability"
-script = ExtResource("2_xx0d3")
-distance = 1
-targets = 1
-max_targets = 0
-acts = 1
-final_act = true
-cooldown = 0
-limit = 0
-count = -1
-type = 4
-_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
-name = ""
-max_stack = 0
+[sub_resource type="Resource" id="Resource_s5fo6"]
+script = ExtResource("2_0x5l4")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 1
+}
+
+[sub_resource type="Resource" id="Resource_8vw01"]
+script = ExtResource("2_tlmj2")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_7y6a4"]
+script = ExtResource("3_d7s85")
+mod_type = 0
+characteristic = SubResource("Resource_8vw01")
+
+[sub_resource type="Resource" id="Resource_nl3sy"]
+script = ExtResource("2_tlmj2")
+base = 0.0
+cur = 0.0
+max_ = 0.0
+
+[sub_resource type="Resource" id="Resource_6jy48"]
+script = ExtResource("3_d7s85")
+mod_type = 3
+characteristic = SubResource("Resource_nl3sy")
+
+[sub_resource type="Resource" id="Resource_uow0a"]
+script = ExtResource("2_tlmj2")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_b0lp5"]
+script = ExtResource("3_d7s85")
+mod_type = 1
+characteristic = SubResource("Resource_uow0a")
+
+[sub_resource type="Resource" id="Resource_dkxsi"]
+script = ExtResource("2_tlmj2")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_7l1dn"]
+script = ExtResource("3_d7s85")
+mod_type = 2
+characteristic = SubResource("Resource_dkxsi")
+
+[sub_resource type="Resource" id="Resource_hil4s"]
+script = ExtResource("5_4ga04")
+level = 1
+expirience = 0
+ups = 0
 
 [sub_resource type="Gradient" id="Gradient_ns4pf"]
 offsets = PackedFloat32Array(0, 0.992327)
@@ -41,38 +87,24 @@ color_ramp = SubResource("GradientTexture1D_j8q1x")
 radius = 11.0
 height = 54.0
 
-[node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "defence", "speed", "damage", "expirience", "sprite_for_outline", "trail_particles")]
+[node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb")]
 z_index = 1
 y_sort_enabled = true
-script = ExtResource("1_btidl")
-unit_name = "Smol Itto"
-inventory = NodePath("InventoryComponent")
-health = NodePath("StatHealth")
-defence = NodePath("StatDefence")
-speed = NodePath("StatSpeed")
-damage = NodePath("StatDamage")
-expirience = NodePath("ExpirienceComponent")
+input_pickable = true
+script = ExtResource("1_mm6vi")
+unit_name = "Смол Итто"
+inventory = SubResource("Resource_s5fo6")
+health = SubResource("Resource_7y6a4")
+defence = SubResource("Resource_6jy48")
+speed = SubResource("Resource_b0lp5")
+damage = SubResource("Resource_7l1dn")
+expirience = SubResource("Resource_hil4s")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("Sprite2D/GPUParticles2D")
-attack_ability = SubResource("Resource_48y4m")
-
-[node name="StatHealth" parent="." instance=ExtResource("2_di4o0")]
-default_base = 200.0
-default_cur = 200.0
-mod_type = 0
-
-[node name="StatDefence" parent="." instance=ExtResource("2_di4o0")]
-mod_type = 3
-
-[node name="StatSpeed" parent="." instance=ExtResource("2_di4o0")]
-default_base = 100.0
-mod_type = 1
-
-[node name="StatDamage" parent="." instance=ExtResource("2_di4o0")]
-default_base = 20.0
-mod_type = 2
-
-[node name="InventoryComponent" parent="." instance=ExtResource("3_yurj5")]
+health_bar_pb = NodePath("StatProgressBar")
+acts_count = 2
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_hjna3"), ExtResource("3_cs53s"), ExtResource("4_22bg3")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("5_avjec")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -26)
@@ -93,12 +125,10 @@ texture = ExtResource("5_th3mn")
 position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_0v1vj")
 
-[node name="StatProgressBar" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("6_7tt4r")]
-z_index = 1
-y_sort_enabled = true
+[node name="StatProgressBar" parent="." instance=ExtResource("12_hexa5")]
 offset_top = -58.0
 offset_bottom = -56.0
-stat_component = NodePath("../StatHealth")
 
-[node name="ExpirienceComponent" type="Node" parent="."]
-script = ExtResource("7_cpjad")
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

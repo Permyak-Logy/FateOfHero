@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="IttoA1" load_steps=3 format=3 uid="uid://bfvhjwkefx6ky"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/SmolItto/itto_a1.gd" id="1_3sd5q"]
+[ext_resource type="Texture2D" uid="uid://kbbm735cmlcr" path="res://tactical_mode/unit/SmolItto/Itto_n1.png" id="2_w5hol"]
+
+[resource]
+script = ExtResource("1_3sd5q")
+power = 100.0
+targets = 1
+max_targets = 0
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Лечебная мазь"
+description = "Хилл в одну цель"
+texture = ExtResource("2_w5hol")
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0

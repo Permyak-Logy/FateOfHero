@@ -1,15 +1,9 @@
 class_name IttoP1 extends Effect
 
-var power: float
-var percent: float
-var cooldown: int = 0
-var cooldown_time: int
-
-func _init(_instigator, _power: float = 20, _percent: float = 0.4, _cooldown_time: int = 3):
-	super(_instigator)
-	power = _power
-	percent = _percent
-	cooldown_time = _cooldown_time
+@export var power: float = 20
+@export var percent: float = 0.4
+@export var cooldown: int = 0
+@export var cooldown_time: int = 3
 	
 func update_on_move():
 	if cooldown:
@@ -27,9 +21,15 @@ func update_on_move():
 		if unit == owner:
 			continue
 		if unit.health and 0 < unit.health.percent() and unit.health.percent() <= percent:
+			var diff = -unit.health.cur()
 			unit.health.add(power)
+			diff += unit.health.cur()
 			cooldown = cooldown_time
-			print("=> IttoP1 heal ", power, " for ", unit.unit_name)
+			get_map().write_info(
+				"=> Восстанавливает " + diff + " здоровья у " + 
+				unit.unit_name + " (" + effect_name + ")"
+				)
+			print()
 			return
 	
 

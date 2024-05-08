@@ -2,22 +2,14 @@ class_name IttoA1 extends DirectedAbility
 
 @export var power: float = 100
 
-func _init(_power: float = power):
-	super(-1)
-
-	acts = 1
-	final_act = true
-	targets = 1
-	power = _power
-	name = "Хилл союзника"
-
 func apply():
 	var unit = selected[0] as Unit
+	
 	if unit.health:
-		await owner.play("preheal")
+		var diff = -unit.health.cur() 
 		unit.health.add(power)
-		await owner.play("postheal")
-		print("=> IttoA1 heal", power, " for ", unit.unit_name)
+		diff += unit.health.cur()
+		get_map().write_info("=> Востанавливает " + str(diff) + " здоровья у " + unit.unit_name)
 		return true
 	return false
 

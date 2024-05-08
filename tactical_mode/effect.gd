@@ -1,30 +1,30 @@
-extends Resource
-
-class_name Effect
+class_name Effect extends Resource
 
 @export var texture: Texture2D
 @export var mods: Array[Mod] = []
 @export var destroy_on_death_instigator: bool = false
+@export var stackable = false
 
 signal finished
 signal updated_mods
 
-var owner: Unit = null
-var instigator: Node
-var is_negative: bool
+@export var effect_name: String = "Эффект"
+@export var is_negative: bool = false
 
-func _init(_instigator: Node = null, is_negative: bool = false):
-	instigator = _instigator
+var owner: Unit = null:
+	set(value):
+		var old = owner
+		owner = value
+		on_set_owner(old, owner)
+
+var instigator: Node = null
 
 func _ready():
 	if destroy_on_death_instigator and is_instance_of(instigator, Unit):
 		(instigator as Unit).death.connect(func (_x) : finished.emit(self))
 
-func set_owner(_owner: Unit):
-	owner = _owner
-
-func set_instigator(_i: Node):
-	instigator = _i
+func on_set_owner(old: Unit, new: Unit):
+	pass
 
 func update_on_move():
 	"""Вызывается перед каждым ходом (но не действием)"""
@@ -37,9 +37,15 @@ func update_on_damage(damage: float, _instigator: Node = null) -> float:
 func update_on_attack(damage: float, _recipient: Node = null) -> float:
 	"""Вызывается перед каждой производимой атакой. Возвращает новый урон атаки."""
 	return damage
-	
+
+func stack(other: Effect) -> bool:
+	return false
+
 func is_active() -> bool:
 	return true
 
 func get_mods() -> Array[Mod]:
 	return mods
+
+func get_map() -> TacticalMap:
+	return owner.get_map()

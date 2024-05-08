@@ -47,3 +47,11 @@ func mti(cell: Vector2i) -> int:
 
 func itm(cell: int) -> Vector2i:
 	return get_point_position(cell) as Vector2i
+
+func get_about_cells(cell: Vector2i) -> Array[Vector2i]:
+	var res: Array[Vector2i] = []
+	for dir in DIRECTIONS[cell[1] % 2]:
+		var about_cell = cell + dir
+		if has_cell(about_cell):
+			res.append(about_cell)
+	return res

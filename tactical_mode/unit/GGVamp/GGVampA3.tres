@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="GGVampA3" load_steps=3 format=3 uid="uid://di4u67c7nk826"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/GGVamp/gg_vamp_a3.gd" id="1_ccfav"]
+[ext_resource type="Texture2D" uid="uid://bi41jim537sfp" path="res://tactical_mode/unit/GGVamp/Vampire_n3.png" id="2_pnwy5"]
+
+[resource]
+script = ExtResource("1_ccfav")
+power_self = 0.1
+power_target = 2.0
+targets = 1
+max_targets = 0
+acts = 0
+final_act = true
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+type = 4
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Кровопускание"
+description = "Вылечить соизника пожертвовав своим хп"
+texture = ExtResource("2_pnwy5")
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0

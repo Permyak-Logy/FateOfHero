@@ -1,13 +1,8 @@
-class_name Characteristic
+class_name Characteristic extends Resource
 
-var base: float
-var cur: float
-var max_: float
-
-func _init(_base: float, _cur: float, _max: float):
-	base = _base
-	cur = _cur
-	max_ = _max
+@export var base: float = 0
+@export var cur: float = 0
+@export var max_: float = 0
 
 func percent() -> float:
 	return cur / max(max_, base) 

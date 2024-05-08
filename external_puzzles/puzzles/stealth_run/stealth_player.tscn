@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cokcriy6hdp3w"]
+
+[ext_resource type="PackedScene" uid="uid://pva6nu0g0lmb" path="res://external_puzzles/puzzles/safe_path/player.tscn" id="1_fs3ps"]
+[ext_resource type="Script" path="res://external_puzzles/puzzles/stealth_run/stealth_player.gd" id="2_c4lai"]
+
+[node name="StealthPlayer" instance=ExtResource("1_fs3ps")]
+script = ExtResource("2_c4lai")

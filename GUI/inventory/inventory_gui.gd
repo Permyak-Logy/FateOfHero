@@ -1,5 +1,10 @@
 class_name InventoryGUI extends Control
 
+"""
+Root of inventory gui. It is also a controller in this this gui
+other scenes are just views
+"""
+
 var is_open:bool = false 
 
 signal inventory_opened
@@ -105,7 +110,7 @@ func update_item_in_hand():
 
 
 func put_item_to_inv_slot(slot: InventorySlot):
-	if not (slot.is_empty() and item_stack_in_hand and item_stack_in_hand.item_stack):
+	if not (item_stack_in_hand and item_stack_in_hand.item_stack):
 		return
 	var item_stack: ItemStack = item_stack_in_hand.item_stack
 	var remaining = inventory.insert(item_stack.item, item_stack.size)
@@ -139,6 +144,7 @@ func put_item_to_char_slot(slot: InventorySlot) -> bool:
 	if not is_instance_of(item_stack.item, Gear):
 		return false
 	var fit = character_panel.current_character.inventory.use(item_stack.item)
+	character_panel.current_character.reload_all_mods()
 	if fit:
 		print("equipped: ", item_stack.item.name)
 		remove_child(item_stack_in_hand)
@@ -158,11 +164,14 @@ func take_item_form_char_slot(slot: InventorySlot) -> bool:
 	slot.item_stack_repr = null
 	var item_stack = item_stack_in_hand.item_stack
 	character_panel.current_character.inventory.unuse(item_stack.item)
+	character_panel.current_character.reload_all_mods()
 	update()
 	update_item_in_hand()
 	return true
 
 func put_to(slot: InventorySlot):
+	if not slot: # TODO: Исправь костыль на переключение персонажей в инвентаре.
+		return
 	if slot.name.begins_with("Slot"):
 		put_item_to_inv_slot(slot)
 	else:
@@ -177,18 +186,19 @@ func take_from(slot:InventorySlot):
 	 
 
 func _input(event):
+	if not is_open:
+		return
 	update_item_in_hand()
 	if event.is_action_pressed("lmb"):
 		if not hovering_slot:
 			return
 		take_from(hovering_slot)
+		item_stack_in_hand_origin = hovering_slot
 	
 	if event.is_action_released("lmb"):
 		var target_slot = hovering_slot
 		if not hovering_slot or not hovering_slot.is_empty():
 			target_slot = item_stack_in_hand_origin
-		if not target_slot:
-			return
 		put_to(target_slot)
 		
 

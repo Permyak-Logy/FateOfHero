@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=5 format=3 uid="uid://di1372ucdkekv"]
+
+[ext_resource type="Script" path="res://tactical_mode/effects/vamp_for_attack.gd" id="1_l6abw"]
+[ext_resource type="Script" path="res://inventory/apply_effect_ability.gd" id="2_7b0x6"]
+[ext_resource type="Texture2D" uid="uid://hpydxfk4lo0a" path="res://tactical_mode/unit/GGVamp/Vampire_n1.png" id="3_0t85r"]
+
+[sub_resource type="Resource" id="Resource_co4lr"]
+script = ExtResource("1_l6abw")
+power = 0.2
+count = 5
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = true
+stackable = false
+effect_name = "Эффект"
+is_negative = false
+
+[resource]
+script = ExtResource("2_7b0x6")
+effect = SubResource("Resource_co4lr")
+apply_on = Array[int]([0])
+targets = 1
+max_targets = 0
+acts = 0
+final_act = true
+cooldown = 6
+limit = 0
+count = -1
+scaling_type = 0
+only_unit_owner = true
+type = 4
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Упырь"
+description = "Активирует вампиризм на следущие 5 ударов"
+texture = ExtResource("3_0t85r")
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0

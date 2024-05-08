@@ -1,14 +1,5 @@
 class_name EscapeAbility extends DirectedAbility
 
-func _init():
-	super(-1)
-	
-	acts = 1
-	targets = 0
-	final_act = true
-	name = "Побег"
-	
-	only_unit_owner = false
 
 func apply():
 	for unit in get_map().get_player_units():

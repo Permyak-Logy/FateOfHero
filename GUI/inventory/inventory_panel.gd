@@ -2,6 +2,10 @@ extends NinePatchRect
 
 class_name InventoryPanel
 
+"""
+The grid of cells in the inventory for the items
+"""
+
 @onready var slots = $GridContainer.get_children()
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
 

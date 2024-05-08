@@ -2,6 +2,9 @@ extends NinePatchRect
 
 class_name CharacterPanel
 
+"""
+Panel on the right that represents character and their gear
+"""
 
 @onready var name_label: Label = $HBoxContainer/Character/Name
 @onready var sprite: Sprite2D = $HBoxContainer/Character/PictureBack/Holder/CharacterSprite
@@ -50,7 +53,7 @@ func remake_gear_slots():
 func remake_ability_slots():
 	for child in ability_holder.get_children():
 		ability_holder.remove_child(child)
-	for i in range(current_character.inventory.max_abilities):
+	for i in range(current_character.inventory.gear_slots.get(Gear.Type.Ability, InventoryComponent.DEFAULT_COUNT_SLOTS)):
 		var slot = special_slots[Gear.Type.Ability].instantiate()
 		ability_holder.add_child(slot)
 		slots[Gear.Type.Ability].append(slot)
@@ -106,8 +109,8 @@ func update_bars():
 	hp_label.text = str(current_character.health.cur()) + "/" + str(current_character.health.get_max())
 	exp_bar.max_value = current_character.expirience.get_exp_to_next_lvl()
 	exp_bar.value = current_character.expirience.expirience
-	exp_label.text = str(current_character.expirience.expirience) + "/" + str(current_character.health.get_max())
-	pass 
+	exp_label.text = str(exp_bar.value) + "/" + \
+		str(exp_bar.max_value)
 
 func update_repr():
 	name_label.text = current_character.name

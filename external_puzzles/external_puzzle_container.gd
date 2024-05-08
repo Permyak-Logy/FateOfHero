@@ -1,3 +1,6 @@
-extends Node2D
+class_name ExternalPuzzleContainer extends Node2D
 
-class_name ExternalPuzzleContainer
+"""
+Innert entety that hosts the external puzzles
+Is singleton
+"""

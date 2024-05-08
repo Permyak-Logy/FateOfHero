@@ -1,5 +1,9 @@
 extends NinePatchRect
+"""
+Rectangle on the top left
+has buttons to switch characters
 
+"""
 class_name CharacterSelectionPanel
 
 @onready var container = $HBoxContainer

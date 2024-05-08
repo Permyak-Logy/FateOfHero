@@ -6,7 +6,7 @@ class_name Ability extends Gear
 @export var limit: int = 0
 @export var count: int = -1
 
-var description: String = ""
+@export var scaling_type: Mod.Type = Mod.Type.None
 
 var owner: Node
 
@@ -15,7 +15,7 @@ signal ready
 var cooldown_time = 0
 var has_uses = 0
 
-var only_unit_owner = true
+@export var only_unit_owner = true
 
 func _init(_count: int = count):
 	count = _count

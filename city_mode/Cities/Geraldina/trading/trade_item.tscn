@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://74426675p6qr"]
+[gd_scene load_steps=12 format=3 uid="uid://74426675p6qr"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/trade_item.gd" id="1_cym07"]
 [ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="2_3ejm0"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_malmt"]
+[ext_resource type="Texture2D" uid="uid://dcuc8xa6k3p27" path="res://GUI/inventory/new_assets/sprait_craft.png" id="4_fujuj"]
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="4_odn4n"]
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/trading/buy.gd" id="4_xanvi"]
 
@@ -27,6 +28,7 @@ coin = ExtResource("2_3ejm0")
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+texture = ExtResource("4_fujuj")
 
 [node name="TextureRect" type="TextureRect" parent="NinePatchRect"]
 custom_minimum_size = Vector2(20, 20)
@@ -37,10 +39,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -13.0
-offset_top = -14.0
-offset_right = 16.0
-offset_bottom = 15.0
+offset_left = -14.5
+offset_top = -22.0
+offset_right = 14.5
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 

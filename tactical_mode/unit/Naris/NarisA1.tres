@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=4 format=3 uid="uid://bd0bpu457k5k0"]
+
+[ext_resource type="Script" path="res://tactical_mode/effects/shield_effect.gd" id="1_3jkel"]
+[ext_resource type="Script" path="res://inventory/apply_effect_ability.gd" id="1_lbl2a"]
+
+[sub_resource type="Resource" id="Resource_7ifd1"]
+script = ExtResource("1_3jkel")
+power = 0.0
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Эффект"
+is_negative = false
+
+[resource]
+script = ExtResource("1_lbl2a")
+effect = SubResource("Resource_7ifd1")
+apply_on = Array[int]([0, 1])
+targets = 1
+max_targets = 0
+acts = 0
+final_act = true
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+only_unit_owner = true
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Моя оборона"
+description = "Дать щит союзнику"
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0

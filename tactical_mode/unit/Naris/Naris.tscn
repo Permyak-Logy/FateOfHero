@@ -1,140 +1,184 @@
-[gd_scene load_steps=14 format=3 uid="uid://cw3rkppa44bw8"]
+[gd_scene load_steps=30 format=3 uid="uid://di7auu4d2dl2"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/Naris/Naris.gd" id="1_w6p3a"]
-[ext_resource type="PackedScene" uid="uid://drgt6laud5ncn" path="res://tactical_mode/unit/components/StatComponent.tscn" id="2_46tem"]
-[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="2_c6ipj"]
-[ext_resource type="PackedScene" uid="uid://crlfebewxivdg" path="res://tactical_mode/unit/components/InventoryComponent.tscn" id="3_ewjxc"]
-[ext_resource type="PackedScene" uid="uid://craplwf1wnhvd" path="res://tactical_mode/unit/components/ExpirienceComponent.tscn" id="4_cdwq4"]
-[ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/Naris/spritesheet.png" id="5_pc56j"]
-[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/inventory/stat_progress_bar.tscn" id="6_7y8up"]
+[ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_fkgsn"]
+[ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/Naris/spritesheet.png" id="1_n5uvs"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_kvuu5"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="3_j6wxa"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_nry61"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_ailqq"]
+[ext_resource type="Resource" uid="uid://gcb5kx2gxphd" path="res://tactical_mode/unit/Naris/NarisA0.tres" id="6_ahqu3"]
+[ext_resource type="Resource" uid="uid://bd0bpu457k5k0" path="res://tactical_mode/unit/Naris/NarisA1.tres" id="7_5dfrg"]
+[ext_resource type="Resource" uid="uid://bimxy6owu2yfe" path="res://tactical_mode/unit/Naris/NarisA2.tres" id="8_w3k2y"]
+[ext_resource type="Resource" uid="uid://ck7fh83303x0w" path="res://tactical_mode/unit/Naris/NarisP1.tres" id="9_o8m50"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="11_ihwm0"]
 
-[sub_resource type="Resource" id="Resource_80w0f"]
-resource_name = "Naris Attack Ability"
-script = ExtResource("2_c6ipj")
-distance = 50
-targets = 1
-max_targets = 0
-acts = 1
-final_act = true
-cooldown = 0
-limit = 0
-count = -1
-type = 4
-_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
-name = ""
-max_stack = 0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pcowp"]
-radius = 12.0
-height = 58.0
-
-[sub_resource type="Animation" id="Animation_3w44h"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
+[sub_resource type="Resource" id="Resource_wmcn0"]
+script = ExtResource("2_kvuu5")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 1
 }
 
-[sub_resource type="Animation" id="Animation_l2m62"]
+[sub_resource type="Resource" id="Resource_mvhxa"]
+script = ExtResource("3_j6wxa")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_xyoi0"]
+script = ExtResource("3_nry61")
+mod_type = 0
+characteristic = SubResource("Resource_mvhxa")
+
+[sub_resource type="Resource" id="Resource_cb2cx"]
+script = ExtResource("3_j6wxa")
+base = 0.0
+cur = 0.0
+max_ = 0.0
+
+[sub_resource type="Resource" id="Resource_x5h83"]
+resource_local_to_scene = true
+script = ExtResource("3_nry61")
+mod_type = 3
+characteristic = SubResource("Resource_cb2cx")
+
+[sub_resource type="Resource" id="Resource_bye8g"]
+script = ExtResource("3_j6wxa")
+base = 101.0
+cur = 101.0
+max_ = 101.0
+
+[sub_resource type="Resource" id="Resource_35spq"]
+script = ExtResource("3_nry61")
+mod_type = 1
+characteristic = SubResource("Resource_bye8g")
+
+[sub_resource type="Resource" id="Resource_1wdrl"]
+script = ExtResource("3_j6wxa")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_pivhi"]
+script = ExtResource("3_nry61")
+mod_type = 2
+characteristic = SubResource("Resource_1wdrl")
+
+[sub_resource type="Resource" id="Resource_endnl"]
+script = ExtResource("4_ailqq")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_81g8j"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_rgt1h"]
+colors = PackedColorArray(1, 0.866667, 0.866667, 1, 0.243137, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ndpsp"]
+gradient = SubResource("Gradient_rgt1h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_42ogi"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_ndpsp")
+anim_offset_min = 1.0
+anim_offset_max = 1.0
+
+[sub_resource type="Animation" id="Animation_ewi1t"]
 resource_name = "idle"
-length = 2.0
+length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.7, 1.1, 1.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.9, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_8gx8v"]
+[sub_resource type="Animation" id="Animation_eeqfk"]
 resource_name = "run"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [5]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5icws"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nhtg4"]
 _data = {
-"RESET": SubResource("Animation_3w44h"),
-"idle": SubResource("Animation_l2m62"),
-"run": SubResource("Animation_8gx8v")
+"idle": SubResource("Animation_ewi1t"),
+"run": SubResource("Animation_eeqfk")
 }
 
-[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "health", "speed", "damage", "expirience", "sprite_for_outline")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jkeh3"]
+radius = 13.0
+height = 52.0
+
+[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player")]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
-script = ExtResource("1_w6p3a")
-unit_name = "Naris"
-inventory = NodePath("InventoryComponent")
-health = NodePath("StatHealth")
-speed = NodePath("StatSpeed")
-damage = NodePath("StatDamage")
-expirience = NodePath("ExpirienceComponent")
+script = ExtResource("1_fkgsn")
+unit_name = "Беррета Нарис"
+inventory = SubResource("Resource_wmcn0")
+health = SubResource("Resource_xyoi0")
+defence = SubResource("Resource_x5h83")
+speed = SubResource("Resource_35spq")
+damage = SubResource("Resource_pivhi")
+expirience = SubResource("Resource_endnl")
 sprite_for_outline = NodePath("Sprite2D")
-attack_ability = SubResource("Resource_80w0f")
-
-[node name="StatHealth" parent="." instance=ExtResource("2_46tem")]
-default_base = 100.0
-default_cur = 100.0
-default_max = 100.0
-mod_type = 0
-
-[node name="StatSpeed" parent="." instance=ExtResource("2_46tem")]
-default_base = 100.0
-default_cur = 100.0
-default_max = 100.0
-mod_type = 1
-
-[node name="StatDamage" parent="." instance=ExtResource("2_46tem")]
-default_base = 20.0
-mod_type = 2
-
-[node name="InventoryComponent" parent="." instance=ExtResource("3_ewjxc")]
-
-[node name="ExpirienceComponent" parent="." instance=ExtResource("4_cdwq4")]
+trail_particles = NodePath("Sprite2D/GPUParticles2D")
+health_bar_pb = NodePath("StatProgressBar")
+animation_player = NodePath("AnimationPlayer")
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_ahqu3"), ExtResource("7_5dfrg"), ExtResource("8_w3k2y")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_o8m50")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -23)
-texture = ExtResource("5_pc56j")
-hframes = 7
-frame = 1
+position = Vector2(1, -26)
+texture = ExtResource("1_n5uvs")
+hframes = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
-position = Vector2(-1, 0)
-shape = SubResource("CapsuleShape2D_pcowp")
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+visible = false
+z_index = -1
+y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_81g8j")
+position = Vector2(-5, 1)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_42ogi")
+texture = ExtResource("1_n5uvs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_5icws")
+"": SubResource("AnimationLibrary_nhtg4")
 }
 
-[node name="StatProgressBar" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("6_7y8up")]
-offset_top = -56.0
-offset_bottom = -54.0
-stat_component = NodePath("../StatHealth")
+[node name="StatProgressBar" parent="." instance=ExtResource("11_ihwm0")]
+offset_top = -55.0
+offset_bottom = -53.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("CapsuleShape2D_jkeh3")
 
 [connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

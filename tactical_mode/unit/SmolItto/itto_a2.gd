@@ -1,14 +1,7 @@
 class_name IttoA2 extends DirectedAbility
 
 @export var power: float = 100
- 
-func _init(_power: float = power):
-	super(-1)
-	
-	acts = 1
-	targets = 0
-	final_act = true
-	name = "Хилл отряда"
+
 
 func apply():
 	await owner.play("prehealteam")

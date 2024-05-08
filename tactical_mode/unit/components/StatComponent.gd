@@ -1,46 +1,30 @@
-extends Node
+class_name StatComponent extends Resource
 
-class_name StatComponent
 
-@export var default_base: float = 0
-@export var default_cur: float = 0
-@export var default_max: float = 0
-@export var reset_on_ready: bool = true
 @export var mod_type: Mod.Type = Mod.Type.None
+@export var characteristic: Characteristic
 
-@onready var mod = Mod.new(mod_type)
-@onready var unit: Unit
-@onready var _characteristic = Characteristic.new(default_base, default_cur, default_max)
 
 signal empty(comp: StatComponent)
 signal full(comp: StatComponent)
 signal change(comp: StatComponent, old: float, new, float)
-
-
-func _ready():
-	if is_instance_of($"..", Unit):
-		unit = $".."
-	
-	if reset_on_ready:
-		_characteristic.cur = _characteristic.base
-		_characteristic.max_ = max(_characteristic.base, _characteristic.max_)
-		reload_mods()
+var mod_value: ModValue = ModValue.new(0, 0)
 
 func percent():
-	return _characteristic.percent()
+	return characteristic.percent()
 
 func cur():
-	return _characteristic.cur
+	return characteristic.cur
 
 func get_max() -> float:
-	return _characteristic.max_
+	return characteristic.max_
 
 func get_base():
-	return _characteristic.base
+	return characteristic.base
 
 func set_cur(value):
 	var old = cur()
-	_characteristic.set_cur(value)
+	characteristic.set_cur(value)
 	if old != cur():
 		change.emit(self, old, cur())
 	
@@ -50,30 +34,30 @@ func set_cur(value):
 		full.emit(self)
 
 func add(value: float):
-	set_cur(_characteristic.cur + value)
+	set_cur(characteristic.cur + value)
 
 func sub(value: float):
-	set_cur(_characteristic.cur - value)
+	set_cur(characteristic.cur - value)
 
 func rebase(value: float, save_percent: bool = true):
 	var p = percent()
-	_characteristic.base = value
-	_characteristic.max_ = _characteristic.base * mod.value.mul + mod.value.add
+	characteristic.base = value
+	characteristic.max_ = characteristic.base * (mod_value.mul + 1) + mod_value.add
 	if save_percent:
-		_characteristic.cur = _characteristic.max_ * p
+		characteristic.cur = characteristic.max_ * p
 
-func reload_mods(save_percent: bool = true):
+func reload_mods(unit: Unit, save_percent: bool = true):
 	var p = percent()
-	mod.value.clear()
-	if unit and unit.inventory:
-		var _mods = unit.inventory.get_mods()
-		var _mod = _mods.get(mod_type, ModValue.new())
-		mod.value.iadd(_mod)
-	_characteristic.max_ = _characteristic.base * (mod.value.mul / 100 + 1) + mod.value.add
+	mod_value.clear()
+	var _mods = unit.get_mods()
+	var _mod = _mods.get(mod_type, ModValue.new())
+	mod_value.iadd(_mod)
+	characteristic.max_ = characteristic.base * (mod_value.mul + 1) + mod_value.add
+
 	if save_percent:
-		_characteristic.set_cur(_characteristic.max_ * p)
+		characteristic.set_cur(characteristic.max_ * p)
 	else:
-		_characteristic.set_cur(_characteristic.cur)
+		characteristic.set_cur(characteristic.cur)
 
 
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh8rmtnpudc4e"]
+
+[ext_resource type="PackedScene" uid="uid://byiv66xh65wju" path="res://external_puzzles/puzzles/stealth_run/obstacles/obstacle.tscn" id="1_f6wgb"]
+[ext_resource type="Script" path="res://external_puzzles/puzzles/stealth_run/obstacles/tree.gd" id="2_p45ln"]
+
+[node name="Tree" instance=ExtResource("1_f6wgb")]
+script = ExtResource("2_p45ln")

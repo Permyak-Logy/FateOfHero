@@ -1,13 +1,18 @@
-extends "res://strategic_mode/tile_events/TileEvent.gd"
+class_name LeverTileEntity extends "res://strategic_mode/tile_events/TileEvent.gd"
 
-class_name LeverTileEntity
+"""
+lever changes it's state when action button is pressed and player is insede the area
+"""
+
 @export var id: int 
 @export var state: bool = false
 
-@onready var sprite = $Sprite2D
 @onready var collider = $EventCollider
 
 var player_present: bool = false 
+
+func _ready():
+	pass
 
 func change_state():
 	state = not state

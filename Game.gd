@@ -1,6 +1,5 @@
-extends Node2D
+class_name Game extends Node2D
 
-class_name Game
 @onready var strat_map: StratMap = load("res://strategic_mode/strat_map.tscn").instantiate()
 @onready var tactical_map: TacticalMap = load("res://tactical_mode/tactical_map.tscn").instantiate() 
 @onready var city_container: CityContainer = load("res://city_mode/city_container.tscn").instantiate()

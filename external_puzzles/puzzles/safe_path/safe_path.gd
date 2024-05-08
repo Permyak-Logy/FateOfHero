@@ -3,9 +3,9 @@ extends "res://external_puzzles/puzzles/base_puzzle.gd"
 class_name SafePath
 @onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
 @onready var tilemap: TileMap = $TileMap
-@onready var player = $player
+@onready var player: WASDPlayer = $player
 @onready var game: Game = get_tree().root.get_child(0)
-@onready var wc: SafePathWinConditionPoint = load("res://external_puzzles/puzzles/safe_path/win_condition_point.tscn").instantiate()
+@onready var wc: EPWinCondition = load("res://external_puzzles/puzzles/safe_path/win_condition_point.tscn").instantiate()
 
 var enemies: Array[PackedScene]
 
@@ -120,25 +120,25 @@ func gen_field():
 
 func _ready():
 	gen_field()
+	wc.WCReached.connect(end_successfully)
 	add_child(wc)
 	wc.global_position = tilemap.map_to_local(end_pos)
 	player.global_position = tilemap.map_to_local(player.pos)
 	player.speed = 8 * tilemap.tile_set.tile_size.length()
 
+func set_enemies(enemies_: Array[PackedScene]):
+	enemies = enemies_
+
 func end_successfully():
-	solved.emit()
-	game.to_strat_mode()
-	
+	solved.emit(rewards)
+
 func start_fight():
 	var characters = inventory.characters
 	game.tactical_map.reinit(characters, enemies)
 	game.to_tact_mode()
 	game.tactical_map.finish.connect(on_finish_tactical_map)
 
-func set_enemies(enemies_: Array[PackedScene]):
-	enemies = enemies_
-
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive
-	solved.emit()
+	solved.emit(rewards)
 	game.to_strat_mode()
