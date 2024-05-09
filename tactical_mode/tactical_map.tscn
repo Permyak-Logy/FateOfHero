@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=14 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="10_3tc35"]
 [ext_resource type="PackedScene" uid="uid://komiiv5ot43n" path="res://tactical_mode/unit/units/Berserk/Berserk.tscn" id="10_h12g4"]
 [ext_resource type="PackedScene" uid="uid://cwccmvlw1ghah" path="res://tactical_mode/nature/Rock.tscn" id="10_m7p5y"]
+[ext_resource type="PackedScene" uid="uid://bnx7qiuivvnwn" path="res://tactical_mode/unit/units/Lugozavr/Lugozavr.tscn" id="11_njmlf"]
 
 [sub_resource type="Resource" id="Resource_cb2cx"]
 script = ExtResource("9_6j4aw")
@@ -87,3 +88,6 @@ position = Vector2(324, 374)
 
 [node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
 position = Vector2(94, 306)
+
+[node name="Lugozavr" parent="." instance=ExtResource("11_njmlf")]
+position = Vector2(449, 425)

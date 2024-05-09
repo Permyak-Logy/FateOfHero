@@ -34,6 +34,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 @export var trail_particles: GPUParticles2D = null
 @export var health_bar_pb: StatProgressBar = null
 @export var animation_player: AnimationPlayer = null
+@export var flip_onready: bool = false
 
 @export_group("Unit stats")
 @export var acts_count: int = 1
@@ -72,6 +73,8 @@ func _ready():
 	if health and health_bar_pb:
 		health_bar_pb.stat_component = health
 	set_outline_color(DEFAULT_COLOR)
+	if flip_onready:
+		on_flip_unit()
 
 func set_outline_color(color: Vector4):
 	"""
@@ -178,7 +181,7 @@ func on_flip_unit():
 		var i: Image = trail_particles.texture.get_image()
 		i.flip_x()
 		trail_particles.texture = ImageTexture.create_from_image(i)
-	sprite_for_outline.flip_h = flipped
+	sprite_for_outline.flip_h = bool(int(flipped) ^ int(flip_onready))
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():

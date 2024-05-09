@@ -176,6 +176,7 @@ sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
+flip_onready = true
 
 [node name="Body" type="Sprite2D" parent="."]
 z_index = 1
