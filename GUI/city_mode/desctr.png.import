@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdknbgrgospre"
-path="res://.godot/imported/Stove7.png-7c1966fe767d420f9dcca8c914c3241a.ctex"
+uid="uid://buhdf405nq8o6"
+path="res://.godot/imported/desctr.png-657d61a10148c45fd367a69761cd47e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://strategic_mode/tile_events/sprites/Stove7.png"
-dest_files=["res://.godot/imported/Stove7.png-7c1966fe767d420f9dcca8c914c3241a.ctex"]
+source_file="res://GUI/city_mode/desctr.png"
+dest_files=["res://.godot/imported/desctr.png-657d61a10148c45fd367a69761cd47e5.ctex"]
 
 [params]
 

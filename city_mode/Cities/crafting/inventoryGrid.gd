@@ -35,26 +35,9 @@ func add_item(item, item_stack, item_maxstack):
 			item_stack = item_stack - item_maxstack
 			i.stack = item_maxstack
 
-#func remove_item(item, item_stack, item_maxctack):
-	#for i in get_children():
-		#if i.item == item and i.stack < item_maxctack:
-			#i.stack -= item_stack
-			#if i.stack == 0:
-				#i.item = null
-				#i.max_stack = 0
-			#item_changed.emit()
-			#return
-	#for i in get_children():
-		#if i.item == item:
-			#i.stack -= item_stack
-			#if i.stack == 0:
-				#i.item = null
-				#i.max_stack = 0
-			#item_changed.emit()
-			#return
- 
-func is_available(item):
+func how_much(item):
+	var st : int = 0
 	for i in get_children():
 		if i.item == item:
-			return true
-	return false
+			st += i.stack
+	return st

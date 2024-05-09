@@ -11,10 +11,13 @@ class_name trade
 		item = value
 		if value != null:
 			$NinePatchRect/TextureRect.texture = value.texture
-			$Label.text = str(item.price) + "G"
 			maxstack = value.max_stack
 			price = value.price
-			item_description = value.description
+			if price > 999:
+				$Label.text = str(price/1000) + "kG"
+			else:
+				$Label.text = str(price) + "G"
+			item_description = value.description 
 			$buy/Sprite2D.frame = 1
 			$buy.disabled = false
 		else:
@@ -28,6 +31,8 @@ class_name trade
 var des = true
 
 func check():
+	$buy.disabled = true
+	$buy/Sprite2D.frame = 0
 	var inventory = $"../../../inventory/inventoryGrid1"
 	if inventory.how_much(coin) >= price and price != 0:
 		$buy.disabled = false
@@ -37,10 +42,7 @@ func _on_buy_pressed():
 	var inventory = $"../../../inventory/inventoryGrid1"
 	global_inventory.remove(coin, price)
 	global_inventory.insert(item, 1)
-	$buy.disabled = true
-	$buy/Sprite2D.frame = 0
 	inventory.update()
-	check()
 
 
 func _on_open_description_pressed():

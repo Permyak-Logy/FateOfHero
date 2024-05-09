@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdknbgrgospre"
-path="res://.godot/imported/Stove7.png-7c1966fe767d420f9dcca8c914c3241a.ctex"
+uid="uid://blim565lr73pr"
+path="res://.godot/imported/Body_billet.png-f8dcda99eb3642950ae8e31feb9e01fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://strategic_mode/tile_events/sprites/Stove7.png"
-dest_files=["res://.godot/imported/Stove7.png-7c1966fe767d420f9dcca8c914c3241a.ctex"]
+source_file="res://inventory/icons/Body_billet.png"
+dest_files=["res://.godot/imported/Body_billet.png-f8dcda99eb3642950ae8e31feb9e01fb.ctex"]
 
 [params]
 

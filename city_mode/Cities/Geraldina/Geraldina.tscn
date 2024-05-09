@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://sgkba57dbbe7"]
+[gd_scene load_steps=18 format=3 uid="uid://sgkba57dbbe7"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/Geraldina.gd" id="1_jacgh"]
 [ext_resource type="Texture2D" uid="uid://dlvrvoxv04o4m" path="res://city_mode/Cities/Assets/Geraldinia_0.png" id="2_415n5"]
@@ -12,7 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://cal6f73hk5ff7" path="res://city_mode/Cities/trading/trading.tscn" id="10_vvwk2"]
 [ext_resource type="PackedScene" uid="uid://cd1lm7663kkqk" path="res://city_mode/Cities/crafting/crafting.tscn" id="11_muc5h"]
 [ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="11_wtqva"]
+[ext_resource type="Resource" uid="uid://c0srtoci3pulj" path="res://inventory/items/helmet_billet.tres" id="12_bcm0t"]
+[ext_resource type="Resource" uid="uid://b1hv1sghbyjh6" path="res://inventory/items/body_billet.tres" id="13_mgyvm"]
+[ext_resource type="Resource" uid="uid://bpac8plevrksx" path="res://inventory/items/trousers_billet.tres" id="14_b3nuq"]
 [ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory/inventory_gui.tscn" id="14_m3655"]
+[ext_resource type="Resource" uid="uid://b7ko7srrw2av6" path="res://inventory/items/boots_billet.tres" id="15_eh26b"]
 
 [node name="CityMap" type="Node2D"]
 script = ExtResource("1_jacgh")
@@ -112,6 +116,11 @@ offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 trade1 = ExtResource("11_wtqva")
+trade5 = ExtResource("14_b3nuq")
+trade6 = ExtResource("12_bcm0t")
+trade7 = ExtResource("13_mgyvm")
+trade8 = ExtResource("14_b3nuq")
+trade9 = ExtResource("15_eh26b")
 
 [node name="Crafting" parent="." instance=ExtResource("11_muc5h")]
 visible = false
@@ -129,8 +138,8 @@ offset_top = 269.0
 offset_right = 461.0
 offset_bottom = 269.0
 
-[connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
 [connection signal="pressed" from="trading/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
 [connection signal="pressed" from="trading/Button" to="Trading" method="_on_button_pressed"]
 [connection signal="pressed" from="crafting/Button" to="." method="_on_button_crafting_pressed"]
 [connection signal="pressed" from="crafting/Button" to="Crafting" method="_on_button_pressed"]
