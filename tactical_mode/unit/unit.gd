@@ -61,6 +61,16 @@ var flipped: bool = false:  # Переключатель поворота
 		else:
 			flipped = value
 
+var _start_pos: Vector2
+var _end_pos = Vector2(0, 0)
+@export var percent_animation_to_attack: float = 0:
+	set(value):
+		global_position = _start_pos + (_end_pos - _start_pos) * value
+		flipped = bool(int(percent_animation_to_attack > value) ^ int((_end_pos - _start_pos)[0] < 0))
+		percent_animation_to_attack = value
+		print(value, " ", global_position, " ", _start_pos)
+
+
 # Различные цвета для обводки
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
 const CUR_COLOR = Vector4(255, 255, 255, 100)
@@ -105,6 +115,7 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 		_damage = effect.update_on_damage(_damage, _instigator)
 	
 	_damage = max(_damage, 0)
+	play("damaged")
 	health.sub(_damage)
 	get_map().write_info(
 		"=> " + unit_name + " получил " + str(_damage) +" урона от " + _instigator.unit_name
@@ -146,7 +157,7 @@ func apply_passives():
 		add_effect(passive)
 
 func ai(map: TacticalMap):
-	map.acts = 0
+	ai_random_move(map)
 
 func get_occupied_cells() -> Array[Vector2i]:
 	if visible:
@@ -155,9 +166,7 @@ func get_occupied_cells() -> Array[Vector2i]:
 
 func prepare_fight():
 	if animation_player:
-		animation_player.animation_set_next("attack", "idle")
-		animation_player.animation_set_next("ability", "idle")
-	
+		animation_player.animation_set_next("damaged", "idle")
 	print("=> Prepare: ", unit_name)
 	while _effects:
 		remove_effect(_effects[0])
@@ -209,12 +218,22 @@ func idle_direction_bool():
 	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
+	if _name == "idle" and is_death():
+		return
 	if _name == "walk":
 		current_id_path = _params
 		await walk_finished
 	elif animation_player:
+		if not animation_player.has_animation(_name):
+			print(self, "not have animation ", _name)
+			return
+		if _name == "preattack":
+			_start_pos = global_position
+			_end_pos = (_params as Unit).global_position + Vector2(10, 10)
 		animation_player.play(_name)
-		await animation_player.animation_changed
+		await animation_player.animation_finished
+		if _name == "postattack":
+			flipped = false
 
 func on_death(_component: StatComponent):
 	print("Death ", self)
@@ -282,8 +301,21 @@ func remove_effect(effect: Effect):
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)
+	effect.cancel_effect()
 	reload_all_mods()
 
 func kill():
 	if health:
 		health.set_cur(0)
+
+func ai_random_move(map: TacticalMap, distance: int=3):
+	var rng = RandomNumberGenerator.new()
+	var path = []
+	var cell = Vector2i(-1, -1)
+	while not map.can_move_to(cell):
+		cell = map.to_map(global_position) + Vector2i(
+			rng.randi_range(-distance, distance),
+			rng.randi_range(-distance, distance)
+		)
+	map.select_path_to(cell)
+	map._move_active_unit()

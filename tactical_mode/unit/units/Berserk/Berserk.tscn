@@ -141,6 +141,7 @@ private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
 position = Vector2(0, -26)
+emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_lcjhm")
 texture = ExtResource("1_by52o")

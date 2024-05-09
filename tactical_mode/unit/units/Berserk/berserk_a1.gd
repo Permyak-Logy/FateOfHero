@@ -15,7 +15,7 @@ func apply_on_unit(unit: Unit):
 	if unit == owner:
 		return
 	get_map().write_info(
-		"=> В ярости атакует " + unit.unit_name + "отнято " + str(int(unit.apply_damage(
+		"=> В ярости атакует " + unit.unit_name + "отнято " + str(int(await unit.apply_damage(
 			(owner as Unit).damage.cur() * power_attack, owner))))
 
 func can_select_cell(_cell: Vector2i) -> bool:

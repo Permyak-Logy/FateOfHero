@@ -373,7 +373,7 @@ func _start_stepmove():
 		_block_input = false
 	else:
 		_update_walkable(false)
-		await active_unit.ai(self)
+		active_unit.ai(self)
 
 func _update_stepmove():
 	"""
@@ -390,10 +390,14 @@ func _update_stepmove():
 		_finalize_fight(killed_enemy_units and not escape)
 		return
 	
-	if acts != 0 and active_unit.controlled_player:
+	if acts != 0:
 		write_info("* Ход продолжается *")
-		_update_walkable()
-		_block_input = false
+		if active_unit.controlled_player:
+			_update_walkable()
+			_block_input = false
+		else:
+			_update_walkable(false)
+			active_unit.ai(self)
 		return
 	
 	var time = unit_queue[0][0]

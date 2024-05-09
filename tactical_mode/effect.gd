@@ -49,3 +49,6 @@ func get_mods() -> Array[Mod]:
 
 func get_map() -> TacticalMap:
 	return owner.get_map()
+
+func cancel_effect():
+	pass

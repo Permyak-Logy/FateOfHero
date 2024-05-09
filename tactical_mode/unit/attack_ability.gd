@@ -3,9 +3,13 @@ class_name AttackAbility extends DirectedAbility
 @export var power_p: float = 1
 
 func apply():
+	var unit = selected[0] as Unit
 	if owner.damage:
+		await (owner as Unit).play("preattack", unit)
 		await (owner as Unit).play("attack")
-		var damaged = (selected[0] as Unit).apply_damage(owner.damage.cur(), owner)
+		var damaged = await unit.apply_damage(owner.damage.cur(), owner)
+		await (owner as Unit).play("postattack")
+		owner.play("idle")
 		return true
 	return false
 
