@@ -4,12 +4,14 @@
 [ext_resource type="Script" path="res://strategic_mode/tile_events/sm_interactables/area_based_interactable.gd" id="2_c4qkh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmho7"]
+size = Vector2(22, 22)
 
 [node name="AreaBasedInteractable" instance=ExtResource("1_p7fit")]
 script = ExtResource("2_c4qkh")
 
 [node name="EventCollider" parent="." index="1"]
 disabled = true
+one_way_collision = true
 
 [node name="Area2D" type="Area2D" parent="." index="2"]
 

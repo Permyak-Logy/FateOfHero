@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7tti01sb6op2"
-path="res://.godot/imported/Runa3.png-21d08a95258a39e659221360453c987a.ctex"
+uid="uid://g65y2jhaerjl"
+path="res://.godot/imported/stone1.png-0926861feb121d480e67426adb32533d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://strategic_mode/tile_events/sprites/Runa3.png"
-dest_files=["res://.godot/imported/Runa3.png-21d08a95258a39e659221360453c987a.ctex"]
+source_file="res://strategic_mode/tile_events/sprites/stone1.png"
+dest_files=["res://.godot/imported/stone1.png-0926861feb121d480e67426adb32533d.ctex"]
 
 [params]
 

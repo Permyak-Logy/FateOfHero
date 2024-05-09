@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://inventory/inventory.gd" id="3_ih5tw"]
 [ext_resource type="Resource" path="res://inventory/items/rune_8.tres" id="7_p06ca"]
 [ext_resource type="Resource" uid="uid://dp7v2ukib0ut1" path="res://inventory/items/pepper.tres" id="7_r5gcm"]
-[ext_resource type="Resource" uid="uid://boxcnxphphtf3" path="res://inventory/items/rune_1.tres" id="8_6uw4y"]
+[ext_resource type="Resource" path="res://inventory/items/rune_1.tres" id="8_6uw4y"]
 
 [resource]
 script = ExtResource("3_ih5tw")

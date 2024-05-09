@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxbfqhg6jo6eh"
-path="res://.godot/imported/Runa6.png-b02cab49e9e6a1faada727c2cb09d789.ctex"
+uid="uid://cgj52w5hxdpkb"
+path="res://.godot/imported/rune7.png-a94d55750e9c55cfca6df7e46becd1bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://strategic_mode/tile_events/sprites/Runa6.png"
-dest_files=["res://.godot/imported/Runa6.png-b02cab49e9e6a1faada727c2cb09d789.ctex"]
+source_file="res://strategic_mode/tile_events/sprites/rune7.png"
+dest_files=["res://.godot/imported/rune7.png-a94d55750e9c55cfca6df7e46becd1bf.ctex"]
 
 [params]
 

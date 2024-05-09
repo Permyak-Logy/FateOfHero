@@ -6,6 +6,8 @@
 
 [node name="Lever" instance=ExtResource("1_0lny7")]
 script = ExtResource("2_7wvgx")
+id = 0
+state = false
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_htat7")

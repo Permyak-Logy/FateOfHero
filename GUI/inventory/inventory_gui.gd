@@ -24,6 +24,7 @@ var character_buttons: Array = []
 var gear_slots: Array = []
 var ability_slots: Array = []
 var active_char_id: int = 0
+# these won't
 var item_stack_in_hand: ItemStackRepr
 var item_stack_in_hand_origin: InventorySlot
 var hovering_slot: InventorySlot = null

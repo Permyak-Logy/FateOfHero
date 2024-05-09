@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://bse1mhf87c40h" path="res://external_puzzles/puzzles/safe_path/safe_path.tscn" id="14_hlgbt"]
 [ext_resource type="Texture2D" uid="uid://dpxxyv64x368h" path="res://strategic_mode/tile_events/sprites/tpr_safe_path.png" id="15_kwpve"]
 [ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://strategic_mode/tile_events/unwalkables/timed_gate.tscn" id="16_u0x0p"]
-[ext_resource type="PackedScene" uid="uid://ubknfwgu3xkx" path="res://GUI/rune_placement/rune_placement_gui.tscn" id="20_pxtgy"]
 [ext_resource type="Resource" uid="uid://bmupad5oq83pg" path="res://strategic_mode/dialogues/example_dialogue/example_hello.tres" id="21_hc15a"]
 [ext_resource type="PackedScene" uid="uid://b7jg3r6hr02df" path="res://strategic_mode/tile_events/town_tile_event.tscn" id="21_vylki"]
 [ext_resource type="PackedScene" uid="uid://y4fch07ijvb1" path="res://strategic_mode/tile_events/dialogue_triggers/dialogue_trigger.tscn" id="21_wx1y1"]
@@ -28,6 +27,7 @@
 [ext_resource type="Resource" path="res://strategic_mode/dialogues/genned_dial/Привет.tres" id="22_trjjb"]
 [ext_resource type="Texture2D" uid="uid://bgqjde0lpoh7w" path="res://strategic_mode/tile_events/sprites/house.png" id="23_qm7dp"]
 [ext_resource type="PackedScene" uid="uid://bids4nmirj5aj" path="res://external_puzzles/puzzles/stealth_run/stealth_run.tscn" id="27_pvq2k"]
+[ext_resource type="PackedScene" uid="uid://co2yhd01ek3ba" path="res://strategic_mode/tile_events/sm_interactables/rune_stone.tscn" id="29_0aliy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4111,13 +4111,9 @@ script = ExtResource("7_rcyvo")
 
 [node name="Lever" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("6_simf5")]
 position = Vector2(-61, -59)
-id = 0
-state = false
 
 [node name="Lever2" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("6_simf5")]
 position = Vector2(40, -44)
-id = 0
-state = false
 
 [node name="Gate" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("8_byobl")]
 position = Vector2(-11, -101)
@@ -4134,7 +4130,7 @@ texture = ExtResource("15_kwpve")
 
 [node name="player" parent="." instance=ExtResource("5_whmy4")]
 top_level = true
-position = Vector2(84, 89)
+position = Vector2(218, 84)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -4146,9 +4142,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-
-[node name="RunePlacementGUI" parent="GUI" instance=ExtResource("20_pxtgy")]
-visible = false
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("21_wx1y1")]
 position = Vector2(117, 177)
@@ -4170,6 +4163,10 @@ position = Vector2(35, 38)
 enemies = Array[PackedScene]([ExtResource("5_r3hyg"), ExtResource("5_r3hyg"), ExtResource("5_r3hyg"), ExtResource("5_r3hyg"), ExtResource("5_r3hyg")])
 puzzle = ExtResource("27_pvq2k")
 texture = ExtResource("15_kwpve")
+
+[node name="RuneStone" parent="." instance=ExtResource("29_0aliy")]
+position = Vector2(302, 120)
+type = 1
 
 [connection signal="inventory_closed" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_closed"]
 [connection signal="inventory_opened" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_opened"]

@@ -8,11 +8,14 @@ Any GUI should be it's child.
 var busy = false
 
 func _input(event):
+	if busy:
+		return
 	if event.is_action_pressed("inv_button"): 
-		if busy:
-			return
 		if not inventory.is_open:
 			inventory.open()
 		else:
+			inventory.close()
+	if event.is_action_pressed("escape"):
+		if inventory.is_open:
 			inventory.close()
 

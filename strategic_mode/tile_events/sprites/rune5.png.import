@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6upvb1mhauqv"
-path="res://.godot/imported/Stove5.png-c36a90a046457221873337ac44b040c7.ctex"
+uid="uid://cg0k3t84t4s0p"
+path="res://.godot/imported/rune5.png-f9fc2096dbbe2bf83020d24db2088ec2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://strategic_mode/tile_events/sprites/Stove5.png"
-dest_files=["res://.godot/imported/Stove5.png-c36a90a046457221873337ac44b040c7.ctex"]
+source_file="res://strategic_mode/tile_events/sprites/rune5.png"
+dest_files=["res://.godot/imported/rune5.png-f9fc2096dbbe2bf83020d24db2088ec2.ctex"]
 
 [params]
 

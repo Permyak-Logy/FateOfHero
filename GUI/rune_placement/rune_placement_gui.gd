@@ -2,11 +2,13 @@ class_name RunePlacementGUI extends Control
 
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
 @onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
+var place_inventory: MicroInventory = null
 
 @onready var inventory_panel: InventoryPanel = $HBoxContainer/InventoryPanel
 @onready var placement_panel: RunePlacementPanel = $HBoxContainer/PlacementPanel
 
 @onready var inv_slots = inventory_panel.slots
+
 
 signal done
 
@@ -14,10 +16,19 @@ var item_stack_in_hand: ItemStackRepr
 var item_stack_in_hand_origin: InventorySlot
 var hovering_slot: InventorySlot = null
 
+
+
 func _ready():
+	assert(place_inventory != null, "You forgot to pass place's inecntory")
 	connect_inventory_slots()
 	placement_panel.rune_slot.HoveringInventorySlot.connect(on_slot_hovered)
 	placement_panel.rune_slot.UnhoveringInventorySlot.connect(on_slot_unhovered)
+	if place_inventory.contents:
+		var isr: ItemStackRepr = ItemStackReprClass.instantiate()
+		placement_panel.current_rune = isr
+		placement_panel.update()
+		isr.item_stack = place_inventory.contents
+		isr.update()
 	update()
 
 func connect_inventory_slots():
@@ -67,35 +78,38 @@ func take_item_from_inv_slot(slot: InventorySlot):
 	update()
 	update_item_in_hand()
 
-func put_item_in_place():
+func put_item_in_place() -> bool:
 	if placement_panel.current_rune:
 		return false
 	if not item_stack_in_hand.item_stack.item.name.begins_with("rune"):
 		return false
 	remove_child(item_stack_in_hand)
 	placement_panel.current_rune = item_stack_in_hand
+	place_inventory.insert_is(item_stack_in_hand.item_stack)
 	item_stack_in_hand = null
 	update()
+	return true
 
 func take_from_place():
 	if item_stack_in_hand:
 		return 
 	if not placement_panel.current_rune:
 		return 
-	item_stack_in_hand = placement_panel.current_rune
+	item_stack_in_hand = placement_panel.rune_slot.take_item()
+	place_inventory.remove_is(item_stack_in_hand.item_stack)
+	add_child(item_stack_in_hand)
 	placement_panel.current_rune = null 
 	update()
 
 func put_to(slot: InventorySlot):
-	print(slot.name)
 	if slot.name.begins_with("Slot"):
 		put_item_in_inv()
 	else:
-		put_item_in_place()
+		if not put_item_in_place():
+			put_item_in_inv()
 	
 
 func take_from(slot:InventorySlot):
-	print(slot.name)
 	if hovering_slot.name.begins_with("Slot"):
 		take_item_from_inv_slot(hovering_slot)
 	else:
@@ -104,7 +118,7 @@ func take_from(slot:InventorySlot):
 
 func _input(event):
 	update_item_in_hand()
-	if event.is_action_pressed("escape") or event.is_action_pressed("inv_button"):
+	if event.is_action_pressed("escape") or event.is_action_pressed("activate"):
 		done.emit()
 	if event.is_action_pressed("lmb"):
 		if not hovering_slot:

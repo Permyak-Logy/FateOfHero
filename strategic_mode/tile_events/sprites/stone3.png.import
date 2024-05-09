@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6pgndeft6skl"
-path="res://.godot/imported/Stove6.png-efaec537a371e75194f8b2ce93023068.ctex"
+uid="uid://cxxwjr3c4hp4g"
+path="res://.godot/imported/stone3.png-34c9e4f7e47c179e609f8916f9de159d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://strategic_mode/tile_events/sprites/Stove6.png"
-dest_files=["res://.godot/imported/Stove6.png-efaec537a371e75194f8b2ce93023068.ctex"]
+source_file="res://strategic_mode/tile_events/sprites/stone3.png"
+dest_files=["res://.godot/imported/stone3.png-34c9e4f7e47c179e609f8916f9de159d.ctex"]
 
 [params]
 

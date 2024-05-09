@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dqhmhhr6opswi"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://inventory/item.gd" id="1_k4w1i"]
-[ext_resource type="Texture2D" uid="uid://bi6f16uqlehk4" path="res://inventory/icons/Rune_item2.png" id="2_xtb4v"]
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_ftkan"]
+[ext_resource type="Texture2D" path="res://inventory/icons/rune_2.png" id="2_tiaw4"]
 
 [resource]
-script = ExtResource("1_k4w1i")
-name = "Rune scythe"
+script = ExtResource("1_ftkan")
+name = "rune_2"
 description = ""
-texture = ExtResource("2_xtb4v")
-max_stack = 0
-recipe = Array[ExtResource("1_k4w1i")]([])
+texture = ExtResource("2_tiaw4")
+max_stack = 1
+recipe = Array[ExtResource("1_ftkan")]([])
 price = 0
