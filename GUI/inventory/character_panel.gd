@@ -16,6 +16,8 @@ Panel on the right that represents character and their gear
 @onready var exp_label = $HBoxContainer/Character/CenterContainer/ExpProgressBar/Label
 @onready var hp_label = $HBoxContainer/Character/CenterContainer2/HealthBar/Label
 
+
+var cs: CollisionShape2D
 var current_character: Unit = null
 var gear_slots = []
 var ability_slots = []
@@ -143,7 +145,8 @@ func print_inventory():
 func change_character(character: PackedScene) -> PackedScene:
 	var old_char = null
 	if current_character:
-		print_inventory()
+		#print_inventory()
+		cs.disabled = false
 		old_char = PackedScene.new()
 		current_character.visible = true
 		sprite_holder.remove_child(current_character)
@@ -151,6 +154,8 @@ func change_character(character: PackedScene) -> PackedScene:
 	
 	current_character = character.instantiate()
 	current_character.visible = false
+	cs = current_character.get_node_or_null("CollisionShape2D")
+	cs.disabled = true
 	sprite_holder.add_child(current_character)
 	
 	

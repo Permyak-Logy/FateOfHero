@@ -13,6 +13,3 @@ texture = ExtResource("3_jukci")
 
 [node name="Rune" type="Sprite2D" parent="." index="1"]
 vframes = 2
-
-[node name="Area2D" parent="." index="3"]
-visible = false

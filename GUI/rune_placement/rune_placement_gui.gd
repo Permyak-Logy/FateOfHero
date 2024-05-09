@@ -15,7 +15,7 @@ signal done
 var item_stack_in_hand: ItemStackRepr
 var item_stack_in_hand_origin: InventorySlot
 var hovering_slot: InventorySlot = null
-
+var is_done = false
 
 
 func _ready():
@@ -118,7 +118,7 @@ func take_from(slot:InventorySlot):
 
 func _input(event):
 	update_item_in_hand()
-	if event.is_action_pressed("escape") or event.is_action_pressed("activate"):
+	if event.is_action_pressed("escape"):
 		done.emit()
 	if event.is_action_pressed("lmb"):
 		if not hovering_slot:
