@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://co2yhd01ek3ba"]
+
+[ext_resource type="PackedScene" uid="uid://dbiejktjnyvgo" path="res://strategic_mode/tile_events/sm_interactables/area_based_interactable.tscn" id="1_xkns3"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/sm_interactables/rune_stone.gd" id="2_qi36p"]
+
+[node name="RuneStone" instance=ExtResource("1_xkns3")]
+script = ExtResource("2_qi36p")
+type = 0

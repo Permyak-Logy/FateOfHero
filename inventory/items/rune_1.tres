@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://boxcnxphphtf3"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_2onej"]
+[ext_resource type="Texture2D" uid="uid://cruvl4wln5783" path="res://inventory/icons/rune_1.png" id="2_i81ac"]
+
+[resource]
+script = ExtResource("1_2onej")
+name = "Rune path"
+description = ""
+texture = ExtResource("2_i81ac")
+max_stack = 1
+recipe = Array[ExtResource("1_2onej")]([])
+price = 0

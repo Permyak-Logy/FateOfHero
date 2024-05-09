@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2kf7xudkcxm1"
-path="res://.godot/imported/Runa_item1.png-f682b3fddd2a3b1f830701e29d666580.ctex"
+uid="uid://cj2qrc72ftoe3"
+path="res://.godot/imported/item_slot.png-afbec7fb67c3aa1a7380b85dde231ec1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inventory/icons/Runa_item1.png"
-dest_files=["res://.godot/imported/Runa_item1.png-f682b3fddd2a3b1f830701e29d666580.ctex"]
+source_file="res://GUI/rune_placement/item_slot.png"
+dest_files=["res://.godot/imported/item_slot.png-afbec7fb67c3aa1a7380b85dde231ec1.ctex"]
 
 [params]
 

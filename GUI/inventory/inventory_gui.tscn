@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://GUI/inventory/inventory_gui.gd" id="1_c5uxj"]
 [ext_resource type="PackedScene" uid="uid://c4t2ssb8xsd48" path="res://GUI/inventory/character_selection_panel.tscn" id="2_0fsi5"]
-[ext_resource type="PackedScene" uid="uid://c21wpigb0wbsp" path="res://GUI/inventory/inventory_panel.tscn" id="3_344xr"]
+[ext_resource type="PackedScene" uid="uid://c21wpigb0wbsp" path="res://GUI/inventory/inventory_panel.tscn" id="3_7p47t"]
 [ext_resource type="PackedScene" uid="uid://bn5u6v7ibmq7d" path="res://GUI/inventory/character_panel.tscn" id="4_gllpg"]
 
 [node name="InventoryGUI" type="Control"]
@@ -35,7 +35,7 @@ layout_mode = 2
 [node name="CharacterSelectionPanel" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_0fsi5")]
 layout_mode = 2
 
-[node name="InventoryPanel" parent="HBoxContainer/VBoxContainer" instance=ExtResource("3_344xr")]
+[node name="InventoryPanel" parent="HBoxContainer/VBoxContainer" instance=ExtResource("3_7p47t")]
 layout_mode = 2
 
 [node name="CharacterPanel" parent="HBoxContainer" instance=ExtResource("4_gllpg")]
