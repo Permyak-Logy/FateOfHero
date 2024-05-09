@@ -122,7 +122,7 @@ _data = {
 "run": SubResource("Animation_whb6q")
 }
 
-[node name="Berserk" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb")]
+[node name="Berserk" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "for_flip_sprites")]
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3ocbc")
@@ -136,6 +136,7 @@ expirience = SubResource("Resource_h4p4i")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
+for_flip_sprites = [NodePath("Sprite2D")]
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_unl5f"), ExtResource("7_h4oqc"), ExtResource("8_x0px8"), ExtResource("9_qtvge")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

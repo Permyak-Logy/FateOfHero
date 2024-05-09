@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://di7auu4d2dl2"]
+[gd_scene load_steps=38 format=3 uid="uid://di7auu4d2dl2"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_fkgsn"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/units/Naris/assets/spritesheet.png" id="1_n5uvs"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="3_j6wxa"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_nry61"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_ailqq"]
+[ext_resource type="Resource" uid="uid://gcb5kx2gxphd" path="res://tactical_mode/unit/units/Naris/res/NarisA0.tres" id="6_pam86"]
+[ext_resource type="Resource" uid="uid://bd0bpu457k5k0" path="res://tactical_mode/unit/units/Naris/res/NarisA1.tres" id="7_55xdn"]
+[ext_resource type="Resource" uid="uid://bimxy6owu2yfe" path="res://tactical_mode/unit/units/Naris/res/NarisA2.tres" id="8_yvxg7"]
 [ext_resource type="Resource" uid="uid://ck7fh83303x0w" path="res://tactical_mode/unit/units/Naris/res/NarisP1.tres" id="9_uu01e"]
 [ext_resource type="Texture2D" uid="uid://cyy3yeywnj7fi" path="res://tactical_mode/unit/units/Naris/assets/run.png" id="11_fbds2"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="11_ihwm0"]
@@ -537,7 +540,7 @@ _data = {
 radius = 13.0
 height = 52.0
 
-[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player")]
+[node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
@@ -553,7 +556,9 @@ sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Body"), NodePath("AttackTrail")]
 acts_count = 2
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_pam86"), ExtResource("7_55xdn"), ExtResource("8_yvxg7")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_uu01e")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -575,7 +580,6 @@ frame = 3
 position = Vector2(1, -26)
 texture = ExtResource("1_n5uvs")
 hframes = 15
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

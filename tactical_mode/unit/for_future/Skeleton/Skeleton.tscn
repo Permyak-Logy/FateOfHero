@@ -1,12 +1,12 @@
 [gd_scene load_steps=20 format=3 uid="uid://dh5vq12tjl11n"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/units/Skeleton/Skeleton.gd" id="1_ccpxk"]
+[ext_resource type="Script" path="res://tactical_mode/unit/for_future/Skeleton/Skeleton.gd" id="1_ccpxk"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_nan3x"]
-[ext_resource type="Texture2D" uid="uid://bwx7qmeuapudt" path="res://tactical_mode/unit/units/Skeleton/Enemy.png" id="3_0chvl"]
+[ext_resource type="Texture2D" uid="uid://bwx7qmeuapudt" path="res://tactical_mode/unit/for_future/Skeleton/Enemy.png" id="3_0chvl"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_8i0i0"]
 [ext_resource type="Shader" path="res://tactical_mode/assets/outline.gdshader" id="3_oy1oo"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_5xtwx"]
-[ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/units/Skeleton/SkeletonA0.tres" id="4_71lrp"]
+[ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/for_future/Skeleton/SkeletonA0.tres" id="4_71lrp"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="7_x8j7o"]
 
 [sub_resource type="Resource" id="Resource_ws37b"]

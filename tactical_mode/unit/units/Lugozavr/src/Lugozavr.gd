@@ -11,6 +11,7 @@ func ai(map: TacticalMap):
 	if not target:
 		ai_random_move(map)
 	elif a1.applied == target:
+		a1.subapply()
 		ai_pass(map)
 	elif map.distance_between_cells(target.get_cell(), get_cell()) > 1:
 		ai_move_to(map, target.get_cell())

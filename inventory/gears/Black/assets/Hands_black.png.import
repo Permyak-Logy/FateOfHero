@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bppodc4pihpjd"
-path="res://.godot/imported/Enemy2.png-3ed30606bfa4b7aaf58bb69c53c8ca0c.ctex"
+uid="uid://caddx6qtifo12"
+path="res://.godot/imported/Hands_black.png-93332d0058fa80011dfd634338693d13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/unit/units/Skeleton/Enemy2.png"
-dest_files=["res://.godot/imported/Enemy2.png-3ed30606bfa4b7aaf58bb69c53c8ca0c.ctex"]
+source_file="res://inventory/gears/Black/assets/Hands_black.png"
+dest_files=["res://.godot/imported/Hands_black.png-93332d0058fa80011dfd634338693d13.ctex"]
 
 [params]
 

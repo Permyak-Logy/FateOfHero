@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://strategic_mode/StratTileMap.gd" id="4_u2vp4"]
 [ext_resource type="PackedScene" uid="uid://dipubwp70sl3s" path="res://strategic_mode/tile_events/encounter.tscn" id="4_ve1hs"]
 [ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://strategic_mode/tile_events/sprites/mean_skelly_boi.png" id="5_1yukr"]
-[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/units/Skeleton/Skeleton.tscn" id="5_r3hyg"]
+[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/for_future/Skeleton/Skeleton.tscn" id="5_r3hyg"]
 [ext_resource type="PackedScene" uid="uid://cf0rrbb0c6pik" path="res://strategic_mode/player.tscn" id="5_whmy4"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/units/Vendigo/Vendigo.tscn" id="6_0wgum"]
 [ext_resource type="PackedScene" uid="uid://bohhuirs02xds" path="res://strategic_mode/tile_events/lever.tscn" id="6_simf5"]

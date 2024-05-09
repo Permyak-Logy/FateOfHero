@@ -17,11 +17,15 @@ var owner: Unit = null:
 		owner = value
 		on_set_owner(old, owner)
 
-var instigator: Node = null
+var instigator: Node = null:
+	set(value):
+		if destroy_on_death_instigator:
+			if instigator and is_instance_of(instigator, Unit):
+				instigator.death.disconnect(func (_x) : finished.emit(self))
 
-func _ready():
-	if destroy_on_death_instigator and is_instance_of(instigator, Unit):
-		(instigator as Unit).death.connect(func (_x) : finished.emit(self))
+			if value and is_instance_of(value, Unit):
+				value.death.connect(func (_x) : finished.emit(self))
+		instigator = value
 
 func on_set_owner(old: Unit, new: Unit):
 	pass

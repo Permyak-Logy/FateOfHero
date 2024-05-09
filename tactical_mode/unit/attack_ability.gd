@@ -6,6 +6,7 @@ func apply():
 	print(selectable_tab)
 	var unit = selected[0] as Unit
 	if owner.damage:
+		get_map().write_info("=> " + owner.unit_name + " атакует")
 		await (owner as Unit).play("preattack", unit)
 		await (owner as Unit).play("attack")
 		var damaged = await unit.apply_damage(owner.damage.cur() * power_p, owner)
@@ -20,9 +21,11 @@ func can_select(node):
 		return false
 	if unit.is_death():
 		return false
-	if get_map().is_player(owner) == get_map().is_player(node):
+	if not unit.visible:
 		return false
-	var cur_dist = float("inf")
+	if get_map().get_relation(owner, unit) != TacticalMap.relation.Enemy:
+		return false
+	var cur_dist = 1_000_000
 	for cell in unit.get_occupied_cells():
 		cur_dist = min(cur_dist, get_map().distance_between_cells(owner.get_cell(), cell))
 	return cur_dist <= distance

@@ -144,7 +144,7 @@ func arrange_units():
 			var left_shift = 0
 			for cell in _p_units[i].get_occupied_cells():
 				left_shift = max(left_shift, (cell - _p_units[i].get_cell())[0])
-			move_unit_to(_p_units[i], _astar_board.left + (y + 1) % 2 + left_shift, y)
+			move_unit_to(_p_units[i], Vector2i(_astar_board.left + (y + 1) % 2 + left_shift, y))
 	
 	if _e_units:
 		var step_e = min((_astar_board.bottom - _astar_board.top) / len(_e_units), 6)
@@ -155,7 +155,7 @@ func arrange_units():
 			var right_shift = 0
 			for cell in _e_units[i].get_occupied_cells():
 				right_shift = max(right_shift, (cell - _e_units[i].get_cell())[0])
-			move_unit_to(_e_units[i],  _astar_board.right - right_shift - 1, y)
+			move_unit_to(_e_units[i],  Vector2i(_astar_board.right - right_shift - 1, y))
 	
 
 func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], count_nature_obj: int=-1):
@@ -254,12 +254,12 @@ func on_kill(unit: Unit):
 	reset_outline_color(unit)
 	write_info("-> " + unit.unit_name + " убит")
 
-func move_unit_to(actor: Actor, x: int, y: int):
+func move_unit_to(actor: Actor, cell: Vector2i):
 	"""
 	Передвигает юнита на указанную клетку на tilemap
 	"""
 	
-	actor.global_position = to_loc(Vector2i(x, y))
+	actor.global_position = to_loc(cell)
 
 func get_player_units() -> Array[Unit]:
 	"""
@@ -412,8 +412,8 @@ func _finalize_fight(_win=false):
 	_tile_map.clear_layer(PATH_LAYER)
 	win = _win
 	_block_input = true
-	running = false
 	write_info("*** Бой завершён ***")
+	running = false
 	for player in get_player_units():
 		if player.is_death():
 			continue
@@ -692,9 +692,11 @@ func spawn(actor_ps: PackedScene, cell: Vector2i) -> Actor:
 	
 	var actor: Actor = actor_ps.instantiate()
 	add_child(actor)
-	move_unit_to(actor, cell[0], cell[1])
+	move_unit_to(actor, cell)
 	return actor
 
 func write_info(text: String):
 	print("===> ", text)
+	if not running:
+		return
 	gui.tactical_info.write(text)

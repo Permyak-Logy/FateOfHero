@@ -173,7 +173,7 @@ _data = {
 "run": SubResource("Animation_x77xp")
 }
 
-[node name="Lugozavr" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player")]
+[node name="Lugozavr" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_4n5r8")
@@ -188,6 +188,7 @@ trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
 flip_onready = true
+for_flip_sprites = [NodePath("Body")]
 controlled_player = false
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("5_arnth"), ExtResource("6_y8n8d")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([SubResource("Resource_bx2ur")])

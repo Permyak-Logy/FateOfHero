@@ -125,7 +125,7 @@ _data = {
 "run": SubResource("Animation_fxtwy")
 }
 
-[node name="GgVamp" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb")]
+[node name="GgVamp" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
@@ -140,6 +140,7 @@ expirience = SubResource("Resource_iw2g7")
 sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
+for_flip_sprites = [NodePath("Body")]
 acts_count = 2
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_1t0c8"), ExtResource("7_ax6he"), ExtResource("8_r0ub4"), ExtResource("9_nqkrh")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("10_5dx63"), ExtResource("11_j0kv6"), ExtResource("12_gmwrs")])

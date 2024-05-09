@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://strategic_mode/dialogues/option.tscn" id="1_118tl"]
 [ext_resource type="Script" path="res://strategic_mode/dialogues/example_dialogue/attack.gd" id="2_pguug"]
-[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/units/Skeleton/Skeleton.tscn" id="3_gb5u2"]
+[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/for_future/Skeleton/Skeleton.tscn" id="3_gb5u2"]
 
 [node name="Option" instance=ExtResource("1_118tl")]
 script = ExtResource("2_pguug")

@@ -123,7 +123,7 @@ _data = {
 "run": SubResource("Animation_48qew")
 }
 
-[node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player")]
+[node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
@@ -139,6 +139,7 @@ sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("Sprite2D/GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Sprite2D")]
 acts_count = 2
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_iu0w4"), ExtResource("7_h74hq"), ExtResource("8_4c6l0")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_eelbm")])

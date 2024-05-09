@@ -16,4 +16,6 @@ func can_select(node):
 	var unit = node as Unit
 	if not unit:
 		return false
+	if not unit.visible:
+		return false
 	return get_map().get_relation(owner, unit) in apply_on

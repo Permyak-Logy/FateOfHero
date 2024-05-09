@@ -35,6 +35,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 @export var health_bar_pb: StatProgressBar = null
 @export var animation_player: AnimationPlayer = null
 @export var flip_onready: bool = false
+@export var for_flip_sprites: Array[Sprite2D] = []
 
 @export_group("Unit stats")
 @export var acts_count: int = 1
@@ -68,8 +69,6 @@ var _end_pos = Vector2(0, 0)
 		global_position = _start_pos + (_end_pos - _start_pos) * value
 		flipped = bool(int(percent_animation_to_attack > value) ^ int((_end_pos - _start_pos)[0] < 0))
 		percent_animation_to_attack = value
-		print(value, " ", global_position, " ", _start_pos)
-
 
 # Различные цвета для обводки
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
@@ -118,7 +117,7 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 	play("damaged")
 	health.sub(_damage)
 	get_map().write_info(
-		"=> " + unit_name + " получил " + str(_damage) +" урона от " + _instigator.unit_name
+		"=> " + unit_name + " получил " + str(int(_damage)) +" урона от " + _instigator.unit_name
 	)
 	return _damage
 
@@ -189,7 +188,8 @@ func on_flip_unit():
 		var i: Image = trail_particles.texture.get_image()
 		i.flip_x()
 		trail_particles.texture = ImageTexture.create_from_image(i)
-	sprite_for_outline.flip_h = bool(int(flipped) ^ int(flip_onready))
+	for sprite in for_flip_sprites:
+		sprite.flip_h = bool(int(flipped) ^ int(flip_onready))
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():
@@ -228,7 +228,9 @@ func play(_name: String, _params=null):
 			return
 		if _name == "preattack":
 			_start_pos = global_position
-			_end_pos = (_params as Unit).global_position + Vector2(10, 10)
+			_end_pos = (_params as Unit).global_position
+			_end_pos += Vector2((1 if _start_pos[0] - _end_pos[0] > 0 else -1) * 16, 5)
+			
 		animation_player.play(_name)
 		await animation_player.animation_finished
 		if _name == "postattack":
@@ -278,6 +280,8 @@ func get_effects() -> Array[Effect]:
 	return _effects
 
 func add_effect(effect: Effect):
+	if is_death() or not visible:
+		return
 	if effect.stackable:
 		for other in get_effects():
 			if effect.get_class() == other.get_class() and other.stackable:
