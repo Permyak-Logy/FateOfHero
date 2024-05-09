@@ -67,9 +67,6 @@ func remove(item: Item, count: int):
 	items[item] -= count 
 	if items[item] == 0:
 		items.erase(item) 
-#
-#func get_characters():
-	#return characters
-	#
-#func set_characters(new_characters: Array[Unit]):
-	#characters = new_characters
+
+func insert_is(item_stack: ItemStack):
+	insert(item_stack.item, item_stack.size)

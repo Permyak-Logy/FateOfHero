@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=35 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://strategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://strategic_mode/strat_map.gd" id="1_vssm8"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://bse1mhf87c40h" path="res://external_puzzles/puzzles/safe_path/safe_path.tscn" id="14_hlgbt"]
 [ext_resource type="Texture2D" uid="uid://dpxxyv64x368h" path="res://strategic_mode/tile_events/sprites/tpr_safe_path.png" id="15_kwpve"]
 [ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://strategic_mode/tile_events/unwalkables/timed_gate.tscn" id="16_u0x0p"]
+[ext_resource type="PackedScene" uid="uid://fr7siwcqaf8x" path="res://strategic_mode/tile_events/sm_interactables/treasure_chest.tscn" id="18_0s02k"]
+[ext_resource type="Resource" uid="uid://bn6fdo3m5610r" path="res://inventory/items/bottle_red.tres" id="19_yu1rd"]
 [ext_resource type="Resource" uid="uid://bmupad5oq83pg" path="res://strategic_mode/dialogues/example_dialogue/example_hello.tres" id="21_hc15a"]
 [ext_resource type="PackedScene" uid="uid://b7jg3r6hr02df" path="res://strategic_mode/tile_events/town_tile_event.tscn" id="21_vylki"]
 [ext_resource type="PackedScene" uid="uid://y4fch07ijvb1" path="res://strategic_mode/tile_events/dialogue_triggers/dialogue_trigger.tscn" id="21_wx1y1"]
@@ -4130,8 +4132,11 @@ texture = ExtResource("15_kwpve")
 [node name="RunesPuzzle1" type="Node" parent="PuzzleMaster"]
 script = ExtResource("28_vwli7")
 
-[node name="Prize" parent="PuzzleMaster/RunesPuzzle1" instance=ExtResource("8_byobl")]
-position = Vector2(367, 107)
+[node name="Prize" parent="PuzzleMaster/RunesPuzzle1" instance=ExtResource("18_0s02k")]
+position = Vector2(371, 109)
+contents = {
+ExtResource("19_yu1rd"): 15
+}
 
 [node name="RuneStone2" parent="PuzzleMaster/RunesPuzzle1" instance=ExtResource("29_0aliy")]
 position = Vector2(320, 157)
