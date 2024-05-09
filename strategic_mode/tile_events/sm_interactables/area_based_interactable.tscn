@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbiejktjnyvgo"]
+
+[ext_resource type="PackedScene" uid="uid://bpa53mqxjwk7r" path="res://strategic_mode/tile_events/TileEvent.tscn" id="1_p7fit"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/sm_interactables/area_based_interactable.gd" id="2_c4qkh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmho7"]
+
+[node name="AreaBasedInteractable" instance=ExtResource("1_p7fit")]
+script = ExtResource("2_c4qkh")
+
+[node name="EventCollider" parent="." index="1"]
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="." index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_pmho7")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

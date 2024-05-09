@@ -20,10 +20,13 @@ value = SubResource("Resource_ihroq")
 
 [sub_resource type="Resource" id="Resource_yhyqj"]
 script = ExtResource("3_la3ks")
+on_stack = 0
+limit_stacks_for_sum_mods = -1
 moves = 3
 texture = ExtResource("4_gm6b6")
 mods = Array[ExtResource("1_e665g")]([SubResource("Resource_xc460")])
 destroy_on_death_instigator = true
+stackable = false
 effect_name = "Чёрная жижа"
 is_negative = false
 
@@ -39,6 +42,7 @@ cooldown = 0
 limit = 0
 count = -1
 scaling_type = 4
+only_unit_owner = true
 type = 4
 _mods = Array[ExtResource("1_e665g")]([])
 name = "Чёрная жижа"

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq3cyu2npqu84"]
+
+[ext_resource type="PackedScene" uid="uid://bgpgpnh8l6avg" path="res://strategic_mode/tile_events/puzzle_activators/external_puzzle_activator.tscn" id="1_ar3sm"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/puzzle_activators/cc_external_puzzle_activator.gd" id="2_pgo1j"]
+
+[node name="CombatCapablePuzzleActivator" instance=ExtResource("1_ar3sm")]
+script = ExtResource("2_pgo1j")
+enemies = Array[PackedScene]([])
