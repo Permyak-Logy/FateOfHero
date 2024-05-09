@@ -35,6 +35,7 @@ func insert_is(item_stack: ItemStack) -> int:
 	return insert(item_stack.item, item_stack.size)
 
 func remove(item: Item, count: int):
+	if not contents: return
 	if item != contents.item: return
 	if count == 0: return
 	assert(count <= contents.size,"can't remove more than in inventory")

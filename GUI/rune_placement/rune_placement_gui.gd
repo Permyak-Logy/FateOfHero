@@ -27,7 +27,7 @@ func _ready():
 		var isr: ItemStackRepr = ItemStackReprClass.instantiate()
 		placement_panel.current_rune = isr
 		placement_panel.update()
-		isr.item_stack = place_inventory.contents
+		isr.item_stack = ItemStack.new(place_inventory.contents.item, place_inventory.contents.size)
 		isr.update()
 	update()
 
@@ -94,9 +94,9 @@ func take_from_place():
 	if item_stack_in_hand:
 		return 
 	if not placement_panel.current_rune:
-		return 
+		return
 	item_stack_in_hand = placement_panel.rune_slot.take_item()
-	place_inventory.remove_is(item_stack_in_hand.item_stack)
+	place_inventory.remove(item_stack_in_hand.item_stack.item, item_stack_in_hand.item_stack.size)
 	add_child(item_stack_in_hand)
 	placement_panel.current_rune = null 
 	update()

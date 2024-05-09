@@ -5,11 +5,23 @@ class_name RuneTileEvent extends AreaBasedInteractable
 
 
 @export var type: int 
+var rune_inside: int
 # is_satisfied
 var state: bool = false
 var gui: RunePlacementGUI
 var RunePlacementGUIRes: PackedScene = preload("res://GUI/rune_placement/rune_placement_gui.tscn")
 var inventory = MicroInventory.new()
+var rune_sprites: Array[Texture2D] = [
+	null,
+	preload("res://strategic_mode/tile_events/sprites/rune1.png"),
+	preload("res://strategic_mode/tile_events/sprites/rune2.png"),
+	preload("res://strategic_mode/tile_events/sprites/rune3.png"),
+	preload("res://strategic_mode/tile_events/sprites/rune4.png"),
+	preload("res://strategic_mode/tile_events/sprites/rune5.png"),
+	preload("res://strategic_mode/tile_events/sprites/rune6.png"),
+	preload("res://strategic_mode/tile_events/sprites/rune7.png"),
+	preload("res://strategic_mode/tile_events/sprites/rune8.png")	
+]
 
 func _ready():
 	assert(type != 0, "you forgot to assign type")
@@ -30,3 +42,18 @@ func on_gui_done():
 	game.strat_map.gui.busy = false
 	rune_sprite.texture
 	game.strat_map.unpause()
+	if inventory.contents:
+		rune_inside = int(inventory.contents.item.name.get_slice("_", 1))
+	else:
+		rune_inside = 0
+	rune_sprite.texture = rune_sprites[rune_inside]
+	update()
+
+func update():
+	if type == rune_inside:
+		rune_sprite.frame = 1
+		state = true
+	else:
+		rune_sprite.frame = 0
+		state = false
+		

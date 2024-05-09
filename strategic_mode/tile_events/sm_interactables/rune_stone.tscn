@@ -8,8 +8,11 @@
 script = ExtResource("2_qi36p")
 type = 0
 
-[node name="Rune" type="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_jukci")
+
+[node name="Rune" type="Sprite2D" parent="." index="1"]
 vframes = 2
 
-[node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("3_jukci")
+[node name="Area2D" parent="." index="3"]
+visible = false
