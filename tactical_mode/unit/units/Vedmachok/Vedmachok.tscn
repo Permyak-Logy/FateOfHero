@@ -42,7 +42,7 @@ characteristic = SubResource("Resource_cfuuq")
 script = ExtResource("2_5q3v1")
 base = 50.0
 cur = 50.0
-max_ = 0.0
+max_ = 50.0
 
 [sub_resource type="Resource" id="Resource_jkeo0"]
 script = ExtResource("3_klvn2")

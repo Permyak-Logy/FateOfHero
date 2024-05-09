@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnrh1hg6sh3ww"
-path="res://.godot/imported/texture.png-0442aae6183aa57c2b1c98591a32a3c3.ctex"
+uid="uid://c7lyt72phhdww"
+path="res://.godot/imported/Helmet_black.png-876d7d564cd3c9beff16d3e6aa12be93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inventory/abilities/magic_attack/texture.png"
-dest_files=["res://.godot/imported/texture.png-0442aae6183aa57c2b1c98591a32a3c3.ctex"]
+source_file="res://inventory/gears/Black/assets/Helmet_black.png"
+dest_files=["res://.godot/imported/Helmet_black.png-876d7d564cd3c9beff16d3e6aa12be93.ctex"]
 
 [params]
 

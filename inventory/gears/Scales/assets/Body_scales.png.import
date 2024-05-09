@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsu32bll3w580"
-path="res://.godot/imported/texture.png-0d234b11da867aa072f1b33ee7d2bc78.ctex"
+uid="uid://bsov0vxm5ho3n"
+path="res://.godot/imported/Body_scales.png-8c3ab046df9c33612b39b5f866fd024b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inventory/abilities/boots_speed/texture.png"
-dest_files=["res://.godot/imported/texture.png-0d234b11da867aa072f1b33ee7d2bc78.ctex"]
+source_file="res://inventory/gears/Scales/assets/Body_scales.png"
+dest_files=["res://.godot/imported/Body_scales.png-8c3ab046df9c33612b39b5f866fd024b.ctex"]
 
 [params]
 
