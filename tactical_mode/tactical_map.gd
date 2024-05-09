@@ -310,14 +310,12 @@ func is_occupied(cell: Vector2i) -> bool:
 	
 	return cell in _tile_map.get_used_cells(WALLS_LAYER)
 	
-func _flood_fill() -> Array:
+func walkable_fill(max_distance: float=1000) -> Array:
 	"""
 	Возвращает список клеток доступных для перемещения
 	"""
 	
 	var cell = active_unit.get_cell()
-	var max_distance: float = (
-		active_unit.speed.cur() - 100) / 20 + 4
 	var array := [cell]
 	var stack := [cell, 0]
 	var distance = 0
@@ -354,14 +352,20 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	await get_tree().create_timer(0.25).timeout
+	# await get_tree().create_timer(0.25).timeout
 	write_info("* Ходит: " + active_unit.unit_name + " *")
+	
 	cur_ability = null
 	for unit_data in unit_queue:
 		reset_outline_color(unit_data[1])
 	active_unit.set_outline_color(Unit.CUR_COLOR)
 	acts = active_unit.acts_count
 	(active_unit as Unit).premove_update()
+	
+	if acts == 0:
+		_update_stepmove()
+		return
+	
 	if active_unit.controlled_player:
 		gui.show_abilities(active_unit)
 		_update_walkable()
@@ -460,12 +464,12 @@ func _update_walkable(show=true):
 	"""
 	
 	_update_walls()
-	var cells = _flood_fill()
+	var cells = walkable_fill((active_unit.speed.cur() - 100) / 20 + 4)
 	_astar_walkable = AStarHexagon2D.new(cells)
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	if show:
 		draw(OVERLAY_PATH_LAYER, cells, 0, Vector2i(3, 0))
-		_select_path_to(to_map(_tile_map.get_local_mouse_position()))
+		select_path_to(to_map(_tile_map.get_local_mouse_position()))
 
 func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
 	"""
@@ -483,7 +487,7 @@ func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
 		result.append(_astar_walkable.itm(cell))
 	return result
 
-func _select_path_to(cell: Vector2i):
+func select_path_to(cell: Vector2i):
 	"""
 	Отрисовывает путь до клетки в оверлее
 	"""
@@ -492,7 +496,10 @@ func _select_path_to(cell: Vector2i):
 		_current_path = get_path_to_cell(cell)
 		_tile_map.clear_layer(PATH_LAYER)
 		draw(PATH_LAYER, _current_path, 0, Vector2i(1, 0))
-	
+
+func can_move_to(cell: Vector2i):
+	return _astar_walkable.has_cell(cell)
+
 func _move_active_unit():
 	"""
 	Запускает передвижение юнита, завершает действие
@@ -520,7 +527,7 @@ func _input(event):
 	if is_instance_of(event, InputEventMouseMotion):
 		var cell: Vector2i = to_map(_tile_map.make_input_local(event).position)
 		if not cur_ability:
-			_select_path_to(cell)
+			select_path_to(cell)
 		elif is_instance_of(cur_ability, AoEAbility):
 			if (cur_ability as AoEAbility).cell == cell:
 				return

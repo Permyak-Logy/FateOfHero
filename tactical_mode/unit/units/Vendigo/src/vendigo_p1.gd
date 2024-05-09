@@ -2,8 +2,8 @@ class_name VendigoP1 extends Effect
 
 @export var power_damage: float = 0.2
 
-var danger_ice = preload("res://tactical_mode/unit/Vendigo/DangerIce.tscn")
-var freezing = preload("res://tactical_mode/unit/Vendigo/Freezing.tres")
+var danger_ice = preload("res://tactical_mode/unit/units/Vendigo/DangerIce.tscn")
+var freezing = preload("res://tactical_mode/unit/units/Vendigo/res/Freezing.tres")
 var ices = {} # Dict[Vector2i: DangerIce]
 
 func update_on_move():

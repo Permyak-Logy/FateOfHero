@@ -146,7 +146,9 @@ func ai(map: TacticalMap):
 	map.acts = 0
 
 func get_occupied_cells() -> Array[Vector2i]:
-	return [get_cell()]
+	if visible:
+		return [get_cell()]
+	return []
 
 func prepare_fight():
 	if animation_player:
