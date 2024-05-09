@@ -1,4 +1,4 @@
-extends "res://strategic_mode/tile_events/TileEvent.gd"
+class_name DialogueTrigger extends TileEvent
 
 """
 starts a dialogue on contact

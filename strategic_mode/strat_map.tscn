@@ -4110,9 +4110,13 @@ script = ExtResource("7_rcyvo")
 
 [node name="Lever" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("6_simf5")]
 position = Vector2(-61, -59)
+id = 0
+state = false
 
 [node name="Lever2" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("6_simf5")]
 position = Vector2(40, -44)
+id = 0
+state = false
 
 [node name="Gate" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("8_byobl")]
 position = Vector2(-11, -101)

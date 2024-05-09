@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://co2yhd01ek3ba"]
+
+[ext_resource type="PackedScene" uid="uid://dbiejktjnyvgo" path="res://strategic_mode/tile_events/sm_interactables/area_based_interactable.tscn" id="1_v5ay7"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/sm_interactables/rune.gd" id="2_63nmj"]
+
+[node name="Runes" instance=ExtResource("1_v5ay7")]
+script = ExtResource("2_63nmj")

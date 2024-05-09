@@ -1,20 +1,16 @@
-extends "res://strategic_mode/tile_events/TileEvent.gd"
+class_name ManualDialogueTrigger extends DialogueTrigger
 
 """
 Allows player to start a dialogue when near the tile and action button is pressed 
 may be used for teleporters, obelisks or abything else 
 To use it you should create a dialog
 """
-@export var dialogue: Dialogue
 @export var do_destroy_on_exit: bool = false
 
 @onready var game: Game = get_tree().root.get_child(0)
 @onready var area: Area2D = $Area2D
 @onready var spite: Sprite2D = $Sprite2D
-@onready var strat_map: StratMap = get_tree().root.get_child(0).strat_map
-@onready var DialogueGUIRes = preload("res://GUI/dialogue/dialogue_gui.tscn")
 
-var dialogue_gui: DialogueGUI
 var player_present = false
 # it won't be triggered on contact as EventCollider is disabled
 func activate():

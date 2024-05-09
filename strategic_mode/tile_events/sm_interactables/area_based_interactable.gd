@@ -1,6 +1,7 @@
 class_name AreaBasedInteractable extends TileEvent
 
 var player_present: bool = false 
+
 # wont change it's texture
 func _ready():
 	pass

@@ -1,4 +1,4 @@
-extends "res://strategic_mode/tile_events/TileEvent.gd"
+class_name PuzzleActivator extends TileEvent
 
 @onready var game: Game = get_tree().root.get_child(0)
 

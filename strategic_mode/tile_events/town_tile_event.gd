@@ -1,4 +1,4 @@
-class_name TownTileEvent extends "res://strategic_mode/tile_events/TileEvent.gd"
+class_name TownTileEvent extends TileEvent
 
 """
 Tile Event for switching into the city_mode

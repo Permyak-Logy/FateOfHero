@@ -1,6 +1,4 @@
-extends "res://strategic_mode/tile_events/activators/external_puzzle_activator.gd"
-
-class_name CombatCapablePuzzleActivator
+class_name CombatCapablePuzzleActivator extends PuzzleActivator
 """
 represents external puzzle
 you must put an instance of this scene into the strat_map scene
