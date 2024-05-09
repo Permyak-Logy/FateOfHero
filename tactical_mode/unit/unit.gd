@@ -156,8 +156,6 @@ func apply_passives():
 		passive.instigator = self
 		add_effect(passive)
 
-func ai(map: TacticalMap):
-	ai_random_move(map)
 
 func get_occupied_cells() -> Array[Vector2i]:
 	if visible:
@@ -166,7 +164,8 @@ func get_occupied_cells() -> Array[Vector2i]:
 
 func prepare_fight():
 	if animation_player:
-		animation_player.animation_set_next("damaged", "idle")
+		if animation_player.has_animation("damaged") and animation_player.has_animation("idle"):
+			animation_player.animation_set_next("damaged", "idle")
 	print("=> Prepare: ", unit_name)
 	while _effects:
 		remove_effect(_effects[0])
@@ -246,6 +245,8 @@ func is_death() -> bool:
 	return health.cur() <= 0
 
 func _on_toggle_select(_viewport, event: InputEvent, _shape_idx: int):
+	if not get_map() or get_map()._block_input:
+		return
 	if event.is_action_pressed("select"):
 		var ability = get_map().cur_ability
 		if not ability or not is_instance_of(ability, DirectedAbility):
@@ -308,6 +309,9 @@ func kill():
 	if health:
 		health.set_cur(0)
 
+func ai(map: TacticalMap):
+	ai_random_move(map)
+
 func ai_random_move(map: TacticalMap, distance: int=3):
 	var rng = RandomNumberGenerator.new()
 	var path = []
@@ -319,3 +323,17 @@ func ai_random_move(map: TacticalMap, distance: int=3):
 		)
 	map.select_path_to(cell)
 	map._move_active_unit()
+
+func ai_move_to(map: TacticalMap, cell: Vector2i):
+	var cells = map.walkable_fill()
+	cells.append(cell)
+	var astar = AStarHexagon2D.new(cells)
+	var path = astar.get_id_path(astar.mti(get_cell()), astar.mti(cell))
+	while not map.can_move_to(astar.itm(path[len(path) - 1])):
+		path.remove_at(len(path) - 1)
+	map.select_path_to(astar.itm(path[len(path) - 1]))
+	map._move_active_unit()
+
+func ai_pass(map: TacticalMap):
+	map.acts = 0
+	map._update_stepmove()

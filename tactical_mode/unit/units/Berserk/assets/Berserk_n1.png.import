@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfjvd077r7e8v"
-path="res://.godot/imported/berserk.png-c2f643b3c5e78c7c362ceaafc05350c6.ctex"
+uid="uid://b4sck2vjg1hwn"
+path="res://.godot/imported/Berserk_n1.png-66c68bda201a5068f07e379e49d45881.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/unit/units/Berserk/berserk.png"
-dest_files=["res://.godot/imported/berserk.png-c2f643b3c5e78c7c362ceaafc05350c6.ctex"]
+source_file="res://tactical_mode/unit/units/Berserk/assets/Berserk_n1.png"
+dest_files=["res://.godot/imported/Berserk_n1.png-66c68bda201a5068f07e379e49d45881.ctex"]
 
 [params]
 

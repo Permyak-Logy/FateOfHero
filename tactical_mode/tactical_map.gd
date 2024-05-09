@@ -372,7 +372,7 @@ func _start_stepmove():
 		_update_walkable()
 		_block_input = false
 	else:
-		_update_walkable(false)
+		_update_walkable(true)
 		active_unit.ai(self)
 
 func _update_stepmove():
@@ -696,4 +696,5 @@ func spawn(actor_ps: PackedScene, cell: Vector2i) -> Actor:
 	return actor
 
 func write_info(text: String):
+	print("===> ", text)
 	gui.tactical_info.write(text)

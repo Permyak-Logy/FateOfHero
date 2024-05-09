@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bnx7qiuivvnwn"]
+[gd_scene load_steps=29 format=3 uid="uid://bnx7qiuivvnwn"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Lugozavr/src/Lugozavr.gd" id="1_4n5r8"]
 [ext_resource type="Texture2D" uid="uid://j8mh72ss2l4v" path="res://tactical_mode/unit/units/Lugozavr/assets/spritesheet.png" id="2_4p48e"]
@@ -6,7 +6,10 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_vvqc4"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_tle5d"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_3prn5"]
+[ext_resource type="Resource" uid="uid://duguqh2qdcele" path="res://tactical_mode/unit/units/Lugozavr/res/LugozavrA0.tres" id="5_arnth"]
+[ext_resource type="Script" path="res://tactical_mode/effects/level_upscale_effect.gd" id="5_gkv3a"]
 [ext_resource type="Texture2D" uid="uid://b45l2fsxtf6v6" path="res://tactical_mode/assets/Big_Shadow.png" id="6_mmnq8"]
+[ext_resource type="Resource" uid="uid://dx3xbtvtvreat" path="res://tactical_mode/unit/units/Lugozavr/res/LugozavrA1.tres" id="6_y8n8d"]
 [ext_resource type="Texture2D" uid="uid://dc1ja8nxxejlk" path="res://tactical_mode/unit/units/Lugozavr/assets/run.png" id="7_4pkcg"]
 
 [sub_resource type="Resource" id="Resource_v41ox"]
@@ -58,6 +61,14 @@ script = ExtResource("4_3prn5")
 level = 1
 expirience = 0
 ups = 0
+
+[sub_resource type="Resource" id="Resource_bx2ur"]
+script = ExtResource("5_gkv3a")
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Эффект"
+is_negative = false
 
 [sub_resource type="Gradient" id="Gradient_ypy32"]
 colors = PackedColorArray(0, 1, 0.745098, 1, 0, 0.541176, 0, 0)
@@ -177,10 +188,11 @@ trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
 flip_onready = true
-private_abilities = Array[Resource("res://inventory/ability.gd")]([null])
+controlled_player = false
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("5_arnth"), ExtResource("6_y8n8d")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([SubResource("Resource_bx2ur")])
 
 [node name="Body" type="Sprite2D" parent="."]
-z_index = 1
 position = Vector2(-2, -24)
 texture = ExtResource("2_4p48e")
 hframes = 7

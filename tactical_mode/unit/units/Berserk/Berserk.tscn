@@ -1,17 +1,17 @@
 [gd_scene load_steps=30 format=3 uid="uid://komiiv5ot43n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3ocbc"]
-[ext_resource type="Texture2D" uid="uid://dfjvd077r7e8v" path="res://tactical_mode/unit/units/Berserk/berserk.png" id="1_by52o"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_1wvle"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="2_7e5uy"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_i4t0d"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="4_tr2kr"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="4_ukfk8"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_iree2"]
-[ext_resource type="Resource" uid="uid://jmvxktk78bc6" path="res://tactical_mode/unit/units/Berserk/BerserkA0.tres" id="6_gpw7t"]
-[ext_resource type="Resource" uid="uid://ca00njn6opt8b" path="res://tactical_mode/unit/units/Berserk/BerserkA1.tres" id="7_exspw"]
-[ext_resource type="Resource" uid="uid://bt80conpnoc8f" path="res://tactical_mode/unit/units/Berserk/BerserkA2.tres" id="8_3psg4"]
-[ext_resource type="Resource" uid="uid://dkk1mqckd0wg4" path="res://tactical_mode/unit/units/Berserk/BerserkA3.tres" id="9_rdbe6"]
+[ext_resource type="Resource" uid="uid://jmvxktk78bc6" path="res://tactical_mode/unit/units/Berserk/res/BerserkA0.tres" id="6_unl5f"]
+[ext_resource type="Resource" uid="uid://ca00njn6opt8b" path="res://tactical_mode/unit/units/Berserk/res/BerserkA1.tres" id="7_h4oqc"]
+[ext_resource type="Resource" uid="uid://bt80conpnoc8f" path="res://tactical_mode/unit/units/Berserk/res/BerserkA2.tres" id="8_x0px8"]
+[ext_resource type="Resource" uid="uid://dkk1mqckd0wg4" path="res://tactical_mode/unit/units/Berserk/res/BerserkA3.tres" id="9_qtvge"]
+[ext_resource type="Texture2D" uid="uid://dfjvd077r7e8v" path="res://tactical_mode/unit/units/Berserk/assets/spritesheet.png" id="10_urkiw"]
 
 [sub_resource type="Resource" id="Resource_qa83h"]
 script = ExtResource("2_1wvle")
@@ -136,7 +136,7 @@ expirience = SubResource("Resource_h4p4i")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_gpw7t"), ExtResource("7_exspw"), ExtResource("8_3psg4"), ExtResource("9_rdbe6")])
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_unl5f"), ExtResource("7_h4oqc"), ExtResource("8_x0px8"), ExtResource("9_qtvge")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
@@ -144,12 +144,12 @@ position = Vector2(0, -26)
 emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_lcjhm")
-texture = ExtResource("1_by52o")
+texture = ExtResource("10_urkiw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 position = Vector2(0, -26)
-texture = ExtResource("1_by52o")
+texture = ExtResource("10_urkiw")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -23)
