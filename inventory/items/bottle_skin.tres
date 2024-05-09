@@ -8,8 +8,8 @@
 [resource]
 script = ExtResource("3_b6y6s")
 name = ""
+description = ""
 texture = ExtResource("4_codtf")
 max_stack = 10
 recipe = Array[ExtResource("3_b6y6s")]([ExtResource("1_v40yk"), ExtResource("2_aesq1")])
 price = 0
-descript = ""

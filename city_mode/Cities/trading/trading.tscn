@@ -1,0 +1,458 @@
+[gd_scene load_steps=17 format=3 uid="uid://cal6f73hk5ff7"]
+
+[ext_resource type="Script" path="res://city_mode/Cities/trading/trading_main.gd" id="1_b2dp5"]
+[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_g6vnm"]
+[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="3_juopo"]
+[ext_resource type="PackedScene" uid="uid://d4lrybm6yo1ub" path="res://city_mode/Cities/trading/crafting_slot.tscn" id="4_kncku"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/trades.gd" id="5_71pds"]
+[ext_resource type="PackedScene" uid="uid://74426675p6qr" path="res://city_mode/Cities/trading/trade_item.tscn" id="5_ktqfa"]
+[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="6_503rw"]
+[ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="8_83wwa"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/page1.gd" id="8_s471d"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/inventoryGrid1.gd" id="9_yjtf3"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/page2.gd" id="10_ip4b6"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/page3.gd" id="11_go2ep"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/page4.gd" id="12_ui67m"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/page5.gd" id="13_7jtqw"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/description.gd" id="14_3431c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n8vo4"]
+
+[node name="Trading" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 1.0
+offset_right = -7.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b2dp5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 271.0
+offset_top = 184.0
+offset_right = 689.0
+offset_bottom = 324.0
+
+[node name="inventory" type="NinePatchRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(256, 140)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_g6vnm")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="inventoryGrid1" type="GridContainer" parent="HBoxContainer/inventory"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -58.0
+offset_right = 118.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 10
+script = ExtResource("9_yjtf3")
+inventory = ExtResource("3_juopo")
+
+[node name="CraftingSlot" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot7" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot8" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot9" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot10" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot11" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot12" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot13" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot14" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot15" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot16" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot17" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot18" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot19" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot20" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot21" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot22" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot23" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot24" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot25" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot26" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot27" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot28" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot29" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot30" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot31" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot32" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot33" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot34" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot35" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot36" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot37" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot38" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot39" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot40" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot41" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot42" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot43" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot44" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot45" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot46" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot47" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot48" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot49" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot50" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot2" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot3" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot4" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot5" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="CraftingSlot6" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+texture = ExtResource("1_g6vnm")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Trades1" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -65.5
+offset_right = 64.0
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_71pds")
+
+[node name="trade_item" parent="HBoxContainer/NinePatchRect/Trades1" instance=ExtResource("5_ktqfa")]
+layout_mode = 2
+item = ExtResource("6_503rw")
+
+[node name="trade_item2" parent="HBoxContainer/NinePatchRect/Trades1" instance=ExtResource("5_ktqfa")]
+layout_mode = 2
+item = ExtResource("6_503rw")
+
+[node name="trade_item3" parent="HBoxContainer/NinePatchRect/Trades1" instance=ExtResource("5_ktqfa")]
+layout_mode = 2
+item = ExtResource("6_503rw")
+
+[node name="Trades2" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
+visible = false
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_71pds")
+
+[node name="trade_item" parent="HBoxContainer/NinePatchRect/Trades2" instance=ExtResource("5_ktqfa")]
+layout_mode = 2
+
+[node name="trade_item2" parent="HBoxContainer/NinePatchRect/Trades2" instance=ExtResource("5_ktqfa")]
+layout_mode = 2
+
+[node name="trade_item3" parent="HBoxContainer/NinePatchRect/Trades2" instance=ExtResource("5_ktqfa")]
+layout_mode = 2
+
+[node name="Trades3" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
+visible = false
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 10.0
+offset_right = 134.0
+offset_bottom = 130.0
+script = ExtResource("5_71pds")
+
+[node name="Trades4" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
+visible = false
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 10.0
+offset_right = 134.0
+offset_bottom = 130.0
+script = ExtResource("5_71pds")
+
+[node name="Trades5" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
+visible = false
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 10.0
+offset_right = 134.0
+offset_bottom = 130.0
+script = ExtResource("5_71pds")
+
+[node name="PageButtons" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+offset_left = 578.0
+offset_top = 161.0
+offset_right = 712.0
+offset_bottom = 181.0
+
+[node name="page1" type="Button" parent="PageButtons"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
+script = ExtResource("8_s471d")
+
+[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page1"]
+position = Vector2(10, 10)
+texture = ExtResource("8_83wwa")
+vframes = 2
+frame = 1
+
+[node name="Label" type="Label" parent="PageButtons/page1"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 19.0
+offset_bottom = 21.0
+text = "1"
+
+[node name="page2" type="Button" parent="PageButtons"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
+script = ExtResource("10_ip4b6")
+
+[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page2"]
+position = Vector2(10, 10)
+texture = ExtResource("8_83wwa")
+vframes = 2
+
+[node name="Label" type="Label" parent="PageButtons/page2"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 19.0
+offset_bottom = 21.0
+text = "2"
+
+[node name="page3" type="Button" parent="PageButtons"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
+script = ExtResource("11_go2ep")
+
+[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page3"]
+position = Vector2(10, 10)
+texture = ExtResource("8_83wwa")
+vframes = 2
+
+[node name="Label" type="Label" parent="PageButtons/page3"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 19.0
+offset_bottom = 21.0
+text = "3"
+
+[node name="page4" type="Button" parent="PageButtons"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
+script = ExtResource("12_ui67m")
+
+[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page4"]
+position = Vector2(10, 10)
+texture = ExtResource("8_83wwa")
+vframes = 2
+
+[node name="Label" type="Label" parent="PageButtons/page4"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 19.0
+offset_bottom = 21.0
+text = "4"
+
+[node name="page5" type="Button" parent="PageButtons"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
+script = ExtResource("13_7jtqw")
+
+[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page5"]
+position = Vector2(10, 10)
+texture = ExtResource("8_83wwa")
+vframes = 2
+
+[node name="Label" type="Label" parent="PageButtons/page5"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 19.0
+offset_bottom = 21.0
+text = "5"
+
+[node name="description" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 271.0
+offset_top = 328.0
+offset_right = 671.0
+offset_bottom = 391.0
+texture = ExtResource("1_g6vnm")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("14_3431c")
+
+[node name="Label" type="Label" parent="description"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.0
+offset_top = -24.0
+offset_right = 191.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid1" to="HBoxContainer/NinePatchRect/Trades1" method="_on_inventory_grid_item_changed"]
+[connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid1" to="HBoxContainer/NinePatchRect/Trades2" method="_on_inventory_grid_1_item_changed"]
+[connection signal="pressed" from="PageButtons/page1" to="PageButtons/page1" method="_on_pressed"]
+[connection signal="pressed" from="PageButtons/page2" to="PageButtons/page2" method="_on_pressed"]
+[connection signal="pressed" from="PageButtons/page3" to="PageButtons/page3" method="_on_pressed"]
+[connection signal="pressed" from="PageButtons/page4" to="PageButtons/page4" method="_on_pressed"]
+[connection signal="pressed" from="PageButtons/page5" to="PageButtons/page5" method="_on_pressed"]

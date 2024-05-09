@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://bv3w2q4mdah8u"]
+[gd_scene load_steps=5 format=3 uid="uid://bv3w2q4mdah8u"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/base_city.gd" id="1_x7xq6"]
+[ext_resource type="PackedScene" uid="uid://cal6f73hk5ff7" path="res://city_mode/Cities/trading/trading.tscn" id="2_pw24d"]
+[ext_resource type="PackedScene" uid="uid://cd1lm7663kkqk" path="res://city_mode/Cities/crafting/crafting.tscn" id="3_saliw"]
+[ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory/inventory_gui.tscn" id="4_q0xn2"]
 
 [node name="BaseCity" type="Node2D"]
 script = ExtResource("1_x7xq6")
+
+[node name="Trading" parent="." instance=ExtResource("2_pw24d")]
+
+[node name="crafting" parent="." instance=ExtResource("3_saliw")]
+offset_left = 943.0
+offset_top = 522.0
+offset_right = 943.0
+offset_bottom = 522.0
+
+[node name="InventoryGUI" parent="." instance=ExtResource("4_q0xn2")]
+offset_left = 477.0
+offset_top = 232.0
+offset_right = 477.0
+offset_bottom = 232.0
