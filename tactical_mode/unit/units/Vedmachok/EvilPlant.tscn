@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://b1ley3wjjoisv"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_xebq4"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="2_13oqw"]
+[ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="3_rmnmy"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_n8qq3"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="6_etn73"]
+
+[sub_resource type="Resource" id="Resource_bbjgs"]
+script = ExtResource("2_13oqw")
+mod_type = 4
+
+[sub_resource type="Resource" id="Resource_hc5ew"]
+script = ExtResource("3_rmnmy")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_exgqs"]
+script = ExtResource("2_13oqw")
+mod_type = 1
+characteristic = SubResource("Resource_hc5ew")
+
+[sub_resource type="Resource" id="Resource_k0vfm"]
+script = ExtResource("4_n8qq3")
+level = 1
+expirience = 0
+ups = 0
+
+[node name="EvilPlant" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "for_flip_sprites")]
+script = ExtResource("1_xebq4")
+health = SubResource("Resource_bbjgs")
+speed = SubResource("Resource_exgqs")
+expirience = SubResource("Resource_k0vfm")
+sprite_for_outline = NodePath("Sprite2D")
+for_flip_sprites = [NodePath("Sprite2D")]
+acts_count = 0
+controlled_player = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -19)
+texture = ExtResource("2_fmumf")
+hframes = 7
+vframes = 8
+frame = 28
+
+[node name="StatProgressBar" parent="." instance=ExtResource("6_etn73")]
+offset_left = -17.0
+offset_top = -35.0
+offset_right = 17.0
+offset_bottom = -33.0

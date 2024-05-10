@@ -181,7 +181,7 @@ func premove_update():
 	for ability in get_abilities():
 		ability.update()
 	for effect in get_effects():
-		effect.update_on_move()
+		effect.update_on_start_stepmove()
 
 func on_flip_unit():
 	if trail_particles:
@@ -312,6 +312,12 @@ func remove_effect(effect: Effect):
 func kill():
 	if health:
 		health.set_cur(0)
+
+func get_move_distance() -> int:
+	var distance = (speed.cur() - 100) / 20 + 4
+	for effect in get_effects():
+		distance = effect.update_on_move(distance)
+	return int(distance)
 
 func ai(map: TacticalMap):
 	ai_random_move(map)

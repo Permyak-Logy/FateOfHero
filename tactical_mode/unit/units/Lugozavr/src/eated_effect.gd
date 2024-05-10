@@ -1,4 +1,4 @@
-class_name Eated extends BlockMovingEffect
+class_name Eated extends BlockStepmoveEffect
 
 
 func on_set_owner(old, new):

@@ -110,7 +110,7 @@ func start_battle():
 			await unit.ready
 		unit.death.connect(on_kill)
 		if unit.speed:
-			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
+			add_to_unit_queue(unit)
 			unit.prepare_fight()
 	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
@@ -467,7 +467,7 @@ func _update_walkable(show=true):
 	"""
 	
 	_update_walls()
-	var cells = walkable_fill((active_unit.speed.cur() - 100) / 20 + 4)
+	var cells = walkable_fill(active_unit.get_move_distance())
 	_astar_walkable = AStarHexagon2D.new(cells)
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	if show:
@@ -683,7 +683,7 @@ func reset_outline_color(unit: Unit):
 	else:
 		unit.set_outline_color(Unit.DEFAULT_COLOR)
 
-func spawn(actor_ps: PackedScene, cell: Vector2i) -> Actor:
+func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> Actor:
 	"""
 	Спавнит Actor в позиции cell
 	"""
@@ -691,7 +691,21 @@ func spawn(actor_ps: PackedScene, cell: Vector2i) -> Actor:
 	var actor: Actor = actor_ps.instantiate()
 	add_child(actor)
 	move_unit_to(actor, cell)
+	
+	if is_instance_of(actor, Unit):
+		var unit = actor as Unit
+		if is_player(_instigator):
+			_p_units.append(unit)
+		if is_enemy(_instigator):
+			_e_units.append(unit)
+		reset_outline_color(unit)
 	return actor
+
+func add_to_unit_queue(unit: Unit, in_start=false):
+	if in_start:
+		unit_queue.insert(int(len(unit_queue) > 0), [unit_queue[0][0], unit])
+	else:
+		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 
 func write_info(text: String):
 	print("===> ", text)

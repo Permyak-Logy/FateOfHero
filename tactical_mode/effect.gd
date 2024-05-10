@@ -30,9 +30,13 @@ var instigator: Node = null:
 func on_set_owner(old: Unit, new: Unit):
 	pass
 
-func update_on_move():
+func update_on_start_stepmove():
 	"""Вызывается перед каждым ходом (но не действием)"""
 	pass
+
+func update_on_move(distance: float) -> float:
+	"""Вызывается перед получением кол-ва клеток для передвижения"""
+	return distance
 
 func update_on_damage(damage: float, _instigator: Node = null) -> float:
 	"""Вызывается перед получением любого урона. Возвращает новый урон."""

@@ -6,7 +6,7 @@ var danger_ice = preload("res://tactical_mode/unit/units/Vendigo/DangerIce.tscn"
 var freezing = preload("res://tactical_mode/unit/units/Vendigo/res/Freezing.tres")
 var ices = {} # Dict[Vector2i: DangerIce]
 
-func update_on_move():
+func update_on_start_stepmove():
 	var map: TacticalMap = owner.get_map()
 	
 	var to_spawn = []

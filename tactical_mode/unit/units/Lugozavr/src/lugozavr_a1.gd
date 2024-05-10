@@ -1,6 +1,6 @@
 class_name LugozavrA1 extends DirectedAbility
 
-@export var block_moving_effect: BlockMovingEffect
+@export var block_moving_effect: BlockStepmoveEffect
 @export var power_p: float = 1
 var applied: Unit
 

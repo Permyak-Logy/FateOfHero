@@ -5,7 +5,7 @@ class_name IttoP1 extends Effect
 @export var cooldown: int = 0
 @export var cooldown_time: int = 3
 	
-func update_on_move():
+func update_on_start_stepmove():
 	if cooldown:
 		cooldown -= 1
 		return
