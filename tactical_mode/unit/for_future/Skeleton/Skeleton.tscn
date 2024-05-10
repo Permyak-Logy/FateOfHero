@@ -81,7 +81,7 @@ expirience = SubResource("Resource_li378")
 sprite_for_outline = NodePath("Sprite2D")
 health_bar_pb = NodePath("StatProgressBar")
 controlled_player = false
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("4_71lrp")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("4_71lrp")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -22)

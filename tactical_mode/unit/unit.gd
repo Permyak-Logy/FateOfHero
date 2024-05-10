@@ -77,7 +77,7 @@ const SELECTED_COLOR = Vector4(0, 0, 255, 100)
 const ENEMY_COLOR = Vector4(255, 0, 0, 100)
 const DEFAULT_COLOR = Vector4(0, 0, 0, 100)
 const TO_SELECT_COLOR = Vector4(255, 255, 0, 100)
-
+var to_del = false
 func _ready():
 	if health and health_bar_pb:
 		health_bar_pb.stat_component = health
@@ -162,6 +162,7 @@ func get_occupied_cells() -> Array[Vector2i]:
 	return []
 
 func prepare_fight():
+	death.connect(get_map().on_kill)
 	if animation_player:
 		if animation_player.has_animation("damaged") and animation_player.has_animation("idle"):
 			animation_player.animation_set_next("damaged", "idle")
@@ -192,12 +193,20 @@ func on_flip_unit():
 		sprite.flip_h = bool(int(flipped) ^ int(flip_onready))
 
 func _physics_process(_delta):
+	if len(death.get_connections()) == 2:
+		if not to_del and unit_name == "Злое растение":
+			print("del", death.get_connections())
+			to_del = true
+	elif to_del:
+		pass
+	else:
+		if unit_name == "Злое растение":
+			print(self, len(death.get_connections()))
+	
 	if current_id_path.is_empty():
 		return
 
 	var target_position = $"../TileMap".map_to_local(current_id_path.front())
-	play("run")
-	
 
 	if (target_position - global_position)[0] == 0:
 		flipped = idle_direction_bool()
@@ -221,6 +230,7 @@ func play(_name: String, _params=null):
 		return
 	if _name == "walk":
 		current_id_path = _params
+		play("run")
 		await walk_finished
 	elif animation_player:
 		if not animation_player.has_animation(_name):
@@ -284,13 +294,18 @@ func add_effect(effect: Effect):
 		return
 	if effect.stackable:
 		for other in get_effects():
-			if effect.get_class() == other.get_class() and other.stackable:
-				if other.stack(effect):
-					get_map().write_info(
-						"=> " + self.unit_name + " обновил эффект " + other.effect_name
-					)
-					reload_all_mods()
-					return
+			if effect.get_class() != other.get_class():
+				continue
+			if not other.stackable:
+				continue
+			if effect.effect_name != other.effect_name:
+				continue
+			if other.stack(effect):
+				get_map().write_info(
+					"=> " + self.unit_name + " обновил эффект " + other.effect_name
+				)
+				reload_all_mods()
+				return
 	
 	get_map().write_info("=> " + self.unit_name + " получил эффект " + effect.effect_name)
 	_effects.append(effect)
@@ -322,7 +337,8 @@ func get_move_distance() -> int:
 func ai(map: TacticalMap):
 	ai_random_move(map)
 
-func ai_random_move(map: TacticalMap, distance: int=3):
+func ai_random_move(map: TacticalMap):
+	var distance = get_move_distance()
 	var rng = RandomNumberGenerator.new()
 	var path = []
 	var cell = Vector2i(-1, -1)

@@ -345,7 +345,7 @@ trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
 acts_count = 2
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_2e2we"), ExtResource("7_d0pbk"), ExtResource("8_8okb2")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_2e2we"), ExtResource("7_d0pbk"), ExtResource("8_8okb2")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_uu01e")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

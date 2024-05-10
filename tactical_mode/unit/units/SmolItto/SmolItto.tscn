@@ -141,7 +141,7 @@ health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
 for_flip_sprites = [NodePath("Sprite2D")]
 acts_count = 2
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_iu0w4"), ExtResource("7_h74hq"), ExtResource("8_4c6l0")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_iu0w4"), ExtResource("7_h74hq"), ExtResource("8_4c6l0")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_eelbm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

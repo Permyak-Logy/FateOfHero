@@ -142,7 +142,7 @@ trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 for_flip_sprites = [NodePath("Body")]
 acts_count = 2
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_1t0c8"), ExtResource("7_ax6he"), ExtResource("8_r0ub4"), ExtResource("9_nqkrh")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_1t0c8"), ExtResource("7_ax6he"), ExtResource("8_r0ub4"), ExtResource("9_nqkrh")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("10_5dx63"), ExtResource("11_j0kv6"), ExtResource("12_gmwrs")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

@@ -21,11 +21,17 @@ var instigator: Node = null:
 	set(value):
 		if destroy_on_death_instigator:
 			if instigator and is_instance_of(instigator, Unit):
-				instigator.death.disconnect(func (_x) : finished.emit(self))
-
+				instigator.death.disconnect(on_death_instigator)
 			if value and is_instance_of(value, Unit):
-				value.death.connect(func (_x) : finished.emit(self))
+				print(value, len(value.death.get_connections()))
+				value.death.connect(on_death_instigator)
+				print(value, len(value.death.get_connections()))
 		instigator = value
+
+func on_death_instigator(_inst):
+	print(_inst.death.get_connections())
+	print("instigator is death!")
+	finished.emit(self)
 
 func on_set_owner(old: Unit, new: Unit):
 	pass
@@ -47,7 +53,7 @@ func update_on_attack(damage: float, _recipient: Node = null) -> float:
 	return damage
 
 func stack(other: Effect) -> bool:
-	return false
+	return stackable
 
 func is_active() -> bool:
 	return true

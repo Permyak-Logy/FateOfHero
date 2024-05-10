@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://csb3ujant2uio"]
+[gd_scene load_steps=24 format=3 uid="uid://csb3ujant2uio"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/Vedmachok.gd" id="1_cy2or"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_5q3v1"]
@@ -6,7 +6,10 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_klvn2"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_udfcx"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="5_dhbj6"]
+[ext_resource type="Resource" uid="uid://fw2xki2sw3o6" path="res://tactical_mode/unit/units/Vedmachok/VedmachokA0.tres" id="5_g43pn"]
+[ext_resource type="Resource" uid="uid://caaovo3ff0mc2" path="res://tactical_mode/unit/units/Vedmachok/VedmachokA1.tres" id="6_f4xex"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="6_uhiw1"]
+[ext_resource type="Texture2D" uid="uid://cs4b8cuqypclf" path="res://tactical_mode/unit/units/Vedmachok/assets/run.png" id="8_jdgdj"]
 
 [sub_resource type="Resource" id="Resource_xhmqf"]
 script = ExtResource("2_5q3v1")
@@ -58,6 +61,21 @@ level = 1
 expirience = 0
 ups = 0
 
+[sub_resource type="Gradient" id="Gradient_1m355"]
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ipqy0"]
+gradient = SubResource("Gradient_1m355")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6iot8"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_ipqy0")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mq533"]
+radius = 13.0
+height = 54.0
+
 [node name="Vedmachok" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
@@ -72,7 +90,11 @@ sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
+flip_onready = true
 for_flip_sprites = [NodePath("Body")]
+acts_count = 2
+controlled_player = false
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_g43pn"), ExtResource("6_f4xex")])
 
 [node name="Body" type="Sprite2D" parent="."]
 position = Vector2(3, -29)
@@ -87,10 +109,18 @@ texture = ExtResource("6_uhiw1")
 [node name="StatProgressBar" parent="." instance=ExtResource("2_fx817")]
 offset_top = -67.0
 offset_bottom = -65.0
+metadata/_edit_use_anchors_ = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(3, -28)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_6iot8")
+texture = ExtResource("8_jdgdj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -28)
+shape = SubResource("CapsuleShape2D_mq533")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../GPUParticles2D")

@@ -9,7 +9,9 @@ func apply():
 		var unit = node as Unit
 		if unit.health:
 			unit.health.add(power)
-			print("=> IttoP2 heal ", power, " for ", unit.unit_name)
+			get_map().write_info(
+				"=> " + owner.unit_name + " восстанавливает  " + str(int(power)) + " хп у " + unit.unit_name
+			)
 	await owner.play("posthealteam")
 	return true
 	

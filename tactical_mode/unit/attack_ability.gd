@@ -3,7 +3,6 @@ class_name AttackAbility extends DirectedAbility
 @export var power_p: float = 1
 
 func apply():
-	print(selectable_tab)
 	var unit = selected[0] as Unit
 	if owner.damage:
 		get_map().write_info("=> " + owner.unit_name + " атакует")

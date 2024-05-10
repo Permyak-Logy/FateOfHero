@@ -137,7 +137,7 @@ sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 for_flip_sprites = [NodePath("Sprite2D")]
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_unl5f"), ExtResource("7_h4oqc"), ExtResource("8_x0px8"), ExtResource("9_qtvge")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_unl5f"), ExtResource("7_h4oqc"), ExtResource("8_x0px8"), ExtResource("9_qtvge")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1

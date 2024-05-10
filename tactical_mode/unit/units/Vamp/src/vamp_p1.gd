@@ -19,6 +19,5 @@ func on_change_health(comp: StatComponent, old: float, new: float):
 
 func update_on_attack(_damage: float, _instigator: Node = null) -> float:
 	_damage *= (1 + power)
-	print("=> Up damage on ", power, " by ", effect_name)
 	power = 0
 	return _damage

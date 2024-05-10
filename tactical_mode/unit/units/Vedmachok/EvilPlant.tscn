@@ -1,52 +1,138 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1ley3wjjoisv"]
+[gd_scene load_steps=21 format=3 uid="uid://b1ley3wjjoisv"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_xebq4"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="2_13oqw"]
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/EvilPlant.gd" id="1_q2mli"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="3_rmnmy"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_n8qq3"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_smu40"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_1oomm"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_pjk8i"]
+[ext_resource type="Resource" uid="uid://db5vwnunv2m3b" path="res://tactical_mode/unit/units/Vedmachok/EvilPlantA0.tres" id="5_l0cx3"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="6_etn73"]
+[ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="8_e7cbv"]
 
-[sub_resource type="Resource" id="Resource_bbjgs"]
-script = ExtResource("2_13oqw")
-mod_type = 4
+[sub_resource type="Resource" id="Resource_us7qo"]
+script = ExtResource("2_smu40")
+base = 50.0
+cur = 50.0
+max_ = 50.0
 
-[sub_resource type="Resource" id="Resource_hc5ew"]
-script = ExtResource("3_rmnmy")
+[sub_resource type="Resource" id="Resource_px43a"]
+script = ExtResource("3_1oomm")
+mod_type = 0
+characteristic = SubResource("Resource_us7qo")
+
+[sub_resource type="Resource" id="Resource_pulf1"]
+script = ExtResource("2_smu40")
+base = 0.0
+cur = 0.0
+max_ = 0.0
+
+[sub_resource type="Resource" id="Resource_aj3sk"]
+script = ExtResource("3_1oomm")
+mod_type = 3
+characteristic = SubResource("Resource_pulf1")
+
+[sub_resource type="Resource" id="Resource_m8x7f"]
+script = ExtResource("2_smu40")
 base = 100.0
 cur = 100.0
 max_ = 100.0
 
-[sub_resource type="Resource" id="Resource_exgqs"]
-script = ExtResource("2_13oqw")
+[sub_resource type="Resource" id="Resource_cvhmw"]
+script = ExtResource("3_1oomm")
 mod_type = 1
-characteristic = SubResource("Resource_hc5ew")
+characteristic = SubResource("Resource_m8x7f")
 
-[sub_resource type="Resource" id="Resource_k0vfm"]
-script = ExtResource("4_n8qq3")
+[sub_resource type="Resource" id="Resource_pie3m"]
+script = ExtResource("2_smu40")
+base = 10.0
+cur = 10.0
+max_ = 10.0
+
+[sub_resource type="Resource" id="Resource_thx8n"]
+script = ExtResource("3_1oomm")
+mod_type = 2
+characteristic = SubResource("Resource_pie3m")
+
+[sub_resource type="Resource" id="Resource_4wda3"]
+script = ExtResource("4_pjk8i")
 level = 1
 expirience = 0
 ups = 0
 
-[node name="EvilPlant" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "for_flip_sprites")]
-script = ExtResource("1_xebq4")
-health = SubResource("Resource_bbjgs")
-speed = SubResource("Resource_exgqs")
-expirience = SubResource("Resource_k0vfm")
-sprite_for_outline = NodePath("Sprite2D")
-for_flip_sprites = [NodePath("Sprite2D")]
-acts_count = 0
-controlled_player = false
+[sub_resource type="Animation" id="Animation_lv3bu"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [28, 29, 30]
+}
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[sub_resource type="Animation" id="Animation_4k388"]
+resource_name = "postattack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [30, 29, 28]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7mk7n"]
+_data = {
+"attack": SubResource("Animation_lv3bu"),
+"postattack": SubResource("Animation_4k388")
+}
+
+[node name="EvilPlant" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "animation_player", "for_flip_sprites")]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_q2mli")
+unit_name = "Злое растение"
+health = SubResource("Resource_px43a")
+defence = SubResource("Resource_aj3sk")
+speed = SubResource("Resource_cvhmw")
+damage = SubResource("Resource_thx8n")
+expirience = SubResource("Resource_4wda3")
+sprite_for_outline = NodePath("Body")
+health_bar_pb = NodePath("StatProgressBar")
+animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Body")]
+controlled_player = false
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_l0cx3")])
+
+[node name="Body" type="Sprite2D" parent="."]
 position = Vector2(0, -19)
 texture = ExtResource("2_fmumf")
 hframes = 7
 vframes = 8
-frame = 28
+frame = 30
 
 [node name="StatProgressBar" parent="." instance=ExtResource("6_etn73")]
 offset_left = -17.0
-offset_top = -35.0
+offset_top = -38.0
 offset_right = 17.0
-offset_bottom = -33.0
+offset_bottom = -36.0
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7mk7n")
+}
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -25)
+texture = ExtResource("8_e7cbv")

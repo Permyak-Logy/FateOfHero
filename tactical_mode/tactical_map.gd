@@ -89,7 +89,8 @@ func _ready():
 		#$SmolItto
 	]
 	_e_units = [
-		$Lugozavr,
+		# $Lugozavr,
+		$Vedmachok
 		#$Vendigo
 	]
 	inited = true
@@ -100,15 +101,14 @@ func start_battle():
 	"""
 	if running:
 		return
-	gui.tactical_info.clear()
-	write_info("*** Бой начинается ***")
+	gui.tactical_info.clear()	
 	running = true
+	write_info("*** Бой начинается ***")
 	align_actors()
 	escape = false
 	for unit in units:	
 		if not unit.is_node_ready():
 			await unit.ready
-		unit.death.connect(on_kill)
 		if unit.speed:
 			add_to_unit_queue(unit)
 			unit.prepare_fight()
@@ -249,6 +249,7 @@ func on_kill(unit: Unit):
 		if unit_queue[i][1] == unit:
 			unit_queue.pop_at(i)
 			break
+	print("||||||||||||||||Cons ", unit.death.get_connections())
 	reset_outline_color(unit)
 	write_info("-> " + unit.unit_name + " убит")
 
@@ -638,9 +639,10 @@ func _apply_ability(cell=Vector2i(0, 0)):
 	"""
 	Применяет действие выбранной способности, завершает действие
 	"""
-	
-	if is_instance_of(cur_ability, DirectedAbility) and cell:
-		if cur_ability.can_select_cell():
+	if is_instance_of(cur_ability, AoEAbility):
+		if cur_ability.only_auto_select:
+			cell = cur_ability.default_cell()
+		if cell and cur_ability.can_select_cell(cell):
 			cur_ability.select_cell(cell)
 	
 	if cur_ability.can_apply():
@@ -698,6 +700,10 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 			_p_units.append(unit)
 		if is_enemy(_instigator):
 			_e_units.append(unit)
+		if running:
+			unit.prepare_fight()
+			reset_outline_color(unit)
+			write_info("=> " + unit.unit_name + " появляется!")
 	return actor
 
 func add_to_unit_queue(unit: Unit, in_start=false):

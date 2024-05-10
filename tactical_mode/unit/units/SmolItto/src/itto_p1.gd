@@ -29,7 +29,6 @@ func update_on_start_stepmove():
 				"=> Восстанавливает " + diff + " здоровья у " + 
 				unit.unit_name + " (" + effect_name + ")"
 				)
-			print()
 			return
 	
 
