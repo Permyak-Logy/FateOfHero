@@ -90,9 +90,7 @@ func _ready():
 	]
 	_e_units = [
 		$Lugozavr,
-		$Vendigo#,
-		#$Skeleton,
-		#$Skeleton2
+		#$Vendigo
 	]
 	inited = true
 

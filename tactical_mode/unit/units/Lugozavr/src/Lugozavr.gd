@@ -27,8 +27,11 @@ func ai(map: TacticalMap):
 func assign_target():
 	var avaliable_units: Array[Unit] = []
 	for unit in get_map().get_units_with_relation(self, TacticalMap.relation.Enemy):
-		if not unit.is_death():
+		if not unit.is_death() and unit.visible:
 			avaliable_units.append(unit)
-		if not avaliable_units:
-			return
-		target = unit
+	if not avaliable_units:
+		return
+	target = avaliable_units[0]
+	for unit in avaliable_units:
+		if target.health.cur() > unit.health.cur():
+			target = unit

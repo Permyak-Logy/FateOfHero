@@ -115,7 +115,7 @@ _data = {
 "run": SubResource("Animation_uf2q2")
 }
 
-[node name="Vendigo" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player")]
+[node name="Vendigo" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
@@ -130,6 +130,7 @@ sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Sprite2D")]
 controlled_player = false
 private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("4_2r87o")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_g467u")])

@@ -24,11 +24,11 @@ func update_on_move():
 		ices[cell] = map.spawn(danger_ice, cell)
 	get_map().write_info("=> Лёд разрастается... (" + owner.unit_name + ")")
 	for unit in map.get_units_with_relation(owner, TacticalMap.relation.Enemy):
-		if ices.has(unit.get_cell()) and not unit.is_death():
-			unit.apply_damage(owner.damage.cur() * power_damage, owner)
+		if ices.has(unit.get_cell()) and not unit.is_death() and unit.visible:
 			var e = freezing.duplicate(true)
 			e.instigator = owner
 			unit.add_effect(e)
+			unit.apply_damage(owner.damage.cur() * power_damage, owner)
 			get_map().write_info(
 				"-> Ух... Холодно... " + unit.unit_name + " скорость: " + str(int(unit.speed.cur()))
 			)

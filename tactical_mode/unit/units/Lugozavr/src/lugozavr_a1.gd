@@ -14,9 +14,9 @@ func apply():
 func subapply():
 	if not applied:
 		return
-	
-	get_map().write_info("=> " + applied.unit_name + " варится в желудке получая (Хп:" +
-		str(applied.health.cur()) + " / " + str(applied.health.get_max()) + ")"
+	applied.apply_damage(owner.damage.cur() * power_p, owner)
+	get_map().write_info("=> " + applied.unit_name + " варится в желудке (Хп:" +
+		str(int(applied.health.cur())) + " / " + str(int(applied.health.get_max())) + ")"
 	)
 
 func can_select(node):
