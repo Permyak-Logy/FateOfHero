@@ -2,7 +2,8 @@ extends GridContainer
 
 signal item_changed
 
-@export var inventory : Inventory
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory : Inventory = game.strat_map.player.inventory
 
 func update():
 	for i in get_children():

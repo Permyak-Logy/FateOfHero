@@ -10,8 +10,10 @@ insert and remove are self explanotory
 """
 
 # list of items and counts there of
-@export var items: Dictionary
-@export var characters: Array[PackedScene]
+var items: Dictionary = {}
+var characters: Array[PackedScene] = [
+	preload("res://tactical_mode/unit/GGVamp/GGVamp.tscn")
+]
 # must be equal to number of cells
 const max_stacks_count: int = 50
 #const max_character_count: int = 5

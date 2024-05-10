@@ -23,7 +23,9 @@ class_name trade
 			$buy/Sprite2D.frame = 0
 			$buy.disabled = true
 
-@export var global_inventory : Inventory
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var global_inventory : Inventory = game.strat_map.player.inventory
+
 @export var coin : Item
 var des = true
 

@@ -79,13 +79,6 @@ func _physics_process(delta):
 	
 	if collision:
 		var collidor = collision.get_collider()
-		print(collidor)
-		print(collidor.get_parent())
-		print(collidor.get_parent().get_parent())
-		print(collidor.get_parent().get_parent().get_parent())
-		print(collidor.get_parent().get_parent().get_parent().get_parent())
-		print(collidor.get_parent().get_parent().get_parent().get_parent().get_parent())
-		print(collidor.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent())
 		if not is_instance_of(collidor, Unit):
 			collidor.activate()
 	

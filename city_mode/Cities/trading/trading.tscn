@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cal6f73hk5ff7"]
+[gd_scene load_steps=16 format=3 uid="uid://cal6f73hk5ff7"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/trading/trading_main.gd" id="1_b2dp5"]
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_g6vnm"]
-[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="3_juopo"]
 [ext_resource type="PackedScene" uid="uid://d4lrybm6yo1ub" path="res://city_mode/Cities/trading/crafting_slot.tscn" id="4_kncku"]
 [ext_resource type="Script" path="res://city_mode/Cities/trading/trades.gd" id="5_71pds"]
 [ext_resource type="PackedScene" uid="uid://74426675p6qr" path="res://city_mode/Cities/trading/trade_item.tscn" id="5_ktqfa"]
@@ -64,7 +63,6 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 10
 script = ExtResource("9_yjtf3")
-inventory = ExtResource("3_juopo")
 
 [node name="CraftingSlot" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
 layout_mode = 2

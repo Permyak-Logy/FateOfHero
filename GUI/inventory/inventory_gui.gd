@@ -35,6 +35,9 @@ func _ready():
 	visible = false
 
 func reinit():
+	game = get_tree().root.get_child(0)
+	inventory = game.strat_map.player.inventory
+	
 	character_buttons = []
 	gear_slots = []
 	ability_slots = []
@@ -75,8 +78,6 @@ func update():
 	
 	
 func open():
-	game = get_tree().root.get_child(0)
-	inventory = game.strat_map.player.inventory
 	reinit()
 	is_open = true 
 	visible = true
