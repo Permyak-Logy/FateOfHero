@@ -1,7 +1,7 @@
 class_name Encounter extends TileEvent
 
-@onready var game: Game = get_tree().root.get_child(0)
-@onready var inventory: Inventory = game.strat_map.player.inventory
+var game: Game
+var inventory: Inventory
 
 @export var enemies: Array[PackedScene]
 
@@ -15,6 +15,8 @@ and texture
 """
 
 func activate():
+	game = get_tree().root.get_child(0)
+	inventory = game.strat_map.player.inventory
 	var characters = inventory.characters
 	game.tactical_map.reinit(characters, enemies)
 	game.tactical_map.finish.connect(on_finish_tactical_map)

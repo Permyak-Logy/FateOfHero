@@ -11,8 +11,8 @@ signal inventory_opened
 signal inventory_closed
 
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
-@onready var game: Game = get_tree().root.get_child(0)
-@onready var inventory: Inventory = game.strat_map.player.inventory
+var game: Game
+var inventory: Inventory
 
 @onready var inventory_panel: InventoryPanel = $HBoxContainer/VBoxContainer/InventoryPanel 
 @onready var character_selection_panel: CharacterSelectionPanel = $HBoxContainer/VBoxContainer/CharacterSelectionPanel
@@ -32,7 +32,6 @@ var hovering_slot: InventorySlot = null
 
 func _ready():
 	connect_inventory_slots()
-	reinit()
 	visible = false
 
 func reinit():
@@ -76,6 +75,8 @@ func update():
 	
 	
 func open():
+	game = get_tree().root.get_child(0)
+	inventory = game.strat_map.player.inventory
 	reinit()
 	is_open = true 
 	visible = true
