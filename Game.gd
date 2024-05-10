@@ -35,3 +35,11 @@ func to_puzzle_mode():
 
 func to_main_menu():
 	activate(main_menu)
+
+func save():
+	var packed: PackedScene = PackedScene.new()
+	packed.pack(strat_map)
+	if ResourceLoader.exists("save.tscn"):
+		pass
+		
+	ResourceSaver.save(packed, "save.tscn")

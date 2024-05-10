@@ -11,13 +11,17 @@ class_name MainMenu extends Control
 
 
 func _ready():
-	if not ResourceLoader.exists("res://GUI/main_menu/save.tscn"):
+	if not ResourceLoader.exists("res://save.tscn"):
 		continue_button.disabled = true
+
+#func prep():
+	
 
 func show_save_menu(saves: Array[PackedScene]):
 	pass
 
 func _on_continue_pressed():
+	game.strat_map = ResourceLoader.load("res://save.tscn").instantiate()
 	game.to_strat_mode()
 	pass
 
