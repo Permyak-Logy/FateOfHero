@@ -23,11 +23,13 @@ func move_time(delta: int):
 	time_changed.emit(time)
 
 
-func _on_inventory_gui_inventory_opened():
+func on_gui_opened():
 	pause()
 
-func _on_inventory_gui_inventory_closed():
+func on_gui_closed():
 	unpause()
 
 func _ready():
+	gui.gui_opened.connect(on_gui_opened)
+	gui.gui_closed.connect(on_gui_closed)
 	strat_map_loaded.emit()

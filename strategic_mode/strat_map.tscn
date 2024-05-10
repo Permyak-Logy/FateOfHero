@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=36 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://strategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://strategic_mode/strat_map.gd" id="1_vssm8"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dpxxyv64x368h" path="res://strategic_mode/tile_events/sprites/tpr_safe_path.png" id="15_kwpve"]
 [ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://strategic_mode/tile_events/unwalkables/timed_gate.tscn" id="16_u0x0p"]
 [ext_resource type="PackedScene" uid="uid://fr7siwcqaf8x" path="res://strategic_mode/tile_events/sm_interactables/treasure_chest.tscn" id="18_0s02k"]
+[ext_resource type="PackedScene" uid="uid://cfkm7grgi7tsr" path="res://GUI/strat_map_menu/strat_map_menu.tscn" id="19_eidl2"]
 [ext_resource type="Resource" uid="uid://bn6fdo3m5610r" path="res://inventory/items/bottle_red.tres" id="19_yu1rd"]
 [ext_resource type="Resource" uid="uid://bmupad5oq83pg" path="res://strategic_mode/dialogues/example_dialogue/example_hello.tres" id="21_hc15a"]
 [ext_resource type="PackedScene" uid="uid://b7jg3r6hr02df" path="res://strategic_mode/tile_events/town_tile_event.tscn" id="21_vylki"]
@@ -4150,11 +4151,13 @@ type = 1
 
 [node name="player" parent="." instance=ExtResource("5_whmy4")]
 top_level = true
-position = Vector2(218, 84)
+position = Vector2(-33, -29)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 process_mode = 3
 script = ExtResource("4_0143e")
+
+[node name="StratMapMenu" parent="GUI" instance=ExtResource("19_eidl2")]
 
 [node name="InventoryGUI" parent="GUI" instance=ExtResource("4_ar3pl")]
 anchors_preset = 8
