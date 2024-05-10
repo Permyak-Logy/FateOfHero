@@ -11,7 +11,8 @@ signal inventory_opened
 signal inventory_closed
 
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
-@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory: Inventory = game.strat_map.player.inventory
 
 @onready var inventory_panel: InventoryPanel = $HBoxContainer/VBoxContainer/InventoryPanel 
 @onready var character_selection_panel: CharacterSelectionPanel = $HBoxContainer/VBoxContainer/CharacterSelectionPanel

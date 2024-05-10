@@ -1,7 +1,8 @@
 class_name RunePlacementGUI extends Control
 
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
-@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory: Inventory = game.strat_map.player.inventory
 var place_inventory: MicroInventory = null
 
 @onready var inventory_panel: InventoryPanel = $HBoxContainer/InventoryPanel

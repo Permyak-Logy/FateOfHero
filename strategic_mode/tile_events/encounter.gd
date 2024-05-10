@@ -1,7 +1,7 @@
 class_name Encounter extends TileEvent
 
 @onready var game: Game = get_tree().root.get_child(0)
-@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
+@onready var inventory: Inventory = game.strat_map.player.inventory
 
 @export var enemies: Array[PackedScene]
 

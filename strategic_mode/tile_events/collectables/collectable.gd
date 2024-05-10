@@ -5,7 +5,8 @@ Tile event that can be placed on teh TileMap
 Abstract parent for all collectables
 """
 
-@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory: Inventory = game.strat_map.player.inventory
 
 var item: Resource 
 var count: int
