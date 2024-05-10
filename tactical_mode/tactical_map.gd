@@ -698,7 +698,6 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 			_p_units.append(unit)
 		if is_enemy(_instigator):
 			_e_units.append(unit)
-		reset_outline_color(unit)
 	return actor
 
 func add_to_unit_queue(unit: Unit, in_start=false):

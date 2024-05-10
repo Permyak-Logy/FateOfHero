@@ -52,4 +52,3 @@ texture = ExtResource("4_oeadd")
 max_stack = 10
 recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_1ijj5"), ExtResource("2_m50ph")])
 price = 0
-descript = "Повышает макс. hp персонажа на 20% на ближайший бой"
