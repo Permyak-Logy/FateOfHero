@@ -75,14 +75,14 @@ func _ready():
 	if is_instance_of($"..", Game):
 		return
 	_p_units = [
-		$GgVamp,
-		$Naris,
-		$SmolItto
+		#$GgVamp,
+		$Naris #,
+		#$SmolItto
 	]
 	_e_units = [
-		$Vendigo,
-		$Skeleton,
-		$Skeleton2
+		$Vendigo#,
+		#$Skeleton,
+		#$Skeleton2
 	]
 	inited = true
 
@@ -241,7 +241,8 @@ func on_kill(unit: Unit):
 		if unit_queue[i][1] == unit:
 			unit_queue.pop_at(i)
 			break
-	write_info("-> " + str(unit) + " убит")
+	reset_outline_color(unit)
+	write_info("-> " + unit.unit_name + " убит")
 
 func move_unit_to(actor: Actor, x: int, y: int):
 	"""
@@ -371,7 +372,7 @@ func _update_stepmove():
 	var killed_player_units = _p_units.all(func (x): return x.is_death())
 	var killed_enemy_units = _e_units.all(func (x): return x.is_death())
 	
-	if killed_player_units != killed_enemy_units or escape:
+	if killed_player_units != killed_enemy_units or escape or not running:
 		_finalize_fight(killed_enemy_units and not escape)
 		return
 	
@@ -403,9 +404,7 @@ func _finalize_fight(_win=false):
 			if enemy.is_death():
 				expirience += int(enemy.health.get_max() / 10)
 		player.expirience.add_exp(expirience)
-		print(expirience, " ", player.expirience.get_exp_to_next_lvl())
 		if player.expirience.can_level_up():
-			print("Level up!!!!!!!")
 			var lug: LevelUpGUI = level_up_gui.instantiate()
 			lug.unit = player
 			lug.pts = player.expirience.ups
@@ -413,6 +412,8 @@ func _finalize_fight(_win=false):
 			await lug.done
 			player.expirience.ups = 0
 			gui.remove_child(lug)
+		while player.get_effects():
+			player.remove_effect(player.get_effects()[0])
 
 	var packed_live: Array[PackedScene] = []
 	var packed_death: Array[PackedScene] = []
@@ -423,7 +424,6 @@ func _finalize_fight(_win=false):
 			packed_death.append(pack)
 		else:
 			packed_live.append(pack)
-	print(packed_live)
 	finish.emit(packed_live, packed_death)
 
 func _update_walls():

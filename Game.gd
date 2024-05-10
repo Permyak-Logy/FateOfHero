@@ -10,8 +10,8 @@ load("res://external_puzzles/external_puzzle_container.tscn").instantiate()
 var active_scene = null
 
 func _ready():
-	add_child(strat_map)
-	active_scene = strat_map
+	add_child(main_menu)
+	active_scene = main_menu
 
 func activate(scene: Node):
 	remove_child(active_scene)

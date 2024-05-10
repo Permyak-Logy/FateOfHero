@@ -1,4 +1,4 @@
-extends Node2D
+class_name TileEvent extends Node2D
 
 """
 Base class for any TileEvents

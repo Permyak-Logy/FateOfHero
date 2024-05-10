@@ -71,7 +71,7 @@ const CUR_COLOR = Vector4(255, 255, 255, 100)
 const SELECTED_COLOR = Vector4(0, 0, 255, 100)
 const ENEMY_COLOR = Vector4(255, 0, 0, 100)
 const DEFAULT_COLOR = Vector4(0, 0, 0, 100)
-const ESCAPE_COLOR = Vector4(255, 255, 0, 100)
+const TO_SELECT_COLOR = Vector4(255, 255, 0, 100)
 
 func _ready():
 	if health and health_bar_pb:
@@ -240,6 +240,22 @@ func _on_toggle_select(_viewport, event: InputEvent, _shape_idx: int):
 			ability.unselect(self)
 		else:
 			ability.select(self)
+	if event.is_action_pressed("about_unit"):
+		get_map().write_info(
+			"-> " + unit_name + " (" + str(expirience.level) + " ур.)" +
+			" ХП=" + str(int(health.cur())) + "/" + str(int(health.get_max()))
+		)
+
+func _on_mouse_entered():
+	var ability = get_map().cur_ability
+	if not ability or not is_instance_of(ability, DirectedAbility):
+		return
+	if not ability.can_select(self):
+		return
+	set_outline_color(TO_SELECT_COLOR)
+
+func _on_mouse_exited():
+	get_map().reset_outline_color(self)
 
 func get_effects() -> Array[Effect]:
 	return _effects

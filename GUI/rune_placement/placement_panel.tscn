@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://dphyb3k2ed84k"]
+
+[ext_resource type="Script" path="res://GUI/rune_placement/placement_panel.gd" id="1_ym75v"]
+[ext_resource type="Texture2D" uid="uid://dxxqoehfvjjdt" path="res://GUI/rune_placement/inventory_rect.png" id="2_mnpbg"]
+[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/inventory/slot.tscn" id="3_vhmcu"]
+
+[node name="PlacementPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ym75v")
+
+[node name="Back" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_mnpbg")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Rune" parent="Back" instance=ExtResource("3_vhmcu")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -30.0
+offset_right = -22.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Back"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_right = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="Back/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Back/VBoxContainer"]
+layout_mode = 2
+text = "place the rune"

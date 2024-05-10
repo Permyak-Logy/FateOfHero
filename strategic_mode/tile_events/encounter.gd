@@ -1,6 +1,5 @@
-extends "res://strategic_mode/tile_events/TileEvent.gd"
+class_name Encounter extends TileEvent
 
-class_name Encounter
 @onready var game: Game = get_tree().root.get_child(0)
 @onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
 

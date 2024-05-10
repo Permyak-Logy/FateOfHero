@@ -7,9 +7,14 @@ func _ready():
 	visible = false
 
 func _on_continue_pressed():
-	leave_menu.emit()
-	pass
-
+	game.strat_map.gui.close_gui()
 
 func _on_exit_pressed():
+	game.strat_map.gui.close_gui()
 	game.to_main_menu()
+
+func open():
+	visible = true
+
+func close():
+	visible = false

@@ -1,4 +1,4 @@
-extends "res://strategic_mode/tile_events/TileEvent.gd"
+class_name UnwalkableTileEvent extends TileEvent
 
 """
 unwalkable tile event

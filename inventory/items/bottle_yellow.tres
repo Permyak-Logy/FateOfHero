@@ -8,8 +8,8 @@
 [resource]
 script = ExtResource("3_kt3l7")
 name = ""
+description = ""
 texture = ExtResource("4_esg6q")
 max_stack = 10
 recipe = Array[ExtResource("3_kt3l7")]([ExtResource("1_n3wd6"), ExtResource("2_0rcrf")])
 price = 0
-descript = "Повышает скорость персонажа на 20% на ближайший бой"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=36 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://strategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://strategic_mode/strat_map.gd" id="1_vssm8"]
@@ -11,23 +11,27 @@
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="5_r3hyg"]
 [ext_resource type="PackedScene" uid="uid://cf0rrbb0c6pik" path="res://strategic_mode/player.tscn" id="5_whmy4"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/Vendigo/Vendigo.tscn" id="6_0wgum"]
-[ext_resource type="PackedScene" path="res://strategic_mode/tile_events/lever.tscn" id="6_simf5"]
+[ext_resource type="PackedScene" uid="uid://kvrf45ophw5k" path="res://strategic_mode/tile_events/sm_interactables/lever.tscn" id="6_simf5"]
 [ext_resource type="Script" path="res://strategic_mode/LeverPuzzle 1.gd" id="7_rcyvo"]
 [ext_resource type="PackedScene" uid="uid://d17julguc6lr2" path="res://strategic_mode/tile_events/unwalkables/gate.tscn" id="8_byobl"]
 [ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://strategic_mode/tile_events/sprites/x_marks_the_spot.png" id="8_q21qa"]
-[ext_resource type="PackedScene" uid="uid://dq3cyu2npqu84" path="res://strategic_mode/tile_events/activators/cc_external_puzzle_activator.tscn" id="13_uwixs"]
+[ext_resource type="PackedScene" uid="uid://dq3cyu2npqu84" path="res://strategic_mode/tile_events/puzzle_activators/cc_external_puzzle_activator.tscn" id="13_uwixs"]
 [ext_resource type="PackedScene" uid="uid://bse1mhf87c40h" path="res://external_puzzles/puzzles/safe_path/safe_path.tscn" id="14_hlgbt"]
 [ext_resource type="Texture2D" uid="uid://dpxxyv64x368h" path="res://strategic_mode/tile_events/sprites/tpr_safe_path.png" id="15_kwpve"]
 [ext_resource type="PackedScene" uid="uid://c5du08y0qxefc" path="res://strategic_mode/tile_events/unwalkables/timed_gate.tscn" id="16_u0x0p"]
+[ext_resource type="PackedScene" uid="uid://fr7siwcqaf8x" path="res://strategic_mode/tile_events/sm_interactables/treasure_chest.tscn" id="18_0s02k"]
 [ext_resource type="PackedScene" uid="uid://cfkm7grgi7tsr" path="res://GUI/strat_map_menu/strat_map_menu.tscn" id="19_eidl2"]
+[ext_resource type="Resource" uid="uid://bn6fdo3m5610r" path="res://inventory/items/bottle_red.tres" id="19_yu1rd"]
 [ext_resource type="Resource" uid="uid://bmupad5oq83pg" path="res://strategic_mode/dialogues/example_dialogue/example_hello.tres" id="21_hc15a"]
-[ext_resource type="PackedScene" uid="uid://b7jg3r6hr02df" path="res://strategic_mode/tile_events/activators/town_tile_event.tscn" id="21_vylki"]
+[ext_resource type="PackedScene" uid="uid://b7jg3r6hr02df" path="res://strategic_mode/tile_events/town_tile_event.tscn" id="21_vylki"]
 [ext_resource type="PackedScene" uid="uid://y4fch07ijvb1" path="res://strategic_mode/tile_events/dialogue_triggers/dialogue_trigger.tscn" id="21_wx1y1"]
 [ext_resource type="PackedScene" uid="uid://bpajsk8dbrjpg" path="res://strategic_mode/tile_events/dialogue_triggers/manual_dialogue_trigger.tscn" id="22_erct1"]
 [ext_resource type="PackedScene" uid="uid://sgkba57dbbe7" path="res://city_mode/Cities/Geraldina/Geraldina.tscn" id="22_t3kb4"]
 [ext_resource type="Resource" path="res://strategic_mode/dialogues/genned_dial/Привет.tres" id="22_trjjb"]
 [ext_resource type="Texture2D" uid="uid://bgqjde0lpoh7w" path="res://strategic_mode/tile_events/sprites/house.png" id="23_qm7dp"]
 [ext_resource type="PackedScene" uid="uid://bids4nmirj5aj" path="res://external_puzzles/puzzles/stealth_run/stealth_run.tscn" id="27_pvq2k"]
+[ext_resource type="Script" path="res://strategic_mode/RunesPuzzle1.gd" id="28_vwli7"]
+[ext_resource type="PackedScene" uid="uid://co2yhd01ek3ba" path="res://strategic_mode/tile_events/sm_interactables/rune_stone.tscn" id="29_0aliy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4109,12 +4113,11 @@ position = Vector2(-51, 57)
 [node name="LeverPuzzle 1" type="Node" parent="PuzzleMaster"]
 script = ExtResource("7_rcyvo")
 
-[node name="LeverTileEvent2" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("6_simf5")]
-position = Vector2(-58, -50)
-id = 1
+[node name="Lever" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("6_simf5")]
+position = Vector2(-61, -59)
 
-[node name="LeverTileEvent" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("6_simf5")]
-position = Vector2(27, -55)
+[node name="Lever2" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("6_simf5")]
+position = Vector2(40, -44)
 
 [node name="Gate" parent="PuzzleMaster/LeverPuzzle 1" instance=ExtResource("8_byobl")]
 position = Vector2(-11, -101)
@@ -4127,10 +4130,28 @@ enemies = Array[PackedScene]([ExtResource("5_r3hyg")])
 puzzle = ExtResource("14_hlgbt")
 texture = ExtResource("15_kwpve")
 
+[node name="RunesPuzzle1" type="Node" parent="PuzzleMaster"]
+script = ExtResource("28_vwli7")
+
+[node name="Prize" parent="PuzzleMaster/RunesPuzzle1" instance=ExtResource("18_0s02k")]
+position = Vector2(371, 109)
+contents = {
+ExtResource("19_yu1rd"): 15
+}
+
+[node name="RuneStone2" parent="PuzzleMaster/RunesPuzzle1" instance=ExtResource("29_0aliy")]
+position = Vector2(320, 157)
+type = 8
+
+[node name="RuneStone4" parent="PuzzleMaster/RunesPuzzle1" instance=ExtResource("29_0aliy")]
+position = Vector2(312, 62)
+type = 1
+
 [node name="OtherTileEvents" type="Node" parent="."]
 
 [node name="player" parent="." instance=ExtResource("5_whmy4")]
 top_level = true
+position = Vector2(-33, -29)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 process_mode = 3

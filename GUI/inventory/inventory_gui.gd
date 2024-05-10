@@ -24,6 +24,7 @@ var character_buttons: Array = []
 var gear_slots: Array = []
 var ability_slots: Array = []
 var active_char_id: int = 0
+# these won't
 var item_stack_in_hand: ItemStackRepr
 var item_stack_in_hand_origin: InventorySlot
 var hovering_slot: InventorySlot = null
@@ -52,21 +53,12 @@ func connect_inventory_slots():
 	for slot in inv_slots:
 		slot.HoveringInventorySlot.connect(on_slot_hovered)
 		slot.UnhoveringInventorySlot.connect(on_slot_unhovered)
-		#var callable = Callable(on_inventory_slot_clicked)
-		#callable = callable.bind(slot)
-		#slot.pressed.connect(callable)
-		pass
-
 
 func connect_character_slots():
 	for slot in gear_slots + ability_slots:
 		slot.HoveringInventorySlot.connect(on_slot_hovered)
 		slot.UnhoveringInventorySlot.connect(on_slot_unhovered)
-		#var callable = Callable(on_character_slot_clicked)
-		#callable = callable.bind(slot)
-		#slot.pressed.connect(callable)
-		pass
-	
+
 func connect_buttons():
 	print("binding buttons")
 	for button in character_buttons:
@@ -106,12 +98,11 @@ func on_char_button_pressed(id: int):
 func update_item_in_hand():
 	if not item_stack_in_hand: return
 	item_stack_in_hand.global_position = get_global_mouse_position() - item_stack_in_hand.size / 2
-	#item_stack_in_hand.top_level = true
 
 
-func put_item_to_inv_slot(slot: InventorySlot):
+func put_item_in_inv():
 	if not (item_stack_in_hand and item_stack_in_hand.item_stack):
-		return
+		return false
 	var item_stack: ItemStack = item_stack_in_hand.item_stack
 	var remaining = inventory.insert(item_stack.item, item_stack.size)
 	if !remaining:
@@ -121,6 +112,7 @@ func put_item_to_inv_slot(slot: InventorySlot):
 		print("remaining")
 		item_stack_in_hand.item_stack.size = remaining
 	update()
+	
 
 func take_item_from_inv_slot(slot: InventorySlot) -> bool:
 	if item_stack_in_hand:
@@ -170,24 +162,21 @@ func take_item_form_char_slot(slot: InventorySlot) -> bool:
 	return true
 
 func put_to(slot: InventorySlot):
-	if not slot: # TODO: Исправь костыль на переключение персонажей в инвентаре.
-		return
+	var success = true
 	if slot.name.begins_with("Slot"):
-		put_item_to_inv_slot(slot)
+		put_item_in_inv()
 	else:
-		put_item_to_char_slot(slot)
-	
+		if not put_item_to_char_slot(slot):
+			put_item_in_inv()
 
 func take_from(slot:InventorySlot):
 	if hovering_slot.name.begins_with("Slot"):
-		take_item_from_inv_slot(hovering_slot)
+		return take_item_from_inv_slot(hovering_slot)
 	else:
-		take_item_form_char_slot(hovering_slot)
+		return take_item_form_char_slot(hovering_slot)
 	 
 
 func _input(event):
-	if not is_open:
-		return
 	update_item_in_hand()
 	if event.is_action_pressed("lmb"):
 		if not hovering_slot:
@@ -196,11 +185,13 @@ func _input(event):
 		item_stack_in_hand_origin = hovering_slot
 	
 	if event.is_action_released("lmb"):
+		if not item_stack_in_hand:
+			return
 		var target_slot = hovering_slot
 		if not hovering_slot or not hovering_slot.is_empty():
 			target_slot = item_stack_in_hand_origin
 		put_to(target_slot)
-		
+
 
 
 func on_slot_hovered(slot: InventorySlot):

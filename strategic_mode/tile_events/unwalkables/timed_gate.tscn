@@ -7,6 +7,3 @@
 script = ExtResource("2_8gxfk")
 open_time_start = 0
 open_time_end = 120
-
-[node name="EventCollider" parent="." index="1"]
-disabled = false

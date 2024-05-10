@@ -24,9 +24,8 @@ func take_item():
 	container.remove_child(item_stack_repr)
 	item_stack_repr = null 
 	backgroundSprite.frame = 0 
-	
 	return item_stack
-	
+
 func update():
 	if item_stack_repr:
 		backgroundSprite.frame = 1
@@ -36,14 +35,12 @@ func update():
 		backgroundSprite.frame = 0
 		if  container.get_children():
 			container.remove_child(container.get_children()[0])
-		
+
 func is_empty():
 	return not item_stack_repr
 
-
 func _on_mouse_entered():
 	HoveringInventorySlot.emit(self)
-
 
 func _on_mouse_exited():
 	UnhoveringInventorySlot.emit(self)

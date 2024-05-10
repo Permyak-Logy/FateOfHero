@@ -1,4 +1,4 @@
-extends "res://strategic_mode/tile_events/collectables/collectable.gd"
+extends Collectable
 
 func init():
 	item = preload("res://inventory/items/coin.tres")

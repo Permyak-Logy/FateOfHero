@@ -1,4 +1,4 @@
-extends "res://strategic_mode/tile_events/unwalkables/unwalbale_tile_event.gd"
+class_name GateTileEvent extends UnwalkableTileEvent
 
 @onready var collider: CollisionShape2D = $EventCollider
 
