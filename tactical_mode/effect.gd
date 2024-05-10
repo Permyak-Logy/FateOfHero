@@ -23,9 +23,7 @@ var instigator: Node = null:
 			if instigator and is_instance_of(instigator, Unit):
 				instigator.death.disconnect(on_death_instigator)
 			if value and is_instance_of(value, Unit):
-				print(value, len(value.death.get_connections()))
 				value.death.connect(on_death_instigator)
-				print(value, len(value.death.get_connections()))
 		instigator = value
 
 func on_death_instigator(_inst):

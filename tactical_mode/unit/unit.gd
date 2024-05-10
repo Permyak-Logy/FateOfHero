@@ -77,7 +77,7 @@ const SELECTED_COLOR = Vector4(0, 0, 255, 100)
 const ENEMY_COLOR = Vector4(255, 0, 0, 100)
 const DEFAULT_COLOR = Vector4(0, 0, 0, 100)
 const TO_SELECT_COLOR = Vector4(255, 255, 0, 100)
-var to_del = false
+
 func _ready():
 	if health and health_bar_pb:
 		health_bar_pb.stat_component = health
@@ -193,16 +193,6 @@ func on_flip_unit():
 		sprite.flip_h = bool(int(flipped) ^ int(flip_onready))
 
 func _physics_process(_delta):
-	if len(death.get_connections()) == 2:
-		if not to_del and unit_name == "Злое растение":
-			print("del", death.get_connections())
-			to_del = true
-	elif to_del:
-		pass
-	else:
-		if unit_name == "Злое растение":
-			print(self, len(death.get_connections()))
-	
 	if current_id_path.is_empty():
 		return
 

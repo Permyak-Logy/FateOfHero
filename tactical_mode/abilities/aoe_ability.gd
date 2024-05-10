@@ -17,11 +17,8 @@ func apply():
 	for unit in get_map().units:
 		for cell in unit.get_occupied_cells():
 			if cell in about_cells:
-				print(".0||||", owner, len(owner.death.get_connections()))
 				apply_on_unit(unit)
-				print("..0||||", owner, len(owner.death.get_connections()))
 				break
-	print("0||||", owner, len(owner.death.get_connections()))
 
 func apply_on_unit(unit: Unit):
 	pass

@@ -249,7 +249,6 @@ func on_kill(unit: Unit):
 		if unit_queue[i][1] == unit:
 			unit_queue.pop_at(i)
 			break
-	print("||||||||||||||||Cons ", unit.death.get_connections())
 	reset_outline_color(unit)
 	write_info("-> " + unit.unit_name + " убит")
 
