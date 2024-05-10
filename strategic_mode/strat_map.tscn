@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/Skeleton/Skeleton.tscn" id="5_r3hyg"]
 [ext_resource type="PackedScene" uid="uid://cf0rrbb0c6pik" path="res://strategic_mode/player.tscn" id="5_whmy4"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/Vendigo/Vendigo.tscn" id="6_0wgum"]
-[ext_resource type="PackedScene" uid="uid://bohhuirs02xds" path="res://strategic_mode/tile_events/lever.tscn" id="6_simf5"]
+[ext_resource type="PackedScene" path="res://strategic_mode/tile_events/lever.tscn" id="6_simf5"]
 [ext_resource type="Script" path="res://strategic_mode/LeverPuzzle 1.gd" id="7_rcyvo"]
 [ext_resource type="PackedScene" uid="uid://d17julguc6lr2" path="res://strategic_mode/tile_events/unwalkables/gate.tscn" id="8_byobl"]
 [ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://strategic_mode/tile_events/sprites/x_marks_the_spot.png" id="8_q21qa"]
