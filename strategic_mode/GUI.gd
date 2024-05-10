@@ -12,4 +12,3 @@ func _input(event):
 			inventory.open()
 		else:
 			inventory.close()
-
