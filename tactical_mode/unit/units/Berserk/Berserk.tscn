@@ -1,0 +1,174 @@
+[gd_scene load_steps=30 format=3 uid="uid://komiiv5ot43n"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3ocbc"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_1wvle"]
+[ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="2_7e5uy"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_i4t0d"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="4_tr2kr"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="4_ukfk8"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_iree2"]
+[ext_resource type="Resource" uid="uid://jmvxktk78bc6" path="res://tactical_mode/unit/units/Berserk/res/BerserkA0.tres" id="6_unl5f"]
+[ext_resource type="Resource" uid="uid://ca00njn6opt8b" path="res://tactical_mode/unit/units/Berserk/res/BerserkA1.tres" id="7_h4oqc"]
+[ext_resource type="Resource" uid="uid://bt80conpnoc8f" path="res://tactical_mode/unit/units/Berserk/res/BerserkA2.tres" id="8_x0px8"]
+[ext_resource type="Resource" uid="uid://dkk1mqckd0wg4" path="res://tactical_mode/unit/units/Berserk/res/BerserkA3.tres" id="9_qtvge"]
+[ext_resource type="Texture2D" uid="uid://dfjvd077r7e8v" path="res://tactical_mode/unit/units/Berserk/assets/spritesheet.png" id="10_urkiw"]
+
+[sub_resource type="Resource" id="Resource_qa83h"]
+script = ExtResource("2_1wvle")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 1
+}
+
+[sub_resource type="Resource" id="Resource_yrivq"]
+script = ExtResource("4_tr2kr")
+base = 200.0
+cur = 200.0
+max_ = 200.0
+
+[sub_resource type="Resource" id="Resource_kdxlc"]
+script = ExtResource("3_i4t0d")
+mod_type = 0
+characteristic = SubResource("Resource_yrivq")
+
+[sub_resource type="Resource" id="Resource_tm6hb"]
+script = ExtResource("4_tr2kr")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_mq55u"]
+script = ExtResource("3_i4t0d")
+mod_type = 3
+characteristic = SubResource("Resource_tm6hb")
+
+[sub_resource type="Resource" id="Resource_6eqvn"]
+script = ExtResource("4_tr2kr")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_keska"]
+script = ExtResource("3_i4t0d")
+mod_type = 1
+characteristic = SubResource("Resource_6eqvn")
+
+[sub_resource type="Resource" id="Resource_xamyv"]
+script = ExtResource("4_tr2kr")
+base = 10.0
+cur = 10.0
+max_ = 10.0
+
+[sub_resource type="Resource" id="Resource_0g0tw"]
+script = ExtResource("3_i4t0d")
+mod_type = 2
+characteristic = SubResource("Resource_xamyv")
+
+[sub_resource type="Resource" id="Resource_h4p4i"]
+script = ExtResource("5_iree2")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Gradient" id="Gradient_ha3mq"]
+colors = PackedColorArray(1, 0, 1, 1, 0.360784, 0, 0.368627, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e1g2a"]
+gradient = SubResource("Gradient_ha3mq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lcjhm"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_e1g2a")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lc7ck"]
+radius = 14.0
+height = 56.0
+
+[sub_resource type="Animation" id="Animation_w1mji"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_whb6q"]
+resource_name = "run"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xnlmd"]
+_data = {
+"idle": SubResource("Animation_w1mji"),
+"run": SubResource("Animation_whb6q")
+}
+
+[node name="Berserk" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "for_flip_sprites")]
+y_sort_enabled = true
+input_pickable = true
+script = ExtResource("1_3ocbc")
+unit_name = "Фиди (Берсерк)"
+inventory = SubResource("Resource_qa83h")
+health = SubResource("Resource_kdxlc")
+defence = SubResource("Resource_mq55u")
+speed = SubResource("Resource_keska")
+damage = SubResource("Resource_0g0tw")
+expirience = SubResource("Resource_h4p4i")
+sprite_for_outline = NodePath("Sprite2D")
+trail_particles = NodePath("GPUParticles2D")
+health_bar_pb = NodePath("StatProgressBar")
+for_flip_sprites = [NodePath("Sprite2D")]
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_unl5f"), ExtResource("7_h4oqc"), ExtResource("8_x0px8"), ExtResource("9_qtvge")])
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(0, -26)
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_lcjhm")
+texture = ExtResource("10_urkiw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -26)
+texture = ExtResource("10_urkiw")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -23)
+texture = ExtResource("2_7e5uy")
+
+[node name="StatProgressBar" parent="." instance=ExtResource("4_ukfk8")]
+offset_top = -59.0
+offset_bottom = -57.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("CapsuleShape2D_lc7ck")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xnlmd")
+}
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

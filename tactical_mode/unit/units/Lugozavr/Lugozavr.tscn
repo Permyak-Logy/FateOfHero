@@ -1,0 +1,229 @@
+[gd_scene load_steps=29 format=3 uid="uid://bnx7qiuivvnwn"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Lugozavr/src/Lugozavr.gd" id="1_4n5r8"]
+[ext_resource type="Texture2D" uid="uid://j8mh72ss2l4v" path="res://tactical_mode/unit/units/Lugozavr/assets/spritesheet.png" id="2_4p48e"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="2_ck8j1"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_vvqc4"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_tle5d"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_3prn5"]
+[ext_resource type="Resource" uid="uid://duguqh2qdcele" path="res://tactical_mode/unit/units/Lugozavr/res/LugozavrA0.tres" id="5_arnth"]
+[ext_resource type="Script" path="res://tactical_mode/effects/level_upscale_effect.gd" id="5_gkv3a"]
+[ext_resource type="Texture2D" uid="uid://b45l2fsxtf6v6" path="res://tactical_mode/assets/Big_Shadow.png" id="6_mmnq8"]
+[ext_resource type="Resource" uid="uid://dx3xbtvtvreat" path="res://tactical_mode/unit/units/Lugozavr/res/LugozavrA1.tres" id="6_y8n8d"]
+[ext_resource type="Texture2D" uid="uid://dc1ja8nxxejlk" path="res://tactical_mode/unit/units/Lugozavr/assets/run.png" id="7_4pkcg"]
+
+[sub_resource type="Resource" id="Resource_v41ox"]
+script = ExtResource("2_vvqc4")
+base = 200.0
+cur = 200.0
+max_ = 200.0
+
+[sub_resource type="Resource" id="Resource_u7bt7"]
+script = ExtResource("3_tle5d")
+mod_type = 0
+characteristic = SubResource("Resource_v41ox")
+
+[sub_resource type="Resource" id="Resource_6npxl"]
+script = ExtResource("2_vvqc4")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_w4bx2"]
+script = ExtResource("3_tle5d")
+mod_type = 3
+characteristic = SubResource("Resource_6npxl")
+
+[sub_resource type="Resource" id="Resource_8n55r"]
+script = ExtResource("2_vvqc4")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_h5dfn"]
+script = ExtResource("3_tle5d")
+mod_type = 1
+characteristic = SubResource("Resource_8n55r")
+
+[sub_resource type="Resource" id="Resource_yka7v"]
+script = ExtResource("2_vvqc4")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_hi6ed"]
+script = ExtResource("3_tle5d")
+mod_type = 2
+characteristic = SubResource("Resource_yka7v")
+
+[sub_resource type="Resource" id="Resource_m5n3s"]
+script = ExtResource("4_3prn5")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_bx2ur"]
+script = ExtResource("5_gkv3a")
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Эффект"
+is_negative = false
+
+[sub_resource type="Gradient" id="Gradient_ypy32"]
+colors = PackedColorArray(0, 1, 0.745098, 1, 0, 0.541176, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wj7vd"]
+gradient = SubResource("Gradient_ypy32")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hyl62"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_wj7vd")
+
+[sub_resource type="Animation" id="Animation_ellrj"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [14, 15, 16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_lemfq"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_x77xp"]
+resource_name = "run"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7elf"]
+_data = {
+"attack": SubResource("Animation_ellrj"),
+"idle": SubResource("Animation_lemfq"),
+"run": SubResource("Animation_x77xp")
+}
+
+[node name="Lugozavr" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_4n5r8")
+unit_name = "Лугозавр"
+health = SubResource("Resource_u7bt7")
+defence = SubResource("Resource_w4bx2")
+speed = SubResource("Resource_h5dfn")
+damage = SubResource("Resource_hi6ed")
+expirience = SubResource("Resource_m5n3s")
+sprite_for_outline = NodePath("Body")
+trail_particles = NodePath("GPUParticles2D")
+health_bar_pb = NodePath("StatProgressBar")
+animation_player = NodePath("AnimationPlayer")
+flip_onready = true
+for_flip_sprites = [NodePath("Body")]
+controlled_player = false
+private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("5_arnth"), ExtResource("6_y8n8d")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([SubResource("Resource_bx2ur")])
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(-2, -24)
+texture = ExtResource("2_4p48e")
+hframes = 7
+vframes = 8
+frame = 7
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(-1.13687e-13, -26)
+scale = Vector2(0.429688, 0.53125)
+texture = ExtResource("6_mmnq8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-2, -24)
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_hyl62")
+texture = ExtResource("7_4pkcg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Body")
+libraries = {
+"": SubResource("AnimationLibrary_l7elf")
+}
+
+[node name="StatProgressBar" parent="." instance=ExtResource("2_ck8j1")]
+offset_top = -51.0
+offset_bottom = -49.0
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

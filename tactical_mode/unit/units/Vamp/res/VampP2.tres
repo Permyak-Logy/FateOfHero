@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GGVampP2" load_steps=2 format=3 uid="uid://drtfi4k16ej2g"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Vamp/src/vamp_p2.gd" id="1_ok3ty"]
+
+[resource]
+script = ExtResource("1_ok3ty")
+power = 0.25
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+effect_name = "Влюблённый монстр"
+is_negative = false

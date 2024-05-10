@@ -1,15 +1,52 @@
-[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://bpucxqd3g08kp"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=11 format=3 uid="uid://bpucxqd3g08kp"]
 
 [ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_n3wd6"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_x7q74"]
 [ext_resource type="Resource" uid="uid://dqdvaxckrca60" path="res://inventory/items/egg.tres" id="2_0rcrf"]
-[ext_resource type="Script" path="res://inventory/item.gd" id="3_kt3l7"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_dwaec"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="3_en7kp"]
+[ext_resource type="Script" path="res://inventory/apply_effect_ability.gd" id="3_fo7js"]
 [ext_resource type="Texture2D" uid="uid://dyi5oqj5vuudu" path="res://inventory/icons/bottle_yellow.png" id="4_esg6q"]
 
+[sub_resource type="Resource" id="Resource_5ekbq"]
+script = ExtResource("2_dwaec")
+add = 0.0
+mul = 0.2
+
+[sub_resource type="Resource" id="Resource_1gpbm"]
+script = ExtResource("1_x7q74")
+type = 1
+value = SubResource("Resource_5ekbq")
+
+[sub_resource type="Resource" id="Resource_habq8"]
+script = ExtResource("3_en7kp")
+on_stack = 0
+limit_stacks_for_sum_mods = -1
+moves = 3
+mods = Array[ExtResource("1_x7q74")]([SubResource("Resource_1gpbm")])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Жижа жёлтая"
+is_negative = false
+
 [resource]
-script = ExtResource("3_kt3l7")
-name = ""
-description = ""
+script = ExtResource("3_fo7js")
+effect = SubResource("Resource_habq8")
+apply_on = Array[int]([0])
+targets = 1
+max_targets = 0
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+only_unit_owner = true
+type = 4
+_mods = Array[ExtResource("1_x7q74")]([])
+name = "Жижа жёлтая"
+description = "+20% скорости на 3 хода"
 texture = ExtResource("4_esg6q")
 max_stack = 10
-recipe = Array[ExtResource("3_kt3l7")]([ExtResource("1_n3wd6"), ExtResource("2_0rcrf")])
+recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_n3wd6"), ExtResource("2_0rcrf")])
 price = 0

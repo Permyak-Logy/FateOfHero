@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Gear" load_steps=3 format=3 uid="uid://dxjswu38qdlka"]
+
+[ext_resource type="Script" path="res://inventory/gear.gd" id="1_tqms4"]
+[ext_resource type="Texture2D" uid="uid://c7lyt72phhdww" path="res://inventory/gears/Black/assets/Helmet_black.png" id="2_cy1wd"]
+
+[resource]
+script = ExtResource("1_tqms4")
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Шлем из чёрного камня"
+description = ""
+texture = ExtResource("2_cy1wd")
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0

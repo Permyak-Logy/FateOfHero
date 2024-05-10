@@ -1,0 +1,96 @@
+[gd_scene load_steps=17 format=3 uid="uid://csb3ujant2uio"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/Vedmachok.gd" id="1_cy2or"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_5q3v1"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="2_fx817"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_klvn2"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_udfcx"]
+[ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="5_dhbj6"]
+[ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="6_uhiw1"]
+
+[sub_resource type="Resource" id="Resource_xhmqf"]
+script = ExtResource("2_5q3v1")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_txejc"]
+script = ExtResource("3_klvn2")
+mod_type = 0
+characteristic = SubResource("Resource_xhmqf")
+
+[sub_resource type="Resource" id="Resource_v2qqe"]
+script = ExtResource("2_5q3v1")
+base = 10.0
+cur = 10.0
+max_ = 10.0
+
+[sub_resource type="Resource" id="Resource_jfvkh"]
+script = ExtResource("3_klvn2")
+mod_type = 3
+characteristic = SubResource("Resource_v2qqe")
+
+[sub_resource type="Resource" id="Resource_cfuuq"]
+script = ExtResource("2_5q3v1")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_aqp23"]
+script = ExtResource("3_klvn2")
+mod_type = 1
+characteristic = SubResource("Resource_cfuuq")
+
+[sub_resource type="Resource" id="Resource_4eanr"]
+script = ExtResource("2_5q3v1")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_jkeo0"]
+script = ExtResource("3_klvn2")
+mod_type = 2
+characteristic = SubResource("Resource_4eanr")
+
+[sub_resource type="Resource" id="Resource_rss36"]
+script = ExtResource("4_udfcx")
+level = 1
+expirience = 0
+ups = 0
+
+[node name="Vedmachok" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_cy2or")
+unit_name = "Ведьмачок"
+health = SubResource("Resource_txejc")
+defence = SubResource("Resource_jfvkh")
+speed = SubResource("Resource_aqp23")
+damage = SubResource("Resource_jkeo0")
+expirience = SubResource("Resource_rss36")
+sprite_for_outline = NodePath("Body")
+trail_particles = NodePath("GPUParticles2D")
+health_bar_pb = NodePath("StatProgressBar")
+animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Body")]
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(3, -29)
+texture = ExtResource("5_dhbj6")
+hframes = 7
+vframes = 8
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(1, -25)
+texture = ExtResource("6_uhiw1")
+
+[node name="StatProgressBar" parent="." instance=ExtResource("2_fx817")]
+offset_top = -67.0
+offset_bottom = -65.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../GPUParticles2D")
