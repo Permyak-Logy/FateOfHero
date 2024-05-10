@@ -10,7 +10,7 @@ func update():
 		i.stack = 0
 	var keys = inventory.items.keys()
 	for i in keys:
-		await get_tree().create_timer(0.0001).timeout
+		#await get_tree().create_timer(0.0001).timeout
 		add_item(i, inventory.items[i], i.max_stack)
 
 func add_item(item, item_stack, item_maxstack):

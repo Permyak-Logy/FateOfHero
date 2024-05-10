@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cd1lm7663kkqk"]
+[gd_scene load_steps=32 format=3 uid="uid://cd1lm7663kkqk"]
 
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_niwie"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/crafting_main.gd" id="1_xhsmd"]
@@ -13,10 +13,18 @@
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="9_2osfl"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/page2.gd" id="9_aediv"]
 [ext_resource type="Resource" uid="uid://b740ckyrxhwfj" path="res://inventory/items/bottle_black.tres" id="9_hyr63"]
-[ext_resource type="Resource" uid="uid://cnbar3w7hii5p" path="res://inventory/items/battle_green.tres" id="10_7cggr"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/page3.gd" id="10_b2mby"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/page4.gd" id="11_f5nbc"]
+[ext_resource type="Resource" uid="uid://dtv54eujbs2l4" path="res://inventory/gears/Black/BlackTrousers.tres" id="11_iggy3"]
+[ext_resource type="Resource" uid="uid://c85yiumr1q5l1" path="res://inventory/gears/Scales/ScalesBody.tres" id="11_n8ii8"]
+[ext_resource type="Resource" uid="uid://d1ubpl1e8gkmh" path="res://inventory/gears/Black/BlackBoots.tres" id="12_3egfa"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/page5.gd" id="12_l60gj"]
+[ext_resource type="Resource" uid="uid://do34g4phnstc1" path="res://inventory/gears/Scales/ScalesTrousers.tres" id="12_tsaxk"]
+[ext_resource type="Resource" uid="uid://ces0l8s1yc40d" path="res://inventory/gears/Scales/ScalesBoots.tres" id="13_swox6"]
+[ext_resource type="Resource" uid="uid://is7yr1qn3gxi" path="res://inventory/items/bottle_green.tres" id="13_xfywt"]
+[ext_resource type="Resource" uid="uid://dxjswu38qdlka" path="res://inventory/gears/Black/BlackHelmet.tres" id="14_yln6l"]
+[ext_resource type="Resource" uid="uid://4mtedxwnoqin" path="res://inventory/gears/Black/BlackBody.tres" id="15_42tbd"]
+[ext_resource type="Resource" uid="uid://1qbldvg8aoc3" path="res://inventory/gears/Scales/ScalesHelmet.tres" id="16_0ybj8"]
 [ext_resource type="Script" path="res://city_mode/Cities/trading/description.gd" id="18_vsba0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wtegs"]
@@ -303,6 +311,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_dkvga")
 
+[node name="Recipe" parent="HBoxContainer/craft4/Recipes" instance=ExtResource("6_twcsm")]
+layout_mode = 2
+item = ExtResource("11_n8ii8")
+
+[node name="Recipe2" parent="HBoxContainer/craft4/Recipes" instance=ExtResource("6_twcsm")]
+layout_mode = 2
+item = ExtResource("12_tsaxk")
+
+[node name="Recipe3" parent="HBoxContainer/craft4/Recipes" instance=ExtResource("6_twcsm")]
+layout_mode = 2
+item = ExtResource("13_swox6")
+
 [node name="craft3" type="NinePatchRect" parent="HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(140, 140)
@@ -328,6 +348,18 @@ offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_dkvga")
+
+[node name="Recipe" parent="HBoxContainer/craft3/Recipes" instance=ExtResource("6_twcsm")]
+layout_mode = 2
+item = ExtResource("11_iggy3")
+
+[node name="Recipe2" parent="HBoxContainer/craft3/Recipes" instance=ExtResource("6_twcsm")]
+layout_mode = 2
+item = ExtResource("12_3egfa")
+
+[node name="Recipe3" parent="HBoxContainer/craft3/Recipes" instance=ExtResource("6_twcsm")]
+layout_mode = 2
+item = ExtResource("16_0ybj8")
 
 [node name="craft2" type="NinePatchRect" parent="HBoxContainer"]
 visible = false
@@ -357,7 +389,15 @@ script = ExtResource("6_dkvga")
 
 [node name="Recipe" parent="HBoxContainer/craft2/Recipes" instance=ExtResource("6_twcsm")]
 layout_mode = 2
-item = ExtResource("10_7cggr")
+item = ExtResource("13_xfywt")
+
+[node name="Recipe2" parent="HBoxContainer/craft2/Recipes" instance=ExtResource("6_twcsm")]
+layout_mode = 2
+item = ExtResource("14_yln6l")
+
+[node name="Recipe3" parent="HBoxContainer/craft2/Recipes" instance=ExtResource("6_twcsm")]
+layout_mode = 2
+item = ExtResource("15_42tbd")
 
 [node name="craft5" type="NinePatchRect" parent="HBoxContainer"]
 visible = false
@@ -393,9 +433,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -403.5
+offset_left = -392.5
 offset_top = -360.0
-offset_right = -223.5
+offset_right = -212.5
 offset_bottom = -340.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -504,6 +544,7 @@ texture = ExtResource("9_2osfl")
 vframes = 2
 
 [node name="page5" type="Button" parent="page_buttons"]
+visible = false
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_type_variation = &"FlatButton"

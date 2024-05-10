@@ -1,4 +1,4 @@
-extends "res://strategic_mode/tile_events/unwalkables/gate.gd"
+class_name TimedGateTileEvent extends GateTileEvent 
 
 """
 will open when `update_time(time)` is called with values  

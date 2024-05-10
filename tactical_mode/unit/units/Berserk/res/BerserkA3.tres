@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BerserkA3" load_steps=3 format=3 uid="uid://dkk1mqckd0wg4"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Berserk/src/berserk_a3.gd" id="1_hcrx0"]
+[ext_resource type="Texture2D" uid="uid://7bkvw6d6gs28" path="res://tactical_mode/unit/units/Berserk/assets/Berserk_n3.png" id="2_1wsbj"]
+
+[resource]
+script = ExtResource("1_hcrx0")
+targets = 1
+max_targets = 0
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 4
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Режим берсерка"
+description = "Накладывает эффект ярость берсерка"
+texture = ExtResource("2_1wsbj")
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0

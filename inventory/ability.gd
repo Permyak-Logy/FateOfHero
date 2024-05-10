@@ -7,6 +7,7 @@ class_name Ability extends Gear
 @export var count: int = -1
 
 @export var scaling_type: Mod.Type = Mod.Type.None
+@export var overlay_atlas_coords: Vector2i = Vector2i(1, 0)
 
 var owner: Node
 
@@ -24,6 +25,9 @@ func set_owner(_owner: Node = null):
 	if not is_instance_of(_owner, Unit) and only_unit_owner:
 		print("Warning! Owner ", _owner, " is not unit for ability ", self)
 	owner = _owner
+
+func fill_overlay() -> Array[Vector2i]:
+	return []
 
 func clear():
 	pass

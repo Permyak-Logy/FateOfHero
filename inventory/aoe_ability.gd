@@ -1,6 +1,6 @@
 class_name AoEAbility extends Ability
 
-@export var overlay_atlas_coords: Vector2i = Vector2i(1, 0)
+@export var only_auto_select = false
 
 var cell: Vector2i = Vector2i(-1, -1)
 var about_cells: Array[Vector2i] = []
@@ -23,6 +23,9 @@ func apply():
 func apply_on_unit(unit: Unit):
 	pass
 
+func fill_overlay() -> Array[Vector2i]:
+	return about_cells
+
 func find_about_cells():
 	about_cells.clear()
 	about_cells.append(cell)
@@ -30,6 +33,9 @@ func find_about_cells():
 func clear():
 	cell = Vector2i(-1, -1)
 	about_cells.clear()
+
+func default_cell():
+	return (owner as Unit).get_cell()
 
 func can_select_cell(_cell: Vector2i) -> bool:
 	return get_map()._astar_board.has_cell(_cell)

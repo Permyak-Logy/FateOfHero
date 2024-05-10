@@ -78,7 +78,8 @@ func _physics_process(delta):
 	
 	if collision:
 		var collidor = collision.get_collider()
-		collidor.activate()
+		if not is_instance_of(collidor, Unit):
+			collidor.activate()
 	
 	if global_position == target_position:
 		current_id_path.pop_front()

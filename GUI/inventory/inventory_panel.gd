@@ -1,6 +1,4 @@
-extends NinePatchRect
-
-class_name InventoryPanel
+class_name InventoryPanel extends NinePatchRect
 
 """
 The grid of cells in the inventory for the items

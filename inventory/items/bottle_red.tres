@@ -1,15 +1,54 @@
-[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://bn6fdo3m5610r"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=11 format=3 uid="uid://bn6fdo3m5610r"]
 
 [ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_1ijj5"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_wr7vi"]
 [ext_resource type="Resource" uid="uid://dp7v2ukib0ut1" path="res://inventory/items/pepper.tres" id="2_m50ph"]
-[ext_resource type="Script" path="res://inventory/item.gd" id="3_du6t0"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_vd6gw"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="3_cvu2o"]
 [ext_resource type="Texture2D" uid="uid://dhfeku8egs81o" path="res://inventory/icons/bottle_red.png" id="4_oeadd"]
+[ext_resource type="Script" path="res://inventory/apply_effect_ability.gd" id="7_fawqh"]
+
+[sub_resource type="Resource" id="Resource_nwx3q"]
+script = ExtResource("2_vd6gw")
+add = 0.0
+mul = 0.2
+
+[sub_resource type="Resource" id="Resource_o8brh"]
+script = ExtResource("1_wr7vi")
+type = 0
+value = SubResource("Resource_nwx3q")
+
+[sub_resource type="Resource" id="Resource_sollj"]
+script = ExtResource("3_cvu2o")
+on_stack = 0
+limit_stacks_for_sum_mods = -1
+moves = 3
+texture = ExtResource("4_oeadd")
+mods = Array[ExtResource("1_wr7vi")]([SubResource("Resource_o8brh")])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Жижа красная"
+is_negative = false
 
 [resource]
-script = ExtResource("3_du6t0")
+script = ExtResource("7_fawqh")
+effect = SubResource("Resource_sollj")
+apply_on = Array[int]([0])
+targets = 1
+max_targets = 0
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+count = -1
+scaling_type = 4
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 4
+_mods = Array[ExtResource("1_wr7vi")]([])
 name = "bottle_red"
-description = ""
+description = "+20% максимального здоровья на 3 хода"
 texture = ExtResource("4_oeadd")
 max_stack = 10
-recipe = Array[ExtResource("3_du6t0")]([ExtResource("1_1ijj5"), ExtResource("2_m50ph")])
+recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_1ijj5"), ExtResource("2_m50ph")])
 price = 0

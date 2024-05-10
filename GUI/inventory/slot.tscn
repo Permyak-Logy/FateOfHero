@@ -6,8 +6,8 @@
 [node name="Slot" type="Button"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 20)
-offset_right = 20.0
-offset_bottom = 20.0
+offset_right = 22.0
+offset_bottom = 22.0
 script = ExtResource("1_5jex5")
 
 [node name="background" type="Sprite2D" parent="."]
@@ -17,8 +17,8 @@ vframes = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_right = 22.0
+offset_bottom = 22.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

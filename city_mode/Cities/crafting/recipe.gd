@@ -19,6 +19,7 @@ func _ready():
 		$RecipeSlot2/NinePatchRect/Label.text = str(second_item_num)
  
 func check():
+	craft.disabled = true
 	var inventory = $"../../../inventory/inventoryGrid"
 	var flag = []
  	
@@ -33,7 +34,7 @@ func _on_craft_result_pressed():
 	for i in recipe:
 		global_inventory.remove(i, 1)
 	global_inventory.insert(item, 1)
-	craft.disabled = true
+	#craft.disabled = true
 	inventory.update()
 	check()
 

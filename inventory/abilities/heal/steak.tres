@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dix0udiaus5kw"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_t5d4u"]
+[ext_resource type="Texture2D" uid="uid://ba8su3m2x5nqp" path="res://inventory/icons/steak.png" id="2_5oc72"]
+
+[resource]
+script = ExtResource("1_t5d4u")
+name = "Steak"
+description = ""
+texture = ExtResource("2_5oc72")
+max_stack = 1
+recipe = Array[ExtResource("1_t5d4u")]([])
+price = 50

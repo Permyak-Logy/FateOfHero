@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://sgkba57dbbe7"]
+[gd_scene load_steps=17 format=3 uid="uid://sgkba57dbbe7"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/Geraldina/Geraldina.gd" id="1_jacgh"]
 [ext_resource type="Texture2D" uid="uid://dlvrvoxv04o4m" path="res://city_mode/Cities/Assets/Geraldinia_0.png" id="2_415n5"]
@@ -10,13 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://cbedbpjj3nvgi" path="res://city_mode/Cities/Assets/Geraldinia_kuzna.png" id="8_nmo70"]
 [ext_resource type="Texture2D" uid="uid://driq1yr2csc7w" path="res://city_mode/Cities/Assets/Geraldinia_1.png" id="9_bwaig"]
 [ext_resource type="PackedScene" uid="uid://cal6f73hk5ff7" path="res://city_mode/Cities/trading/trading.tscn" id="10_vvwk2"]
+[ext_resource type="Resource" uid="uid://nxw7br686d41" path="res://inventory/abilities/heal/wine.tres" id="11_fhf5x"]
 [ext_resource type="PackedScene" uid="uid://cd1lm7663kkqk" path="res://city_mode/Cities/crafting/crafting.tscn" id="11_muc5h"]
-[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="11_wtqva"]
-[ext_resource type="Resource" uid="uid://c0srtoci3pulj" path="res://inventory/items/helmet_billet.tres" id="12_bcm0t"]
-[ext_resource type="Resource" uid="uid://b1hv1sghbyjh6" path="res://inventory/items/body_billet.tres" id="13_mgyvm"]
-[ext_resource type="Resource" uid="uid://bpac8plevrksx" path="res://inventory/items/trousers_billet.tres" id="14_b3nuq"]
+[ext_resource type="Resource" uid="uid://cjqq7675tviu7" path="res://inventory/abilities/heal/beer.tres" id="12_be6vv"]
+[ext_resource type="Resource" uid="uid://n3d30lb3mf6w" path="res://inventory/abilities/heal/caviar.tres" id="13_4xtbu"]
 [ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory/inventory_gui.tscn" id="14_m3655"]
-[ext_resource type="Resource" uid="uid://b7ko7srrw2av6" path="res://inventory/items/boots_billet.tres" id="15_eh26b"]
+[ext_resource type="Resource" uid="uid://dkuujrdq3m16y" path="res://inventory/abilities/heal/fish.tres" id="14_r7dhh"]
 
 [node name="CityMap" type="Node2D"]
 script = ExtResource("1_jacgh")
@@ -115,12 +114,10 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
-trade1 = ExtResource("11_wtqva")
-trade5 = ExtResource("14_b3nuq")
-trade6 = ExtResource("12_bcm0t")
-trade7 = ExtResource("13_mgyvm")
-trade8 = ExtResource("14_b3nuq")
-trade9 = ExtResource("15_eh26b")
+trade2 = ExtResource("11_fhf5x")
+trade3 = ExtResource("12_be6vv")
+trade4 = ExtResource("13_4xtbu")
+trade5 = ExtResource("14_r7dhh")
 
 [node name="Crafting" parent="." instance=ExtResource("11_muc5h")]
 visible = false
@@ -133,10 +130,10 @@ offset_bottom = 644.0
 grow_vertical = 1
 
 [node name="InventoryGUI" parent="." instance=ExtResource("14_m3655")]
-offset_left = 461.0
-offset_top = 269.0
-offset_right = 461.0
-offset_bottom = 269.0
+offset_left = 481.0
+offset_top = 232.0
+offset_right = 481.0
+offset_bottom = 232.0
 
 [connection signal="pressed" from="trading/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]

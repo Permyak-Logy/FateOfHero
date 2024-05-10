@@ -12,6 +12,10 @@ func _input(event):
 	if event.is_action_pressed("inv_button"): 
 		if not inventory.is_open:
 			inventory.open()
+			if $Trading.visible:
+				$Trading.visible = false
+			if $Crafting.visible:
+				$Crafting.visible = false
 		else:
 			inventory.close()
 

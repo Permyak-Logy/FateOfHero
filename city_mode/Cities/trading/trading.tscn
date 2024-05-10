@@ -1,11 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://cal6f73hk5ff7"]
+[gd_scene load_steps=21 format=3 uid="uid://cal6f73hk5ff7"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/trading/trading_main.gd" id="1_b2dp5"]
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_g6vnm"]
+[ext_resource type="Resource" uid="uid://c0srtoci3pulj" path="res://inventory/items/helmet_billet.tres" id="3_1n8ig"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="3_juopo"]
+[ext_resource type="Resource" uid="uid://b1hv1sghbyjh6" path="res://inventory/items/body_billet.tres" id="4_k3w58"]
 [ext_resource type="PackedScene" uid="uid://d4lrybm6yo1ub" path="res://city_mode/Cities/trading/crafting_slot.tscn" id="4_kncku"]
+[ext_resource type="Resource" uid="uid://bpac8plevrksx" path="res://inventory/items/trousers_billet.tres" id="5_1woqh"]
 [ext_resource type="Script" path="res://city_mode/Cities/trading/trades.gd" id="5_71pds"]
 [ext_resource type="PackedScene" uid="uid://74426675p6qr" path="res://city_mode/Cities/trading/trade_item.tscn" id="5_ktqfa"]
+[ext_resource type="Resource" uid="uid://b7ko7srrw2av6" path="res://inventory/items/boots_billet.tres" id="6_5f4at"]
 [ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="6_503rw"]
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="8_83wwa"]
 [ext_resource type="Script" path="res://city_mode/Cities/trading/page1.gd" id="8_s471d"]
@@ -30,6 +34,11 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b2dp5")
+trade1 = ExtResource("6_503rw")
+trade6 = ExtResource("3_1n8ig")
+trade7 = ExtResource("4_k3w58")
+trade8 = ExtResource("5_1woqh")
+trade9 = ExtResource("6_5f4at")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
