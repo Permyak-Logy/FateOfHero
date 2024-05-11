@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://blxk4ex3fpwq8"]
 
-[ext_resource type="Script" path="res://city_mode/Cities/crafting/recipe.gd" id="1_c3sk5"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/recipe_gui.gd" id="1_c3sk5"]
 [ext_resource type="PackedScene" uid="uid://douwpwsc16lq5" path="res://city_mode/Cities/crafting/recipe_slot.tscn" id="1_d288w"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_40380"]
-[ext_resource type="Texture2D" uid="uid://dcho8736qppe" path="res://GUI/city_mode/plus.png" id="4_a1u47"]
+[ext_resource type="Texture2D" uid="uid://15slnphedf6a" path="res://GUI/city_mode/plus.png" id="4_a1u47"]
 [ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="4_qptat"]
-[ext_resource type="Texture2D" uid="uid://bbfgy7lon4qv0" path="res://GUI/city_mode/eqw.png" id="5_t6y0p"]
-[ext_resource type="Texture2D" uid="uid://buhdf405nq8o6" path="res://GUI/city_mode/desctr.png" id="5_wcbb3"]
+[ext_resource type="Texture2D" uid="uid://skoxnfqn8d10" path="res://GUI/city_mode/eqw.png" id="5_t6y0p"]
+[ext_resource type="Texture2D" uid="uid://c5hv5y8ekxcry" path="res://GUI/city_mode/desctr.png" id="5_wcbb3"]
 
 [sub_resource type="Theme" id="Theme_7g0g1"]
 

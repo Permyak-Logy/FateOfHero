@@ -1,10 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://cd1lm7663kkqk"]
+[gd_scene load_steps=31 format=3 uid="uid://cd1lm7663kkqk"]
 
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_niwie"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/crafting_main.gd" id="1_xhsmd"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/inventoryGrid.gd" id="2_qqhid"]
 [ext_resource type="PackedScene" uid="uid://d4lrybm6yo1ub" path="res://city_mode/Cities/trading/crafting_slot.tscn" id="2_sd3va"]
-[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="3_2qfv2"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/Recipes.gd" id="6_dkvga"]
 [ext_resource type="PackedScene" uid="uid://blxk4ex3fpwq8" path="res://city_mode/Cities/crafting/recipe.tscn" id="6_twcsm"]
 [ext_resource type="Resource" uid="uid://bn6fdo3m5610r" path="res://inventory/items/bottle_red.tres" id="7_3f4ck"]
@@ -90,7 +89,6 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 10
 script = ExtResource("2_qqhid")
-inventory = ExtResource("3_2qfv2")
 
 [node name="CraftingSlot" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("2_sd3va")]
 layout_mode = 2
