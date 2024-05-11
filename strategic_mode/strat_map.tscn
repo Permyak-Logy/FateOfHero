@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=39 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://strategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://strategic_mode/strat_map.gd" id="1_vssm8"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://iogr1vem4tnv" path="res://strategic_mode/tile_events/collectables/concrete_collectable.tscn" id="33_dkxfb"]
 [ext_resource type="Resource" path="res://inventory/items/rune_8.tres" id="34_mxwhc"]
 [ext_resource type="Resource" path="res://inventory/items/rune_1.tres" id="35_gq8in"]
+[ext_resource type="AudioStream" uid="uid://dlsbppd8qggrt" path="res://strategic_mode/strategic_mode_bg_music.mp3" id="36_xru70"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4207,6 +4208,11 @@ count = 1
 position = Vector2(244, 149)
 item = ExtResource("35_gq8in")
 count = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("36_xru70")
+volume_db = 3.237
+autoplay = true
 
 [connection signal="inventory_closed" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_closed"]
 [connection signal="inventory_opened" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_opened"]
