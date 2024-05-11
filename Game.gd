@@ -45,12 +45,11 @@ func save():
 	packed.pack(strat_map)
 	ResourceSaver.save(packed, "save/save.tscn")
 	ResourceSaver.save(strat_map.player.inventory, "save/player_inventory.tres")
+	#for scn in get_node
 
 func remove_save():
-	if not ResourceLoader.exists("save.tscn"):
-		return 
-	var dir = DirAccess.open("res://save")
-	dir.remove("save.tscn")
+	DirAccess.dir_exists_absolute("save")
+	DirAccess.remove_absolute("save")
 
 func load_save():
 	strat_map = ResourceLoader.load("res://save/save.tscn").instantiate()

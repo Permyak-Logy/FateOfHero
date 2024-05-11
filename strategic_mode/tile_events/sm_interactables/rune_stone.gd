@@ -11,7 +11,8 @@ var id: int
 var rune_inside: int
 var gui: RunePlacementGUI
 var RunePlacementGUIRes: PackedScene = preload("res://GUI/rune_placement/rune_placement_gui.tscn")
-var local_inventory = MicroInventory.new()
+var local_inventory: MicroInventory = MicroInventory.new() 
+
 var rune_sprites: Array[Texture2D] = [
 	null,
 	preload("res://strategic_mode/tile_events/sprites/rune1.png"),

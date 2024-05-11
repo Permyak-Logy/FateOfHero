@@ -4141,10 +4141,12 @@ ExtResource("19_yu1rd"): 15
 [node name="RuneStone2" parent="PuzzleMaster/RunesPuzzle1" instance=ExtResource("29_0aliy")]
 position = Vector2(320, 157)
 type = 8
+local_inventory = null
 
 [node name="RuneStone4" parent="PuzzleMaster/RunesPuzzle1" instance=ExtResource("29_0aliy")]
 position = Vector2(312, 62)
 type = 1
+local_inventory = null
 
 [node name="OtherTileEvents" type="Node" parent="."]
 
