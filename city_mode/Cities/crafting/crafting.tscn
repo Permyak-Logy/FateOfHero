@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="9_2osfl"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/page2.gd" id="9_aediv"]
 [ext_resource type="Resource" uid="uid://b740ckyrxhwfj" path="res://inventory/items/bottle_black.tres" id="9_hyr63"]
-[ext_resource type="Resource" uid="uid://cnbar3w7hii5p" path="res://inventory/items/battle_green.tres" id="10_7cggr"]
+[ext_resource type="Resource" uid="uid://cnbar3w7hii5p" path="res://inventory/items/bottle_green.tres" id="10_7cggr"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/page3.gd" id="10_b2mby"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/page4.gd" id="11_f5nbc"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/page5.gd" id="12_l60gj"]
