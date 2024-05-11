@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://city_mode/Cities/trading/trade_item.gd" id="1_cym07"]
 [ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="2_3ejm0"]
 [ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_malmt"]
-[ext_resource type="Texture2D" uid="uid://buhdf405nq8o6" path="res://GUI/city_mode/desctr.png" id="4_i7y4p"]
+[ext_resource type="Texture2D" path="res://GUI/city_mode/desctr.png" id="4_i7y4p"]
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="4_odn4n"]
 [ext_resource type="Script" path="res://city_mode/Cities/trading/buy.gd" id="4_xanvi"]
 
