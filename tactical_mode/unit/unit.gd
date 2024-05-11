@@ -31,12 +31,11 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 	set(value):
 		sprite_for_outline = value
 		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
-@export var trail_particles: GPUParticles2D = null:
-	set(value):
-		trail_particles = value
-		trail_particles.hide()
+@export var trail_particles: GPUParticles2D = null
 @export var health_bar_pb: StatProgressBar = null
 @export var animation_player: AnimationPlayer = null
+@export var flip_onready: bool = false
+@export var for_flip_sprites: Array[Sprite2D] = []
 
 @export_group("Unit stats")
 @export var acts_count: int = 1
@@ -63,7 +62,13 @@ var flipped: bool = false:  # Переключатель поворота
 		else:
 			flipped = value
 
-var timer_for_walk_trail: SceneTreeTimer = null  # Таймер отключения walk_trail
+var _start_pos: Vector2
+var _end_pos = Vector2(0, 0)
+@export var percent_animation_to_attack: float = 0:
+	set(value):
+		global_position = _start_pos + (_end_pos - _start_pos) * value
+		flipped = bool(int(percent_animation_to_attack > value) ^ int((_end_pos - _start_pos)[0] < 0))
+		percent_animation_to_attack = value
 
 # Различные цвета для обводки
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
@@ -77,6 +82,8 @@ func _ready():
 	if health and health_bar_pb:
 		health_bar_pb.stat_component = health
 	set_outline_color(DEFAULT_COLOR)
+	if flip_onready:
+		on_flip_unit()
 
 func set_outline_color(color: Vector4):
 	"""
@@ -107,9 +114,10 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 		_damage = effect.update_on_damage(_damage, _instigator)
 	
 	_damage = max(_damage, 0)
+	play("damaged")
 	health.sub(_damage)
 	get_map().write_info(
-		"=> " + unit_name + " получил " + str(_damage) +" урона от " + _instigator.unit_name
+		"=> " + unit_name + " получил " + str(int(_damage)) +" урона от " + _instigator.unit_name
 	)
 	return _damage
 
@@ -147,13 +155,17 @@ func apply_passives():
 		passive.instigator = self
 		add_effect(passive)
 
-func ai(map: TacticalMap):
-	map.acts = 0
 
 func get_occupied_cells() -> Array[Vector2i]:
-	return [get_cell()]
+	if visible:
+		return [get_cell()]
+	return []
 
 func prepare_fight():
+	death.connect(get_map().on_kill)
+	if animation_player:
+		if animation_player.has_animation("damaged") and animation_player.has_animation("idle"):
+			animation_player.animation_set_next("damaged", "idle")
 	print("=> Prepare: ", unit_name)
 	while _effects:
 		remove_effect(_effects[0])
@@ -164,28 +176,27 @@ func prepare_fight():
 		ability.reset()
 	apply_passives()
 	flipped = idle_direction_bool()
+	play("idle")
 
 func premove_update():
 	for ability in get_abilities():
 		ability.update()
 	for effect in get_effects():
-		effect.update_on_move()
+		effect.update_on_start_stepmove()
 
 func on_flip_unit():
 	if trail_particles:
 		var i: Image = trail_particles.texture.get_image()
 		i.flip_x()
 		trail_particles.texture = ImageTexture.create_from_image(i)
-	sprite_for_outline.flip_h = flipped
+	for sprite in for_flip_sprites:
+		sprite.flip_h = bool(int(flipped) ^ int(flip_onready))
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():
-		play("idle")
 		return
 
 	var target_position = $"../TileMap".map_to_local(current_id_path.front())
-	play("run")
-	
 
 	if (target_position - global_position)[0] == 0:
 		flipped = idle_direction_bool()
@@ -199,25 +210,31 @@ func _physics_process(_delta):
 		if not current_id_path:
 			flipped = idle_direction_bool()
 			walk_finished.emit()
+			play("idle")
 
 func idle_direction_bool():
 	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
+	if _name == "idle" and is_death():
+		return
 	if _name == "walk":
-		if trail_particles:
-			if timer_for_walk_trail:
-				timer_for_walk_trail.timeout.disconnect(trail_particles.hide)
-			trail_particles.show()
 		current_id_path = _params
-		
+		play("run")
 		await walk_finished
-		
-		if trail_particles:
-			timer_for_walk_trail = get_tree().create_timer(trail_particles.lifetime)
-			timer_for_walk_trail.timeout.connect(trail_particles.hide)
 	elif animation_player:
+		if not animation_player.has_animation(_name):
+			print(self, "not have animation ", _name)
+			return
+		if _name == "preattack":
+			_start_pos = global_position
+			_end_pos = (_params as Unit).global_position
+			_end_pos += Vector2((1 if _start_pos[0] - _end_pos[0] > 0 else -1) * 16, 5)
+			
 		animation_player.play(_name)
+		await animation_player.animation_finished
+		if _name == "postattack":
+			flipped = false
 
 func on_death(_component: StatComponent):
 	print("Death ", self)
@@ -230,6 +247,8 @@ func is_death() -> bool:
 	return health.cur() <= 0
 
 func _on_toggle_select(_viewport, event: InputEvent, _shape_idx: int):
+	if not get_map() or get_map()._block_input:
+		return
 	if event.is_action_pressed("select"):
 		var ability = get_map().cur_ability
 		if not ability or not is_instance_of(ability, DirectedAbility):
@@ -261,15 +280,22 @@ func get_effects() -> Array[Effect]:
 	return _effects
 
 func add_effect(effect: Effect):
+	if is_death() or not visible:
+		return
 	if effect.stackable:
 		for other in get_effects():
-			if effect.get_class() == other.get_class() and other.stackable:
-				if other.stack(effect):
-					get_map().write_info(
-						"=> " + self.unit_name + " обновил эффект " + other.effect_name
-					)
-					reload_all_mods()
-					return
+			if effect.get_class() != other.get_class():
+				continue
+			if not other.stackable:
+				continue
+			if effect.effect_name != other.effect_name:
+				continue
+			if other.stack(effect):
+				get_map().write_info(
+					"=> " + self.unit_name + " обновил эффект " + other.effect_name
+				)
+				reload_all_mods()
+				return
 	
 	get_map().write_info("=> " + self.unit_name + " получил эффект " + effect.effect_name)
 	_effects.append(effect)
@@ -285,8 +311,45 @@ func remove_effect(effect: Effect):
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)
+	effect.cancel_effect()
 	reload_all_mods()
 
 func kill():
 	if health:
 		health.set_cur(0)
+
+func get_move_distance() -> int:
+	var distance = (speed.cur() - 100) / 20 + 4
+	for effect in get_effects():
+		distance = effect.update_on_move(distance)
+	return int(distance)
+
+func ai(map: TacticalMap):
+	ai_random_move(map)
+
+func ai_random_move(map: TacticalMap):
+	var distance = get_move_distance()
+	var rng = RandomNumberGenerator.new()
+	var path = []
+	var cell = Vector2i(-1, -1)
+	while not map.can_move_to(cell):
+		cell = map.to_map(global_position) + Vector2i(
+			rng.randi_range(-distance, distance),
+			rng.randi_range(-distance, distance)
+		)
+	map.select_path_to(cell)
+	map._move_active_unit()
+
+func ai_move_to(map: TacticalMap, cell: Vector2i):
+	var cells = map.walkable_fill()
+	cells.append(cell)
+	var astar = AStarHexagon2D.new(cells)
+	var path = astar.get_id_path(astar.mti(get_cell()), astar.mti(cell))
+	while not map.can_move_to(astar.itm(path[len(path) - 1])):
+		path.remove_at(len(path) - 1)
+	map.select_path_to(astar.itm(path[len(path) - 1]))
+	map._move_active_unit()
+
+func ai_pass(map: TacticalMap):
+	map.acts = 0
+	map._update_stepmove()

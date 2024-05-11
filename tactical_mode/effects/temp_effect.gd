@@ -4,7 +4,7 @@ class_name TempEffect extends Effect
 @export var limit_stacks_for_sum_mods: int = -1
 @export var moves: int = 1
 
-func update_on_move():
+func update_on_start_stepmove():
 	moves -= 1
 	if moves == 0:
 		finished.emit()

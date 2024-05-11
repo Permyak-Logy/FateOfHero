@@ -24,6 +24,14 @@ var _e_units: Array[Unit] = []  # Список юнитов оппонента
 var units:  # property список всех юнитов
 	get:
 		return _p_units + _e_units
+
+var actors:
+	get:
+		var res = []
+		for child in get_children():
+			if is_instance_of(child, Actor):
+				res.append(child)
+		return res
 const GRID_LAYER = 0  # Слой сетки
 const OVERLAY_PATH_LAYER = 1  # Слой оверлея для перемещения
 const PATH_LAYER = 2  # Слой пути
@@ -75,14 +83,15 @@ func _ready():
 	if is_instance_of($"..", Game):
 		return
 	_p_units = [
-		#$GgVamp,
+		$Berserk,
+		# $Vamp,
 		$Naris #,
 		#$SmolItto
 	]
 	_e_units = [
-		$Vendigo#,
-		#$Skeleton,
-		#$Skeleton2
+		$Lugozavr,
+		$Vedmachok
+		#$Vendigo
 	]
 	inited = true
 
@@ -92,17 +101,16 @@ func start_battle():
 	"""
 	if running:
 		return
-	gui.tactical_info.clear()
-	write_info("*** Бой начинается ***")
+	gui.tactical_info.clear()	
 	running = true
+	write_info("*** Бой начинается ***")
 	align_actors()
 	escape = false
 	for unit in units:	
 		if not unit.is_node_ready():
 			await unit.ready
-		unit.death.connect(on_kill)
 		if unit.speed:
-			unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
+			add_to_unit_queue(unit)
 			unit.prepare_fight()
 	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
@@ -134,7 +142,7 @@ func arrange_units():
 			var left_shift = 0
 			for cell in _p_units[i].get_occupied_cells():
 				left_shift = max(left_shift, (cell - _p_units[i].get_cell())[0])
-			move_unit_to(_p_units[i], _astar_board.left + (y + 1) % 2 + left_shift, y)
+			move_unit_to(_p_units[i], Vector2i(_astar_board.left + (y + 1) % 2 + left_shift, y))
 	
 	if _e_units:
 		var step_e = min((_astar_board.bottom - _astar_board.top) / len(_e_units), 6)
@@ -145,7 +153,7 @@ func arrange_units():
 			var right_shift = 0
 			for cell in _e_units[i].get_occupied_cells():
 				right_shift = max(right_shift, (cell - _e_units[i].get_cell())[0])
-			move_unit_to(_e_units[i],  _astar_board.right - right_shift - 1, y)
+			move_unit_to(_e_units[i],  Vector2i(_astar_board.right - right_shift - 1, y))
 	
 
 func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], count_nature_obj: int=-1):
@@ -244,12 +252,12 @@ func on_kill(unit: Unit):
 	reset_outline_color(unit)
 	write_info("-> " + unit.unit_name + " убит")
 
-func move_unit_to(actor: Actor, x: int, y: int):
+func move_unit_to(actor: Actor, cell: Vector2i):
 	"""
 	Передвигает юнита на указанную клетку на tilemap
 	"""
 	
-	actor.global_position = to_loc(Vector2i(x, y))
+	actor.global_position = to_loc(cell)
 
 func get_player_units() -> Array[Unit]:
 	"""
@@ -301,14 +309,12 @@ func is_occupied(cell: Vector2i) -> bool:
 	
 	return cell in _tile_map.get_used_cells(WALLS_LAYER)
 	
-func _flood_fill() -> Array:
+func walkable_fill(max_distance: float=1000) -> Array:
 	"""
 	Возвращает список клеток доступных для перемещения
 	"""
 	
 	var cell = active_unit.get_cell()
-	var max_distance: float = (
-		active_unit.speed.cur() - 100) / 20 + 4
 	var array := [cell]
 	var stack := [cell, 0]
 	var distance = 0
@@ -345,21 +351,27 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	await get_tree().create_timer(0.25).timeout
+	# await get_tree().create_timer(0.25).timeout
 	write_info("* Ходит: " + active_unit.unit_name + " *")
+	
 	cur_ability = null
 	for unit_data in unit_queue:
 		reset_outline_color(unit_data[1])
 	active_unit.set_outline_color(Unit.CUR_COLOR)
 	acts = active_unit.acts_count
 	(active_unit as Unit).premove_update()
+	
+	if acts == 0:
+		_update_stepmove()
+		return
+	
 	if active_unit.controlled_player:
 		gui.show_abilities(active_unit)
 		_update_walkable()
 		_block_input = false
 	else:
-		_update_walkable(false)
-		await active_unit.ai(self)
+		_update_walkable(true)
+		active_unit.ai(self)
 
 func _update_stepmove():
 	"""
@@ -376,10 +388,14 @@ func _update_stepmove():
 		_finalize_fight(killed_enemy_units and not escape)
 		return
 	
-	if acts != 0 and active_unit.controlled_player:
+	if acts != 0:
 		write_info("* Ход продолжается *")
-		_update_walkable()
-		_block_input = false
+		if active_unit.controlled_player:
+			_update_walkable()
+			_block_input = false
+		else:
+			_update_walkable(false)
+			active_unit.ai(self)
 		return
 	
 	var time = unit_queue[0][0]
@@ -394,8 +410,8 @@ func _finalize_fight(_win=false):
 	_tile_map.clear_layer(PATH_LAYER)
 	win = _win
 	_block_input = true
-	running = false
 	write_info("*** Бой завершён ***")
+	running = false
 	for player in get_player_units():
 		if player.is_death():
 			continue
@@ -451,12 +467,12 @@ func _update_walkable(show=true):
 	"""
 	
 	_update_walls()
-	var cells = _flood_fill()
+	var cells = walkable_fill(active_unit.get_move_distance())
 	_astar_walkable = AStarHexagon2D.new(cells)
 	_tile_map.clear_layer(OVERLAY_PATH_LAYER)
 	if show:
 		draw(OVERLAY_PATH_LAYER, cells, 0, Vector2i(3, 0))
-		_select_path_to(to_map(_tile_map.get_local_mouse_position()))
+		select_path_to(to_map(_tile_map.get_local_mouse_position()))
 
 func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
 	"""
@@ -474,7 +490,7 @@ func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
 		result.append(_astar_walkable.itm(cell))
 	return result
 
-func _select_path_to(cell: Vector2i):
+func select_path_to(cell: Vector2i):
 	"""
 	Отрисовывает путь до клетки в оверлее
 	"""
@@ -483,7 +499,10 @@ func _select_path_to(cell: Vector2i):
 		_current_path = get_path_to_cell(cell)
 		_tile_map.clear_layer(PATH_LAYER)
 		draw(PATH_LAYER, _current_path, 0, Vector2i(1, 0))
-	
+
+func can_move_to(cell: Vector2i):
+	return _astar_walkable.has_cell(cell)
+
 func _move_active_unit():
 	"""
 	Запускает передвижение юнита, завершает действие
@@ -511,29 +530,35 @@ func _input(event):
 	if is_instance_of(event, InputEventMouseMotion):
 		var cell: Vector2i = to_map(_tile_map.make_input_local(event).position)
 		if not cur_ability:
-			_select_path_to(cell)
-		elif is_instance_of(cur_ability, AoEAbility) and (cur_ability as AoEAbility).cell != cell:
+			select_path_to(cell)
+		elif is_instance_of(cur_ability, AoEAbility):
+			if (cur_ability as AoEAbility).cell == cell:
+				return
+			if (cur_ability as AoEAbility).only_auto_select:
+				return
 			_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 			if (cur_ability as AoEAbility).can_select_cell(cell):
 				(cur_ability as AoEAbility).select_cell(cell)
-				draw_aoe_overlay()
+				draw_ability_overlay()
 			else:
 				(cur_ability as AoEAbility).unselect_cell()
 				
 	if event.is_pressed():
 		return await _key_press_event(event)
 
-func draw_aoe_overlay():
+func draw_ability_overlay():
 	"""
 	Отрисовка зоны действия AoE способности
 	"""
 	
-	draw(
-		OVERLAY_ABILITY_LAYER, 
-		(cur_ability as AoEAbility).about_cells, 
-		0, 
-		(cur_ability as AoEAbility).overlay_atlas_coords
-	)
+	var cells = cur_ability.fill_overlay()
+	if cells:
+		draw(
+			OVERLAY_ABILITY_LAYER, 
+			cells, 
+			0, 
+			cur_ability.overlay_atlas_coords
+		)
 
 func _key_press_event(event):
 	"""
@@ -576,7 +601,7 @@ func _prepare_ability(ability: Ability):
 	
 	write_info("-> Выбрана способность '" + ability.name + "'")
 	_cancel_ability()
-	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
+	
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	cur_ability = ability
 	cur_ability.clear()
@@ -584,10 +609,16 @@ func _prepare_ability(ability: Ability):
 		cur_ability.find_all_selectable_tab_targets()
 		cur_ability.auto_select()
 	if is_instance_of(cur_ability, AoEAbility):
-		var cell: Vector2i = to_map(_tile_map.get_local_mouse_position())
+		var cell: Vector2i
+		if cur_ability.only_auto_select:
+			cell = cur_ability.default_cell()
+		else:
+			cell = to_map(_tile_map.get_local_mouse_position())
 		if (cur_ability as AoEAbility).can_select_cell(cell):
 			(cur_ability as AoEAbility).select_cell(cell)
-			draw_aoe_overlay()
+			draw_ability_overlay()
+	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
+	draw_ability_overlay()
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, false)
 	_tile_map.clear_layer(PATH_LAYER)
 
@@ -607,9 +638,10 @@ func _apply_ability(cell=Vector2i(0, 0)):
 	"""
 	Применяет действие выбранной способности, завершает действие
 	"""
-	
-	if is_instance_of(cur_ability, DirectedAbility) and cell:
-		if cur_ability.can_select_cell():
+	if is_instance_of(cur_ability, AoEAbility):
+		if cur_ability.only_auto_select:
+			cell = cur_ability.default_cell()
+		if cell and cur_ability.can_select_cell(cell):
 			cur_ability.select_cell(cell)
 	
 	if cur_ability.can_apply():
@@ -639,8 +671,7 @@ func reset_outline_color(unit: Unit):
 	Сбрасывает цвет обводки на основе текущего состояния юнита
 	"""
 	
-	# TODO: Поправить баг со смертями персов игрока
-	if cur_ability and unit in cur_ability.selected:
+	if cur_ability and is_instance_of(cur_ability, DirectedAbility) and unit in cur_ability.selected:
 		unit.set_outline_color(Unit.SELECTED_COLOR)
 	elif unit.is_death():
 		unit.set_outline_color(Unit.DEFAULT_COLOR)
@@ -653,15 +684,35 @@ func reset_outline_color(unit: Unit):
 	else:
 		unit.set_outline_color(Unit.DEFAULT_COLOR)
 
-func spawn(actor_ps: PackedScene, cell: Vector2i) -> Actor:
+func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> Actor:
 	"""
 	Спавнит Actor в позиции cell
 	"""
 	
 	var actor: Actor = actor_ps.instantiate()
 	add_child(actor)
-	move_unit_to(actor, cell[0], cell[1])
+	move_unit_to(actor, cell)
+	
+	if is_instance_of(actor, Unit):
+		var unit = actor as Unit
+		if is_player(_instigator):
+			_p_units.append(unit)
+		if is_enemy(_instigator):
+			_e_units.append(unit)
+		if running:
+			unit.prepare_fight()
+			reset_outline_color(unit)
+			write_info("=> " + unit.unit_name + " появляется!")
 	return actor
 
+func add_to_unit_queue(unit: Unit, in_start=false):
+	if in_start:
+		unit_queue.insert(int(len(unit_queue) > 0), [unit_queue[0][0], unit])
+	else:
+		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
+
 func write_info(text: String):
+	print("===> ", text)
+	if not running:
+		return
 	gui.tactical_info.write(text)

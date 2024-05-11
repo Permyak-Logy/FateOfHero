@@ -19,6 +19,8 @@ func can_select(node):
 		return false
 	if unit.is_death():
 		return false
+	if not unit.visible:
+		return false
 	if unit.get_cell()[0] != 0:
 		return false
 	return get_map().is_player(node)

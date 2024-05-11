@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://dcvf8mp6jdjst"]
+
+[ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
+[ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
+[ext_resource type="PackedScene" uid="uid://di7auu4d2dl2" path="res://tactical_mode/unit/units/Naris/Naris.tscn" id="6_1btoa"]
+[ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="9_6j4aw"]
+[ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="10_3tc35"]
+[ext_resource type="PackedScene" uid="uid://komiiv5ot43n" path="res://tactical_mode/unit/units/Berserk/Berserk.tscn" id="10_h12g4"]
+[ext_resource type="PackedScene" uid="uid://cwccmvlw1ghah" path="res://tactical_mode/nature/Rock.tscn" id="10_m7p5y"]
+[ext_resource type="PackedScene" uid="uid://bnx7qiuivvnwn" path="res://tactical_mode/unit/units/Lugozavr/Lugozavr.tscn" id="11_njmlf"]
+
+[sub_resource type="Resource" id="Resource_cb2cx"]
+script = ExtResource("9_6j4aw")
+base = 0.0
+cur = 0.0
+max_ = 0.0
+
+[sub_resource type="Resource" id="Resource_vhoup"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_cb2cx")
+
+[node name="TacticalMap" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_dw5lh")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_5tyj1")
+format = 2
+layer_0/name = "Grid"
+layer_0/tile_data = PackedInt32Array(393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 851968, 0, 0, 917504, 0, 0, 983040, 0, 0, 1048576, 0, 0, 1114112, 0, 0, 1179648, 0, 0, 1179661, 0, 0, 1114125, 0, 0, 1048589, 0, 0, 983053, 0, 0, 917517, 0, 0, 851981, 0, 0, 786445, 0, 0, 720908, 0, 0, 720909, 0, 0, 655373, 0, 0, 589837, 0, 0, 524301, 0, 0, 458765, 0, 0, 393229, 0, 0, 393228, 0, 0, 393227, 0, 0, 393226, 0, 0, 393225, 0, 0, 393224, 0, 0, 393223, 0, 0, 393222, 0, 0, 393221, 0, 0, 393220, 0, 0, 393219, 0, 0, 393218, 0, 0, 393217, 0, 0, 786435, 0, 0, 720899, 0, 0, 655364, 0, 0, 589828, 0, 0, 524293, 0, 0, 458757, 0, 0, 458756, 0, 0, 458755, 0, 0, 458754, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0, 524290, 0, 0, 589826, 0, 0, 524291, 0, 0, 589827, 0, 0, 524292, 0, 0, 655363, 0, 0, 655362, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 0, 0, 851969, 0, 0, 786434, 0, 0, 720898, 0, 0, 851970, 0, 0, 917506, 0, 0, 917505, 0, 0, 983041, 0, 0, 1048577, 0, 0, 1114113, 0, 0, 1048578, 0, 0, 983042, 0, 0, 917507, 0, 0, 851971, 0, 0, 786436, 0, 0, 720900, 0, 0, 655365, 0, 0, 589829, 0, 0, 524294, 0, 0, 458758, 0, 0, 524295, 0, 0, 458759, 0, 0, 524296, 0, 0, 458760, 0, 0, 524297, 0, 0, 458761, 0, 0, 524298, 0, 0, 458762, 0, 0, 524299, 0, 0, 458763, 0, 0, 524300, 0, 0, 458764, 0, 0, 589835, 0, 0, 589834, 0, 0, 589833, 0, 0, 589832, 0, 0, 589831, 0, 0, 589830, 0, 0, 655366, 0, 0, 720901, 0, 0, 786437, 0, 0, 851972, 0, 0, 917508, 0, 0, 983043, 0, 0, 1048579, 0, 0, 1114114, 0, 0, 1179650, 0, 0, 1179649, 0, 0, 1179651, 0, 0, 1114115, 0, 0, 1048580, 0, 0, 983044, 0, 0, 917509, 0, 0, 851973, 0, 0, 786438, 0, 0, 720902, 0, 0, 655367, 0, 0, 720903, 0, 0, 655368, 0, 0, 720904, 0, 0, 655369, 0, 0, 720905, 0, 0, 655370, 0, 0, 720906, 0, 0, 655371, 0, 0, 720907, 0, 0, 655372, 0, 0, 589836, 0, 0, 786443, 0, 0, 786442, 0, 0, 786441, 0, 0, 786440, 0, 0, 786439, 0, 0, 851974, 0, 0, 917510, 0, 0, 983045, 0, 0, 1048581, 0, 0, 1114116, 0, 0, 1179652, 0, 0, 1179653, 0, 0, 1114117, 0, 0, 1048582, 0, 0, 983046, 0, 0, 917511, 0, 0, 851975, 0, 0, 917512, 0, 0, 851976, 0, 0, 917513, 0, 0, 851977, 0, 0, 917514, 0, 0, 851978, 0, 0, 917515, 0, 0, 851979, 0, 0, 786444, 0, 0, 851980, 0, 0, 917516, 0, 0, 983051, 0, 0, 983050, 0, 0, 983049, 0, 0, 983048, 0, 0, 983047, 0, 0, 1048583, 0, 0, 1114118, 0, 0, 1179654, 0, 0, 1179655, 0, 0, 1114119, 0, 0, 1048584, 0, 0, 1114120, 0, 0, 1048585, 0, 0, 1114121, 0, 0, 1048586, 0, 0, 1114122, 0, 0, 1048587, 0, 0, 1114123, 0, 0, 1048588, 0, 0, 983052, 0, 0, 1114124, 0, 0, 1179660, 0, 0, 1179659, 0, 0, 1179658, 0, 0, 1179657, 0, 0, 1179656, 0, 0)
+layer_1/name = "Overlay Path"
+layer_1/modulate = Color(1, 1, 1, 0.466667)
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Path"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Walls"
+layer_3/enabled = false
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "Overlay Ability Layer"
+layer_4/navigation_enabled = false
+layer_4/tile_data = PackedInt32Array()
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(160, 86)
+texture = ExtResource("7_jbq2n")
+offset = Vector2(305, 175)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(-16, -8)
+anchor_mode = 0
+
+[node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
+
+[node name="Rock" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(516, 280)
+
+[node name="Rock2" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(574, 226)
+
+[node name="Rock3" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(700, 231)
+
+[node name="Rock4" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(636, 281)
+
+[node name="Rock5" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(476, 255)
+
+[node name="Rock6" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(733, 258)
+
+[node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(542, 210)
+
+[node name="Naris" parent="." instance=ExtResource("6_1btoa")]
+position = Vector2(98, 256)
+defence = SubResource("Resource_vhoup")
+flip_onready = null
+controlled_player = null
+percent_animation_to_attack = null
+
+[node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
+position = Vector2(97, 399)
+flip_onready = null
+acts_count = null
+controlled_player = null
+private_passives = null
+percent_animation_to_attack = null
+
+[node name="Lugozavr" parent="." instance=ExtResource("11_njmlf")]
+position = Vector2(449, 425)

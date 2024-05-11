@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_wk4do"]
 [ext_resource type="Script" path="res://GUI/level_up/level_up_gui.gd" id="2_ff8jq"]
 [ext_resource type="PackedScene" uid="uid://dlboe3rhpm7op" path="res://GUI/level_up/stat_card.tscn" id="3_ftgpa"]
-[ext_resource type="Texture2D" uid="uid://bj46kmpl7b6mg" path="res://tactical_mode/unit/GGStandart/GG.png" id="3_xgdr6"]
+[ext_resource type="Texture2D" uid="uid://bj46kmpl7b6mg" path="res://tactical_mode/unit/for_future/GGStandart/GG.png" id="3_xgdr6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crdn2"]
 bg_color = Color(0.337255, 0.121569, 0.337255, 1)

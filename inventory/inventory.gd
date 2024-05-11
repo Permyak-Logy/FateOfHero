@@ -16,7 +16,7 @@ insert and remove are self explanotory
 const max_stacks_count: int = 50
 #const max_character_count: int = 5
 
-func _init(items_: Dictionary = {}, characters_: Array[PackedScene]= [preload("res://tactical_mode/unit/GGVamp/GGVamp.tscn")]):
+func _init(items_: Dictionary = {}, characters_: Array[PackedScene]= [preload("res://tactical_mode/unit/units/Vamp/Vamp.tscn")]):
 	items = items_.duplicate(true)
 	characters = characters_.duplicate(true)
 

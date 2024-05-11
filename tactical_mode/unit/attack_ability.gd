@@ -3,8 +3,14 @@ class_name AttackAbility extends DirectedAbility
 @export var power_p: float = 1
 
 func apply():
+	var unit = selected[0] as Unit
 	if owner.damage:
-		var damaged = (selected[0] as Unit).apply_damage(owner.damage.cur(), owner)
+		get_map().write_info("=> " + owner.unit_name + " атакует")
+		await (owner as Unit).play("preattack", unit)
+		await (owner as Unit).play("attack")
+		var damaged = await unit.apply_damage(owner.damage.cur() * power_p, owner)
+		await (owner as Unit).play("postattack")
+		owner.play("idle")
 		return true
 	return false
 
@@ -14,9 +20,20 @@ func can_select(node):
 		return false
 	if unit.is_death():
 		return false
-	if get_map().is_player(owner) == get_map().is_player(node):
+	if not unit.visible:
 		return false
-	var cur_dist = float("inf")
+	if get_map().get_relation(owner, unit) != TacticalMap.relation.Enemy:
+		return false
+	var cur_dist = 1_000_000
 	for cell in unit.get_occupied_cells():
 		cur_dist = min(cur_dist, get_map().distance_between_cells(owner.get_cell(), cell))
 	return cur_dist <= distance
+
+func fill_overlay() -> Array[Vector2i]:
+	var res: Array[Vector2i] = []
+	var map = get_map()
+	var cell = (owner as Actor).get_cell()
+	for _cell in map._astar_board._cells:
+		if map.distance_between_cells(_cell, cell) <= distance and _cell != cell:
+			res.append(_cell)
+	return res

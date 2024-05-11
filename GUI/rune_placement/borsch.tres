@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://d0icvwhjmsb71"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_vix0e"]
+[ext_resource type="Texture2D" uid="uid://kjih1gkq036" path="res://inventory/icons/borsch.png" id="2_8fd6m"]
+
+[resource]
+script = ExtResource("1_vix0e")
+name = "borsch"
+description = ""
+texture = ExtResource("2_8fd6m")
+max_stack = 99
+recipe = Array[ExtResource("1_vix0e")]([])
+price = 50

@@ -1,9 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://74426675p6qr"]
+[gd_scene load_steps=17 format=3 uid="uid://74426675p6qr"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/trading/trade_item.gd" id="1_cym07"]
 [ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="2_3ejm0"]
+[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_malmt"]
+[ext_resource type="Texture2D" uid="uid://buhdf405nq8o6" path="res://GUI/city_mode/desctr.png" id="4_i7y4p"]
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="4_odn4n"]
 [ext_resource type="Script" path="res://city_mode/Cities/trading/buy.gd" id="4_xanvi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a5fgk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wtdh5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dttnc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_opllv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fkiuh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c5fl7"]
 
@@ -20,6 +32,7 @@ custom_minimum_size = Vector2(120, 40)
 offset_right = 144.0
 offset_bottom = 40.0
 script = ExtResource("1_cym07")
+global_inventory = ExtResource("2_malmt")
 coin = ExtResource("2_3ejm0")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -53,6 +66,13 @@ offset_left = -8.0
 offset_top = -8.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_type_variation = &"FlatButton"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a5fgk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wtdh5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dttnc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_opllv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fkiuh")
+icon = ExtResource("4_i7y4p")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(40, 0)

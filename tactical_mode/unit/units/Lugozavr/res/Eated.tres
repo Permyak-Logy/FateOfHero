@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Eated" load_steps=2 format=3 uid="uid://dw2tmigxh6pmv"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Lugozavr/src/eated_effect.gd" id="1_d53b8"]
+
+[resource]
+script = ExtResource("1_d53b8")
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = true
+stackable = false
+effect_name = "Съеден"
+is_negative = true
