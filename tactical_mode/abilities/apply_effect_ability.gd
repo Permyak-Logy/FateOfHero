@@ -10,6 +10,7 @@ func apply():
 		var e = effect.duplicate(true)
 		e.instigator = owner
 		unit.add_effect(e)
+		owner.play("idle")
 	return true
 
 func can_select(node):

@@ -3,6 +3,11 @@ class_name VampA2 extends AoEAbility
 @export var power_attack: float = 0.2
 @export var range_apply: int = 1
 
+func apply():
+	await owner.play("ability")
+	super()
+	owner.play("idle")
+
 func find_about_cells():
 	var map = get_map()
 	

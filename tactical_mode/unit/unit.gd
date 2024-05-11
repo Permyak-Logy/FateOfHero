@@ -27,10 +27,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 @export var expirience: ExpirienceComponent = null:
 	set(value):
 		expirience = value.duplicate(true) if value else null
-@export var sprite_for_outline: Sprite2D = null:
-	set(value):
-		sprite_for_outline = value
-		(sprite_for_outline as CanvasItem).material = outline_shader.duplicate()
+@export var sprite_for_outline: Sprite2D = null
 @export var trail_particles: GPUParticles2D = null
 @export var health_bar_pb: StatProgressBar = null
 @export var animation_player: AnimationPlayer = null
@@ -62,21 +59,27 @@ var flipped: bool = false:  # Переключатель поворота
 		else:
 			flipped = value
 
-var _start_pos: Vector2
-var _end_pos = Vector2(0, 0)
-@export var percent_animation_to_attack: float = 0:
-	set(value):
-		global_position = _start_pos + (_end_pos - _start_pos) * value
-		flipped = bool(int(percent_animation_to_attack > value) ^ int((_end_pos - _start_pos)[0] < 0))
-		percent_animation_to_attack = value
+
 
 # Различные цвета для обводки
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)
 const CUR_COLOR = Vector4(255, 255, 255, 100)
 const SELECTED_COLOR = Vector4(0, 0, 255, 100)
 const ENEMY_COLOR = Vector4(255, 0, 0, 100)
-const DEFAULT_COLOR = Vector4(0, 0, 0, 100)
+const DEFAULT_COLOR = Vector4(0, 0, 0, 0)
 const TO_SELECT_COLOR = Vector4(255, 255, 0, 100)
+
+# Слайд для передвижения между целью
+var _start_pos: Vector2
+var _end_pos = Vector2(0, 0)
+
+@export_group("For Animation")
+@export var percent_between_target: float = 0:
+	set(value):
+		if value != percent_between_target:
+			global_position = _start_pos + (_end_pos - _start_pos) * value
+			flipped = bool(int(percent_between_target > value) ^ int((_end_pos - _start_pos)[0] < 0))
+			percent_between_target = value
 
 func _ready():
 	if health and health_bar_pb:
@@ -89,7 +92,7 @@ func set_outline_color(color: Vector4):
 	"""
 	Устанавливает цвет обводки (необходимо чтобы был определён sprite_for_outline)
 	"""
-	if (sprite_for_outline == null):
+	if (sprite_for_outline == null) or not (sprite_for_outline.material as ShaderMaterial):
 		return
 	(sprite_for_outline.material as ShaderMaterial).set_shader_parameter(
 		"outline_color", color)
@@ -99,6 +102,8 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 	Применяет урон в размере _damage от _instigator с учётом наложенных эффектов
 	предметов, сопротивлений и т.д.
 	"""
+	if is_death():
+		return 0
 	
 	if _instigator:
 		for effect in _instigator.get_effects():
@@ -114,7 +119,7 @@ func apply_damage(_damage: float, _instigator: Unit = null):
 		_damage = effect.update_on_damage(_damage, _instigator)
 	
 	_damage = max(_damage, 0)
-	play("damaged")
+	await play("damaged")
 	health.sub(_damage)
 	get_map().write_info(
 		"=> " + unit_name + " получил " + str(int(_damage)) +" урона от " + _instigator.unit_name
@@ -163,9 +168,6 @@ func get_occupied_cells() -> Array[Vector2i]:
 
 func prepare_fight():
 	death.connect(get_map().on_kill)
-	if animation_player:
-		if animation_player.has_animation("damaged") and animation_player.has_animation("idle"):
-			animation_player.animation_set_next("damaged", "idle")
 	print("=> Prepare: ", unit_name)
 	while _effects:
 		remove_effect(_effects[0])
@@ -177,6 +179,7 @@ func prepare_fight():
 	apply_passives()
 	flipped = idle_direction_bool()
 	play("idle")
+	get_map().reset_outline_color(self)
 
 func premove_update():
 	for ability in get_abilities():
@@ -216,7 +219,7 @@ func idle_direction_bool():
 	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
-	if _name == "idle" and is_death():
+	if is_death() and _name != "death":
 		return
 	if _name == "walk":
 		current_id_path = _params
@@ -230,9 +233,14 @@ func play(_name: String, _params=null):
 			_start_pos = global_position
 			_end_pos = (_params as Unit).global_position
 			_end_pos += Vector2((1 if _start_pos[0] - _end_pos[0] > 0 else -1) * 16, 5)
-			
-		animation_player.play(_name)
+		
+		if animation_player.has_animation("RESET"):
+			animation_player.animation_set_next("RESET", _name)
+			animation_player.play("RESET")
+		else:
+			animation_player.play(_name)
 		await animation_player.animation_finished
+		
 		if _name == "postattack":
 			flipped = false
 
@@ -353,3 +361,6 @@ func ai_move_to(map: TacticalMap, cell: Vector2i):
 func ai_pass(map: TacticalMap):
 	map.acts = 0
 	map._update_stepmove()
+
+func reset_color():
+	get_map().reset_outline_color(self)

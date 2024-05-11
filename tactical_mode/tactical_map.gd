@@ -16,7 +16,9 @@ var unit_queue = []  # [(act_index, unit)]
 
 var active_unit: Unit:  # Текущий 
 	get:
-		return unit_queue[0][1]
+		if unit_queue:
+			return unit_queue[0][1]
+		return null
 
 var acts: int  # Текущее кол-во действий
 var _p_units: Array[Unit] = []  # Список юнитов игрока
@@ -82,16 +84,10 @@ func _init():
 func _ready():
 	if is_instance_of($"..", Game):
 		return
-	_p_units = [
-		$Berserk,
-		# $Vamp,
-		$Naris #,
-		#$SmolItto
+	_p_units = [$Naris,$Berserk,$SmolItto,$Vamp
 	]
 	_e_units = [
-		$Lugozavr,
-		$Vedmachok
-		#$Vendigo
+		$Vendigo,$Lugozavr,$Vedmachok
 	]
 	inited = true
 

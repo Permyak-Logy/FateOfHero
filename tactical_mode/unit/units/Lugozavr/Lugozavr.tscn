@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bnx7qiuivvnwn"]
+[gd_scene load_steps=32 format=3 uid="uid://bnx7qiuivvnwn"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Lugozavr/src/Lugozavr.gd" id="1_4n5r8"]
 [ext_resource type="Texture2D" uid="uid://j8mh72ss2l4v" path="res://tactical_mode/unit/units/Lugozavr/assets/spritesheet.png" id="2_4p48e"]
@@ -69,6 +69,9 @@ destroy_on_death_instigator = false
 stackable = false
 effect_name = "Эффект"
 is_negative = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_50nic"]
+radius = 23.0868
 
 [sub_resource type="Gradient" id="Gradient_ypy32"]
 colors = PackedColorArray(0, 1, 0.745098, 1, 0, 0.541176, 0, 0)
@@ -286,6 +289,9 @@ scale = Vector2(0.429688, 0.53125)
 texture = ExtResource("6_mmnq8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -1
+position = Vector2(-1, -22)
+shape = SubResource("CircleShape2D_50nic")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1

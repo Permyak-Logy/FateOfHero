@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_ojiqq")
-distance = 1
+distance = 50
 power_p = 1.0
 targets = 1
 max_targets = 0
