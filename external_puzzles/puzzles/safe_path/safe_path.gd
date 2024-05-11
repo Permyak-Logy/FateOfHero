@@ -1,10 +1,10 @@
 extends "res://external_puzzles/puzzles/base_puzzle.gd"
 
 class_name SafePath
-@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
 @onready var tilemap: TileMap = $TileMap
 @onready var player: WASDPlayer = $player
 @onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory: Inventory = game.strat_map.player.inventory
 @onready var wc: EPWinCondition = load("res://external_puzzles/puzzles/safe_path/win_condition_point.tscn").instantiate()
 
 var enemies: Array[PackedScene]

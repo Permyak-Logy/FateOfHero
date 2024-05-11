@@ -4,10 +4,13 @@ extends HBoxContainer
 @export var item : Item = null
 @onready var maxstack : int = item.max_stack
 @onready var recipe = item.recipe
-@export var global_inventory : Inventory
 @onready var item_description : String = item.description
 var des = true
- 
+
+
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var global_inventory : Inventory = game.strat_map.player.inventory
+
 func _ready():
 	craft.icon = item.texture
  

@@ -6,6 +6,8 @@
 
 [node name="Collectable" instance=ExtResource("1_qwc56")]
 script = ExtResource("2_wq6cs")
+item = null
+count = 0
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_gawaf")

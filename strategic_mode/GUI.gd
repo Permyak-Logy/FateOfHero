@@ -24,10 +24,11 @@ func _input(event):
 			close_gui()
 		if event.is_action_pressed("inv_button") and is_instance_of(open_gui, InventoryGUI):
 			close_gui()
-	elif event.is_action_pressed("escape"):
-		open(sm_menu)
-	elif event.is_action_pressed("inv_button"):
-		open(inventory)
+	else: 
+		if event.is_action_pressed("escape"):
+			open(sm_menu)
+		if event.is_action_pressed("inv_button"):
+			open(inventory)
 
 func open(gui):
 	gui_opened.emit()

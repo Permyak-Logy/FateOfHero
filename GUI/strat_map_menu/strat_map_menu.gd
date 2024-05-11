@@ -11,6 +11,7 @@ func _on_continue_pressed():
 
 func _on_exit_pressed():
 	game.strat_map.gui.close_gui()
+	game.save()
 	game.to_main_menu()
 
 func open():

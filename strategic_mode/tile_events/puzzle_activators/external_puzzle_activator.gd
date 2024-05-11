@@ -1,6 +1,6 @@
 class_name PuzzleActivator extends TileEvent
 
-@onready var game: Game = get_tree().root.get_child(0)
+var game: Game
 
 @export var puzzle: PackedScene
 
@@ -16,6 +16,7 @@ and texture
 """
 
 func activate():
+	game = get_tree().root.get_child(0)
 	var puzzle_scene: BasePuzzle = puzzle.instantiate()
 	puzzle_scene.solved.connect(on_done)
 	remove()

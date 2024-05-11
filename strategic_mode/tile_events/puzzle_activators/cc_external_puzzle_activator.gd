@@ -18,6 +18,7 @@ and  define opponents in enemies array
 
 
 func activate():
+	game = get_tree().root.get_child(0)
 	var puzzle_scene: BasePuzzle = puzzle.instantiate()
 	assert(puzzle_scene.has_method("set_enemies"), "trying to start a non combat puzzle with CombatCapablePuzzleActivator")
 	puzzle_scene.solved.connect(on_done)

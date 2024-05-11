@@ -10,11 +10,15 @@ insert and remove are self explanotory
 """
 
 # list of items and counts there of
-@export var items: Dictionary
-@export var characters: Array[PackedScene]
+@export var items: Dictionary = {}
+@export var characters: Array[PackedScene] 
 # must be equal to number of cells
 const max_stacks_count: int = 50
 #const max_character_count: int = 5
+
+func _init(items_: Dictionary = {}, characters_: Array[PackedScene]= [preload("res://tactical_mode/unit/GGVamp/GGVamp.tscn")]):
+	items = items_.duplicate(true)
+	characters = characters_.duplicate(true)
 
 func get_item_stacks() -> Array[ItemStack]:
 	"""
@@ -70,3 +74,6 @@ func remove(item: Item, count: int):
 
 func insert_is(item_stack: ItemStack):
 	insert(item_stack.item, item_stack.size)
+
+func load_json(file: String):
+	pass

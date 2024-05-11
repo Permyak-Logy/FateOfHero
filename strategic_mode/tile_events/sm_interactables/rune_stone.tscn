@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://strategic_mode/tile_events/sm_interactables/rune_stone.gd" id="2_qi36p"]
 [ext_resource type="Texture2D" uid="uid://g65y2jhaerjl" path="res://strategic_mode/tile_events/sprites/stone1.png" id="3_jukci"]
 
-[node name="RuneStone" instance=ExtResource("1_xkns3")]
+[node name="RuneStone" groups=["MicroInventoryOwner"] instance=ExtResource("1_xkns3")]
 script = ExtResource("2_qi36p")
 type = 0
 

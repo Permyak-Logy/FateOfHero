@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://blxk4ex3fpwq8"]
+[gd_scene load_steps=10 format=3 uid="uid://blxk4ex3fpwq8"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/recipe.gd" id="1_c3sk5"]
 [ext_resource type="PackedScene" uid="uid://douwpwsc16lq5" path="res://city_mode/Cities/crafting/recipe_slot.tscn" id="1_d288w"]
-[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_40380"]
 [ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="4_qptat"]
 
 [sub_resource type="Theme" id="Theme_7g0g1"]
@@ -21,7 +20,6 @@
 offset_right = 88.0
 offset_bottom = 40.0
 script = ExtResource("1_c3sk5")
-global_inventory = ExtResource("2_40380")
 
 [node name="RecipeSlot" parent="." instance=ExtResource("1_d288w")]
 layout_mode = 2
