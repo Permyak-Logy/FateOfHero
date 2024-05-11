@@ -6,7 +6,6 @@ One slot incentory for... various needs
 
 # list of items and counts there of
 @export var contents: ItemStack = null
-#const max_character_count: int = 5
 
 func get_item_stacks() -> Array[ItemStack]:
 	return [contents]

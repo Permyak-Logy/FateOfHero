@@ -40,21 +40,32 @@ func to_main_menu():
 
 func save():
 	var packed: PackedScene = PackedScene.new()
-	if ResourceLoader.exists("save/save.tscn"):
-		remove_save()
+	remove_save()
 	packed.pack(strat_map)
+	DirAccess.make_dir_absolute("save")
 	ResourceSaver.save(packed, "save/save.tscn")
 	ResourceSaver.save(strat_map.player.inventory, "save/player_inventory.tres")
-	#for scn in get_node
+	for scn in get_tree().get_nodes_in_group("MicroInventoryOwner"):
+		ResourceSaver.save(scn.local_inventory, "save/" + scn.name + "_inv.tres")
+
 
 func remove_save():
 	DirAccess.dir_exists_absolute("save")
 	DirAccess.remove_absolute("save")
 
 func load_save():
+	print(" # Loading game")
+	print("loading: ", "[res://save/save.tscn]")
 	strat_map = ResourceLoader.load("res://save/save.tscn").instantiate()
 	add_child(strat_map)
 	strat_map.player.inventory = ResourceLoader.load("save/player_inventory.tres")
+	for scn in get_tree().get_nodes_in_group("MicroInventoryOwner"):
+		print("loading: [", "res://save/" + scn.name + "_inv.tres", "]")
+		var inv: MicroInventory = ResourceLoader.load("res://save/" + scn.name + "_inv.tres", "MicroInventory") as Mic
+		print(inv)
+		print(inv.get_class())
+		print(inv.contents)
+		scn.set_inventory(inv)
 	remove_child(strat_map)
 
 func new_save():

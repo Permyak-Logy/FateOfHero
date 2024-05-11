@@ -7,10 +7,12 @@ note, that it is just data. It cannot be seen on it's own
 """
 class_name ItemStack
 
-@export var item: Item 
-@export var size: int 
+@export var item: Item
+@export var size: int
 
 func _init(item_: Item, size_: int):
+	assert(item_ != null)
+	assert(size_ > 0)
 	assert(size_ <= item_.max_stack, "can't create itemstack with size > max_stack_size")
 	item = item_
 	size = size_

@@ -20,7 +20,7 @@ var is_done = false
 
 
 func _ready():
-	assert(place_inventory != null, "You forgot to pass place's inecntory")
+	assert(place_inventory != null, "You forgot to pass place's inventory")
 	connect_inventory_slots()
 	placement_panel.rune_slot.HoveringInventorySlot.connect(on_slot_hovered)
 	placement_panel.rune_slot.UnhoveringInventorySlot.connect(on_slot_unhovered)
