@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://komiiv5ot43n"]
+[gd_scene load_steps=31 format=3 uid="uid://komiiv5ot43n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3ocbc"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_1wvle"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://bt80conpnoc8f" path="res://tactical_mode/unit/units/Berserk/res/BerserkA2.tres" id="8_x0px8"]
 [ext_resource type="Resource" uid="uid://dkk1mqckd0wg4" path="res://tactical_mode/unit/units/Berserk/res/BerserkA3.tres" id="9_qtvge"]
 [ext_resource type="Texture2D" uid="uid://dfjvd077r7e8v" path="res://tactical_mode/unit/units/Berserk/assets/spritesheet.png" id="10_urkiw"]
+[ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="11_os431"]
 
 [sub_resource type="Resource" id="Resource_qa83h"]
 script = ExtResource("2_1wvle")
@@ -149,6 +150,7 @@ texture = ExtResource("10_urkiw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+material = ExtResource("11_os431")
 position = Vector2(0, -26)
 texture = ExtResource("10_urkiw")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://csb3ujant2uio"]
+[gd_scene load_steps=25 format=3 uid="uid://csb3ujant2uio"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/Vedmachok.gd" id="1_cy2or"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_5q3v1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://fw2xki2sw3o6" path="res://tactical_mode/unit/units/Vedmachok/VedmachokA0.tres" id="5_g43pn"]
 [ext_resource type="Resource" uid="uid://caaovo3ff0mc2" path="res://tactical_mode/unit/units/Vedmachok/VedmachokA1.tres" id="6_f4xex"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="6_uhiw1"]
+[ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="7_f0kl4"]
 [ext_resource type="Texture2D" uid="uid://cs4b8cuqypclf" path="res://tactical_mode/unit/units/Vedmachok/assets/run.png" id="8_jdgdj"]
 
 [sub_resource type="Resource" id="Resource_xhmqf"]
@@ -97,6 +98,7 @@ controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_g43pn"), ExtResource("6_f4xex")])
 
 [node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("7_f0kl4")
 position = Vector2(3, -29)
 texture = ExtResource("5_dhbj6")
 hframes = 7

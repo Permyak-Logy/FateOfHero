@@ -7,11 +7,13 @@ class_name SpawnAbility extends AoEAbility
 var plants: Array[EvilPlantUnit] = []
 
 func apply():
+	await owner.play("ability")
 	var map = get_map()
 	var unit = map.spawn(mob, cell, owner)
 	map.add_to_unit_queue(unit, true)
 	if kill_all_mobs_on_death_owner:
 		(owner as Unit).death.connect(unit.kill)
+	owner.play("idle")
 
 func can_select_cell(_cell: Vector2i) -> bool:
 	if get_map().distance_between_cells(owner.get_cell(), _cell) > range_apply:

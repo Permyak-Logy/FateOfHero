@@ -4,15 +4,15 @@ class_name IttoA2 extends DirectedAbility
 
 
 func apply():
-	await owner.play("prehealteam")
 	for node in selected:
+		await owner.play("ability")
 		var unit = node as Unit
 		if unit.health:
 			unit.health.add(power)
 			get_map().write_info(
 				"=> " + owner.unit_name + " восстанавливает  " + str(int(power)) + " хп у " + unit.unit_name
 			)
-	await owner.play("posthealteam")
+	owner.play("idle")
 	return true
 	
 func unselect(_node):
