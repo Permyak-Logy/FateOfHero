@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Gear" load_steps=3 format=3 uid="uid://dtv54eujbs2l4"]
+[gd_resource type="Resource" script_class="Gear" load_steps=5 format=3 uid="uid://dtv54eujbs2l4"]
 
 [ext_resource type="Script" path="res://inventory/gear.gd" id="1_7xmvb"]
+[ext_resource type="Resource" uid="uid://bpac8plevrksx" path="res://inventory/items/trousers_billet.tres" id="1_y2nlc"]
 [ext_resource type="Texture2D" uid="uid://duna0a7u2ak2c" path="res://inventory/gears/Black/assets/Trousers_black.png" id="2_ntlbb"]
+[ext_resource type="Resource" uid="uid://xplppy8t3gmi" path="res://inventory/items/oil.tres" id="2_x3nvx"]
 
 [resource]
 script = ExtResource("1_7xmvb")
@@ -10,6 +12,6 @@ _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Штаны из чёрного камня"
 description = ""
 texture = ExtResource("2_ntlbb")
-max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
+max_stack = 1
+recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_y2nlc"), ExtResource("2_x3nvx"), ExtResource("2_x3nvx"), ExtResource("2_x3nvx"), ExtResource("2_x3nvx"), ExtResource("2_x3nvx")])
 price = 0

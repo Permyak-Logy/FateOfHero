@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Gear" load_steps=3 format=3 uid="uid://ces0l8s1yc40d"]
+[gd_resource type="Resource" script_class="Gear" load_steps=5 format=3 uid="uid://ces0l8s1yc40d"]
 
+[ext_resource type="Resource" uid="uid://b7ko7srrw2av6" path="res://inventory/items/boots_billet.tres" id="1_7km1w"]
 [ext_resource type="Script" path="res://inventory/gear.gd" id="1_tmx8k"]
 [ext_resource type="Texture2D" uid="uid://bx157cs6u8ayc" path="res://inventory/gears/Scales/assets/Boots_scales.png" id="2_gamlf"]
+[ext_resource type="Resource" uid="uid://doqtu33sxqbhu" path="res://inventory/items/skin.tres" id="2_prm23"]
 
 [resource]
 script = ExtResource("1_tmx8k")
@@ -10,6 +12,6 @@ _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Чешуйчатые ботинки"
 description = ""
 texture = ExtResource("2_gamlf")
-max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
+max_stack = 1
+recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_7km1w"), ExtResource("2_prm23"), ExtResource("2_prm23"), ExtResource("2_prm23"), ExtResource("2_prm23"), ExtResource("2_prm23")])
 price = 0

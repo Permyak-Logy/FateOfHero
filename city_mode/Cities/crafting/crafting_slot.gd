@@ -28,6 +28,7 @@ class_name CraftingSlot
 @export var max_stack : int = 0:
 	set(value):
 		max_stack = value 
+
 #func get_preview():
 	#var preview_texture = TextureRect.new()
 	#var preview_number = Label.new()

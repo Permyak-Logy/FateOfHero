@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Gear" load_steps=3 format=3 uid="uid://c85yiumr1q5l1"]
+[gd_resource type="Resource" script_class="Gear" load_steps=5 format=3 uid="uid://c85yiumr1q5l1"]
 
+[ext_resource type="Resource" uid="uid://b1hv1sghbyjh6" path="res://inventory/items/body_billet.tres" id="1_ls8v3"]
 [ext_resource type="Script" path="res://inventory/gear.gd" id="1_vjmcm"]
 [ext_resource type="Texture2D" uid="uid://bsov0vxm5ho3n" path="res://inventory/gears/Scales/assets/Body_scales.png" id="2_bvuqd"]
+[ext_resource type="Resource" uid="uid://doqtu33sxqbhu" path="res://inventory/items/skin.tres" id="2_plr1w"]
 
 [resource]
 script = ExtResource("1_vjmcm")
@@ -10,6 +12,6 @@ _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Чешуйчатый нагрудник"
 description = ""
 texture = ExtResource("2_bvuqd")
-max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
+max_stack = 1
+recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_ls8v3"), ExtResource("2_plr1w"), ExtResource("2_plr1w"), ExtResource("2_plr1w"), ExtResource("2_plr1w"), ExtResource("2_plr1w")])
 price = 0
