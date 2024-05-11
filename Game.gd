@@ -61,7 +61,7 @@ func load_save():
 	strat_map.player.inventory = ResourceLoader.load("save/player_inventory.tres")
 	for scn in get_tree().get_nodes_in_group("MicroInventoryOwner"):
 		print("loading: [", "res://save/" + scn.name + "_inv.tres", "]")
-		var inv: MicroInventory = ResourceLoader.load("res://save/" + scn.name + "_inv.tres", "MicroInventory") as Mic
+		var inv: MicroInventory = ResourceLoader.load("res://save/" + scn.name + "_inv.tres", "MicroInventory") as MicroInventory
 		print(inv)
 		print(inv.get_class())
 		print(inv.contents)
