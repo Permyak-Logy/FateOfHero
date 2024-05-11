@@ -119,8 +119,8 @@ func take_from(slot:InventorySlot):
 
 func _input(event):
 	update_item_in_hand()
-	if event.is_action_pressed("escape"):
-		done.emit()
+	#if event.is_action_pressed("escape"):
+		#done.emit()
 	if event.is_action_pressed("lmb"):
 		if not hovering_slot:
 			return
@@ -134,3 +134,9 @@ func _input(event):
 		if not hovering_slot or not hovering_slot.is_empty():
 			target_slot = item_stack_in_hand_origin
 		put_to(target_slot)
+
+func open():
+	pass
+
+func close():
+	done.emit()

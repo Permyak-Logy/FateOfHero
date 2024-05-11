@@ -36,13 +36,11 @@ func activate():
 	gui.place_inventory = local_inventory
 	gui.done.connect(on_gui_done)
 	game.strat_map.gui.add_child(gui)
-	game.strat_map.gui.busy = true
+	game.strat_map.gui.open(gui)
 	game.strat_map.pause()
 
 func on_gui_done():
-	print(local_inventory.contents)
 	game.strat_map.gui.remove_child(gui)
-	game.strat_map.gui.busy = false
 	rune_sprite.texture
 	game.strat_map.unpause()
 	if local_inventory.contents:

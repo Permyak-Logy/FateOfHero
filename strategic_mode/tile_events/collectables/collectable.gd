@@ -1,15 +1,14 @@
 class_name Collectable extends TileEvent
 
 """
-Tile event that can be placed on teh TileMap
 Abstract parent for all collectables
 """
 
 var game: Game
 var inventory: Inventory
 
-var item: Resource 
-var count: int
+@export var item: Item 
+@export var count: int
 
 
 func init():

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://iogr1vem4tnv"]
+
+[ext_resource type="PackedScene" uid="uid://dvk8v36nd7iqw" path="res://strategic_mode/tile_events/collectables/collectable.tscn" id="1_oe58q"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/collectables/concrete_collectable.gd" id="2_58u80"]
+
+[node name="ConcreteCollectable" instance=ExtResource("1_oe58q")]
+script = ExtResource("2_58u80")

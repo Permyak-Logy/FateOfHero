@@ -6,6 +6,8 @@ class_name Game extends Node2D
 @onready var external_puzzle_container: ExternalPuzzleContainer = \
 load("res://external_puzzles/external_puzzle_container.tscn").instantiate()
 @onready var main_menu: MainMenu = load("res://GUI/main_menu/main_menu.tscn").instantiate()
+@onready var StratMapRes = preload("res://strategic_mode/strat_map.tscn")
+
 
 var active_scene = null
 
@@ -38,8 +40,23 @@ func to_main_menu():
 
 func save():
 	var packed: PackedScene = PackedScene.new()
+	if ResourceLoader.exists("save/save.tscn"):
+		remove_save()
 	packed.pack(strat_map)
-	if ResourceLoader.exists("save.tscn"):
-		pass
-		
-	ResourceSaver.save(packed, "save.tscn")
+	ResourceSaver.save(packed, "save/save.tscn")
+	ResourceSaver.save(strat_map.player.inventory, "save/player_inventory.tres")
+
+func remove_save():
+	if not ResourceLoader.exists("save.tscn"):
+		return 
+	var dir = DirAccess.open("res://save")
+	dir.remove("save.tscn")
+
+func load_save():
+	strat_map = ResourceLoader.load("res://save/save.tscn").instantiate()
+	add_child(strat_map)
+	strat_map.player.inventory = ResourceLoader.load("save/player_inventory.tres")
+	remove_child(strat_map)
+
+func new_save():
+	strat_map = StratMapRes.instantiate()

@@ -8,8 +8,7 @@ It finds path among the squares on the tilemap with walkable set to true.
 
 @onready var strat_map: StratMap = $".."
 @onready var tilemap: StratTileMap =  $"../StratTileMap"
-@onready var TileEvent = preload("res://strategic_mode/tile_events/TileEvent.tscn")
-var inventory: Inventory = Inventory.new()
+@export var inventory: Inventory
 
 
 var astar_grid: AStarGrid2D
@@ -17,6 +16,10 @@ var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var last_position: Vector2
 var is_moving: bool = false
+#
+func _init():
+	if not inventory:
+		inventory = Inventory.new() 
 
 func update_nav_map(pos: Vector2i, state: bool):
 	astar_grid.set_point_solid(pos, not state)
