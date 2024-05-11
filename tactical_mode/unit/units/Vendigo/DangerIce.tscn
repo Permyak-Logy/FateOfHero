@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://c4w6lbi46pkf0" path="res://tactical_mode/unit/units/Vendigo/assets/IceTile.png" id="1_110v0"]
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vendigo/src/DangerIce.gd" id="1_ppwbo"]
 
-[node name="DangerIce" type="Node2D"]
+[node name="DangerIce" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_ppwbo")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_110v0")

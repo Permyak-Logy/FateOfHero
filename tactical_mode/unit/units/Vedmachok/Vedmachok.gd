@@ -2,6 +2,7 @@ class_name Vedmachok extends Unit
 
 
 func ai(map: TacticalMap):
+	var a0: AttackAbility = get_abilities()[0]
 	var a1: SpawnAbility = get_abilities()[1]
 	
 	if a1.can_use():
@@ -22,4 +23,23 @@ func ai(map: TacticalMap):
 		else:
 			ai_random_move(map)
 	else:
-		ai_random_move(map)
+		var target = find_target()
+		if a0.can_select(target):
+			map._prepare_ability(a0)
+			a0.select(target)
+			map._apply_ability()
+		else:
+			ai_move_to(map, target.get_cell())
+
+func find_target() -> Unit:
+	var target: Unit = null
+	var dist = 100000
+	for unit in get_map().get_units_with_relation(self, TacticalMap.relation.Enemy):
+		if unit.is_death() or not unit.visible:
+			continue
+		var new_dist = get_map().distance_between_cells(get_cell(), unit.get_cell())
+		if new_dist > dist:
+			continue
+		dist = new_dist
+		target = unit
+	return target

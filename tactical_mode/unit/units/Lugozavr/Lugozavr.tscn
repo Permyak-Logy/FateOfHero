@@ -633,7 +633,6 @@ shape = SubResource("CircleShape2D_50nic")
 z_index = -1
 y_sort_enabled = true
 position = Vector2(-2, -23)
-emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_hyl62")
 texture = ExtResource("7_4pkcg")

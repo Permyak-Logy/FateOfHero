@@ -72,7 +72,7 @@ func apply() -> bool:
 	return false
 
 func after_apply():
-	cooldown_time = cooldown
+	cooldown_time = cooldown + 1
 	has_uses -= 1
 	if count >= 0:
 		count -= 1

@@ -5,7 +5,7 @@ class_name EvilPlantA0 extends AoEAbility
 @export var range_apply: int = 1
 
 func apply():
-	await owner.play("attack")
+	await owner.play("preattack")
 	super()
 	await owner.play("postattack")
 
