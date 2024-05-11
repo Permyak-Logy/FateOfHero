@@ -27,8 +27,6 @@ var instigator: Node = null:
 		instigator = value
 
 func on_death_instigator(_inst):
-	print(_inst.death.get_connections())
-	print("instigator is death!")
 	finished.emit(self)
 
 func on_set_owner(old: Unit, new: Unit):

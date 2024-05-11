@@ -100,6 +100,7 @@ _data = {
 [node name="EvilPlant" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "animation_player", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
+scale = Vector2(1.4, 1.4)
 script = ExtResource("1_q2mli")
 unit_name = "Злое растение"
 health = SubResource("Resource_px43a")

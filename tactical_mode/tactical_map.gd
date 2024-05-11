@@ -89,7 +89,7 @@ func _ready():
 		#$SmolItto
 	]
 	_e_units = [
-		# $Lugozavr,
+		$Lugozavr,
 		$Vedmachok
 		#$Vendigo
 	]

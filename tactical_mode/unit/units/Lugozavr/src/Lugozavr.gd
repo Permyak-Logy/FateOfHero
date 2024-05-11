@@ -35,3 +35,7 @@ func assign_target():
 	for unit in avaliable_units:
 		if target.health.cur() > unit.health.cur():
 			target = unit
+
+
+func get_occupied_cells():
+	return [get_cell(), get_cell() + Vector2i(1, 0)]
