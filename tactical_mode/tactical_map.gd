@@ -97,6 +97,9 @@ func start_battle():
 	"""
 	if running:
 		return
+	if is_instance_of($"..", Game):
+		arrange_units()
+		gen_nature()
 	gui.tactical_info.clear()	
 	running = true
 	write_info("*** Бой начинается ***")
@@ -159,17 +162,17 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], cou
 	"""
 	
 	clear()
+	if not is_node_ready():
+		await ready
 	
 	for p in player:
-		_p_units.append(spawn(p, Vector2i(0, 0)))
+		_p_units.append(await spawn(p, Vector2i(0, 0)))
 	for e in enemy:
-		_e_units.append(spawn(e, Vector2i(0, 0)))
-	arrange_units()
+		_e_units.append(await spawn(e, Vector2i(0, 0)))
 	if count_nature_obj < 0:
 		nature_count = randi_range(0, 16)
 	else:
 		nature_count = count_nature_obj
-	gen_nature()
 	inited = true
 
 func gen_nature():
@@ -688,6 +691,7 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 	"""
 	
 	var actor: Actor = actor_ps.instantiate()
+	print("Spawn ", actor)
 	add_child(actor)
 	move_unit_to(actor, cell)
 	
@@ -710,4 +714,5 @@ func add_to_unit_queue(unit: Unit, in_start=false):
 		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 
 func write_info(text: String):
+	print("===> ", text)
 	gui.tactical_info.write(text)
