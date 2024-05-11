@@ -58,7 +58,7 @@ func update():
 	else:
 		rune_sprite.frame = 0
 
-func set_inventory(item_stack: ItemStack):
-	local_inventory.contents = item_stack
+func set_inventory(item_stack: MicroInventory):
+	local_inventory = item_stack
 	update()
 	pass
