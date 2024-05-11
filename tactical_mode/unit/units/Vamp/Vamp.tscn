@@ -21,7 +21,7 @@ script = ExtResource("2_7afhu")
 _gears = {}
 gear_slots = {
 2: 2,
-4: 1
+4: 5
 }
 
 [sub_resource type="Resource" id="Resource_ywk01"]

@@ -4,7 +4,7 @@ const DEFAULT_COUNT_SLOTS = 1
 
 @export var _gears: Dictionary # Dict[Gear.Type, [Gear]]
 @export var gear_slots = { 
-	Gear.Type.Ability: 1,
+	Gear.Type.Ability: 5,
 	Gear.Type.Hands: 2
 }
 
