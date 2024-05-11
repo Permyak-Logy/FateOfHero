@@ -46,7 +46,9 @@ func save():
 	ResourceSaver.save(packed, "save/save.tscn")
 	ResourceSaver.save(strat_map.player.inventory, "save/player_inventory.tres")
 	for scn in get_tree().get_nodes_in_group("MicroInventoryOwner"):
-		ResourceSaver.save(scn.local_inventory, "save/" + scn.name + "_inv.tres")
+		if not scn.local_inventory.contents:
+			continue
+		ResourceSaver.save(scn.local_inventory.contents, "save/" + scn.name + "_inv.tres")
 
 
 func remove_save():
@@ -56,16 +58,18 @@ func remove_save():
 func load_save():
 	print(" # Loading game")
 	print("loading: ", "[res://save/save.tscn]")
-	strat_map = ResourceLoader.load("res://save/save.tscn").instantiate()
+	strat_map = load("res://save/save.tscn").instantiate()
 	add_child(strat_map)
 	strat_map.player.inventory = ResourceLoader.load("save/player_inventory.tres")
 	for scn in get_tree().get_nodes_in_group("MicroInventoryOwner"):
+		if not ResourceLoader.exists("res://save/" + scn.name + "_inv.tres"):
+			continue
+		#ResourceImporter.new()
 		print("loading: [", "res://save/" + scn.name + "_inv.tres", "]")
-		var inv: MicroInventory = ResourceLoader.load("res://save/" + scn.name + "_inv.tres", "MicroInventory") as MicroInventory
-		print(inv)
-		print(inv.get_class())
-		print(inv.contents)
-		scn.set_inventory(inv)
+		var item_stack = load("res://save/" + scn.name + "_inv.tres")
+		print(item_stack)
+		print(item_stack.resource_name)
+		scn.set_inventory(item_stack)
 	remove_child(strat_map)
 
 func new_save():

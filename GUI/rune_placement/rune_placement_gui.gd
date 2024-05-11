@@ -28,7 +28,7 @@ func _ready():
 		var isr: ItemStackRepr = ItemStackReprClass.instantiate()
 		placement_panel.current_rune = isr
 		placement_panel.update()
-		isr.item_stack = ItemStack.new(place_inventory.contents.item, place_inventory.contents.size)
+		isr.item_stack = ItemStack.create(place_inventory.contents.item, place_inventory.contents.size)
 		isr.update()
 	update()
 

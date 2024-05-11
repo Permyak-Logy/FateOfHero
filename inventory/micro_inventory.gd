@@ -22,7 +22,7 @@ func insert(item: Item, count: int) -> int:
 	assert(item.max_stack > 0)
 	if count == 0: return 0
 	if not contents:
-		contents = ItemStack.new(item, count)
+		contents = ItemStack.create(item, count)
 	if contents.item != item: 
 		return count
 	if contents and contents.size + count > item.max_stack:

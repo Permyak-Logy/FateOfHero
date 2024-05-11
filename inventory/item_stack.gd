@@ -10,10 +10,11 @@ class_name ItemStack
 @export var item: Item
 @export var size: int
 
-func _init(item_: Item, size_: int):
+static func create(item_: Item, size_: int) -> ItemStack:
 	assert(item_ != null)
 	assert(size_ > 0)
 	assert(size_ <= item_.max_stack, "can't create itemstack with size > max_stack_size")
-	item = item_
-	size = size_
-
+	var item_stack: ItemStack = ItemStack.new()
+	item_stack.item = item_
+	item_stack.size = size_
+	return item_stack

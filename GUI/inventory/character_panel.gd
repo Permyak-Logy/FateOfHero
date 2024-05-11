@@ -82,7 +82,7 @@ func update_gear():
 			continue
 		var i = 0
 		for item in current_character.inventory.get_gears(type):
-			var item_stack = ItemStack.new(item, 1)
+			var item_stack = ItemStack.create(item, 1)
 			var isr = ItemStackReprClass.instantiate()
 			slots[type][i].insert(isr)
 			isr.item_stack = item_stack
@@ -97,7 +97,7 @@ func update_abilities():
 	var i = 0
 	for item in current_character.inventory.get_abilities():
 		var slot = special_slots[Gear.Type.Ability].instantiate()
-		var item_stack = ItemStack.new(item, 1)
+		var item_stack = ItemStack.create(item, 1)
 		var isr = ItemStackReprClass.instantiate()
 		isr.item_stack = item_stack
 		slots[Gear.Type.Ability][i].insert(isr)

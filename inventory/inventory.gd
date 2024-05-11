@@ -30,9 +30,9 @@ func get_item_stacks() -> Array[ItemStack]:
 	for item in keys:
 		var count = items[item]
 		for i in range(count / item.max_stack):
-			item_stacks.push_back(ItemStack.new(item, item.max_stack))
+			item_stacks.push_back(ItemStack.create(item, item.max_stack))
 		if count % item.max_stack:
-			item_stacks.push_back(ItemStack.new(item, count % item.max_stack))
+			item_stacks.push_back(ItemStack.create(item, count % item.max_stack))
 	return item_stacks
 
 func get_stack_count():

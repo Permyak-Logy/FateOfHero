@@ -17,4 +17,4 @@ you need to put it inside the ItemStack resource to make it tangeble
 
 static func less(a: Item, b: Item):
 	return a.name < b.name
-	
+

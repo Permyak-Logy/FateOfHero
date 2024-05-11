@@ -11,7 +11,7 @@ var id: int
 var rune_inside: int
 var gui: RunePlacementGUI
 var RunePlacementGUIRes: PackedScene = preload("res://GUI/rune_placement/rune_placement_gui.tscn")
-var local_inventory: MicroInventory
+@onready var local_inventory: MicroInventory = MicroInventory.new()
 
 var rune_sprites: Array[Texture2D] = [
 	null,
@@ -26,8 +26,6 @@ var rune_sprites: Array[Texture2D] = [
 ]
 
 func _ready():
-	if not local_inventory:
-		local_inventory = MicroInventory.new()
 	game = get_tree().root.get_child(0)
 	assert(type != 0, "you forgot to assign type")
 	assert(id != null, "you forgot to assign id")
@@ -60,9 +58,7 @@ func update():
 	else:
 		rune_sprite.frame = 0
 
-func set_inventory(inv: MicroInventory):
-	local_inventory = inv 
-	print(self.name)
-	print(local_inventory.contents)
+func set_inventory(item_stack: ItemStack):
+	local_inventory.contents = item_stack
 	update()
 	pass
