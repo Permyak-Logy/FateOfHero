@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="TempSlowdownEffect" load_steps=4 format=3 uid="uid://b7y2yl2m702vn"]
+[gd_resource type="Resource" script_class="TempSlowdownEffect" load_steps=5 format=3 uid="uid://b7y2yl2m702vn"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_j34ah"]
 [ext_resource type="Script" path="res://tactical_mode/effects/temp_slowdown_effect.gd" id="2_03dj1"]
+[ext_resource type="PackedScene" uid="uid://b4ilo2onw4uys" path="res://tactical_mode/unit/units/Vedmachok/VisualRootEffect.tscn" id="3_hitwd"]
 
 [sub_resource type="Resource" id="Resource_dawy7"]
 script = ExtResource("1_j34ah")
@@ -19,3 +20,4 @@ destroy_on_death_instigator = true
 stackable = true
 effect_name = "Обвивающиеся корни"
 is_negative = true
+visual_effect = ExtResource("3_hitwd")
