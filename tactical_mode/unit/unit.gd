@@ -188,6 +188,7 @@ func premove_update():
 		effect.update_on_start_stepmove()
 
 func on_flip_unit():
+	print(unit_name, "flip to ", flipped)
 	if trail_particles:
 		var i: Image = trail_particles.texture.get_image()
 		i.flip_x()
@@ -219,7 +220,7 @@ func idle_direction_bool():
 	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
-	if is_death() and _name != "death":
+	if is_death() and not _name.begins_with("death"):
 		return
 	if _name == "walk":
 		current_id_path = _params
@@ -229,7 +230,7 @@ func play(_name: String, _params=null):
 		if not animation_player.has_animation(_name):
 			print(self, "not have animation ", _name)
 			return
-		if _name == "preattack":
+		if _name == "preattack" or (_name == "ability" and _params):
 			_start_pos = global_position
 			_end_pos = (_params as Unit).global_position
 			_end_pos += Vector2((1 if _start_pos[0] - _end_pos[0] > 0 else -1) * 16, 5)
@@ -241,8 +242,8 @@ func play(_name: String, _params=null):
 			animation_player.play(_name)
 		await animation_player.animation_finished
 		
-		if _name == "postattack":
-			flipped = false
+		if _name.begins_with("post"):
+			flipped = idle_direction_bool()
 
 func on_death(_component: StatComponent):
 	print("Death ", self)

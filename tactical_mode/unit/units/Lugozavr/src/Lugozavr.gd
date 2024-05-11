@@ -36,6 +36,8 @@ func assign_target():
 		if target.health.cur() > unit.health.cur():
 			target = unit
 
-
-func get_occupied_cells():
-	return [get_cell(), get_cell() + Vector2i(1, 0)]
+func play(_name: String, _param=null):
+	if _name in ["idle", "damaged", "death"] and target and get_abilities()[1].applied == target and not target.is_death():
+		await super(_name + "2", _param)
+	else:
+		await super(_name, _param)

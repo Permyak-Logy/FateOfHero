@@ -6,10 +6,13 @@ var applied: Unit
 
 func apply():
 	var unit = selected[0] as Unit
+	await owner.play("ability", unit)
 	var te = block_moving_effect.duplicate(true)
 	te.instigator = owner
 	unit.add_effect(te)
 	applied = unit
+	await owner.play("postability")
+	owner.play("idle")
 
 func subapply():
 	if not applied:

@@ -7,7 +7,7 @@ func apply():
 	if owner.damage:
 		get_map().write_info("=> " + owner.unit_name + " атакует")
 		await (owner as Unit).play("preattack", unit)
-		var damaged = await unit.apply_damage(owner.damage.cur() * power_p, owner)
+		unit.apply_damage(owner.damage.cur() * power_p, owner)
 		await (owner as Unit).play("postattack")
 		owner.play("idle")
 		return true
