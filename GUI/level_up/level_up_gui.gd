@@ -63,6 +63,7 @@ func _ready():
 
 func increment(comp: StatComponent):
 	if pts <= 0:
+		done_button.disabled = false
 		return
 	delta[comp] += std_d[comp]
 	pts -= 1
@@ -70,11 +71,11 @@ func increment(comp: StatComponent):
 
 func decrement(comp: StatComponent):
 	if delta[comp] == 0:
+		done_button.disabled = true
 		return
 	delta[comp] -= std_d[comp]
 	pts += 1
 	update()
-
 
 # graphical update
 func update():
@@ -83,7 +84,7 @@ func update():
 	defence_card.set_value(unit.defence.get_base() + delta[unit.defence])
 	damage_card.set_value(unit.damage.get_base() + delta[unit.damage])
 	pts_label.text = str(pts)
-	
+
 
 func commit():
 	unit.health.rebase(unit.health.get_base() + delta[unit.health])

@@ -151,6 +151,7 @@ func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene])
 
 func _ready():
 	player.pos = Vector2i(1, 1)
+	player.sprite.texture = game.strat_map.player.sprite.texture
 	gen_field()
 	for pawn in pawns:
 		pawn.stealth_suicide.connect(kill)

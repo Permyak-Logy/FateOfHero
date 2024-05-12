@@ -7,24 +7,34 @@ It finds path among the squares on the tilemap with walkable set to true.
 """
 
 @onready var strat_map: StratMap = $".."
+@onready var sprite: Sprite2D = $Sprite2D
+
 @onready var tilemap: StratTileMap =  $"../StratTileMap"
 @export var inventory: Inventory
-
+@export var texture: Dictionary = {
+	"default" : preload("res://strategic_mode/tile_events/sprites/gg_base.png"),
+	"Vamp" : preload("res://strategic_mode/tile_events/sprites/gg_vampire.png"),
+	"Berserk" : preload("res://strategic_mode/tile_events/sprites/gg_berserk.png")
+}
 
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var last_position: Vector2
 var is_moving: bool = false
-#
+@export var mc_name: String
+
 func _init():
 	if not inventory:
-		inventory = Inventory.new() 
+		inventory = Inventory.new()
 
 func update_nav_map(pos: Vector2i, state: bool):
 	astar_grid.set_point_solid(pos, not state)
 
 func _ready():
+	if mc_name:
+		sprite.texture = texture[mc_name]
+	
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16) 
@@ -41,6 +51,14 @@ func _ready():
 			
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
+			
+			tile_data = tilemap.get_cell_tile_data(1, tile_position)
+			
+			if tile_data == null:
+				continue
+			astar_grid.set_point_solid(tile_position, not tile_data.get_custom_data("walkable"))
+				
+			
 	
 	tilemap.occupied_changed.connect(update_nav_map)
 		

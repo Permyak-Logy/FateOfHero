@@ -1,5 +1,6 @@
 class_name StealthPlayer extends WASDPlayer
 
+
 func wasd_move(event):
 	var p: StealthRun = puzzle as StealthRun
 	var delta = Vector2i(0, 0)

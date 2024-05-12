@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=4 format=3 uid="uid://dwwvkvq2dp0no"]
+
+[ext_resource type="PackedScene" uid="uid://broh86uja0jol" path="res://strategic_mode/dialogues/team_up/yes.tscn" id="0_bbitg"]
+[ext_resource type="Script" path="res://strategic_mode/dialogues/dialogue.gd" id="1_3w2yq"]
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/team_up/no.tscn" id="1_bbitg"]
+
+[resource]
+script = ExtResource("1_3w2yq")
+title = "Hello"
+msg = "Wanna team up?"
+options = Array[PackedScene]([ExtResource("0_bbitg"), ExtResource("1_bbitg")])

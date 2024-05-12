@@ -1,6 +1,6 @@
 class_name WASDPlayer extends CharacterBody2D
 
-
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var puzzle = get_parent()
 @onready var pos: Vector2i = Vector2i(5, 13)
 @onready var moving: bool = false
