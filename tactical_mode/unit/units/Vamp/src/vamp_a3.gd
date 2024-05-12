@@ -4,6 +4,7 @@ class_name VampA3 extends DirectedAbility
 @export var power_target: float = 2
 
 func apply():
+	await owner.play("ability")
 	var unit = selected[0] as Unit
 	
 	var heal = owner.health.cur() * power_self
@@ -12,6 +13,7 @@ func apply():
 	unit.health.add(heal)
 	get_map().write_info(
 		"=> " + owner.unit_name + "восстанавливает " + str(heal) + " здоровья " + unit.unit_name)
+	owner.play("idle")
 	return true
 
 func can_select(node):

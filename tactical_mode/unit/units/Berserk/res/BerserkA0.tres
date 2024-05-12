@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_rkga8")
 distance = 1
-power_p = 100.0
+power_p = 1.0
 targets = 1
 max_targets = 0
 acts = 1

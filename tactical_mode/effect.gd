@@ -5,16 +5,28 @@ class_name Effect extends Resource
 @export var destroy_on_death_instigator: bool = false
 @export var stackable = false
 
-signal finished
+signal finished(Effect)
 signal updated_mods
 
 @export var effect_name: String = "Эффект"
 @export var is_negative: bool = false
+@export var visual_effect: PackedScene
+
+var _visual_effect: Node
 
 var owner: Unit = null:
 	set(value):
+		if not _visual_effect and visual_effect:
+			_visual_effect = visual_effect.instantiate()
+			finished.connect(func(_x): _x.remove_visual_effect())
 		var old = owner
 		owner = value
+		if _visual_effect:
+			if old:
+				old.remove_child(_visual_effect)
+			if owner:
+				owner.add_child(_visual_effect)
+		 
 		on_set_owner(old, owner)
 
 var instigator: Node = null:
@@ -62,3 +74,7 @@ func get_map() -> TacticalMap:
 
 func cancel_effect():
 	pass
+
+func remove_visual_effect():
+	if _visual_effect and owner:
+		owner.remove_child(_visual_effect)

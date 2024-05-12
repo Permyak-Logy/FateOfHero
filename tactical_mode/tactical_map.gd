@@ -16,7 +16,9 @@ var unit_queue = []  # [(act_index, unit)]
 
 var active_unit: Unit:  # Текущий 
 	get:
-		return unit_queue[0][1]
+		if unit_queue:
+			return unit_queue[0][1]
+		return null
 
 var acts: int  # Текущее кол-во действий
 var _p_units: Array[Unit] = []  # Список юнитов игрока
@@ -82,16 +84,10 @@ func _init():
 func _ready():
 	if is_instance_of($"..", Game):
 		return
-	_p_units = [
-		$Berserk,
-		# $Vamp,
-		$Naris #,
-		#$SmolItto
+	_p_units = [$Naris,$Berserk,$SmolItto,$Vamp
 	]
 	_e_units = [
-		$Lugozavr,
-		$Vedmachok
-		#$Vendigo
+		$Vendigo,$Lugozavr,$Vedmachok
 	]
 	inited = true
 
@@ -657,6 +653,8 @@ func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
 	Расстояние между клетками на поле без учёта стен
 	"""
 	
+	if not _astar_board.has_cell(a) or not _astar_board.has_cell(b):
+		return 0
 	var path = _astar_board.get_id_path(_astar_board.mti(a), _astar_board.mti(b))
 	return len(path) - 1
 
@@ -712,7 +710,4 @@ func add_to_unit_queue(unit: Unit, in_start=false):
 		unit_queue.append([_ACT_INDEX_MAX / unit.speed.cur(), unit])
 
 func write_info(text: String):
-	print("===> ", text)
-	if not running:
-		return
 	gui.tactical_info.write(text)
