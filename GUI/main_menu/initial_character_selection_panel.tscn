@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://ywyg6edx5cuc"]
+
+[ext_resource type="Script" path="res://GUI/main_menu/initial_character_selection_panel.gd" id="1_ejl1g"]
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_ihgss"]
+[ext_resource type="PackedScene" uid="uid://eo8pepqxbs2w" path="res://GUI/main_menu/initial_character_info.tscn" id="3_bye6i"]
+[ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/units/Vamp/Vamp.tscn" id="4_dmp7p"]
+[ext_resource type="PackedScene" uid="uid://komiiv5ot43n" path="res://tactical_mode/unit/units/Berserk/Berserk.tscn" id="5_awynu"]
+
+[node name="InitialCharacterSelectionPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ihgss")
+script = ExtResource("1_ejl1g")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(1000, 560)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -300.0
+offset_right = 500.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(800, 480)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -440.0
+offset_top = 30.0
+offset_right = 440.0
+offset_bottom = 510.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="InitCharInfo1" parent="Panel/HBoxContainer" instance=ExtResource("3_bye6i")]
+layout_mode = 2
+presented_character = ExtResource("4_dmp7p")
+
+[node name="InitCharInfo2" parent="Panel/HBoxContainer" instance=ExtResource("3_bye6i")]
+layout_mode = 2
+presented_character = ExtResource("5_awynu")
+
+[node name="InitCharInfo3" parent="Panel/HBoxContainer" instance=ExtResource("3_bye6i")]
+layout_mode = 2
+
+[node name="InitCharInfo4" parent="Panel/HBoxContainer" instance=ExtResource("3_bye6i")]
+layout_mode = 2
+
+[node name="InitCharInfo5" parent="Panel/HBoxContainer" instance=ExtResource("3_bye6i")]
+layout_mode = 2

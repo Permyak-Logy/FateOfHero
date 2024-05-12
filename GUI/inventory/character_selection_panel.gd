@@ -1,10 +1,10 @@
-extends NinePatchRect
+class_name CharacterSelectionPanel extends NinePatchRect
+
 """
 Rectangle on the top left
 has buttons to switch characters
 
 """
-class_name CharacterSelectionPanel
 
 @onready var container = $HBoxContainer
 @onready var button_scene = preload("res://GUI/inventory/character_button.tscn")

@@ -65,11 +65,15 @@ func load_save():
 	for scn in get_tree().get_nodes_in_group("MicroInventoryOwner"):
 		if not ResourceLoader.exists("res://save/" + scn.name + "_inv.tres"):
 			continue
-		#ResourceImporter.new()
 		print("loading: [", "res://save/" + scn.name + "_inv.tres", "]")
 		var inv = load("res://save/" + scn.name + "_inv.tres")
 		scn.set_inventory(inv)
 	remove_child(strat_map)
 
-func new_save():
+func new_save(init_char: PackedScene):
 	strat_map = StratMapRes.instantiate()
+	add_child(strat_map)
+	strat_map.player.inventory.characters.append(init_char)
+	remove_child(strat_map)
+	
+	
