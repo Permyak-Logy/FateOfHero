@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=41 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Script" path="res://strategic_mode/strat_map.gd" id="1_vssm8"]
 [ext_resource type="PackedScene" uid="uid://dy0430gbmyn54" path="res://strategic_mode/tile_events/collectables/x_marks_the_spot.tscn" id="3_jdbk3"]
@@ -36,6 +36,8 @@
 [ext_resource type="Resource" path="res://inventory/items/rune_8.tres" id="34_mxwhc"]
 [ext_resource type="Resource" path="res://inventory/items/rune_1.tres" id="35_gq8in"]
 [ext_resource type="AudioStream" uid="uid://dlsbppd8qggrt" path="res://strategic_mode/strategic_mode_bg_music.mp3" id="36_xru70"]
+[ext_resource type="Resource" uid="uid://dwwvkvq2dp0no" path="res://strategic_mode/dialogues/team_up/Hello.tres" id="37_ohrpj"]
+[ext_resource type="Texture2D" uid="uid://cjs8kv5nytjdx" path="res://strategic_mode/tile_events/sprites/gg_base.png" id="38_cdp5s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v7reh"]
 texture = ExtResource("3_wk3m8")
@@ -6716,7 +6718,7 @@ type = 1
 
 [node name="player" parent="." groups=["Persistant"] instance=ExtResource("5_whmy4")]
 top_level = true
-position = Vector2(138, 197)
+position = Vector2(321, 266)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -6780,6 +6782,12 @@ count = 1
 stream = ExtResource("36_xru70")
 volume_db = 3.237
 autoplay = true
+
+[node name="ManualDialogueTrigger2" parent="." instance=ExtResource("22_erct1")]
+position = Vector2(299, 234)
+do_destroy_on_exit = true
+dialogue = ExtResource("37_ohrpj")
+texture = ExtResource("38_cdp5s")
 
 [connection signal="inventory_closed" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_closed"]
 [connection signal="inventory_opened" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_opened"]
