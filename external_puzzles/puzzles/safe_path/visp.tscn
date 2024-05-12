@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3sox5r2j5fkr"]
+
+[ext_resource type="Script" path="res://external_puzzles/puzzles/safe_path/visp.gd" id="1_57m7f"]
+[ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://strategic_mode/tile_events/sprites/x_marks_the_spot.png" id="2_s787d"]
+
+[node name="Visp" type="Node2D"]
+script = ExtResource("1_57m7f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_s787d")

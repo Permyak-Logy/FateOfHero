@@ -22,7 +22,8 @@ var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var last_position: Vector2
 var is_moving: bool = false
-#
+@export var mc_name: String
+
 func _init():
 	if not inventory:
 		inventory = Inventory.new()
@@ -31,6 +32,9 @@ func update_nav_map(pos: Vector2i, state: bool):
 	astar_grid.set_point_solid(pos, not state)
 
 func _ready():
+	if mc_name:
+		sprite.texture = texture[mc_name]
+	
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16) 

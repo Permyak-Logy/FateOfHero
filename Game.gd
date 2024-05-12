@@ -62,6 +62,7 @@ func load_save():
 	strat_map = load("res://save/save.tscn").instantiate()
 	add_child(strat_map)
 	strat_map.player.inventory = ResourceLoader.load("save/player_inventory.tres")
+	
 	for scn in get_tree().get_nodes_in_group("MicroInventoryOwner"):
 		if not ResourceLoader.exists("res://save/" + scn.name + "_inv.tres"):
 			continue
@@ -76,6 +77,7 @@ func new_save(init_char: PackedScene):
 	strat_map.player.inventory.characters.append(init_char)
 	var char = init_char.instantiate()
 	strat_map.player.sprite.texture = strat_map.player.texture[char.name]
+	strat_map.player.mc_name = char.name
 	remove_child(strat_map)
 	
 	
