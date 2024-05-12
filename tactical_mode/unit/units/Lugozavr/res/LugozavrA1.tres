@@ -10,6 +10,7 @@ block_moving_effect = ExtResource("1_o3thu")
 power_p = 0.5
 targets = 1
 max_targets = 0
+apply_on = Array[int]([2])
 acts = 1
 final_act = true
 cooldown = 10

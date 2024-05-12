@@ -2,6 +2,7 @@ class_name DirectedAbility extends Ability
 
 @export var targets: int = 1
 @export var max_targets: int = 0
+@export var apply_on: Array[TacticalMap.relation]
 
 var selected: Array[Actor] = []
 var selectable_tab: Array[Actor] = []
@@ -79,7 +80,12 @@ func find_all_selectable_tab_targets():
 			selectable_tab.append(actor)
 
 func can_select(_node: Actor) -> bool:
-	return true
+	var unit = _node as Unit
+	if not unit:
+		return false
+	if not unit.visible:
+		return false
+	return get_map().get_relation(owner, unit) in apply_on
 
 func get_map() -> TacticalMap:
 	if is_instance_of(owner, Unit):
@@ -95,3 +101,4 @@ func can_apply() -> bool:
 	else:
 		up_bound = max_targets
 	return targets <= len(selected) and len(selected) <= up_bound
+	

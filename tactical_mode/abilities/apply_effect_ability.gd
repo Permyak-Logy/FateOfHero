@@ -1,7 +1,6 @@
 class_name ApplyEffectAbility extends DirectedAbility
 
 @export var effect: Effect
-@export var apply_on: Array[TacticalMap.relation]
 
 func apply():
 	for i in range(len(selected)):
@@ -12,11 +11,3 @@ func apply():
 		unit.add_effect(e)
 		owner.play("idle")
 	return true
-
-func can_select(node):
-	var unit = node as Unit
-	if not unit:
-		return false
-	if not unit.visible:
-		return false
-	return get_map().get_relation(owner, unit) in apply_on

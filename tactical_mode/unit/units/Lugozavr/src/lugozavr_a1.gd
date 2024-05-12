@@ -23,15 +23,9 @@ func subapply():
 	)
 
 func can_select(node):
+	if not super(node):
+		return false
 	var unit = node as Unit
-	if not unit:
-		return false
-	if unit.is_death():
-		return false
-	if not unit.visible:
-		return false
-	if get_map().is_player(owner) == get_map().is_player(node):
-		return false
 	var cur_dist = float("inf")
 	for cell in unit.get_occupied_cells():
 		cur_dist = min(cur_dist, get_map().distance_between_cells(owner.get_cell(), cell))

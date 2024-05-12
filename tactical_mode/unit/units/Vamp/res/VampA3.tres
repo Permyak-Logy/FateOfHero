@@ -10,6 +10,7 @@ power_self = 0.1
 power_target = 2.0
 targets = 1
 max_targets = 0
+apply_on = Array[int]([1])
 acts = 0
 final_act = true
 cooldown = 0

@@ -13,12 +13,3 @@ func apply():
 	owner.play("idle")
 	return true
 
-func can_select(node):
-	var unit = node as Unit
-	if not unit:
-		return false
-	if unit.is_death():
-		return false
-	if not unit.visible:
-		return false
-	return get_map().is_player(owner) == get_map().is_player(node)

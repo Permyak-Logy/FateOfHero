@@ -15,13 +15,7 @@ func apply():
 
 func can_select(node):
 	var unit = node as Unit
-	if not unit:
-		return false
-	if unit.is_death():
-		return false
-	if not unit.visible:
-		return false
-	if get_map().get_relation(owner, unit) != TacticalMap.relation.Enemy:
+	if not super(unit):
 		return false
 	var cur_dist = 1_000_000
 	for cell in unit.get_occupied_cells():

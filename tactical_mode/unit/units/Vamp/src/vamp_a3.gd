@@ -15,15 +15,3 @@ func apply():
 		"=> " + owner.unit_name + "восстанавливает " + str(heal) + " здоровья " + unit.unit_name)
 	owner.play("idle")
 	return true
-
-func can_select(node):
-	var unit = node as Unit
-	if not unit:
-		return false
-	if unit.is_death():
-		return false
-	if unit == owner:
-		return false
-	if not unit.visible:
-		return false
-	return get_map().is_player(owner) == get_map().is_player(node)

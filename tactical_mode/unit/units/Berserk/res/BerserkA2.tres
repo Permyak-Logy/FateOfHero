@@ -10,6 +10,7 @@ distance = 1
 power_p = 4.0
 targets = 1
 max_targets = 0
+apply_on = Array[int]([2])
 acts = 1
 final_act = true
 cooldown = 4

@@ -17,13 +17,3 @@ func apply():
 	
 func unselect(_node):
 	return
-
-func can_select(node):
-	var unit = node as Unit
-	if not unit:
-		return false
-	if unit.is_death():
-		return false
-	if unit.visible:
-		return false
-	return get_map().is_player(owner) == get_map().is_player(node)
