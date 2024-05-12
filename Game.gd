@@ -74,6 +74,8 @@ func new_save(init_char: PackedScene):
 	strat_map = StratMapRes.instantiate()
 	add_child(strat_map)
 	strat_map.player.inventory.characters.append(init_char)
+	var char = init_char.instantiate()
+	strat_map.player.sprite.texture = strat_map.player.texture[char.name]
 	remove_child(strat_map)
 	
 	
