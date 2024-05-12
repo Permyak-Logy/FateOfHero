@@ -6668,7 +6668,7 @@ enemies = Array[PackedScene]([ExtResource("5_r3hyg"), ExtResource("5_r3hyg"), Ex
 texture = ExtResource("5_1yukr")
 
 [node name="ambush" parent="CombatEncounters" instance=ExtResource("4_ve1hs")]
-position = Vector2(-111, 92)
+position = Vector2(281, 337)
 enemies = Array[PackedScene]([ExtResource("6_0wgum"), ExtResource("6_0wgum")])
 texture = ExtResource("8_q21qa")
 
@@ -6718,7 +6718,7 @@ type = 1
 
 [node name="player" parent="." groups=["Persistant"] instance=ExtResource("5_whmy4")]
 top_level = true
-position = Vector2(321, 266)
+position = Vector2(316, 297)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -6784,7 +6784,7 @@ volume_db = 3.237
 autoplay = true
 
 [node name="ManualDialogueTrigger2" parent="." instance=ExtResource("22_erct1")]
-position = Vector2(299, 234)
+position = Vector2(278, 269)
 do_destroy_on_exit = true
 dialogue = ExtResource("37_ohrpj")
 texture = ExtResource("38_cdp5s")
