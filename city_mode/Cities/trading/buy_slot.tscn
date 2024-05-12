@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cypsp1pvj7dh8"]
+
+[ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="1_i6xl3"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/buy_slot.gd" id="1_j32f1"]
+
+[node name="BuySlot" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 20)
+offset_right = 22.0
+offset_bottom = 21.0
+script = ExtResource("1_j32f1")
+
+[node name="back" type="Sprite2D" parent="."]
+position = Vector2(11, 10.5)
+scale = Vector2(1, 0.954545)
+texture = ExtResource("1_i6xl3")
+vframes = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2

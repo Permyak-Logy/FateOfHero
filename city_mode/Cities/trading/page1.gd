@@ -1,7 +1,5 @@
 extends Button
 
-
-
 func _on_pressed():
 	$"../../HBoxContainer/NinePatchRect/Trades1".visible = true
 	$"../../HBoxContainer/NinePatchRect/Trades2".visible = false

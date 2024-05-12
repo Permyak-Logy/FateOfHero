@@ -6746,7 +6746,7 @@ dialogue = ExtResource("22_trjjb")
 texture = ExtResource("5_1yukr")
 
 [node name="TownTileEvent" parent="." instance=ExtResource("21_vylki")]
-position = Vector2(77, 261)
+position = Vector2(390, 340)
 city = ExtResource("22_t3kb4")
 texture = ExtResource("23_qm7dp")
 

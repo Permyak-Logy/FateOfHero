@@ -1,0 +1,222 @@
+[gd_scene load_steps=16 format=3 uid="uid://dmkyu0kpc2o6b"]
+
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/RBook.gd" id="1_obsew"]
+[ext_resource type="Resource" uid="uid://b6qiv7mvlchkl" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottkeBlackRecipe.tres" id="2_jmrry"]
+[ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="3_2s3wr"]
+[ext_resource type="Resource" uid="uid://d2wwyvv1unq3j" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottkeRedRecipe.tres" id="3_s7abs"]
+[ext_resource type="Resource" uid="uid://ccmjb70h4h7co" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottleGreenRecipe.tres" id="4_7n45g"]
+[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="4_un25g"]
+[ext_resource type="PackedScene" uid="uid://bwsiiooku1t2u" path="res://city_mode/Cities/crafting/RecipeBook/Page.tscn" id="5_3tlli"]
+[ext_resource type="Resource" uid="uid://i58s8hni5ajs" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottleYellowRecipe.tres" id="5_actsd"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/recipes/recipe_book.gd" id="6_id6qd"]
+
+[sub_resource type="Resource" id="Resource_xrckl"]
+script = ExtResource("6_id6qd")
+Recipes = Array[Resource("res://city_mode/Cities/crafting/RecipeBook/recipes/recipe.gd")]([ExtResource("2_jmrry"), ExtResource("3_s7abs"), ExtResource("4_7n45g"), ExtResource("5_actsd")])
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ibys"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_blh8a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1le2f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7367"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owu3o"]
+
+[node name="RecipeBook" type="VBoxContainer"]
+offset_left = 394.0
+offset_top = 215.0
+offset_right = 534.0
+offset_bottom = 360.0
+script = ExtResource("1_obsew")
+recipes = SubResource("Resource_xrckl")
+
+[node name="PageButtons" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PB1" type="Button" parent="PageButtons"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ibys")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_blh8a")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1le2f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_t7367")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owu3o")
+
+[node name="Back" type="Sprite2D" parent="PageButtons/PB1"]
+position = Vector2(0.5, -0.5)
+scale = Vector2(1.05, 1.025)
+texture = ExtResource("3_2s3wr")
+centered = false
+vframes = 2
+frame = 1
+
+[node name="Pnum" type="Label" parent="PageButtons/PB1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -12.0
+offset_right = 13.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+
+[node name="PB2" type="Button" parent="PageButtons"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ibys")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_blh8a")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1le2f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_t7367")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owu3o")
+
+[node name="Back" type="Sprite2D" parent="PageButtons/PB2"]
+position = Vector2(0.5, -0.5)
+scale = Vector2(1.05, 1.025)
+texture = ExtResource("3_2s3wr")
+centered = false
+vframes = 2
+
+[node name="Pnum" type="Label" parent="PageButtons/PB2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -12.0
+offset_right = 13.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+
+[node name="PB3" type="Button" parent="PageButtons"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ibys")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_blh8a")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1le2f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_t7367")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owu3o")
+
+[node name="Back" type="Sprite2D" parent="PageButtons/PB3"]
+position = Vector2(0.5, -0.5)
+scale = Vector2(1.05, 1.025)
+texture = ExtResource("3_2s3wr")
+centered = false
+vframes = 2
+
+[node name="Pnum" type="Label" parent="PageButtons/PB3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -12.0
+offset_right = 13.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "3"
+
+[node name="PB4" type="Button" parent="PageButtons"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ibys")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_blh8a")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1le2f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_t7367")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owu3o")
+
+[node name="Back" type="Sprite2D" parent="PageButtons/PB4"]
+position = Vector2(0.5, -0.5)
+scale = Vector2(1.05, 1.025)
+texture = ExtResource("3_2s3wr")
+centered = false
+vframes = 2
+
+[node name="Pnum" type="Label" parent="PageButtons/PB4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -12.0
+offset_right = 13.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+
+[node name="Recipes" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+texture = ExtResource("4_un25g")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Page1" parent="Recipes" instance=ExtResource("5_3tlli")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 138.0
+offset_bottom = 133.0
+
+[node name="Page2" parent="Recipes" instance=ExtResource("5_3tlli")]
+visible = false
+layout_mode = 0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 138.0
+offset_bottom = 133.0
+
+[node name="Page3" parent="Recipes" instance=ExtResource("5_3tlli")]
+visible = false
+layout_mode = 0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 138.0
+offset_bottom = 133.0
+
+[node name="Page4" parent="Recipes" instance=ExtResource("5_3tlli")]
+visible = false
+layout_mode = 0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 138.0
+offset_bottom = 133.0
+
+[node name="Label" type="Label" parent="Recipes"]
+visible = false
+layout_mode = 0
+offset_left = 27.0
+offset_top = 54.0
+offset_right = 141.0
+offset_bottom = 121.0
+text = "No recipes"
+autowrap_mode = 2
+
+[connection signal="pressed" from="PageButtons/PB1" to="." method="_on_pb_1_pressed"]
+[connection signal="pressed" from="PageButtons/PB2" to="." method="_on_pb_2_pressed"]
+[connection signal="pressed" from="PageButtons/PB3" to="." method="_on_pb_3_pressed"]
+[connection signal="pressed" from="PageButtons/PB4" to="." method="_on_pb_4_pressed"]

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RecipeBook" load_steps=6 format=3 uid="uid://ccxrbnaw2l1dl"]
+
+[ext_resource type="Resource" uid="uid://b6qiv7mvlchkl" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottkeBlackRecipe.tres" id="1_skwx7"]
+[ext_resource type="Resource" uid="uid://d2wwyvv1unq3j" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottkeRedRecipe.tres" id="2_m0h71"]
+[ext_resource type="Resource" uid="uid://ccmjb70h4h7co" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottleGreenRecipe.tres" id="3_ka22f"]
+[ext_resource type="Resource" uid="uid://i58s8hni5ajs" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottleYellowRecipe.tres" id="4_xlyxu"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/recipes/recipe_book.gd" id="5_ly1er"]
+
+[resource]
+script = ExtResource("5_ly1er")
+Recipes = Array[Resource("res://city_mode/Cities/crafting/RecipeBook/recipes/recipe.gd")]([ExtResource("1_skwx7"), ExtResource("2_m0h71"), ExtResource("3_ka22f"), ExtResource("4_xlyxu")])

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwsiiooku1t2u"]
+
+[ext_resource type="PackedScene" uid="uid://blxk4ex3fpwq8" path="res://city_mode/Cities/crafting/RecipeBook/recipe.tscn" id="1_ih03v"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/Page.gd" id="1_lgqu1"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_lgqu1")
+
+[node name="Recipe" parent="." instance=ExtResource("1_ih03v")]
+layout_mode = 2
+
+[node name="Recipe2" parent="." instance=ExtResource("1_ih03v")]
+layout_mode = 2
+
+[node name="Recipe3" parent="." instance=ExtResource("1_ih03v")]
+layout_mode = 2

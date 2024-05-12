@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://blxk4ex3fpwq8"]
+
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/recipe_gui.gd" id="1_aaros"]
+[ext_resource type="Resource" uid="uid://dccvs3cym8a1x" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottleGreenR.tres" id="2_tiemi"]
+[ext_resource type="PackedScene" uid="uid://douwpwsc16lq5" path="res://city_mode/Cities/crafting/recipe_slot.tscn" id="2_wruki"]
+[ext_resource type="Texture2D" uid="uid://15slnphedf6a" path="res://GUI/city_mode/plus.png" id="3_684ar"]
+[ext_resource type="Texture2D" uid="uid://skoxnfqn8d10" path="res://GUI/city_mode/eqw.png" id="4_1u2ph"]
+
+[node name="Recipe" type="HBoxContainer"]
+offset_right = 88.0
+offset_bottom = 40.0
+script = ExtResource("1_aaros")
+r = ExtResource("2_tiemi")
+
+[node name="RecipeSlot" parent="." instance=ExtResource("2_wruki")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -9.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_684ar")
+
+[node name="RecipeSlot2" parent="." instance=ExtResource("2_wruki")]
+layout_mode = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_1u2ph")
+
+[node name="RecipeSlot3" parent="." instance=ExtResource("2_wruki")]
+layout_mode = 2

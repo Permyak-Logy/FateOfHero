@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=8 format=3 uid="uid://r13qdibf7tm3"]
+
+[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_2slgn"]
+[ext_resource type="Resource" uid="uid://c0srtoci3pulj" path="res://inventory/items/helmet_billet.tres" id="2_n1wdj"]
+[ext_resource type="Resource" uid="uid://b1hv1sghbyjh6" path="res://inventory/items/body_billet.tres" id="3_5spb2"]
+[ext_resource type="Resource" uid="uid://bpac8plevrksx" path="res://inventory/items/trousers_billet.tres" id="4_fgcoi"]
+[ext_resource type="Resource" uid="uid://b7ko7srrw2av6" path="res://inventory/items/boots_billet.tres" id="5_whapq"]
+[ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="6_d74o3"]
+[ext_resource type="Script" path="res://inventory/inventory.gd" id="6_vemxm"]
+
+[resource]
+script = ExtResource("6_vemxm")
+items = {
+ExtResource("1_2slgn"): 10,
+ExtResource("2_n1wdj"): 2,
+ExtResource("3_5spb2"): 3,
+ExtResource("4_fgcoi"): 1,
+ExtResource("5_whapq"): 4,
+ExtResource("6_d74o3"): 1800
+}
+characters = Array[PackedScene]([])

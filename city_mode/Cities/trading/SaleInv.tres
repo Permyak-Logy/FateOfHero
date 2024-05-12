@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=2 format=3 uid="uid://mgakgn2qb2fn"]
+
+[ext_resource type="Script" path="res://inventory/inventory.gd" id="1_jrr2e"]
+
+[resource]
+script = ExtResource("1_jrr2e")
+items = {}
+characters = Array[PackedScene]([])
