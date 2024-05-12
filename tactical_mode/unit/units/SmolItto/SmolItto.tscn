@@ -59,9 +59,9 @@ characteristic = SubResource("Resource_uow0a")
 
 [sub_resource type="Resource" id="Resource_dkxsi"]
 script = ExtResource("2_tlmj2")
-base = 50.0
-cur = 50.0
-max_ = 50.0
+base = 20.0
+cur = 20.0
+max_ = 20.0
 
 [sub_resource type="Resource" id="Resource_7l1dn"]
 script = ExtResource("3_d7s85")

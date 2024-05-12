@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_33sav")
 block_moving_effect = ExtResource("1_o3thu")
-power_p = 0.2
+power_p = 0.5
 targets = 1
 max_targets = 0
 acts = 1

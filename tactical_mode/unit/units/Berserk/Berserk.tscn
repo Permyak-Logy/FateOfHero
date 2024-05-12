@@ -87,26 +87,6 @@ color_ramp = SubResource("GradientTexture1D_e1g2a")
 radius = 14.0
 height = 56.0
 
-[sub_resource type="Animation" id="Animation_whb6q"]
-resource_name = "run"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_yhwse"]
-resource_name = "idle"
-loop_mode = 1
-
 [sub_resource type="Animation" id="Animation_pr4as"]
 length = 0.001
 tracks/0/type = "value"
@@ -249,6 +229,26 @@ tracks/4/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_yhwse"]
+resource_name = "idle"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_whb6q"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xnlmd"]
 _data = {
 "RESET": SubResource("Animation_pr4as"),
@@ -280,7 +280,6 @@ private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResour
 z_index = -1
 position = Vector2(0, -26)
 emitting = false
-amount = 5
 process_material = SubResource("ParticleProcessMaterial_lcjhm")
 texture = ExtResource("10_urkiw")
 
