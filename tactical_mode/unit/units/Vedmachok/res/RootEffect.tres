@@ -10,6 +10,7 @@ add = 0.0
 mul = 1.0
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_03dj1")
 mod_value = SubResource("Resource_dawy7")
 on_stack = 0

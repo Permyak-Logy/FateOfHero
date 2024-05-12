@@ -1,81 +1,25 @@
-[gd_scene load_steps=42 format=3 uid="uid://d1jk2a04wq33q"]
+[gd_scene load_steps=34 format=3 uid="uid://d1jk2a04wq33q"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3454p"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_7afhu"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="3_uv67m"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="4_5v37f"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_8mxrt"]
+[ext_resource type="Resource" uid="uid://cvfnpm8t4cw35" path="res://tactical_mode/unit/res/InventoryComp.tres" id="2_45jho"]
+[ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_lkwsv"]
+[ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_0f3pp"]
+[ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="5_eaw4v"]
 [ext_resource type="Resource" uid="uid://bhkcohkp7d0tj" path="res://tactical_mode/unit/units/Vamp/res/VampA0.tres" id="6_1t0c8"]
+[ext_resource type="Resource" uid="uid://crsva3kiqhcl" path="res://tactical_mode/unit/res/DamageStat.tres" id="6_ppntu"]
 [ext_resource type="Resource" uid="uid://di1372ucdkekv" path="res://tactical_mode/unit/units/Vamp/res/VampA1.tres" id="7_ax6he"]
+[ext_resource type="Resource" uid="uid://c4l247aylu587" path="res://tactical_mode/unit/res/Expirience.tres" id="7_b26qs"]
 [ext_resource type="Resource" uid="uid://csshoxe7yf51e" path="res://tactical_mode/unit/units/Vamp/res/VampA2.tres" id="8_r0ub4"]
 [ext_resource type="Resource" uid="uid://di4u67c7nk826" path="res://tactical_mode/unit/units/Vamp/res/VampA3.tres" id="9_nqkrh"]
 [ext_resource type="Resource" uid="uid://5d8bwek6gx45" path="res://tactical_mode/unit/units/Vamp/res/VampP1.tres" id="10_5dx63"]
 [ext_resource type="Resource" uid="uid://drtfi4k16ej2g" path="res://tactical_mode/unit/units/Vamp/res/VampP2.tres" id="11_j0kv6"]
-[ext_resource type="Resource" uid="uid://chwc8kck316im" path="res://tactical_mode/effects/MainHeroEffect.tres" id="12_gmwrs"]
+[ext_resource type="Resource" uid="uid://chwc8kck316im" path="res://tactical_mode/effects/res/MainHeroEffect.tres" id="12_gmwrs"]
 [ext_resource type="Texture2D" uid="uid://ble3aqxqisbwg" path="res://tactical_mode/unit/units/Vamp/assets/VampRun.png" id="13_klfgo"]
 [ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/units/Vamp/assets/spritesheet.png" id="13_yrav4"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="14_2n4pm"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="14_w61fm"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="15_s6ke4"]
 [ext_resource type="Texture2D" uid="uid://duhyf2qq5fq5b" path="res://tactical_mode/unit/units/Vamp/assets/spritesheet_trail.png" id="17_kuf3k"]
-
-[sub_resource type="Resource" id="Resource_gxg75"]
-script = ExtResource("2_7afhu")
-_gears = {}
-gear_slots = {
-2: 2,
-4: 5
-}
-
-[sub_resource type="Resource" id="Resource_ywk01"]
-script = ExtResource("3_uv67m")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_8hokp"]
-script = ExtResource("4_5v37f")
-mod_type = 0
-characteristic = SubResource("Resource_ywk01")
-
-[sub_resource type="Resource" id="Resource_6gu2l"]
-script = ExtResource("3_uv67m")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_m422q"]
-script = ExtResource("4_5v37f")
-mod_type = 3
-characteristic = SubResource("Resource_6gu2l")
-
-[sub_resource type="Resource" id="Resource_k16fc"]
-script = ExtResource("3_uv67m")
-base = 101.0
-cur = 101.0
-max_ = 101.0
-
-[sub_resource type="Resource" id="Resource_go4ob"]
-script = ExtResource("4_5v37f")
-mod_type = 1
-characteristic = SubResource("Resource_k16fc")
-
-[sub_resource type="Resource" id="Resource_2j2qp"]
-script = ExtResource("3_uv67m")
-base = 50.0
-cur = 50.0
-max_ = 50.0
-
-[sub_resource type="Resource" id="Resource_ngsv5"]
-script = ExtResource("4_5v37f")
-mod_type = 2
-characteristic = SubResource("Resource_2j2qp")
-
-[sub_resource type="Resource" id="Resource_iw2g7"]
-script = ExtResource("5_8mxrt")
-level = 1
-expirience = 0
-ups = 0
 
 [sub_resource type="Gradient" id="Gradient_h44pd"]
 colors = PackedColorArray(1, 0.933333, 0.945098, 1, 0.254902, 0, 0, 0)
@@ -451,12 +395,12 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3454p")
 unit_name = "Фиди (Вапир)"
-inventory = SubResource("Resource_gxg75")
-health = SubResource("Resource_8hokp")
-defence = SubResource("Resource_m422q")
-speed = SubResource("Resource_go4ob")
-damage = SubResource("Resource_ngsv5")
-expirience = SubResource("Resource_iw2g7")
+inventory = ExtResource("2_45jho")
+health = ExtResource("3_lkwsv")
+defence = ExtResource("4_0f3pp")
+speed = ExtResource("5_eaw4v")
+damage = ExtResource("6_ppntu")
+expirience = ExtResource("7_b26qs")
 sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")

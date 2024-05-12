@@ -140,7 +140,6 @@ func put_item_to_char_slot(slot: InventorySlot) -> int:
 	if not is_instance_of(item_stack.item, Gear):
 		return false
 	var fit = character_panel.current_character.inventory.use(item_stack)
-	assert(item_stack.size == fit, "Ошибка в добавлении предмета")
 	character_panel.current_character.reload_all_mods()
 	print("equipped: ", item_stack.item.name, " size:", item_stack.size)
 	item_stack_in_hand.item_stack.size -= fit

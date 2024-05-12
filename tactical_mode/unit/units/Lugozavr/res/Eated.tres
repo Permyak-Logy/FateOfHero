@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Lugozavr/src/eated_effect.gd" id="1_d53b8"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_d53b8")
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = true

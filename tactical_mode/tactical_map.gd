@@ -369,7 +369,7 @@ func _start_stepmove():
 		_update_walkable()
 		_block_input = false
 	else:
-		_update_walkable(true)
+		_update_walkable(false)
 		active_unit.ai(self)
 
 func _update_stepmove():
@@ -377,6 +377,7 @@ func _update_stepmove():
 	Вызывается перед каждым действием юнита
 	"""
 	
+	await get_tree().create_timer(0.1).timeout
 	cur_ability = null
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	

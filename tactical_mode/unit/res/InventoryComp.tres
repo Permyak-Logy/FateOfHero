@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryComponent" load_steps=2 format=3 uid="uid://cvfnpm8t4cw35"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="1_k2iwd"]
+
+[resource]
+script = ExtResource("1_k2iwd")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}

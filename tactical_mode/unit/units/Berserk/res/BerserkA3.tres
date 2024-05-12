@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://7bkvw6d6gs28" path="res://tactical_mode/unit/units/Berserk/assets/Berserk_n3.png" id="2_1wsbj"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_hcrx0")
 targets = 1
 max_targets = 0
@@ -11,6 +12,7 @@ acts = 0
 final_act = false
 cooldown = 0
 limit = 0
+consumable = false
 count = -1
 scaling_type = 4
 overlay_atlas_coords = Vector2i(1, 0)

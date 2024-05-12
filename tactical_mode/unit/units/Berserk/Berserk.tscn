@@ -1,76 +1,20 @@
-[gd_scene load_steps=34 format=3 uid="uid://komiiv5ot43n"]
+[gd_scene load_steps=26 format=3 uid="uid://komiiv5ot43n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3ocbc"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_1wvle"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="2_7e5uy"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_i4t0d"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="4_tr2kr"]
+[ext_resource type="Resource" uid="uid://cvfnpm8t4cw35" path="res://tactical_mode/unit/res/InventoryComp.tres" id="2_twqik"]
+[ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_efh4n"]
+[ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_1oxc8"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="4_ukfk8"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_iree2"]
+[ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="5_iy66f"]
+[ext_resource type="Resource" uid="uid://crsva3kiqhcl" path="res://tactical_mode/unit/res/DamageStat.tres" id="6_bh2dk"]
 [ext_resource type="Resource" uid="uid://jmvxktk78bc6" path="res://tactical_mode/unit/units/Berserk/res/BerserkA0.tres" id="6_unl5f"]
 [ext_resource type="Resource" uid="uid://ca00njn6opt8b" path="res://tactical_mode/unit/units/Berserk/res/BerserkA1.tres" id="7_h4oqc"]
+[ext_resource type="Resource" uid="uid://c4l247aylu587" path="res://tactical_mode/unit/res/Expirience.tres" id="7_xyv8o"]
 [ext_resource type="Resource" uid="uid://bt80conpnoc8f" path="res://tactical_mode/unit/units/Berserk/res/BerserkA2.tres" id="8_x0px8"]
 [ext_resource type="Resource" uid="uid://dkk1mqckd0wg4" path="res://tactical_mode/unit/units/Berserk/res/BerserkA3.tres" id="9_qtvge"]
 [ext_resource type="Texture2D" uid="uid://dfjvd077r7e8v" path="res://tactical_mode/unit/units/Berserk/assets/spritesheet.png" id="10_urkiw"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="11_os431"]
-
-[sub_resource type="Resource" id="Resource_qa83h"]
-script = ExtResource("2_1wvle")
-_gears = {}
-gear_slots = {
-2: 2,
-4: 1
-}
-
-[sub_resource type="Resource" id="Resource_yrivq"]
-script = ExtResource("4_tr2kr")
-base = 200.0
-cur = 200.0
-max_ = 200.0
-
-[sub_resource type="Resource" id="Resource_kdxlc"]
-script = ExtResource("3_i4t0d")
-mod_type = 0
-characteristic = SubResource("Resource_yrivq")
-
-[sub_resource type="Resource" id="Resource_tm6hb"]
-script = ExtResource("4_tr2kr")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_mq55u"]
-script = ExtResource("3_i4t0d")
-mod_type = 3
-characteristic = SubResource("Resource_tm6hb")
-
-[sub_resource type="Resource" id="Resource_6eqvn"]
-script = ExtResource("4_tr2kr")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_keska"]
-script = ExtResource("3_i4t0d")
-mod_type = 1
-characteristic = SubResource("Resource_6eqvn")
-
-[sub_resource type="Resource" id="Resource_xamyv"]
-script = ExtResource("4_tr2kr")
-base = 10.0
-cur = 10.0
-max_ = 10.0
-
-[sub_resource type="Resource" id="Resource_0g0tw"]
-script = ExtResource("3_i4t0d")
-mod_type = 2
-characteristic = SubResource("Resource_xamyv")
-
-[sub_resource type="Resource" id="Resource_h4p4i"]
-script = ExtResource("5_iree2")
-level = 1
-expirience = 0
-ups = 0
 
 [sub_resource type="Gradient" id="Gradient_ha3mq"]
 colors = PackedColorArray(1, 0, 1, 1, 0.360784, 0, 0.368627, 0)
@@ -263,12 +207,12 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3ocbc")
 unit_name = "Фиди (Берсерк)"
-inventory = SubResource("Resource_qa83h")
-health = SubResource("Resource_kdxlc")
-defence = SubResource("Resource_mq55u")
-speed = SubResource("Resource_keska")
-damage = SubResource("Resource_0g0tw")
-expirience = SubResource("Resource_h4p4i")
+inventory = ExtResource("2_twqik")
+health = ExtResource("3_efh4n")
+defence = ExtResource("4_1oxc8")
+speed = ExtResource("5_iy66f")
+damage = ExtResource("6_bh2dk")
+expirience = ExtResource("7_xyv8o")
 sprite_for_outline = NodePath("Sprite2D")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")

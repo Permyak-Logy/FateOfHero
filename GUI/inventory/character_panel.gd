@@ -7,7 +7,6 @@ Panel on the right that represents character and their gear
 """
 
 @onready var name_label: Label = $HBoxContainer/Character/Name
-@onready var sprite: Sprite2D = $HBoxContainer/Character/PictureBack/Holder/CharacterSprite
 @onready var sprite_holder: CenterContainer = $HBoxContainer/Character/PictureBack/Holder
 @onready var gear_holder: VBoxContainer = $HBoxContainer/Gear
 @onready var ability_holder: VBoxContainer = $HBoxContainer/Skills
@@ -114,13 +113,12 @@ func update_bars():
 
 func update_repr():
 	name_label.text = current_character.name
-	if sprite_holder.get_child_count():
-		sprite_holder.remove_child(sprite)
 	
-	sprite = current_character.sprite_for_outline.duplicate()
-	sprite.centered = false
-	sprite.offset = Vector2i(0, 24)
-	sprite_holder.add_child(sprite)
+	var offset = sprite_holder.size
+	offset[0] /= 2
+	current_character.global_position = sprite_holder.global_position + offset
+	current_character.toggle_preview(true)
+	
 
 func update():
 	update_repr()
@@ -143,11 +141,12 @@ func change_character(character: PackedScene) -> PackedScene:
 	
 	if current_character:
 		sprite_holder.remove_child(current_character)
+	
 	current_character = character.instantiate()
-	current_character.visible = false
 	cs = current_character.get_node_or_null("CollisionShape2D")
 	cs.disabled = true
 	sprite_holder.add_child(current_character)
+	current_character.play("idle")
 	
 	remake_stots()
 	print("changed displayed character to <", current_character.name, ">" )
@@ -155,18 +154,10 @@ func change_character(character: PackedScene) -> PackedScene:
 	return old_char
 
 func pack_character() -> PackedScene:
-	cs.disabled = false
 	var character = PackedScene.new()
-	current_character.visible = true
+	cs = current_character.get_node_or_null("CollisionShape2D")
+	cs.disabled = false
 	character.pack(current_character)
+	cs.disabled = true
+	
 	return character
-
-func _process(delta):
-	if !sprite:
-		return
-	if sprite.hframes < 3:
-		return
-	t += delta
-	if t > 1:
-		sprite.frame = 1 + (sprite.frame  % 3) 
-		t = 0

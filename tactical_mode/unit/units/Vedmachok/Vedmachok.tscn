@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://csb3ujant2uio"]
+[gd_scene load_steps=35 format=3 uid="uid://csb3ujant2uio"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/Vedmachok.gd" id="1_niktu"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_5q3v1"]
@@ -10,53 +10,63 @@
 [ext_resource type="Resource" uid="uid://caaovo3ff0mc2" path="res://tactical_mode/unit/units/Vedmachok/res/VedmachokA1.tres" id="6_ft64p"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="6_uhiw1"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="7_f0kl4"]
+[ext_resource type="Resource" uid="uid://bq2iicqcssmai" path="res://tactical_mode/effects/res/LevelUpscaleEffect.tres" id="7_fed47"]
 [ext_resource type="Texture2D" uid="uid://cs4b8cuqypclf" path="res://tactical_mode/unit/units/Vedmachok/assets/run.png" id="8_jdgdj"]
 
 [sub_resource type="Resource" id="Resource_xhmqf"]
+resource_local_to_scene = true
 script = ExtResource("2_5q3v1")
 base = 100.0
 cur = 100.0
 max_ = 100.0
 
 [sub_resource type="Resource" id="Resource_txejc"]
+resource_local_to_scene = true
 script = ExtResource("3_klvn2")
 mod_type = 0
 characteristic = SubResource("Resource_xhmqf")
 
 [sub_resource type="Resource" id="Resource_v2qqe"]
+resource_local_to_scene = true
 script = ExtResource("2_5q3v1")
 base = 300.0
 cur = 300.0
 max_ = 300.0
 
 [sub_resource type="Resource" id="Resource_jfvkh"]
+resource_local_to_scene = true
 script = ExtResource("3_klvn2")
 mod_type = 3
 characteristic = SubResource("Resource_v2qqe")
 
 [sub_resource type="Resource" id="Resource_cfuuq"]
+resource_local_to_scene = true
 script = ExtResource("2_5q3v1")
 base = 100.0
 cur = 100.0
 max_ = 100.0
 
 [sub_resource type="Resource" id="Resource_aqp23"]
+resource_local_to_scene = true
 script = ExtResource("3_klvn2")
 mod_type = 1
 characteristic = SubResource("Resource_cfuuq")
 
 [sub_resource type="Resource" id="Resource_4eanr"]
+resource_local_to_scene = true
 script = ExtResource("2_5q3v1")
 base = 30.0
 cur = 30.0
 max_ = 30.0
 
 [sub_resource type="Resource" id="Resource_jkeo0"]
+resource_local_to_scene = true
 script = ExtResource("3_klvn2")
 mod_type = 2
 characteristic = SubResource("Resource_4eanr")
 
 [sub_resource type="Resource" id="Resource_rss36"]
+resource_local_to_scene = true
 script = ExtResource("4_udfcx")
 level = 1
 expirience = 0
@@ -285,10 +295,10 @@ tracks/1/path = NodePath("..:percent_between_target")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [1.0, 1.0, 0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -385,6 +395,7 @@ _data = {
 [node name="Vedmachok" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
+input_pickable = true
 script = ExtResource("1_niktu")
 unit_name = "Ведьмачок"
 health = SubResource("Resource_txejc")
@@ -401,7 +412,7 @@ for_flip_sprites = [NodePath("Body")]
 acts_count = 2
 controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_sprtl"), ExtResource("6_ft64p")])
-percent_between_target = 1.0
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("7_fed47")])
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("7_f0kl4")
@@ -436,3 +447,7 @@ root_node = NodePath("../GPUParticles2D")
 libraries = {
 "": SubResource("AnimationLibrary_gtko6")
 }
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

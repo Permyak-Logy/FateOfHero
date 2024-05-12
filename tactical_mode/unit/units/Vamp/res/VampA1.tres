@@ -5,16 +5,18 @@
 [ext_resource type="Texture2D" uid="uid://hpydxfk4lo0a" path="res://tactical_mode/unit/units/Vamp/assets/Vampire_n1.png" id="3_6urav"]
 
 [sub_resource type="Resource" id="Resource_co4lr"]
+resource_local_to_scene = true
 script = ExtResource("1_l6abw")
 power = 0.2
 count = 5
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = true
 stackable = false
-effect_name = "Эффект"
+effect_name = "Вампиризм"
 is_negative = false
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_7b0x6")
 effect = SubResource("Resource_co4lr")
 apply_on = Array[int]([0])

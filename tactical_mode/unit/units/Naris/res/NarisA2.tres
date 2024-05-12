@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dbv71s0kcqln3" path="res://tactical_mode/unit/units/Naris/assets/Beretta_n2.png" id="3_yfp7y"]
 
 [sub_resource type="Resource" id="Resource_rao28"]
+resource_local_to_scene = true
 script = ExtResource("1_wo0u3")
 count = 1.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
@@ -14,6 +15,7 @@ effect_name = "Неуязвимость"
 is_negative = false
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_sjwrv")
 effect = SubResource("Resource_rao28")
 apply_on = Array[int]([1, 0])
@@ -28,7 +30,7 @@ count = -1
 scaling_type = 4
 overlay_atlas_coords = Vector2i(3, 0)
 only_unit_owner = true
-type = 0
+type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Скрытая броня"
 description = "Дать неуязвимость к следующему получению урона"

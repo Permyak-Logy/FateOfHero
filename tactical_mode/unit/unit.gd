@@ -5,28 +5,18 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 @export var unit_name: String = "Unit"
 
 @export_group("Components")
-@export var inventory: InventoryComponent = null:
-	set(value):
-		inventory = value.duplicate(true) if value else null
+@export var inventory: InventoryComponent = null
 @export var health: StatComponent = null:
 	set(value):
 		if health:
 			health.empty.disconnect(on_death)
-		health = value.duplicate(true) if value else null
-		if health:		
+		health = value
+		if health:
 			health.empty.connect(on_death)
-@export var defence: StatComponent = null:
-	set(value):
-		defence = value.duplicate(true) if value else null
-@export var speed: StatComponent = null:
-	set(value):
-		speed = value.duplicate(true) if value else null
-@export var damage: StatComponent = null:
-	set(value):
-		damage = value.duplicate(true) if value else null
-@export var expirience: ExpirienceComponent = null:
-	set(value):
-		expirience = value.duplicate(true) if value else null
+@export var defence: StatComponent = null
+@export var speed: StatComponent = null
+@export var damage: StatComponent = null
+@export var expirience: ExpirienceComponent = null
 @export var sprite_for_outline: Sprite2D = null
 @export var trail_particles: GPUParticles2D = null
 @export var health_bar_pb: StatProgressBar = null
@@ -225,6 +215,7 @@ func idle_direction_bool():
 	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
+	print(unit_name, " play ", _name, " ", _params)
 	if is_death() and not _name.begins_with("death"):
 		return
 	if _name == "walk":
@@ -249,6 +240,8 @@ func play(_name: String, _params=null):
 		
 		if _name.begins_with("post"):
 			flipped = idle_direction_bool()
+	else:
+		print(self, " not Animation player")
 
 func on_death(_component: StatComponent):
 	print("Death ", self)

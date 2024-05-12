@@ -18,13 +18,15 @@ var owner: Unit = null:
 	set(value):
 		if not _visual_effect and visual_effect:
 			_visual_effect = visual_effect.instantiate()
-			finished.connect(func(_x): _x.remove_visual_effect())
+			finished.connect(remove_visual_effect)
 		var old = owner
 		owner = value
 		if _visual_effect:
 			if old:
+				old.death.disconnect(remove_visual_effect)
 				old.remove_child(_visual_effect)
 			if owner:
+				owner.death.connect(remove_visual_effect)
 				owner.add_child(_visual_effect)
 		 
 		on_set_owner(old, owner)
@@ -75,6 +77,6 @@ func get_map() -> TacticalMap:
 func cancel_effect():
 	pass
 
-func remove_visual_effect():
+func remove_visual_effect(_null=null):
 	if _visual_effect and owner:
 		owner.remove_child(_visual_effect)

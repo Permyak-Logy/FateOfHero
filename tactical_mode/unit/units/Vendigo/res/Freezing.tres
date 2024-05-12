@@ -15,6 +15,7 @@ type = 1
 value = SubResource("Resource_gsuud")
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_wkxoy")
 on_stack = 3
 limit_stacks_for_sum_mods = 10

@@ -5,15 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://b5x878mj5f2fp" path="res://tactical_mode/unit/units/Naris/assets/Beretta_n1.png" id="3_2y2fy"]
 
 [sub_resource type="Resource" id="Resource_7ifd1"]
+resource_local_to_scene = true
 script = ExtResource("1_3jkel")
 power = 0.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
 stackable = false
-effect_name = "Эффект"
+effect_name = "Щит"
 is_negative = false
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_lbl2a")
 effect = SubResource("Resource_7ifd1")
 apply_on = Array[int]([0, 1])

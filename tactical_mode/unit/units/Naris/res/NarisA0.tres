@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dfp6pw6jqp11v" path="res://tactical_mode/assets/AttackAbility.png" id="2_o0guf"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_eeq7w")
 distance = 1
 power_p = 1.0
@@ -13,6 +14,7 @@ acts = 0
 final_act = true
 cooldown = 0
 limit = 0
+consumable = false
 count = -1
 scaling_type = 2
 overlay_atlas_coords = Vector2i(2, 0)

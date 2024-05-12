@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://tactical_mode/effects/shield_effect.gd" id="2_ew2o5"]
 
 [sub_resource type="Resource" id="Resource_gvm22"]
+resource_local_to_scene = true
 script = ExtResource("2_ew2o5")
 power = 10.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
@@ -13,6 +14,7 @@ effect_name = "Щит"
 is_negative = false
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_avptq")
 to_replicate_effect = SubResource("Resource_gvm22")
 apply_to = Array[int]([1, 0])

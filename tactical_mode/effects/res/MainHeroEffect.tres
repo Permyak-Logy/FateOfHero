@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="MainHeroEffect" load_steps=2 format=3 uid="uid://chwc8kck316im"]
 
-[ext_resource type="Script" path="res://tactical_mode/effects/main_hero_effect.gd" id="1_whqne"]
+[ext_resource type="Script" path="res://tactical_mode/effects/main_hero_effect.gd" id="1_kh6yi"]
 
 [resource]
-script = ExtResource("1_whqne")
+resource_local_to_scene = true
+script = ExtResource("1_kh6yi")
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
 stackable = false

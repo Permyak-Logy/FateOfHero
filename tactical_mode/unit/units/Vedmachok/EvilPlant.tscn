@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b1ley3wjjoisv"]
+[gd_scene load_steps=27 format=3 uid="uid://b1ley3wjjoisv"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/EvilPlant.gd" id="1_g78kk"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
@@ -7,54 +7,64 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_pjk8i"]
 [ext_resource type="Resource" uid="uid://db5vwnunv2m3b" path="res://tactical_mode/unit/units/Vedmachok/res/EvilPlantA0.tres" id="5_l7ulv"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="6_etn73"]
+[ext_resource type="Resource" uid="uid://bq2iicqcssmai" path="res://tactical_mode/effects/res/LevelUpscaleEffect.tres" id="6_krl3i"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="6_w1513"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="8_e7cbv"]
 
 [sub_resource type="Resource" id="Resource_us7qo"]
+resource_local_to_scene = true
 script = ExtResource("2_smu40")
 base = 40.0
 cur = 40.0
 max_ = 40.0
 
 [sub_resource type="Resource" id="Resource_px43a"]
+resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 0
 characteristic = SubResource("Resource_us7qo")
 
 [sub_resource type="Resource" id="Resource_pulf1"]
+resource_local_to_scene = true
 script = ExtResource("2_smu40")
 base = 0.0
 cur = 0.0
 max_ = 0.0
 
 [sub_resource type="Resource" id="Resource_aj3sk"]
+resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 3
 characteristic = SubResource("Resource_pulf1")
 
 [sub_resource type="Resource" id="Resource_m8x7f"]
+resource_local_to_scene = true
 script = ExtResource("2_smu40")
 base = 80.0
 cur = 80.0
 max_ = 80.0
 
 [sub_resource type="Resource" id="Resource_cvhmw"]
+resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 1
 characteristic = SubResource("Resource_m8x7f")
 
 [sub_resource type="Resource" id="Resource_pie3m"]
+resource_local_to_scene = true
 script = ExtResource("2_smu40")
 base = 10.0
 cur = 10.0
 max_ = 10.0
 
 [sub_resource type="Resource" id="Resource_thx8n"]
+resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 2
 characteristic = SubResource("Resource_pie3m")
 
 [sub_resource type="Resource" id="Resource_4wda3"]
+resource_local_to_scene = true
 script = ExtResource("4_pjk8i")
 level = 1
 expirience = 0
@@ -243,10 +253,14 @@ _data = {
 "preattack": SubResource("Animation_lv3bu")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ta4jk"]
+height = 40.0
+
 [node name="EvilPlant" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "animation_player", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(1.4, 1.4)
+input_pickable = true
 script = ExtResource("1_g78kk")
 unit_name = "Злое растение"
 health = SubResource("Resource_px43a")
@@ -260,6 +274,7 @@ animation_player = NodePath("AnimationPlayer")
 for_flip_sprites = [NodePath("Body")]
 controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_l7ulv")])
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_krl3i")])
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("6_w1513")
@@ -284,3 +299,11 @@ libraries = {
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -25)
 texture = ExtResource("8_e7cbv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.714286, -13.5714)
+shape = SubResource("CapsuleShape2D_ta4jk")
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

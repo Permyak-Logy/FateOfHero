@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/units/SmolItto/src/itto_p1.gd" id="1_q5qfc"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_q5qfc")
 power = 20.0
 percent = 0.4
@@ -10,5 +11,6 @@ cooldown = 0
 cooldown_time = 3
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
+stackable = false
 effect_name = "Стадное чуство"
 is_negative = false
