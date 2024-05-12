@@ -350,8 +350,7 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	# await get_tree().create_timer(0.25).timeout
-	write_info("* Ходит: " + active_unit.unit_name + " *")
+	write_info("* Ходит: " + str(active_unit) + " *")
 	
 	cur_ability = null
 	for unit_data in unit_queue:
@@ -390,6 +389,7 @@ func _update_stepmove():
 	if acts != 0:
 		write_info("* Ход продолжается *")
 		if active_unit.controlled_player:
+			gui.show_abilities(active_unit)
 			_update_walkable()
 			_block_input = false
 		else:

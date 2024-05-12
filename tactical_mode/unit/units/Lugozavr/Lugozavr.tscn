@@ -15,9 +15,9 @@
 
 [sub_resource type="Resource" id="Resource_v41ox"]
 script = ExtResource("2_vvqc4")
-base = 300.0
-cur = 300.0
-max_ = 300.0
+base = 150.0
+cur = 150.0
+max_ = 150.0
 
 [sub_resource type="Resource" id="Resource_u7bt7"]
 script = ExtResource("3_tle5d")

@@ -34,9 +34,9 @@ characteristic = SubResource("Resource_pulf1")
 
 [sub_resource type="Resource" id="Resource_m8x7f"]
 script = ExtResource("2_smu40")
-base = 100.0
-cur = 100.0
-max_ = 100.0
+base = 80.0
+cur = 80.0
+max_ = 80.0
 
 [sub_resource type="Resource" id="Resource_cvhmw"]
 script = ExtResource("3_1oomm")

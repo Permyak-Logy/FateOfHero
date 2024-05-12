@@ -1,12 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://dh5vq12tjl11n"]
+[gd_scene load_steps=19 format=3 uid="uid://dh5vq12tjl11n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/for_future/Skeleton/Skeleton.gd" id="1_ccpxk"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_nan3x"]
 [ext_resource type="Texture2D" uid="uid://bwx7qmeuapudt" path="res://tactical_mode/unit/for_future/Skeleton/Enemy.png" id="3_0chvl"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_8i0i0"]
-[ext_resource type="Shader" path="res://tactical_mode/assets/outline.gdshader" id="3_oy1oo"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_5xtwx"]
 [ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/for_future/Skeleton/SkeletonA0.tres" id="4_71lrp"]
+[ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="6_xc5m0"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="7_x8j7o"]
 
 [sub_resource type="Resource" id="Resource_ws37b"]
@@ -63,11 +63,7 @@ ups = 0
 radius = 11.0
 height = 50.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8qku"]
-shader = ExtResource("3_oy1oo")
-shader_parameter/outline_color = null
-
-[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb")]
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "for_flip_sprites")]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
@@ -80,6 +76,7 @@ damage = SubResource("Resource_h68g5")
 expirience = SubResource("Resource_li378")
 sprite_for_outline = NodePath("Sprite2D")
 health_bar_pb = NodePath("StatProgressBar")
+for_flip_sprites = [NodePath("Sprite2D")]
 controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("4_71lrp")])
 
@@ -88,7 +85,7 @@ position = Vector2(-1, -22)
 shape = SubResource("CapsuleShape2D_oqbrs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_j8qku")
+material = ExtResource("6_xc5m0")
 position = Vector2(0, -24)
 texture = ExtResource("3_0chvl")
 
