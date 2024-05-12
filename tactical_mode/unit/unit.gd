@@ -161,9 +161,6 @@ func prepare_fight():
 	toggle_preview(false)
 	death.connect(get_map().on_kill)
 	print("=> Prepare: ", unit_name)
-	while _effects:
-		remove_effect(_effects[0])
-	
 	reload_all_mods()
 	for ability in get_abilities():
 		ability.set_owner(self)
@@ -301,7 +298,7 @@ func add_effect(effect: Effect):
 				return
 	
 	get_map().write_info("=> " + self.unit_name + " получил эффект " + effect.effect_name)
-	_effects.append(effect)
+	_effects.insert(0, effect)
 	effect.owner = self
 	effect.finished.connect(remove_effect)
 	effect.updated_mods.connect(reload_all_mods)
@@ -314,6 +311,7 @@ func remove_effect(effect: Effect):
 	_effects.erase(effect)
 	effect.finished.disconnect(remove_effect)
 	effect.updated_mods.disconnect(reload_all_mods)
+	effect.remove_visual_effect()
 	effect.cancel_effect()
 	reload_all_mods()
 

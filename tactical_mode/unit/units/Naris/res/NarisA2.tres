@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=5 format=3 uid="uid://bimxy6owu2yfe"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=6 format=3 uid="uid://bimxy6owu2yfe"]
 
 [ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="1_sjwrv"]
 [ext_resource type="Script" path="res://tactical_mode/effects/immortality_for_attack.gd" id="1_wo0u3"]
+[ext_resource type="PackedScene" uid="uid://sni3dotp4kpt" path="res://tactical_mode/unit/units/Naris/VisualImmortalEffect.tscn" id="2_pn38q"]
 [ext_resource type="Texture2D" uid="uid://dbv71s0kcqln3" path="res://tactical_mode/unit/units/Naris/assets/Beretta_n2.png" id="3_yfp7y"]
 
 [sub_resource type="Resource" id="Resource_rao28"]
@@ -10,9 +11,10 @@ script = ExtResource("1_wo0u3")
 count = 1.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
-stackable = false
+stackable = true
 effect_name = "Неуязвимость"
 is_negative = false
+visual_effect = ExtResource("2_pn38q")
 
 [resource]
 resource_local_to_scene = true

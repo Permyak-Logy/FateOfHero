@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4ilo2onw4uys"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/VisualRootEffect.gd" id="1_hem2p"]
+[ext_resource type="Script" path="res://tactical_mode/visual_effect.gd" id="1_hem2p"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="1_noqsx"]
 
 [sub_resource type="Animation" id="Animation_3j3yq"]
@@ -25,9 +25,9 @@ _data = {
 "idle": SubResource("Animation_3j3yq")
 }
 
-[node name="VisualRootEffect" type="Node2D" node_paths=PackedStringArray("animation_player")]
+[node name="VisualRootEffect" type="Node2D" node_paths=PackedStringArray("anim")]
 script = ExtResource("1_hem2p")
-animation_player = NodePath("AnimationPlayer")
+anim = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -33)

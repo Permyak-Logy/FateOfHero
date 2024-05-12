@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=5 format=3 uid="uid://bd0bpu457k5k0"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=6 format=3 uid="uid://bd0bpu457k5k0"]
 
 [ext_resource type="Script" path="res://tactical_mode/effects/shield_effect.gd" id="1_3jkel"]
 [ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="1_lbl2a"]
+[ext_resource type="PackedScene" uid="uid://da2shmx6hu6y1" path="res://tactical_mode/unit/units/Naris/VisualShieldEffect.tscn" id="2_4prm7"]
 [ext_resource type="Texture2D" uid="uid://b5x878mj5f2fp" path="res://tactical_mode/unit/units/Naris/assets/Beretta_n1.png" id="3_2y2fy"]
 
 [sub_resource type="Resource" id="Resource_7ifd1"]
@@ -10,9 +11,10 @@ script = ExtResource("1_3jkel")
 power = 100.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
-stackable = false
+stackable = true
 effect_name = "Щит"
 is_negative = false
+visual_effect = ExtResource("2_4prm7")
 
 [resource]
 resource_local_to_scene = true

@@ -7,7 +7,7 @@ func update_on_damage(_damage: float, _instigator: Node = null) -> float:
 	_damage -= diff
 	power -= diff
 	get_map().write_info(
-		"=> Заблокировано щитом " + str(diff) + " урона (" + owner.unit_name + ")"
+		"=> Заблокировано щитом " + str(int(diff)) + " урона (" + owner.unit_name + ")"
 	)
 	if power <= 0:
 		finished.emit(self)
@@ -15,3 +15,7 @@ func update_on_damage(_damage: float, _instigator: Node = null) -> float:
 
 func is_active():
 	return power > 0
+
+func stack(other):
+	power += (other as ShieldEffect).power
+	return true
