@@ -17,6 +17,9 @@ func _ready():
 	btn_group.pressed.connect(_on_pressed)
 	ability_panel.hide()
 
+func _exit_tree():
+	ability_panel.hide()
+
 func show_abilities(unit: Unit):
 	clear_abilities()
 	for ability in unit.get_abilities():

@@ -84,6 +84,7 @@ func open():
 	inventory_opened.emit()
 	
 func close():
+	inventory.characters[active_char_id] = character_panel.pack_character()
 	is_open = false 
 	visible = false
 	inventory_closed.emit()
@@ -132,20 +133,22 @@ func take_item_from_inv_slot(slot: InventorySlot) -> bool:
 	update_item_in_hand()
 	return true
 
-func put_item_to_char_slot(slot: InventorySlot) -> bool:
+func put_item_to_char_slot(slot: InventorySlot) -> int:
 	if not (slot.is_empty() and item_stack_in_hand and item_stack_in_hand.item_stack):
 		return false
 	var item_stack: ItemStack = item_stack_in_hand.item_stack
 	if not is_instance_of(item_stack.item, Gear):
 		return false
-	var fit = character_panel.current_character.inventory.use(item_stack.item)
+	var fit = character_panel.current_character.inventory.use(item_stack)
+	assert(item_stack.size == fit, "Ошибка в добавлении предмета")
 	character_panel.current_character.reload_all_mods()
-	if fit:
-		print("equipped: ", item_stack.item.name)
+	print("equipped: ", item_stack.item.name, " size:", item_stack.size)
+	item_stack_in_hand.item_stack.size -= fit
+	if item_stack_in_hand.item_stack.size == 0:
 		remove_child(item_stack_in_hand)
-		item_stack_in_hand = null 
+		item_stack_in_hand = null
 	update()
-	return true
+	return item_stack_in_hand != null
 
 
 func take_item_form_char_slot(slot: InventorySlot) -> bool:
@@ -158,7 +161,8 @@ func take_item_form_char_slot(slot: InventorySlot) -> bool:
 	add_child(item_stack_in_hand)
 	slot.item_stack_repr = null
 	var item_stack = item_stack_in_hand.item_stack
-	character_panel.current_character.inventory.unuse(item_stack.item)
+	var fit = character_panel.current_character.inventory.unuse(item_stack)
+	assert(item_stack.size == fit, "Ошибка в снятии предмета")
 	character_panel.current_character.reload_all_mods()
 	update()
 	update_item_in_hand()

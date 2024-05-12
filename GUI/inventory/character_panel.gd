@@ -82,14 +82,13 @@ func update_gear():
 		if type == Gear.Type.Ability:
 			continue
 		var i = 0
-		for item in current_character.inventory.get_gears(type):
-			var item_stack = ItemStack.create(item, 1)
+		for item_stack in current_character.inventory.get_gears(type):
 			var isr = ItemStackReprClass.instantiate()
 			slots[type][i].insert(isr)
 			isr.item_stack = item_stack
 			isr.update()
 			i += 1
-		
+
 
 func update_abilities():
 	for slot in ability_slots:
@@ -97,14 +96,12 @@ func update_abilities():
 		slot.update()
 	var i = 0
 	for item in current_character.inventory.get_abilities():
-		var slot = special_slots[Gear.Type.Ability].instantiate()
-		var item_stack = ItemStack.create(item, 1)
+		var item_stack = ItemStack.create(item, item.count if item.consumable else 1)
 		var isr = ItemStackReprClass.instantiate()
-		isr.item_stack = item_stack
 		slots[Gear.Type.Ability][i].insert(isr)
-		ability_holder.add_child(slot)
+		isr.item_stack = item_stack
+		isr.update()
 		i += 1
-	ability_slots = ability_holder.get_children()
 
 func update_bars():
 	hp_bar.max_value = current_character.health.get_max()
@@ -124,8 +121,6 @@ func update_repr():
 	sprite.centered = false
 	sprite.offset = Vector2i(0, 24)
 	sprite_holder.add_child(sprite)
-	pass 
-	
 
 func update():
 	update_repr()
@@ -144,29 +139,28 @@ func print_inventory():
 	
 
 func change_character(character: PackedScene) -> PackedScene:
-	var old_char = null
-	if current_character:
-		#print_inventory()
-		cs.disabled = false
-		old_char = PackedScene.new()
-		current_character.visible = true
-		sprite_holder.remove_child(current_character)
-		old_char.pack(current_character)
+	var old_char = pack_character() if current_character else null
 	
+	if current_character:
+		sprite_holder.remove_child(current_character)
 	current_character = character.instantiate()
 	current_character.visible = false
 	cs = current_character.get_node_or_null("CollisionShape2D")
 	cs.disabled = true
 	sprite_holder.add_child(current_character)
 	
-	
-	
-	
 	remake_stots()
-	print("changed displayed character to <",current_character.name ,">" )
+	print("changed displayed character to <", current_character.name, ">" )
 	update()
 	return old_char
-	
+
+func pack_character() -> PackedScene:
+	cs.disabled = false
+	var character = PackedScene.new()
+	current_character.visible = true
+	character.pack(current_character)
+	return character
+
 func _process(delta):
 	if !sprite:
 		return

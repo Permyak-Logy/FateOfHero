@@ -96,7 +96,12 @@ func set_outline_color(color: Vector4):
 		return
 	(sprite_for_outline.material as ShaderMaterial).set_shader_parameter(
 		"outline_color", color)
-		
+
+func toggle_preview(value: bool):
+	if value:
+		set_outline_color(DEFAULT_COLOR)
+	health_bar_pb.visible = not value
+
 func apply_damage(_damage: float, _instigator: Unit = null):
 	"""
 	Применяет урон в размере _damage от _instigator с учётом наложенных эффектов
@@ -167,6 +172,7 @@ func get_occupied_cells() -> Array[Vector2i]:
 	return []
 
 func prepare_fight():
+	toggle_preview(false)
 	death.connect(get_map().on_kill)
 	print("=> Prepare: ", unit_name)
 	while _effects:

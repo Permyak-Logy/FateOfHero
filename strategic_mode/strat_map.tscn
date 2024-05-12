@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=40 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Texture2D" uid="uid://63jhcsgjdsdg" path="res://strategic_mode/tileset.png" id="1_san24"]
 [ext_resource type="Script" path="res://strategic_mode/strat_map.gd" id="1_vssm8"]
@@ -36,6 +36,7 @@
 [ext_resource type="Resource" path="res://inventory/items/rune_8.tres" id="34_mxwhc"]
 [ext_resource type="Resource" path="res://inventory/items/rune_1.tres" id="35_gq8in"]
 [ext_resource type="AudioStream" uid="uid://dlsbppd8qggrt" path="res://strategic_mode/strategic_mode_bg_music.mp3" id="36_xru70"]
+[ext_resource type="Resource" uid="uid://4mtedxwnoqin" path="res://inventory/gears/Black/BlackBody.tres" id="37_h0phj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc35f"]
 texture = ExtResource("1_san24")
@@ -4198,6 +4199,7 @@ position = Vector2(-128, 198)
 
 [node name="XMarksTheSpot4" parent="." instance=ExtResource("3_jdbk3")]
 position = Vector2(56, 227)
+count = 3
 
 [node name="ConcreteCollectable" parent="." instance=ExtResource("33_dkxfb")]
 position = Vector2(221, 101)
@@ -4213,6 +4215,11 @@ count = 1
 stream = ExtResource("36_xru70")
 volume_db = 3.237
 autoplay = true
+
+[node name="ConcreteCollectable3" parent="." instance=ExtResource("33_dkxfb")]
+position = Vector2(-53, 1)
+item = ExtResource("37_h0phj")
+count = 2
 
 [connection signal="inventory_closed" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_closed"]
 [connection signal="inventory_opened" from="GUI/InventoryGUI" to="." method="_on_inventory_gui_inventory_opened"]

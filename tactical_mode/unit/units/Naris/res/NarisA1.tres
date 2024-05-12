@@ -23,6 +23,7 @@ acts = 1
 final_act = true
 cooldown = 0
 limit = 0
+consumable = false
 count = -1
 scaling_type = 4
 overlay_atlas_coords = Vector2i(3, 0)

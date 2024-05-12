@@ -4,7 +4,8 @@ class_name Ability extends Gear
 @export var final_act: bool = false
 @export var cooldown: int = 0
 @export var limit: int = 0
-@export var count: int = -1
+@export var consumable: bool = false
+@export var count: int = 0
 
 @export var scaling_type: Mod.Type = Mod.Type.None
 @export var overlay_atlas_coords: Vector2i = Vector2i(1, 0)
@@ -35,10 +36,12 @@ func clear():
 func reset():
 	clear()
 	cooldown_time = 0
-	if count < 0:
-		has_uses = limit
-	else:
-		has_uses = min(limit, count)
+	has_uses = limit
+	if consumable:
+		if limit > 0:
+			has_uses = min(limit, count)
+		else:
+			has_uses = count
 
 func update():
 	cooldown_time = max(cooldown_time - 1, 0)
@@ -48,9 +51,9 @@ func update():
 func can_use() -> bool:
 	if not owner:
 		return false
-	if cooldown_time > 0:
+	if has_uses == 0 and (limit > 0 or consumable):
 		return false
-	if has_uses == 0 and limit > 0:
+	if cooldown_time > 0:
 		return false
 	if get_map().acts < acts:
 		return false
@@ -74,7 +77,7 @@ func apply() -> bool:
 func after_apply():
 	cooldown_time = cooldown + 1
 	has_uses -= 1
-	if count >= 0:
+	if consumable and count >= 0:
 		count -= 1
 	var map = get_map()
 	if final_act:

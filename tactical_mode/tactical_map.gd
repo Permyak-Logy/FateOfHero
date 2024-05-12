@@ -104,6 +104,7 @@ func start_battle():
 	running = true
 	write_info("*** Бой начинается ***")
 	align_actors()
+	escape_ability.reset()
 	escape = false
 	for unit in units:	
 		if not unit.is_node_ready():
@@ -427,6 +428,8 @@ func _finalize_fight(_win=false):
 			await lug.done
 			player.expirience.ups = 0
 			gui.remove_child(lug)
+		
+		player.inventory.fixup_abilities()
 		while player.get_effects():
 			player.remove_effect(player.get_effects()[0])
 

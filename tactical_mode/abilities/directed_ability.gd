@@ -32,17 +32,7 @@ func fill_overlay() -> Array[Vector2i]:
 		cells.append(actor.get_cell())
 	return cells
 
-func can_use() -> bool:
-	if not owner:
-		return false
-	if cooldown_time > 0:
-		return false
-	if has_uses == 0 and limit > 0:
-		return false
-	if get_map().acts < acts:
-		return false
-	return true
-	
+
 func auto_select() -> bool:
 	if len(selectable_tab) > 0:
 		var to_select: int
