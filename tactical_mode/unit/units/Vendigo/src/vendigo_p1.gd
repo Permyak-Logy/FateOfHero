@@ -21,7 +21,7 @@ func update_on_start_stepmove():
 			to_spawn.append(cell_about)
 	
 	for cell in to_spawn:
-		ices[cell] = map.spawn(danger_ice, cell)
+		ices[cell] = await map.spawn(danger_ice, cell)
 		owner.death.connect(ices[cell].death_owner)
 	get_map().write_info("=> Лёд разрастается... (" + owner.unit_name + ")")
 	for unit in map.get_units_with_relation(owner, TacticalMap.relation.Enemy):

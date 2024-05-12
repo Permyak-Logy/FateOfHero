@@ -9,7 +9,7 @@ var plants: Array[EvilPlantUnit] = []
 func apply():
 	await owner.play("ability")
 	var map = get_map()
-	var unit = map.spawn(mob, cell, owner)
+	var unit = await map.spawn(mob, cell, owner)
 	map.add_to_unit_queue(unit, true)
 	if kill_all_mobs_on_death_owner:
 		(owner as Unit).death.connect(unit.kill)

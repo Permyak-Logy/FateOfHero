@@ -26,7 +26,7 @@ func update_on_start_stepmove():
 			diff += unit.health.cur()
 			cooldown = cooldown_time
 			get_map().write_info(
-				"=> Восстанавливает " + diff + " здоровья у " + 
+				"=> Восстанавливает " + str(diff) + " здоровья у " + 
 				unit.unit_name + " (" + effect_name + ")"
 				)
 			return

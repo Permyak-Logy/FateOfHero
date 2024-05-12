@@ -188,7 +188,6 @@ func premove_update():
 		effect.update_on_start_stepmove()
 
 func on_flip_unit():
-	print(unit_name, "flip to ", flipped)
 	if trail_particles:
 		var i: Image = trail_particles.texture.get_image()
 		i.flip_x()
