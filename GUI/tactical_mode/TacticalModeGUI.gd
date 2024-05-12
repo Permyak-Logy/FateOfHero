@@ -58,7 +58,7 @@ func _on_selected(new_ability):
 		if btn:
 			btn.set_pressed_no_signal(false)
 
-func _on_pressed():
+func _on_pressed(_null=null):
 	var pressed_btn: W_BtnAbility = btn_group.get_pressed_button()
 	if pressed_btn:
 		if pressed_btn.ability != map.cur_ability:

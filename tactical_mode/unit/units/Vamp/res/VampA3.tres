@@ -22,6 +22,7 @@ power_target = SubResource("Resource_3c2oe")
 targets = 1
 max_targets = 0
 apply_on = Array[int]([1])
+can_use_if_only_has_any_selectable_target = true
 acts = 1
 final_act = true
 cooldown = 0

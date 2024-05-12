@@ -16,6 +16,7 @@ power = SubResource("Resource_h3med")
 targets = 1
 max_targets = 0
 apply_on = Array[int]([1, 0])
+can_use_if_only_has_any_selectable_target = true
 acts = 1
 final_act = false
 cooldown = 0

@@ -18,7 +18,7 @@ func apply():
 	return true
 	
 func unselect(_node):
-	return
+	pass
 
 func tab_next():
 	pass
