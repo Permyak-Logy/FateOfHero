@@ -3,6 +3,7 @@ class_name DirectedAbility extends Ability
 @export var targets: int = 1
 @export var max_targets: int = 0
 @export var apply_on: Array[TacticalMap.relation]
+@export var can_use_if_only_has_any_selectable_target: bool = true
 
 var selected: Array[Actor] = []
 var selectable_tab: Array[Actor] = []
@@ -98,8 +99,10 @@ func get_map() -> TacticalMap:
 func can_use():
 	if not super():
 		return false
-	find_all_selectable_tab_targets()
-	return len(selectable_tab) > 0
+	if can_use_if_only_has_any_selectable_target:
+		find_all_selectable_tab_targets()
+		return len(selectable_tab) > 0
+	return true
 
 func can_apply() -> bool:
 	var up_bound: int

@@ -16,6 +16,7 @@ power = SubResource("Resource_hxrvf")
 targets = 1
 max_targets = 0
 apply_on = Array[int]([2])
+can_use_if_only_has_any_selectable_target = false
 acts = 1
 final_act = true
 cooldown = 0
