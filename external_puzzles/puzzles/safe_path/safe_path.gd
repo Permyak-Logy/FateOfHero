@@ -6,7 +6,8 @@ class_name SafePath
 @onready var game: Game = get_tree().root.get_child(0)
 @onready var inventory: Inventory = game.strat_map.player.inventory
 @onready var wc: EPWinCondition = load("res://external_puzzles/puzzles/safe_path/win_condition_point.tscn").instantiate()
-@export var period: float = 15
+@export var period: float = 5
+var SafePathVispRes: PackedScene = preload("res://external_puzzles/puzzles/safe_path/visp.tscn")
 var time: float = 0
 
 var enemies: Array[PackedScene]
@@ -152,8 +153,14 @@ func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene])
 	game.to_strat_mode()
 
 func spawn_visp():
-	
-	pass	
+	var visp: SafePathVisp = SafePathVispRes.instantiate()  
+	visp.start = player.pos
+	visp.end = end_pos
+	visp.target_reaced.connect(kill_visp)
+	add_child(visp)
+
+func kill_visp(visp: SafePathVisp):
+	remove_child(visp)
 
 func _physics_process(delta):
 	time += delta

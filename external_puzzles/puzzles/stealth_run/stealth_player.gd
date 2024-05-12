@@ -1,6 +1,5 @@
 class_name StealthPlayer extends WASDPlayer
 
-@onready var sprite: Sprite2D = $Sprite2D
 
 func wasd_move(event):
 	var p: StealthRun = puzzle as StealthRun

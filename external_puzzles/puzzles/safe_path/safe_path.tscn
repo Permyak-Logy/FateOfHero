@@ -24,7 +24,7 @@ sources/0 = SubResource("TileSetAtlasSource_qogk0")
 
 [node name="SafePath" instance=ExtResource("1_kpe5n")]
 script = ExtResource("2_owly7")
-period = 15.0
+period = 5.0
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 tile_set = SubResource("TileSet_omxw6")
