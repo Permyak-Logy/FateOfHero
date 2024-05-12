@@ -1,17 +1,14 @@
 class_name AttackAbility extends DirectedAbility
 @export var distance: int = 1
-@export var power_p: float = 1
+@export var power: ModValue = ModValue.new()
 
 func apply():
 	var unit = selected[0] as Unit
-	if owner.damage:
-		get_map().write_info("=> " + owner.unit_name + " атакует")
-		await (owner as Unit).play("preattack", unit)
-		unit.apply_damage(owner.damage.cur() * power_p, owner)
-		await (owner as Unit).play("postattack")
-		owner.play("idle")
-		return true
-	return false
+	get_map().write_info("=> " + owner.unit_name + " атакует")
+	await (owner as Unit).play("preattack", unit)
+	unit.apply_damage(scale * power.mul + power.add, owner)
+	await (owner as Unit).play("postattack")
+	owner.play("idle")
 
 func can_select(node):
 	var unit = node as Unit

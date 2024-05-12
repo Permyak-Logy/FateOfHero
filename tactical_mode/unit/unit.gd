@@ -29,9 +29,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 @export var controlled_player: bool = true
 
 @export_group("Unit abilities")
-@export var private_abilities: Array[Ability] = []:
-	set(value):
-		private_abilities = value.duplicate(true)
+@export var private_abilities: Array[Ability] = []
 @export var private_passives: Array[Effect] = []
 
 signal death(Unit)  # Вызывается при смерти
@@ -48,8 +46,6 @@ var flipped: bool = false:  # Переключатель поворота
 			on_flip_unit()
 		else:
 			flipped = value
-
-
 
 # Различные цвета для обводки
 const PLAYER_COLOR = Vector4(0, 255, 0, 100)

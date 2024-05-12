@@ -40,7 +40,7 @@ const PATH_LAYER = 2  # Слой пути
 const WALLS_LAYER = 3  # Слой стен
 const OVERLAY_ABILITY_LAYER = 4  # Слой оверлея для способностей
 
-var escape_ability: EscapeAbility = load("res://tactical_mode/EscapeAbility.tres")  # Способность побега
+var escape_ability: EscapeAbility = load("res://tactical_mode/abilities/res/EscapeAbility.tres")  # Способность побега
 
 var win: bool = false  # True если мы победили и закончили бой, иначе false 
 var escape = false  # True если был активирован побег
@@ -351,7 +351,7 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	write_info("* Ходит: " + str(active_unit) + " *")
+	write_info("* Ходит: " + active_unit.unit_name + " *")
 	
 	cur_ability = null
 	for unit_data in unit_queue:
@@ -359,6 +359,8 @@ func _start_stepmove():
 	active_unit.set_outline_color(Unit.CUR_COLOR)
 	acts = active_unit.acts_count
 	(active_unit as Unit).premove_update()
+	
+	gui.escape_ability_btn.update()
 	
 	if acts == 0:
 		_update_stepmove()
@@ -391,6 +393,7 @@ func _update_stepmove():
 	if acts != 0:
 		write_info("* Ход продолжается *")
 		if active_unit.controlled_player:
+			gui.escape_ability_btn.update()
 			gui.show_abilities(active_unit)
 			_update_walkable()
 			_block_input = false
@@ -540,11 +543,11 @@ func _input(event):
 			if (cur_ability as AoEAbility).only_auto_select:
 				return
 			_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
-			if (cur_ability as AoEAbility).can_select_cell(cell):
-				(cur_ability as AoEAbility).select_cell(cell)
+			if (cur_ability as AoEAbility).can_select(cell):
+				(cur_ability as AoEAbility).select(cell)
 				draw_ability_overlay()
 			else:
-				(cur_ability as AoEAbility).unselect_cell()
+				(cur_ability as AoEAbility).unselect()
 				
 	if event.is_pressed():
 		return await _key_press_event(event)
@@ -617,8 +620,8 @@ func _prepare_ability(ability: Ability):
 			cell = cur_ability.default_cell()
 		else:
 			cell = to_map(_tile_map.get_local_mouse_position())
-		if (cur_ability as AoEAbility).can_select_cell(cell):
-			(cur_ability as AoEAbility).select_cell(cell)
+		if (cur_ability as AoEAbility).can_select(cell):
+			(cur_ability as AoEAbility).select(cell)
 			draw_ability_overlay()
 	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 	draw_ability_overlay()
@@ -644,8 +647,8 @@ func _apply_ability(cell=Vector2i(0, 0)):
 	if is_instance_of(cur_ability, AoEAbility):
 		if cur_ability.only_auto_select:
 			cell = cur_ability.default_cell()
-		if cell and cur_ability.can_select_cell(cell):
-			cur_ability.select_cell(cell)
+		if cell and cur_ability.can_select(cell):
+			cur_ability.select(cell)
 	
 	if cur_ability.can_apply():
 		_block_input = true

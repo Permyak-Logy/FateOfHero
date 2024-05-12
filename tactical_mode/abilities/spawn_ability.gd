@@ -15,7 +15,7 @@ func apply():
 		(owner as Unit).death.connect(unit.kill)
 	owner.play("idle")
 
-func can_select_cell(_cell: Vector2i) -> bool:
+func can_select(_cell: Vector2i) -> bool:
 	if get_map().distance_between_cells(owner.get_cell(), _cell) > range_apply:
 		return false
 	if not get_map()._astar_board.has_cell(_cell):

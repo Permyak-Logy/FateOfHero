@@ -1,17 +1,28 @@
-[gd_resource type="Resource" script_class="VampA3" load_steps=3 format=3 uid="uid://di4u67c7nk826"]
+[gd_resource type="Resource" script_class="VampA3" load_steps=6 format=3 uid="uid://di4u67c7nk826"]
 
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_40y3d"]
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vamp/src/vamp_a3.gd" id="1_ccfav"]
 [ext_resource type="Texture2D" uid="uid://bi41jim537sfp" path="res://tactical_mode/unit/units/Vamp/assets/Vampire_n3.png" id="2_pnwy5"]
+
+[sub_resource type="Resource" id="Resource_bh2ab"]
+script = ExtResource("1_40y3d")
+add = 0.0
+mul = 0.1
+
+[sub_resource type="Resource" id="Resource_3c2oe"]
+script = ExtResource("1_40y3d")
+add = 20.0
+mul = 0.5
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_ccfav")
-power_self = 0.1
-power_target = 2.0
+power_self = SubResource("Resource_bh2ab")
+power_target = SubResource("Resource_3c2oe")
 targets = 1
 max_targets = 0
 apply_on = Array[int]([1])
-acts = 0
+acts = 1
 final_act = true
 cooldown = 0
 limit = 0

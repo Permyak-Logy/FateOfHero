@@ -1,7 +1,7 @@
 class_name EvilPlantA0 extends AoEAbility
 
 @export var root_effect: TempSlowdownEffect
-@export var power_attack: float = 1
+@export var power: ModValue = ModValue.new()
 @export var range_apply: int = 1
 
 func apply():
@@ -11,7 +11,7 @@ func apply():
 
 func apply_on_unit(unit: Unit):
 	if get_map().get_relation(owner, unit) == TacticalMap.relation.Enemy:
-		unit.apply_damage(owner.damage.cur() * power_attack, owner)
+		unit.apply_damage(scale * power.mul + power.add, owner)
 		var e = root_effect.duplicate(true)
 		e.instigator = owner
 		unit.add_effect(e)
@@ -24,6 +24,6 @@ func find_about_cells():
 		if map.distance_between_cells(_cell, cell) <= range_apply:
 			about_cells.append(_cell)
 
-func can_select_cell(_cell: Vector2i):
+func can_select(_cell: Vector2i):
 	return owner.get_cell() == _cell
 

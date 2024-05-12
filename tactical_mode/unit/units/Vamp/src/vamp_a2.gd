@@ -1,6 +1,6 @@
 class_name VampA2 extends AoEAbility
 
-@export var power_attack: float = 0.2
+@export var power: ModValue = ModValue.new()
 @export var range_apply: int = 1
 
 func apply():
@@ -17,10 +17,11 @@ func find_about_cells():
 			about_cells.append(_cell)
 
 func apply_on_unit(unit: Unit):
+	var d = unit.health.cur() * power.mul + power.add
 	get_map().write_info(
-		"=> Жрёт хп у " + unit.unit_name + "отнято " + str(int(unit.health.cur() * power_attack))
+		"=> Жрёт хп у " + unit.unit_name + "отнято " + str(int(d))
 	)
-	unit.health.sub(unit.health.cur() * power_attack)
+	unit.health.sub(d)
 
-func can_select_cell(_cell: Vector2i) -> bool:
+func can_select(_cell: Vector2i) -> bool:
 	return get_map()._astar_board.has_cell(_cell)

@@ -18,6 +18,20 @@ var cooldown_time = 0
 var has_uses = 0
 
 @export var only_unit_owner = true
+var scale: float:
+	get:
+		var stat: StatComponent = null
+		var unit = owner as Unit
+		if scaling_type == Mod.Type.Health:
+			stat = unit.health
+		elif scaling_type == Mod.Type.Defence:
+			stat = unit.defence
+		elif scaling_type == Mod.Type.Damage:
+			stat = unit.damage
+		elif scaling_type == Mod.Type.Speed:
+			stat = unit.speed
+		assert(stat != null, "Неопределён компонент для скейлинга для " + unit.unit_name)
+		return stat.cur()
 
 func _init(_count: int = count):
 	count = _count
@@ -71,8 +85,8 @@ func get_map() -> TacticalMap:
 func can_apply() -> bool:
 	return true
 
-func apply() -> bool:
-	return false
+func apply():
+	pass
 
 func after_apply():
 	cooldown_time = cooldown + 1

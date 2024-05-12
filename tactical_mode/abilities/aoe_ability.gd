@@ -5,11 +5,11 @@ class_name AoEAbility extends Ability
 var cell: Vector2i = Vector2i(-1, -1)
 var about_cells: Array[Vector2i] = []
 
-func select_cell(_cell: Vector2i):
+func select(_cell: Vector2i):
 	cell = _cell
 	find_about_cells()
 
-func unselect_cell():
+func unselect():
 	cell = Vector2i(-1, -1)
 	about_cells.clear()
 
@@ -37,7 +37,7 @@ func clear():
 func default_cell():
 	return (owner as Unit).get_cell()
 
-func can_select_cell(_cell: Vector2i) -> bool:
+func can_select(_cell: Vector2i) -> bool:
 	return get_map()._astar_board.has_cell(_cell)
 
 func can_apply() -> bool:

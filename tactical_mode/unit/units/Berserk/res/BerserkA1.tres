@@ -1,12 +1,18 @@
-[gd_resource type="Resource" script_class="BerserkA1" load_steps=3 format=3 uid="uid://ca00njn6opt8b"]
+[gd_resource type="Resource" script_class="BerserkA1" load_steps=5 format=3 uid="uid://ca00njn6opt8b"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Berserk/src/berserk_a1.gd" id="1_01yf5"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_m1210"]
 [ext_resource type="Texture2D" uid="uid://b4sck2vjg1hwn" path="res://tactical_mode/unit/units/Berserk/assets/Berserk_n1.png" id="2_6vyjq"]
+
+[sub_resource type="Resource" id="Resource_2mf0o"]
+script = ExtResource("1_m1210")
+add = 0.0
+mul = 3.0
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_01yf5")
-power_attack = 3.0
+power = SubResource("Resource_2mf0o")
 range_apply = 2
 only_auto_select = false
 acts = 1

@@ -1,7 +1,7 @@
 class_name LugozavrA1 extends DirectedAbility
 
 @export var block_moving_effect: BlockStepmoveEffect
-@export var power_p: float = 1
+@export var power: ModValue = ModValue.new()
 var applied: Unit
 
 func apply():
@@ -17,7 +17,7 @@ func apply():
 func subapply():
 	if not applied:
 		return
-	applied.apply_damage(owner.damage.cur() * power_p, owner)
+	applied.apply_damage(scale * power.mul + power.add, owner)
 	get_map().write_info("=> " + applied.unit_name + " варится в желудке (Хп:" +
 		str(int(applied.health.cur())) + " / " + str(int(applied.health.get_max())) + ")"
 	)

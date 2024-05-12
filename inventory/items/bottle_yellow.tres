@@ -32,9 +32,9 @@ is_negative = false
 [resource]
 script = ExtResource("3_fo7js")
 effect = SubResource("Resource_habq8")
-apply_on = Array[int]([0])
 targets = 1
 max_targets = 0
+apply_on = Array[int]([0])
 acts = 0
 final_act = false
 cooldown = 0

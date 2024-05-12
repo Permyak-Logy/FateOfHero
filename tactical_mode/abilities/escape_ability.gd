@@ -13,6 +13,12 @@ func apply():
 func unselect(_node):
 	return
 
+func tab_next():
+	pass
+
+func tab_prev():
+	pass
+
 func can_select(node):
 	var unit = node as Unit
 	if not unit:

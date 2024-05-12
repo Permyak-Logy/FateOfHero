@@ -38,7 +38,7 @@ func auto_select() -> bool:
 	if len(selectable_tab) > 0:
 		var to_select: int
 		if max_targets == 0:
-			if targets == 0:
+			if targets == 0 or targets == -1:
 				to_select = len(selectable_tab)
 			else:
 				to_select = min(len(selectable_tab), targets)
@@ -74,6 +74,7 @@ func tab_prev():
 			return
 
 func find_all_selectable_tab_targets():
+	selectable_tab.clear()
 	var map = get_map()
 	for actor in map.actors:
 		if can_select(actor):
@@ -94,11 +95,17 @@ func get_map() -> TacticalMap:
 		return owner as TacticalMap
 	return null
 
+func can_use():
+	if not super():
+		return false
+	find_all_selectable_tab_targets()
+	return len(selectable_tab) > 0
+
 func can_apply() -> bool:
 	var up_bound: int
 	if max_targets == 0:
 		up_bound = targets if targets > 0 else len(selected)
 	else:
 		up_bound = max_targets
-	return targets <= len(selected) and len(selected) <= up_bound
+	return targets <= len(selected) and len(selected) <= up_bound and selected
 	
