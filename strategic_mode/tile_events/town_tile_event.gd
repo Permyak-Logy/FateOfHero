@@ -16,8 +16,8 @@ func activate():
 	assert(city != null, "You forgot ot enter the town")
 	var city_scene: City = city.instantiate()
 	city_scene.leave_city.connect(on_done)
-	game.city_container.add_child(city_scene)
 	city_scene.set_inventory(local_inventory)
+    game.city_container.add_child(city_scene)
 	game.to_city_mode()
 
 func on_done():
