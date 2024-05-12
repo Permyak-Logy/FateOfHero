@@ -41,6 +41,14 @@ func _ready():
 			
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
+			
+			tile_data = tilemap.get_cell_tile_data(1, tile_position)
+			
+			if tile_data == null:
+				continue
+			astar_grid.set_point_solid(tile_position, not tile_data.get_custom_data("walkable"))
+				
+			
 	
 	tilemap.occupied_changed.connect(update_nav_map)
 		
