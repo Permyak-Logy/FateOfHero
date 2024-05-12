@@ -50,6 +50,10 @@ func save():
 		if not scn.local_inventory:
 			continue
 		ResourceSaver.save(scn.local_inventory, "save/" + scn.name + "_inv.tres")
+	for scn in get_tree().get_nodes_in_group("InventoryOwner"):
+		if not scn.local_inventory:
+			continue
+		ResourceSaver.save(scn.local_inventory, "save/" + scn.name + "_inv.tres")
 
 
 func remove_save():
@@ -64,6 +68,13 @@ func load_save():
 	strat_map.player.inventory = ResourceLoader.load("save/player_inventory.tres")
 	
 	for scn in get_tree().get_nodes_in_group("MicroInventoryOwner"):
+		if not ResourceLoader.exists("res://save/" + scn.name + "_inv.tres"):
+			continue
+		print("loading: [", "res://save/" + scn.name + "_inv.tres", "]")
+		var inv = load("res://save/" + scn.name + "_inv.tres")
+		scn.set_inventory(inv)
+	
+	for scn in get_tree().get_nodes_in_group("InventoryOwner"):
 		if not ResourceLoader.exists("res://save/" + scn.name + "_inv.tres"):
 			continue
 		print("loading: [", "res://save/" + scn.name + "_inv.tres", "]")

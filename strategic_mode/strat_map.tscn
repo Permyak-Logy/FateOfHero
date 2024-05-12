@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cm1mhskgq3tsj"]
+[gd_scene load_steps=44 format=3 uid="uid://cm1mhskgq3tsj"]
 
 [ext_resource type="Script" path="res://strategic_mode/strat_map.gd" id="1_vssm8"]
 [ext_resource type="PackedScene" uid="uid://dy0430gbmyn54" path="res://strategic_mode/tile_events/collectables/x_marks_the_spot.tscn" id="3_jdbk3"]
@@ -32,6 +32,8 @@
 [ext_resource type="PackedScene" uid="uid://bids4nmirj5aj" path="res://external_puzzles/puzzles/stealth_run/stealth_run.tscn" id="27_pvq2k"]
 [ext_resource type="Script" path="res://strategic_mode/RunesPuzzle1.gd" id="28_vwli7"]
 [ext_resource type="PackedScene" uid="uid://co2yhd01ek3ba" path="res://strategic_mode/tile_events/sm_interactables/rune_stone.tscn" id="29_0aliy"]
+[ext_resource type="Resource" uid="uid://jgko6igthbun" path="res://inventory/items/apple.tres" id="30_03gra"]
+[ext_resource type="Script" path="res://inventory/inventory.gd" id="30_e8vci"]
 [ext_resource type="PackedScene" uid="uid://iogr1vem4tnv" path="res://strategic_mode/tile_events/collectables/concrete_collectable.tscn" id="33_dkxfb"]
 [ext_resource type="Resource" path="res://inventory/items/rune_8.tres" id="34_mxwhc"]
 [ext_resource type="Resource" path="res://inventory/items/rune_1.tres" id="35_gq8in"]
@@ -6647,6 +6649,13 @@ custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_v7reh")
 
+[sub_resource type="Resource" id="Resource_ehqbt"]
+script = ExtResource("30_e8vci")
+items = {
+ExtResource("30_03gra"): 42
+}
+characters = Array[PackedScene]([])
+
 [node name="StratMap" type="Node2D"]
 position = Vector2(1, 1)
 script = ExtResource("1_vssm8")
@@ -6748,6 +6757,7 @@ texture = ExtResource("5_1yukr")
 [node name="TownTileEvent" parent="." instance=ExtResource("21_vylki")]
 position = Vector2(390, 340)
 city = ExtResource("22_t3kb4")
+local_inventory = SubResource("Resource_ehqbt")
 texture = ExtResource("23_qm7dp")
 
 [node name="CombatCapablePuzzleActivator" parent="." instance=ExtResource("13_uwixs")]
