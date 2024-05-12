@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtr1ge41rwvcl"
-path="res://.godot/imported/safepath_tileset.png-0c67710574bfe9bff9ec92d6df66032d.ctex"
+uid="uid://bfsbsrygi4nky"
+path="res://.godot/imported/chest.png-c90cfa0008178daf7cd63de96c896083.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://external_puzzles/puzzles/stealth_run/safepath_tileset.png"
-dest_files=["res://.godot/imported/safepath_tileset.png-0c67710574bfe9bff9ec92d6df66032d.ctex"]
+source_file="res://strategic_mode/tile_events/sprites/chest.png"
+dest_files=["res://.godot/imported/chest.png-c90cfa0008178daf7cd63de96c896083.ctex"]
 
 [params]
 

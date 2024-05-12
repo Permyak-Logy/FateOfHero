@@ -10,12 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://cbedbpjj3nvgi" path="res://city_mode/Cities/Assets/Geraldinia_kuzna.png" id="8_nmo70"]
 [ext_resource type="Texture2D" uid="uid://driq1yr2csc7w" path="res://city_mode/Cities/Assets/Geraldinia_1.png" id="9_bwaig"]
 [ext_resource type="PackedScene" uid="uid://cal6f73hk5ff7" path="res://city_mode/Cities/trading/trading.tscn" id="10_vvwk2"]
-[ext_resource type="Resource" uid="uid://nxw7br686d41" path="res://inventory/abilities/heal/wine.tres" id="11_fhf5x"]
+[ext_resource type="Resource" uid="uid://nxw7br686d41" path="res://GUI/rune_placement/wine.tres" id="11_fhf5x"]
 [ext_resource type="PackedScene" uid="uid://cd1lm7663kkqk" path="res://city_mode/Cities/crafting/crafting.tscn" id="11_muc5h"]
-[ext_resource type="Resource" uid="uid://cjqq7675tviu7" path="res://inventory/abilities/heal/beer.tres" id="12_be6vv"]
-[ext_resource type="Resource" uid="uid://n3d30lb3mf6w" path="res://inventory/abilities/heal/caviar.tres" id="13_4xtbu"]
+[ext_resource type="Resource" uid="uid://cjqq7675tviu7" path="res://GUI/rune_placement/beer.tres" id="12_be6vv"]
+[ext_resource type="Resource" uid="uid://n3d30lb3mf6w" path="res://GUI/rune_placement/caviar.tres" id="13_4xtbu"]
 [ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory/inventory_gui.tscn" id="14_m3655"]
-[ext_resource type="Resource" uid="uid://dkuujrdq3m16y" path="res://inventory/abilities/heal/fish.tres" id="14_r7dhh"]
+[ext_resource type="Resource" uid="uid://dkuujrdq3m16y" path="res://GUI/rune_placement/fish.tres" id="14_r7dhh"]
 
 [node name="CityMap" type="Node2D"]
 script = ExtResource("1_jacgh")
@@ -135,8 +135,8 @@ offset_top = 232.0
 offset_right = 481.0
 offset_bottom = 232.0
 
-[connection signal="pressed" from="trading/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
+[connection signal="pressed" from="trading/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="trading/Button" to="Trading" method="_on_button_pressed"]
 [connection signal="pressed" from="crafting/Button" to="." method="_on_button_crafting_pressed"]
 [connection signal="pressed" from="crafting/Button" to="Crafting" method="_on_button_pressed"]

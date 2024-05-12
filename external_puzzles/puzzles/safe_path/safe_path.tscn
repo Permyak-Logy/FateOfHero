@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://ctden4msbgos3" path="res://external_puzzles/puzzles/base_puzzle.tscn" id="1_kpe5n"]
 [ext_resource type="Script" path="res://external_puzzles/puzzles/safe_path/safe_path.gd" id="2_owly7"]
 [ext_resource type="PackedScene" uid="uid://pva6nu0g0lmb" path="res://external_puzzles/puzzles/safe_path/player.tscn" id="3_8sag4"]
-[ext_resource type="Texture2D" uid="uid://dtr1ge41rwvcl" path="res://external_puzzles/puzzles/stealth_run/safepath_tileset.png" id="3_wof2q"]
+[ext_resource type="Texture2D" uid="uid://2rd6fmf8fde8" path="res://external_puzzles/puzzles/safe_path/safepath_tileset.png" id="3_qlmh5"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b65x3"]
-texture = ExtResource("3_wof2q")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qogk0"]
+texture = ExtResource("3_qlmh5")
 0:0/0 = 0
 0:0/0/custom_data_0 = true
 1:0/0 = 0
@@ -20,7 +20,7 @@ custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "safe"
 custom_data_layer_1/type = 1
-sources/0 = SubResource("TileSetAtlasSource_b65x3")
+sources/0 = SubResource("TileSetAtlasSource_qogk0")
 
 [node name="SafePath" instance=ExtResource("1_kpe5n")]
 script = ExtResource("2_owly7")
