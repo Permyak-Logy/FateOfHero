@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://blfx1lby8vl2c"]
+
+[ext_resource type="Script" path="res://city_mode/Cities/trading/trading_inventory_slot.gd" id="1_4e8ou"]
+[ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="1_elvs8"]
+
+[node name="TradingInventorySlot" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 20)
+offset_right = 24.0
+offset_bottom = 21.0
+scale = Vector2(0.984377, 0.992927)
+script = ExtResource("1_4e8ou")
+
+[node name="back" type="Sprite2D" parent="."]
+scale = Vector2(0.923519, 0.915567)
+texture = ExtResource("1_elvs8")
+centered = false
+vframes = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2

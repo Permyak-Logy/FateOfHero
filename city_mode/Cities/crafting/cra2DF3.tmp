@@ -29,7 +29,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -737.5
+offset_left = -727.5
 offset_top = -396.0
 offset_right = -223.5
 offset_bottom = -256.0
@@ -215,44 +215,35 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(110, 140)
+custom_minimum_size = Vector2(120, 140)
 layout_mode = 2
 
 [node name="Crafting_table" parent="HBoxContainer/NinePatchRect" instance=ExtResource("5_k2nd8")]
 layout_mode = 2
-offset_left = 5.0
-offset_top = 50.0
-offset_right = 105.0
-offset_bottom = 91.0
+offset_left = 3.0
+offset_top = 49.0
+offset_right = 103.0
+offset_bottom = 90.0
 
 [node name="Recipes" type="NinePatchRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="RecipeBook" parent="HBoxContainer/Recipes" instance=ExtResource("5_cj3hw")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -71.0
-offset_top = -94.0
-offset_right = 69.0
-offset_bottom = 70.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+offset_left = -14.0
+offset_top = -25.0
+offset_right = 126.0
+offset_bottom = 149.0
 size_flags_horizontal = 4
 
 [node name="description" type="NinePatchRect" parent="."]
 visible = false
 layout_mode = 0
-offset_left = -567.0
-offset_top = -63.0
-offset_right = -167.0
-offset_bottom = 1.0
+offset_left = -573.0
+offset_top = -194.0
+offset_right = -173.0
+offset_bottom = -130.0
 texture = ExtResource("1_niwie")
 patch_margin_left = 6
 patch_margin_top = 6

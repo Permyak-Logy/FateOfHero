@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3r4vn6k2oiau"]
+
+[ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="1_b6k18"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/slot.gd" id="1_fmlgx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_liuay"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wrkse"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ow3u0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwnwa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ebjn"]
+
+[node name="Slot" type="Button"]
+custom_minimum_size = Vector2(20, 20)
+offset_right = 40.0
+offset_bottom = 39.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_liuay")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wrkse")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ow3u0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xwnwa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7ebjn")
+script = ExtResource("1_fmlgx")
+
+[node name="back" type="Sprite2D" parent="."]
+position = Vector2(10, 10)
+texture = ExtResource("1_b6k18")
+vframes = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_direction = 1
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 3

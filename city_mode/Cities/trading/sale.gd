@@ -1,15 +1,17 @@
 extends HBoxContainer
 
-@export var buys : Inventory = null
+class_name Sale
+
+@export var sale_inventory: Inventory = null
 
 func update():
 	for i in get_children():
 		i.item = null
 		i.stack = 0
-	var keys = buys.items.keys()
+	var keys = sale_inventory.items.keys()
 	for i in keys:
 		#await get_tree().create_timer(0.0001).timeout
-		add_item(i, buys.items[i], i.max_stack)
+		add_item(i, sale_inventory.items[i], i.max_stack)
 
 func add_item(item, item_stack, item_maxstack):
 	for i in get_children():
@@ -45,6 +47,6 @@ func get_price():
 	return price
 
 func clear():
-	for i in buys.items.keys():
-		buys.remove(i, buys.items[i])
+	for i in sale_inventory.items.keys():
+		sale_inventory.remove(i, sale_inventory.items[i])
 	update()

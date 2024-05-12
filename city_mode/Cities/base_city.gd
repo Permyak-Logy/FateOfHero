@@ -6,3 +6,5 @@ All the shared logic goes here
 The API must be defined here
 """
 signal leave_city
+
+@export var TradingInventory: Inventory
