@@ -4,10 +4,8 @@ class_name GateTileEvent extends UnwalkableTileEvent
 @export var is_open: bool = false
 
 func _ready():
-	close()
-	if is_open:
-		open()
 	strat_map.strat_map_loaded.connect(snap_to_grid)
+	strat_map.strat_map_loaded.connect(update_state)
 
 func open(_null=null):
 	collider.disabled = true
@@ -21,3 +19,8 @@ func close():
 
 func activate():
 	pass
+
+func update_state():
+	close()
+	if is_open:
+		open()
