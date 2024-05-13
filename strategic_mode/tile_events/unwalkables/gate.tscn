@@ -8,5 +8,9 @@
 script = ExtResource("2_ghlwe")
 
 [node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.375, 1)
 texture = ExtResource("3_mx0xg")
 hframes = 2
+
+[node name="EventCollider" parent="." index="1"]
+position = Vector2(0, -0.5)

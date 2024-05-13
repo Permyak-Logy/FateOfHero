@@ -10,7 +10,6 @@ Base class for any TileEvents
 @onready var sprite: Sprite2D = $Sprite2D
 
 func _ready():
-	assert(texture != null)
 	sprite.texture = texture
 	sprite.flip_v = doflip
 
