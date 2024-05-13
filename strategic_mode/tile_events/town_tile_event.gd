@@ -17,7 +17,7 @@ func activate():
 	var city_scene: City = city.instantiate()
 	city_scene.leave_city.connect(on_done)
 	city_scene.set_inventory(local_inventory)
-    game.city_container.add_child(city_scene)
+	game.city_container.add_child(city_scene)
 	game.to_city_mode()
 
 func on_done():
