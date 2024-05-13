@@ -9,6 +9,8 @@ Base class for any TileEvents
 
 @onready var sprite: Sprite2D = $Sprite2D
 
+signal removed(tile_event: TileEvent)
+
 func _ready():
 	sprite.texture = texture
 	sprite.flip_v = doflip
@@ -17,9 +19,10 @@ func activate():
 	print("TODO -- redefine activate")
 	remove()
 
-func remove():
+func remove(_none = null):
 	var host = get_parent()
 	if host:
 		host.remove_child(self)
+		removed.emit(self)
 
 

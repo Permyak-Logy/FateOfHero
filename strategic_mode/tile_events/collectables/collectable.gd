@@ -24,7 +24,3 @@ func activate():
 	inventory = game.strat_map.player.inventory
 	inventory.insert(item, count)
 	remove()
-
-func remove():
-	var host = get_parent()
-	host.remove_child(self)
