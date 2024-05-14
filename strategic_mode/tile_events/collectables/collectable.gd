@@ -18,6 +18,7 @@ func _ready():
 	init()
 	assert(item != null, "collectables need their values refefined in seperate script")
 	assert(count != null, "collectables need their values refefined in seperate script")
+	sprite.texture = item.texture
 
 func activate():
 	game = get_tree().root.get_child(0)

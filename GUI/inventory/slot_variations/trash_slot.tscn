@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://15hdpwxbp3ti"]
+
+[ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/inventory/slot.tscn" id="1_3l2ne"]
+[ext_resource type="Texture2D" uid="uid://cq02mrjss3xa6" path="res://GUI/inventory/new_assets/x_marks_the_spot.png" id="2_wffbq"]
+[ext_resource type="Script" path="res://GUI/inventory/slot_variations/trash_slot.gd" id="2_x2u8e"]
+
+[node name="TrashSlot" instance=ExtResource("1_3l2ne")]
+custom_minimum_size = Vector2(22, 22)
+scale = Vector2(1.4, 1.4)
+script = ExtResource("2_x2u8e")
+
+[node name="Cross" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_wffbq")
+offset = Vector2(11, 11)
