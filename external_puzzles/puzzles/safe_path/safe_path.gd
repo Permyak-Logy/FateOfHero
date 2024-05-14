@@ -151,6 +151,10 @@ func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene])
 	inventory.characters = alive
 	solved.emit(rewards)
 	game.to_strat_mode()
+	for char_p in dead:
+		var char = char_p.instantiate()
+		if char.name == game.strat_map.player.mc_name:
+			game.strat_map.show_game_over()
 
 func spawn_visp():
 	var visp: SafePathVisp = SafePathVispRes.instantiate()  

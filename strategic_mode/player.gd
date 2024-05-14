@@ -21,6 +21,7 @@ var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var last_position: Vector2
+var pos: Vector2i
 var is_moving: bool = false
 @export var mc_name: String
 
@@ -32,6 +33,7 @@ func update_nav_map(pos: Vector2i, state: bool):
 	astar_grid.set_point_solid(pos, not state)
 
 func _ready():
+	pos = tilemap.local_to_map(global_position)
 	if mc_name:
 		sprite.texture = texture[mc_name]
 	
@@ -47,42 +49,61 @@ func _ready():
 				x + tilemap.get_used_rect().position.x,
 				y + tilemap.get_used_rect().position.y
 				)
-			var tile_data = tilemap.get_cell_tile_data(0, tile_position)
+			astar_grid.set_point_solid(tile_position, not is_walkable(tile_position))
 			
-			if tile_data == null or tile_data.get_custom_data("walkable") == false:
-				astar_grid.set_point_solid(tile_position)
-			
-			tile_data = tilemap.get_cell_tile_data(1, tile_position)
-			
-			if tile_data == null:
-				continue
-			astar_grid.set_point_solid(tile_position, not tile_data.get_custom_data("walkable"))
-				
-			
-	
+
 	tilemap.occupied_changed.connect(update_nav_map)
-		
+
+func is_walkable(pos: Vector2i) -> bool:
+	var res = true
+	var tile_data = tilemap.get_cell_tile_data(0, pos)
+	if tile_data and tile_data.get_custom_data("walkable") == false:
+		res = false
+	# overwrite with terrain; so bridges and highlands are walkable
+	tile_data = tilemap.get_cell_tile_data(1, pos)
+	if tile_data:
+		res = tile_data.get_custom_data("walkable")
+	return res
+
 func _input(event):
-	if event.is_action_pressed("lmb") == false:
-		return 
-		
-	var id_path
-	if is_moving:
-		print("stopping")
-		target_position = last_position
-		id_path = astar_grid.get_id_path(
-			tilemap.local_to_map(global_position),
-			tilemap.local_to_map(target_position)
-		).slice(1)
-		is_moving = false
+	if event.is_action_pressed("lmb"):
+		var id_path
+		if is_moving:
+			print("stopping")
+			target_position = last_position
+			id_path = astar_grid.get_id_path(
+				tilemap.local_to_map(global_position),
+				tilemap.local_to_map(target_position)
+			).slice(1)
+			is_moving = false
+		else:
+			id_path = astar_grid.get_id_path(
+				tilemap.local_to_map(global_position),
+				tilemap.local_to_map(get_global_mouse_position())
+			).slice(1)
+		print("is walkable ", tilemap.get_cell_tile_data(0, tilemap.local_to_map(get_global_mouse_position())).get_custom_data("walkable"))
+		print(id_path)
+		current_id_path = id_path
+		return
+
+	var delta = Vector2i(0, 0)
+	if event.is_action_pressed("up"):
+		delta[1] -= 1
+	if event.is_action_pressed("down"):
+		delta[1] += 1
+	if event.is_action_pressed("left"):
+		delta[0] -= 1
+	if event.is_action_pressed("right"):
+		delta[0] += 1
+	if current_id_path.size() > 2:
+		current_id_path = [current_id_path.front()]
+	if current_id_path.is_empty():
+		if astar_grid.is_point_solid(pos + delta) == false and (delta.x != 0 or delta.y != 0):
+			current_id_path.append(pos + delta)
 	else:
-		id_path = astar_grid.get_id_path(
-			tilemap.local_to_map(global_position),
-			tilemap.local_to_map(get_global_mouse_position())
-		).slice(1)
-	print("is walkable ", tilemap.get_cell_tile_data(0, tilemap.local_to_map(get_global_mouse_position())).get_custom_data("walkable"))
-	print(id_path)
-	current_id_path = id_path
+		if astar_grid.is_point_solid(current_id_path.back() + delta) == false and (delta.x != 0 or delta.y != 0):
+			current_id_path.append(current_id_path.back() + delta)
+		
 
 
 func _physics_process(delta):
@@ -105,8 +126,10 @@ func _physics_process(delta):
 	
 	if global_position == target_position:
 		current_id_path.pop_front()
+		last_position = target_position
+		pos = tilemap.local_to_map(last_position)
+		print("reached: ", last_position)
 		if not current_id_path.is_empty():
-			last_position = target_position
 			target_position = tilemap.map_to_local(current_id_path.front())
 			target_position[0] -= 8
 			target_position[1] -= 8
@@ -118,6 +141,7 @@ func _physics_process(delta):
 func move_to(new_pos: Vector2i):
 	var new_local_pos = tilemap.map_to_local(new_pos) + Vector2(8, 8)
 	last_position = global_position
+	pos = tilemap.local_to_map(last_position)
 	global_position = new_local_pos
 	current_id_path = []
 	target_position = new_pos

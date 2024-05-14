@@ -41,26 +41,26 @@ theme_override_constants/separation = 20
 [node name="Continue" type="Button" parent="Menu"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Continue"
+text = "Продолжить"
 
 [node name="Campaign" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
-text = "New Campaign"
+text = "Новая кампания"
 
 [node name="Infinite" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "New Infinnite Mode"
+text = "Новый бесконечный режим"
 
 [node name="Exit" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Exit"
+text = "Выйти"
 
 [node name="SaveMenuComtainer" type="Control" parent="."]
 anchors_preset = 0

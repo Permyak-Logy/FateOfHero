@@ -36,7 +36,7 @@ func to_puzzle_mode():
 	activate(external_puzzle_container)
 
 func to_main_menu():
-	
+	main_menu.update()
 	activate(main_menu)
 
 func save():

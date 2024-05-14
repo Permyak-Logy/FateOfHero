@@ -4,7 +4,9 @@ class_name StratMap extends Node2D
 @onready var gui: StratMapGUI = $GUI
 @onready var tilemap: StratTileMap = $StratTileMap
 @onready var player: Player = $player
+@onready var game: Game = get_tree().root.get_child(0)
 
+var GameOverGUIRes: PackedScene = preload("res://GUI/game_over/game_over_gui.tscn")
 var time: int = 0
 
 signal strat_map_loaded
@@ -35,4 +37,14 @@ func _ready():
 
 
 func _enter_tree():
+	pass
+
+
+func show_game_over():
+	var game_over_gui: GameOverGUI = GameOverGUIRes.instantiate() 
+	gui.add_child(game_over_gui)
+	await game_over_gui.done
+	gui.remove_child(game_over_gui)
+	game.remove_save()
+	game.to_main_menu()
 	pass

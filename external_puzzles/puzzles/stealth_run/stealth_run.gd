@@ -148,6 +148,10 @@ func start_fight():
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive
 	solved.emit(rewards)
+	for char_p in dead:
+		var char = char_p.instantiate()
+		if char.name == game.strat_map.player.mc_name:
+			game.strat_map.show_game_over()
 
 func _ready():
 	player.pos = Vector2i(1, 1)

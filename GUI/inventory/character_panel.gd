@@ -112,8 +112,7 @@ func update_bars():
 		str(exp_bar.max_value)
 
 func update_repr():
-	name_label.text = current_character.name
-	
+	name_label.text = current_character.unit_name
 	var offset = sprite_holder.size
 	offset[0] /= 2
 	current_character.global_position = sprite_holder.global_position + offset

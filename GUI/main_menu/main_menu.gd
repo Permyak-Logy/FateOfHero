@@ -10,9 +10,8 @@ class_name MainMenu extends Control
 @onready var game: Game = get_tree().root.get_child(0)
 
 func _ready():
+	update()
 	infinite_button.disabled = true
-	if not ResourceLoader.exists("res://save/save.tscn"):
-		continue_button.disabled = true
 
 func _on_continue_pressed():
 	game.load_save()
@@ -30,3 +29,8 @@ func _on_infinite_pressed():
 
 func _on_exit_pressed():
 	get_tree().quit()
+
+func update():
+	continue_button.disabled = false
+	if not ResourceLoader.exists("res://save/save.tscn"):
+		continue_button.disabled = true
