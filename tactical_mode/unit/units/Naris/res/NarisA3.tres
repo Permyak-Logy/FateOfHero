@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="NarisA3" load_steps=4 format=3 uid="uid://dmhdwngjlmky6"]
+
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="1_ni344"]
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Naris/src/naris_a3.gd" id="1_r4fau"]
+
+[sub_resource type="Resource" id="Resource_hslh2"]
+script = ExtResource("1_ni344")
+on_stack = 0
+limit_stacks_for_sum_mods = -1
+moves = 1
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Усиление на атаку"
+is_negative = false
+
+[resource]
+script = ExtResource("1_r4fau")
+effect = SubResource("Resource_hslh2")
+targets = 1
+max_targets = 0
+apply_on = Array[int]([])
+can_use_if_only_has_any_selectable_target = true
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+consumable = false
+count = 0
+scaling_type = 4
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 0
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = ""
+description = ""
+max_stack = 0
+recipe = Array[Resource("res://inventory/item.gd")]([])
+price = 0

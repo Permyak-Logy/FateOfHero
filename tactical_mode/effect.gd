@@ -78,5 +78,5 @@ func cancel_effect():
 	pass
 
 func remove_visual_effect(_null=null):
-	if _visual_effect and owner:
+	if _visual_effect and owner and owner.get_parent() == owner:
 		owner.remove_child(_visual_effect)

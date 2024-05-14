@@ -41,6 +41,8 @@ curve = SubResource("Curve_45mll")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_286y4"]
 particle_flag_disable_z = true
 gravity = Vector3(30, -100, 0)
+tangential_accel_min = -51.95
+tangential_accel_max = 24.74
 scale_curve = SubResource("CurveTexture_t1tkd")
 color_ramp = SubResource("GradientTexture1D_l3oxu")
 turbulence_enabled = true
@@ -51,6 +53,8 @@ turbulence_noise_speed_random = 0.41
 lifetime_randomness = 0.09
 particle_flag_disable_z = true
 gravity = Vector3(-30, -100, 0)
+tangential_accel_min = -29.32
+tangential_accel_max = 43.41
 scale_curve = SubResource("CurveTexture_t1tkd")
 color_ramp = SubResource("GradientTexture1D_l3oxu")
 turbulence_enabled = true
