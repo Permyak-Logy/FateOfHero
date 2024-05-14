@@ -57,4 +57,4 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Back/VBoxContainer"]
 layout_mode = 2
-text = "place the rune"
+text = "Вставь руну"
