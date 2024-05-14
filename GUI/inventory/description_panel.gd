@@ -1,4 +1,4 @@
-class_name ItemDesctiptionPanel extends Panel
+class_name ItemDesctiptionPanel extends NinePatchRect
 
 @onready var sprite: Sprite2D = $HBoxContainer/VBoxContainer2/Panel/CenterContainer/Sprite2D
 @onready var price_label: Label = $HBoxContainer/VBoxContainer2/Price
@@ -10,5 +10,6 @@ var item: Item
 func _ready():
 	assert(item, "can't display description of null")
 	sprite.texture = item.texture
-	name_label.text = str(item.price) + "G"
+	name_label.text = item.name
+	price_label.text = str(item.price) + "G"
 	description_label.text = item.description

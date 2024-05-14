@@ -30,6 +30,12 @@ var item_stack_in_hand: ItemStackRepr
 var item_stack_in_hand_origin: InventorySlot
 var hovering_slot: InventorySlot = null
 
+const DESCRIPTION_OFFSET: Vector2 = Vector2(-260, -100)
+const DESCTIPTION_DELAY: float = 2.4
+const ItemDescriptionPanelRes: PackedScene = preload("res://GUI/inventory/description_panel.tscn")
+var description: ItemDesctiptionPanel
+var description_timer: Timer
+
 func _ready():
 	connect_inventory_slots()
 	visible = false
@@ -84,6 +90,7 @@ func open():
 	inventory_opened.emit()
 	
 func close():
+	hide_description()
 	inventory.characters[active_char_id] = character_panel.pack_character()
 	is_open = false 
 	visible = false
@@ -101,7 +108,9 @@ func on_char_button_pressed(id: int):
 
 func update_item_in_hand():
 	if not item_stack_in_hand: return
-	item_stack_in_hand.global_position = get_global_mouse_position() - item_stack_in_hand.size / 2
+	item_stack_in_hand.global_position = get_global_mouse_position() - item_stack_in_hand.size
+	if description:
+		description.position = get_global_mouse_position() + DESCRIPTION_OFFSET
 
 
 func put_item_in_inv():
@@ -198,10 +207,35 @@ func _input(event):
 			target_slot = item_stack_in_hand_origin
 		put_to(target_slot)
 
+func show_description(item: Item):
+	hide_description()
+	if not item: return
+	description = ItemDescriptionPanelRes.instantiate() 
+	description.item = item
+	add_child(description)
+	description.top_level = true 
+	description.mouse_filter = 2
+	description.position = get_global_mouse_position() + DESCRIPTION_OFFSET
 
+func hide_description():
+	if not description:
+		return
+	remove_child(description)
+	remove_child(description_timer)
+	description_timer = null
+	description = null
 
 func on_slot_hovered(slot: InventorySlot):
 	hovering_slot = slot
+	if not slot.item_stack_repr:
+		return
+	description_timer = Timer.new()
+	var callable = Callable(show_description)
+	callable = callable.bind(hovering_slot.item_stack_repr.item_stack.item)
+	description_timer.timeout.connect(callable)
+	add_child(description_timer)
+	description_timer.start(DESCTIPTION_DELAY)
 
 func on_slot_unhovered(slot: InventorySlot):
 	hovering_slot = null
+	hide_description()
