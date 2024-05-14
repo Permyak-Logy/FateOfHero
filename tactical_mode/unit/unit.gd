@@ -357,3 +357,17 @@ func ai_pass(map: TacticalMap):
 
 func reset_color():
 	get_map().reset_outline_color(self)
+
+func stat_from_type(t: Mod.Type) -> StatComponent:
+	if t == Mod.Type.Health:
+		return health
+	elif t == Mod.Type.Defence:
+		return defence
+	elif t == Mod.Type.Damage:
+		return damage
+	elif t == Mod.Type.Speed:
+		return speed
+	elif t == Mod.Type.None:
+		return null
+	assert(false, "Неопределён компонент для скейлинга для " + unit_name)
+	return null

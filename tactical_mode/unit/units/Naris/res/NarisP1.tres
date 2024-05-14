@@ -7,11 +7,12 @@
 [sub_resource type="Resource" id="Resource_qh0vw"]
 script = ExtResource("2_ew2o5")
 power = 30.0
-mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
-destroy_on_death_instigator = false
+scaling_type = 0
+mods = null
+destroy_on_death_instigator = null
 stackable = true
 effect_name = "Щит"
-is_negative = false
+is_negative = null
 visual_effect = ExtResource("3_oorwl")
 
 [resource]

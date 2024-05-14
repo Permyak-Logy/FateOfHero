@@ -67,6 +67,7 @@ func is_walkable(pos: Vector2i) -> bool:
 
 func _input(event):
 	if event.is_action_pressed("lmb"):
+		print(event)
 		var id_path
 		if is_moving:
 			print("stopping")
@@ -95,7 +96,7 @@ func _input(event):
 		delta[0] -= 1
 	if event.is_action_pressed("right"):
 		delta[0] += 1
-	if current_id_path.size() > 2:
+	if current_id_path.size() > 2 and (delta.x != 0 or delta.y != 0):
 		current_id_path = [current_id_path.front()]
 	if current_id_path.is_empty():
 		if astar_grid.is_point_solid(pos + delta) == false and (delta.x != 0 or delta.y != 0):

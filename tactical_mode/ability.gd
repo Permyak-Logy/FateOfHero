@@ -18,20 +18,9 @@ var cooldown_time = 0
 var has_uses = 0
 
 @export var only_unit_owner = true
-var scale: float:
+var scale: float = 0:
 	get:
-		var stat: StatComponent = null
-		var unit = owner as Unit
-		if scaling_type == Mod.Type.Health:
-			stat = unit.health
-		elif scaling_type == Mod.Type.Defence:
-			stat = unit.defence
-		elif scaling_type == Mod.Type.Damage:
-			stat = unit.damage
-		elif scaling_type == Mod.Type.Speed:
-			stat = unit.speed
-		assert(stat != null, "Неопределён компонент для скейлинга для " + unit.unit_name)
-		return stat.cur()
+		return (owner as Unit).stat_from_type(scaling_type).cur()
 
 func _init(_count: int = count):
 	count = _count

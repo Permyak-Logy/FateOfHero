@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlydogsjd8q0v"]
 
 [ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_u8q88"]
-[ext_resource type="Texture2D" uid="uid://dlgmv8rc8w2ru" path="res://GUI/main_menu/back_tpr.png" id="2_as3v0"]
+[ext_resource type="Texture2D" uid="uid://bpbquk87c07qo" path="res://GUI/main_menu/back_tpr.png" id="2_as3v0"]
 [ext_resource type="Script" path="res://GUI/main_menu/main_menu.gd" id="2_nat64"]
 [ext_resource type="PackedScene" uid="uid://ywyg6edx5cuc" path="res://GUI/main_menu/initial_character_selection_panel.tscn" id="4_0au2r"]
 [ext_resource type="AudioStream" uid="uid://ck6j63tju4lmb" path="res://main_menu_bg.mp3" id="4_q6ds8"]
@@ -25,7 +25,8 @@ zoom = Vector2(0.5, 0.5)
 layout_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="CenterContainer"]
-position = Vector2(990, 540)
+position = Vector2(960, 540)
+scale = Vector2(1.87134, 1.875)
 texture = ExtResource("2_as3v0")
 
 [node name="Menu" type="VBoxContainer" parent="."]
