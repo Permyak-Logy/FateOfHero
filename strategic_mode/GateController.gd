@@ -4,4 +4,5 @@ extends Node
 @onready var encounter: Encounter = $GateEncounter
 
 func _ready():
-	encounter.removed.connect(gate.open)
+	if encounter:
+		encounter.removed.connect(gate.open)
