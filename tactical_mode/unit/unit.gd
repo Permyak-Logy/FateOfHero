@@ -224,7 +224,7 @@ func play(_name: String, _params=null):
 			_end_pos = (_params as Unit).global_position
 			_end_pos += Vector2((1 if _start_pos[0] - _end_pos[0] > 0 else -1) * 16, 5)
 		
-		if animation_player.has_animation("RESET"):
+		if animation_player.has_animation("RESET") and not _name.begins_with("post"):
 			animation_player.animation_set_next("RESET", _name)
 			animation_player.play("RESET")
 		else:

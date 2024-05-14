@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cxvcedbc0b2ki"]
+[gd_scene load_steps=22 format=3 uid="uid://cxvcedbc0b2ki"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Poludnisa/Poludnisa.gd" id="1_854ht"]
 [ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="2_4onig"]
@@ -6,11 +6,25 @@
 [ext_resource type="Texture2D" uid="uid://vy3p352yeo1p" path="res://tactical_mode/unit/units/Poludnisa/assets/spritesheet.png" id="3_c5age"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="3_yggft"]
 [ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="4_eb4lc"]
-[ext_resource type="Resource" uid="uid://crsva3kiqhcl" path="res://tactical_mode/unit/res/DamageStat.tres" id="5_kypel"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="5_a7xqb"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="6_6ek8e"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="6_peqxc"]
 [ext_resource type="Resource" uid="uid://dl1lldw2twwoi" path="res://tactical_mode/unit/units/Poludnisa/PoludnisaA0.tres" id="7_i0lhi"]
 [ext_resource type="Resource" uid="uid://bq2iicqcssmai" path="res://tactical_mode/effects/res/LevelUpscaleEffect.tres" id="8_slafw"]
 [ext_resource type="Texture2D" uid="uid://d3tuayo5k68te" path="res://tactical_mode/unit/units/Poludnisa/assets/run.png" id="9_cl7s2"]
+
+[sub_resource type="Resource" id="Resource_o87s6"]
+resource_local_to_scene = true
+script = ExtResource("5_a7xqb")
+base = 30.0
+cur = 30.0
+max_ = 30.0
+
+[sub_resource type="Resource" id="Resource_6o1dp"]
+resource_local_to_scene = true
+script = ExtResource("6_6ek8e")
+mod_type = 2
+characteristic = SubResource("Resource_o87s6")
 
 [sub_resource type="Resource" id="Resource_o475n"]
 script = ExtResource("6_peqxc")
@@ -75,7 +89,7 @@ unit_name = "Полудница"
 health = ExtResource("2_4onig")
 defence = ExtResource("3_yggft")
 speed = ExtResource("4_eb4lc")
-damage = ExtResource("5_kypel")
+damage = SubResource("Resource_6o1dp")
 expirience = SubResource("Resource_o475n")
 sprite_for_outline = NodePath("Sprite2D")
 health_bar_pb = NodePath("StatProgressBar")

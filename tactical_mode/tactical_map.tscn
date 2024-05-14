@@ -430,57 +430,57 @@ level = 1
 expirience = 0
 ups = 0
 
-[sub_resource type="Resource" id="Resource_sh200"]
+[sub_resource type="Resource" id="Resource_q36t0"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 80.0
+cur = 80.0
+max_ = 80.0
+
+[sub_resource type="Resource" id="Resource_yhhox"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_q36t0")
+
+[sub_resource type="Resource" id="Resource_0p6qj"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_qyyw3"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_0p6qj")
+
+[sub_resource type="Resource" id="Resource_pls1k"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
 base = 100.0
 cur = 100.0
 max_ = 100.0
 
-[sub_resource type="Resource" id="Resource_20qjc"]
-resource_local_to_scene = true
-script = ExtResource("10_3tc35")
-mod_type = 0
-characteristic = SubResource("Resource_sh200")
-
-[sub_resource type="Resource" id="Resource_lwvmi"]
-resource_local_to_scene = true
-script = ExtResource("9_6j4aw")
-base = 50.0
-cur = 50.0
-max_ = 50.0
-
-[sub_resource type="Resource" id="Resource_gjhkd"]
-resource_local_to_scene = true
-script = ExtResource("10_3tc35")
-mod_type = 3
-characteristic = SubResource("Resource_lwvmi")
-
-[sub_resource type="Resource" id="Resource_k870g"]
-resource_local_to_scene = true
-script = ExtResource("9_6j4aw")
-base = 110.0
-cur = 110.0
-max_ = 110.0
-
-[sub_resource type="Resource" id="Resource_msqrp"]
+[sub_resource type="Resource" id="Resource_0rv6p"]
 resource_local_to_scene = true
 script = ExtResource("10_3tc35")
 mod_type = 1
-characteristic = SubResource("Resource_k870g")
+characteristic = SubResource("Resource_pls1k")
 
-[sub_resource type="Resource" id="Resource_feibk"]
+[sub_resource type="Resource" id="Resource_hls3b"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
-base = 50.0
-cur = 50.0
-max_ = 50.0
+base = 30.0
+cur = 30.0
+max_ = 30.0
 
-[sub_resource type="Resource" id="Resource_6vk0p"]
+[sub_resource type="Resource" id="Resource_crqjo"]
 resource_local_to_scene = true
 script = ExtResource("10_3tc35")
 mod_type = 2
-characteristic = SubResource("Resource_feibk")
+characteristic = SubResource("Resource_hls3b")
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
@@ -596,10 +596,10 @@ expirience = SubResource("Resource_xj23x")
 
 [node name="Poludnisa" parent="." instance=ExtResource("16_sq65k")]
 position = Vector2(513, 328)
-health = SubResource("Resource_20qjc")
-defence = SubResource("Resource_gjhkd")
-speed = SubResource("Resource_msqrp")
-damage = SubResource("Resource_6vk0p")
+health = SubResource("Resource_yhhox")
+defence = SubResource("Resource_qyyw3")
+speed = SubResource("Resource_0rv6p")
+damage = SubResource("Resource_crqjo")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_nmmmq")

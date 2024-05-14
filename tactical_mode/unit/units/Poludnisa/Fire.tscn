@@ -60,6 +60,7 @@ turbulence_noise_speed_random = 0.41
 [node name="Fire" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1, -26)
 texture = ExtResource("1_4gjno")
 hframes = 15
