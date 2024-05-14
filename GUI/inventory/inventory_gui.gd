@@ -17,7 +17,7 @@ var inventory: Inventory
 @onready var inventory_panel: InventoryPanel = $HBoxContainer/VBoxContainer/InventoryPanel 
 @onready var character_selection_panel: CharacterSelectionPanel = $HBoxContainer/VBoxContainer/CharacterSelectionPanel
 @onready var character_panel: CharacterPanel = $HBoxContainer/CharacterPanel
-
+@onready var trash_slot: InventoryTrashSlot = $HBoxContainer/NinePatchRect/TrashSlot
 
 @onready var inv_slots = inventory_panel.slots
 # these will be defined in `_ready()`
@@ -39,6 +39,8 @@ var description_timer: Timer
 func _ready():
 	connect_inventory_slots()
 	visible = false
+	trash_slot.HoveringInventorySlot.connect(on_slot_hovered)
+	trash_slot.UnhoveringInventorySlot.connect(on_slot_unhovered)
 
 func reinit():
 	game = get_tree().root.get_child(0)
@@ -87,6 +89,7 @@ func open():
 	reinit()
 	is_open = true 
 	visible = true
+	trash_slot.visible = true
 	inventory_opened.emit()
 	
 func close():
@@ -94,6 +97,7 @@ func close():
 	inventory.characters[active_char_id] = character_panel.pack_character()
 	is_open = false 
 	visible = false
+	trash_slot.visible = true	
 	inventory_closed.emit()
 
 func on_char_button_pressed(id: int):
@@ -112,6 +116,28 @@ func update_item_in_hand():
 	if description:
 		description.position = get_global_mouse_position() + DESCRIPTION_OFFSET
 
+
+func take_from_trash(slot: InventoryTrashSlot):
+	if item_stack_in_hand:
+		return false
+	if not slot.item_stack_repr:
+		return false
+	item_stack_in_hand = trash_slot.take_item()
+	add_child(item_stack_in_hand)
+	update()
+	update_item_in_hand()
+	return true
+
+func put_to_trash():
+	if not (item_stack_in_hand and item_stack_in_hand.item_stack):
+		return false
+	remove_child(item_stack_in_hand)
+	trash_slot.insert(item_stack_in_hand)
+	item_stack_in_hand = null
+	update()
+	update_item_in_hand()
+	return true
+	
 
 func put_item_in_inv():
 	if not (item_stack_in_hand and item_stack_in_hand.item_stack):
@@ -180,6 +206,8 @@ func put_to(slot: InventorySlot):
 	var success = true
 	if slot.name.begins_with("Slot"):
 		put_item_in_inv()
+	elif slot.name.begins_with("Trash"):
+		put_to_trash()
 	else:
 		if not put_item_to_char_slot(slot):
 			put_item_in_inv()
@@ -187,6 +215,8 @@ func put_to(slot: InventorySlot):
 func take_from(slot:InventorySlot):
 	if hovering_slot.name.begins_with("Slot"):
 		return take_item_from_inv_slot(hovering_slot)
+	elif slot.name.begins_with("Trash"):
+		take_from_trash(slot)
 	else:
 		return take_item_form_char_slot(hovering_slot)
 	 
@@ -221,9 +251,10 @@ func hide_description():
 	if not description:
 		return
 	remove_child(description)
-	remove_child(description_timer)
-	description_timer = null
 	description = null
+	if description_timer:
+		remove_child(description_timer)
+		description_timer = null
 
 func on_slot_hovered(slot: InventorySlot):
 	hovering_slot = slot
