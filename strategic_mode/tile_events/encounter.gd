@@ -1,6 +1,6 @@
 class_name Encounter extends TileEvent
 
-var game: Game
+@onready var game: Game = get_tree().root.get_child(0)
 var inventory: Inventory
 
 @export var enemies: Array[PackedScene]
@@ -26,3 +26,7 @@ func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene])
 	inventory.characters = alive
 	game.to_strat_mode()
 	remove()
+	for char_p in dead:
+		var char = char_p.instantiate()
+		if char.name == game.strat_map.player.mc_name:
+			game.strat_map.show_game_over()

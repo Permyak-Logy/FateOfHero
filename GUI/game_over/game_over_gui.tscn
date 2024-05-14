@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckj8nmdprwmr"]
+
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_6sg7b"]
+[ext_resource type="Script" path="res://GUI/game_over/game_over_gui.gd" id="1_l3fk4"]
+[ext_resource type="StyleBox" uid="uid://c2c74ou71elg4" path="res://GUI/styles/highlight_panel.tres" id="3_g3ooi"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_mfblg"]
+color = Color(1, 0.678431, 0.364706, 1)
+grow_begin = 30.0
+grow_end = 30.0
+thickness = 2
+
+[node name="GameOverGui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6sg7b")
+script = ExtResource("1_l3fk4")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Padding" type="Control" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Игра окончена"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_mfblg")
+
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_g3ooi")
+
+[node name="Body" type="RichTextLabel" parent="Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+text = "Главный герой умер"
+
+[node name="ToMainMenu" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "В главное меню"
+
+[connection signal="pressed" from="Panel/VBoxContainer/ToMainMenu" to="." method="_on_to_main_menu_pressed"]
