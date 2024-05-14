@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsis47xaepjwn"]
+
+[ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/units/Naris/assets/spritesheet.png" id="1_4gjno"]
+
+[sub_resource type="Gradient" id="Gradient_kjbty"]
+offsets = PackedFloat32Array(0.00363636, 0.985455)
+colors = PackedColorArray(1, 0.960784, 0.388235, 0.486275, 0.581457, 0, 0.088954, 0.490196)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l3oxu"]
+gradient = SubResource("Gradient_kjbty")
+
+[sub_resource type="Curve" id="Curve_0axaa"]
+min_value = 1.0
+max_value = 8.0
+_data = [Vector2(0.00273973, 4.37354), 0.0, 0.0, 0, 0, Vector2(1, 1.90755), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iyw7b"]
+curve = SubResource("Curve_0axaa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mk2s0"]
+particle_flag_disable_z = true
+gravity = Vector3(-250, -220, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_iyw7b")
+color_ramp = SubResource("GradientTexture1D_l3oxu")
+turbulence_enabled = true
+turbulence_noise_scale = 4.204
+turbulence_noise_speed_random = 0.41
+
+[sub_resource type="Curve" id="Curve_45mll"]
+min_value = 1.0
+max_value = 5.0
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t1tkd"]
+curve = SubResource("Curve_45mll")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_286y4"]
+particle_flag_disable_z = true
+gravity = Vector3(30, -100, 0)
+scale_curve = SubResource("CurveTexture_t1tkd")
+color_ramp = SubResource("GradientTexture1D_l3oxu")
+turbulence_enabled = true
+turbulence_noise_scale = 4.204
+turbulence_noise_speed_random = 0.41
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gdrtl"]
+lifetime_randomness = 0.09
+particle_flag_disable_z = true
+gravity = Vector3(-30, -100, 0)
+scale_curve = SubResource("CurveTexture_t1tkd")
+color_ramp = SubResource("GradientTexture1D_l3oxu")
+turbulence_enabled = true
+turbulence_noise_scale = 4.204
+turbulence_noise_speed_random = 0.41
+
+[node name="Fire" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -26)
+texture = ExtResource("1_4gjno")
+hframes = 15
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+position = Vector2(0, -27)
+amount = 7
+process_material = SubResource("ParticleProcessMaterial_mk2s0")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(3, -4)
+rotation = -0.0205232
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_286y4")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-3, -13)
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_gdrtl")

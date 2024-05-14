@@ -87,7 +87,7 @@ func _ready():
 	_p_units = [$Naris,$Berserk,$SmolItto,$Vamp
 	]
 	_e_units = [
-		$Vendigo,$Lugozavr,$Vedmachok
+		$Vendigo,$Lugozavr,$Vedmachok,$Poludnisa
 	]
 	inited = true
 
