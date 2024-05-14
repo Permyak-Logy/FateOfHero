@@ -151,7 +151,6 @@ func apply_passives():
 		passive.instigator = self
 		add_effect(passive)
 
-
 func get_occupied_cells() -> Array[Vector2i]:
 	if visible:
 		return [get_cell()]
