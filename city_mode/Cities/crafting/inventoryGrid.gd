@@ -2,9 +2,9 @@ extends GridContainer
 
 signal item_changed
 
-#@onready var game: Game = get_tree().root.get_child(0)
-#@onready var inventory : Inventory = game.strat_map.player.inventory
-@export var inventory : Inventory
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory : Inventory = game.strat_map.player.inventory
+#@export var inventory : Inventory
 
 func _ready():
 	update()
@@ -46,3 +46,10 @@ func how_much(item):
 		if i.item == item:
 			st += i.stack
 	return st
+
+func free_slots():
+	var free_slots: int = 0 
+	for i in get_children():
+		if i.item == null:
+			free_slots += 1
+	return free_slots

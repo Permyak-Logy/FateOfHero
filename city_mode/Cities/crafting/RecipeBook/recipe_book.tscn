@@ -1,18 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmkyu0kpc2o6b"]
+[gd_scene load_steps=11 format=3 uid="uid://dmkyu0kpc2o6b"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/RBook.gd" id="1_obsew"]
-[ext_resource type="Resource" uid="uid://b6qiv7mvlchkl" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottkeBlackRecipe.tres" id="2_jmrry"]
+[ext_resource type="Resource" uid="uid://ccxrbnaw2l1dl" path="res://city_mode/Cities/crafting/RecipeBook/recipes/RecipeBook.tres" id="2_6cg7x"]
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="3_2s3wr"]
-[ext_resource type="Resource" uid="uid://d2wwyvv1unq3j" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottkeRedRecipe.tres" id="3_s7abs"]
-[ext_resource type="Resource" uid="uid://ccmjb70h4h7co" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottleGreenRecipe.tres" id="4_7n45g"]
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="4_un25g"]
 [ext_resource type="PackedScene" uid="uid://bwsiiooku1t2u" path="res://city_mode/Cities/crafting/RecipeBook/Page.tscn" id="5_3tlli"]
-[ext_resource type="Resource" uid="uid://i58s8hni5ajs" path="res://city_mode/Cities/crafting/RecipeBook/recipes/BottleYellowRecipe.tres" id="5_actsd"]
-[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/recipes/recipe_book.gd" id="6_id6qd"]
-
-[sub_resource type="Resource" id="Resource_xrckl"]
-script = ExtResource("6_id6qd")
-Recipes = Array[Resource("res://city_mode/Cities/crafting/RecipeBook/recipes/recipe.gd")]([ExtResource("2_jmrry"), ExtResource("3_s7abs"), ExtResource("4_7n45g"), ExtResource("5_actsd")])
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ibys"]
 
@@ -30,7 +22,7 @@ offset_top = 215.0
 offset_right = 534.0
 offset_bottom = 360.0
 script = ExtResource("1_obsew")
-recipes = SubResource("Resource_xrckl")
+recipes = ExtResource("2_6cg7x")
 
 [node name="PageButtons" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 20)
@@ -209,11 +201,12 @@ offset_bottom = 133.0
 [node name="Label" type="Label" parent="Recipes"]
 visible = false
 layout_mode = 0
-offset_left = 27.0
-offset_top = 54.0
-offset_right = 141.0
+offset_left = 5.0
+offset_top = 46.0
+offset_right = 135.0
 offset_bottom = 121.0
-text = "No recipes"
+text = "Нет открытых рецептов"
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [connection signal="pressed" from="PageButtons/PB1" to="." method="_on_pb_1_pressed"]

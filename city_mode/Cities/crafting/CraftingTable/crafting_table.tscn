@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://ptqgke0gbms0"]
+[gd_scene load_steps=11 format=3 uid="uid://ptqgke0gbms0"]
 
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_enpor"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/CraftingTable/crafting_table.gd" id="2_21e4c"]
 [ext_resource type="PackedScene" uid="uid://du32dx3ffb22q" path="res://city_mode/Cities/crafting/CraftingTable/craft_slot.tscn" id="2_n43nb"]
 [ext_resource type="Resource" uid="uid://ccxrbnaw2l1dl" path="res://city_mode/Cities/crafting/RecipeBook/recipes/RecipeBook.tres" id="3_4ttrx"]
-[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="4_baq6t"]
 [ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="6_n3enl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_333tk"]
@@ -30,7 +29,6 @@ patch_margin_right = 6
 patch_margin_bottom = 6
 script = ExtResource("2_21e4c")
 recipes = ExtResource("3_4ttrx")
-global_inventory = ExtResource("4_baq6t")
 
 [node name="CraftSlot" parent="." instance=ExtResource("2_n43nb")]
 layout_mode = 0
@@ -48,7 +46,7 @@ offset_bottom = 31.0
 
 [node name="Result" type="Button" parent="."]
 layout_mode = 0
-offset_left = 62.0
+offset_left = 70.0
 offset_top = 6.0
 offset_right = 93.0
 offset_bottom = 34.0
@@ -59,23 +57,23 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_3s70t")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_yoq5w")
 
 [node name="Back" type="Sprite2D" parent="Result"]
-position = Vector2(19, 13.5)
-scale = Vector2(1.13636, 1.13636)
+position = Vector2(12, 13.5)
+scale = Vector2(1.09091, 1.13636)
 texture = ExtResource("6_n3enl")
 vframes = 2
 
 [node name="TextureRect" type="TextureRect" parent="Result"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 5.0
-offset_right = 25.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 22.0
 offset_bottom = 23.0
 
 [node name="Label" type="Label" parent="Result"]
 layout_mode = 0
-offset_left = 12.0
+offset_left = 8.0
 offset_top = 2.0
-offset_right = 24.0
+offset_right = 20.0
 offset_bottom = 25.0
 
 [node name="Label" type="Label" parent="."]

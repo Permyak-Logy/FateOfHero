@@ -7,7 +7,7 @@ The API must be defined here
 """
 signal leave_city
 
-@export var TradingInventory: Inventory
+@onready var trading_inventory: Inventory
 
 func set_inventory(inventory: Inventory):
-	pass
+	trading_inventory = inventory

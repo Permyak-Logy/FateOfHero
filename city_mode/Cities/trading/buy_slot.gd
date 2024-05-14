@@ -48,6 +48,6 @@ func _can_drop_data(_pos, data):
 func _drop_data(at_position, data):
 	$"..".buys.insert(data.item, 1)
 	$"..".update()
-	$"../../../../..".TradingInventory.remove(data.item, 1)
+	$"../../../../..".trading_inventory.remove(data.item, 1)
 	$"../../../../TradeInventory/TradeGrid".update()
 	$"../../trade".check()
