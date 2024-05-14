@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://kn0koccqa28q"]
+[gd_scene load_steps=6 format=3 uid="uid://kn0koccqa28q"]
 
 [ext_resource type="Script" path="res://GUI/inventory/inventory_gui.gd" id="1_c5uxj"]
 [ext_resource type="PackedScene" uid="uid://c4t2ssb8xsd48" path="res://GUI/inventory/character_selection_panel.tscn" id="2_0fsi5"]
+[ext_resource type="PackedScene" uid="uid://7vipxc4t0d3x" path="res://GUI/inventory/description_panel.tscn" id="2_2y36v"]
 [ext_resource type="PackedScene" uid="uid://c21wpigb0wbsp" path="res://GUI/inventory/inventory_panel.tscn" id="3_7p47t"]
 [ext_resource type="PackedScene" uid="uid://bn5u6v7ibmq7d" path="res://GUI/inventory/character_panel.tscn" id="4_gllpg"]
 
@@ -14,6 +15,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c5uxj")
 metadata/_edit_use_anchors_ = true
+
+[node name="DescriptionPanel" parent="." instance=ExtResource("2_2y36v")]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 455.0
+offset_right = 718.0
+offset_bottom = 615.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
