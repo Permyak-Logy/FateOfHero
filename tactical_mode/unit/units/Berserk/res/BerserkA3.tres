@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=9 format=3 uid="uid://dkk1mqckd0wg4"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=10 format=3 uid="uid://dkk1mqckd0wg4"]
 
 [ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="1_8g075"]
 [ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="1_c7fti"]
 [ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_jgihn"]
 [ext_resource type="Texture2D" uid="uid://7bkvw6d6gs28" path="res://tactical_mode/unit/units/Berserk/assets/Berserk_n3.png" id="2_1wsbj"]
 [ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_qiat2"]
+[ext_resource type="PackedScene" uid="uid://b864dfl6a2fky" path="res://tactical_mode/assets/effects/PurpleEffect.tscn" id="4_3mmy3"]
 
 [sub_resource type="Resource" id="Resource_ks5tg"]
 resource_local_to_scene = true
@@ -29,6 +30,7 @@ destroy_on_death_instigator = true
 stackable = true
 effect_name = "Ярость берсерка"
 is_negative = false
+visual_effect = ExtResource("4_3mmy3")
 
 [resource]
 resource_local_to_scene = true

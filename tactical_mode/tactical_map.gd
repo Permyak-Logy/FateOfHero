@@ -405,7 +405,7 @@ func _update_stepmove():
 	var time = unit_queue[0][0]
 	for elem in unit_queue:
 		elem[0] -= time
-	unit_queue[0][0] += _ACT_INDEX_MAX / active_unit.speed.cur()
+	unit_queue[0][0] = _ACT_INDEX_MAX / active_unit.speed.cur()
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
 

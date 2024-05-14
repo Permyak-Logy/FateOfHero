@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=5 format=3 uid="uid://di1372ucdkekv"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=6 format=3 uid="uid://di1372ucdkekv"]
 
 [ext_resource type="Script" path="res://tactical_mode/effects/vamp_for_attack.gd" id="1_l6abw"]
 [ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="2_7b0x6"]
+[ext_resource type="PackedScene" uid="uid://b2a82rsuqq3j0" path="res://tactical_mode/assets/effects/RedEffect.tscn" id="2_lv0u5"]
 [ext_resource type="Texture2D" uid="uid://hpydxfk4lo0a" path="res://tactical_mode/unit/units/Vamp/assets/Vampire_n1.png" id="3_6urav"]
 
 [sub_resource type="Resource" id="Resource_co4lr"]
@@ -14,6 +15,7 @@ destroy_on_death_instigator = true
 stackable = false
 effect_name = "Вампиризм"
 is_negative = false
+visual_effect = ExtResource("2_lv0u5")
 
 [resource]
 resource_local_to_scene = true

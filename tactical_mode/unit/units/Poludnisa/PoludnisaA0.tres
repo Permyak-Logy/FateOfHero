@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://tactical_mode/effects/burning_effect.gd" id="1_5kqrw"]
 [ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="1_b5wev"]
 [ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_wr2dk"]
-[ext_resource type="PackedScene" uid="uid://bsis47xaepjwn" path="res://tactical_mode/unit/units/Poludnisa/Fire.tscn" id="2_61d0t"]
+[ext_resource type="PackedScene" uid="uid://bsis47xaepjwn" path="res://tactical_mode/unit/units/Poludnisa/VisualFireEffect.tscn" id="2_61d0t"]
 
 [sub_resource type="Resource" id="Resource_8jn37"]
 script = ExtResource("1_wr2dk")

@@ -39,7 +39,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,7 +63,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackTrail:frame")
+tracks/2/path = NodePath("Body/AttackTrail:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -75,7 +75,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:material:shader_parameter/modulate")
+tracks/3/path = NodePath("Body:material:shader_parameter/modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -87,7 +87,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite2D:material:shader_parameter/opacity")
+tracks/4/path = NodePath("Body:material:shader_parameter/opacity")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -111,7 +111,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Shadow:modulate")
+tracks/6/path = NodePath("Body/Shadow:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -126,7 +126,7 @@ resource_name = "ability"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -142,7 +142,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/modulate")
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -157,7 +157,7 @@ resource_name = "death"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/outline_color")
+tracks/0/path = NodePath("Body:material:shader_parameter/outline_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -169,7 +169,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/modulate")
+tracks/1/path = NodePath("Body:material:shader_parameter/modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -181,7 +181,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:material:shader_parameter/opacity")
+tracks/2/path = NodePath("Body:material:shader_parameter/opacity")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -205,7 +205,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Shadow:modulate")
+tracks/4/path = NodePath("Body/Shadow:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -217,7 +217,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D:frame")
+tracks/5/path = NodePath("Body:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -234,7 +234,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -250,7 +250,7 @@ length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -290,7 +290,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -326,7 +326,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackTrail:frame")
+tracks/3/path = NodePath("Body/AttackTrail:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -343,7 +343,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -378,7 +378,6 @@ _data = {
 }
 
 [node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
-z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_mm6vi")
@@ -389,20 +388,31 @@ defence = ExtResource("4_5wldu")
 speed = ExtResource("5_11w7f")
 damage = ExtResource("6_aepf0")
 expirience = ExtResource("7_yk04r")
-sprite_for_outline = NodePath("Sprite2D")
+sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
-for_flip_sprites = [NodePath("Sprite2D"), NodePath("AttackTrail")]
+for_flip_sprites = [NodePath("Body"), NodePath("Body/AttackTrail")]
 acts_count = 2
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_iu0w4"), ExtResource("7_h74hq"), ExtResource("8_4c6l0")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_eelbm")])
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("10_rk873")
 position = Vector2(0, -26)
 texture = ExtResource("4_n8og0")
 hframes = 18
+
+[node name="AttackTrail" type="Sprite2D" parent="Body"]
+z_index = 1
+position = Vector2(1, 1)
+texture = ExtResource("15_2of5b")
+hframes = 8
+
+[node name="Shadow" type="Sprite2D" parent="Body"]
+z_index = -1
+position = Vector2(0, 2)
+texture = ExtResource("5_th3mn")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
@@ -412,16 +422,14 @@ process_material = SubResource("ParticleProcessMaterial_74otp")
 texture = ExtResource("11_hqwuc")
 lifetime = 0.5
 
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(0, -24)
-texture = ExtResource("5_th3mn")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = -1
+z_index = 1
 position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_0v1vj")
 
 [node name="StatProgressBar" parent="." instance=ExtResource("12_hexa5")]
+z_index = 2
+y_sort_enabled = false
 offset_top = -58.0
 offset_bottom = -56.0
 
@@ -429,11 +437,6 @@ offset_bottom = -56.0
 libraries = {
 "": SubResource("AnimationLibrary_emh1m")
 }
-
-[node name="AttackTrail" type="Sprite2D" parent="."]
-position = Vector2(1, -25)
-texture = ExtResource("15_2of5b")
-hframes = 8
 
 [connection signal="input_event" from="." to="." method="_on_toggle_select"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

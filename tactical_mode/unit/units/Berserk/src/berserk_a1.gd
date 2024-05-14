@@ -3,6 +3,11 @@ class_name BerserkA1 extends AoEAbility
 @export var power: ModValue = ModValue.new()
 @export var range_apply: int = 2
 
+func apply():
+	await owner.play("aoe_ability")
+	super()
+	owner.play("idle")
+
 func find_about_cells():
 	var map = get_map()
 	
@@ -16,7 +21,7 @@ func apply_on_unit(unit: Unit):
 		return
 		
 	get_map().write_info("=> В ярости атакует " + unit.unit_name)
-	unit.apply_damage(scale * power.mul + power.add)
+	unit.apply_damage(scale * power.mul + power.add, owner)
 
 func can_select(_cell: Vector2i) -> bool:
 	return _cell == (owner as Unit).get_cell()
