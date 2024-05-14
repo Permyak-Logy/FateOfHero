@@ -1,9 +1,9 @@
-[gd_scene load_steps=80 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=89 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
+[ext_resource type="Texture2D" uid="uid://dv2lw4mfvgojg" path="res://tactical_mode/assets/Bg1.png" id="3_cboxx"]
 [ext_resource type="PackedScene" uid="uid://di7auu4d2dl2" path="res://tactical_mode/unit/units/Naris/Naris.tscn" id="6_1btoa"]
-[ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="9_6j4aw"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="9_fe0mx"]
 [ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/units/Vendigo/Vendigo.tscn" id="13_h8vpa"]
 [ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/units/Vamp/Vamp.tscn" id="14_y1ibn"]
 [ext_resource type="AudioStream" uid="uid://dq0vrkeat2qlu" path="res://tactical_mode/assets/tactical_mode_bg_music.mp3" id="15_nmmmq"]
+[ext_resource type="PackedScene" uid="uid://cxvcedbc0b2ki" path="res://tactical_mode/unit/units/Poludnisa/Poludnisa.tscn" id="16_sq65k"]
 
 [sub_resource type="Resource" id="Resource_kgjbu"]
 resource_local_to_scene = true
@@ -429,9 +430,62 @@ level = 1
 expirience = 0
 ups = 0
 
+[sub_resource type="Resource" id="Resource_sh200"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_20qjc"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_sh200")
+
+[sub_resource type="Resource" id="Resource_lwvmi"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_gjhkd"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_lwvmi")
+
+[sub_resource type="Resource" id="Resource_k870g"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_msqrp"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_k870g")
+
+[sub_resource type="Resource" id="Resource_feibk"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_6vk0p"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_feibk")
+
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_dw5lh")
+metadata/_edit_vertical_guides_ = [-32.0]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_5tyj1")
@@ -454,7 +508,7 @@ layer_4/tile_data = PackedInt32Array()
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(160, 86)
-texture = ExtResource("7_jbq2n")
+texture = ExtResource("3_cboxx")
 offset = Vector2(305, 175)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -539,6 +593,13 @@ defence = SubResource("Resource_agh86")
 speed = SubResource("Resource_kjqva")
 damage = SubResource("Resource_kwpax")
 expirience = SubResource("Resource_xj23x")
+
+[node name="Poludnisa" parent="." instance=ExtResource("16_sq65k")]
+position = Vector2(513, 328)
+health = SubResource("Resource_20qjc")
+defence = SubResource("Resource_gjhkd")
+speed = SubResource("Resource_msqrp")
+damage = SubResource("Resource_6vk0p")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_nmmmq")

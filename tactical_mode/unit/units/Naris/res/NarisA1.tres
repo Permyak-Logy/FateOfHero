@@ -9,11 +9,11 @@
 resource_local_to_scene = true
 script = ExtResource("1_3jkel")
 power = 100.0
-mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
-destroy_on_death_instigator = false
+mods = null
+destroy_on_death_instigator = null
 stackable = true
 effect_name = "Щит"
-is_negative = false
+is_negative = null
 visual_effect = ExtResource("2_4prm7")
 
 [resource]
