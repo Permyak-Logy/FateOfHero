@@ -23,7 +23,7 @@ func _ready():
 	character = presented_character.instantiate() 
 	add_child(character)
 	character.visible = false
-	name_label.text = character.name
+	name_label.text = character.unit_name
 	descr_box.text = character.editor_description
 
 func _on_select_pressed():
