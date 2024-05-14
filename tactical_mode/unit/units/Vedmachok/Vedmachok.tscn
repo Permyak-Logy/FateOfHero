@@ -152,7 +152,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Shadow:modulate")
+tracks/5/path = NodePath("../Body/Shadow:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -247,7 +247,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Shadow:modulate")
+tracks/4/path = NodePath("../Body/Shadow:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -393,8 +393,6 @@ _data = {
 }
 
 [node name="Vedmachok" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
-z_index = 1
-y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_niktu")
 unit_name = "Ведьмачок"
@@ -421,14 +419,10 @@ texture = ExtResource("5_dhbj6")
 hframes = 7
 vframes = 8
 
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(1, -25)
+[node name="Shadow" type="Sprite2D" parent="Body"]
+z_index = -1
+position = Vector2(-2, 4)
 texture = ExtResource("6_uhiw1")
-
-[node name="StatProgressBar" parent="." instance=ExtResource("2_fx817")]
-offset_top = -67.0
-offset_bottom = -65.0
-metadata/_edit_use_anchors_ = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
@@ -441,6 +435,13 @@ texture = ExtResource("8_jdgdj")
 z_index = -1
 position = Vector2(1, -28)
 shape = SubResource("CapsuleShape2D_mq533")
+
+[node name="StatProgressBar" parent="." instance=ExtResource("2_fx817")]
+z_index = 2
+y_sort_enabled = false
+offset_top = -67.0
+offset_bottom = -65.0
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../GPUParticles2D")

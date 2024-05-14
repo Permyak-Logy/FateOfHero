@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bsis47xaepjwn"]
 
-[ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/units/Naris/assets/spritesheet.png" id="1_4gjno"]
+[ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/units/Naris/assets/spritesheet.png" id="1_lbfk5"]
 
 [sub_resource type="Gradient" id="Gradient_kjbty"]
 offsets = PackedFloat32Array(0.00363636, 0.985455)
@@ -62,7 +62,7 @@ turbulence_noise_speed_random = 0.41
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(1, -26)
-texture = ExtResource("1_4gjno")
+texture = ExtResource("1_lbfk5")
 hframes = 15
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="."]

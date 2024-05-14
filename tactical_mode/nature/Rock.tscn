@@ -4,11 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://xw5i1k2yrvnx" path="res://tactical_mode/nature/Rock.png" id="2_4kbu1"]
 
 [node name="Rock" type="Node2D"]
-z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_t1mcr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-y_sort_enabled = true
 position = Vector2(-2, -16)
 texture = ExtResource("2_4kbu1")

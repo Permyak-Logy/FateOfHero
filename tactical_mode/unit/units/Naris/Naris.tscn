@@ -29,6 +29,10 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_ndpsp")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jkeh3"]
+radius = 13.0
+height = 52.0
+
 [sub_resource type="Animation" id="Animation_si8eq"]
 length = 0.001
 tracks/0/type = "value"
@@ -58,7 +62,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackTrail:visible")
+tracks/2/path = NodePath("Body/AttackTrail:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -106,7 +110,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Shadow:modulate")
+tracks/6/path = NodePath("Body/Shadow:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -118,7 +122,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("AttackTrail:frame")
+tracks/7/path = NodePath("Body/AttackTrail:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -162,7 +166,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackTrail:frame")
+tracks/1/path = NodePath("Body/AttackTrail:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -174,7 +178,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackTrail:visible")
+tracks/2/path = NodePath("Body/AttackTrail:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -217,7 +221,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Shadow:modulate")
+tracks/1/path = NodePath("Body/Shadow:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -374,7 +378,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackTrail:visible")
+tracks/3/path = NodePath("Body/AttackTrail:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -386,7 +390,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackTrail:frame")
+tracks/4/path = NodePath("Body/AttackTrail:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -438,12 +442,7 @@ _data = {
 "run": SubResource("Animation_eeqfk")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jkeh3"]
-radius = 13.0
-height = 52.0
-
 [node name="Naris" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
-z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_fkgsn")
@@ -458,11 +457,29 @@ sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
-for_flip_sprites = [NodePath("Body"), NodePath("AttackTrail")]
+for_flip_sprites = [NodePath("Body"), NodePath("Body/AttackTrail")]
 acts_count = 2
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_pam86"), ExtResource("7_55xdn"), ExtResource("8_yvxg7")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_uu01e")])
 percent_between_target = 1.0
+
+[node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("12_n6er6")
+position = Vector2(1, -26)
+texture = ExtResource("1_n5uvs")
+hframes = 15
+
+[node name="AttackTrail" type="Sprite2D" parent="Body"]
+visible = false
+z_index = 1
+position = Vector2(0, 1)
+texture = ExtResource("11_oynup")
+hframes = 4
+
+[node name="Shadow" type="Sprite2D" parent="Body"]
+z_index = -1
+position = Vector2(0, 3)
+texture = ExtResource("12_br34b")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
@@ -472,37 +489,22 @@ emitting = false
 process_material = SubResource("ParticleProcessMaterial_42ogi")
 texture = ExtResource("11_fbds2")
 
-[node name="AttackTrail" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1, -25)
-texture = ExtResource("11_oynup")
-hframes = 4
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(0, -24)
+shape = SubResource("CapsuleShape2D_jkeh3")
 
-[node name="Body" type="Sprite2D" parent="."]
-material = ExtResource("12_n6er6")
-position = Vector2(1, -26)
-texture = ExtResource("1_n5uvs")
-hframes = 15
+[node name="StatProgressBar" parent="." instance=ExtResource("11_ihwm0")]
+z_index = 2
+y_sort_enabled = false
+offset_top = -55.0
+offset_bottom = -53.0
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_nhtg4")
 }
-
-[node name="StatProgressBar" parent="." instance=ExtResource("11_ihwm0")]
-offset_top = -55.0
-offset_bottom = -53.0
-metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = -1
-position = Vector2(0, -24)
-shape = SubResource("CapsuleShape2D_jkeh3")
-
-[node name="Shadow" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(1, -23)
-texture = ExtResource("12_br34b")
 
 [connection signal="input_event" from="." to="." method="_on_toggle_select"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

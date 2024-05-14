@@ -88,7 +88,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Shadow:modulate")
+tracks/4/path = NodePath("Body/Shadow:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -112,7 +112,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("TrailAoEAbility:frame")
+tracks/6/path = NodePath("Body/TrailAoEAbility:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -124,7 +124,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("TrailAbility:frame")
+tracks/7/path = NodePath("Body/TrailAbility:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -136,7 +136,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("TrailAttack:frame")
+tracks/8/path = NodePath("Body/TrailAttack:frame")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -215,7 +215,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Shadow:modulate")
+tracks/4/path = NodePath("Body/Shadow:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -287,7 +287,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TrailAoEAbility:frame")
+tracks/1/path = NodePath("Body/TrailAoEAbility:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -299,7 +299,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TrailAbility:frame")
+tracks/2/path = NodePath("Body/TrailAbility:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -326,7 +326,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TrailAttack:frame")
+tracks/1/path = NodePath("Body/TrailAttack:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -378,7 +378,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TrailAttack:frame")
+tracks/1/path = NodePath("Body/TrailAttack:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -429,7 +429,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TrailAbility:frame")
+tracks/1/path = NodePath("Body/TrailAbility:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -453,7 +453,6 @@ _data = {
 }
 
 [node name="Berserk" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
-z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3ocbc")
@@ -472,6 +471,35 @@ for_flip_sprites = [NodePath("Body")]
 acts_count = 2
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_unl5f"), ExtResource("7_h4oqc"), ExtResource("8_x0px8"), ExtResource("9_qtvge")])
 
+[node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("11_os431")
+position = Vector2(0, -26)
+texture = ExtResource("10_urkiw")
+hframes = 15
+
+[node name="TrailAttack" type="Sprite2D" parent="Body"]
+z_index = 1
+position = Vector2(0, -2)
+texture = ExtResource("16_j3rbd")
+hframes = 5
+
+[node name="TrailAoEAbility" type="Sprite2D" parent="Body"]
+z_index = 1
+position = Vector2(0, -1)
+texture = ExtResource("17_ckb07")
+hframes = 8
+
+[node name="TrailAbility" type="Sprite2D" parent="Body"]
+z_index = 1
+position = Vector2(0, -1)
+texture = ExtResource("18_6kwe6")
+hframes = 8
+
+[node name="Shadow" type="Sprite2D" parent="Body"]
+z_index = -1
+position = Vector2(0, 3)
+texture = ExtResource("2_7e5uy")
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
 position = Vector2(0, -26)
@@ -479,46 +507,21 @@ emitting = false
 process_material = SubResource("ParticleProcessMaterial_lcjhm")
 texture = ExtResource("12_i51g0")
 
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(0, -23)
-texture = ExtResource("2_7e5uy")
-
-[node name="StatProgressBar" parent="." instance=ExtResource("4_ukfk8")]
-offset_top = -59.0
-offset_bottom = -57.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 position = Vector2(0, -28)
 shape = SubResource("CapsuleShape2D_lc7ck")
+
+[node name="StatProgressBar" parent="." instance=ExtResource("4_ukfk8")]
+z_index = 2
+y_sort_enabled = false
+offset_top = -62.0
+offset_bottom = -60.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_xnlmd")
 }
-
-[node name="Body" type="Sprite2D" parent="."]
-material = ExtResource("11_os431")
-position = Vector2(0, -26)
-texture = ExtResource("10_urkiw")
-hframes = 15
-
-[node name="TrailAttack" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(0, -28)
-texture = ExtResource("16_j3rbd")
-hframes = 5
-
-[node name="TrailAoEAbility" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(0, -27)
-texture = ExtResource("17_ckb07")
-hframes = 8
-
-[node name="TrailAbility" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(0, -27)
-texture = ExtResource("18_6kwe6")
-hframes = 8
 
 [connection signal="input_event" from="." to="." method="_on_toggle_select"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
