@@ -88,7 +88,7 @@ func toggle_preview(value: bool):
 		set_outline_color(DEFAULT_COLOR)
 	health_bar_pb.visible = not value
 
-func apply_damage(_damage: float, _instigator: Unit = null):
+func apply_damage(_damage: float, _instigator: Unit):
 	"""
 	Применяет урон в размере _damage от _instigator с учётом наложенных эффектов
 	предметов, сопротивлений и т.д.

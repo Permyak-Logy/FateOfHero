@@ -21,7 +21,7 @@ func apply_on_unit(unit: Unit):
 		return
 		
 	get_map().write_info("=> В ярости атакует " + unit.unit_name)
-	unit.apply_damage(scale * power.mul + power.add)
+	unit.apply_damage(scale * power.mul + power.add, owner)
 
 func can_select(_cell: Vector2i) -> bool:
 	return _cell == (owner as Unit).get_cell()
