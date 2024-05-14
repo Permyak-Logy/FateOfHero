@@ -459,9 +459,9 @@ characteristic = SubResource("Resource_lwvmi")
 [sub_resource type="Resource" id="Resource_k870g"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
-base = 100.0
-cur = 100.0
-max_ = 100.0
+base = 110.0
+cur = 110.0
+max_ = 110.0
 
 [sub_resource type="Resource" id="Resource_msqrp"]
 resource_local_to_scene = true

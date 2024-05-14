@@ -6,6 +6,7 @@ func ai(map: TacticalMap):
 	if a0.can_use():
 		var rng = RandomNumberGenerator.new()
 		map._prepare_ability(a0)
+		
 		a0.select(a0.selectable_tab[rng.randi_range(0, len(a0.selectable_tab))])
 		map._apply_ability()
 	else:

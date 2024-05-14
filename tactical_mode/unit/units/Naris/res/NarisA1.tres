@@ -9,6 +9,7 @@
 resource_local_to_scene = true
 script = ExtResource("1_3jkel")
 power = 100.0
+scaling_type = 0
 mods = null
 destroy_on_death_instigator = null
 stackable = true
