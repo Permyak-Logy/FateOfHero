@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b1ley3wjjoisv"]
+[gd_scene load_steps=30 format=3 uid="uid://b1ley3wjjoisv"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/EvilPlant.gd" id="1_g78kk"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
@@ -70,6 +70,23 @@ level = 1
 expirience = 0
 ups = 0
 
+[sub_resource type="Gradient" id="Gradient_1d3rw"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fop3k"]
+gradient = SubResource("Gradient_1d3rw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xnprx"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1000, 0)
+spread = 180.0
+initial_velocity_min = 29.09
+initial_velocity_max = 83.63
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_fop3k")
+
 [sub_resource type="Animation" id="Animation_14kou"]
 length = 0.001
 tracks/0/type = "value"
@@ -131,6 +148,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GPUParticles2D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_o4gcn"]
@@ -214,7 +243,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_4k388"]
 resource_name = "postattack"
-length = 0.5
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -230,7 +259,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_lv3bu"]
 resource_name = "preattack"
-length = 0.3
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -242,6 +271,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [28, 29, 30]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7mk7n"]
@@ -275,6 +316,15 @@ for_flip_sprites = [NodePath("Body")]
 controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_l7ulv")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_krl3i")])
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 1
+position = Vector2(-0.714286, -30)
+scale = Vector2(1, 1)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_xnprx")
+explosiveness = 1.0
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("6_w1513")

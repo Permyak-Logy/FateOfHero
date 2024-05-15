@@ -14,9 +14,9 @@ var num: int = 0:
 		num = value
 		
 		if value > 1:
-			$back/Label.text = str(value)
+			$Label.text = str(value) + "  "
 		else:
-			$back/Label.text = ""
+			$Label.text = ""
  
 #func enable(value = true):
 	#$Panel.show_behind_parent = value

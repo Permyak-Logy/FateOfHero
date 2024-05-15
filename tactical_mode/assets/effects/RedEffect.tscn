@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2a82rsuqq3j0"]
+
+[ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/units/Vamp/assets/spritesheet.png" id="1_3evjn"]
+[ext_resource type="PackedScene" uid="uid://creglhrdmh6" path="res://tactical_mode/assets/gpu_default_effect.tscn" id="2_m6qnc"]
+
+[node name="RedEffect" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -26)
+texture = ExtResource("1_3evjn")
+hframes = 13
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("2_m6qnc")]
+modulate = Color(1, 0, 0, 0.470588)

@@ -88,7 +88,7 @@ func toggle_preview(value: bool):
 		set_outline_color(DEFAULT_COLOR)
 	health_bar_pb.visible = not value
 
-func apply_damage(_damage: float, _instigator: Unit = null):
+func apply_damage(_damage: float, _instigator: Unit):
 	"""
 	Применяет урон в размере _damage от _instigator с учётом наложенных эффектов
 	предметов, сопротивлений и т.д.
@@ -150,7 +150,6 @@ func apply_passives():
 		var passive: Effect = effect.duplicate(true)
 		passive.instigator = self
 		add_effect(passive)
-
 
 func get_occupied_cells() -> Array[Vector2i]:
 	if visible:
@@ -224,7 +223,7 @@ func play(_name: String, _params=null):
 			_end_pos = (_params as Unit).global_position
 			_end_pos += Vector2((1 if _start_pos[0] - _end_pos[0] > 0 else -1) * 16, 5)
 		
-		if animation_player.has_animation("RESET"):
+		if animation_player.has_animation("RESET") and not _name.begins_with("post"):
 			animation_player.animation_set_next("RESET", _name)
 			animation_player.play("RESET")
 		else:

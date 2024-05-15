@@ -1,9 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://cal6f73hk5ff7"]
+[gd_scene load_steps=27 format=3 uid="uid://cal6f73hk5ff7"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/trading/trading_main.gd" id="1_b2dp5"]
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_g6vnm"]
-[ext_resource type="Resource" uid="uid://r13qdibf7tm3" path="res://city_mode/Cities/Geraldina/GeraldinaTradingInventory.tres" id="2_dpimb"]
-[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="3_juopo"]
 [ext_resource type="PackedScene" uid="uid://blfx1lby8vl2c" path="res://city_mode/Cities/trading/trading_inventory_slot.tscn" id="6_6tb4h"]
 [ext_resource type="PackedScene" uid="uid://03eoa6vymydn" path="res://city_mode/Cities/trading/sale_slot.tscn" id="7_o775d"]
 [ext_resource type="PackedScene" uid="uid://cypsp1pvj7dh8" path="res://city_mode/Cities/trading/buy_slot.tscn" id="8_77vyv"]
@@ -52,7 +50,6 @@ offset_bottom = -752.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b2dp5")
-TradingInventory = ExtResource("2_dpimb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -87,7 +84,6 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 10
 script = ExtResource("9_yjtf3")
-inventory = ExtResource("3_juopo")
 
 [node name="TradingInventorySlot" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
@@ -513,5 +509,6 @@ grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="HBoxContainer/Trade/VBoxContainer/trade/Buttonbuy" to="HBoxContainer/Trade/VBoxContainer/trade" method="_on_buttonbuy_pressed"]
 [connection signal="pressed" from="HBoxContainer/Trade/VBoxContainer/trade/ResetButton" to="HBoxContainer/Trade/VBoxContainer/trade" method="_on_reset_button_pressed"]

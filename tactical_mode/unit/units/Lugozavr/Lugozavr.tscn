@@ -73,9 +73,6 @@ stackable = false
 effect_name = "Эффект"
 is_negative = false
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_50nic"]
-radius = 23.0868
-
 [sub_resource type="Gradient" id="Gradient_ypy32"]
 colors = PackedColorArray(0, 1, 0.745098, 1, 0, 0.541176, 0, 0)
 
@@ -86,6 +83,9 @@ gradient = SubResource("Gradient_ypy32")
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_wj7vd")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_50nic"]
+radius = 23.0868
 
 [sub_resource type="Animation" id="Animation_l1q1f"]
 length = 0.001
@@ -140,7 +140,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Shadow:modulate")
+tracks/4/path = NodePath("Shadow:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -299,7 +299,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Shadow:modulate")
+tracks/5/path = NodePath("Shadow:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -374,7 +374,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Shadow:modulate")
+tracks/5/path = NodePath("Shadow:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -594,7 +594,6 @@ _data = {
 }
 
 [node name="Lugozavr" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
-z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_4n5r8")
@@ -622,32 +621,32 @@ texture = ExtResource("2_4p48e")
 hframes = 7
 vframes = 8
 
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(-1.13687e-13, -26)
+[node name="Shadow" type="Sprite2D" parent="Body"]
+z_index = -1
+position = Vector2(2, -2)
 scale = Vector2(0.429688, 0.53125)
 texture = ExtResource("6_mmnq8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = -1
-position = Vector2(-1, -22)
-shape = SubResource("CircleShape2D_50nic")
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
-y_sort_enabled = true
 position = Vector2(-2, -23)
 process_material = SubResource("ParticleProcessMaterial_hyl62")
 texture = ExtResource("7_4pkcg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(-1, -22)
+shape = SubResource("CircleShape2D_50nic")
+
+[node name="StatProgressBar" parent="." instance=ExtResource("2_ck8j1")]
+offset_top = -51.0
+offset_bottom = -49.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Body")
 libraries = {
 "": SubResource("AnimationLibrary_l7elf")
 }
-
-[node name="StatProgressBar" parent="." instance=ExtResource("2_ck8j1")]
-offset_top = -51.0
-offset_bottom = -49.0
 
 [connection signal="input_event" from="." to="." method="_on_toggle_select"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

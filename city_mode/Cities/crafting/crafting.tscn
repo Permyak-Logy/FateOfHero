@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cd1lm7663kkqk"]
+[gd_scene load_steps=8 format=3 uid="uid://cd1lm7663kkqk"]
 
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_niwie"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/crafting_main.gd" id="1_xhsmd"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/inventoryGrid.gd" id="2_qqhid"]
-[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="4_fb2xi"]
 [ext_resource type="PackedScene" uid="uid://dmkyu0kpc2o6b" path="res://city_mode/Cities/crafting/RecipeBook/recipe_book.tscn" id="5_cj3hw"]
 [ext_resource type="PackedScene" uid="uid://d4lrybm6yo1ub" path="res://city_mode/Cities/trading/crafting_slot.tscn" id="5_cpway"]
 [ext_resource type="PackedScene" uid="uid://ptqgke0gbms0" path="res://city_mode/Cities/crafting/CraftingTable/crafting_table.tscn" id="5_k2nd8"]
@@ -62,7 +61,6 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 10
 script = ExtResource("2_qqhid")
-inventory = ExtResource("4_fb2xi")
 
 [node name="CraftingSlot" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
 layout_mode = 2
@@ -276,3 +274,5 @@ grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

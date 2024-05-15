@@ -12,6 +12,7 @@ insert and remove are self explanotory
 # list of items and counts there of
 @export var items: Dictionary = {}
 @export var characters: Array[PackedScene] 
+@export var recipes_known: Array[bool] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 # must be equal to number of cells
 const max_stacks_count: int = 50
 
@@ -69,3 +70,7 @@ func remove(item: Item, count: int):
 
 func insert_is(item_stack: ItemStack):
 	insert(item_stack.item, item_stack.size)
+
+func open_recipe(i):
+	recipes_known[i] = 1
+	print("Recipe ", i, " opened")

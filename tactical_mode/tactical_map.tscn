@@ -430,57 +430,57 @@ level = 1
 expirience = 0
 ups = 0
 
-[sub_resource type="Resource" id="Resource_sh200"]
+[sub_resource type="Resource" id="Resource_q36t0"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 80.0
+cur = 80.0
+max_ = 80.0
+
+[sub_resource type="Resource" id="Resource_yhhox"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_q36t0")
+
+[sub_resource type="Resource" id="Resource_0p6qj"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_qyyw3"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_0p6qj")
+
+[sub_resource type="Resource" id="Resource_pls1k"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
 base = 100.0
 cur = 100.0
 max_ = 100.0
 
-[sub_resource type="Resource" id="Resource_20qjc"]
-resource_local_to_scene = true
-script = ExtResource("10_3tc35")
-mod_type = 0
-characteristic = SubResource("Resource_sh200")
-
-[sub_resource type="Resource" id="Resource_lwvmi"]
-resource_local_to_scene = true
-script = ExtResource("9_6j4aw")
-base = 50.0
-cur = 50.0
-max_ = 50.0
-
-[sub_resource type="Resource" id="Resource_gjhkd"]
-resource_local_to_scene = true
-script = ExtResource("10_3tc35")
-mod_type = 3
-characteristic = SubResource("Resource_lwvmi")
-
-[sub_resource type="Resource" id="Resource_k870g"]
-resource_local_to_scene = true
-script = ExtResource("9_6j4aw")
-base = 110.0
-cur = 110.0
-max_ = 110.0
-
-[sub_resource type="Resource" id="Resource_msqrp"]
+[sub_resource type="Resource" id="Resource_0rv6p"]
 resource_local_to_scene = true
 script = ExtResource("10_3tc35")
 mod_type = 1
-characteristic = SubResource("Resource_k870g")
+characteristic = SubResource("Resource_pls1k")
 
-[sub_resource type="Resource" id="Resource_feibk"]
+[sub_resource type="Resource" id="Resource_hls3b"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
-base = 50.0
-cur = 50.0
-max_ = 50.0
+base = 30.0
+cur = 30.0
+max_ = 30.0
 
-[sub_resource type="Resource" id="Resource_6vk0p"]
+[sub_resource type="Resource" id="Resource_crqjo"]
 resource_local_to_scene = true
 script = ExtResource("10_3tc35")
 mod_type = 2
-characteristic = SubResource("Resource_feibk")
+characteristic = SubResource("Resource_hls3b")
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
@@ -491,22 +491,26 @@ metadata/_edit_vertical_guides_ = [-32.0]
 tile_set = ExtResource("2_5tyj1")
 format = 2
 layer_0/name = "Grid"
+layer_0/z_index = -3
 layer_0/tile_data = PackedInt32Array(393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 851968, 0, 0, 917504, 0, 0, 983040, 0, 0, 1048576, 0, 0, 1114112, 0, 0, 1179648, 0, 0, 1179661, 0, 0, 1114125, 0, 0, 1048589, 0, 0, 983053, 0, 0, 917517, 0, 0, 851981, 0, 0, 786445, 0, 0, 720908, 0, 0, 720909, 0, 0, 655373, 0, 0, 589837, 0, 0, 524301, 0, 0, 458765, 0, 0, 393229, 0, 0, 393228, 0, 0, 393227, 0, 0, 393226, 0, 0, 393225, 0, 0, 393224, 0, 0, 393223, 0, 0, 393222, 0, 0, 393221, 0, 0, 393220, 0, 0, 393219, 0, 0, 393218, 0, 0, 393217, 0, 0, 786435, 0, 0, 720899, 0, 0, 655364, 0, 0, 589828, 0, 0, 524293, 0, 0, 458757, 0, 0, 458756, 0, 0, 458755, 0, 0, 458754, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0, 524290, 0, 0, 589826, 0, 0, 524291, 0, 0, 589827, 0, 0, 524292, 0, 0, 655363, 0, 0, 655362, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 0, 0, 851969, 0, 0, 786434, 0, 0, 720898, 0, 0, 851970, 0, 0, 917506, 0, 0, 917505, 0, 0, 983041, 0, 0, 1048577, 0, 0, 1114113, 0, 0, 1048578, 0, 0, 983042, 0, 0, 917507, 0, 0, 851971, 0, 0, 786436, 0, 0, 720900, 0, 0, 655365, 0, 0, 589829, 0, 0, 524294, 0, 0, 458758, 0, 0, 524295, 0, 0, 458759, 0, 0, 524296, 0, 0, 458760, 0, 0, 524297, 0, 0, 458761, 0, 0, 524298, 0, 0, 458762, 0, 0, 524299, 0, 0, 458763, 0, 0, 524300, 0, 0, 458764, 0, 0, 589835, 0, 0, 589834, 0, 0, 589833, 0, 0, 589832, 0, 0, 589831, 0, 0, 589830, 0, 0, 655366, 0, 0, 720901, 0, 0, 786437, 0, 0, 851972, 0, 0, 917508, 0, 0, 983043, 0, 0, 1048579, 0, 0, 1114114, 0, 0, 1179650, 0, 0, 1179649, 0, 0, 1179651, 0, 0, 1114115, 0, 0, 1048580, 0, 0, 983044, 0, 0, 917509, 0, 0, 851973, 0, 0, 786438, 0, 0, 720902, 0, 0, 655367, 0, 0, 720903, 0, 0, 655368, 0, 0, 720904, 0, 0, 655369, 0, 0, 720905, 0, 0, 655370, 0, 0, 720906, 0, 0, 655371, 0, 0, 720907, 0, 0, 655372, 0, 0, 589836, 0, 0, 786443, 0, 0, 786442, 0, 0, 786441, 0, 0, 786440, 0, 0, 786439, 0, 0, 851974, 0, 0, 917510, 0, 0, 983045, 0, 0, 1048581, 0, 0, 1114116, 0, 0, 1179652, 0, 0, 1179653, 0, 0, 1114117, 0, 0, 1048582, 0, 0, 983046, 0, 0, 917511, 0, 0, 851975, 0, 0, 917512, 0, 0, 851976, 0, 0, 917513, 0, 0, 851977, 0, 0, 917514, 0, 0, 851978, 0, 0, 917515, 0, 0, 851979, 0, 0, 786444, 0, 0, 851980, 0, 0, 917516, 0, 0, 983051, 0, 0, 983050, 0, 0, 983049, 0, 0, 983048, 0, 0, 983047, 0, 0, 1048583, 0, 0, 1114118, 0, 0, 1179654, 0, 0, 1179655, 0, 0, 1114119, 0, 0, 1048584, 0, 0, 1114120, 0, 0, 1048585, 0, 0, 1114121, 0, 0, 1048586, 0, 0, 1114122, 0, 0, 1048587, 0, 0, 1114123, 0, 0, 1048588, 0, 0, 983052, 0, 0, 1114124, 0, 0, 1179660, 0, 0, 1179659, 0, 0, 1179658, 0, 0, 1179657, 0, 0, 1179656, 0, 0)
 layer_1/name = "Overlay Path"
 layer_1/modulate = Color(1, 1, 1, 0.466667)
-layer_1/z_index = 1
+layer_1/z_index = -2
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Path"
+layer_2/z_index = -1
 layer_2/tile_data = PackedInt32Array()
 layer_3/name = "Walls"
 layer_3/enabled = false
+layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
 layer_4/name = "Overlay Ability Layer"
+layer_4/z_index = -1
 layer_4/navigation_enabled = false
 layer_4/tile_data = PackedInt32Array()
 
 [node name="Background" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -10
 position = Vector2(160, 86)
 texture = ExtResource("3_cboxx")
 offset = Vector2(305, 175)
@@ -596,10 +600,10 @@ expirience = SubResource("Resource_xj23x")
 
 [node name="Poludnisa" parent="." instance=ExtResource("16_sq65k")]
 position = Vector2(513, 328)
-health = SubResource("Resource_20qjc")
-defence = SubResource("Resource_gjhkd")
-speed = SubResource("Resource_msqrp")
-damage = SubResource("Resource_6vk0p")
+health = SubResource("Resource_yhhox")
+defence = SubResource("Resource_qyyw3")
+speed = SubResource("Resource_0rv6p")
+damage = SubResource("Resource_crqjo")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_nmmmq")
