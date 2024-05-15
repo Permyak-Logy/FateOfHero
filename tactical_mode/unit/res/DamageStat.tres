@@ -6,9 +6,9 @@
 [sub_resource type="Resource" id="Resource_o87s6"]
 resource_local_to_scene = true
 script = ExtResource("1_3wer8")
-base = 30.0
-cur = 30.0
-max_ = 30.0
+base = 35.0
+cur = 35.0
+max_ = 35.0
 
 [resource]
 resource_local_to_scene = true

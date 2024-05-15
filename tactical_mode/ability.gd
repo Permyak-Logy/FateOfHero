@@ -7,7 +7,9 @@ class_name Ability extends Gear
 @export var consumable: bool = false
 @export var count: int = 0
 
+enum indicator {Base, Cur, Max}
 @export var scaling_type: Mod.Type = Mod.Type.None
+@export var scaling_stat: indicator = indicator.Cur
 @export var overlay_atlas_coords: Vector2i = Vector2i(1, 0)
 
 var owner: Node
@@ -20,7 +22,14 @@ var has_uses = 0
 @export var only_unit_owner = true
 var scale: float = 0:
 	get:
-		return (owner as Unit).stat_from_type(scaling_type).cur()
+		var stat = (owner as Unit).stat_from_type(scaling_type)
+		if scaling_stat == indicator.Cur:
+			return stat.cur()
+		if scaling_stat == indicator.Base:
+			return stat.get_base()
+		if scaling_stat == indicator.Max:
+			return stat.get_max()
+		return 0
 
 func _init(_count: int = count):
 	count = _count
@@ -62,14 +71,12 @@ func can_use() -> bool:
 		return false
 	return true
 
-
 func get_map() -> TacticalMap:
 	if is_instance_of(owner, Unit):
-		return owner.get_parent() as TacticalMap
+		return owner.get_map()
 	if is_instance_of(owner, TacticalMap):
 		return owner as TacticalMap
 	return null
-
 
 func can_apply() -> bool:
 	return true

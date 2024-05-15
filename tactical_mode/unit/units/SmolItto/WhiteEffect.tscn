@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://4mtg2fpir2h1"]
+
+[ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/units/Vamp/assets/spritesheet.png" id="1_xw8gc"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7dyow"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+linear_accel_max = 18.03
+scale_min = 2.0
+scale_max = 4.0
+color = Color(1, 1, 1, 0.447059)
+
+[node name="BlueEffect" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -26)
+texture = ExtResource("1_xw8gc")
+hframes = 13
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(6, -24)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_7dyow")
+explosiveness = 0.2

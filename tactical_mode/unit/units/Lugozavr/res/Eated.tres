@@ -1,11 +1,23 @@
-[gd_resource type="Resource" script_class="Eated" load_steps=2 format=3 uid="uid://dw2tmigxh6pmv"]
+[gd_resource type="Resource" script_class="Eated" load_steps=6 format=3 uid="uid://dw2tmigxh6pmv"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Lugozavr/src/eated_effect.gd" id="1_d53b8"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_skx6s"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_60iwt"]
+
+[sub_resource type="Resource" id="Resource_qmvmy"]
+script = ExtResource("2_60iwt")
+add = 0.0
+mul = -1.0
+
+[sub_resource type="Resource" id="Resource_1uk35"]
+script = ExtResource("1_skx6s")
+type = 3
+value = SubResource("Resource_qmvmy")
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_d53b8")
-mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+mods = Array[ExtResource("1_skx6s")]([SubResource("Resource_1uk35")])
 destroy_on_death_instigator = true
 stackable = false
 effect_name = "Съеден"

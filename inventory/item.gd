@@ -13,7 +13,6 @@ you need to put it inside the ItemStack resource to make it tangeble
 
 @export var texture: Texture2D
 @export var max_stack: int
-@export var recipe: Array[Item]
 @export var price: int
 
 

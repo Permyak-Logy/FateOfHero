@@ -602,7 +602,6 @@ flip_onready = true
 for_flip_sprites = [NodePath("Body")]
 controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_arnth"), ExtResource("6_y8n8d")])
-percent_between_target = 1.0
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("8_v1wg6")
@@ -620,6 +619,7 @@ texture = ExtResource("6_mmnq8")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
 position = Vector2(-2, -23)
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_hyl62")
 texture = ExtResource("7_4pkcg")
 

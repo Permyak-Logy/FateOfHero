@@ -392,6 +392,7 @@ _data = {
 }
 
 [node name="Vedmachok" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
+y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_niktu")
 unit_name = "Ведьмачок"
@@ -408,6 +409,7 @@ flip_onready = true
 for_flip_sprites = [NodePath("Body")]
 acts_count = 2
 controlled_player = false
+expirience_on_kill = 25
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_sprtl"), ExtResource("6_ft64p")])
 
 [node name="Body" type="Sprite2D" parent="."]

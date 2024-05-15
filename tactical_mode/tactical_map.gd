@@ -4,7 +4,6 @@ class_name TacticalMap extends Node
 @onready var _tile_map: TileMap = $TileMap
 @onready var _astar_board = AStarHexagon2D.new(_tile_map.get_used_cells(0))
 @onready var _astar_walkable: AStarHexagon2D
-
 @onready var _current_path = PackedVector2Array()
 var Rock = preload("res://tactical_mode/nature/Rock.tscn")
 var ability_btn = preload("res://GUI/tactical_mode/BtnAbility.tscn")
@@ -26,7 +25,7 @@ var _e_units: Array[Unit] = []  # Список юнитов оппонента
 var units:  # property список всех юнитов
 	get:
 		return _p_units + _e_units
-var _enemy_level: int = 10
+var _enemy_level: int = 1
 var actors:
 	get:
 		var res = []
@@ -84,11 +83,10 @@ func _init():
 func _ready():
 	if is_instance_of($"..", Game):
 		return
-	_p_units = [$Naris,$Berserk,$SmolItto,$Vamp
-	]
-	_e_units = [
-		$Vendigo,$Lugozavr,$Vedmachok,$Poludnisa
-	]
+		
+	_p_units = [$Berserk, $Vamp, $SmolItto, $Naris]
+	
+	_e_units = [$Vedmachok, $Lugozavr, $Vendigo, $Skeleton, $Poludnisa]
 	inited = true
 
 func start_battle():
@@ -125,7 +123,6 @@ func align_actors():
 	"""
 	Выравнивает всех дочерних Actor на карте
 	"""
-	
 	for child in get_children():
 		if is_instance_of(child, Actor):
 			child.global_position = to_loc(child.get_cell())
@@ -424,14 +421,15 @@ func _finalize_fight(_win=false):
 	win = _win
 	_block_input = true
 	write_info("*** Бой завершён ***")
+	print("Win=", win, " Escape=", escape)
 	running = false
 	for player in get_player_units():
-		if player.is_death():
+		if player.is_death() or escape:
 			continue
 		var expirience = 0
 		for enemy in get_enemy_units():
 			if enemy.is_death():
-				expirience += int(enemy.health.get_max() / 10)
+				expirience += int(enemy.expirience_on_kill * sqrt(_enemy_level))
 		player.expirience.add_exp(expirience)
 		if player.expirience.can_level_up():
 			var lug: LevelUpGUI = level_up_gui.instantiate()
