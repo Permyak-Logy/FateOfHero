@@ -4,6 +4,11 @@ class_name Encounter extends TileEvent
 var inventory: Inventory
 
 @export var enemies: Array[PackedScene]
+@export var enemy_level: int = 1:
+	set(value):
+		if value != null:
+			enemy_level = value
+
 
 """
 represents encounter
@@ -19,14 +24,18 @@ func activate():
 	game = get_tree().root.get_child(0)
 	inventory = game.strat_map.player.inventory
 	var characters = inventory.characters
-	game.tactical_map.reinit(characters, enemies)
+	game.tactical_map.reinit(characters, enemies, enemy_level)
 	game.tactical_map.finish.connect(on_finish_tactical_map)
 	game.to_tact_mode()
 	
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive
 	game.to_strat_mode()
-	remove()
+	if game.tactical_map.win:
+		remove()
+	else:
+		game.strat_map.player.backtrack()
+	game.tactical_map
 	for char_p in dead:
 		var char = char_p.instantiate()
 		if char.name == game.strat_map.player.mc_name:

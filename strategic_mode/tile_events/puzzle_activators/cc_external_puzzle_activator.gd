@@ -14,7 +14,10 @@ and  define opponents in enemies array
 """
 
 @export var enemies: Array[PackedScene] 
-
+@export var enemy_level: int = 1:
+	set(value):
+		if value != null:
+			enemy_level = value
 
 
 func activate():
@@ -22,7 +25,7 @@ func activate():
 	var puzzle_scene: BasePuzzle = puzzle.instantiate()
 	assert(puzzle_scene.has_method("set_enemies"), "trying to start a non combat puzzle with CombatCapablePuzzleActivator")
 	puzzle_scene.solved.connect(on_done)
-	puzzle_scene.set_enemies(enemies)
+	puzzle_scene.set_enemies(enemies, enemy_level)
 	remove()
 	game.external_puzzle_container.add_child(puzzle_scene)
 	game.to_puzzle_mode()

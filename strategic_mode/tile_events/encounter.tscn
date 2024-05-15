@@ -7,6 +7,7 @@
 [node name="Encounter" instance=ExtResource("1_g813s")]
 script = ExtResource("2_txtyl")
 enemies = Array[PackedScene]([])
+enemy_level = 1
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_sbxc6")

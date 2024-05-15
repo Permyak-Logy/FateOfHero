@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ywyg6edx5cuc"]
+[gd_scene load_steps=6 format=3 uid="uid://ywyg6edx5cuc"]
 
 [ext_resource type="Script" path="res://GUI/main_menu/initial_character_selection_panel.gd" id="1_ejl1g"]
 [ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_ihgss"]
 [ext_resource type="PackedScene" uid="uid://eo8pepqxbs2w" path="res://GUI/main_menu/initial_character_info.tscn" id="3_bye6i"]
 [ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/units/Vamp/Vamp.tscn" id="4_dmp7p"]
 [ext_resource type="PackedScene" uid="uid://komiiv5ot43n" path="res://tactical_mode/unit/units/Berserk/Berserk.tscn" id="5_awynu"]
-[ext_resource type="PackedScene" uid="uid://di7auu4d2dl2" path="res://tactical_mode/unit/units/Naris/Naris.tscn" id="6_1331q"]
 
 [node name="InitialCharacterSelectionPanel" type="Control"]
 layout_mode = 3
@@ -56,7 +55,6 @@ presented_character = ExtResource("5_awynu")
 
 [node name="InitCharInfo3" parent="Panel/HBoxContainer" instance=ExtResource("3_bye6i")]
 layout_mode = 2
-presented_character = ExtResource("6_1331q")
 
 [node name="InitCharInfo4" parent="Panel/HBoxContainer" instance=ExtResource("3_bye6i")]
 layout_mode = 2

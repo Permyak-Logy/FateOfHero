@@ -6,3 +6,4 @@
 [node name="CombatCapablePuzzleActivator" instance=ExtResource("1_ar3sm")]
 script = ExtResource("2_pgo1j")
 enemies = Array[PackedScene]([])
+enemy_level = 1

@@ -65,6 +65,11 @@ func is_walkable(pos: Vector2i) -> bool:
 		res = tile_data.get_custom_data("walkable")
 	return res
 
+func backtrack():
+	global_position = last_position
+	is_moving = false 
+	current_id_path = []
+
 func _input(event):
 	if event.is_action_pressed("lmb"):
 		print(event)
@@ -147,4 +152,3 @@ func move_to(new_pos: Vector2i):
 	current_id_path = []
 	target_position = new_pos
 	is_moving = false
-

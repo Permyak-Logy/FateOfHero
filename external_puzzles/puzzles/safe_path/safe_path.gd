@@ -11,6 +11,7 @@ var SafePathVispRes: PackedScene = preload("res://external_puzzles/puzzles/safe_
 var time: float = 0
 
 var enemies: Array[PackedScene]
+var enemy_level: int
 
 const field_size: Vector2i = Vector2i(11, 14)
 const end_pos: Vector2i = Vector2i(5, 0)
@@ -135,17 +136,12 @@ func _ready():
 	player.global_position = tilemap.map_to_local(player.pos)
 	player.speed = 8 * tilemap.tile_set.tile_size.length()
 
-func set_enemies(enemies_: Array[PackedScene]):
+func set_enemies(enemies_: Array[PackedScene], level: int):
 	enemies = enemies_
+	enemy_level = level
 
 func end_successfully():
 	solved.emit(rewards)
-
-func start_fight():
-	var characters = inventory.characters
-	game.tactical_map.reinit(characters, enemies)
-	game.to_tact_mode()
-	game.tactical_map.finish.connect(on_finish_tactical_map)
 
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive
@@ -171,4 +167,11 @@ func _physics_process(delta):
 	if time > period:
 		time = 0
 		spawn_visp()
-	
+
+
+func start_fight():
+	var characters = inventory.characters
+	game.tactical_map.reinit(characters, enemies, enemy_level)
+	game.to_tact_mode()
+	game.tactical_map.finish.connect(on_finish_tactical_map)
+
