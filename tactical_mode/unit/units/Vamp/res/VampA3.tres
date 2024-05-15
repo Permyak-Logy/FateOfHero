@@ -40,5 +40,4 @@ russian_name = ""
 description = "Вылечить союзника на 50% от вашего хп пожертвовав своим хп"
 texture = ExtResource("2_pnwy5")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

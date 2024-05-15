@@ -1,9 +1,7 @@
-[gd_resource type="Resource" script_class="Gear" load_steps=9 format=3 uid="uid://4mtedxwnoqin"]
+[gd_resource type="Resource" script_class="Gear" load_steps=7 format=3 uid="uid://4mtedxwnoqin"]
 
-[ext_resource type="Resource" uid="uid://b1hv1sghbyjh6" path="res://inventory/items/body_billet.tres" id="1_1qh04"]
 [ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_vta46"]
 [ext_resource type="Script" path="res://inventory/gear.gd" id="1_yev0k"]
-[ext_resource type="Resource" uid="uid://xplppy8t3gmi" path="res://inventory/items/oil.tres" id="2_61ylg"]
 [ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_pipbc"]
 [ext_resource type="Texture2D" uid="uid://cupu1inpjfyx8" path="res://inventory/gears/Black/assets/Body_black.png" id="2_wtgcs"]
 
@@ -26,5 +24,4 @@ russian_name = ""
 description = ""
 texture = ExtResource("2_wtgcs")
 max_stack = 1
-recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_1qh04"), ExtResource("2_61ylg"), ExtResource("2_61ylg"), ExtResource("2_61ylg"), ExtResource("2_61ylg"), ExtResource("2_61ylg")])
 price = 0

@@ -1,4 +1,4 @@
-extends AreaBasedInteractable
+class_name TreasureChest extends AreaBasedInteractable
 
 var game: Game
 @export var contents: Dictionary

@@ -42,5 +42,4 @@ russian_name = ""
 description = "Активирует вампиризм на следущие 3 нанесения урона востанавливают по 70% от вашего урона"
 texture = ExtResource("3_6urav")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

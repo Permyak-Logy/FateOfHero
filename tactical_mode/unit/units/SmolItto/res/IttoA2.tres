@@ -34,5 +34,4 @@ russian_name = ""
 description = "Хилл всего отряда"
 texture = ExtResource("2_v3r1h")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

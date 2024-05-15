@@ -32,5 +32,4 @@ russian_name = ""
 description = "Атакует по области и снимает 20% хп от текущего"
 texture = ExtResource("2_ijakr")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

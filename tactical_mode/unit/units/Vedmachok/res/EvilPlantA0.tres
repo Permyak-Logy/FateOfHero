@@ -32,5 +32,4 @@ name = "Атака"
 russian_name = ""
 description = ""
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

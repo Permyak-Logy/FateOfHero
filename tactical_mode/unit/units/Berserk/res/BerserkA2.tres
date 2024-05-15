@@ -59,5 +59,4 @@ russian_name = ""
 description = "Наносит 2х кратный урон одной цели и накладывает раскол брони (-30% защиты)"
 texture = ExtResource("2_npmud")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

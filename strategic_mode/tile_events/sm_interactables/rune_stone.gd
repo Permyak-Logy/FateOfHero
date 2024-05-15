@@ -3,12 +3,13 @@ class_name RuneTileEvent extends AreaBasedInteractable
 var game: Game
 @onready var rune_sprite: Sprite2D = $Rune
 
-signal stone_changed(id: int, satisfied: bool)
+# 1 = statisfied, 0 = not satisfied
+signal state_changed(id: int, satisfied: bool)
 
 @export var type: int 
 var id: int
 
-var rune_inside: int
+var rune_inside: int = -1
 var gui: RunePlacementGUI
 var RunePlacementGUIRes: PackedScene = preload("res://GUI/rune_placement/rune_placement_gui.tscn")
 @onready var local_inventory: MicroInventory = MicroInventory.new()
@@ -52,7 +53,7 @@ func update():
 	else:
 		rune_inside = 0
 	rune_sprite.texture = rune_sprites[rune_inside]
-	stone_changed.emit(id, type == rune_inside)
+	state_changed.emit(id, type == rune_inside)
 	if type == rune_inside:
 		rune_sprite.frame = 1
 	else:

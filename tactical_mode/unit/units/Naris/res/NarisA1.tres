@@ -49,5 +49,4 @@ russian_name = ""
 description = "Дать щит союзнику в размере 20% от максимального ХП"
 texture = ExtResource("3_2y2fy")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

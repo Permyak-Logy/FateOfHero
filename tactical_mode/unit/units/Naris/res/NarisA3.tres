@@ -51,5 +51,4 @@ russian_name = ""
 description = "Продвигает действие союзника вперёд и увеличивает урон на 50% на 1 ход"
 texture = ExtResource("5_xsety")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

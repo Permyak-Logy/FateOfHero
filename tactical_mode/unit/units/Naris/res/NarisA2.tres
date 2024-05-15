@@ -41,5 +41,4 @@ russian_name = ""
 description = "Дать неуязвимость к следующему получению урона"
 texture = ExtResource("3_yfp7y")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

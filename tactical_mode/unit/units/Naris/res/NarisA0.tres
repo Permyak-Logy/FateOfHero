@@ -35,5 +35,4 @@ russian_name = ""
 description = "Атаковать выбранную цель"
 texture = ExtResource("2_o0guf")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

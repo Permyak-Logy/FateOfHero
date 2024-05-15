@@ -57,5 +57,4 @@ russian_name = ""
 description = "Накладывает эффект ярость берсерка (+50% урона) на 4 хода"
 texture = ExtResource("2_1wsbj")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0
