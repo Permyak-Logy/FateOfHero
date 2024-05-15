@@ -10,16 +10,15 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="6_6ek8e"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="6_peqxc"]
 [ext_resource type="Resource" uid="uid://dl1lldw2twwoi" path="res://tactical_mode/unit/units/Poludnisa/PoludnisaA0.tres" id="7_i0lhi"]
-[ext_resource type="Resource" uid="uid://bq2iicqcssmai" path="res://tactical_mode/effects/res/LevelUpscaleEffect.tres" id="8_slafw"]
 [ext_resource type="Texture2D" uid="uid://d3tuayo5k68te" path="res://tactical_mode/unit/units/Poludnisa/assets/run.png" id="9_cl7s2"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="10_ncb23"]
 
 [sub_resource type="Resource" id="Resource_o87s6"]
 resource_local_to_scene = true
 script = ExtResource("5_a7xqb")
-base = 30.0
-cur = 30.0
-max_ = 30.0
+base = 10.0
+cur = 10.0
+max_ = 10.0
 
 [sub_resource type="Resource" id="Resource_6o1dp"]
 resource_local_to_scene = true
@@ -32,6 +31,10 @@ script = ExtResource("6_peqxc")
 level = 1
 expirience = 0
 ups = 0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7k3o"]
+radius = 16.0
+height = 52.0
 
 [sub_resource type="Gradient" id="Gradient_o02v2"]
 colors = PackedColorArray(1, 0.733809, 0.494052, 1, 0.25, 0.1625, 0, 0)
@@ -93,23 +96,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_7m2pk"]
-resource_name = "idle"
-length = 0.5
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_k86vy"]
@@ -194,6 +180,23 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_7m2pk"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1xtlw"]
 _data = {
 "RESET": SubResource("Animation_l8fdw"),
@@ -205,6 +208,7 @@ _data = {
 
 [node name="Poludnisa" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "animation_player", "for_flip_sprites")]
 y_sort_enabled = true
+input_pickable = true
 script = ExtResource("1_854ht")
 unit_name = "Полудница"
 health = ExtResource("2_4onig")
@@ -218,7 +222,10 @@ animation_player = NodePath("AnimationPlayer")
 for_flip_sprites = [NodePath("Body")]
 controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("7_i0lhi")])
-private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("8_slafw")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = SubResource("CapsuleShape2D_j7k3o")
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("10_ncb23")
@@ -245,3 +252,7 @@ root_node = NodePath("../GPUParticles2D")
 libraries = {
 "": SubResource("AnimationLibrary_1xtlw")
 }
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

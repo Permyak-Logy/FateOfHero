@@ -9,7 +9,7 @@ class_name TacticalMap extends Node
 var Rock = preload("res://tactical_mode/nature/Rock.tscn")
 var ability_btn = preload("res://GUI/tactical_mode/BtnAbility.tscn")
 var level_up_gui = preload("res://GUI/level_up/level_up_gui.tscn")
-
+var level_upscale_effect: LevelUpscaleEffect = preload("res://tactical_mode/effects/res/LevelUpscaleEffect.tres")
 var _block_input = false  # Блокировка пользовательского ввода
 const _ACT_INDEX_MAX = 10000  # Магическая константа для порядка ходов
 var unit_queue = []  # [(act_index, unit)]
@@ -26,7 +26,7 @@ var _e_units: Array[Unit] = []  # Список юнитов оппонента
 var units:  # property список всех юнитов
 	get:
 		return _p_units + _e_units
-
+var _enemy_level: int = 10
 var actors:
 	get:
 		var res = []
@@ -100,7 +100,12 @@ func start_battle():
 	if is_instance_of($"..", Game):
 		arrange_units()
 		gen_nature()
-	gui.tactical_info.clear()	
+	else:
+		for e in _e_units:
+			if e.expirience:
+				e.expirience.level = _enemy_level
+				e.private_passives.append(level_upscale_effect.duplicate(true))
+	gui.tactical_info.clear()
 	running = true
 	write_info("*** Бой начинается ***")
 	align_actors()
@@ -156,7 +161,10 @@ func arrange_units():
 			move_unit_to(_e_units[i],  Vector2i(_astar_board.right - right_shift - 1, y))
 	
 
-func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], count_nature_obj: int=-1):
+func reinit(
+	player: Array[PackedScene] = [],
+	enemy: Array[PackedScene] = [],
+	enemy_level: int = 0):
 	"""
 	Сбрасывает прошлые данные и загружает новые, подготавливает бой,
 	запускает бой, если TacticalMap в "SceneTree"
@@ -166,14 +174,13 @@ func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], cou
 	if not is_node_ready():
 		await ready
 	
+	_enemy_level = enemy_level
 	for p in player:
 		_p_units.append(await spawn(p, Vector2i(0, 0)))
 	for e in enemy:
-		_e_units.append(await spawn(e, Vector2i(0, 0)))
-	if count_nature_obj < 0:
-		nature_count = randi_range(0, 16)
-	else:
-		nature_count = count_nature_obj
+		var _e = (await spawn(e, Vector2i(0, 0))) as Unit
+		_e_units.append(_e)
+	nature_count = randi_range(0, 16)
 	inited = true
 
 func gen_nature():
@@ -708,6 +715,9 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 			_p_units.append(unit)
 		if is_enemy(_instigator):
 			_e_units.append(unit)
+			if unit.expirience:
+				unit.expirience.level = _enemy_level
+				unit.private_passives.append(level_upscale_effect)
 		if running:
 			unit.prepare_fight()
 			reset_outline_color(unit)

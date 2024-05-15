@@ -568,6 +568,7 @@ z_index = 2
 y_sort_enabled = false
 offset_top = -62.0
 offset_bottom = -60.0
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

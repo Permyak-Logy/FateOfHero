@@ -17,7 +17,7 @@ func apply():
 func subapply():
 	if not applied:
 		return
-	applied.apply_damage(scale * power.mul + power.add, owner)
+	await applied.apply_damage(scale * power.mul + power.add, owner)
 	get_map().write_info("=> " + applied.unit_name + " варится в желудке (Хп:" +
 		str(int(applied.health.cur())) + " / " + str(int(applied.health.get_max())) + ")"
 	)

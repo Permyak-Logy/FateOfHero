@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b1ley3wjjoisv"]
+[gd_scene load_steps=29 format=3 uid="uid://b1ley3wjjoisv"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/EvilPlant.gd" id="1_g78kk"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_pjk8i"]
 [ext_resource type="Resource" uid="uid://db5vwnunv2m3b" path="res://tactical_mode/unit/units/Vedmachok/res/EvilPlantA0.tres" id="5_l7ulv"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="6_etn73"]
-[ext_resource type="Resource" uid="uid://bq2iicqcssmai" path="res://tactical_mode/effects/res/LevelUpscaleEffect.tres" id="6_krl3i"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="6_w1513"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="8_e7cbv"]
 
@@ -298,7 +297,6 @@ _data = {
 height = 40.0
 
 [node name="EvilPlant" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "animation_player", "for_flip_sprites")]
-z_index = 1
 y_sort_enabled = true
 scale = Vector2(1.4, 1.4)
 input_pickable = true
@@ -315,12 +313,10 @@ animation_player = NodePath("AnimationPlayer")
 for_flip_sprites = [NodePath("Body")]
 controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_l7ulv")])
-private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_krl3i")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = 1
 position = Vector2(-0.714286, -30)
-scale = Vector2(1, 1)
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_xnprx")
