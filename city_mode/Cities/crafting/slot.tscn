@@ -31,6 +31,7 @@ vframes = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 stretch_mode = 3
@@ -38,6 +39,7 @@ stretch_mode = 3
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(20, 20)
 layout_direction = 1
+layout_mode = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 10

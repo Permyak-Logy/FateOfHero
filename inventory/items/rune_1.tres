@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_ftkan")
-name = "rune branch"
+name = "rune_1"
+russian_name = "Руна пути"
 description = ""
 texture = ExtResource("2_tiaw4")
 max_stack = 1
