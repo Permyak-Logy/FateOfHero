@@ -269,4 +269,6 @@ func on_slot_hovered(slot: InventorySlot):
 
 func on_slot_unhovered(slot: InventorySlot):
 	hovering_slot = null
+	if description_timer:
+		description_timer.stop()
 	hide_description()
