@@ -49,6 +49,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[ExtResource("1_nl8v8")]([])
 name = "Жижа зелёная"
+russian_name = ""
 description = "+20% атаки на 3 хода"
 texture = ExtResource("4_62khd")
 max_stack = 10

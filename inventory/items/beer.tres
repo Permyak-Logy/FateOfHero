@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cjqq7675tviu7"]
 
 [ext_resource type="Script" path="res://inventory/item.gd" id="1_u2jfh"]
-[ext_resource type="Texture2D" path="res://inventory/icons/beer.png" id="2_ystn8"]
+[ext_resource type="Texture2D" uid="uid://cx8d6p7uimyrm" path="res://inventory/icons/beer.png" id="2_ystn8"]
 
 [resource]
 script = ExtResource("1_u2jfh")
 name = "beer"
+russian_name = "Пиво"
 description = ""
 texture = ExtResource("2_ystn8")
 max_stack = 99

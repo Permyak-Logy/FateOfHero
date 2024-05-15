@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_rposf")
 name = "apple"
+russian_name = "Яблоко"
 description = ""
 texture = ExtResource("2_8vgnk")
 max_stack = 100

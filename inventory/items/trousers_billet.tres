@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bpac8plevrksx"]
 
 [ext_resource type="Script" path="res://inventory/item.gd" id="1_vfgjg"]
-[ext_resource type="Texture2D" path="res://inventory/icons/Trousers_billet.png" id="2_nycfu"]
+[ext_resource type="Texture2D" uid="uid://dr0mx2ladvgo3" path="res://inventory/icons/Trousers_billet.png" id="2_nycfu"]
 
 [resource]
 script = ExtResource("1_vfgjg")
 name = "trousers_bill"
-description = "Заготовка для штанов"
+russian_name = "Заготовка для штанов"
+description = ""
 texture = ExtResource("2_nycfu")
 max_stack = 1
 recipe = Array[ExtResource("1_vfgjg")]([])

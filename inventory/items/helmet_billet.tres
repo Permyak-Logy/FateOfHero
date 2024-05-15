@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c0srtoci3pulj"]
 
 [ext_resource type="Script" path="res://inventory/item.gd" id="1_uk4to"]
-[ext_resource type="Texture2D" path="res://inventory/icons/Helmet_billet.png" id="2_cxjuy"]
+[ext_resource type="Texture2D" uid="uid://ckwu6n244hesm" path="res://inventory/icons/Helmet_billet.png" id="2_cxjuy"]
 
 [resource]
 script = ExtResource("1_uk4to")
 name = "helmet_bill"
-description = "Заготовка для шлема"
+russian_name = "Заготовка для шлема"
+description = ""
 texture = ExtResource("2_cxjuy")
 max_stack = 1
 recipe = Array[ExtResource("1_uk4to")]([])

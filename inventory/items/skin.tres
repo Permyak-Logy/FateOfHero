@@ -6,8 +6,9 @@
 [resource]
 script = ExtResource("1_8ps7f")
 name = ""
+russian_name = "Кожа"
+description = ""
 texture = ExtResource("2_0l7aj")
 max_stack = 49
 recipe = Array[ExtResource("1_8ps7f")]([])
 price = 0
-descript = ""

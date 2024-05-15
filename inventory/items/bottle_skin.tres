@@ -8,6 +8,7 @@
 [resource]
 script = ExtResource("3_b6y6s")
 name = ""
+russian_name = "Зеленая жижа"
 description = ""
 texture = ExtResource("4_codtf")
 max_stack = 10
