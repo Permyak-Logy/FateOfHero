@@ -312,6 +312,7 @@ health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
 for_flip_sprites = [NodePath("Body")]
 controlled_player = false
+expirience_on_kill = 5
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_l7ulv")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

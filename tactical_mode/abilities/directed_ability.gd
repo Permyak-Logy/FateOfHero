@@ -89,13 +89,6 @@ func can_select(_node: Actor) -> bool:
 		return false
 	return get_map().get_relation(owner, unit) in apply_on
 
-func get_map() -> TacticalMap:
-	if is_instance_of(owner, Unit):
-		return owner.get_parent() as TacticalMap
-	if is_instance_of(owner, TacticalMap):
-		return owner as TacticalMap
-	return null
-
 func can_use():
 	if not super():
 		return false

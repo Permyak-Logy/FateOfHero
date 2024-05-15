@@ -1,0 +1,479 @@
+[gd_scene load_steps=33 format=3 uid="uid://dh5vq12tjl11n"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Skeleton/Skeleton.gd" id="1_fgkl7"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_cp544"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_n00ux"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_jbdcy"]
+[ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/units/Skeleton/SkeletonA0.tres" id="5_02wdl"]
+[ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="6_nnhpt"]
+[ext_resource type="Texture2D" uid="uid://dnmkrltvspta6" path="res://tactical_mode/unit/units/Skeleton/spritesheet.png" id="7_2efhq"]
+[ext_resource type="Texture2D" uid="uid://dgkgrudg6y1jb" path="res://tactical_mode/unit/units/Skeleton/attack_trail.png" id="8_7xunk"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="8_s877j"]
+[ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="8_wv0lx"]
+[ext_resource type="Texture2D" uid="uid://di8gme8ny3f43" path="res://tactical_mode/unit/units/Skeleton/run.png" id="10_k3aay"]
+
+[sub_resource type="Resource" id="Resource_ws37b"]
+script = ExtResource("2_cp544")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_omiyo"]
+script = ExtResource("3_n00ux")
+mod_type = 0
+characteristic = SubResource("Resource_ws37b")
+
+[sub_resource type="Resource" id="Resource_vl6n6"]
+script = ExtResource("2_cp544")
+base = 0.0
+cur = 0.0
+max_ = 0.0
+
+[sub_resource type="Resource" id="Resource_11jpo"]
+script = ExtResource("3_n00ux")
+mod_type = 3
+characteristic = SubResource("Resource_vl6n6")
+
+[sub_resource type="Resource" id="Resource_6fdyb"]
+script = ExtResource("2_cp544")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_8p6jf"]
+script = ExtResource("3_n00ux")
+mod_type = 1
+characteristic = SubResource("Resource_6fdyb")
+
+[sub_resource type="Resource" id="Resource_sfnud"]
+script = ExtResource("2_cp544")
+base = 5.0
+cur = 5.0
+max_ = 5.0
+
+[sub_resource type="Resource" id="Resource_h68g5"]
+script = ExtResource("3_n00ux")
+mod_type = 2
+characteristic = SubResource("Resource_sfnud")
+
+[sub_resource type="Resource" id="Resource_li378"]
+script = ExtResource("4_jbdcy")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Gradient" id="Gradient_0n010"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ufaf8"]
+gradient = SubResource("Gradient_0n010")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13yjb"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_ufaf8")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oqbrs"]
+radius = 11.0
+height = 50.0
+
+[sub_resource type="Animation" id="Animation_3q3bj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Body/Trail:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Body/Shadow:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../StatProgressBar:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Body:material:shader_parameter/opacity")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_yj16a"]
+resource_name = "damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5ssal"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body:material:shader_parameter/outline_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Body/Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StatProgressBar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Body:material:shader_parameter/opacity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_22rlt"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_s12ns"]
+resource_name = "postattack"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body/Trail:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:percent_between_target")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_btx26"]
+resource_name = "preattack"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body/Trail:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 1, 0, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:percent_between_target")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_4kswv"]
+resource_name = "run"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wq7nv"]
+_data = {
+"RESET": SubResource("Animation_3q3bj"),
+"damaged": SubResource("Animation_yj16a"),
+"death": SubResource("Animation_5ssal"),
+"idle": SubResource("Animation_22rlt"),
+"postattack": SubResource("Animation_s12ns"),
+"preattack": SubResource("Animation_btx26"),
+"run": SubResource("Animation_4kswv")
+}
+
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
+y_sort_enabled = true
+input_pickable = true
+script = ExtResource("1_fgkl7")
+unit_name = "Скелет"
+health = SubResource("Resource_omiyo")
+defence = SubResource("Resource_11jpo")
+speed = SubResource("Resource_8p6jf")
+damage = SubResource("Resource_h68g5")
+expirience = SubResource("Resource_li378")
+sprite_for_outline = NodePath("Body")
+trail_particles = NodePath("GPUParticles2D")
+health_bar_pb = NodePath("StatProgressBar")
+animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Body"), NodePath("Body/Trail")]
+acts_count = 2
+controlled_player = false
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_02wdl")])
+percent_between_target = 15.0
+
+[node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("6_nnhpt")
+position = Vector2(-2, -27)
+texture = ExtResource("7_2efhq")
+hframes = 14
+
+[node name="Trail" type="Sprite2D" parent="Body"]
+position = Vector2(2, 1)
+texture = ExtResource("8_7xunk")
+hframes = 6
+frame = 4
+
+[node name="Shadow" type="Sprite2D" parent="Body"]
+z_index = -1
+position = Vector2(0, 3)
+texture = ExtResource("8_wv0lx")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(-2, -27)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_13yjb")
+texture = ExtResource("10_k3aay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = SubResource("CapsuleShape2D_oqbrs")
+
+[node name="StatProgressBar" parent="." instance=ExtResource("8_s877j")]
+offset_top = -52.0
+offset_bottom = -50.0
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CollisionShape2D")
+libraries = {
+"": SubResource("AnimationLibrary_wq7nv")
+}
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

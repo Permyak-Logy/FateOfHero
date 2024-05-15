@@ -1,13 +1,13 @@
 class_name IttoP1 extends Effect
 
-@export var power: float = 20
+@export var power: ModValue
 @export var percent: float = 0.4
-@export var cooldown: int = 0
-@export var cooldown_time: int = 3
+@export var cooldown: int = 3
+var cooldown_time: int = 0
 	
 func update_on_start_stepmove():
-	if cooldown:
-		cooldown -= 1
+	if cooldown_time:
+		cooldown_time -= 1
 		return
 
 	var map = owner.get_map()
@@ -22,20 +22,11 @@ func update_on_start_stepmove():
 			continue
 		if unit.health and 0 < unit.health.percent() and unit.health.percent() <= percent:
 			var diff = -unit.health.cur()
-			unit.health.add(power)
+			unit.health.iadd(owner.health.get_max() * power.mul + power.add)
 			diff += unit.health.cur()
-			cooldown = cooldown_time
+			cooldown_time = cooldown
 			get_map().write_info(
 				"=> Восстанавливает " + str(diff) + " здоровья у " + 
 				unit.unit_name + " (" + effect_name + ")"
 				)
 			return
-	
-
-func update_on_damage(_damage: float, _instigator: Node = null) -> float:
-	var diff = min(power, _damage)
-	_damage -= diff
-	power -= diff
-	if power <= 0:
-		finished.emit(self)
-	return _damage

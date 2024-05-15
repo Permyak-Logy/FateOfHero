@@ -19,17 +19,17 @@ func ai(map: TacticalMap):
 		if a1.can_select(cell):
 			map._prepare_ability(a1)
 			a1.select(cell)
-			map._apply_ability()
+			await map._apply_ability()
 		else:
-			ai_random_move(map)
+			await ai_random_move(map)
 	else:
 		var target = find_target()
 		if a0.can_select(target):
 			map._prepare_ability(a0)
 			a0.select(target)
-			map._apply_ability()
+			await map._apply_ability()
 		else:
-			ai_move_to(map, target.get_cell())
+			await ai_move_to(map, target.get_cell())
 
 func find_target() -> Unit:
 	var target: Unit = null

@@ -116,6 +116,7 @@ func apply_damage(_damage: float, _instigator: Unit):
 	get_map().write_info(
 		"=> " + unit_name + " получил " + str(int(_damage)) +" урона от " + _instigator.unit_name
 	)
+	play("idle")
 	return _damage
 
 func reload_all_mods():
@@ -126,7 +127,6 @@ func reload_all_mods():
 	for comp in [speed, health, defence, damage]:
 		if comp:
 			comp.reload_mods(self)
-	print(self, damage.cur())
 
 func get_mods() -> Dictionary:
 	var all_mods: Dictionary
@@ -189,7 +189,7 @@ func _physics_process(_delta):
 	if current_id_path.is_empty():
 		return
 
-	var target_position = $"../TileMap".map_to_local(current_id_path.front())
+	var target_position = get_map()._tile_map.map_to_local(current_id_path.front())
 
 	if (target_position - global_position)[0] == 0:
 		flipped = idle_direction_bool()
@@ -245,7 +245,7 @@ func on_death(_component: StatComponent):
 func is_death() -> bool:
 	if not health:
 		return false
-	return health.cur() <= 0
+	return health.cur() < 1
 
 func _on_toggle_select(_viewport, event: InputEvent, _shape_idx: int):
 	if not get_map() or get_map()._block_input:
@@ -343,7 +343,7 @@ func ai_random_move(map: TacticalMap):
 			rng.randi_range(-distance, distance)
 		)
 	map.select_path_to(cell)
-	map._move_active_unit()
+	await map._move_active_unit()
 
 func ai_move_to(map: TacticalMap, cell: Vector2i):
 	var cells = map.walkable_fill()
@@ -353,7 +353,7 @@ func ai_move_to(map: TacticalMap, cell: Vector2i):
 	while not map.can_move_to(astar.itm(path[len(path) - 1])):
 		path.remove_at(len(path) - 1)
 	map.select_path_to(astar.itm(path[len(path) - 1]))
-	map._move_active_unit()
+	await map._move_active_unit()
 
 func ai_pass(map: TacticalMap):
 	map.acts = 0

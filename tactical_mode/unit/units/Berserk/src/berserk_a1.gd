@@ -1,5 +1,6 @@
 class_name BerserkA1 extends AoEAbility
 
+@export var effect: Effect
 @export var power: ModValue = ModValue.new()
 @export var range_apply: int = 2
 
@@ -22,6 +23,9 @@ func apply_on_unit(unit: Unit):
 		
 	get_map().write_info("=> В ярости атакует " + unit.unit_name)
 	unit.apply_damage(scale * power.mul + power.add, owner)
+	var e = effect.duplicate(true)
+	e.instigator = owner
+	unit.add_effect(e)
 
 func can_select(_cell: Vector2i) -> bool:
 	return _cell == (owner as Unit).get_cell()

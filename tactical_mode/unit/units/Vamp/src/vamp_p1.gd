@@ -1,7 +1,7 @@
 class_name VampP1 extends Effect
 
-var power_delta: float = 0.1
-var power_max: float = 0.5
+@export var power_delta: float = 0.1
+@export var power_max: float = 0.5
 var power: float = 0
 
 func on_set_owner(old, new):

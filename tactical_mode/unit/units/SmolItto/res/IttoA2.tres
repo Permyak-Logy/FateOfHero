@@ -29,6 +29,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Залитое поле"
+russian_name = ""
 description = "Хилл всего отряда"
 texture = ExtResource("2_v3r1h")
 max_stack = 0

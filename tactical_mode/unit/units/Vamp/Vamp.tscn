@@ -390,7 +390,6 @@ _data = {
 }
 
 [node name="Vamp" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
-z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3454p")

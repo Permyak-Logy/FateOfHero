@@ -5,6 +5,8 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_lcs4v")
+power_delta = 0.2
+power_max = 1.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
 stackable = false
