@@ -37,6 +37,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Упырь"
+russian_name = ""
 description = "Активирует вампиризм на следущие 5 ударов"
 texture = ExtResource("3_6urav")
 max_stack = 0

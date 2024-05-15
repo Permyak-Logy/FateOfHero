@@ -52,6 +52,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[ExtResource("1_jgihn")]([])
 name = "Режим берсерка"
+russian_name = ""
 description = "Накладывает эффект ярость берсерка на 4 хода"
 texture = ExtResource("2_1wsbj")
 max_stack = 0

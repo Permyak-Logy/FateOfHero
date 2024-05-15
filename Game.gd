@@ -57,8 +57,13 @@ func save():
 
 
 func remove_save():
-	DirAccess.dir_exists_absolute("save")
-	DirAccess.remove_absolute("save")
+	if not DirAccess.dir_exists_absolute("res://save"):
+		return
+	
+	var dir = DirAccess.open("res://save")
+	for file in dir.get_files():
+		dir.remove(file)
+	DirAccess.remove_absolute("res://save")
 
 func load_save():
 	print(" # Loading game")

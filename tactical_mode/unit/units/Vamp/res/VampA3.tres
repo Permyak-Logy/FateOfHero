@@ -35,6 +35,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Кровопускание"
+russian_name = ""
 description = "Вылечить соизника пожертвовав своим хп"
 texture = ExtResource("2_pnwy5")
 max_stack = 0

@@ -30,6 +30,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Таран"
+russian_name = ""
 description = "Наносит 4х кратный урон одной цели"
 texture = ExtResource("2_npmud")
 max_stack = 0

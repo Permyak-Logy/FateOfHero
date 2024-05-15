@@ -30,6 +30,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Атака"
+russian_name = ""
 description = "Атаковать выбранную цель"
 texture = ExtResource("2_q6edk")
 max_stack = 0

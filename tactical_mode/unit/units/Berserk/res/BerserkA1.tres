@@ -27,6 +27,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Погром"
+russian_name = ""
 description = "Наносит 3x кратный урон от атаки вокруг себя всем юнитам"
 texture = ExtResource("2_6vyjq")
 max_stack = 0

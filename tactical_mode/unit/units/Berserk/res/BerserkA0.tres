@@ -35,6 +35,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[ExtResource("1_ifxyi")]([SubResource("Resource_ewhvc")])
 name = "Атака"
+russian_name = ""
 description = "Атаковать выбранного противника в ближнем бою"
 texture = ExtResource("2_qg7dj")
 max_stack = 0

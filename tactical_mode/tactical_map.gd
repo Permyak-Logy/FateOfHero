@@ -497,8 +497,6 @@ func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 	if not _astar_walkable.has_cell(map_coords):
 		return []
-	if map_coords == Vector2i(11, 12):
-		assert(not _astar_walkable.has_cell(map_coords))
 	var path = _astar_walkable.get_id_path(
 			_astar_walkable.mti(active_unit.get_cell()),
 			_astar_walkable.mti(map_coords)
