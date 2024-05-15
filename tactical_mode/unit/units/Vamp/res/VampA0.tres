@@ -25,6 +25,7 @@ limit = 0
 consumable = false
 count = -1
 scaling_type = 2
+scaling_stat = 1
 overlay_atlas_coords = Vector2i(2, 0)
 only_unit_owner = true
 type = 4
