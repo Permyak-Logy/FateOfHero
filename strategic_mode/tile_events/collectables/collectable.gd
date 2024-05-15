@@ -16,8 +16,8 @@ func init():
 
 func _ready():
 	init()
-	assert(item != null, "collectables need their values refefined in seperate script")
-	assert(count != null, "collectables need their values refefined in seperate script")
+	assert(item != null, "Ты забыл добавить предмет")
+	assert(count != null, "Ты забыл добавить предмет")
 	sprite.texture = texture
 
 func activate():
