@@ -27,6 +27,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 @export_group("Unit stats")
 @export var acts_count: int = 1
 @export var controlled_player: bool = true
+@export var expirience_on_kill = 1
 
 @export_group("Unit abilities")
 @export var private_abilities: Array[Ability] = []
@@ -125,6 +126,7 @@ func reload_all_mods():
 	for comp in [speed, health, defence, damage]:
 		if comp:
 			comp.reload_mods(self)
+	print(self, damage.cur())
 
 func get_mods() -> Dictionary:
 	var all_mods: Dictionary
@@ -261,7 +263,10 @@ func _on_toggle_select(_viewport, event: InputEvent, _shape_idx: int):
 	if event.is_action_pressed("about_unit"):
 		get_map().write_info(
 			"-> " + unit_name + " (" + str(expirience.level) + " ур.)" +
-			" ХП=" + str(int(health.cur())) + "/" + str(int(health.get_max()))
+			" ХП=" + str(int(health.cur())) + "/" + str(int(health.get_max())) +
+			" АТК=" + str(int(damage.cur())) +
+			" ЗЩТ=" + str(int(defence.cur())) +
+			" СКР=" + str(int(speed.cur()))
 		)
 
 func _on_mouse_entered():

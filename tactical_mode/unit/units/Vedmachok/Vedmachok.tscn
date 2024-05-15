@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://csb3ujant2uio"]
+[gd_scene load_steps=34 format=3 uid="uid://csb3ujant2uio"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/Vedmachok.gd" id="1_niktu"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_5q3v1"]
@@ -10,7 +10,6 @@
 [ext_resource type="Resource" uid="uid://caaovo3ff0mc2" path="res://tactical_mode/unit/units/Vedmachok/res/VedmachokA1.tres" id="6_ft64p"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="6_uhiw1"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="7_f0kl4"]
-[ext_resource type="Resource" uid="uid://bq2iicqcssmai" path="res://tactical_mode/effects/res/LevelUpscaleEffect.tres" id="7_fed47"]
 [ext_resource type="Texture2D" uid="uid://cs4b8cuqypclf" path="res://tactical_mode/unit/units/Vedmachok/assets/run.png" id="8_jdgdj"]
 
 [sub_resource type="Resource" id="Resource_xhmqf"]
@@ -410,7 +409,6 @@ for_flip_sprites = [NodePath("Body")]
 acts_count = 2
 controlled_player = false
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_sprtl"), ExtResource("6_ft64p")])
-private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("7_fed47")])
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("7_f0kl4")

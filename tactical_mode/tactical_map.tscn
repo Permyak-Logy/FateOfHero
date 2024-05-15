@@ -430,57 +430,57 @@ level = 1
 expirience = 0
 ups = 0
 
-[sub_resource type="Resource" id="Resource_q36t0"]
+[sub_resource type="Resource" id="Resource_4dq17"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
 base = 80.0
 cur = 80.0
 max_ = 80.0
 
-[sub_resource type="Resource" id="Resource_yhhox"]
+[sub_resource type="Resource" id="Resource_22t6d"]
 resource_local_to_scene = true
 script = ExtResource("10_3tc35")
 mod_type = 0
-characteristic = SubResource("Resource_q36t0")
+characteristic = SubResource("Resource_4dq17")
 
-[sub_resource type="Resource" id="Resource_0p6qj"]
+[sub_resource type="Resource" id="Resource_v0iga"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
 base = 50.0
 cur = 50.0
 max_ = 50.0
 
-[sub_resource type="Resource" id="Resource_qyyw3"]
+[sub_resource type="Resource" id="Resource_7hea6"]
 resource_local_to_scene = true
 script = ExtResource("10_3tc35")
 mod_type = 3
-characteristic = SubResource("Resource_0p6qj")
+characteristic = SubResource("Resource_v0iga")
 
-[sub_resource type="Resource" id="Resource_pls1k"]
+[sub_resource type="Resource" id="Resource_spjqk"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
 base = 100.0
 cur = 100.0
 max_ = 100.0
 
-[sub_resource type="Resource" id="Resource_0rv6p"]
+[sub_resource type="Resource" id="Resource_g480k"]
 resource_local_to_scene = true
 script = ExtResource("10_3tc35")
 mod_type = 1
-characteristic = SubResource("Resource_pls1k")
+characteristic = SubResource("Resource_spjqk")
 
-[sub_resource type="Resource" id="Resource_hls3b"]
+[sub_resource type="Resource" id="Resource_wsihs"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
-base = 30.0
-cur = 30.0
-max_ = 30.0
+base = 10.0
+cur = 10.0
+max_ = 10.0
 
-[sub_resource type="Resource" id="Resource_crqjo"]
+[sub_resource type="Resource" id="Resource_jjvy4"]
 resource_local_to_scene = true
 script = ExtResource("10_3tc35")
 mod_type = 2
-characteristic = SubResource("Resource_hls3b")
+characteristic = SubResource("Resource_wsihs")
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
@@ -522,10 +522,10 @@ anchor_mode = 0
 [node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
 
 [node name="Rock" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(384, 281)
+position = Vector2(347, 354)
 
 [node name="Rock2" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(447, 427)
+position = Vector2(352, 400)
 
 [node name="Rock3" parent="." instance=ExtResource("10_m7p5y")]
 position = Vector2(642, 233)
@@ -534,16 +534,16 @@ position = Vector2(642, 233)
 position = Vector2(320, 376)
 
 [node name="Rock5" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(353, 209)
+position = Vector2(453, 280)
 
 [node name="Rock6" parent="." instance=ExtResource("10_m7p5y")]
 position = Vector2(638, 331)
 
 [node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(512, 187)
+position = Vector2(386, 233)
 
 [node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
-position = Vector2(91, 398)
+position = Vector2(30, 205)
 health = SubResource("Resource_engs8")
 defence = SubResource("Resource_mb28j")
 speed = SubResource("Resource_i88dp")
@@ -559,7 +559,7 @@ damage = SubResource("Resource_p0rpr")
 expirience = SubResource("Resource_hisbe")
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(98, 256)
+position = Vector2(96, 211)
 health = SubResource("Resource_vpvh8")
 defence = SubResource("Resource_vhoup")
 speed = SubResource("Resource_tk7bu")
@@ -567,7 +567,7 @@ damage = SubResource("Resource_mqq0j")
 expirience = SubResource("Resource_o4tmp")
 
 [node name="SmolItto" parent="." instance=ExtResource("12_e7e7b")]
-position = Vector2(127, 335)
+position = Vector2(65, 187)
 health = SubResource("Resource_7yvpb")
 defence = SubResource("Resource_iyj7q")
 speed = SubResource("Resource_l5hdv")
@@ -591,7 +591,7 @@ damage = SubResource("Resource_qdl0k")
 expirience = SubResource("Resource_4l6hp")
 
 [node name="Vedmachok" parent="." instance=ExtResource("11_wexxj")]
-position = Vector2(802, 213)
+position = Vector2(30, 164)
 health = SubResource("Resource_d477q")
 defence = SubResource("Resource_agh86")
 speed = SubResource("Resource_kjqva")
@@ -599,11 +599,11 @@ damage = SubResource("Resource_kwpax")
 expirience = SubResource("Resource_xj23x")
 
 [node name="Poludnisa" parent="." instance=ExtResource("16_sq65k")]
-position = Vector2(513, 328)
-health = SubResource("Resource_yhhox")
-defence = SubResource("Resource_qyyw3")
-speed = SubResource("Resource_0rv6p")
-damage = SubResource("Resource_crqjo")
+position = Vector2(483, 398)
+health = SubResource("Resource_22t6d")
+defence = SubResource("Resource_7hea6")
+speed = SubResource("Resource_g480k")
+damage = SubResource("Resource_jjvy4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_nmmmq")
