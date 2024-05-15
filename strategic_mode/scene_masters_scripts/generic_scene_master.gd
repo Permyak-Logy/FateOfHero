@@ -7,6 +7,7 @@ class_name SMPuzzleMaster extends Node
 var current_state: Array[bool] = []
 var prizes: Array[TileEvent] = []
 var enemies: Array[TileEvent] = []
+@onready var game: Game = get_tree().root.get_child(0)
 
 func _ready():
 	var i = 0
@@ -37,7 +38,7 @@ func _ready():
 		
 		if is_instance_of(node, TreasureChest):
 			prizes.append(node)
-	update()
+	game.strat_map.strat_map_loaded.connect(update)
 
 func update():
 	for prize in prizes:

@@ -28,8 +28,10 @@ func ai(map: TacticalMap):
 			map._prepare_ability(a0)
 			a0.select(target)
 			await map._apply_ability()
-		else:
+		elif target:
 			await ai_move_to(map, target.get_cell())
+		else:
+			await ai_pass(map)
 
 func find_target() -> Unit:
 	var target: Unit = null
