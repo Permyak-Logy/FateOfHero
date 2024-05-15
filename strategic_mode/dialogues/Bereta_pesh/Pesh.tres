@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=3 format=3 uid="uid://bmupad5oq83pg"]
+
+[ext_resource type="Script" path="res://strategic_mode/dialogues/dialogue.gd" id="1_w8g43"]
+[ext_resource type="PackedScene" uid="uid://bmlfmfgjguyh2" path="res://strategic_mode/dialogues/example_dialogue/rude.tscn" id="2_hyrcp"]
+
+[resource]
+script = ExtResource("1_w8g43")
+title = "Пастух"
+msg = "Незнакомка: Мы на месте. Там внизу горы золота.
+Фиди: Так чего же мы ждём?
+Итте: Стоять!
+Фиди: Ну что опять?
+Незнакомка: Эй, Фиди. Я пойду первой, а вы следом...
+Мы шагнули во тьму пещеры. Я услышал как Берета тихо пробормотала:
+-Сыкло...
+Её спина колыхнулась от вздоха."
+options = Array[PackedScene]([ExtResource("2_hyrcp")])
