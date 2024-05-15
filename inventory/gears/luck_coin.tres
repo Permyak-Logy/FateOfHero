@@ -20,6 +20,7 @@ script = ExtResource("1_rbgy5")
 type = 1
 _mods = Array[ExtResource("1_whgx3")]([SubResource("Resource_xlgn3")])
 name = "Lucky coin"
+russian_name = "Удачливая монетка"
 description = ""
 texture = ExtResource("4_7ssxl")
 max_stack = 1
