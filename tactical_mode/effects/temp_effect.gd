@@ -7,7 +7,7 @@ class_name TempEffect extends Effect
 func update_on_start_stepmove():
 	moves -= 1
 	if moves == 0:
-		finished.emit()
+		finished.emit(self)
 	else:
 		get_map().write_info(
 			"=> " + owner.unit_name + " под эффектом " + effect_name

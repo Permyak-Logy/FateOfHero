@@ -251,11 +251,6 @@ func on_kill(unit: Unit):
 	"""
 	Вызывается при смерти любого юнита
 	"""
-	
-	for i in range(len(unit_queue)):
-		if unit_queue[i][1] == unit:
-			unit_queue.pop_at(i)
-			break
 	reset_outline_color(unit)
 	write_info("-> " + unit.unit_name + " убит")
 
@@ -361,15 +356,22 @@ func _start_stepmove():
 	write_info("* Ходит: " + active_unit.unit_name + " *")
 	
 	cur_ability = null
-	for unit_data in unit_queue:
-		reset_outline_color(unit_data[1])
 	active_unit.set_outline_color(Unit.CUR_COLOR)
 	acts = active_unit.acts_count
-	(active_unit as Unit).premove_update()
-	
+
+	await active_unit.premove_update()
+	while active_unit and active_unit.is_death():
+		unit_queue.pop_front()
+		if active_unit:
+			await active_unit.premove_update()
+
+	for unit_data in unit_queue:
+		reset_outline_color(unit_data[1])
+		
 	gui.escape_ability_btn.update()
 	
-	if acts == 0:
+	if acts == 0 or not active_unit:
+		acts = 0
 		_update_stepmove()
 		return
 	
@@ -397,7 +399,7 @@ func _update_stepmove():
 		_finalize_fight(killed_enemy_units and not escape)
 		return
 	
-	if acts != 0:
+	if acts != 0 and not active_unit.is_death():
 		write_info("* Ход продолжается *")
 		if active_unit.controlled_player:
 			gui.escape_ability_btn.update()
@@ -495,6 +497,8 @@ func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 	if not _astar_walkable.has_cell(map_coords):
 		return []
+	if map_coords == Vector2i(11, 12):
+		assert(not _astar_walkable.has_cell(map_coords))
 	var path = _astar_walkable.get_id_path(
 			_astar_walkable.mti(active_unit.get_cell()),
 			_astar_walkable.mti(map_coords)

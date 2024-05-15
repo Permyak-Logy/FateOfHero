@@ -173,9 +173,9 @@ func prepare_fight():
 
 func premove_update():
 	for ability in get_abilities():
-		ability.update()
+		await ability.update()
 	for effect in get_effects():
-		effect.update_on_start_stepmove()
+		await effect.update_on_start_stepmove()
 
 func on_flip_unit():
 	if trail_particles:
