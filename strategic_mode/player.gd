@@ -60,9 +60,10 @@ func is_walkable(pos: Vector2i) -> bool:
 	if tile_data and tile_data.get_custom_data("walkable") == false:
 		res = false
 	# overwrite with terrain; so bridges and highlands are walkable
-	tile_data = tilemap.get_cell_tile_data(1, pos)
-	if tile_data:
-		res = tile_data.get_custom_data("walkable")
+	for i in range(1, tilemap.get_layers_count()):
+		tile_data = tilemap.get_cell_tile_data(1, pos)
+		if tile_data:
+			res = tile_data.get_custom_data("walkable")
 	return res
 
 func backtrack():
@@ -109,8 +110,6 @@ func _input(event):
 	else:
 		if astar_grid.is_point_solid(current_id_path.back() + delta) == false and (delta.x != 0 or delta.y != 0):
 			current_id_path.append(current_id_path.back() + delta)
-		
-
 
 func _physics_process(delta):
 	if current_id_path.is_empty():
@@ -134,7 +133,6 @@ func _physics_process(delta):
 		current_id_path.pop_front()
 		last_position = target_position
 		pos = tilemap.local_to_map(last_position)
-		print("reached: ", last_position)
 		if not current_id_path.is_empty():
 			target_position = tilemap.map_to_local(current_id_path.front())
 			target_position[0] -= 8
@@ -142,7 +140,6 @@ func _physics_process(delta):
 			strat_map.move_time(30)
 		else:
 			is_moving = false
-			
 
 func move_to(new_pos: Vector2i):
 	var new_local_pos = tilemap.map_to_local(new_pos) + Vector2(8, 8)
