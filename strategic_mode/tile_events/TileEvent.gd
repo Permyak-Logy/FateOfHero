@@ -13,7 +13,7 @@ signal removed(tile_event: TileEvent)
 
 func _ready():
 	sprite.texture = texture
-	sprite.flip_v = doflip
+	sprite.flip_h = doflip
 
 func activate():
 	print("TODO -- redefine activate")

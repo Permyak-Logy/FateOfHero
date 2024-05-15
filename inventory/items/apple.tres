@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_rposf")
 name = "apple"
+description = ""
 texture = ExtResource("2_8vgnk")
 max_stack = 100
 recipe = Array[ExtResource("1_rposf")]([])
 price = 50
-descript = ""
