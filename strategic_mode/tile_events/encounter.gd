@@ -15,6 +15,7 @@ and texture
 """
 
 func activate():
+	assert(enemies, "Враги должны быть настроенны в эдиторе")
 	game = get_tree().root.get_child(0)
 	inventory = game.strat_map.player.inventory
 	var characters = inventory.characters
