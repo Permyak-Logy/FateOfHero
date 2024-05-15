@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="Gear" load_steps=5 format=3 uid="uid://1qbldvg8aoc3"]
+[gd_resource type="Resource" script_class="Gear" load_steps=3 format=3 uid="uid://1qbldvg8aoc3"]
 
 [ext_resource type="Script" path="res://inventory/gear.gd" id="1_vlwi2"]
-[ext_resource type="Resource" uid="uid://c0srtoci3pulj" path="res://inventory/items/helmet_billet.tres" id="1_xfs0i"]
-[ext_resource type="Resource" uid="uid://doqtu33sxqbhu" path="res://inventory/items/skin.tres" id="2_anpdc"]
 [ext_resource type="Texture2D" uid="uid://kpmduhvql2aj" path="res://inventory/gears/Scales/assets/Helmet_scales.png" id="2_qt7no"]
 
 [resource]
@@ -10,8 +8,8 @@ script = ExtResource("1_vlwi2")
 type = 0
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Чешуйчатый шлем"
+russian_name = ""
 description = ""
 texture = ExtResource("2_qt7no")
 max_stack = 1
-recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_xfs0i"), ExtResource("2_anpdc"), ExtResource("2_anpdc"), ExtResource("2_anpdc"), ExtResource("2_anpdc"), ExtResource("2_anpdc")])
 price = 0

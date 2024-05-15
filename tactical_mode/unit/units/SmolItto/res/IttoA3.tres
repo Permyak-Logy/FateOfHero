@@ -1,12 +1,39 @@
-[gd_resource type="Resource" script_class="DirectedAbility" load_steps=2 format=3 uid="uid://cx0kko3n1c2nj"]
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=9 format=3 uid="uid://cx0kko3n1c2nj"]
 
-[ext_resource type="Script" path="res://tactical_mode/abilities/directed_ability.gd" id="1_5p832"]
+[ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="1_g0pxb"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_sigle"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_7melx"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="3_utrhf"]
+[ext_resource type="PackedScene" uid="uid://4mtg2fpir2h1" path="res://tactical_mode/unit/units/SmolItto/WhiteEffect.tscn" id="4_1yosm"]
+
+[sub_resource type="Resource" id="Resource_sqjeo"]
+script = ExtResource("2_7melx")
+add = 5.0
+mul = 0.0
+
+[sub_resource type="Resource" id="Resource_itr3i"]
+script = ExtResource("1_sigle")
+type = 1
+value = SubResource("Resource_sqjeo")
+
+[sub_resource type="Resource" id="Resource_hus0i"]
+script = ExtResource("3_utrhf")
+on_stack = 1
+limit_stacks_for_sum_mods = -1
+moves = 1
+mods = Array[ExtResource("1_sigle")]([SubResource("Resource_itr3i")])
+destroy_on_death_instigator = true
+stackable = true
+effect_name = "Воодушевление"
+is_negative = false
+visual_effect = ExtResource("4_1yosm")
 
 [resource]
-script = ExtResource("1_5p832")
+script = ExtResource("1_g0pxb")
+effect = SubResource("Resource_hus0i")
 targets = 1
 max_targets = 0
-apply_on = Array[int]([])
+apply_on = Array[int]([1])
 can_use_if_only_has_any_selectable_target = true
 acts = 0
 final_act = false
@@ -19,10 +46,10 @@ scaling_stat = 1
 overlay_atlas_coords = Vector2i(1, 0)
 only_unit_owner = true
 type = 0
-_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
-name = ""
+_mods = Array[ExtResource("1_sigle")]([])
+name = "Воодушевление"
 russian_name = ""
-description = ""
+description = "Увеличивает скорость союзника на 2 хода"
 max_stack = 0
 recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0
