@@ -49,6 +49,7 @@ only_unit_owner = true
 type = 4
 _mods = Array[ExtResource("1_wr7vi")]([])
 name = "Красная жижа"
+russian_name = ""
 description = "+20% максимального здоровья на 3 хода"
 texture = ExtResource("4_oeadd")
 max_stack = 10

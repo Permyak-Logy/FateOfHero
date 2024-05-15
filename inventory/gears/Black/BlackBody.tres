@@ -22,6 +22,7 @@ script = ExtResource("1_yev0k")
 type = 1
 _mods = Array[ExtResource("1_vta46")]([SubResource("Resource_00mgp")])
 name = "Броня из чёрного камня"
+russian_name = ""
 description = ""
 texture = ExtResource("2_wtgcs")
 max_stack = 1
