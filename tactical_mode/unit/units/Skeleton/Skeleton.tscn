@@ -1,16 +1,16 @@
 [gd_scene load_steps=33 format=3 uid="uid://dh5vq12tjl11n"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/units/Skeleton/Skeleton.gd" id="1_fgkl7"]
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Skeleton/src/Skeleton.gd" id="1_fgkl7"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_cp544"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_n00ux"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_jbdcy"]
-[ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/units/Skeleton/SkeletonA0.tres" id="5_02wdl"]
+[ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/units/Skeleton/res/SkeletonA0.tres" id="5_02wdl"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="6_nnhpt"]
-[ext_resource type="Texture2D" uid="uid://dnmkrltvspta6" path="res://tactical_mode/unit/units/Skeleton/spritesheet.png" id="7_2efhq"]
-[ext_resource type="Texture2D" uid="uid://dgkgrudg6y1jb" path="res://tactical_mode/unit/units/Skeleton/attack_trail.png" id="8_7xunk"]
+[ext_resource type="Texture2D" uid="uid://dnmkrltvspta6" path="res://tactical_mode/unit/units/Skeleton/assets/spritesheet.png" id="7_2efhq"]
+[ext_resource type="Texture2D" uid="uid://dgkgrudg6y1jb" path="res://tactical_mode/unit/units/Skeleton/assets/attack_trail.png" id="8_7xunk"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="8_s877j"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="8_wv0lx"]
-[ext_resource type="Texture2D" uid="uid://di8gme8ny3f43" path="res://tactical_mode/unit/units/Skeleton/run.png" id="10_k3aay"]
+[ext_resource type="Texture2D" uid="uid://di8gme8ny3f43" path="res://tactical_mode/unit/units/Skeleton/assets/run.png" id="10_k3aay"]
 
 [sub_resource type="Resource" id="Resource_ws37b"]
 script = ExtResource("2_cp544")

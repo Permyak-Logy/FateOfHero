@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgkgrudg6y1jb"
-path="res://.godot/imported/attack_trail.png-77c7ef0f28b4ede081b23d0061b19b00.ctex"
+uid="uid://di8gme8ny3f43"
+path="res://.godot/imported/run.png-b5bee695ce5d9eb368e882db76c2a3d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/unit/units/Skeleton/attack_trail.png"
-dest_files=["res://.godot/imported/attack_trail.png-77c7ef0f28b4ede081b23d0061b19b00.ctex"]
+source_file="res://tactical_mode/unit/units/Skeleton/assets/run.png"
+dest_files=["res://.godot/imported/run.png-b5bee695ce5d9eb368e882db76c2a3d5.ctex"]
 
 [params]
 

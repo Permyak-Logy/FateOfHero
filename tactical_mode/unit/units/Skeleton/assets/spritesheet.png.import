@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck2h4xn2ngng0"
-path="res://.godot/imported/Enemy3.png-3089712dded812fbb41bb2a5213af06f.ctex"
+uid="uid://dnmkrltvspta6"
+path="res://.godot/imported/spritesheet.png-55f55b7e7c69de856885f94d691238cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/unit/units/Skeleton/Enemy3.png"
-dest_files=["res://.godot/imported/Enemy3.png-3089712dded812fbb41bb2a5213af06f.ctex"]
+source_file="res://tactical_mode/unit/units/Skeleton/assets/spritesheet.png"
+dest_files=["res://.godot/imported/spritesheet.png-55f55b7e7c69de856885f94d691238cc.ctex"]
 
 [params]
 
