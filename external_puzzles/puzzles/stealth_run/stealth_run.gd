@@ -139,7 +139,7 @@ func gen_field():
 
 func set_enemies(enemies_: Array[PackedScene], level_: int):
 	enemies = enemies_
-	level = level_
+	enemy_level = level_
 
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive
