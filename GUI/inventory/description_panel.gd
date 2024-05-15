@@ -10,6 +10,6 @@ var item: Item
 func _ready():
 	assert(item, "can't display description of null")
 	sprite.texture = item.texture
-	name_label.text = item.name
+	name_label.text = item.russian_name
 	price_label.text = str(item.price) + "G"
 	description_label.text = item.description

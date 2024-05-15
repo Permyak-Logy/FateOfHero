@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://tytwxb8pdflp"]
 
 [ext_resource type="Script" path="res://inventory/item.gd" id="1_ftkan"]
-[ext_resource type="Texture2D" path="res://inventory/icons/rune_7.png" id="2_tiaw4"]
+[ext_resource type="Texture2D" uid="uid://cnvtn3jup43cv" path="res://inventory/icons/rune_7.png" id="2_tiaw4"]
 
 [resource]
 script = ExtResource("1_ftkan")
 name = "rune_7"
+russian_name = "Руна человека"
 description = ""
 texture = ExtResource("2_tiaw4")
 max_stack = 1

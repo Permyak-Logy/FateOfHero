@@ -32,4 +32,4 @@ func _ready():
 
 func _on_select_pressed():
 	sprite_holder.remove_child(character)
-	init_char_chosen.emit(presented_character)
+	init_char_chosen.emit(presented_character.duplicate(true))
