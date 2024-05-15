@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="1_k2iwd"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_k2iwd")
 _gears = {}
 gear_slots = {

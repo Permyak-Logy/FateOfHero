@@ -1,10 +1,10 @@
 class_name FinalEnctounter extends Encounter
 
 
-func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
+func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene], is_win):
 	inventory.characters = alive
 	game.to_strat_mode()
-	if game.tactical_map.win:
+	if is_win:
 		game.strat_map.show_win()
 		remove()
 	else:

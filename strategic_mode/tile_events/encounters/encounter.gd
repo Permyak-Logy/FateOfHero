@@ -28,10 +28,10 @@ func activate():
 	game.tactical_map.finish.connect(on_finish_tactical_map)
 	game.to_tact_mode()
 	
-func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
+func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene], is_win):
 	inventory.characters = alive
 	game.to_strat_mode()
-	if game.tactical_map.win:
+	if is_win:
 		remove()
 	else:
 		game.strat_map.player.backtrack()
