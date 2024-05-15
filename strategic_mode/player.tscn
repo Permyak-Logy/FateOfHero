@@ -7,6 +7,7 @@
 size = Vector2(16, 16)
 
 [node name="player" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_xumpg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -20,9 +21,11 @@ drag_right_margin = 0.05
 drag_bottom_margin = 0.05
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, 8)
+y_sort_enabled = true
+position = Vector2(8, 6)
 texture = ExtResource("2_kswqr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_4123s")

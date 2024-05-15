@@ -35,7 +35,6 @@ func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene])
 		remove()
 	else:
 		game.strat_map.player.backtrack()
-	game.tactical_map
 	for char_p in dead:
 		var char = char_p.instantiate()
 		if char.name == game.strat_map.player.mc_name:
