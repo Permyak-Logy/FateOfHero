@@ -121,7 +121,7 @@ func _physics_process(delta):
 		target_position[1] -= 8
 		is_moving = true
 	
-	var movement = global_position.move_toward(target_position, 8 * 20 * 16 * delta) - global_position
+	var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
 	var collision = move_and_collide(movement)
 	
 	if collision:
