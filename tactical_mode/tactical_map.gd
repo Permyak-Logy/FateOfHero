@@ -10,6 +10,7 @@ var ability_btn = preload("res://GUI/tactical_mode/BtnAbility.tscn")
 var level_up_gui = preload("res://GUI/level_up/level_up_gui.tscn")
 var level_upscale_effect: LevelUpscaleEffect = preload("res://tactical_mode/effects/res/LevelUpscaleEffect.tres")
 var _block_input = false  # Блокировка пользовательского ввода
+var _block_info = false # Блокировка вывода информации
 const _ACT_INDEX_MAX = 10000  # Магическая константа для порядка ходов
 var unit_queue = []  # [(act_index, unit)]
 
@@ -86,7 +87,7 @@ func _ready():
 		
 	_p_units = [$Berserk, $Vamp, $SmolItto, $Naris]
 	
-	_e_units = [$Vedmachok, $Lugozavr, $Vendigo, $Skeleton, $Poludnisa]
+	_e_units = [$Vedmachok, $Lugozavr, $Vendigo, $Skeleton, $Poludnisa, $Poludnisa2, $Poludnisa3, $Poludnisa4]
 	inited = true
 
 func start_battle():
@@ -106,6 +107,7 @@ func start_battle():
 	gui.tactical_info.clear()
 	running = true
 	write_info("*** Бой начинается ***")
+	_block_info = true
 	align_actors()
 	escape_ability.reset()
 	escape = false
@@ -117,6 +119,8 @@ func start_battle():
 			unit.prepare_fight()
 	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
+	_block_info = false
+	await get_tree().create_timer(2).timeout
 	_start_stepmove()
 
 func align_actors():
@@ -350,7 +354,7 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	write_info("* Ходит: " + active_unit.unit_name + " *")
+	write_info("* Ходит: " + active_unit.unit_name + " * ")
 	
 	cur_ability = null
 	active_unit.set_outline_color(Unit.CUR_COLOR)
@@ -397,7 +401,7 @@ func _update_stepmove():
 		return
 	
 	if acts != 0 and not active_unit.is_death():
-		write_info("* Ход продолжается *")
+		write_info("* Ход продолжается (Действий: " + str(acts) + "/" + str(active_unit.acts_count) + ")")
 		if active_unit.controlled_player:
 			gui.escape_ability_btn.update()
 			gui.show_abilities(active_unit)
@@ -732,4 +736,5 @@ func add_to_unit_queue(unit: Unit, in_start=false):
 
 func write_info(text: String):
 	print("===> ", text)
-	gui.tactical_info.write(text)
+	if not _block_info:
+		gui.tactical_info.write(text)

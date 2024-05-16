@@ -87,6 +87,8 @@ func can_select(_node: Actor) -> bool:
 		return false
 	if not unit.visible:
 		return false
+	if unit.is_death():
+		return false
 	return get_map().get_relation(owner, unit) in apply_on
 
 func can_use():
