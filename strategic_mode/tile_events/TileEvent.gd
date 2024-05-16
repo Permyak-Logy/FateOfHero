@@ -24,5 +24,9 @@ func remove(_none = null):
 	if host:
 		host.remove_child(self)
 		removed.emit(self)
+		queue_free()
+		
+	else: 
+		print(" - ! problem: removing a TE outside the tree")
 
 

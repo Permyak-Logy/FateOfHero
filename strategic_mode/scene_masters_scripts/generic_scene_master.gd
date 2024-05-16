@@ -1,4 +1,4 @@
-class_name SMPuzzleMaster extends Node
+class_name SMPuzzleMaster extends Node2D
 
 """
 Контроллер для пазлов. Это очень стандартная логика
