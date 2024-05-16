@@ -623,7 +623,7 @@ expirience = SubResource("Resource_wwavn")
 position = Vector2(796, 305)
 
 [node name="Poludnisa" parent="." instance=ExtResource("16_sq65k")]
-position = Vector2(803, 253)
+position = Vector2(509, 229)
 health = SubResource("Resource_22t6d")
 defence = SubResource("Resource_7hea6")
 speed = SubResource("Resource_g480k")

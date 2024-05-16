@@ -17,6 +17,10 @@ func find_about_cells():
 			about_cells.append(_cell)
 
 func apply_on_unit(unit: Unit):
+	if unit.is_death():
+		return
+	if not unit.visible:
+		return
 	var d = unit.health.cur() * power.mul + power.add
 	get_map().write_info(
 		"=> Жрёт хп у " + unit.unit_name + "отнято " + str(int(d))
