@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3sox5r2j5fkr"]
+
+[ext_resource type="Script" path="res://external_puzzles/puzzles/safe_path/visp.gd" id="1_57m7f"]
+[ext_resource type="Texture2D" uid="uid://cei2yqd4op2f3" path="res://external_puzzles/puzzles/safe_path/ghostly_light.png" id="2_h33xx"]
+
+[node name="Visp" type="Node2D"]
+position = Vector2(8, 7)
+script = ExtResource("1_57m7f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = ExtResource("2_h33xx")
+hframes = 8

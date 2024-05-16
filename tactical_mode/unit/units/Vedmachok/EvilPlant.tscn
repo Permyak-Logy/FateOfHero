@@ -1,0 +1,356 @@
+[gd_scene load_steps=29 format=3 uid="uid://b1ley3wjjoisv"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/EvilPlant.gd" id="1_g78kk"]
+[ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_smu40"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_1oomm"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_pjk8i"]
+[ext_resource type="Resource" uid="uid://db5vwnunv2m3b" path="res://tactical_mode/unit/units/Vedmachok/res/EvilPlantA0.tres" id="5_l7ulv"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="6_etn73"]
+[ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="6_w1513"]
+[ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="8_e7cbv"]
+
+[sub_resource type="Resource" id="Resource_us7qo"]
+resource_local_to_scene = true
+script = ExtResource("2_smu40")
+base = 40.0
+cur = 40.0
+max_ = 40.0
+
+[sub_resource type="Resource" id="Resource_px43a"]
+resource_local_to_scene = true
+script = ExtResource("3_1oomm")
+mod_type = 0
+characteristic = SubResource("Resource_us7qo")
+
+[sub_resource type="Resource" id="Resource_pulf1"]
+resource_local_to_scene = true
+script = ExtResource("2_smu40")
+base = 0.0
+cur = 0.0
+max_ = 0.0
+
+[sub_resource type="Resource" id="Resource_aj3sk"]
+resource_local_to_scene = true
+script = ExtResource("3_1oomm")
+mod_type = 3
+characteristic = SubResource("Resource_pulf1")
+
+[sub_resource type="Resource" id="Resource_m8x7f"]
+resource_local_to_scene = true
+script = ExtResource("2_smu40")
+base = 80.0
+cur = 80.0
+max_ = 80.0
+
+[sub_resource type="Resource" id="Resource_cvhmw"]
+resource_local_to_scene = true
+script = ExtResource("3_1oomm")
+mod_type = 1
+characteristic = SubResource("Resource_m8x7f")
+
+[sub_resource type="Resource" id="Resource_pie3m"]
+resource_local_to_scene = true
+script = ExtResource("2_smu40")
+base = 10.0
+cur = 10.0
+max_ = 10.0
+
+[sub_resource type="Resource" id="Resource_thx8n"]
+resource_local_to_scene = true
+script = ExtResource("3_1oomm")
+mod_type = 2
+characteristic = SubResource("Resource_pie3m")
+
+[sub_resource type="Resource" id="Resource_4wda3"]
+resource_local_to_scene = true
+script = ExtResource("4_pjk8i")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Gradient" id="Gradient_1d3rw"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fop3k"]
+gradient = SubResource("Gradient_1d3rw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xnprx"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1000, 0)
+spread = 180.0
+initial_velocity_min = 29.09
+initial_velocity_max = 83.63
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_fop3k")
+
+[sub_resource type="Animation" id="Animation_14kou"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [29]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatProgressBar:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shadow:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GPUParticles2D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_o4gcn"]
+resource_name = "damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1), Color(1, 0, 0, 1), Color(0.966672, 1, 0.999604, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wmm14"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatProgressBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body:material:shader_parameter/outline_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4k388"]
+resource_name = "postattack"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [30, 29, 28]
+}
+
+[sub_resource type="Animation" id="Animation_lv3bu"]
+resource_name = "preattack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [28, 29, 30]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7mk7n"]
+_data = {
+"RESET": SubResource("Animation_14kou"),
+"damaged": SubResource("Animation_o4gcn"),
+"death": SubResource("Animation_wmm14"),
+"postattack": SubResource("Animation_4k388"),
+"preattack": SubResource("Animation_lv3bu")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ta4jk"]
+height = 40.0
+
+[node name="EvilPlant" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "animation_player", "for_flip_sprites")]
+y_sort_enabled = true
+scale = Vector2(1.4, 1.4)
+input_pickable = true
+script = ExtResource("1_g78kk")
+unit_name = "Злое растение"
+health = SubResource("Resource_px43a")
+defence = SubResource("Resource_aj3sk")
+speed = SubResource("Resource_cvhmw")
+damage = SubResource("Resource_thx8n")
+expirience = SubResource("Resource_4wda3")
+sprite_for_outline = NodePath("Body")
+health_bar_pb = NodePath("StatProgressBar")
+animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Body")]
+controlled_player = false
+expirience_on_kill = 5
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("5_l7ulv")])
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 1
+position = Vector2(-0.714286, -30)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_xnprx")
+explosiveness = 1.0
+
+[node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("6_w1513")
+position = Vector2(0, -19)
+texture = ExtResource("2_fmumf")
+hframes = 7
+vframes = 8
+frame = 29
+
+[node name="StatProgressBar" parent="." instance=ExtResource("6_etn73")]
+offset_left = -17.0
+offset_top = -38.0
+offset_right = 17.0
+offset_bottom = -36.0
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7mk7n")
+}
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -25)
+texture = ExtResource("8_e7cbv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.714286, -13.5714)
+shape = SubResource("CapsuleShape2D_ta4jk")
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

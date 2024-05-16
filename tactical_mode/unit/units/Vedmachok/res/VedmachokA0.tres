@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="AttackAbility" load_steps=4 format=3 uid="uid://fw2xki2sw3o6"]
+
+[ext_resource type="Script" path="res://tactical_mode/abilities/attack_ability.gd" id="1_1yhvs"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_s6xgy"]
+
+[sub_resource type="Resource" id="Resource_hxrvf"]
+script = ExtResource("1_s6xgy")
+add = 0.0
+mul = 1.0
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_1yhvs")
+distance = 1
+power = SubResource("Resource_hxrvf")
+targets = 1
+max_targets = 0
+apply_on = Array[int]([2])
+can_use_if_only_has_any_selectable_target = false
+acts = 1
+final_act = true
+cooldown = 0
+limit = 0
+consumable = false
+count = -1
+scaling_type = 2
+scaling_stat = 1
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 4
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Атака"
+russian_name = ""
+description = ""
+max_stack = 0
+price = 0

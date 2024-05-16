@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://nxw7br686d41"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_wqhwi"]
+[ext_resource type="Texture2D" uid="uid://cn4tdasgw8y2y" path="res://inventory/icons/wine.png" id="2_w6yb3"]
+
+[resource]
+script = ExtResource("1_wqhwi")
+relative_value = 0.95
+absolute_value = 0
+name = "wine"
+russian_name = "Вино"
+description = "Красное кисло-сладкое вино.
+Восстанавливает 95% максимального здоровья"
+texture = ExtResource("2_w6yb3")
+max_stack = 99
+price = 190

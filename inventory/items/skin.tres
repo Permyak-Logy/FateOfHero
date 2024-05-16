@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://doqtu33sxqbhu"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_8ps7f"]
+[ext_resource type="Texture2D" uid="uid://coeekbxmd1cq3" path="res://inventory/icons/skin.png" id="2_0l7aj"]
+
+[resource]
+script = ExtResource("1_8ps7f")
+name = ""
+russian_name = "Кожа"
+description = "Возможно в городе с помощью нее можно что-нибудь смастерить"
+texture = ExtResource("2_0l7aj")
+max_stack = 99
+price = 200

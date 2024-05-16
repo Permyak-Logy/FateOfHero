@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Gear" load_steps=9 format=3 uid="uid://1qbldvg8aoc3"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_fpp3x"]
+[ext_resource type="Script" path="res://inventory/gear.gd" id="1_vlwi2"]
+[ext_resource type="Texture2D" uid="uid://kpmduhvql2aj" path="res://inventory/gears/Scales/assets/Helmet_scales.png" id="2_qt7no"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_ykpv5"]
+
+[sub_resource type="Resource" id="Resource_vnp3l"]
+script = ExtResource("2_ykpv5")
+add = 250.0
+mul = 0.0
+
+[sub_resource type="Resource" id="Resource_ujxxu"]
+script = ExtResource("1_fpp3x")
+type = 0
+value = SubResource("Resource_vnp3l")
+
+[sub_resource type="Resource" id="Resource_gb2c6"]
+script = ExtResource("2_ykpv5")
+add = 10.0
+mul = 0.0
+
+[sub_resource type="Resource" id="Resource_hq5tx"]
+script = ExtResource("1_fpp3x")
+type = 1
+value = SubResource("Resource_gb2c6")
+
+[resource]
+script = ExtResource("1_vlwi2")
+type = 0
+_mods = Array[ExtResource("1_fpp3x")]([SubResource("Resource_ujxxu"), SubResource("Resource_hq5tx")])
+name = "Чешуйчатый шлем"
+russian_name = ""
+description = "Увеличивает скорость на 10 и здоровье на 250
+"
+texture = ExtResource("2_qt7no")
+max_stack = 1
+price = 500

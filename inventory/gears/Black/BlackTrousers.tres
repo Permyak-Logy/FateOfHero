@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Gear" load_steps=7 format=3 uid="uid://dtv54eujbs2l4"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_3ntv8"]
+[ext_resource type="Script" path="res://inventory/gear.gd" id="1_7xmvb"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_8xmfe"]
+[ext_resource type="Texture2D" uid="uid://duna0a7u2ak2c" path="res://inventory/gears/Black/assets/Trousers_black.png" id="2_ntlbb"]
+
+[sub_resource type="Resource" id="Resource_enpku"]
+script = ExtResource("2_8xmfe")
+add = 0.0
+mul = 0.5
+
+[sub_resource type="Resource" id="Resource_mtvmy"]
+script = ExtResource("1_3ntv8")
+type = 2
+value = SubResource("Resource_enpku")
+
+[resource]
+script = ExtResource("1_7xmvb")
+type = 3
+_mods = Array[ExtResource("1_3ntv8")]([SubResource("Resource_mtvmy")])
+name = "Штаны из чёрного камня"
+russian_name = ""
+description = "Увеличивает защиту на 50%"
+texture = ExtResource("2_ntlbb")
+max_stack = 1
+price = 700

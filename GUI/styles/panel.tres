@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://eve012771uwc"]
+
+[resource]
+bg_color = Color(0.827451, 0.52549, 0.372549, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.588235, 0.32549, 0.25098, 1)
+border_blend = true

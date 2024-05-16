@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5du08y0qxefc"]
+
+[ext_resource type="PackedScene" uid="uid://d17julguc6lr2" path="res://strategic_mode/tile_events/unwalkables/gate.tscn" id="1_m01y6"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/unwalkables/timed_gate.gd" id="2_8gxfk"]
+
+[node name="TimedGate" instance=ExtResource("1_m01y6")]
+script = ExtResource("2_8gxfk")
+open_time_start = 0
+open_time_end = 120

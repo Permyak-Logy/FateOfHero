@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwvwkfte82018"]
+
+[ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
+[ext_resource type="Script" path="res://strategic_mode/dialogues/Itto_first/f8.gd" id="2_dmo0k"]
+
+[node name="Option" instance=ExtResource("1_ae00h")]
+script = ExtResource("2_dmo0k")
+msg = "***"

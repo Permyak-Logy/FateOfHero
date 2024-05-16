@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="AttackAbility" load_steps=7 format=3 uid="uid://jmvxktk78bc6"]
+
+[ext_resource type="Script" path="res://tactical_mode/abilities/attack_ability.gd" id="1_1qnt3"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_2544i"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_ifxyi"]
+[ext_resource type="Texture2D" uid="uid://dfp6pw6jqp11v" path="res://tactical_mode/assets/AttackAbility.png" id="2_qg7dj"]
+
+[sub_resource type="Resource" id="Resource_ewhvc"]
+script = ExtResource("1_ifxyi")
+type = 4
+
+[sub_resource type="Resource" id="Resource_q0nyi"]
+script = ExtResource("1_2544i")
+add = 0.0
+mul = 1.0
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_1qnt3")
+distance = 1
+power = SubResource("Resource_q0nyi")
+targets = 1
+max_targets = 0
+apply_on = Array[int]([2])
+can_use_if_only_has_any_selectable_target = false
+acts = 1
+final_act = true
+cooldown = 0
+limit = 0
+consumable = false
+count = -1
+scaling_type = 2
+scaling_stat = 1
+overlay_atlas_coords = Vector2i(2, 0)
+only_unit_owner = true
+type = 4
+_mods = Array[ExtResource("1_ifxyi")]([SubResource("Resource_ewhvc")])
+name = "Атака"
+russian_name = ""
+description = "Атаковать выбранного противника в ближнем бою"
+texture = ExtResource("2_qg7dj")
+max_stack = 0
+price = 0

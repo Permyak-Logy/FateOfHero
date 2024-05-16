@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3oc0616pppep"]
+
+[ext_resource type="Script" path="res://GUI/tactical_mode/stat_progress_bar.gd" id="1_dc71v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bprg5"]
+bg_color = Color(0.294118, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2xs3"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="StatProgressBar" type="ProgressBar"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -22.0
+offset_top = -1.0
+offset_right = 22.0
+offset_bottom = 1.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bprg5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v2xs3")
+value = 50.0
+show_percentage = false
+script = ExtResource("1_dc71v")

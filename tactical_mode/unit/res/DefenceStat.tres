@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=4 format=3 uid="uid://cngkkj07qgi8"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="1_pm3eo"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="2_yedf4"]
+
+[sub_resource type="Resource" id="Resource_0edtn"]
+resource_local_to_scene = true
+script = ExtResource("1_pm3eo")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_yedf4")
+mod_type = 3
+characteristic = SubResource("Resource_0edtn")

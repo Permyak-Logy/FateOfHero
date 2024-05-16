@@ -1,0 +1,183 @@
+[gd_scene load_steps=19 format=3 uid="uid://blxk4ex3fpwq8"]
+
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/recipe_gui.gd" id="1_c3sk5"]
+[ext_resource type="PackedScene" uid="uid://douwpwsc16lq5" path="res://city_mode/Cities/crafting/recipe_slot.tscn" id="1_d288w"]
+[ext_resource type="Texture2D" uid="uid://15slnphedf6a" path="res://GUI/city_mode/plus.png" id="4_a1u47"]
+[ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="4_qptat"]
+[ext_resource type="Texture2D" uid="uid://skoxnfqn8d10" path="res://GUI/city_mode/eqw.png" id="5_t6y0p"]
+[ext_resource type="Texture2D" uid="uid://c5hv5y8ekxcry" path="res://GUI/city_mode/desctr.png" id="5_wcbb3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fblsw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43s2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tqifj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_us5h0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vw2fr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_72ced"]
+
+[sub_resource type="Theme" id="Theme_7g0g1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f13qm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0e5s3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tafv3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ml0p0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_plc14"]
+
+[node name="Recipe" type="HBoxContainer"]
+offset_right = 88.0
+offset_bottom = 40.0
+script = ExtResource("1_c3sk5")
+
+[node name="RecipeSlot" parent="." instance=ExtResource("1_d288w")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="RecipeSlot"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="RecipeSlot/NinePatchRect"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 33.0
+offset_bottom = 34.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+horizontal_alignment = 3
+vertical_alignment = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -9.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_a1u47")
+
+[node name="RecipeSlot2" parent="." instance=ExtResource("1_d288w")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="RecipeSlot2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="RecipeSlot2/NinePatchRect"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 33.0
+offset_bottom = 34.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+horizontal_alignment = 3
+vertical_alignment = 3
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_t6y0p")
+
+[node name="CraftResult2" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fblsw")
+
+[node name="back" type="Sprite2D" parent="CraftResult2"]
+show_behind_parent = true
+position = Vector2(24, 20)
+scale = Vector2(1.31818, 1.36364)
+texture = ExtResource("4_qptat")
+vframes = 2
+
+[node name="OpenDescription" type="Button" parent="CraftResult2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_type_variation = &"FlatButton"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_43s2h")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tqifj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_us5h0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vw2fr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_72ced")
+icon = ExtResource("5_wcbb3")
+
+[node name="CraftResult" type="Button" parent="."]
+visible = false
+light_mask = 0
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = SubResource("Theme_7g0g1")
+theme_type_variation = &"FlatButton"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_f13qm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0e5s3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tafv3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ml0p0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_plc14")
+disabled = true
+shortcut_in_tooltip = false
+icon_alignment = 1
+
+[node name="back" type="Sprite2D" parent="CraftResult"]
+show_behind_parent = true
+position = Vector2(20, 19)
+scale = Vector2(1.31818, 1.36364)
+texture = ExtResource("4_qptat")
+vframes = 2
+
+[node name="OpenDescription" type="Button" parent="CraftResult"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -19.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"FlatButton"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_43s2h")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tqifj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_us5h0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vw2fr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_72ced")
+icon = ExtResource("5_wcbb3")
+
+[connection signal="pressed" from="CraftResult2/OpenDescription" to="." method="_on_open_description_pressed"]
+[connection signal="pressed" from="CraftResult" to="." method="_on_craft_result_pressed"]
+[connection signal="pressed" from="CraftResult/OpenDescription" to="." method="_on_open_description_pressed"]

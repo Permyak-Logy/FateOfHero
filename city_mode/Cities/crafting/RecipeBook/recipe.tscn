@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://blxk4ex3fpwq8"]
+
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/recipe_gui.gd" id="1_aaros"]
+[ext_resource type="PackedScene" uid="uid://douwpwsc16lq5" path="res://city_mode/Cities/crafting/recipe_slot.tscn" id="2_wruki"]
+[ext_resource type="Texture2D" uid="uid://15slnphedf6a" path="res://GUI/city_mode/plus.png" id="3_684ar"]
+[ext_resource type="Texture2D" uid="uid://skoxnfqn8d10" path="res://GUI/city_mode/eqw.png" id="4_1u2ph"]
+[ext_resource type="Texture2D" uid="uid://c5hv5y8ekxcry" path="res://GUI/city_mode/desctr.png" id="5_4ysh1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvudg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_skxr0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35yh5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wjam"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ej26r"]
+
+[node name="recipe_GUI" type="HBoxContainer"]
+visible = false
+offset_right = 88.0
+offset_bottom = 40.0
+script = ExtResource("1_aaros")
+
+[node name="RecipeSlot" parent="." instance=ExtResource("2_wruki")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -9.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_684ar")
+
+[node name="RecipeSlot2" parent="." instance=ExtResource("2_wruki")]
+layout_mode = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_1u2ph")
+
+[node name="RecipeSlot3" parent="." instance=ExtResource("2_wruki")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="RecipeSlot3"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qvudg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_skxr0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_35yh5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4wjam")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ej26r")
+icon = ExtResource("5_4ysh1")
+
+[connection signal="pressed" from="RecipeSlot3/Button" to="." method="_on_button_pressed"]

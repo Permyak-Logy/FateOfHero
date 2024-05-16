@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://d3vripd5p5crh"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_ftkan"]
+[ext_resource type="Texture2D" uid="uid://dx4dxosc8bxov" path="res://inventory/icons/rune_8.png" id="2_tiaw4"]
+
+[resource]
+script = ExtResource("1_ftkan")
+name = "rune_8"
+russian_name = "Руна зла"
+description = "дрожит с энергией"
+texture = ExtResource("2_tiaw4")
+max_stack = 1
+price = 1000

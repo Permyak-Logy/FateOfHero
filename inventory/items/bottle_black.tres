@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=9 format=3 uid="uid://b740ckyrxhwfj"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_e665g"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_k6dut"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="3_la3ks"]
+[ext_resource type="Texture2D" uid="uid://bexjkhmi7opnt" path="res://inventory/icons/bottle_black.png" id="4_gm6b6"]
+[ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="6_tq7y7"]
+
+[sub_resource type="Resource" id="Resource_ihroq"]
+script = ExtResource("2_k6dut")
+add = 0.0
+mul = 0.2
+
+[sub_resource type="Resource" id="Resource_xc460"]
+script = ExtResource("1_e665g")
+type = 3
+value = SubResource("Resource_ihroq")
+
+[sub_resource type="Resource" id="Resource_yhyqj"]
+script = ExtResource("3_la3ks")
+on_stack = 0
+limit_stacks_for_sum_mods = -1
+moves = 3
+texture = ExtResource("4_gm6b6")
+mods = Array[ExtResource("1_e665g")]([SubResource("Resource_xc460")])
+destroy_on_death_instigator = true
+stackable = false
+effect_name = "Чёрная жижа"
+is_negative = false
+
+[resource]
+script = ExtResource("6_tq7y7")
+effect = SubResource("Resource_yhyqj")
+targets = 1
+max_targets = 0
+apply_on = Array[int]([0])
+can_use_if_only_has_any_selectable_target = true
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+consumable = false
+count = 0
+scaling_type = 4
+scaling_stat = 1
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 4
+_mods = Array[ExtResource("1_e665g")]([])
+name = "Чёрная жижа"
+russian_name = ""
+description = "+20% защиты на 3 хода"
+texture = ExtResource("4_gm6b6")
+max_stack = 10
+price = 250

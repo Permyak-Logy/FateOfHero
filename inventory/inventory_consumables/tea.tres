@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://cu4cqim7i4cux"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_um5da"]
+[ext_resource type="Texture2D" uid="uid://b7w4v3rwin6o4" path="res://inventory/icons/tea.png" id="2_c5s75"]
+
+[resource]
+script = ExtResource("1_um5da")
+relative_value = 0.2
+absolute_value = 0
+name = "peach tea"
+russian_name = "Персиковый Чай"
+description = "Чай, при заваривании которого использовались сушенные персики
+Восстанавливает 20% максимального здоровья"
+texture = ExtResource("2_c5s75")
+max_stack = 99
+price = 40

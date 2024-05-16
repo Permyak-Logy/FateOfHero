@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Gear" load_steps=3 format=3 uid="uid://d1ubpl1e8gkmh"]
+
+[ext_resource type="Script" path="res://inventory/gear.gd" id="1_qyj00"]
+[ext_resource type="Texture2D" uid="uid://c4ah7hgk03qka" path="res://inventory/gears/Black/assets/Boots_black.png" id="2_bxuo3"]
+
+[resource]
+script = ExtResource("1_qyj00")
+type = 3
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Ботинки из чёрного камня"
+russian_name = ""
+description = ""
+texture = ExtResource("2_bxuo3")
+max_stack = 1
+price = 700

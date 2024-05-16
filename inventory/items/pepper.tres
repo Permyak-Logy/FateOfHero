@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dp7v2ukib0ut1"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_fqu2w"]
+[ext_resource type="Texture2D" uid="uid://uq8trjnak82l" path="res://inventory/icons/pepper.png" id="2_s851d"]
+
+[resource]
+script = ExtResource("1_fqu2w")
+name = ""
+russian_name = "Перец"
+description = "Острый перец
+"
+texture = ExtResource("2_s851d")
+max_stack = 99
+price = 200

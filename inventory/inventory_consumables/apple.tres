@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://jgko6igthbun"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_rposf"]
+[ext_resource type="Texture2D" uid="uid://bw48glpfkyl7n" path="res://inventory/icons/apple.png" id="2_8vgnk"]
+
+[resource]
+script = ExtResource("1_rposf")
+relative_value = 0.0
+absolute_value = 5
+name = "apple"
+russian_name = "Яблоко"
+description = "Обычное спелое яблоко
+Восстанавливает 5 ед. здоровья"
+texture = ExtResource("2_8vgnk")
+max_stack = 100
+price = 50

@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="AttackWithEffectAbility" load_steps=10 format=3 uid="uid://bt80conpnoc8f"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_2uxkg"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="1_e6qu5"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_ic428"]
+[ext_resource type="Script" path="res://tactical_mode/abilities/attack_with_effect_ability.gd" id="1_xpbol"]
+[ext_resource type="Texture2D" uid="uid://b1aoxg6tjsqvq" path="res://tactical_mode/unit/units/Berserk/assets/Berserk_n2.png" id="2_npmud"]
+
+[sub_resource type="Resource" id="Resource_c5whw"]
+script = ExtResource("1_ic428")
+add = 0.0
+mul = -0.3
+
+[sub_resource type="Resource" id="Resource_8evsv"]
+script = ExtResource("1_2uxkg")
+type = 3
+value = SubResource("Resource_c5whw")
+
+[sub_resource type="Resource" id="Resource_81gtg"]
+script = ExtResource("1_e6qu5")
+on_stack = 3
+limit_stacks_for_sum_mods = -1
+moves = 1
+mods = Array[ExtResource("1_2uxkg")]([SubResource("Resource_8evsv")])
+destroy_on_death_instigator = true
+stackable = true
+effect_name = "Раскол брони"
+is_negative = true
+
+[sub_resource type="Resource" id="Resource_lg4qg"]
+script = ExtResource("1_ic428")
+add = 0.0
+mul = 2.0
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_xpbol")
+effect = SubResource("Resource_81gtg")
+distance = 1
+power = SubResource("Resource_lg4qg")
+targets = 1
+max_targets = 0
+apply_on = Array[int]([2])
+can_use_if_only_has_any_selectable_target = true
+acts = 1
+final_act = true
+cooldown = 4
+limit = 0
+consumable = false
+count = -1
+scaling_type = 2
+scaling_stat = 1
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 4
+_mods = Array[ExtResource("1_2uxkg")]([])
+name = "Таран"
+russian_name = ""
+description = "Наносит 2х кратный урон одной цели и накладывает раскол брони (-30% защиты)"
+texture = ExtResource("2_npmud")
+max_stack = 0
+price = 0

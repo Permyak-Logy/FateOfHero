@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b1hv1sghbyjh6"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_2t2bs"]
+[ext_resource type="Texture2D" uid="uid://b1wyj30e0uffq" path="res://inventory/icons/Body_billet.png" id="2_72uol"]
+
+[resource]
+script = ExtResource("1_2t2bs")
+name = "body_bill"
+russian_name = "Заготовка для нагрудника"
+description = "Возможно в городе с помощью нее можно что-нибудь смастерить"
+texture = ExtResource("2_72uol")
+max_stack = 5
+price = 1500

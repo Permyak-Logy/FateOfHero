@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Gear" load_steps=3 format=3 uid="uid://ces0l8s1yc40d"]
+
+[ext_resource type="Script" path="res://inventory/gear.gd" id="1_tmx8k"]
+[ext_resource type="Texture2D" uid="uid://bx157cs6u8ayc" path="res://inventory/gears/Scales/assets/Boots_scales.png" id="2_gamlf"]
+
+[resource]
+script = ExtResource("1_tmx8k")
+type = 3
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Чешуйчатые ботинки"
+russian_name = ""
+description = ""
+texture = ExtResource("2_gamlf")
+max_stack = 1
+price = 500

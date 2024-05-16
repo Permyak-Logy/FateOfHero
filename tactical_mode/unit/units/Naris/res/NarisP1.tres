@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ReplicateEffect" load_steps=7 format=3 uid="uid://ck7fh83303x0w"]
+
+[ext_resource type="Script" path="res://tactical_mode/effects/multiply_effect.gd" id="1_avptq"]
+[ext_resource type="Script" path="res://tactical_mode/effects/shield_effect.gd" id="2_ew2o5"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_yjibc"]
+[ext_resource type="PackedScene" uid="uid://da2shmx6hu6y1" path="res://tactical_mode/unit/units/Naris/VisualShieldEffect.tscn" id="3_oorwl"]
+
+[sub_resource type="Resource" id="Resource_glje6"]
+script = ExtResource("2_yjibc")
+add = 0.0
+mul = 0.1
+
+[sub_resource type="Resource" id="Resource_qh0vw"]
+script = ExtResource("2_ew2o5")
+power = SubResource("Resource_glje6")
+scaling_type = 0
+scaling_stat = 2
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = true
+stackable = true
+effect_name = "Щит"
+is_negative = false
+visual_effect = ExtResource("3_oorwl")
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_avptq")
+to_replicate_effect = SubResource("Resource_qh0vw")
+apply_to = Array[int]([1, 0])
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Грязный щит"
+is_negative = false

@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://dly11cs48am3l"]
+
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_r287j"]
+[ext_resource type="Script" path="res://GUI/tactical_mode/TacticalInfo.gd" id="2_b887j"]
+
+[node name="TacticalInfo" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+theme = ExtResource("1_r287j")
+script = ExtResource("2_b887j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+theme_override_font_sizes/normal_font_size = 9
+text = "=>
+=>
+=>
+=>
+=>
+=>
+=>
+
+"
+scroll_following = true

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://dkuujrdq3m16y"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_srg1l"]
+[ext_resource type="Texture2D" uid="uid://cux6oilptvcq" path="res://inventory/icons/fish.png" id="2_3moau"]
+
+[resource]
+script = ExtResource("1_srg1l")
+relative_value = 0.0
+absolute_value = 80 
+name = "fish"
+russian_name = "Рыба"
+description = "Восстанавливает 80 ед. здоровья"
+texture = ExtResource("2_3moau")
+max_stack = 99
+price = 80

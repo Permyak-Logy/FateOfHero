@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://03eoa6vymydn"]
+
+[ext_resource type="Script" path="res://city_mode/Cities/trading/sale_slot.gd" id="1_oqnyj"]
+[ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="2_cpgeo"]
+
+[node name="SaleSlot" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 20)
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_oqnyj")
+
+[node name="back" type="Sprite2D" parent="."]
+position = Vector2(10, 11)
+scale = Vector2(1, 1)
+texture = ExtResource("2_cpgeo")
+vframes = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 19.0
+offset_bottom = 20.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

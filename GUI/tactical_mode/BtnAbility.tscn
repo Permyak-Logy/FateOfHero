@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://k1m48ayhuf51"]
+
+[ext_resource type="Script" path="res://GUI/tactical_mode/BtnAbility.gd" id="1_twa4s"]
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/dialogue/dialogue_gui_theme.tres" id="1_wlk5j"]
+
+[sub_resource type="SystemFont" id="SystemFont_k17c6"]
+
+[node name="BtnAbility" type="Button"]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 57.0
+offset_bottom = 38.0
+theme = ExtResource("1_wlk5j")
+theme_type_variation = &"FlatButton"
+theme_override_fonts/font = SubResource("SystemFont_k17c6")
+toggle_mode = true
+text = "X.0"
+script = ExtResource("1_twa4s")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=5 format=3 uid="uid://i58s8hni5ajs"]
+
+[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="1_f1qcy"]
+[ext_resource type="Resource" uid="uid://dqdvaxckrca60" path="res://inventory/items/egg.tres" id="3_h8o81"]
+[ext_resource type="Resource" uid="uid://bpucxqd3g08kp" path="res://inventory/items/bottle_yellow.tres" id="4_3k234"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/recipes/recipe.gd" id="5_13o4c"]
+
+[resource]
+script = ExtResource("5_13o4c")
+ingredients_item = Array[Resource("res://inventory/item.gd")]([ExtResource("1_f1qcy"), ExtResource("3_h8o81")])
+ingredients_num = Array[int]([1, 1])
+product = ExtResource("4_3k234")
+is_known = false

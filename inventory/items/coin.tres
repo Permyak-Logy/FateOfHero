@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dwhtjpp4dsb7d"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_awnyd"]
+[ext_resource type="Texture2D" uid="uid://bhbtjmc4gb6yh" path="res://inventory/icons/coin.png" id="2_pbkp4"]
+
+[resource]
+script = ExtResource("1_awnyd")
+name = "Coin"
+russian_name = "Монетка"
+description = "Монета из чистого (не совсем) золота. Имеет ценность на всём континенте"
+texture = ExtResource("2_pbkp4")
+max_stack = 999
+price = 1

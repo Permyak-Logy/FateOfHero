@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=9 format=3 uid="uid://is7yr1qn3gxi"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_nl8v8"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_ala56"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="3_akqo6"]
+[ext_resource type="Texture2D" uid="uid://cdqukvrhlwfli" path="res://inventory/icons/bottle_green.png" id="4_62khd"]
+[ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="7_djaid"]
+
+[sub_resource type="Resource" id="Resource_58s61"]
+script = ExtResource("2_ala56")
+add = 0.0
+mul = 0.2
+
+[sub_resource type="Resource" id="Resource_l631m"]
+script = ExtResource("1_nl8v8")
+type = 2
+value = SubResource("Resource_58s61")
+
+[sub_resource type="Resource" id="Resource_mskdt"]
+script = ExtResource("3_akqo6")
+on_stack = 0
+limit_stacks_for_sum_mods = -1
+moves = 3
+texture = ExtResource("4_62khd")
+mods = Array[ExtResource("1_nl8v8")]([SubResource("Resource_l631m")])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Жижа зелёная"
+is_negative = false
+
+[resource]
+script = ExtResource("7_djaid")
+effect = SubResource("Resource_mskdt")
+targets = 1
+max_targets = 0
+apply_on = Array[int]([0])
+can_use_if_only_has_any_selectable_target = true
+acts = 0
+final_act = false
+cooldown = 0
+limit = 0
+consumable = false
+count = 0
+scaling_type = 4
+scaling_stat = 1
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 4
+_mods = Array[ExtResource("1_nl8v8")]([])
+name = "Жижа зелёная"
+russian_name = ""
+description = "+20% атаки на 3 хода"
+texture = ExtResource("4_62khd")
+max_stack = 10
+price = 250

@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c3kwn6d20ipja"]
+
+[ext_resource type="StyleBox" uid="uid://cbtpodd5tuolv" path="res://GUI/styles/button_style_flat_pressed.tres" id="1_oru5m"]
+[ext_resource type="StyleBox" uid="uid://b4a2bmlcq1x1q" path="res://GUI/styles/button_style_flat_normal.tres" id="2_jcy74"]
+[ext_resource type="StyleBox" uid="uid://eve012771uwc" path="res://GUI/styles/panel.tres" id="3_jsako"]
+
+[sub_resource type="SystemFont" id="SystemFont_ddgfa"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_hknur"]
+color = Color(1, 0.678431, 0.364706, 1)
+grow_begin = 20.0
+grow_end = 20.0
+thickness = 2
+
+[resource]
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 1
+Button/fonts/font = SubResource("SystemFont_ddgfa")
+Button/styles/focus = null
+Button/styles/hover = ExtResource("2_jcy74")
+Button/styles/normal = ExtResource("2_jcy74")
+Button/styles/pressed = ExtResource("1_oru5m")
+HSeparator/styles/separator = SubResource("StyleBoxLine_hknur")
+Normal/base_type = &"Button"
+Panel/styles/panel = ExtResource("3_jsako")

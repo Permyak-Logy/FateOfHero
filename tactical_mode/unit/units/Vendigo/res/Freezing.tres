@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="TempEffect" load_steps=7 format=3 uid="uid://di26rc20mgjo"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_wiuta"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_effect.gd" id="1_wkxoy"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_j5ynv"]
+[ext_resource type="PackedScene" uid="uid://bjtwnj3cmuhcy" path="res://tactical_mode/assets/effects/BlueEffect.tscn" id="4_4frqi"]
+
+[sub_resource type="Resource" id="Resource_gsuud"]
+script = ExtResource("2_j5ynv")
+add = 0.0
+mul = -0.01
+
+[sub_resource type="Resource" id="Resource_e66lu"]
+script = ExtResource("1_wiuta")
+type = 1
+value = SubResource("Resource_gsuud")
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_wkxoy")
+on_stack = 3
+limit_stacks_for_sum_mods = 10
+moves = 3
+mods = Array[ExtResource("1_wiuta")]([SubResource("Resource_e66lu")])
+destroy_on_death_instigator = true
+stackable = true
+effect_name = "Замерзание"
+is_negative = true
+visual_effect = ExtResource("4_4frqi")

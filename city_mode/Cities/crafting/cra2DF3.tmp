@@ -1,0 +1,269 @@
+[gd_scene load_steps=9 format=3 uid="uid://cd1lm7663kkqk"]
+
+[ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_niwie"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/crafting_main.gd" id="1_xhsmd"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/inventoryGrid.gd" id="2_qqhid"]
+[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="4_fb2xi"]
+[ext_resource type="PackedScene" uid="uid://dmkyu0kpc2o6b" path="res://city_mode/Cities/crafting/RecipeBook/recipe_book.tscn" id="5_cj3hw"]
+[ext_resource type="PackedScene" uid="uid://d4lrybm6yo1ub" path="res://city_mode/Cities/trading/crafting_slot.tscn" id="5_cpway"]
+[ext_resource type="PackedScene" uid="uid://ptqgke0gbms0" path="res://city_mode/Cities/crafting/CraftingTable/crafting_table.tscn" id="5_k2nd8"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/description.gd" id="18_vsba0"]
+
+[node name="crafting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1336.0
+offset_top = 744.0
+offset_right = -479.0
+offset_bottom = -226.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xhsmd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -727.5
+offset_top = -396.0
+offset_right = -223.5
+offset_bottom = -256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="inventory" type="NinePatchRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(256, 140)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_niwie")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="inventoryGrid" type="GridContainer" parent="HBoxContainer/inventory"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -58.0
+offset_right = 118.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 10
+script = ExtResource("2_qqhid")
+inventory = ExtResource("4_fb2xi")
+
+[node name="CraftingSlot" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot2" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot3" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot4" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot5" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot6" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot7" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot8" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot9" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot10" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot11" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot12" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot13" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot14" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot15" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot16" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot17" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot18" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot19" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot20" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot21" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot22" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot23" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot24" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot25" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot26" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot27" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot28" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot29" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot30" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot31" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot32" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot33" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot34" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot35" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot36" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot37" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot38" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot39" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot40" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot41" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot42" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot43" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot44" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot45" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot46" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot47" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot48" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot49" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="CraftingSlot50" parent="HBoxContainer/inventory/inventoryGrid" instance=ExtResource("5_cpway")]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 140)
+layout_mode = 2
+
+[node name="Crafting_table" parent="HBoxContainer/NinePatchRect" instance=ExtResource("5_k2nd8")]
+layout_mode = 2
+offset_left = 3.0
+offset_top = 49.0
+offset_right = 103.0
+offset_bottom = 90.0
+
+[node name="Recipes" type="NinePatchRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+
+[node name="RecipeBook" parent="HBoxContainer/Recipes" instance=ExtResource("5_cj3hw")]
+layout_mode = 2
+offset_left = -14.0
+offset_top = -25.0
+offset_right = 126.0
+offset_bottom = 149.0
+size_flags_horizontal = 4
+
+[node name="description" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -573.0
+offset_top = -194.0
+offset_right = -173.0
+offset_bottom = -130.0
+texture = ExtResource("1_niwie")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("18_vsba0")
+
+[node name="Label" type="Label" parent="description"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -24.0
+offset_right = 192.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

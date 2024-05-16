@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=5 format=3 uid="uid://bkc7bjej0aoxe"]
+
+[ext_resource type="Resource" uid="uid://b1hv1sghbyjh6" path="res://inventory/items/body_billet.tres" id="1_bk6pg"]
+[ext_resource type="Resource" uid="uid://doqtu33sxqbhu" path="res://inventory/items/skin.tres" id="2_7nkdd"]
+[ext_resource type="Resource" uid="uid://c85yiumr1q5l1" path="res://inventory/gears/Scales/ScalesBody.tres" id="3_8lyqd"]
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/RecipeBook/recipes/recipe.gd" id="4_qeksm"]
+
+[resource]
+script = ExtResource("4_qeksm")
+ingredients_item = Array[Resource("res://inventory/item.gd")]([ExtResource("1_bk6pg"), ExtResource("2_7nkdd")])
+ingredients_num = Array[int]([1, 5])
+product = ExtResource("3_8lyqd")
+is_known = false

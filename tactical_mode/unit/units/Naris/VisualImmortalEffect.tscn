@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://sni3dotp4kpt"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Naris/src/VisualShieldEffect.gd" id="1_kahvs"]
+[ext_resource type="Texture2D" uid="uid://qpgbboedl63p" path="res://tactical_mode/unit/units/Naris/assets/shield_v2.png" id="2_duxsq"]
+
+[sub_resource type="Animation" id="Animation_5jpm3"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.376471)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m24nb"]
+_data = {
+"idle": SubResource("Animation_5jpm3")
+}
+
+[node name="VisualImmortalEffect" type="Node2D" node_paths=PackedStringArray("anim")]
+script = ExtResource("1_kahvs")
+anim = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_m24nb")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.606125)
+position = Vector2(-1, -24)
+texture = ExtResource("2_duxsq")

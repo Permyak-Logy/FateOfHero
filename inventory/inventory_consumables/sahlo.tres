@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://dtnyuu7lu71w4"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_0nl2p"]
+[ext_resource type="Texture2D" uid="uid://b1yrxko1f1tu1" path="res://inventory/icons/sahlo.png" id="2_vu6ng"]
+
+[resource]
+script = ExtResource("1_0nl2p")
+relative_value = 0.0
+absolute_value = 100
+name = "lard"
+russian_name = "Сало"
+description = "Жирный кусок сала
+Восстанавливает 100 ед. здоровья"
+texture = ExtResource("2_vu6ng")
+max_stack = 99
+price = 100

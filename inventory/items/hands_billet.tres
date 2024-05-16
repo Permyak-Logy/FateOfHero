@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://d1vtypma231eg"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_ywaeh"]
+[ext_resource type="Texture2D" uid="uid://ftugas85chhn" path="res://inventory/icons/Hands_billet.png" id="2_3vwc8"]
+
+[resource]
+script = ExtResource("1_ywaeh")
+name = "hands_bill"
+russian_name = "Загатовка для наручей"
+description = "Возможно в городе с помощью нее можно что-нибудь смастерить"
+texture = ExtResource("2_3vwc8")
+max_stack = 1
+price = 1000

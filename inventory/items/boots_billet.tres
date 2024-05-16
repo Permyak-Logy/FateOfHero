@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b7ko7srrw2av6"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_kq76t"]
+[ext_resource type="Texture2D" uid="uid://c4yv52yqkn1tx" path="res://inventory/icons/Boots_billet.png" id="2_mhmfn"]
+
+[resource]
+script = ExtResource("1_kq76t")
+name = "boots_bill"
+russian_name = "Заготовка для ботинков"
+description = "Возможно в городе с помощью нее можно что-нибудь смастерить"
+texture = ExtResource("2_mhmfn")
+max_stack = 1
+price = 5000
