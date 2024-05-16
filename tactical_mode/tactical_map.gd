@@ -503,7 +503,6 @@ func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
 	if not _astar_walkable.has_cell(map_coords):
 		return []
 	if not _astar_walkable.has_cell(active_unit.get_cell()):
-		assert(false, "what 2?!")
 		return []
 	var path = _astar_walkable.get_id_path(
 			_astar_walkable.mti(active_unit.get_cell()),
