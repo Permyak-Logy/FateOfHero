@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bblkjee3ug4bq"]
 
-[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
+[ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
 [ext_resource type="Resource" path="res://strategic_mode/dialogues/Itto_first/i6.tres" id="1_lpq1w"]
 
 [node name="Option" instance=ExtResource("1_ae00h")]
-msg = "Знаешь, что я понял? Быть воином - это великая честь!Здесь сладостно всё\nот кровина руках, заканчивая ощущением боли ран."
+msg = "Знаешь, что я понял? Быть воином - 
+это великая честь! Здесь сладостно 
+всё: от кровина руках, 
+до ощущениия боли ран."
 next_dialogue = ExtResource("1_lpq1w")

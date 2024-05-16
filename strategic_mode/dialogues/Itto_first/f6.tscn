@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://d3dfpy0bt7wt7"]
 
-[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
+[ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
 [ext_resource type="Resource" path="res://strategic_mode/dialogues/Itto_first/i7.tres" id="1_lpq1w"]
 
 [node name="Option" instance=ExtResource("1_ae00h")]

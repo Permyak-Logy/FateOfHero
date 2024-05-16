@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://b4coo8mdkbh4x"]
 
-[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
-[ext_resource type="Resource" path="res://strategic_mode/dialogues/Bereta_Cave/i4.tres" id="1_lpq1w"]
+[ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
+[ext_resource type="Script" path="res://strategic_mode/dialogues/Bereta_Cave/f3.gd" id="2_skjc8"]
 
 [node name="Option" instance=ExtResource("1_ae00h")]
+script = ExtResource("2_skjc8")
 msg = "Лады..."
-next_dialogue = ExtResource("1_lpq1w")
