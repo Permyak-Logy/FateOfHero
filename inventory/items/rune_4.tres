@@ -7,7 +7,7 @@
 script = ExtResource("1_ftkan")
 name = "rune_4"
 russian_name = "Руна водовота"
-description = ""
+description = "дрожит с энергией"
 texture = ExtResource("2_tiaw4")
 max_stack = 1
 price = 1000

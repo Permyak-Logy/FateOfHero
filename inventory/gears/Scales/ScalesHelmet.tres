@@ -31,7 +31,8 @@ type = 0
 _mods = Array[ExtResource("1_fpp3x")]([SubResource("Resource_ujxxu"), SubResource("Resource_hq5tx")])
 name = "Чешуйчатый шлем"
 russian_name = ""
-description = ""
+description = "Увеличивает скорость на 10 и здоровье на 250
+"
 texture = ExtResource("2_qt7no")
 max_stack = 1
 price = 500
