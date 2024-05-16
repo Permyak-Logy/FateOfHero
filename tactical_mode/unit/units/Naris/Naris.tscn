@@ -475,21 +475,21 @@ percent_between_target = 1.0
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("12_n6er6")
-position = Vector2(1, -26)
 texture = ExtResource("1_n5uvs")
+offset = Vector2(0, -27)
 hframes = 15
 
 [node name="AttackTrail" type="Sprite2D" parent="Body"]
 visible = false
 z_index = 1
-position = Vector2(0, 1)
 texture = ExtResource("11_oynup")
+offset = Vector2(0, -27)
 hframes = 4
 
 [node name="Shadow" type="Sprite2D" parent="Body"]
 z_index = -1
-position = Vector2(0, 3)
 texture = ExtResource("12_br34b")
+offset = Vector2(0, -24)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1

@@ -560,7 +560,7 @@ anchor_mode = 0
 [node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
 
 [node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
-position = Vector2(126, 422)
+position = Vector2(127, 427)
 inventory = SubResource("Resource_23mrv")
 health = SubResource("Resource_engs8")
 defence = SubResource("Resource_mb28j")
@@ -578,7 +578,7 @@ damage = SubResource("Resource_p0rpr")
 expirience = SubResource("Resource_hisbe")
 
 [node name="SmolItto" parent="." instance=ExtResource("12_e7e7b")]
-position = Vector2(129, 239)
+position = Vector2(128, 231)
 inventory = SubResource("Resource_7hdn2")
 health = SubResource("Resource_7yvpb")
 defence = SubResource("Resource_iyj7q")
@@ -587,7 +587,7 @@ damage = SubResource("Resource_00vg8")
 expirience = SubResource("Resource_e1hbj")
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(126, 330)
+position = Vector2(127, 328)
 inventory = SubResource("Resource_k4p1i")
 health = SubResource("Resource_vpvh8")
 defence = SubResource("Resource_vhoup")
@@ -620,10 +620,10 @@ damage = SubResource("Resource_anygu")
 expirience = SubResource("Resource_wwavn")
 
 [node name="Skeleton" parent="." instance=ExtResource("17_rqd6n")]
-position = Vector2(796, 305)
+position = Vector2(801, 257)
 
 [node name="Poludnisa" parent="." instance=ExtResource("16_sq65k")]
-position = Vector2(509, 229)
+position = Vector2(545, 208)
 health = SubResource("Resource_22t6d")
 defence = SubResource("Resource_7hea6")
 speed = SubResource("Resource_g480k")
@@ -648,7 +648,7 @@ position = Vector2(453, 280)
 position = Vector2(638, 331)
 
 [node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(386, 233)
+position = Vector2(350, 208)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_nmmmq")

@@ -7,10 +7,10 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_tle5d"]
 [ext_resource type="Resource" uid="uid://c4l247aylu587" path="res://tactical_mode/unit/res/Expirience.tres" id="4_sme2v"]
 [ext_resource type="Resource" uid="uid://duguqh2qdcele" path="res://tactical_mode/unit/units/Lugozavr/res/LugozavrA0.tres" id="5_arnth"]
-[ext_resource type="Texture2D" uid="uid://b45l2fsxtf6v6" path="res://tactical_mode/assets/Big_Shadow.png" id="6_mmnq8"]
 [ext_resource type="Resource" uid="uid://dx3xbtvtvreat" path="res://tactical_mode/unit/units/Lugozavr/res/LugozavrA1.tres" id="6_y8n8d"]
 [ext_resource type="Texture2D" uid="uid://dc1ja8nxxejlk" path="res://tactical_mode/unit/units/Lugozavr/assets/run.png" id="7_4pkcg"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="8_v1wg6"]
+[ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="9_vphu6"]
 
 [sub_resource type="Resource" id="Resource_v41ox"]
 resource_local_to_scene = true
@@ -605,20 +605,20 @@ private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResour
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("8_v1wg6")
-position = Vector2(-2, -24)
 texture = ExtResource("2_4p48e")
+offset = Vector2(0, -25)
 hframes = 7
 vframes = 8
 
 [node name="Shadow" type="Sprite2D" parent="Body"]
 z_index = -1
-position = Vector2(2, -2)
-scale = Vector2(0.429688, 0.53125)
-texture = ExtResource("6_mmnq8")
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("9_vphu6")
+offset = Vector2(2, -24)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
-position = Vector2(-2, -23)
+position = Vector2(1, -23)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_hyl62")
 texture = ExtResource("7_4pkcg")

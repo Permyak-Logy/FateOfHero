@@ -32,4 +32,6 @@ func can_select(_node):
 		return false
 	if not unit.health:
 		return false
+	if unit.health.percent() == 1:
+		return false
 	return true

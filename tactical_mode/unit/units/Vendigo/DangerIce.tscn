@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vendigo/src/DangerIce.gd" id="1_ppwbo"]
 
 [node name="DangerIce" type="Node2D" node_paths=PackedStringArray("sprite")]
-z_index = -1
+z_index = -2
 script = ExtResource("1_ppwbo")
 sprite = NodePath("Sprite2D")
 

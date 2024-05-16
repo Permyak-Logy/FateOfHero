@@ -209,7 +209,6 @@ func idle_direction_bool():
 	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
-	print(unit_name, " play ", _name, " ", _params)
 	if is_death() and not _name.begins_with("death"):
 		return
 	if _name == "walk":
