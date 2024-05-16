@@ -10,5 +10,4 @@ russian_name = "Загатовка для наручей"
 description = ""
 texture = ExtResource("2_3vwc8")
 max_stack = 1
-recipe = Array[ExtResource("1_ywaeh")]([])
 price = 1000

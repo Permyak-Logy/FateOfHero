@@ -7,8 +7,7 @@
 script = ExtResource("1_2475y")
 name = "tincture"
 russian_name = "Настойка из корней"
-description = ""
+description = "Хилл 50%"
 texture = ExtResource("2_vuplv")
 max_stack = 99
-recipe = Array[ExtResource("1_2475y")]([])
-price = 50
+price = 100

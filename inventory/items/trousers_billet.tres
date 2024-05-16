@@ -7,8 +7,7 @@
 script = ExtResource("1_vfgjg")
 name = "trousers_bill"
 russian_name = "Заготовка для штанов"
-description = ""
+description = "Заготовка для штанов"
 texture = ExtResource("2_nycfu")
-max_stack = 1
-recipe = Array[ExtResource("1_vfgjg")]([])
-price = 1000
+max_stack = 5
+price = 1500

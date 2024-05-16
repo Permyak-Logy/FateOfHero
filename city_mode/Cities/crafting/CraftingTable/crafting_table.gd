@@ -30,17 +30,20 @@ var res_item : Item = null:
 			texture_rect.texture = res_item.texture
 			label.text = ""
 		elif value != null:
+			texture_rect.texture = null
 			label.text = "?"
 		else:
 			texture_rect.texture = null
 
 func _ready():
 	check()
+
+func check():
+	av_recipes = []
 	for i in range(recipes.Recipes.size()):
 		if global_inventory.recipes_known[i]:
 			av_recipes.append(recipes.Recipes[i])
-
-func check():
+	#print(av_recipes)
 	res_button.disabled = true
 	res_back.frame = 0
 	label.text = ""
@@ -49,6 +52,7 @@ func check():
 	stack1 = craft_slot1.stack
 	stack2 = craft_slot2.stack
 	if item1 != null and item2 != null and inventory_grid.free_slots() >= 1 and inventory_grid.free_slots() != 0:
+		#res_item = null
 		res_button.disabled = false
 		res_back.frame = 1
 		label.text = "?"
@@ -57,28 +61,32 @@ func check():
 			var cond1 = (item1 == i.ingredients_item[0] and item2 == i.ingredients_item[1]) or (item1 == i.ingredients_item[1] and item2 == i.ingredients_item[0])
 			var cond2 = (stack1 >= i.ingredients_num[0] and stack2 >= i.ingredients_num[1]) or (stack1 >= i.ingredients_num[1] and stack2 >= i.ingredients_num[0])
 			if cond1 and cond2:
-				res_item = i.product
-				recipe = i
 				recipe_idx = count
 				is_known = global_inventory.recipes_known[recipe_idx]
+				#print(is_known)
+				res_item = i.product
+				recipe = i
 				return
 			count += 1
 	res_item = null
 
 func _on_result_pressed():
-	craft_slot1.stack -= 1
-	if craft_slot1.stack == 0:
-		craft_slot1.item = null
-	craft_slot2.stack -= 1
-	if craft_slot2.stack == 0:
-		craft_slot2.item = null
 	if res_item != null:
+		craft_slot1.stack -= recipe.ingredients_num[0]
+		craft_slot2.stack -= recipe.ingredients_num[1]
 		global_inventory.insert(res_item, 1)
 		inventory_grid.update()
 		if !is_known:
 			#recipe.is_known = true
 			global_inventory.open_recipe(recipe_idx)
 			$"../../Recipes/RecipeBook".update()
+	else:
+		craft_slot1.stack -= 1
+		craft_slot2.stack -= 1
+	if craft_slot1.stack == 0:
+		craft_slot1.item = null
+	if craft_slot2.stack == 0:
+		craft_slot2.item = null
 	check()
 
 func remove_item(item):

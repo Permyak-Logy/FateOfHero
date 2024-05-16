@@ -46,6 +46,8 @@ func _can_drop_data(_pos, data):
 	return data is CraftSlot
  
 func _drop_data(_at_position, data):
+	var crafting_table = $"../../../NinePatchRect/Crafting_table"
 	$"..".inventory.insert(data.item, 1)
-	$"../../../NinePatchRect/Crafting_table".remove_item(data.item)
+	crafting_table.remove_item(data.item)
+	crafting_table.check()
 	$"..".update()

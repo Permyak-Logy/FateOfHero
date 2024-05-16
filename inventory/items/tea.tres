@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cu4cqim7i4cux"]
 
 [ext_resource type="Script" path="res://inventory/item.gd" id="1_um5da"]
-[ext_resource type="Texture2D" path="res://inventory/icons/tea.png" id="2_c5s75"]
+[ext_resource type="Texture2D" uid="uid://b7w4v3rwin6o4" path="res://inventory/icons/tea.png" id="2_c5s75"]
 
 [resource]
 script = ExtResource("1_um5da")
 name = "peach tea"
 russian_name = "Персиковый Чай"
-description = ""
+description = "Хилл 20%"
 texture = ExtResource("2_c5s75")
 max_stack = 99
-recipe = Array[ExtResource("1_um5da")]([])
-price = 50
+price = 40

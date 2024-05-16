@@ -10,5 +10,4 @@ russian_name = "Монетка"
 description = ""
 texture = ExtResource("2_pbkp4")
 max_stack = 999
-recipe = Array[ExtResource("1_awnyd")]([])
-price = 0
+price = 1

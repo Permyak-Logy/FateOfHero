@@ -5,15 +5,15 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_pipbc"]
 [ext_resource type="Texture2D" uid="uid://cupu1inpjfyx8" path="res://inventory/gears/Black/assets/Body_black.png" id="2_wtgcs"]
 
-[sub_resource type="Resource" id="Resource_4w84e"]
+[sub_resource type="Resource" id="Resource_2auo2"]
 script = ExtResource("2_pipbc")
-add = 1e+08
-mul = 1000.0
+add = 0.0
+mul = 0.5
 
 [sub_resource type="Resource" id="Resource_00mgp"]
 script = ExtResource("1_vta46")
-type = 2
-value = SubResource("Resource_4w84e")
+type = 3
+value = SubResource("Resource_2auo2")
 
 [resource]
 script = ExtResource("1_yev0k")
@@ -24,4 +24,4 @@ russian_name = ""
 description = ""
 texture = ExtResource("2_wtgcs")
 max_stack = 1
-price = 0
+price = 700

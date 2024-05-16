@@ -2,14 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="1_e4cd5"]
 [ext_resource type="Script" path="res://city_mode/Cities/crafting/CraftingTable/craft_slot.gd" id="1_j4yat"]
-[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="2_2mk3b"]
 
 [node name="CraftSlot" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0)
 offset_right = 21.0
 offset_bottom = 23.0
 script = ExtResource("1_j4yat")
-global_inventory = ExtResource("2_2mk3b")
 
 [node name="Back" type="Sprite2D" parent="."]
 position = Vector2(10.6875, 11.75)

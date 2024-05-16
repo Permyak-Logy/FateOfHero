@@ -22,7 +22,7 @@ func update():
 	for i in range(recipes.Recipes.size()):
 		if inventory.recipes_known[i]:
 			av_recipes.append(recipes.Recipes[i])
-	print(av_recipes)
+	#print(av_recipes)
 	if av_recipes.size() == 0:
 		page1.visible = false
 		$Recipes/Label.visible = true

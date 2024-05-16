@@ -7,8 +7,7 @@
 script = ExtResource("1_1hnnd")
 name = "courgette caviar"
 russian_name = "Кабачковая Икра"
-description = ""
+description = "Хилл 30 ед."
 texture = ExtResource("2_vf2nw")
 max_stack = 99
-recipe = Array[ExtResource("1_1hnnd")]([])
 price = 50
