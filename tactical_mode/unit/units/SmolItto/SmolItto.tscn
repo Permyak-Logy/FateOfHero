@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bjcjl3qla8b62"]
+[gd_scene load_steps=33 format=3 uid="uid://bjcjl3qla8b62"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_mm6vi"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_3pi2g"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://bu3x836fsv2io" path="res://tactical_mode/unit/units/SmolItto/res/IttoP1.tres" id="9_eelbm"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="10_rk873"]
 [ext_resource type="Texture2D" uid="uid://b5fjt17hsio3k" path="res://tactical_mode/unit/units/SmolItto/assets/Run.png" id="11_hqwuc"]
+[ext_resource type="Resource" uid="uid://cx0kko3n1c2nj" path="res://tactical_mode/unit/units/SmolItto/res/IttoA3.tres" id="11_mqo5s"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="12_hexa5"]
 [ext_resource type="Texture2D" uid="uid://c377myww2iiv0" path="res://tactical_mode/unit/units/SmolItto/assets/attack_trail.png" id="15_2of5b"]
 
@@ -403,7 +404,7 @@ health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
 for_flip_sprites = [NodePath("Body"), NodePath("Body/AttackTrail")]
 acts_count = 2
-private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_iu0w4"), ExtResource("7_h74hq"), ExtResource("8_4c6l0")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_iu0w4"), ExtResource("7_h74hq"), ExtResource("8_4c6l0"), ExtResource("11_mqo5s")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_eelbm")])
 
 [node name="Body" type="Sprite2D" parent="."]

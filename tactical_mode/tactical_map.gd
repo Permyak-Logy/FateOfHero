@@ -87,7 +87,7 @@ func _ready():
 		
 	_p_units = [$Berserk, $Vamp, $SmolItto, $Naris]
 	
-	_e_units = [$Vedmachok, $Lugozavr, $Vendigo, $Skeleton, $Poludnisa, $Poludnisa2, $Poludnisa3, $Poludnisa4]
+	_e_units = [$Vedmachok, $Lugozavr, $Vendigo, $Skeleton, $Poludnisa]
 	inited = true
 
 func start_battle():
