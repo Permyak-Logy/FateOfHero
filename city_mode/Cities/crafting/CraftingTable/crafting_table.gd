@@ -66,19 +66,22 @@ func check():
 	res_item = null
 
 func _on_result_pressed():
-	craft_slot1.stack -= recipe.ingredients_num[0]
-	if craft_slot1.stack == 0:
-		craft_slot1.item = null
-	craft_slot2.stack -= recipe.ingredients_num[1]
-	if craft_slot2.stack == 0:
-		craft_slot2.item = null
 	if res_item != null:
+		craft_slot1.stack -= recipe.ingredients_num[0]
+		craft_slot2.stack -= recipe.ingredients_num[1]
 		global_inventory.insert(res_item, 1)
 		inventory_grid.update()
 		if !is_known:
 			#recipe.is_known = true
 			global_inventory.open_recipe(recipe_idx)
 			$"../../Recipes/RecipeBook".update()
+	else:
+		craft_slot1.stack -= 1
+		craft_slot2.stack -= 1
+	if craft_slot1.stack == 0:
+		craft_slot1.item = null
+	if craft_slot2.stack == 0:
+		craft_slot2.item = null
 	check()
 
 func remove_item(item):
