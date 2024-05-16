@@ -13,6 +13,7 @@ color = Color(1, 1, 1, 0.447059)
 [node name="BlueEffect" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -26)
 texture = ExtResource("1_xw8gc")
 hframes = 13

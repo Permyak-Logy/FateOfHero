@@ -578,7 +578,7 @@ damage = SubResource("Resource_p0rpr")
 expirience = SubResource("Resource_hisbe")
 
 [node name="SmolItto" parent="." instance=ExtResource("12_e7e7b")]
-position = Vector2(129, 239)
+position = Vector2(128, 231)
 inventory = SubResource("Resource_7hdn2")
 health = SubResource("Resource_7yvpb")
 defence = SubResource("Resource_iyj7q")
@@ -648,7 +648,7 @@ position = Vector2(453, 280)
 position = Vector2(638, 331)
 
 [node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(414, 210)
+position = Vector2(350, 208)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_nmmmq")

@@ -349,7 +349,7 @@ hframes = 6
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
-position = Vector2(22, -46)
+position = Vector2(32, -47)
 emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_aqvrl")
