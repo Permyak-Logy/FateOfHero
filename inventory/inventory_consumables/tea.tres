@@ -9,7 +9,8 @@ relative_value = 0.2
 absolute_value = 0
 name = "peach tea"
 russian_name = "Персиковый Чай"
-description = "Восстанавливает 20% максимального здоровья"
+description = "Чай, при заваривании которого использовались сушенные персики
+Восстанавливает 20% максимального здоровья"
 texture = ExtResource("2_c5s75")
 max_stack = 99
 price = 40

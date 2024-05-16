@@ -9,7 +9,8 @@ relative_value = 0.0
 absolute_value = 15
 name = "borsch"
 russian_name = "Борщ"
-description = "Восстанавливает 15 ед."
+description = "Вкусный, теплый, домашний борщ со сметаной
+Восстанавливает 15 ед. здоровья"
 texture = ExtResource("2_8fd6m")
 max_stack = 99
 price = 25

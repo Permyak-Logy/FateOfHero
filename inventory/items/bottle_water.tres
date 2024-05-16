@@ -7,8 +7,7 @@
 script = ExtResource("1_dgr1f")
 name = "bottle_water"
 russian_name = "Бутылка воды"
-description = "Предмет для крафта"
+description = "Возможно в городе с помощью нее можно что-нибудь смастерить"
 texture = ExtResource("2_ea01o")
 max_stack = 10
-recipe = Array[ExtResource("1_dgr1f")]([])
 price = 50

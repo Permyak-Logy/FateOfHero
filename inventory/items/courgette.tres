@@ -7,7 +7,7 @@
 script = ExtResource("1_vx75t")
 name = "Courgette"
 russian_name = "Кабачек"
-description = ""
+description = "Огромный кабачек."
 texture = ExtResource("2_cpskr")
 max_stack = 1
 price = 50

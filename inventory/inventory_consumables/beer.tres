@@ -9,7 +9,8 @@ relative_value = 0.1
 absolute_value = 0
 name = "beer"
 russian_name = "Пиво"
-description = "Восстанавливает 10% максимального здоровья"
+description = "Пенное, комнатной температуры пиво.
+Восстанавливает 10% максимального здоровья"
 texture = ExtResource("2_ystn8")
 max_stack = 99
 price = 20

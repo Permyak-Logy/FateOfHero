@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://btlyc035annuj"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_kjeu5"]
+[ext_resource type="Texture2D" uid="uid://v8ue0jovw2us" path="res://inventory/icons/liquid_pain.png" id="2_avq82"]
+
+[resource]
+script = ExtResource("1_kjeu5")
+relative_value = 0.3
+absolute_value = 0
+name = "Liquid pain"
+russian_name = "Жидкая боль"
+description = "Восстанавливает 30% здоровья "
+texture = ExtResource("2_avq82")
+max_stack = 99
+price = 60

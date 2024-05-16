@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://b7ko7srrw2av6" path="res://inventory/items/boots_billet.tres" id="5_whapq"]
 [ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="6_d74o3"]
 [ext_resource type="Script" path="res://inventory/inventory.gd" id="6_vemxm"]
-[ext_resource type="Resource" uid="uid://jgko6igthbun" path="res://inventory/items/apple.tres" id="7_de43m"]
+[ext_resource type="Resource" uid="uid://jgko6igthbun" path="res://inventory/inventory_consumables/apple.tres" id="7_de43m"]
 
 [resource]
 script = ExtResource("6_vemxm")

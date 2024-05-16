@@ -7,7 +7,7 @@
 script = ExtResource("1_kq76t")
 name = "boots_bill"
 russian_name = "Заготовка для ботинков"
-description = ""
+description = "Возможно в городе с помощью нее можно что-нибудь смастерить"
 texture = ExtResource("2_mhmfn")
 max_stack = 1
 price = 5000

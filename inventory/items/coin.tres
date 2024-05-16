@@ -7,7 +7,7 @@
 script = ExtResource("1_awnyd")
 name = "Coin"
 russian_name = "Монетка"
-description = ""
+description = "Монета из чистого (не совсем) золота. Имеет ценность на всём континенте"
 texture = ExtResource("2_pbkp4")
 max_stack = 999
 price = 1

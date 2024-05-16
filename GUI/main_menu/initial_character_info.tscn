@@ -70,15 +70,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Description" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(140, 100)
+custom_minimum_size = Vector2(140, 180)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/normal_font_size = 14
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et tellus nisl. "
-
-[node name="SpaceForStats" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
 
 [node name="Select" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(120, 0)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://csfvb5sb82rce"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_8micr"]
+[ext_resource type="Texture2D" uid="uid://denoe6lehlwbk" path="res://inventory/icons/koomis.png" id="2_w4mgq"]
+
+[resource]
+script = ExtResource("1_8micr")
+relative_value = 0.15
+absolute_value = 0
+name = "koomis"
+russian_name = "Кумыс"
+description = "Восстанавливает 15% здоровья"
+texture = ExtResource("2_w4mgq")
+max_stack = 99
+price = 30
