@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
+[ext_resource type="Resource" path="res://strategic_mode/dialogues/Bereta_meet/i5.tres" id="1_lpq1w"]
+
+[node name="Option" instance=ExtResource("1_ae00h")]
+msg = "Это легально? Да какая разница! Что делать надо?"
+next_dialogue = ExtResource("1_lpq1w")
