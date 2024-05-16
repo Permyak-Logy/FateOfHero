@@ -124,6 +124,7 @@ offset_bottom = 676.0
 grow_vertical = 1
 
 [node name="InventoryGUI" parent="." instance=ExtResource("12_ds6mk")]
+visible = false
 offset_left = 481.0
 offset_top = 232.0
 offset_right = 481.0
