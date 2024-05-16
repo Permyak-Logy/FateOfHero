@@ -30,10 +30,10 @@ var pts: = 0
 }
 
 @onready var std_d: Dictionary = {
-	unit.health :  100,
+	unit.health :  20,
 	unit.speed :   2,
 	unit.defence : 20,
-	unit.damage :  20,
+	unit.damage :  10,
 }
 
 func setup_stat_card(stat_card: StatCard, comp: StatComponent):
