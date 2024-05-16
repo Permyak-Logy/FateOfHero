@@ -8,7 +8,7 @@ if you wosh to make option do something or have it apear only when some
 condition is met you must extend the script; othervice it is not nessasory
 """
 
-@export var msg: String 
+@export_multiline var msg: String 
 @export var next_dialogue: Dialogue
 
 # will be usefull in many situations, hence have it defined here
