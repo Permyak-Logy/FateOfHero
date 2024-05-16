@@ -74,3 +74,4 @@ func insert_is(item_stack: ItemStack):
 func open_recipe(i):
 	recipes_known[i] = 1
 	print("Recipe ", i, " opened")
+	#print("Opened recipes: ", recipes_known)

@@ -9,5 +9,5 @@ name = ""
 russian_name = "Яйцо"
 description = ""
 texture = ExtResource("2_qhoof")
-max_stack = 10
+max_stack = 99
 price = 800
