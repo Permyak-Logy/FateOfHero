@@ -9,7 +9,7 @@ var Rock = preload("res://tactical_mode/nature/Rock.tscn")
 var ability_btn = preload("res://GUI/tactical_mode/BtnAbility.tscn")
 var level_up_gui = preload("res://GUI/level_up/level_up_gui.tscn")
 var level_upscale_effect: LevelUpscaleEffect = preload("res://tactical_mode/effects/res/LevelUpscaleEffect.tres")
-var _block_input = false  # Блокировка пользовательского ввода
+var _block_input = true  # Блокировка пользовательского ввода
 var _block_info = false # Блокировка вывода информации
 const _ACT_INDEX_MAX = 10000  # Магическая константа для порядка ходов
 var unit_queue = []  # [(act_index, unit)]
@@ -98,7 +98,7 @@ func start_battle():
 		return
 	if is_instance_of($"..", Game):
 		arrange_units()
-		gen_nature()
+		await gen_nature()
 	else:
 		for e in _e_units:
 			if e.expirience:
@@ -120,6 +120,7 @@ func start_battle():
 	
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_block_info = false
+	_block_input = false
 	await get_tree().create_timer(2).timeout
 	_start_stepmove()
 
@@ -183,23 +184,25 @@ func reinit(
 		_e_units.append(_e)
 	nature_count = randi_range(0, 16)
 	inited = true
+	
+	_block_input = true
 
 func gen_nature():
 	"""
 	Генерирует неуправляемые природные объекты/стены
 	"""
-	
-	for i in range(nature_count):
-		await _update_walls()
-		while true:
-			var pos = Vector2i(
-				randi_range(_astar_board.left, _astar_board.right),
+	print("Gen Nature: ", nature_count)
+	var points = []
+	while len(points) < nature_count:
+		var point = Vector2i(
+				randi_range(_astar_board.left + 2, _astar_board.right - 2),
 				randi_range(_astar_board.bottom, _astar_board.top)
 			)
-			if not is_occupied(pos):
-				spawn(Rock, pos)
-				break
-
+		if point not in points:
+			points.append(point)
+	for i in range(nature_count):
+		var pos = points.pop_front()
+		spawn(Rock, pos)
 
 func get_relation(unit_a: Unit, unit_b: Unit) -> relation:
 	"""
@@ -499,6 +502,9 @@ func get_path_to_cell(map_coords: Vector2i) -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 	if not _astar_walkable.has_cell(map_coords):
 		return []
+	if not _astar_walkable.has_cell(active_unit.get_cell()):
+		assert(false, "what 2?!")
+		return []
 	var path = _astar_walkable.get_id_path(
 			_astar_walkable.mti(active_unit.get_cell()),
 			_astar_walkable.mti(map_coords)
@@ -710,6 +716,8 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 	
 	var actor: Actor = actor_ps.instantiate()
 	print("Spawn ", actor)
+	
+
 	add_child(actor)
 	move_unit_to(actor, cell)
 	

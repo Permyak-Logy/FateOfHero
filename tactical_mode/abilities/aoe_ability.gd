@@ -17,7 +17,7 @@ func apply():
 	for unit in get_map().units:
 		for cell in unit.get_occupied_cells():
 			if cell in about_cells:
-				apply_on_unit(unit)
+				await apply_on_unit(unit)
 				break
 
 func apply_on_unit(unit: Unit):

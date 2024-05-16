@@ -12,7 +12,7 @@ func apply():
 	var unit = await map.spawn(mob, cell, owner)
 	map.add_to_unit_queue(unit, true)
 	if kill_all_mobs_on_death_owner:
-		(owner as Unit).death.connect(unit.kill)
+		(owner as Unit).death.connect(func(u): unit.kill())
 	owner.play("idle")
 
 func can_select(_cell: Vector2i) -> bool:
