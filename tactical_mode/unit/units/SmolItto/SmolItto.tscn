@@ -409,20 +409,20 @@ private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("10_rk873")
-position = Vector2(0, -26)
 texture = ExtResource("4_n8og0")
+offset = Vector2(0, -27)
 hframes = 18
 
 [node name="AttackTrail" type="Sprite2D" parent="Body"]
 z_index = 1
-position = Vector2(1, 1)
 texture = ExtResource("15_2of5b")
+offset = Vector2(0, -27)
 hframes = 8
 
 [node name="Shadow" type="Sprite2D" parent="Body"]
 z_index = -1
-position = Vector2(0, 2)
 texture = ExtResource("5_th3mn")
+offset = Vector2(0, -24)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1

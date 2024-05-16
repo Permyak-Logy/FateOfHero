@@ -414,15 +414,16 @@ private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResour
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("7_f0kl4")
-position = Vector2(3, -29)
 texture = ExtResource("5_dhbj6")
+offset = Vector2(3, -28)
 hframes = 7
 vframes = 8
 
 [node name="Shadow" type="Sprite2D" parent="Body"]
 z_index = -1
-position = Vector2(-2, 4)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("6_uhiw1")
+offset = Vector2(2, -24)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1

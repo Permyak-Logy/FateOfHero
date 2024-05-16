@@ -526,39 +526,39 @@ private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResour
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("11_os431")
-position = Vector2(0, -26)
 texture = ExtResource("10_urkiw")
+offset = Vector2(0, -26)
 hframes = 15
+
+[node name="TrailAoEAbility" type="Sprite2D" parent="Body"]
+z_index = 1
+texture = ExtResource("17_ckb07")
+offset = Vector2(0, -26)
+hframes = 8
 
 [node name="TrailAttack" type="Sprite2D" parent="Body"]
 z_index = 1
-position = Vector2(0, -2)
 texture = ExtResource("16_j3rbd")
+offset = Vector2(0, -26)
 hframes = 5
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Body/TrailAttack"]
-position = Vector2(19, 28)
+position = Vector2(19, -3)
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_oq6su")
 explosiveness = 1.0
 
-[node name="TrailAoEAbility" type="Sprite2D" parent="Body"]
-z_index = 1
-position = Vector2(0, -1)
-texture = ExtResource("17_ckb07")
-hframes = 8
+[node name="Shadow" type="Sprite2D" parent="Body"]
+z_index = -1
+texture = ExtResource("2_7e5uy")
+offset = Vector2(0, -24)
 
 [node name="TrailAbility" type="Sprite2D" parent="Body"]
 z_index = 1
-position = Vector2(0, -1)
 texture = ExtResource("18_6kwe6")
+offset = Vector2(0, -26)
 hframes = 8
-
-[node name="Shadow" type="Sprite2D" parent="Body"]
-z_index = -1
-position = Vector2(0, 3)
-texture = ExtResource("2_7e5uy")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1

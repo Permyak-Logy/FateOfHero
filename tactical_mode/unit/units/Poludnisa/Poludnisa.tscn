@@ -230,14 +230,14 @@ shape = SubResource("CapsuleShape2D_j7k3o")
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("10_ncb23")
-position = Vector2(-1, -26)
 texture = ExtResource("3_c5age")
+offset = Vector2(0, -26)
 hframes = 7
 vframes = 8
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
-position = Vector2(-1, -26)
+position = Vector2(0, -26)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_5m2i6")
 texture = ExtResource("9_cl7s2")
