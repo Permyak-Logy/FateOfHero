@@ -11,8 +11,10 @@ config_version=5
 [application]
 
 config/name="Fate of hero"
+config/version="0.1"
 run/main_scene="res://Game.tscn"
 config/features=PackedStringArray("4.2")
+config/icon="res://chest.svg"
 
 [debug]
 
