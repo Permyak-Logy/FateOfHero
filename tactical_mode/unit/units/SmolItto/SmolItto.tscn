@@ -1,75 +1,22 @@
-[gd_scene load_steps=30 format=3 uid="uid://bjcjl3qla8b62"]
+[gd_scene load_steps=31 format=3 uid="uid://bjcjl3qla8b62"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_mm6vi"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_0x5l4"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_tlmj2"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_d7s85"]
+[ext_resource type="Resource" uid="uid://cvfnpm8t4cw35" path="res://tactical_mode/unit/res/InventoryComp.tres" id="2_bfmma"]
+[ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_6l5m4"]
+[ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_5wldu"]
 [ext_resource type="Texture2D" uid="uid://b7oowqmoun462" path="res://tactical_mode/unit/units/SmolItto/assets/spritesheet.png" id="4_n8og0"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_4ga04"]
+[ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="5_11w7f"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="5_th3mn"]
+[ext_resource type="Resource" uid="uid://crsva3kiqhcl" path="res://tactical_mode/unit/res/DamageStat.tres" id="6_aepf0"]
 [ext_resource type="Resource" uid="uid://bfhgjgorox6g3" path="res://tactical_mode/unit/units/SmolItto/res/IttoA0.tres" id="6_iu0w4"]
 [ext_resource type="Resource" uid="uid://bfvhjwkefx6ky" path="res://tactical_mode/unit/units/SmolItto/res/IttoA1.tres" id="7_h74hq"]
+[ext_resource type="Resource" uid="uid://c4l247aylu587" path="res://tactical_mode/unit/res/Expirience.tres" id="7_yk04r"]
 [ext_resource type="Resource" uid="uid://cc4ld682tyt0b" path="res://tactical_mode/unit/units/SmolItto/res/IttoA2.tres" id="8_4c6l0"]
 [ext_resource type="Resource" uid="uid://bu3x836fsv2io" path="res://tactical_mode/unit/units/SmolItto/res/IttoP1.tres" id="9_eelbm"]
+[ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="10_rk873"]
+[ext_resource type="Texture2D" uid="uid://b5fjt17hsio3k" path="res://tactical_mode/unit/units/SmolItto/assets/Run.png" id="11_hqwuc"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="12_hexa5"]
-
-[sub_resource type="Resource" id="Resource_s5fo6"]
-script = ExtResource("2_0x5l4")
-_gears = {}
-gear_slots = {
-2: 2,
-4: 1
-}
-
-[sub_resource type="Resource" id="Resource_8vw01"]
-script = ExtResource("2_tlmj2")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_7y6a4"]
-script = ExtResource("3_d7s85")
-mod_type = 0
-characteristic = SubResource("Resource_8vw01")
-
-[sub_resource type="Resource" id="Resource_nl3sy"]
-script = ExtResource("2_tlmj2")
-base = 0.0
-cur = 0.0
-max_ = 0.0
-
-[sub_resource type="Resource" id="Resource_6jy48"]
-script = ExtResource("3_d7s85")
-mod_type = 3
-characteristic = SubResource("Resource_nl3sy")
-
-[sub_resource type="Resource" id="Resource_uow0a"]
-script = ExtResource("2_tlmj2")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_b0lp5"]
-script = ExtResource("3_d7s85")
-mod_type = 1
-characteristic = SubResource("Resource_uow0a")
-
-[sub_resource type="Resource" id="Resource_dkxsi"]
-script = ExtResource("2_tlmj2")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_7l1dn"]
-script = ExtResource("3_d7s85")
-mod_type = 2
-characteristic = SubResource("Resource_dkxsi")
-
-[sub_resource type="Resource" id="Resource_hil4s"]
-script = ExtResource("5_4ga04")
-level = 1
-expirience = 0
-ups = 0
+[ext_resource type="Texture2D" uid="uid://c377myww2iiv0" path="res://tactical_mode/unit/units/SmolItto/assets/attack_trail.png" id="15_2of5b"]
 
 [sub_resource type="Gradient" id="Gradient_ns4pf"]
 offsets = PackedFloat32Array(0, 0.992327)
@@ -87,31 +34,332 @@ color_ramp = SubResource("GradientTexture1D_j8q1x")
 radius = 11.0
 height = 54.0
 
-[sub_resource type="Animation" id="Animation_0r1vr"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_wkne5"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D/GPUParticles2D:emitting")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/AttackTrail:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatProgressBar:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Shadow:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_48qew"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_1k6xm"]
+resource_name = "ability"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D/GPUParticles2D:emitting")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_yoghh"]
+resource_name = "damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1), Color(0.968627, 0, 0, 1), Color(0.966672, 1, 0.999604, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q0i07"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatProgressBar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Shadow:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_0r1vr"]
+resource_name = "idle"
+length = 1.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_34sxt"]
+resource_name = "postattack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:percent_between_target")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_v8jii"]
+resource_name = "preattack"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7, 0.8, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:percent_between_target")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/AttackTrail:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_48qew"]
+resource_name = "run"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -119,51 +367,69 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_emh1m"]
 _data = {
+"RESET": SubResource("Animation_wkne5"),
+"ability": SubResource("Animation_1k6xm"),
+"damaged": SubResource("Animation_yoghh"),
+"death": SubResource("Animation_q0i07"),
 "idle": SubResource("Animation_0r1vr"),
+"postattack": SubResource("Animation_34sxt"),
+"preattack": SubResource("Animation_v8jii"),
 "run": SubResource("Animation_48qew")
 }
 
 [node name="SmolItto" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
-z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_mm6vi")
 unit_name = "Смол Итто"
-inventory = SubResource("Resource_s5fo6")
-health = SubResource("Resource_7y6a4")
-defence = SubResource("Resource_6jy48")
-speed = SubResource("Resource_b0lp5")
-damage = SubResource("Resource_7l1dn")
-expirience = SubResource("Resource_hil4s")
-sprite_for_outline = NodePath("Sprite2D")
-trail_particles = NodePath("Sprite2D/GPUParticles2D")
+inventory = ExtResource("2_bfmma")
+health = ExtResource("3_6l5m4")
+defence = ExtResource("4_5wldu")
+speed = ExtResource("5_11w7f")
+damage = ExtResource("6_aepf0")
+expirience = ExtResource("7_yk04r")
+sprite_for_outline = NodePath("Body")
+trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
-for_flip_sprites = [NodePath("Sprite2D")]
+for_flip_sprites = [NodePath("Body"), NodePath("Body/AttackTrail")]
 acts_count = 2
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_iu0w4"), ExtResource("7_h74hq"), ExtResource("8_4c6l0")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_iu0w4"), ExtResource("7_h74hq"), ExtResource("8_4c6l0")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_eelbm")])
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("10_rk873")
 position = Vector2(0, -26)
 texture = ExtResource("4_n8og0")
+hframes = 18
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+[node name="AttackTrail" type="Sprite2D" parent="Body"]
+z_index = 1
+position = Vector2(1, 1)
+texture = ExtResource("15_2of5b")
+hframes = 8
+
+[node name="Shadow" type="Sprite2D" parent="Body"]
 z_index = -1
-amount = 5
-process_material = SubResource("ParticleProcessMaterial_74otp")
-texture = ExtResource("4_n8og0")
-lifetime = 0.5
-
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(0, -24)
+position = Vector2(0, 2)
 texture = ExtResource("5_th3mn")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(0, -26)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_74otp")
+texture = ExtResource("11_hqwuc")
+lifetime = 0.5
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_0v1vj")
 
 [node name="StatProgressBar" parent="." instance=ExtResource("12_hexa5")]
+z_index = 2
+y_sort_enabled = false
 offset_top = -58.0
 offset_bottom = -56.0
 

@@ -4,19 +4,20 @@ class_name TacticalMap extends Node
 @onready var _tile_map: TileMap = $TileMap
 @onready var _astar_board = AStarHexagon2D.new(_tile_map.get_used_cells(0))
 @onready var _astar_walkable: AStarHexagon2D
-
 @onready var _current_path = PackedVector2Array()
 var Rock = preload("res://tactical_mode/nature/Rock.tscn")
 var ability_btn = preload("res://GUI/tactical_mode/BtnAbility.tscn")
 var level_up_gui = preload("res://GUI/level_up/level_up_gui.tscn")
-
+var level_upscale_effect: LevelUpscaleEffect = preload("res://tactical_mode/effects/res/LevelUpscaleEffect.tres")
 var _block_input = false  # Блокировка пользовательского ввода
 const _ACT_INDEX_MAX = 10000  # Магическая константа для порядка ходов
 var unit_queue = []  # [(act_index, unit)]
 
 var active_unit: Unit:  # Текущий 
 	get:
-		return unit_queue[0][1]
+		if unit_queue:
+			return unit_queue[0][1]
+		return null
 
 var acts: int  # Текущее кол-во действий
 var _p_units: Array[Unit] = []  # Список юнитов игрока
@@ -24,7 +25,7 @@ var _e_units: Array[Unit] = []  # Список юнитов оппонента
 var units:  # property список всех юнитов
 	get:
 		return _p_units + _e_units
-
+var _enemy_level: int = 1
 var actors:
 	get:
 		var res = []
@@ -38,7 +39,7 @@ const PATH_LAYER = 2  # Слой пути
 const WALLS_LAYER = 3  # Слой стен
 const OVERLAY_ABILITY_LAYER = 4  # Слой оверлея для способностей
 
-var escape_ability: EscapeAbility = load("res://tactical_mode/EscapeAbility.tres")  # Способность побега
+var escape_ability: EscapeAbility = load("res://tactical_mode/abilities/res/EscapeAbility.tres")  # Способность побега
 
 var win: bool = false  # True если мы победили и закончили бой, иначе false 
 var escape = false  # True если был активирован побег
@@ -62,7 +63,7 @@ var cur_ability: Ability = null:  # Текущая выбранная спосо
 var nature_count: int = -1  # Кол-во природных actor выступающих в роли стен 
 
 # Вызывается после завершения боя, возвращает списки живых и мёртвых персонажей
-signal finish(live: Array[PackedScene], death: Array[PackedScene])
+signal finish(live: Array[PackedScene], death: Array[PackedScene], is_win: bool)
 
 # Отношения между разными юнитами
 enum relation {Equal, Friend, Enemy, Neutral}
@@ -82,16 +83,10 @@ func _init():
 func _ready():
 	if is_instance_of($"..", Game):
 		return
-	_p_units = [
-		$Berserk,
-		# $Vamp,
-		$Naris #,
-		#$SmolItto
-	]
-	_e_units = [
-		$Lugozavr,
-		#$Vendigo
-	]
+		
+	_p_units = [$Berserk, $Vamp, $SmolItto, $Naris]
+	
+	_e_units = [$Vedmachok, $Lugozavr, $Vendigo, $Skeleton, $Poludnisa]
 	inited = true
 
 func start_battle():
@@ -100,15 +95,23 @@ func start_battle():
 	"""
 	if running:
 		return
+	if is_instance_of($"..", Game):
+		arrange_units()
+		gen_nature()
+	else:
+		for e in _e_units:
+			if e.expirience:
+				e.expirience.level = _enemy_level
+				e.private_passives.append(level_upscale_effect.duplicate(true))
 	gui.tactical_info.clear()
-	write_info("*** Бой начинается ***")
 	running = true
+	write_info("*** Бой начинается ***")
 	align_actors()
+	escape_ability.reset()
 	escape = false
 	for unit in units:	
 		if not unit.is_node_ready():
 			await unit.ready
-		unit.death.connect(on_kill)
 		if unit.speed:
 			add_to_unit_queue(unit)
 			unit.prepare_fight()
@@ -120,7 +123,6 @@ func align_actors():
 	"""
 	Выравнивает всех дочерних Actor на карте
 	"""
-	
 	for child in get_children():
 		if is_instance_of(child, Actor):
 			child.global_position = to_loc(child.get_cell())
@@ -156,24 +158,26 @@ func arrange_units():
 			move_unit_to(_e_units[i],  Vector2i(_astar_board.right - right_shift - 1, y))
 	
 
-func reinit(player: Array[PackedScene] = [], enemy: Array[PackedScene] = [], count_nature_obj: int=-1):
+func reinit(
+	player: Array[PackedScene] = [],
+	enemy: Array[PackedScene] = [],
+	enemy_level: int = 0):
 	"""
 	Сбрасывает прошлые данные и загружает новые, подготавливает бой,
 	запускает бой, если TacticalMap в "SceneTree"
 	"""
 	
 	clear()
+	if not is_node_ready():
+		await ready
 	
+	_enemy_level = enemy_level
 	for p in player:
-		_p_units.append(spawn(p, Vector2i(0, 0)))
+		_p_units.append(await spawn(p, Vector2i(0, 0)))
 	for e in enemy:
-		_e_units.append(spawn(e, Vector2i(0, 0)))
-	arrange_units()
-	if count_nature_obj < 0:
-		nature_count = randi_range(0, 16)
-	else:
-		nature_count = count_nature_obj
-	gen_nature()
+		var _e = (await spawn(e, Vector2i(0, 0))) as Unit
+		_e_units.append(_e)
+	nature_count = randi_range(0, 16)
 	inited = true
 
 func gen_nature():
@@ -244,11 +248,6 @@ func on_kill(unit: Unit):
 	"""
 	Вызывается при смерти любого юнита
 	"""
-	
-	for i in range(len(unit_queue)):
-		if unit_queue[i][1] == unit:
-			unit_queue.pop_at(i)
-			break
 	reset_outline_color(unit)
 	write_info("-> " + unit.unit_name + " убит")
 
@@ -351,17 +350,25 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	# await get_tree().create_timer(0.25).timeout
 	write_info("* Ходит: " + active_unit.unit_name + " *")
 	
 	cur_ability = null
-	for unit_data in unit_queue:
-		reset_outline_color(unit_data[1])
 	active_unit.set_outline_color(Unit.CUR_COLOR)
 	acts = active_unit.acts_count
-	(active_unit as Unit).premove_update()
+
+	await active_unit.premove_update()
+	while active_unit and active_unit.is_death():
+		unit_queue.pop_front()
+		if active_unit:
+			await active_unit.premove_update()
+
+	for unit_data in unit_queue:
+		reset_outline_color(unit_data[1])
+		
+	gui.escape_ability_btn.update()
 	
-	if acts == 0:
+	if acts == 0 or not active_unit:
+		acts = 0
 		_update_stepmove()
 		return
 	
@@ -370,7 +377,7 @@ func _start_stepmove():
 		_update_walkable()
 		_block_input = false
 	else:
-		_update_walkable(true)
+		_update_walkable(false)
 		active_unit.ai(self)
 
 func _update_stepmove():
@@ -378,6 +385,7 @@ func _update_stepmove():
 	Вызывается перед каждым действием юнита
 	"""
 	
+	await get_tree().create_timer(0.1).timeout
 	cur_ability = null
 	_tile_map.set_layer_enabled(OVERLAY_PATH_LAYER, true)
 	
@@ -388,9 +396,11 @@ func _update_stepmove():
 		_finalize_fight(killed_enemy_units and not escape)
 		return
 	
-	if acts != 0:
+	if acts != 0 and not active_unit.is_death():
 		write_info("* Ход продолжается *")
 		if active_unit.controlled_player:
+			gui.escape_ability_btn.update()
+			gui.show_abilities(active_unit)
 			_update_walkable()
 			_block_input = false
 		else:
@@ -401,7 +411,7 @@ func _update_stepmove():
 	var time = unit_queue[0][0]
 	for elem in unit_queue:
 		elem[0] -= time
-	unit_queue[0][0] += _ACT_INDEX_MAX / active_unit.speed.cur()
+	unit_queue[0][0] = _ACT_INDEX_MAX / active_unit.speed.cur()
 	unit_queue.sort_custom(func(a, b): return a[0] < b[0])
 	_start_stepmove()
 
@@ -411,14 +421,15 @@ func _finalize_fight(_win=false):
 	win = _win
 	_block_input = true
 	write_info("*** Бой завершён ***")
+	print("Win=", win, " Escape=", escape)
 	running = false
 	for player in get_player_units():
-		if player.is_death():
+		if player.is_death() or escape:
 			continue
 		var expirience = 0
 		for enemy in get_enemy_units():
 			if enemy.is_death():
-				expirience += int(enemy.health.get_max() / 10)
+				expirience += int(enemy.expirience_on_kill * sqrt(_enemy_level))
 		player.expirience.add_exp(expirience)
 		if player.expirience.can_level_up():
 			var lug: LevelUpGUI = level_up_gui.instantiate()
@@ -428,6 +439,8 @@ func _finalize_fight(_win=false):
 			await lug.done
 			player.expirience.ups = 0
 			gui.remove_child(lug)
+		
+		player.inventory.fixup_abilities()
 		while player.get_effects():
 			player.remove_effect(player.get_effects()[0])
 
@@ -440,7 +453,7 @@ func _finalize_fight(_win=false):
 			packed_death.append(pack)
 		else:
 			packed_live.append(pack)
-	finish.emit(packed_live, packed_death)
+	finish.emit(packed_live, packed_death, win)
 
 func _update_walls():
 	"""
@@ -537,11 +550,11 @@ func _input(event):
 			if (cur_ability as AoEAbility).only_auto_select:
 				return
 			_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
-			if (cur_ability as AoEAbility).can_select_cell(cell):
-				(cur_ability as AoEAbility).select_cell(cell)
+			if (cur_ability as AoEAbility).can_select(cell):
+				(cur_ability as AoEAbility).select(cell)
 				draw_ability_overlay()
 			else:
-				(cur_ability as AoEAbility).unselect_cell()
+				(cur_ability as AoEAbility).unselect()
 				
 	if event.is_pressed():
 		return await _key_press_event(event)
@@ -614,8 +627,8 @@ func _prepare_ability(ability: Ability):
 			cell = cur_ability.default_cell()
 		else:
 			cell = to_map(_tile_map.get_local_mouse_position())
-		if (cur_ability as AoEAbility).can_select_cell(cell):
-			(cur_ability as AoEAbility).select_cell(cell)
+		if (cur_ability as AoEAbility).can_select(cell):
+			(cur_ability as AoEAbility).select(cell)
 			draw_ability_overlay()
 	_tile_map.clear_layer(OVERLAY_ABILITY_LAYER)
 	draw_ability_overlay()
@@ -638,10 +651,11 @@ func _apply_ability(cell=Vector2i(0, 0)):
 	"""
 	Применяет действие выбранной способности, завершает действие
 	"""
-	
-	if is_instance_of(cur_ability, DirectedAbility) and cell:
-		if cur_ability.can_select_cell():
-			cur_ability.select_cell(cell)
+	if is_instance_of(cur_ability, AoEAbility):
+		if cur_ability.only_auto_select:
+			cell = cur_ability.default_cell()
+		if cell and cur_ability.can_select(cell):
+			cur_ability.select(cell)
 	
 	if cur_ability.can_apply():
 		_block_input = true
@@ -656,6 +670,8 @@ func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
 	Расстояние между клетками на поле без учёта стен
 	"""
 	
+	if not _astar_board.has_cell(a) or not _astar_board.has_cell(b):
+		return 0
 	var path = _astar_board.get_id_path(_astar_board.mti(a), _astar_board.mti(b))
 	return len(path) - 1
 
@@ -689,6 +705,7 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 	"""
 	
 	var actor: Actor = actor_ps.instantiate()
+	print("Spawn ", actor)
 	add_child(actor)
 	move_unit_to(actor, cell)
 	
@@ -698,6 +715,13 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 			_p_units.append(unit)
 		if is_enemy(_instigator):
 			_e_units.append(unit)
+			if unit.expirience:
+				unit.expirience.level = _enemy_level
+				unit.private_passives.append(level_upscale_effect)
+		if running:
+			unit.prepare_fight()
+			reset_outline_color(unit)
+			write_info("=> " + unit.unit_name + " появляется!")
 	return actor
 
 func add_to_unit_queue(unit: Unit, in_start=false):
@@ -708,6 +732,4 @@ func add_to_unit_queue(unit: Unit, in_start=false):
 
 func write_info(text: String):
 	print("===> ", text)
-	if not running:
-		return
 	gui.tactical_info.write(text)

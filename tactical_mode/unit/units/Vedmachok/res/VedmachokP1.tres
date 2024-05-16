@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TempSlowdownEffect" load_steps=4 format=3 uid="uid://bmgpfeoytv3x7"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_gd4ye"]
+[ext_resource type="Script" path="res://tactical_mode/effects/temp_slowdown_effect.gd" id="1_l0fjr"]
+
+[sub_resource type="Resource" id="Resource_quim4"]
+script = ExtResource("1_gd4ye")
+add = 0.0
+mul = 0.5
+
+[resource]
+script = ExtResource("1_l0fjr")
+mod_value = SubResource("Resource_quim4")
+on_stack = 0
+limit_stacks_for_sum_mods = -1
+moves = 1
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Медленность..."
+is_negative = false

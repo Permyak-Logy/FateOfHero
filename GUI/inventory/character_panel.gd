@@ -7,7 +7,6 @@ Panel on the right that represents character and their gear
 """
 
 @onready var name_label: Label = $HBoxContainer/Character/Name
-@onready var sprite: Sprite2D = $HBoxContainer/Character/PictureBack/Holder/CharacterSprite
 @onready var sprite_holder: CenterContainer = $HBoxContainer/Character/PictureBack/Holder
 @onready var gear_holder: VBoxContainer = $HBoxContainer/Gear
 @onready var ability_holder: VBoxContainer = $HBoxContainer/Skills
@@ -55,6 +54,7 @@ func remake_gear_slots():
 func remake_ability_slots():
 	for child in ability_holder.get_children():
 		ability_holder.remove_child(child)
+	print(current_character.inventory.gear_slots[Gear.Type.Ability])
 	for i in range(current_character.inventory.gear_slots.get(Gear.Type.Ability, InventoryComponent.DEFAULT_COUNT_SLOTS)):
 		var slot = special_slots[Gear.Type.Ability].instantiate()
 		ability_holder.add_child(slot)
@@ -81,14 +81,13 @@ func update_gear():
 		if type == Gear.Type.Ability:
 			continue
 		var i = 0
-		for item in current_character.inventory.get_gears(type):
-			var item_stack = ItemStack.new(item, 1)
+		for item_stack in current_character.inventory.get_gears(type):
 			var isr = ItemStackReprClass.instantiate()
 			slots[type][i].insert(isr)
 			isr.item_stack = item_stack
 			isr.update()
 			i += 1
-		
+
 
 func update_abilities():
 	for slot in ability_slots:
@@ -96,14 +95,12 @@ func update_abilities():
 		slot.update()
 	var i = 0
 	for item in current_character.inventory.get_abilities():
-		var slot = special_slots[Gear.Type.Ability].instantiate()
-		var item_stack = ItemStack.new(item, 1)
+		var item_stack = ItemStack.create(item, item.count if item.consumable else 1)
 		var isr = ItemStackReprClass.instantiate()
-		isr.item_stack = item_stack
 		slots[Gear.Type.Ability][i].insert(isr)
-		ability_holder.add_child(slot)
+		isr.item_stack = item_stack
+		isr.update()
 		i += 1
-	ability_slots = ability_holder.get_children()
 
 func update_bars():
 	hp_bar.max_value = current_character.health.get_max()
@@ -115,15 +112,11 @@ func update_bars():
 		str(exp_bar.max_value)
 
 func update_repr():
-	name_label.text = current_character.name
-	if sprite_holder.get_child_count():
-		sprite_holder.remove_child(sprite)
-	
-	sprite = current_character.sprite_for_outline.duplicate()
-	sprite.centered = false
-	sprite.offset = Vector2i(0, 24)
-	sprite_holder.add_child(sprite)
-	pass 
+	name_label.text = current_character.unit_name
+	var offset = sprite_holder.size
+	offset[0] /= 2
+	current_character.global_position = sprite_holder.global_position + offset
+	current_character.toggle_preview(true)
 	
 
 func update():
@@ -143,35 +136,28 @@ func print_inventory():
 	
 
 func change_character(character: PackedScene) -> PackedScene:
-	var old_char = null
+	var old_char = pack_character() if current_character else null
+	
 	if current_character:
-		#print_inventory()
-		cs.disabled = false
-		old_char = PackedScene.new()
-		current_character.visible = true
 		sprite_holder.remove_child(current_character)
-		old_char.pack(current_character)
 	
 	current_character = character.instantiate()
-	current_character.visible = false
 	cs = current_character.get_node_or_null("CollisionShape2D")
 	cs.disabled = true
 	sprite_holder.add_child(current_character)
-	
-	
-	
+	current_character.play("idle")
 	
 	remake_stots()
-	print("changed displayed character to <",current_character.name ,">" )
+	print("changed displayed character to <", current_character.name, ">" )
+	print_inventory()
 	update()
 	return old_char
+
+func pack_character() -> PackedScene:
+	var character = PackedScene.new()
+	cs = current_character.get_node_or_null("CollisionShape2D")
+	cs.disabled = false
+	character.pack(current_character)
+	cs.disabled = true
 	
-func _process(delta):
-	if !sprite:
-		return
-	if sprite.hframes < 3:
-		return
-	t += delta
-	if t > 1:
-		sprite.frame = 1 + (sprite.frame  % 3) 
-		t = 0
+	return character

@@ -8,6 +8,7 @@ activate is called when "activate"(f) is pressed and player is in the area of th
 @onready var game: Game = get_tree().root.get_child(0)
 
 @export var city: PackedScene
+@export var local_inventory: Inventory = Inventory.new()
 
 var player_present = false
 
@@ -15,6 +16,7 @@ func activate():
 	assert(city != null, "You forgot ot enter the town")
 	var city_scene: City = city.instantiate()
 	city_scene.leave_city.connect(on_done)
+	city_scene.set_inventory(local_inventory)
 	game.city_container.add_child(city_scene)
 	game.to_city_mode()
 
@@ -34,3 +36,6 @@ func _on_area_2d_body_exited(body):
 func _on_area_2d_body_entered(body):
 	if not is_instance_of(body, Player): return
 	player_present = true
+
+func set_inventory(inventory: Inventory):
+	local_inventory = inventory

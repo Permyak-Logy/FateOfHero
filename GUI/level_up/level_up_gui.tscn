@@ -125,4 +125,5 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+disabled = true
 text = "Готово"

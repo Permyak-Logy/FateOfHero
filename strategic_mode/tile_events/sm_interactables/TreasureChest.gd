@@ -1,6 +1,6 @@
-extends AreaBasedInteractable
+class_name TreasureChest extends AreaBasedInteractable
 
-@onready var game: Game = get_tree().root.get_child(0)
+var game: Game
 @export var contents: Dictionary
 var is_open = false
 
@@ -8,6 +8,7 @@ func _ready():
 	print(contents)
 
 func activate():
+	game = get_tree().root.get_child(0)
 	assert(contents != null)
 	if not is_open:
 		return

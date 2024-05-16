@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://eo8pepqxbs2w"]
+
+[ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_kp6c5"]
+[ext_resource type="StyleBox" uid="uid://c2c74ou71elg4" path="res://GUI/styles/highlight_panel.tres" id="2_rwry1"]
+[ext_resource type="Script" path="res://GUI/main_menu/initial_character_info.gd" id="3_hrlk7"]
+[ext_resource type="Texture2D" uid="uid://bpygsmt8liy5q" path="res://GUI/inventory/back_tpr.png" id="4_e65qx"]
+
+[node name="InitCharInfo" type="Panel"]
+custom_minimum_size = Vector2(180, 480)
+theme = ExtResource("1_kp6c5")
+theme_override_styles/panel = ExtResource("2_rwry1")
+script = ExtResource("3_hrlk7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(160, 480)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopPadding" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Coolest Hero Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpaceForPicture" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+
+[node name="PictureBack" type="NinePatchRect" parent="VBoxContainer/SpaceForPicture"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("4_e65qx")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Holder" type="CenterContainer" parent="VBoxContainer/SpaceForPicture/PictureBack"]
+custom_minimum_size = Vector2(64, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Description" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(140, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 14
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et tellus nisl. "
+
+[node name="SpaceForStats" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Select" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Выбрать"
+
+[connection signal="pressed" from="VBoxContainer/Select" to="." method="_on_select_pressed"]

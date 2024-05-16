@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ExpirienceComponent" load_steps=2 format=3 uid="uid://c4l247aylu587"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="1_oraoi"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_oraoi")
+level = 1
+expirience = 0
+ups = 0

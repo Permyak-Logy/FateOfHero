@@ -9,3 +9,4 @@ func on_set_owner(old: Unit, new: Unit):
 
 func on_death(unit: Unit):
 	get_map().running = false
+	get_map().escape = false

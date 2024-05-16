@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="ApplyEffectAbility" load_steps=7 format=3 uid="uid://dl1lldw2twwoi"]
+
+[ext_resource type="Script" path="res://tactical_mode/effects/burning_effect.gd" id="1_5kqrw"]
+[ext_resource type="Script" path="res://tactical_mode/abilities/apply_effect_ability.gd" id="1_b5wev"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_wr2dk"]
+[ext_resource type="PackedScene" uid="uid://bsis47xaepjwn" path="res://tactical_mode/unit/units/Poludnisa/VisualFireEffect.tscn" id="2_61d0t"]
+
+[sub_resource type="Resource" id="Resource_8jn37"]
+script = ExtResource("1_wr2dk")
+add = 0.0
+mul = 1.0
+
+[sub_resource type="Resource" id="Resource_po7pw"]
+resource_local_to_scene = true
+script = ExtResource("1_5kqrw")
+scaling_type = 2
+power = SubResource("Resource_8jn37")
+on_stack = 3
+limit_stacks_for_sum_mods = 3
+moves = 2
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = true
+stackable = true
+effect_name = "Горение"
+is_negative = true
+visual_effect = ExtResource("2_61d0t")
+
+[resource]
+script = ExtResource("1_b5wev")
+effect = SubResource("Resource_po7pw")
+targets = 1
+max_targets = 0
+apply_on = Array[int]([2])
+can_use_if_only_has_any_selectable_target = true
+acts = 1
+final_act = true
+cooldown = 1
+limit = 0
+consumable = false
+count = 0
+scaling_type = 2
+scaling_stat = 1
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 4
+_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+name = "Поджог"
+russian_name = ""
+description = ""
+max_stack = 0
+price = 0

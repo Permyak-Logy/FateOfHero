@@ -42,7 +42,7 @@ damage = NodePath("StatDamage")
 expirience = NodePath("ExpirienceComponent")
 sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("Body/GPUParticles2D")
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("2_olxes"), ExtResource("3_va2qo"), ExtResource("4_ovp7n"), ExtResource("5_cpus2")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("2_olxes"), ExtResource("3_va2qo"), ExtResource("4_ovp7n"), ExtResource("5_cpus2")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("6_6lveg"), ExtResource("7_77e65")])
 
 [node name="Body" type="Sprite2D" parent="."]

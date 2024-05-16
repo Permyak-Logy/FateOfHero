@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfom8jl7uqpve"]
+
+[ext_resource type="Script" path="res://strategic_mode/scene_masters_scripts/generic_scene_master.gd" id="1_eis8q"]
+
+[node name="GenericSceneMaster" type="Node"]
+script = ExtResource("1_eis8q")

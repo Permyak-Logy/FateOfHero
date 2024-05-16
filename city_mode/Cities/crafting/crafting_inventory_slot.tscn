@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4lrybm6yo1ub"]
+
+[ext_resource type="Script" path="res://city_mode/Cities/crafting/crafting_inventory_slot.gd" id="1_xywl8"]
+[ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="2_1sjwy"]
+
+[sub_resource type="GDScript" id="GDScript_wn7p8"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="CraftingSlot" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 20)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xywl8")
+
+[node name="back" type="Sprite2D" parent="."]
+position = Vector2(10, 10)
+texture = ExtResource("2_1sjwy")
+vframes = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 3
+script = SubResource("GDScript_wn7p8")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 3

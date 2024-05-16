@@ -1,15 +1,250 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=95 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
+[ext_resource type="Texture2D" uid="uid://dv2lw4mfvgojg" path="res://tactical_mode/assets/Bg1.png" id="3_cboxx"]
 [ext_resource type="PackedScene" uid="uid://di7auu4d2dl2" path="res://tactical_mode/unit/units/Naris/Naris.tscn" id="6_1btoa"]
-[ext_resource type="Texture2D" uid="uid://djnldn1hpxdhs" path="res://tactical_mode/assets/Bg2.png" id="7_jbq2n"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="6_kbg8m"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="9_6j4aw"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="9_fe0mx"]
 [ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="10_3tc35"]
 [ext_resource type="PackedScene" uid="uid://komiiv5ot43n" path="res://tactical_mode/unit/units/Berserk/Berserk.tscn" id="10_h12g4"]
 [ext_resource type="PackedScene" uid="uid://cwccmvlw1ghah" path="res://tactical_mode/nature/Rock.tscn" id="10_m7p5y"]
 [ext_resource type="PackedScene" uid="uid://bnx7qiuivvnwn" path="res://tactical_mode/unit/units/Lugozavr/Lugozavr.tscn" id="11_njmlf"]
+[ext_resource type="PackedScene" uid="uid://csb3ujant2uio" path="res://tactical_mode/unit/units/Vedmachok/Vedmachok.tscn" id="11_wexxj"]
+[ext_resource type="PackedScene" uid="uid://bjcjl3qla8b62" path="res://tactical_mode/unit/units/SmolItto/SmolItto.tscn" id="12_e7e7b"]
+[ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/units/Vendigo/Vendigo.tscn" id="13_h8vpa"]
+[ext_resource type="PackedScene" uid="uid://d1jk2a04wq33q" path="res://tactical_mode/unit/units/Vamp/Vamp.tscn" id="14_y1ibn"]
+[ext_resource type="AudioStream" uid="uid://dq0vrkeat2qlu" path="res://tactical_mode/assets/tactical_mode_bg_music.mp3" id="15_nmmmq"]
+[ext_resource type="PackedScene" uid="uid://cxvcedbc0b2ki" path="res://tactical_mode/unit/units/Poludnisa/Poludnisa.tscn" id="16_sq65k"]
+[ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/units/Skeleton/Skeleton.tscn" id="17_rqd6n"]
+
+[sub_resource type="Resource" id="Resource_23mrv"]
+resource_local_to_scene = true
+script = ExtResource("6_kbg8m")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}
+
+[sub_resource type="Resource" id="Resource_kgjbu"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_engs8"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_kgjbu")
+
+[sub_resource type="Resource" id="Resource_i32r3"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_mb28j"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_i32r3")
+
+[sub_resource type="Resource" id="Resource_15c6o"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_i88dp"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_15c6o")
+
+[sub_resource type="Resource" id="Resource_mbph2"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 20.0
+cur = 20.0
+max_ = 20.0
+
+[sub_resource type="Resource" id="Resource_bnf1i"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_mbph2")
+
+[sub_resource type="Resource" id="Resource_yoj6t"]
+resource_local_to_scene = true
+script = ExtResource("9_fe0mx")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_lxki2"]
+resource_local_to_scene = true
+script = ExtResource("6_kbg8m")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}
+
+[sub_resource type="Resource" id="Resource_33q3x"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_u6nck"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_33q3x")
+
+[sub_resource type="Resource" id="Resource_l0bne"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_b5blw"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_l0bne")
+
+[sub_resource type="Resource" id="Resource_kjy0l"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_ohguw"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_kjy0l")
+
+[sub_resource type="Resource" id="Resource_fe6y1"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 20.0
+cur = 20.0
+max_ = 20.0
+
+[sub_resource type="Resource" id="Resource_p0rpr"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_fe6y1")
+
+[sub_resource type="Resource" id="Resource_hisbe"]
+resource_local_to_scene = true
+script = ExtResource("9_fe0mx")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_7hdn2"]
+resource_local_to_scene = true
+script = ExtResource("6_kbg8m")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}
+
+[sub_resource type="Resource" id="Resource_hnp3c"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_7yvpb"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_hnp3c")
+
+[sub_resource type="Resource" id="Resource_3t4am"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_iyj7q"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_3t4am")
+
+[sub_resource type="Resource" id="Resource_is8io"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_l5hdv"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_is8io")
+
+[sub_resource type="Resource" id="Resource_sge5j"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 20.0
+cur = 20.0
+max_ = 20.0
+
+[sub_resource type="Resource" id="Resource_00vg8"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_sge5j")
+
+[sub_resource type="Resource" id="Resource_e1hbj"]
+resource_local_to_scene = true
+script = ExtResource("9_fe0mx")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_k4p1i"]
+resource_local_to_scene = true
+script = ExtResource("6_kbg8m")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}
+
+[sub_resource type="Resource" id="Resource_tv4bm"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_vpvh8"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_tv4bm")
 
 [sub_resource type="Resource" id="Resource_cb2cx"]
 script = ExtResource("9_6j4aw")
@@ -23,32 +258,299 @@ script = ExtResource("10_3tc35")
 mod_type = 3
 characteristic = SubResource("Resource_cb2cx")
 
+[sub_resource type="Resource" id="Resource_r4xq4"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_tk7bu"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_r4xq4")
+
+[sub_resource type="Resource" id="Resource_p613a"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 20.0
+cur = 20.0
+max_ = 20.0
+
+[sub_resource type="Resource" id="Resource_mqq0j"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_p613a")
+
+[sub_resource type="Resource" id="Resource_o4tmp"]
+resource_local_to_scene = true
+script = ExtResource("9_fe0mx")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_e40aa"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_d477q"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_e40aa")
+
+[sub_resource type="Resource" id="Resource_10xkq"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 300.0
+cur = 300.0
+max_ = 300.0
+
+[sub_resource type="Resource" id="Resource_agh86"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_10xkq")
+
+[sub_resource type="Resource" id="Resource_owbpv"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_kjqva"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_owbpv")
+
+[sub_resource type="Resource" id="Resource_w6hr7"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 30.0
+cur = 30.0
+max_ = 30.0
+
+[sub_resource type="Resource" id="Resource_kwpax"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_w6hr7")
+
+[sub_resource type="Resource" id="Resource_xj23x"]
+resource_local_to_scene = true
+script = ExtResource("9_fe0mx")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_qdytk"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 150.0
+cur = 150.0
+max_ = 150.0
+
+[sub_resource type="Resource" id="Resource_kde22"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_qdytk")
+
+[sub_resource type="Resource" id="Resource_bd2t7"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_2t3pj"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_bd2t7")
+
+[sub_resource type="Resource" id="Resource_2ajmm"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_mlh7q"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_2ajmm")
+
+[sub_resource type="Resource" id="Resource_kdu22"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 30.0
+cur = 30.0
+max_ = 30.0
+
+[sub_resource type="Resource" id="Resource_qdl0k"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_kdu22")
+
+[sub_resource type="Resource" id="Resource_4l6hp"]
+resource_local_to_scene = true
+script = ExtResource("9_fe0mx")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_r7qxh"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 500.0
+cur = 500.0
+max_ = 500.0
+
+[sub_resource type="Resource" id="Resource_arxde"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_r7qxh")
+
+[sub_resource type="Resource" id="Resource_yscvj"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 0.0
+cur = 0.0
+max_ = 500.0
+
+[sub_resource type="Resource" id="Resource_p1fij"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_yscvj")
+
+[sub_resource type="Resource" id="Resource_6ys18"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_axir7"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_6ys18")
+
+[sub_resource type="Resource" id="Resource_lwngr"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_anygu"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_lwngr")
+
+[sub_resource type="Resource" id="Resource_wwavn"]
+resource_local_to_scene = true
+script = ExtResource("9_fe0mx")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_4dq17"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 80.0
+cur = 80.0
+max_ = 80.0
+
+[sub_resource type="Resource" id="Resource_22t6d"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 0
+characteristic = SubResource("Resource_4dq17")
+
+[sub_resource type="Resource" id="Resource_v0iga"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 50.0
+cur = 50.0
+max_ = 50.0
+
+[sub_resource type="Resource" id="Resource_7hea6"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 3
+characteristic = SubResource("Resource_v0iga")
+
+[sub_resource type="Resource" id="Resource_spjqk"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 100.0
+cur = 100.0
+max_ = 100.0
+
+[sub_resource type="Resource" id="Resource_g480k"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 1
+characteristic = SubResource("Resource_spjqk")
+
+[sub_resource type="Resource" id="Resource_wsihs"]
+resource_local_to_scene = true
+script = ExtResource("9_6j4aw")
+base = 10.0
+cur = 10.0
+max_ = 10.0
+
+[sub_resource type="Resource" id="Resource_jjvy4"]
+resource_local_to_scene = true
+script = ExtResource("10_3tc35")
+mod_type = 2
+characteristic = SubResource("Resource_wsihs")
+
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_dw5lh")
+metadata/_edit_vertical_guides_ = [-32.0]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_5tyj1")
 format = 2
 layer_0/name = "Grid"
+layer_0/z_index = -3
 layer_0/tile_data = PackedInt32Array(393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 851968, 0, 0, 917504, 0, 0, 983040, 0, 0, 1048576, 0, 0, 1114112, 0, 0, 1179648, 0, 0, 1179661, 0, 0, 1114125, 0, 0, 1048589, 0, 0, 983053, 0, 0, 917517, 0, 0, 851981, 0, 0, 786445, 0, 0, 720908, 0, 0, 720909, 0, 0, 655373, 0, 0, 589837, 0, 0, 524301, 0, 0, 458765, 0, 0, 393229, 0, 0, 393228, 0, 0, 393227, 0, 0, 393226, 0, 0, 393225, 0, 0, 393224, 0, 0, 393223, 0, 0, 393222, 0, 0, 393221, 0, 0, 393220, 0, 0, 393219, 0, 0, 393218, 0, 0, 393217, 0, 0, 786435, 0, 0, 720899, 0, 0, 655364, 0, 0, 589828, 0, 0, 524293, 0, 0, 458757, 0, 0, 458756, 0, 0, 458755, 0, 0, 458754, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0, 524290, 0, 0, 589826, 0, 0, 524291, 0, 0, 589827, 0, 0, 524292, 0, 0, 655363, 0, 0, 655362, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 0, 0, 851969, 0, 0, 786434, 0, 0, 720898, 0, 0, 851970, 0, 0, 917506, 0, 0, 917505, 0, 0, 983041, 0, 0, 1048577, 0, 0, 1114113, 0, 0, 1048578, 0, 0, 983042, 0, 0, 917507, 0, 0, 851971, 0, 0, 786436, 0, 0, 720900, 0, 0, 655365, 0, 0, 589829, 0, 0, 524294, 0, 0, 458758, 0, 0, 524295, 0, 0, 458759, 0, 0, 524296, 0, 0, 458760, 0, 0, 524297, 0, 0, 458761, 0, 0, 524298, 0, 0, 458762, 0, 0, 524299, 0, 0, 458763, 0, 0, 524300, 0, 0, 458764, 0, 0, 589835, 0, 0, 589834, 0, 0, 589833, 0, 0, 589832, 0, 0, 589831, 0, 0, 589830, 0, 0, 655366, 0, 0, 720901, 0, 0, 786437, 0, 0, 851972, 0, 0, 917508, 0, 0, 983043, 0, 0, 1048579, 0, 0, 1114114, 0, 0, 1179650, 0, 0, 1179649, 0, 0, 1179651, 0, 0, 1114115, 0, 0, 1048580, 0, 0, 983044, 0, 0, 917509, 0, 0, 851973, 0, 0, 786438, 0, 0, 720902, 0, 0, 655367, 0, 0, 720903, 0, 0, 655368, 0, 0, 720904, 0, 0, 655369, 0, 0, 720905, 0, 0, 655370, 0, 0, 720906, 0, 0, 655371, 0, 0, 720907, 0, 0, 655372, 0, 0, 589836, 0, 0, 786443, 0, 0, 786442, 0, 0, 786441, 0, 0, 786440, 0, 0, 786439, 0, 0, 851974, 0, 0, 917510, 0, 0, 983045, 0, 0, 1048581, 0, 0, 1114116, 0, 0, 1179652, 0, 0, 1179653, 0, 0, 1114117, 0, 0, 1048582, 0, 0, 983046, 0, 0, 917511, 0, 0, 851975, 0, 0, 917512, 0, 0, 851976, 0, 0, 917513, 0, 0, 851977, 0, 0, 917514, 0, 0, 851978, 0, 0, 917515, 0, 0, 851979, 0, 0, 786444, 0, 0, 851980, 0, 0, 917516, 0, 0, 983051, 0, 0, 983050, 0, 0, 983049, 0, 0, 983048, 0, 0, 983047, 0, 0, 1048583, 0, 0, 1114118, 0, 0, 1179654, 0, 0, 1179655, 0, 0, 1114119, 0, 0, 1048584, 0, 0, 1114120, 0, 0, 1048585, 0, 0, 1114121, 0, 0, 1048586, 0, 0, 1114122, 0, 0, 1048587, 0, 0, 1114123, 0, 0, 1048588, 0, 0, 983052, 0, 0, 1114124, 0, 0, 1179660, 0, 0, 1179659, 0, 0, 1179658, 0, 0, 1179657, 0, 0, 1179656, 0, 0)
 layer_1/name = "Overlay Path"
 layer_1/modulate = Color(1, 1, 1, 0.466667)
-layer_1/z_index = 1
+layer_1/z_index = -2
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Path"
+layer_2/z_index = -1
 layer_2/tile_data = PackedInt32Array()
 layer_3/name = "Walls"
 layer_3/enabled = false
+layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
 layer_4/name = "Overlay Ability Layer"
+layer_4/z_index = -1
 layer_4/navigation_enabled = false
 layer_4/tile_data = PackedInt32Array()
 
 [node name="Background" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -10
 position = Vector2(160, 86)
-texture = ExtResource("7_jbq2n")
+texture = ExtResource("3_cboxx")
 offset = Vector2(305, 175)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -57,41 +559,97 @@ anchor_mode = 0
 
 [node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
 
-[node name="Rock" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(516, 280)
+[node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
+position = Vector2(126, 422)
+inventory = SubResource("Resource_23mrv")
+health = SubResource("Resource_engs8")
+defence = SubResource("Resource_mb28j")
+speed = SubResource("Resource_i88dp")
+damage = SubResource("Resource_bnf1i")
+expirience = SubResource("Resource_yoj6t")
 
-[node name="Rock2" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(574, 226)
+[node name="Vamp" parent="." instance=ExtResource("14_y1ibn")]
+position = Vector2(128, 183)
+inventory = SubResource("Resource_lxki2")
+health = SubResource("Resource_u6nck")
+defence = SubResource("Resource_b5blw")
+speed = SubResource("Resource_ohguw")
+damage = SubResource("Resource_p0rpr")
+expirience = SubResource("Resource_hisbe")
 
-[node name="Rock3" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(700, 231)
-
-[node name="Rock4" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(636, 281)
-
-[node name="Rock5" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(476, 255)
-
-[node name="Rock6" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(733, 258)
-
-[node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(542, 210)
+[node name="SmolItto" parent="." instance=ExtResource("12_e7e7b")]
+position = Vector2(129, 239)
+inventory = SubResource("Resource_7hdn2")
+health = SubResource("Resource_7yvpb")
+defence = SubResource("Resource_iyj7q")
+speed = SubResource("Resource_l5hdv")
+damage = SubResource("Resource_00vg8")
+expirience = SubResource("Resource_e1hbj")
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(98, 256)
+position = Vector2(126, 330)
+inventory = SubResource("Resource_k4p1i")
+health = SubResource("Resource_vpvh8")
 defence = SubResource("Resource_vhoup")
-flip_onready = null
-controlled_player = null
-percent_animation_to_attack = null
+speed = SubResource("Resource_tk7bu")
+damage = SubResource("Resource_mqq0j")
+expirience = SubResource("Resource_o4tmp")
 
-[node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
-position = Vector2(97, 399)
-flip_onready = null
-acts_count = null
-controlled_player = null
-private_passives = null
-percent_animation_to_attack = null
+[node name="Vedmachok" parent="." instance=ExtResource("11_wexxj")]
+position = Vector2(797, 354)
+health = SubResource("Resource_d477q")
+defence = SubResource("Resource_agh86")
+speed = SubResource("Resource_kjqva")
+damage = SubResource("Resource_kwpax")
+expirience = SubResource("Resource_xj23x")
 
 [node name="Lugozavr" parent="." instance=ExtResource("11_njmlf")]
-position = Vector2(449, 425)
+position = Vector2(799, 404)
+health = SubResource("Resource_kde22")
+defence = SubResource("Resource_2t3pj")
+speed = SubResource("Resource_mlh7q")
+damage = SubResource("Resource_qdl0k")
+expirience = SubResource("Resource_4l6hp")
+
+[node name="Vendigo" parent="." instance=ExtResource("13_h8vpa")]
+position = Vector2(767, 180)
+health = SubResource("Resource_arxde")
+defence = SubResource("Resource_p1fij")
+speed = SubResource("Resource_axir7")
+damage = SubResource("Resource_anygu")
+expirience = SubResource("Resource_wwavn")
+
+[node name="Skeleton" parent="." instance=ExtResource("17_rqd6n")]
+position = Vector2(796, 305)
+
+[node name="Poludnisa" parent="." instance=ExtResource("16_sq65k")]
+position = Vector2(803, 253)
+health = SubResource("Resource_22t6d")
+defence = SubResource("Resource_7hea6")
+speed = SubResource("Resource_g480k")
+damage = SubResource("Resource_jjvy4")
+
+[node name="Rock" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(347, 354)
+
+[node name="Rock2" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(352, 400)
+
+[node name="Rock3" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(642, 233)
+
+[node name="Rock4" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(320, 376)
+
+[node name="Rock5" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(453, 280)
+
+[node name="Rock6" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(638, 331)
+
+[node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
+position = Vector2(386, 233)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_nmmmq")
+autoplay = true

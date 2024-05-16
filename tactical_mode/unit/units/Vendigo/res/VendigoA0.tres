@@ -1,26 +1,38 @@
-[gd_resource type="Resource" script_class="AttackAbility" load_steps=3 format=3 uid="uid://crecdgxj4lurs"]
+[gd_resource type="Resource" script_class="AttackAbility" load_steps=5 format=3 uid="uid://crecdgxj4lurs"]
 
-[ext_resource type="Script" path="res://tactical_mode/unit/attack_ability.gd" id="1_i4tag"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_3vrur"]
+[ext_resource type="Script" path="res://tactical_mode/abilities/attack_ability.gd" id="1_oh7em"]
 [ext_resource type="Texture2D" uid="uid://dfp6pw6jqp11v" path="res://tactical_mode/assets/AttackAbility.png" id="2_jgvcd"]
 
+[sub_resource type="Resource" id="Resource_mq061"]
+script = ExtResource("1_3vrur")
+add = 0.0
+mul = 1.0
+
 [resource]
-script = ExtResource("1_i4tag")
+resource_local_to_scene = true
+script = ExtResource("1_oh7em")
 distance = 1
-power_p = 1.0
+power = SubResource("Resource_mq061")
 targets = 1
 max_targets = 0
+apply_on = Array[int]([2])
+can_use_if_only_has_any_selectable_target = false
 acts = 0
 final_act = true
 cooldown = 0
 limit = 0
+consumable = false
 count = -1
 scaling_type = 2
+scaling_stat = 1
+overlay_atlas_coords = Vector2i(1, 0)
 only_unit_owner = true
 type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Атака"
+russian_name = ""
 description = "Атаковать выбранного противника"
 texture = ExtResource("2_jgvcd")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelUpscaleEffect" load_steps=2 format=3 uid="uid://bq2iicqcssmai"]
+
+[ext_resource type="Script" path="res://tactical_mode/effects/level_upscale_effect.gd" id="1_i3vu4"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_i3vu4")
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = true
+stackable = false
+effect_name = "Апскейл от уровня"
+is_negative = false

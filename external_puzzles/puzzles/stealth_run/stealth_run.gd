@@ -13,6 +13,7 @@ var EnemyRes: PackedScene = preload("res://external_puzzles/puzzles/stealth_run/
 var EPWinConditionRes: PackedScene = preload("res://external_puzzles/puzzles/safe_path/win_condition_point.tscn")
 
 var enemies: Array[PackedScene]
+var enemy_level: int
 var pawns: Array[StealthEnemy] = []
 var trees: Array[StealthTree] = []
 var wc: EPWinCondition = EPWinConditionRes.instantiate()
@@ -136,21 +137,21 @@ func gen_field():
 		tree.place(pos)
 		trees.append(tree)
 
-func set_enemies(enemies_: Array[PackedScene]):
+func set_enemies(enemies_: Array[PackedScene], level_: int):
 	enemies = enemies_
-
-func start_fight():
-	var characters = inventory.characters
-	game.tactical_map.reinit(characters, enemies)
-	game.to_tact_mode()
-	game.tactical_map.finish.connect(on_finish_tactical_map)
+	enemy_level = level_
 
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive
 	solved.emit(rewards)
+	for char_p in dead:
+		var char = char_p.instantiate()
+		if char.name == game.strat_map.player.mc_name:
+			game.strat_map.show_game_over()
 
 func _ready():
 	player.pos = Vector2i(1, 1)
+	player.sprite.texture = game.strat_map.player.sprite.texture
 	gen_field()
 	for pawn in pawns:
 		pawn.stealth_suicide.connect(kill)
@@ -168,3 +169,8 @@ func on_wc_activated():
 func get_random_tree():
 	return trees[randi_range(0, trees.size() - 1)]
 
+func start_fight():
+	var characters = inventory.characters
+	game.tactical_map.reinit(characters, enemies, enemy_level)
+	game.to_tact_mode()
+	game.tactical_map.finish.connect(on_finish_tactical_map)

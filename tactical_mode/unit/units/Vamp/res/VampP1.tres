@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="GGVampP1" load_steps=2 format=3 uid="uid://5d8bwek6gx45"]
+[gd_resource type="Resource" script_class="VampP1" load_steps=2 format=3 uid="uid://5d8bwek6gx45"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vamp/src/vamp_p1.gd" id="1_lcs4v"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_lcs4v")
+power_delta = 0.2
+power_max = 1.0
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
+stackable = false
 effect_name = "Падший ангел"
 is_negative = false

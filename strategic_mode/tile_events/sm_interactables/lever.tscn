@@ -8,6 +8,7 @@
 script = ExtResource("2_7wvgx")
 id = 0
 state = false
+expected_state = true
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_htat7")

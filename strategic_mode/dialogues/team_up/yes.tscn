@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://broh86uja0jol"]
+
+[ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
+[ext_resource type="Script" path="res://strategic_mode/dialogues/team_up/yes.gd" id="2_lmhlk"]
+
+[node name="Option" instance=ExtResource("1_ae00h")]
+script = ExtResource("2_lmhlk")
+msg = "yes"

@@ -1,27 +1,35 @@
 class_name IttoA2 extends DirectedAbility
 
-@export var power: float = 100
+@export var power: ModValue = ModValue.new()
 
 
 func apply():
-	await owner.play("prehealteam")
 	for node in selected:
+		await owner.play("ability")
 		var unit = node as Unit
-		if unit.health:
-			unit.health.add(power)
-			print("=> IttoP2 heal ", power, " for ", unit.unit_name)
-	await owner.play("posthealteam")
+		
+		var diff = -unit.health.cur() 
+		unit.health.add(scale * power.mul + power.add)
+		diff += unit.health.cur()
+		get_map().write_info(
+			"=> " + owner.unit_name + " восстанавливает  " + str(int(diff)) + " хп у " + unit.unit_name
+		)
+	owner.play("idle")
 	return true
 	
 func unselect(_node):
-	return
+	pass
 
-func can_select(node):
-	var unit = node as Unit
-	if not unit:
+func tab_next():
+	pass
+
+func tab_prev():
+	pass
+
+func can_select(_node):
+	var unit = _node as Unit
+	if not super(unit):
 		return false
-	if unit.is_death():
+	if not unit.health:
 		return false
-	if unit.visible:
-		return false
-	return get_map().is_player(owner) == get_map().is_player(node)
+	return true

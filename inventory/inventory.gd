@@ -10,11 +10,11 @@ insert and remove are self explanotory
 """
 
 # list of items and counts there of
-@export var items: Dictionary
-@export var characters: Array[PackedScene]
+@export var items: Dictionary = {}
+@export var characters: Array[PackedScene] 
+@export var recipes_known: Array[bool] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 # must be equal to number of cells
 const max_stacks_count: int = 50
-#const max_character_count: int = 5
 
 func get_item_stacks() -> Array[ItemStack]:
 	"""
@@ -26,9 +26,9 @@ func get_item_stacks() -> Array[ItemStack]:
 	for item in keys:
 		var count = items[item]
 		for i in range(count / item.max_stack):
-			item_stacks.push_back(ItemStack.new(item, item.max_stack))
+			item_stacks.push_back(ItemStack.create(item, item.max_stack))
 		if count % item.max_stack:
-			item_stacks.push_back(ItemStack.new(item, count % item.max_stack))
+			item_stacks.push_back(ItemStack.create(item, count % item.max_stack))
 	return item_stacks
 
 func get_stack_count():
@@ -70,3 +70,7 @@ func remove(item: Item, count: int):
 
 func insert_is(item_stack: ItemStack):
 	insert(item_stack.item, item_stack.size)
+
+func open_recipe(i):
+	recipes_known[i] = 1
+	print("Recipe ", i, " opened")

@@ -6,9 +6,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p88yo"]
 
-[node name="TownTileEvent" instance=ExtResource("1_wkrhe")]
+[node name="TownTileEvent" groups=["InventoryOwner"] instance=ExtResource("1_wkrhe")]
 script = ExtResource("2_no6cn")
 city = null
+local_inventory = null
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_cs5hl")

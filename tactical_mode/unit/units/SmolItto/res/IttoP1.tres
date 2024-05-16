@@ -1,14 +1,21 @@
-[gd_resource type="Resource" script_class="IttoP1" load_steps=2 format=3 uid="uid://bu3x836fsv2io"]
+[gd_resource type="Resource" script_class="IttoP1" load_steps=4 format=3 uid="uid://bu3x836fsv2io"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/SmolItto/src/itto_p1.gd" id="1_q5qfc"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_xpbfe"]
+
+[sub_resource type="Resource" id="Resource_yib67"]
+script = ExtResource("1_xpbfe")
+add = 0.0
+mul = 0.1
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_q5qfc")
-power = 20.0
+power = SubResource("Resource_yib67")
 percent = 0.4
-cooldown = 0
-cooldown_time = 3
+cooldown = 1
 mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 destroy_on_death_instigator = false
+stackable = false
 effect_name = "Стадное чуство"
 is_negative = false

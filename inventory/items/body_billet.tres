@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b1hv1sghbyjh6"]
 
 [ext_resource type="Script" path="res://inventory/item.gd" id="1_2t2bs"]
-[ext_resource type="Texture2D" uid="uid://blim565lr73pr" path="res://inventory/icons/Body_billet.png" id="2_72uol"]
+[ext_resource type="Texture2D" uid="uid://b1wyj30e0uffq" path="res://inventory/icons/Body_billet.png" id="2_72uol"]
 
 [resource]
 script = ExtResource("1_2t2bs")
 name = "body_bill"
-description = "Заготовка для нагрудника"
+russian_name = "Заготовка для нагрудника"
+description = ""
 texture = ExtResource("2_72uol")
-max_stack = 1
-recipe = Array[ExtResource("1_2t2bs")]([])
-price = 1000
+max_stack = 5
+price = 1500

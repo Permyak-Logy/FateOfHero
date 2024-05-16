@@ -1,7 +1,8 @@
 class_name RunePlacementGUI extends Control
 
 @onready var ItemStackReprClass = preload("res://inventory/item_stack_repr.tscn")
-@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
+@onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory: Inventory = game.strat_map.player.inventory
 var place_inventory: MicroInventory = null
 
 @onready var inventory_panel: InventoryPanel = $HBoxContainer/InventoryPanel
@@ -19,7 +20,7 @@ var is_done = false
 
 
 func _ready():
-	assert(place_inventory != null, "You forgot to pass place's inecntory")
+	assert(place_inventory != null, "You forgot to pass place's inventory")
 	connect_inventory_slots()
 	placement_panel.rune_slot.HoveringInventorySlot.connect(on_slot_hovered)
 	placement_panel.rune_slot.UnhoveringInventorySlot.connect(on_slot_unhovered)
@@ -27,7 +28,7 @@ func _ready():
 		var isr: ItemStackRepr = ItemStackReprClass.instantiate()
 		placement_panel.current_rune = isr
 		placement_panel.update()
-		isr.item_stack = ItemStack.new(place_inventory.contents.item, place_inventory.contents.size)
+		isr.item_stack = ItemStack.create(place_inventory.contents.item, place_inventory.contents.size)
 		isr.update()
 	update()
 
@@ -118,8 +119,8 @@ func take_from(slot:InventorySlot):
 
 func _input(event):
 	update_item_in_hand()
-	if event.is_action_pressed("escape"):
-		done.emit()
+	#if event.is_action_pressed("escape"):
+		#done.emit()
 	if event.is_action_pressed("lmb"):
 		if not hovering_slot:
 			return
@@ -133,3 +134,9 @@ func _input(event):
 		if not hovering_slot or not hovering_slot.is_empty():
 			target_slot = item_stack_in_hand_origin
 		put_to(target_slot)
+
+func open():
+	pass
+
+func close():
+	done.emit()

@@ -9,11 +9,3 @@ func write(text: String):
 
 func clear():
 	rich_text_label.text = ""
-
-func _on_focus_entered():
-	print("Ok 1")
-	scale[1] *= 4
-
-func _on_focus_exited():
-	print("Ok 2")
-	scale[1] /= 4

@@ -1,18 +1,24 @@
 extends "res://external_puzzles/puzzles/base_puzzle.gd"
 
 class_name SafePath
-@onready var inventory: Inventory = preload("res://inventory/global_inventory.tres")
 @onready var tilemap: TileMap = $TileMap
 @onready var player: WASDPlayer = $player
 @onready var game: Game = get_tree().root.get_child(0)
+@onready var inventory: Inventory = game.strat_map.player.inventory
 @onready var wc: EPWinCondition = load("res://external_puzzles/puzzles/safe_path/win_condition_point.tscn").instantiate()
+@export var period: float = 5
+var SafePathVispRes: PackedScene = preload("res://external_puzzles/puzzles/safe_path/visp.tscn")
+var time: float = 0
 
 var enemies: Array[PackedScene]
+var enemy_level: int
 
-var field_size: Vector2i = Vector2i(11, 14)
-var end_pos: Vector2i = Vector2i(5, 0)
-var curve_count: int = 3
-var curve_prescision: int = 100_000
+const field_size: Vector2i = Vector2i(11, 14)
+const end_pos: Vector2i = Vector2i(5, 0)
+const curve_count: int = 3
+const curve_prescision: int = 100_000
+
+var safe_path: Array[Vector2i]
 
 var danger_tile_atlas_coords = Vector2i(0, 0)
 
@@ -84,7 +90,8 @@ func gen_field():
 		var pos = tilemap.local_to_map(point)
 		if field[pos.y][pos.x]:
 			field[pos.y][pos.x] = false
-	
+			safe_path.append(Vector2i(pos.x, pos.y))
+
 	for cid in range(1, on_curve_point_count):
 		print("_______________________________________________________")
 		print("curve ", cid, ": p1:", on_curve_points[cid - 1], ", p2: ", off_curve_points[cid], ", p3: ", on_curve_points[cid])
@@ -98,6 +105,7 @@ func gen_field():
 			var pos = tilemap.local_to_map(point)
 			if field[pos.y][pos.x]:
 				field[pos.y][pos.x] = false
+				safe_path.append(Vector2i(pos.x, pos.y))
 	
 	
 	print("_______________________________________________________")
@@ -110,6 +118,7 @@ func gen_field():
 		var pos = tilemap.local_to_map(point)
 		if field[pos.y][pos.x]: 
 			field[pos.y][pos.x] = false
+			safe_path.append(Vector2i(pos.x, pos.y))
 	
 	for y in range(field_size.y):
 		print(y, ": ", field[y])
@@ -122,23 +131,47 @@ func _ready():
 	gen_field()
 	wc.WCReached.connect(end_successfully)
 	add_child(wc)
+	player.sprite.texture = game.strat_map.player.sprite.texture
 	wc.global_position = tilemap.map_to_local(end_pos)
 	player.global_position = tilemap.map_to_local(player.pos)
 	player.speed = 8 * tilemap.tile_set.tile_size.length()
 
-func set_enemies(enemies_: Array[PackedScene]):
+func set_enemies(enemies_: Array[PackedScene], level: int):
 	enemies = enemies_
+	enemy_level = level
 
 func end_successfully():
 	solved.emit(rewards)
-
-func start_fight():
-	var characters = inventory.characters
-	game.tactical_map.reinit(characters, enemies)
-	game.to_tact_mode()
-	game.tactical_map.finish.connect(on_finish_tactical_map)
 
 func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
 	inventory.characters = alive
 	solved.emit(rewards)
 	game.to_strat_mode()
+	for char_p in dead:
+		var char = char_p.instantiate()
+		if char.name == game.strat_map.player.mc_name:
+			game.strat_map.show_game_over()
+
+func spawn_visp():
+	var visp: SafePathVisp = SafePathVispRes.instantiate()  
+	visp.start = player.pos
+	visp.end = end_pos
+	visp.target_reaced.connect(kill_visp)
+	add_child(visp)
+
+func kill_visp(visp: SafePathVisp):
+	remove_child(visp)
+
+func _physics_process(delta):
+	time += delta
+	if time > period:
+		time = 0
+		spawn_visp()
+
+
+func start_fight():
+	var characters = inventory.characters
+	game.tactical_map.reinit(characters, enemies, enemy_level)
+	game.to_tact_mode()
+	game.tactical_map.finish.connect(on_finish_tactical_map)
+

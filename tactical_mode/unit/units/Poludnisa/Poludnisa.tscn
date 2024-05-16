@@ -1,0 +1,259 @@
+[gd_scene load_steps=26 format=3 uid="uid://cxvcedbc0b2ki"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Poludnisa/Poludnisa.gd" id="1_854ht"]
+[ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="2_4onig"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="2_y0bvn"]
+[ext_resource type="Texture2D" uid="uid://vy3p352yeo1p" path="res://tactical_mode/unit/units/Poludnisa/assets/spritesheet.png" id="3_c5age"]
+[ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="3_yggft"]
+[ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="4_eb4lc"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="5_a7xqb"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="6_6ek8e"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="6_peqxc"]
+[ext_resource type="Resource" uid="uid://dl1lldw2twwoi" path="res://tactical_mode/unit/units/Poludnisa/PoludnisaA0.tres" id="7_i0lhi"]
+[ext_resource type="Texture2D" uid="uid://d3tuayo5k68te" path="res://tactical_mode/unit/units/Poludnisa/assets/run.png" id="9_cl7s2"]
+[ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="10_ncb23"]
+
+[sub_resource type="Resource" id="Resource_o87s6"]
+resource_local_to_scene = true
+script = ExtResource("5_a7xqb")
+base = 8.0
+cur = 8.0
+max_ = 8.0
+
+[sub_resource type="Resource" id="Resource_6o1dp"]
+resource_local_to_scene = true
+script = ExtResource("6_6ek8e")
+mod_type = 2
+characteristic = SubResource("Resource_o87s6")
+
+[sub_resource type="Resource" id="Resource_o475n"]
+script = ExtResource("6_peqxc")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7k3o"]
+radius = 16.0
+height = 52.0
+
+[sub_resource type="Gradient" id="Gradient_o02v2"]
+colors = PackedColorArray(1, 0.733809, 0.494052, 1, 0.25, 0.1625, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ohblj"]
+gradient = SubResource("Gradient_o02v2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5m2i6"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_ohblj")
+
+[sub_resource type="Animation" id="Animation_l8fdw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Body:material:shader_parameter/opacity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StatProgressBar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_k86vy"]
+resource_name = "ability"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17, 16, 15, 14]
+}
+
+[sub_resource type="Animation" id="Animation_derru"]
+resource_name = "damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_76s7l"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Body:material:shader_parameter/opacity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StatProgressBar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7m2pk"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1xtlw"]
+_data = {
+"RESET": SubResource("Animation_l8fdw"),
+"ability": SubResource("Animation_k86vy"),
+"damaged": SubResource("Animation_derru"),
+"death": SubResource("Animation_76s7l"),
+"idle": SubResource("Animation_7m2pk")
+}
+
+[node name="Poludnisa" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "animation_player", "for_flip_sprites")]
+y_sort_enabled = true
+input_pickable = true
+script = ExtResource("1_854ht")
+unit_name = "Полудница"
+health = ExtResource("2_4onig")
+defence = ExtResource("3_yggft")
+speed = ExtResource("4_eb4lc")
+damage = SubResource("Resource_6o1dp")
+expirience = SubResource("Resource_o475n")
+sprite_for_outline = NodePath("Body")
+health_bar_pb = NodePath("StatProgressBar")
+animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Body")]
+controlled_player = false
+expirience_on_kill = 15
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("7_i0lhi")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = SubResource("CapsuleShape2D_j7k3o")
+
+[node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("10_ncb23")
+position = Vector2(-1, -26)
+texture = ExtResource("3_c5age")
+hframes = 7
+vframes = 8
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(-1, -26)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_5m2i6")
+texture = ExtResource("9_cl7s2")
+
+[node name="StatProgressBar" parent="." instance=ExtResource("2_y0bvn")]
+z_index = 2
+y_sort_enabled = false
+offset_top = -59.0
+offset_bottom = -57.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../GPUParticles2D")
+libraries = {
+"": SubResource("AnimationLibrary_1xtlw")
+}
+
+[connection signal="input_event" from="." to="." method="_on_toggle_select"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

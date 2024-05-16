@@ -1,24 +1,37 @@
-[gd_resource type="Resource" script_class="IttoA1" load_steps=3 format=3 uid="uid://bfvhjwkefx6ky"]
+[gd_resource type="Resource" script_class="IttoA1" load_steps=5 format=3 uid="uid://bfvhjwkefx6ky"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/SmolItto/src/itto_a1.gd" id="1_3sd5q"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_j8or8"]
 [ext_resource type="Texture2D" uid="uid://kbbm735cmlcr" path="res://tactical_mode/unit/units/SmolItto/assets/Itto_n1.png" id="2_w5hol"]
 
+[sub_resource type="Resource" id="Resource_h3med"]
+script = ExtResource("1_j8or8")
+add = 30.0
+mul = 0.2
+
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_3sd5q")
-power = 100.0
+power = SubResource("Resource_h3med")
 targets = 1
 max_targets = 0
-acts = 0
+apply_on = Array[int]([1, 0])
+can_use_if_only_has_any_selectable_target = true
+acts = 1
 final_act = false
 cooldown = 0
 limit = 0
+consumable = false
 count = -1
-scaling_type = 4
-type = 0
+scaling_type = 0
+scaling_stat = 1
+overlay_atlas_coords = Vector2i(1, 0)
+only_unit_owner = true
+type = 4
 _mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
 name = "Лечебная мазь"
+russian_name = ""
 description = "Хилл в одну цель"
 texture = ExtResource("2_w5hol")
 max_stack = 0
-recipe = Array[Resource("res://inventory/item.gd")]([])
 price = 0

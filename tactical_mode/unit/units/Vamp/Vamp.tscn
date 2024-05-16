@@ -1,78 +1,25 @@
-[gd_scene load_steps=33 format=3 uid="uid://d1jk2a04wq33q"]
+[gd_scene load_steps=34 format=3 uid="uid://d1jk2a04wq33q"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3454p"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_7afhu"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="3_uv67m"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="4_5v37f"]
-[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="5_8mxrt"]
+[ext_resource type="Resource" uid="uid://cvfnpm8t4cw35" path="res://tactical_mode/unit/res/InventoryComp.tres" id="2_45jho"]
+[ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_lkwsv"]
+[ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_0f3pp"]
+[ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="5_eaw4v"]
 [ext_resource type="Resource" uid="uid://bhkcohkp7d0tj" path="res://tactical_mode/unit/units/Vamp/res/VampA0.tres" id="6_1t0c8"]
+[ext_resource type="Resource" uid="uid://crsva3kiqhcl" path="res://tactical_mode/unit/res/DamageStat.tres" id="6_ppntu"]
 [ext_resource type="Resource" uid="uid://di1372ucdkekv" path="res://tactical_mode/unit/units/Vamp/res/VampA1.tres" id="7_ax6he"]
+[ext_resource type="Resource" uid="uid://c4l247aylu587" path="res://tactical_mode/unit/res/Expirience.tres" id="7_b26qs"]
 [ext_resource type="Resource" uid="uid://csshoxe7yf51e" path="res://tactical_mode/unit/units/Vamp/res/VampA2.tres" id="8_r0ub4"]
 [ext_resource type="Resource" uid="uid://di4u67c7nk826" path="res://tactical_mode/unit/units/Vamp/res/VampA3.tres" id="9_nqkrh"]
 [ext_resource type="Resource" uid="uid://5d8bwek6gx45" path="res://tactical_mode/unit/units/Vamp/res/VampP1.tres" id="10_5dx63"]
 [ext_resource type="Resource" uid="uid://drtfi4k16ej2g" path="res://tactical_mode/unit/units/Vamp/res/VampP2.tres" id="11_j0kv6"]
-[ext_resource type="Resource" uid="uid://chwc8kck316im" path="res://tactical_mode/effects/MainHeroEffect.tres" id="12_gmwrs"]
+[ext_resource type="Resource" uid="uid://chwc8kck316im" path="res://tactical_mode/effects/res/MainHeroEffect.tres" id="12_gmwrs"]
+[ext_resource type="Texture2D" uid="uid://ble3aqxqisbwg" path="res://tactical_mode/unit/units/Vamp/assets/VampRun.png" id="13_klfgo"]
 [ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/units/Vamp/assets/spritesheet.png" id="13_yrav4"]
+[ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="14_2n4pm"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="14_w61fm"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="15_s6ke4"]
-
-[sub_resource type="Resource" id="Resource_gxg75"]
-script = ExtResource("2_7afhu")
-_gears = {}
-gear_slots = {
-2: 2,
-4: 1
-}
-
-[sub_resource type="Resource" id="Resource_ywk01"]
-script = ExtResource("3_uv67m")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_8hokp"]
-script = ExtResource("4_5v37f")
-mod_type = 0
-characteristic = SubResource("Resource_ywk01")
-
-[sub_resource type="Resource" id="Resource_6gu2l"]
-script = ExtResource("3_uv67m")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_m422q"]
-script = ExtResource("4_5v37f")
-mod_type = 3
-characteristic = SubResource("Resource_6gu2l")
-
-[sub_resource type="Resource" id="Resource_k16fc"]
-script = ExtResource("3_uv67m")
-base = 103.0
-cur = 103.0
-max_ = 103.0
-
-[sub_resource type="Resource" id="Resource_go4ob"]
-script = ExtResource("4_5v37f")
-mod_type = 1
-characteristic = SubResource("Resource_k16fc")
-
-[sub_resource type="Resource" id="Resource_2j2qp"]
-script = ExtResource("3_uv67m")
-base = 1e+06
-cur = 1e+06
-max_ = 1e+06
-
-[sub_resource type="Resource" id="Resource_ngsv5"]
-script = ExtResource("4_5v37f")
-mod_type = 2
-characteristic = SubResource("Resource_2j2qp")
-
-[sub_resource type="Resource" id="Resource_iw2g7"]
-script = ExtResource("5_8mxrt")
-level = 1
-expirience = 0
-ups = 0
+[ext_resource type="Texture2D" uid="uid://duhyf2qq5fq5b" path="res://tactical_mode/unit/units/Vamp/assets/spritesheet_trail.png" id="17_kuf3k"]
 
 [sub_resource type="Gradient" id="Gradient_h44pd"]
 colors = PackedColorArray(1, 0.933333, 0.945098, 1, 0.254902, 0, 0, 0)
@@ -89,31 +36,342 @@ color_ramp = SubResource("GradientTexture1D_htaen")
 radius = 13.0
 height = 58.0
 
+[sub_resource type="Animation" id="Animation_gch17"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/TrailAttack:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Shadow:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatProgressBar:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2d7kb"]
+resource_name = "ability"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_wibm2"]
+resource_name = "damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1), Color(1, 0, 0, 1), Color(0.966672, 1, 0.999604, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o2o6j"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/outline_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1), Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Shadow:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatProgressBar:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_oxaj6"]
 resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r4uof"]
+resource_name = "postattack"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 7, 5, 4, 3, 2, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:percent_between_target")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/TrailAttack:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_k3qcp"]
+resource_name = "preattack"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.9, 1, 1.2, 1.3, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/TrailAttack:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:percent_between_target")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_fxtwy"]
 resource_name = "run"
+length = 0.1
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -121,53 +379,72 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bbjha"]
 _data = {
+"RESET": SubResource("Animation_gch17"),
+"ability": SubResource("Animation_2d7kb"),
+"damaged": SubResource("Animation_wibm2"),
+"death": SubResource("Animation_o2o6j"),
 "idle": SubResource("Animation_oxaj6"),
+"postattack": SubResource("Animation_r4uof"),
+"preattack": SubResource("Animation_k3qcp"),
 "run": SubResource("Animation_fxtwy")
 }
 
-[node name="GgVamp" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "for_flip_sprites")]
-z_index = 1
+[node name="Vamp" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3454p")
 unit_name = "Фиди (Вапир)"
-inventory = SubResource("Resource_gxg75")
-health = SubResource("Resource_8hokp")
-defence = SubResource("Resource_m422q")
-speed = SubResource("Resource_go4ob")
-damage = SubResource("Resource_ngsv5")
-expirience = SubResource("Resource_iw2g7")
+inventory = ExtResource("2_45jho")
+health = ExtResource("3_lkwsv")
+defence = ExtResource("4_0f3pp")
+speed = ExtResource("5_eaw4v")
+damage = ExtResource("6_ppntu")
+expirience = ExtResource("7_b26qs")
 sprite_for_outline = NodePath("Body")
 trail_particles = NodePath("GPUParticles2D")
 health_bar_pb = NodePath("StatProgressBar")
-for_flip_sprites = [NodePath("Body")]
+animation_player = NodePath("AnimationPlayer")
+for_flip_sprites = [NodePath("Body"), NodePath("Body/TrailAttack")]
 acts_count = 2
-private_abilities = Array[Resource("res://inventory/ability.gd")]([ExtResource("6_1t0c8"), ExtResource("7_ax6he"), ExtResource("8_r0ub4"), ExtResource("9_nqkrh")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_1t0c8"), ExtResource("7_ax6he"), ExtResource("8_r0ub4"), ExtResource("9_nqkrh")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("10_5dx63"), ExtResource("11_j0kv6"), ExtResource("12_gmwrs")])
+percent_between_target = 1.0
+
+[node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("14_2n4pm")
+position = Vector2(1, -26)
+texture = ExtResource("13_yrav4")
+hframes = 12
+
+[node name="TrailAttack" type="Sprite2D" parent="Body"]
+z_index = 1
+texture = ExtResource("17_kuf3k")
+hframes = 4
+
+[node name="Shadow" type="Sprite2D" parent="Body"]
+z_index = -1
+position = Vector2(0, 2)
+texture = ExtResource("15_s6ke4")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
 y_sort_enabled = true
 position = Vector2(1, -26)
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_fk72q")
-texture = ExtResource("13_yrav4")
+texture = ExtResource("13_klfgo")
 
-[node name="Body" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 position = Vector2(1, -26)
-texture = ExtResource("13_yrav4")
+shape = SubResource("CapsuleShape2D_plq5k")
 
 [node name="StatProgressBar" parent="." instance=ExtResource("14_w61fm")]
+z_index = 2
+y_sort_enabled = false
 offset_top = -57.0
 offset_bottom = -55.0
 metadata/_edit_use_anchors_ = true
-
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(1, -24)
-texture = ExtResource("15_s6ke4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -26)
-shape = SubResource("CapsuleShape2D_plq5k")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

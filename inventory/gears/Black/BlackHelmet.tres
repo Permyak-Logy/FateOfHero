@@ -1,17 +1,27 @@
-[gd_resource type="Resource" script_class="Gear" load_steps=5 format=3 uid="uid://dxjswu38qdlka"]
+[gd_resource type="Resource" script_class="Gear" load_steps=7 format=3 uid="uid://dxjswu38qdlka"]
 
-[ext_resource type="Resource" uid="uid://c0srtoci3pulj" path="res://inventory/items/helmet_billet.tres" id="1_rubom"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_jsb4q"]
 [ext_resource type="Script" path="res://inventory/gear.gd" id="1_tqms4"]
-[ext_resource type="Resource" uid="uid://xplppy8t3gmi" path="res://inventory/items/oil.tres" id="2_1i31u"]
 [ext_resource type="Texture2D" uid="uid://c7lyt72phhdww" path="res://inventory/gears/Black/assets/Helmet_black.png" id="2_cy1wd"]
+[ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="2_rr7cf"]
+
+[sub_resource type="Resource" id="Resource_gxcic"]
+script = ExtResource("2_rr7cf")
+add = 0.0
+mul = 0.5
+
+[sub_resource type="Resource" id="Resource_cyin1"]
+script = ExtResource("1_jsb4q")
+type = 0
+value = SubResource("Resource_gxcic")
 
 [resource]
 script = ExtResource("1_tqms4")
 type = 0
-_mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+_mods = Array[ExtResource("1_jsb4q")]([SubResource("Resource_cyin1")])
 name = "Шлем из чёрного камня"
+russian_name = ""
 description = ""
 texture = ExtResource("2_cy1wd")
 max_stack = 1
-recipe = Array[Resource("res://inventory/item.gd")]([ExtResource("1_rubom"), ExtResource("2_1i31u"), ExtResource("2_1i31u"), ExtResource("2_1i31u"), ExtResource("2_1i31u"), ExtResource("2_1i31u")])
-price = 0
+price = 700

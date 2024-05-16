@@ -9,7 +9,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("activate"):
 		if player_present:
-			activate()
+			activate() 
 
 func _on_area_2d_body_entered(body):
 	if not is_instance_of(body, CharacterBody2D): return

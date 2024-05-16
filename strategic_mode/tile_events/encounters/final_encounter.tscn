@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dldcgbb6vbsjx"]
+
+[ext_resource type="PackedScene" uid="uid://dipubwp70sl3s" path="res://strategic_mode/tile_events/encounters/encounter.tscn" id="1_rj183"]
+[ext_resource type="Script" path="res://strategic_mode/tile_events/encounters/final_encounter.gd" id="2_xvkj6"]
+
+[node name="FinalEncounter" instance=ExtResource("1_rj183")]
+script = ExtResource("2_xvkj6")

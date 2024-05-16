@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://n3d30lb3mf6w"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_1hnnd"]
+[ext_resource type="Texture2D" uid="uid://nr0al7lkg57" path="res://inventory/icons/courgette_caviar.png" id="2_vf2nw"]
+
+[resource]
+script = ExtResource("1_1hnnd")
+name = "courgette caviar"
+russian_name = "Кабачковая Икра"
+description = "Хилл 30 ед."
+texture = ExtResource("2_vf2nw")
+max_stack = 99
+price = 50

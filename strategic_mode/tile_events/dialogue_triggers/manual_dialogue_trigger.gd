@@ -7,13 +7,15 @@ To use it you should create a dialog
 """
 @export var do_destroy_on_exit: bool = false
 
-@onready var game: Game = get_tree().root.get_child(0)
 @onready var area: Area2D = $Area2D
 @onready var spite: Sprite2D = $Sprite2D
 
 var player_present = false
+var game: Game
+
 # it won't be triggered on contact as EventCollider is disabled
 func activate():
+	game = get_tree().root.get_child(0)
 	assert(dialogue != null, "you'va forgotten to set the dialog")
 	dialogue_gui = DialogueGUIRes.instantiate()
 	strat_map.gui.add_child(dialogue_gui)

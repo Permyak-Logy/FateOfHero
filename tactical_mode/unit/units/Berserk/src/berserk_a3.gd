@@ -1,1 +1,0 @@
-class_name BerserkA3 extends DirectedAbility

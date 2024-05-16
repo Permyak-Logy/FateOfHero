@@ -1,7 +1,7 @@
 class_name VampP1 extends Effect
 
-var power_delta: float = 0.1
-var power_max: float = 0.5
+@export var power_delta: float = 0.1
+@export var power_max: float = 0.5
 var power: float = 0
 
 func on_set_owner(old, new):
@@ -19,6 +19,5 @@ func on_change_health(comp: StatComponent, old: float, new: float):
 
 func update_on_attack(_damage: float, _instigator: Node = null) -> float:
 	_damage *= (1 + power)
-	print("=> Up damage on ", power, " by ", effect_name)
 	power = 0
 	return _damage

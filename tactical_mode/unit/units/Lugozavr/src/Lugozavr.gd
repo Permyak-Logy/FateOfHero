@@ -9,20 +9,20 @@ func ai(map: TacticalMap):
 	if not target or target.is_death():
 		assign_target()
 	if not target:
-		ai_random_move(map)
+		await ai_random_move(map)
 	elif a1.applied == target:
-		a1.subapply()
+		await a1.subapply()
 		ai_pass(map)
 	elif map.distance_between_cells(target.get_cell(), get_cell()) > 1:
-		ai_move_to(map, target.get_cell())
+		await ai_move_to(map, target.get_cell())
 	elif a1.can_use():
 		map._prepare_ability(a1)
 		a1.select(target)
-		map._apply_ability()
+		await map._apply_ability()
 	elif a0.can_use():
 		map._prepare_ability(a0)
 		a0.select(target)
-		map._apply_ability()
+		await map._apply_ability()
 
 func assign_target():
 	var avaliable_units: Array[Unit] = []
@@ -35,3 +35,9 @@ func assign_target():
 	for unit in avaliable_units:
 		if target.health.cur() > unit.health.cur():
 			target = unit
+
+func play(_name: String, _param=null):
+	if _name in ["idle", "damaged", "death"] and target and get_abilities()[1].applied == target and not target.is_death():
+		await super(_name + "2", _param)
+	else:
+		await super(_name, _param)

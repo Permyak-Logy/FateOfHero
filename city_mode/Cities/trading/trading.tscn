@@ -1,44 +1,55 @@
-[gd_scene load_steps=21 format=3 uid="uid://cal6f73hk5ff7"]
+[gd_scene load_steps=27 format=3 uid="uid://cal6f73hk5ff7"]
 
 [ext_resource type="Script" path="res://city_mode/Cities/trading/trading_main.gd" id="1_b2dp5"]
 [ext_resource type="Texture2D" uid="uid://cge1377fuys03" path="res://GUI/inventory/InventoryRect.png" id="1_g6vnm"]
-[ext_resource type="Resource" uid="uid://c0srtoci3pulj" path="res://inventory/items/helmet_billet.tres" id="3_1n8ig"]
-[ext_resource type="Resource" uid="uid://bf6q272lgp3nh" path="res://inventory/global_inventory.tres" id="3_juopo"]
-[ext_resource type="Resource" uid="uid://b1hv1sghbyjh6" path="res://inventory/items/body_billet.tres" id="4_k3w58"]
-[ext_resource type="PackedScene" uid="uid://d4lrybm6yo1ub" path="res://city_mode/Cities/trading/crafting_slot.tscn" id="4_kncku"]
-[ext_resource type="Resource" uid="uid://bpac8plevrksx" path="res://inventory/items/trousers_billet.tres" id="5_1woqh"]
-[ext_resource type="Script" path="res://city_mode/Cities/trading/trades.gd" id="5_71pds"]
-[ext_resource type="PackedScene" uid="uid://74426675p6qr" path="res://city_mode/Cities/trading/trade_item.tscn" id="5_ktqfa"]
-[ext_resource type="Resource" uid="uid://b7ko7srrw2av6" path="res://inventory/items/boots_billet.tres" id="6_5f4at"]
-[ext_resource type="Resource" uid="uid://dcy6rd6mt1dix" path="res://inventory/items/bottle_water.tres" id="6_503rw"]
+[ext_resource type="PackedScene" uid="uid://blfx1lby8vl2c" path="res://city_mode/Cities/trading/trading_inventory_slot.tscn" id="6_6tb4h"]
+[ext_resource type="PackedScene" uid="uid://03eoa6vymydn" path="res://city_mode/Cities/trading/sale_slot.tscn" id="7_o775d"]
+[ext_resource type="PackedScene" uid="uid://cypsp1pvj7dh8" path="res://city_mode/Cities/trading/buy_slot.tscn" id="8_77vyv"]
 [ext_resource type="Texture2D" uid="uid://pg0t8p3rqvb0" path="res://GUI/inventory/inventorySlot.png" id="8_83wwa"]
-[ext_resource type="Script" path="res://city_mode/Cities/trading/page1.gd" id="8_s471d"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/sale.gd" id="8_j357x"]
+[ext_resource type="Resource" uid="uid://dwhtjpp4dsb7d" path="res://inventory/items/coin.tres" id="9_705ie"]
+[ext_resource type="Resource" uid="uid://mgakgn2qb2fn" path="res://city_mode/Cities/trading/SaleInv.tres" id="9_y1agf"]
 [ext_resource type="Script" path="res://city_mode/Cities/trading/inventoryGrid1.gd" id="9_yjtf3"]
-[ext_resource type="Script" path="res://city_mode/Cities/trading/page2.gd" id="10_ip4b6"]
-[ext_resource type="Script" path="res://city_mode/Cities/trading/page3.gd" id="11_go2ep"]
-[ext_resource type="Script" path="res://city_mode/Cities/trading/page4.gd" id="12_ui67m"]
-[ext_resource type="Script" path="res://city_mode/Cities/trading/page5.gd" id="13_7jtqw"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/trade.gd" id="10_014jr"]
+[ext_resource type="PackedScene" uid="uid://bnm273naoyejs" path="res://city_mode/Cities/trading/TradeSlot.tscn" id="10_a5dbp"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/buy.gd" id="11_le15h"]
+[ext_resource type="Resource" uid="uid://bku6tkbuhweq5" path="res://city_mode/Cities/trading/BuyInv.tres" id="12_b406k"]
+[ext_resource type="Script" path="res://city_mode/Cities/trading/TradeGrid.gd" id="13_6wrth"]
 [ext_resource type="Script" path="res://city_mode/Cities/trading/description.gd" id="14_3431c"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n8vo4"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_on5as"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0a30f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yfht0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lyxc4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ih8xu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q7mwc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_84ltg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e6wn8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63srq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n70p2"]
 
 [node name="Trading" type="Control"]
 layout_mode = 3
-anchors_preset = 15
+anchor_left = -0.001
+anchor_top = 0.001
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = 1.0
-offset_right = -7.0
-offset_bottom = -3.0
+offset_left = 8.92
+offset_top = -0.08
+offset_right = -1101.0
+offset_bottom = -752.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b2dp5")
-trade1 = ExtResource("6_503rw")
-trade6 = ExtResource("3_1n8ig")
-trade7 = ExtResource("4_k3w58")
-trade8 = ExtResource("5_1woqh")
-trade9 = ExtResource("6_5f4at")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -65,167 +76,166 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -118.0
+offset_left = -117.0
 offset_top = -58.0
-offset_right = 118.0
-offset_bottom = 58.0
+offset_right = 122.0
+offset_bottom = 59.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 10
 script = ExtResource("9_yjtf3")
-inventory = ExtResource("3_juopo")
 
-[node name="CraftingSlot" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot7" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot2" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot8" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot3" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot9" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot4" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot10" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot5" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot11" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot6" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot12" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot7" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot13" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot8" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot14" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot9" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot15" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot10" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot16" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot11" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot17" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot12" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot18" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot13" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot19" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot14" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot20" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot15" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot21" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot16" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot22" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot17" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot23" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot18" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot24" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot19" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot25" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot20" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot26" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot21" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot27" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot22" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot28" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot23" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot29" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot24" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot30" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot25" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot31" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot26" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot32" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot27" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot33" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot28" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot34" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot29" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot35" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot30" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot36" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot31" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot37" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot32" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot38" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot33" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot39" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot34" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot40" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot35" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot41" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot36" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot42" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot37" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot43" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot38" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot44" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot39" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot45" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot40" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot46" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot41" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot47" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot42" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot48" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot43" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot49" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot44" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot50" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot45" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot2" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot46" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot3" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot47" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot4" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot48" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot5" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot49" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="CraftingSlot6" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("4_kncku")]
+[node name="TradingInventorySlot50" parent="HBoxContainer/inventory/inventoryGrid1" instance=ExtResource("6_6tb4h")]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer"]
+[node name="Trade" type="NinePatchRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 texture = ExtResource("1_g6vnm")
@@ -234,224 +244,248 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="Trades1" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
-custom_minimum_size = Vector2(120, 120)
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Trade"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -65.5
-offset_right = 64.0
-offset_bottom = 65.5
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("5_71pds")
-
-[node name="trade_item" parent="HBoxContainer/NinePatchRect/Trades1" instance=ExtResource("5_ktqfa")]
-layout_mode = 2
-item = ExtResource("6_503rw")
-
-[node name="trade_item2" parent="HBoxContainer/NinePatchRect/Trades1" instance=ExtResource("5_ktqfa")]
-layout_mode = 2
-item = ExtResource("6_503rw")
-
-[node name="trade_item3" parent="HBoxContainer/NinePatchRect/Trades1" instance=ExtResource("5_ktqfa")]
-layout_mode = 2
-item = ExtResource("6_503rw")
-
-[node name="Trades2" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
-visible = false
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
+offset_left = -58.0
+offset_top = -71.0
+offset_right = 58.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("5_71pds")
+alignment = 1
 
-[node name="trade_item" parent="HBoxContainer/NinePatchRect/Trades2" instance=ExtResource("5_ktqfa")]
+[node name="Label" type="Label" parent="HBoxContainer/Trade/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "-> продать ->"
+horizontal_alignment = 1
+
+[node name="sale" type="HBoxContainer" parent="HBoxContainer/Trade/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_j357x")
+sale_inventory = ExtResource("9_y1agf")
+
+[node name="SaleSlot" parent="HBoxContainer/Trade/VBoxContainer/sale" instance=ExtResource("7_o775d")]
 layout_mode = 2
 
-[node name="trade_item2" parent="HBoxContainer/NinePatchRect/Trades2" instance=ExtResource("5_ktqfa")]
+[node name="SaleSlot2" parent="HBoxContainer/Trade/VBoxContainer/sale" instance=ExtResource("7_o775d")]
 layout_mode = 2
 
-[node name="trade_item3" parent="HBoxContainer/NinePatchRect/Trades2" instance=ExtResource("5_ktqfa")]
+[node name="SaleSlot3" parent="HBoxContainer/Trade/VBoxContainer/sale" instance=ExtResource("7_o775d")]
 layout_mode = 2
 
-[node name="Trades3" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
-visible = false
-custom_minimum_size = Vector2(120, 120)
+[node name="SaleSlot4" parent="HBoxContainer/Trade/VBoxContainer/sale" instance=ExtResource("7_o775d")]
+layout_mode = 2
+
+[node name="SaleSlot5" parent="HBoxContainer/Trade/VBoxContainer/sale" instance=ExtResource("7_o775d")]
+layout_mode = 2
+
+[node name="trade" type="HBoxContainer" parent="HBoxContainer/Trade/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("10_014jr")
+coin = ExtResource("9_705ie")
+
+[node name="Label" type="Label" parent="HBoxContainer/Trade/VBoxContainer/trade"]
+layout_mode = 2
+text = "+0G"
+
+[node name="Buttonbuy" type="Button" parent="HBoxContainer/Trade/VBoxContainer/trade"]
+custom_minimum_size = Vector2(31, 13)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_on5as")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0a30f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yfht0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_lyxc4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ih8xu")
+
+[node name="back" type="Sprite2D" parent="HBoxContainer/Trade/VBoxContainer/trade/Buttonbuy"]
+position = Vector2(16.75, 16.25)
+scale = Vector2(1.625, 1.575)
+texture = ExtResource("8_83wwa")
+vframes = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Trade/VBoxContainer/trade/Buttonbuy"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_left = -12.5
+offset_top = -5.0
+offset_right = 14.3
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("5_71pds")
+theme_override_font_sizes/font_size = 8
+text = "обмен"
 
-[node name="trade_item" parent="HBoxContainer/NinePatchRect/Trades3" instance=ExtResource("5_ktqfa")]
+[node name="ResetButton" type="Button" parent="HBoxContainer/Trade/VBoxContainer/trade"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q7mwc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_84ltg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_e6wn8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_63srq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n70p2")
 
-[node name="trade_item2" parent="HBoxContainer/NinePatchRect/Trades3" instance=ExtResource("5_ktqfa")]
-layout_mode = 2
-
-[node name="trade_item3" parent="HBoxContainer/NinePatchRect/Trades3" instance=ExtResource("5_ktqfa")]
-layout_mode = 2
-
-[node name="Trades4" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
-visible = false
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 0
-offset_left = 6.0
-offset_top = 10.0
-offset_right = 134.0
-offset_bottom = 130.0
-script = ExtResource("5_71pds")
-
-[node name="Trades5" type="VBoxContainer" parent="HBoxContainer/NinePatchRect"]
-visible = false
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 0
-offset_left = 6.0
-offset_top = 10.0
-offset_right = 134.0
-offset_bottom = 130.0
-script = ExtResource("5_71pds")
-
-[node name="PageButtons" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-offset_left = 566.0
-offset_top = 161.0
-offset_right = 700.0
-offset_bottom = 181.0
-
-[node name="page1" type="Button" parent="PageButtons"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-theme_type_variation = &"FlatButton"
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
-script = ExtResource("8_s471d")
-
-[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page1"]
-position = Vector2(10, 10)
+[node name="back" type="Sprite2D" parent="HBoxContainer/Trade/VBoxContainer/trade/ResetButton"]
+position = Vector2(15, 17)
+scale = Vector2(1.2, 1.1)
 texture = ExtResource("8_83wwa")
 vframes = 2
 frame = 1
 
-[node name="Label" type="Label" parent="PageButtons/page1"]
+[node name="Label" type="Label" parent="HBoxContainer/Trade/VBoxContainer/trade/ResetButton"]
 layout_mode = 0
 offset_left = 5.0
-offset_top = -2.0
-offset_right = 19.0
-offset_bottom = 21.0
-text = "1"
+offset_top = 11.0
+offset_right = 25.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 7
+text = "сброс"
 
-[node name="page2" type="Button" parent="PageButtons"]
-custom_minimum_size = Vector2(20, 20)
+[node name="Label2" type="Label" parent="HBoxContainer/Trade/VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"FlatButton"
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
-script = ExtResource("10_ip4b6")
+theme_override_font_sizes/font_size = 12
+text = "<- купить <-"
+horizontal_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page2"]
-position = Vector2(10, 10)
-texture = ExtResource("8_83wwa")
-vframes = 2
-
-[node name="Label" type="Label" parent="PageButtons/page2"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = -2.0
-offset_right = 19.0
-offset_bottom = 21.0
-text = "2"
-
-[node name="page3" type="Button" parent="PageButtons"]
-custom_minimum_size = Vector2(20, 20)
+[node name="buy" type="HBoxContainer" parent="HBoxContainer/Trade/VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"FlatButton"
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
-script = ExtResource("11_go2ep")
+script = ExtResource("11_le15h")
+buys = ExtResource("12_b406k")
 
-[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page3"]
-position = Vector2(10, 10)
-texture = ExtResource("8_83wwa")
-vframes = 2
-
-[node name="Label" type="Label" parent="PageButtons/page3"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = -2.0
-offset_right = 19.0
-offset_bottom = 21.0
-text = "3"
-
-[node name="page4" type="Button" parent="PageButtons"]
-visible = false
-custom_minimum_size = Vector2(20, 20)
+[node name="BuySlot" parent="HBoxContainer/Trade/VBoxContainer/buy" instance=ExtResource("8_77vyv")]
 layout_mode = 2
-theme_type_variation = &"FlatButton"
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
-script = ExtResource("12_ui67m")
 
-[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page4"]
-position = Vector2(10, 10)
-texture = ExtResource("8_83wwa")
-vframes = 2
-
-[node name="Label" type="Label" parent="PageButtons/page4"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = -2.0
-offset_right = 19.0
-offset_bottom = 21.0
-text = "4"
-
-[node name="page5" type="Button" parent="PageButtons"]
-visible = false
-custom_minimum_size = Vector2(20, 20)
+[node name="BuySlot2" parent="HBoxContainer/Trade/VBoxContainer/buy" instance=ExtResource("8_77vyv")]
 layout_mode = 2
-theme_type_variation = &"FlatButton"
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n8vo4")
-script = ExtResource("13_7jtqw")
 
-[node name="Sprite2D" type="Sprite2D" parent="PageButtons/page5"]
-position = Vector2(10, 10)
-texture = ExtResource("8_83wwa")
-vframes = 2
+[node name="BuySlot3" parent="HBoxContainer/Trade/VBoxContainer/buy" instance=ExtResource("8_77vyv")]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="PageButtons/page5"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = -2.0
-offset_right = 19.0
-offset_bottom = 21.0
-text = "5"
+[node name="BuySlot4" parent="HBoxContainer/Trade/VBoxContainer/buy" instance=ExtResource("8_77vyv")]
+layout_mode = 2
+
+[node name="BuySlot5" parent="HBoxContainer/Trade/VBoxContainer/buy" instance=ExtResource("8_77vyv")]
+layout_mode = 2
+
+[node name="TradeInventory" type="NinePatchRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+texture = ExtResource("1_g6vnm")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="TradeGrid" type="GridContainer" parent="HBoxContainer/TradeInventory"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -59.0
+offset_right = 65.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+script = ExtResource("13_6wrth")
+
+[node name="TradeSlot" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot3" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot4" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot5" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot6" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot7" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot8" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot9" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot10" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot11" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot12" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot13" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot14" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot15" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot16" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot17" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot18" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot19" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot20" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot21" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot22" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot23" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot24" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot25" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
+
+[node name="TradeSlot2" parent="HBoxContainer/TradeInventory/TradeGrid" instance=ExtResource("10_a5dbp")]
+layout_mode = 2
 
 [node name="description" type="NinePatchRect" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 271.0
-offset_top = 328.0
-offset_right = 671.0
-offset_bottom = 391.0
+offset_left = 415.0
+offset_top = 327.0
+offset_right = 815.0
+offset_bottom = 390.0
 texture = ExtResource("1_g6vnm")
 patch_margin_left = 6
 patch_margin_top = 6
@@ -466,20 +500,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -191.0
-offset_top = -24.0
-offset_right = 191.0
-offset_bottom = 24.0
+offset_left = -185.0
+offset_top = -25.5
+offset_right = 197.0
+offset_bottom = 22.5
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid1" to="HBoxContainer/NinePatchRect/Trades1" method="_on_inventory_grid_item_changed"]
-[connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid1" to="HBoxContainer/NinePatchRect/Trades2" method="_on_inventory_grid_item_changed"]
-[connection signal="item_changed" from="HBoxContainer/inventory/inventoryGrid1" to="HBoxContainer/NinePatchRect/Trades3" method="_on_inventory_grid_item_changed"]
-[connection signal="pressed" from="PageButtons/page1" to="PageButtons/page1" method="_on_pressed"]
-[connection signal="pressed" from="PageButtons/page2" to="PageButtons/page2" method="_on_pressed"]
-[connection signal="pressed" from="PageButtons/page3" to="PageButtons/page3" method="_on_pressed"]
-[connection signal="pressed" from="PageButtons/page4" to="PageButtons/page4" method="_on_pressed"]
-[connection signal="pressed" from="PageButtons/page5" to="PageButtons/page5" method="_on_pressed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="HBoxContainer/Trade/VBoxContainer/trade/Buttonbuy" to="HBoxContainer/Trade/VBoxContainer/trade" method="_on_buttonbuy_pressed"]
+[connection signal="pressed" from="HBoxContainer/Trade/VBoxContainer/trade/ResetButton" to="HBoxContainer/Trade/VBoxContainer/trade" method="_on_reset_button_pressed"]

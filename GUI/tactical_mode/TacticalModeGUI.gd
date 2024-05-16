@@ -17,6 +17,9 @@ func _ready():
 	btn_group.pressed.connect(_on_pressed)
 	ability_panel.hide()
 
+func _exit_tree():
+	ability_panel.hide()
+
 func show_abilities(unit: Unit):
 	clear_abilities()
 	for ability in unit.get_abilities():
@@ -55,7 +58,7 @@ func _on_selected(new_ability):
 		if btn:
 			btn.set_pressed_no_signal(false)
 
-func _on_pressed():
+func _on_pressed(_null=null):
 	var pressed_btn: W_BtnAbility = btn_group.get_pressed_button()
 	if pressed_btn:
 		if pressed_btn.ability != map.cur_ability:
