@@ -130,8 +130,8 @@ offset_top = 232.0
 offset_right = 481.0
 offset_bottom = 232.0
 
-[connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
 [connection signal="pressed" from="trading/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
 [connection signal="pressed" from="trading/Button" to="Trading" method="_on_button_pressed"]
 [connection signal="pressed" from="crafting/Button" to="." method="_on_button_crafting_pressed"]
 [connection signal="pressed" from="crafting/Button" to="Crafting" method="_on_button_pressed"]

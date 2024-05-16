@@ -15,6 +15,7 @@ script = ExtResource("1_awv48")
 root_effect = ExtResource("1_btorl")
 power = SubResource("Resource_nhnnt")
 range_apply = 1
+range_root = 1
 only_auto_select = true
 acts = 0
 final_act = true
