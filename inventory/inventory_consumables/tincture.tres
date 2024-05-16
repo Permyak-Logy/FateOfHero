@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://g45jigx4nb5c"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_2475y"]
+[ext_resource type="Texture2D" uid="uid://bck0utewri2ll" path="res://inventory/icons/tincture.png" id="2_vuplv"]
+
+[resource]
+script = ExtResource("1_2475y")
+relative_value = 0.5
+absolute_value = 0
+name = "tincture"
+russian_name = "Настойка из корней"
+description = "Восстанавливает 50% максимального здоровья "
+texture = ExtResource("2_vuplv")
+max_stack = 99
+price = 100

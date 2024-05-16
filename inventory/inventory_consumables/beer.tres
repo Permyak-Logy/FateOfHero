@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://cjqq7675tviu7"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_u2jfh"]
+[ext_resource type="Texture2D" uid="uid://cx8d6p7uimyrm" path="res://inventory/icons/beer.png" id="2_ystn8"]
+
+[resource]
+script = ExtResource("1_u2jfh")
+relative_value = 0.1
+absolute_value = 0
+name = "beer"
+russian_name = "Пиво"
+description = "Восстанавливает 10% максимального здоровья"
+texture = ExtResource("2_ystn8")
+max_stack = 99
+price = 20

@@ -219,7 +219,10 @@ func take_from(slot:InventorySlot):
 		take_from_trash(slot)
 	else:
 		return take_item_form_char_slot(hovering_slot)
-	 
+
+func activate(slot: InventorySlot):
+	pass 
+
 
 func _input(event):
 	update_item_in_hand()
@@ -236,6 +239,19 @@ func _input(event):
 		if not hovering_slot or not hovering_slot.is_empty():
 			target_slot = item_stack_in_hand_origin
 		put_to(target_slot)
+	
+	if event.is_action_pressed("rmb"):
+		if not hovering_slot: return
+		if not hovering_slot.item_stack_repr: return
+		#activate(hovering_slot)
+		if is_instance_of(hovering_slot.item_stack_repr.item_stack.item, HealingItem):
+			inventory.remove(hovering_slot.item_stack_repr.item_stack.item, 1)
+			var max_hp = character_panel.current_character.health.get_max()
+			var healing_item: HealingItem = hovering_slot.item_stack_repr.item_stack.item 
+			character_panel.current_character.health.add(healing_item.absolute_value)
+			character_panel.current_character.health.add(healing_item.relative_value * max_hp)
+			update()
+		pass
 
 func show_description(item: Item):
 	hide_description()

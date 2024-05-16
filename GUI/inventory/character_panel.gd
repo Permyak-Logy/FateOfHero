@@ -105,11 +105,11 @@ func update_abilities():
 func update_bars():
 	hp_bar.max_value = current_character.health.get_max()
 	hp_bar.value = current_character.health.cur()
-	hp_label.text = str(current_character.health.cur()) + "/" + str(current_character.health.get_max())
+	hp_label.text = str(int(current_character.health.cur())) + "/" + str(int(current_character.health.get_max()))
 	exp_bar.max_value = current_character.expirience.get_exp_to_next_lvl()
 	exp_bar.value = current_character.expirience.expirience
-	exp_label.text = str(exp_bar.value) + "/" + \
-		str(exp_bar.max_value)
+	exp_label.text = str(int(exp_bar.value)) + "/" + \
+		str(int(exp_bar.max_value))
 
 func update_repr():
 	name_label.text = current_character.unit_name

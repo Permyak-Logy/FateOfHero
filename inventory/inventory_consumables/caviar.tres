@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HealingItem" load_steps=3 format=3 uid="uid://n3d30lb3mf6w"]
+
+[ext_resource type="Script" path="res://inventory/healing_item.gd" id="1_1hnnd"]
+[ext_resource type="Texture2D" uid="uid://nr0al7lkg57" path="res://inventory/icons/courgette_caviar.png" id="2_vf2nw"]
+
+[resource]
+script = ExtResource("1_1hnnd")
+relative_value = 0.0
+absolute_value = 30
+name = "courgette caviar"
+russian_name = "Кабачковая Икра"
+description = "Восстанавливает 30 ед. здоровья"
+texture = ExtResource("2_vf2nw")
+max_stack = 99
+price = 50
