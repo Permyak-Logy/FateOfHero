@@ -149,6 +149,7 @@ func change_character(character: PackedScene) -> PackedScene:
 	
 	remake_stots()
 	print("changed displayed character to <", current_character.name, ">" )
+	print_inventory()
 	update()
 	return old_char
 

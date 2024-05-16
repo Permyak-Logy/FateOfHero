@@ -7,8 +7,7 @@
 script = ExtResource("1_8micr")
 name = "koomis"
 russian_name = "Кумыс"
-description = ""
+description = "Хилл 15%"
 texture = ExtResource("2_w4mgq")
-max_stack = 1
-recipe = Array[ExtResource("1_8micr")]([])
-price = 50
+max_stack = 99
+price = 30

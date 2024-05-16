@@ -31,7 +31,7 @@ var item_stack_in_hand_origin: InventorySlot
 var hovering_slot: InventorySlot = null
 
 const DESCRIPTION_OFFSET: Vector2 = Vector2(-260, -100)
-const DESCTIPTION_DELAY: float = 2.4
+const DESCTIPTION_DELAY: float = 0.5 # 2.4
 const ItemDescriptionPanelRes: PackedScene = preload("res://GUI/inventory/description_panel.tscn")
 var description: ItemDesctiptionPanel
 var description_timer: Timer

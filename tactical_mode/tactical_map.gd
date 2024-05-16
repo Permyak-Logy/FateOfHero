@@ -63,7 +63,7 @@ var cur_ability: Ability = null:  # Текущая выбранная спосо
 var nature_count: int = -1  # Кол-во природных actor выступающих в роли стен 
 
 # Вызывается после завершения боя, возвращает списки живых и мёртвых персонажей
-signal finish(live: Array[PackedScene], death: Array[PackedScene])
+signal finish(live: Array[PackedScene], death: Array[PackedScene], is_win: bool)
 
 # Отношения между разными юнитами
 enum relation {Equal, Friend, Enemy, Neutral}
@@ -453,7 +453,7 @@ func _finalize_fight(_win=false):
 			packed_death.append(pack)
 		else:
 			packed_live.append(pack)
-	finish.emit(packed_live, packed_death)
+	finish.emit(packed_live, packed_death, win)
 
 func _update_walls():
 	"""

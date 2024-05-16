@@ -8,6 +8,6 @@
 [resource]
 script = ExtResource("4_1tpxy")
 ingredients_item = Array[Resource("res://inventory/item.gd")]([ExtResource("1_txho8"), ExtResource("2_hajjl")])
-ingredients_num = Array[int]([1, 10])
+ingredients_num = Array[int]([1, 20])
 product = ExtResource("3_cuipq")
-is_known = true
+is_known = false

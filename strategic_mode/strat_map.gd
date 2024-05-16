@@ -35,16 +35,18 @@ func _ready():
 	gui.gui_closed.connect(on_gui_closed)
 	strat_map_loaded.emit()
 
-
-func _enter_tree():
-	pass
-
-
 func show_game_over():
 	var game_over_gui: GameOverGUI = GameOverGUIRes.instantiate() 
 	gui.add_child(game_over_gui)
+	game_over_gui.set_lose()
 	await game_over_gui.done
 	gui.remove_child(game_over_gui)
 	game.remove_save()
 	game.to_main_menu()
-	pass
+
+func show_win():
+	var game_over_gui: GameOverGUI = GameOverGUIRes.instantiate() 
+	gui.add_child(game_over_gui)
+	game_over_gui.set_win()
+	await game_over_gui.done
+	gui.remove_child(game_over_gui)

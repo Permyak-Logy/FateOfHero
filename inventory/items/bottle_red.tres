@@ -52,4 +52,4 @@ russian_name = ""
 description = "+20% максимального здоровья на 3 хода"
 texture = ExtResource("4_oeadd")
 max_stack = 10
-price = 0
+price = 250

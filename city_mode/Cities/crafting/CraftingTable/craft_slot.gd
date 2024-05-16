@@ -2,7 +2,6 @@ class_name CraftSlot extends PanelContainer
 
 @onready var game: Game = get_tree().root.get_child(0)
 @onready var global_inventory : Inventory = game.strat_map.player.inventory
-#@export var global_inventory: Inventory = null
 
 var item : Item = null:
 	set(value):

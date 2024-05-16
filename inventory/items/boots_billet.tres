@@ -10,5 +10,4 @@ russian_name = "Заготовка для ботинков"
 description = ""
 texture = ExtResource("2_mhmfn")
 max_stack = 1
-recipe = Array[ExtResource("1_kq76t")]([])
-price = 1000
+price = 5000

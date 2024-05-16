@@ -8,3 +8,11 @@ signal done
 
 func _on_to_main_menu_pressed():
 	done.emit()
+
+func set_win():
+	title.text = "Победа!"
+	body.text = "Игра окончена"
+
+func set_lose():
+	title.text = "Игра окончена"
+	body.text = "Главный герой умер"

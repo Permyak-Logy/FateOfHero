@@ -22,7 +22,7 @@ func update_on_start_stepmove():
 			continue
 		if unit.health and 0 < unit.health.percent() and unit.health.percent() <= percent:
 			var diff = -unit.health.cur()
-			unit.health.iadd(owner.health.get_max() * power.mul + power.add)
+			unit.health.add(owner.health.get_max() * power.mul + power.add)
 			diff += unit.health.cur()
 			cooldown_time = cooldown
 			get_map().write_info(

@@ -1,9 +1,10 @@
-[gd_scene load_steps=90 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=95 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
 [ext_resource type="Texture2D" uid="uid://dv2lw4mfvgojg" path="res://tactical_mode/assets/Bg1.png" id="3_cboxx"]
 [ext_resource type="PackedScene" uid="uid://di7auu4d2dl2" path="res://tactical_mode/unit/units/Naris/Naris.tscn" id="6_1btoa"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="6_kbg8m"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="9_6j4aw"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="9_fe0mx"]
 [ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
@@ -18,6 +19,15 @@
 [ext_resource type="AudioStream" uid="uid://dq0vrkeat2qlu" path="res://tactical_mode/assets/tactical_mode_bg_music.mp3" id="15_nmmmq"]
 [ext_resource type="PackedScene" uid="uid://cxvcedbc0b2ki" path="res://tactical_mode/unit/units/Poludnisa/Poludnisa.tscn" id="16_sq65k"]
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/units/Skeleton/Skeleton.tscn" id="17_rqd6n"]
+
+[sub_resource type="Resource" id="Resource_23mrv"]
+resource_local_to_scene = true
+script = ExtResource("6_kbg8m")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}
 
 [sub_resource type="Resource" id="Resource_kgjbu"]
 resource_local_to_scene = true
@@ -78,6 +88,15 @@ level = 1
 expirience = 0
 ups = 0
 
+[sub_resource type="Resource" id="Resource_lxki2"]
+resource_local_to_scene = true
+script = ExtResource("6_kbg8m")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}
+
 [sub_resource type="Resource" id="Resource_33q3x"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
@@ -137,6 +156,15 @@ level = 1
 expirience = 0
 ups = 0
 
+[sub_resource type="Resource" id="Resource_7hdn2"]
+resource_local_to_scene = true
+script = ExtResource("6_kbg8m")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}
+
 [sub_resource type="Resource" id="Resource_hnp3c"]
 resource_local_to_scene = true
 script = ExtResource("9_6j4aw")
@@ -195,6 +223,15 @@ script = ExtResource("9_fe0mx")
 level = 1
 expirience = 0
 ups = 0
+
+[sub_resource type="Resource" id="Resource_k4p1i"]
+resource_local_to_scene = true
+script = ExtResource("6_kbg8m")
+_gears = {}
+gear_slots = {
+2: 2,
+4: 5
+}
 
 [sub_resource type="Resource" id="Resource_tv4bm"]
 resource_local_to_scene = true
@@ -524,6 +561,7 @@ anchor_mode = 0
 
 [node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
 position = Vector2(126, 422)
+inventory = SubResource("Resource_23mrv")
 health = SubResource("Resource_engs8")
 defence = SubResource("Resource_mb28j")
 speed = SubResource("Resource_i88dp")
@@ -532,6 +570,7 @@ expirience = SubResource("Resource_yoj6t")
 
 [node name="Vamp" parent="." instance=ExtResource("14_y1ibn")]
 position = Vector2(128, 183)
+inventory = SubResource("Resource_lxki2")
 health = SubResource("Resource_u6nck")
 defence = SubResource("Resource_b5blw")
 speed = SubResource("Resource_ohguw")
@@ -540,6 +579,7 @@ expirience = SubResource("Resource_hisbe")
 
 [node name="SmolItto" parent="." instance=ExtResource("12_e7e7b")]
 position = Vector2(129, 239)
+inventory = SubResource("Resource_7hdn2")
 health = SubResource("Resource_7yvpb")
 defence = SubResource("Resource_iyj7q")
 speed = SubResource("Resource_l5hdv")
@@ -548,6 +588,7 @@ expirience = SubResource("Resource_e1hbj")
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
 position = Vector2(126, 330)
+inventory = SubResource("Resource_k4p1i")
 health = SubResource("Resource_vpvh8")
 defence = SubResource("Resource_vhoup")
 speed = SubResource("Resource_tk7bu")
