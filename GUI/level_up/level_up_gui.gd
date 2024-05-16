@@ -63,19 +63,21 @@ func _ready():
 
 func increment(comp: StatComponent):
 	if pts <= 0:
-		done_button.disabled = false
 		return
 	delta[comp] += std_d[comp]
 	pts -= 1
 	update()
+	if pts <= 0:
+		done_button.disabled = false
 
 func decrement(comp: StatComponent):
 	if delta[comp] == 0:
-		done_button.disabled = true
 		return
 	delta[comp] -= std_d[comp]
 	pts += 1
 	update()
+	if pts > 0:
+		done_button.disabled = true
 
 # graphical update
 func update():
