@@ -84,10 +84,13 @@ func _init():
 func _ready():
 	if is_instance_of($"..", Game):
 		return
-		
-	_p_units = [$Berserk, $Vamp, $SmolItto, $Naris]
 	
-	_e_units = [$Vedmachok, $Lugozavr, $Vendigo, $Skeleton, $Poludnisa]
+	for u in get_children():
+		if is_instance_of(u, Unit):
+			if (u as Unit).controlled_player:
+				_p_units.append(u)
+			else:
+				_e_units.append(u)
 	inited = true
 
 func start_battle():
@@ -357,7 +360,7 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	write_info("* Ходит: " + active_unit.unit_name + " * ")
+	write_info("* Ходит: " + str(active_unit) + " * ")
 	
 	cur_ability = null
 	active_unit.set_outline_color(Unit.CUR_COLOR)

@@ -36,6 +36,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 signal death(Unit)  # Вызывается при смерти
 signal walk_finished  # Вызывается при завершении передвижения
 
+var abilities: Array[Ability] = []
 var current_id_path: Array = []  # Путь для передвижения
 
 var _effects: Array[Effect] = []
@@ -71,6 +72,8 @@ var _end_pos = Vector2(0, 0)
 func _ready():
 	if health and health_bar_pb:
 		health_bar_pb.stat_component = health
+	for ability in private_abilities:
+		abilities.append(ability.duplicate(true))
 	set_outline_color(DEFAULT_COLOR)
 	if flip_onready:
 		on_flip_unit()
@@ -144,8 +147,8 @@ func get_mods() -> Dictionary:
 
 func get_abilities() -> Array[Ability]:
 	if inventory:
-		return private_abilities + inventory.get_abilities()
-	return private_abilities
+		return abilities + inventory.get_abilities()
+	return abilities
 
 func apply_passives():
 	for effect in private_passives:
