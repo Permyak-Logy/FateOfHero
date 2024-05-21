@@ -17,7 +17,7 @@ func init():
 func _ready():
 	init()
 	assert(item != null, "Ты забыл добавить предмет")
-	assert(count != null, "Ты забыл добавить предмет")
+	assert(count != 0, "Ты забыл добавить колличество")
 	sprite.texture = texture
 
 func activate():
@@ -25,3 +25,4 @@ func activate():
 	inventory = game.strat_map.player.inventory
 	inventory.insert(item, count)
 	remove()
+	
