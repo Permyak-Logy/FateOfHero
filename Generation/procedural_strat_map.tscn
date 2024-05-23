@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0inyrl8f6qwh"]
+
+[ext_resource type="Script" path="res://Generation/procedural_strat_map.gd" id="1_bxdt3"]
+[ext_resource type="TileSet" uid="uid://b4qxaryuue2gl" path="res://Generation/sm_tileset.tres" id="2_ymkqo"]
+[ext_resource type="Script" path="res://strategic_mode/StratTileMap.gd" id="3_q84tg"]
+[ext_resource type="PackedScene" uid="uid://cf0rrbb0c6pik" path="res://strategic_mode/player.tscn" id="4_4qthm"]
+[ext_resource type="Script" path="res://strategic_mode/GUI.gd" id="5_jnebf"]
+[ext_resource type="PackedScene" uid="uid://kn0koccqa28q" path="res://GUI/inventory/inventory_gui.tscn" id="6_dc75d"]
+[ext_resource type="PackedScene" uid="uid://cfkm7grgi7tsr" path="res://GUI/strat_map_menu/strat_map_menu.tscn" id="7_3f7v3"]
+[ext_resource type="AudioStream" uid="uid://dlsbppd8qggrt" path="res://strategic_mode/strategic_mode_bg_music.mp3" id="8_jhq8n"]
+
+[node name="StratMapTemplate" type="Node2D"]
+script = ExtResource("1_bxdt3")
+
+[node name="StratTileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_ymkqo")
+format = 2
+layer_0/name = "Terrain0"
+layer_1/name = "Terrain1"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Terrain2"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Terrain3"
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "Terrain4"
+layer_4/tile_data = PackedInt32Array()
+script = ExtResource("3_q84tg")
+
+[node name="player" parent="." instance=ExtResource("4_4qthm")]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("5_jnebf")
+
+[node name="InventoryGUI" parent="GUI" instance=ExtResource("6_dc75d")]
+visible = false
+
+[node name="StratMapMenu" parent="GUI" instance=ExtResource("7_3f7v3")]
+visible = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_jhq8n")

@@ -6,8 +6,8 @@ class_name Game extends Node2D
 @onready var external_puzzle_container: ExternalPuzzleContainer = \
 load("res://external_puzzles/external_puzzle_container.tscn").instantiate()
 @onready var main_menu: MainMenu = load("res://GUI/main_menu/main_menu.tscn").instantiate()
-@onready var StratMapRes = preload("res://strategic_mode/strat_map.tscn")
-
+var StratMapRes = preload("res://strategic_mode/strat_map.tscn")
+var ProceduralSMRes = preload("res://Generation/procedural_strat_map.tscn")
 
 var active_scene = null
 
@@ -96,5 +96,10 @@ func new_save(init_char: PackedScene):
 	strat_map.player.sprite.hframes = 8
 	strat_map.player.mc_name = char.name
 	remove_child(strat_map)
-	
-	
+
+func new_procedural_world(init_char: PackedScene):
+	var sm: ProceduralStratMap = ProceduralSMRes.instantiate()
+	add_child(sm)
+	sm.gen_world()
+	remove_child(sm)
+	strat_map = sm
