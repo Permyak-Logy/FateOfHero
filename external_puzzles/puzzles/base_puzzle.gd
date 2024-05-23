@@ -6,5 +6,6 @@ All the shared logic goes here
 The API must be defined here
 """
 
-@export var rewards: Array[ItemStack] = []
+var rewards: Array[ItemStack] = []
 signal solved(rewards: Array[ItemStack])
+signal failed(rewards: Array[ItemStack])

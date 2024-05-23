@@ -90,7 +90,7 @@ func load_save():
 func new_save(init_char: PackedScene):
 	strat_map = StratMapRes.instantiate()
 	add_child(strat_map)
-	strat_map.player.inventory.characters.append(init_char)
+	strat_map.player.inventory.characters = [init_char]
 	var char = init_char.instantiate()
 	strat_map.player.sprite.texture = strat_map.player.texture[char.name]
 	strat_map.player.sprite.hframes = 8

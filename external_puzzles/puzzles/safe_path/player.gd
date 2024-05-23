@@ -8,6 +8,35 @@ class_name WASDPlayer extends CharacterBody2D
 var speed = 1000
 var next_move = null
 
+enum Direction {
+	North,
+	NorthEast,
+	East,
+	SouthEast,
+	South,
+	SouthWest,
+	West,
+	NorthWest
+}
+
+func get_dir_from_vect(vect: Vector2i) -> Direction:
+	if vect == Vector2i(0, -1):
+		return Direction.North
+	elif vect == Vector2i(1, -1):
+		return Direction.East
+	elif vect == Vector2i(1, 0):
+		return Direction.East
+	elif vect == Vector2i(1, 1):
+		return Direction.East
+	elif vect == Vector2i(0, 1):
+		return Direction.South
+	elif vect == Vector2i(-1, 1):
+		return Direction.West
+	elif vect == Vector2i(-1, 0):
+		return Direction.West
+	else:
+		return Direction.West
+
 func wasd_move(event):
 	var delta = Vector2i(0, 0)
 	if event.is_action_pressed("up"):
@@ -20,6 +49,7 @@ func wasd_move(event):
 		delta[0] += 1
 	if puzzle.tilemap.get_cell_tile_data(0, pos + delta).get_custom_data("walkable"):
 		pos += delta
+		sprite.frame = get_dir_from_vect(delta)
 
 func _physics_process(delta):
 	var target_position = puzzle.tilemap.map_to_local(pos)
@@ -54,4 +84,6 @@ func _input(event):
 
 
 func _ready():
+	sprite.frame = Direction.South
+	sprite.offset = Vector2i(0, -2)
 	pass
