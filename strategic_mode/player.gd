@@ -127,19 +127,19 @@ func get_dir_from_vect(vect: Vector2i) -> Direction:
 	if vect == Vector2i(0, -1):
 		return Direction.North
 	elif vect == Vector2i(1, -1):
-		return Direction.NorthEast
+		return Direction.East
 	elif vect == Vector2i(1, 0):
 		return Direction.East
 	elif vect == Vector2i(1, 1):
-		return Direction.SouthEast
+		return Direction.East
 	elif vect == Vector2i(0, 1):
 		return Direction.South
 	elif vect == Vector2i(-1, 1):
-		return Direction.SouthWest
+		return Direction.West
 	elif vect == Vector2i(-1, 0):
 		return Direction.West
 	else:
-		return Direction.NorthWest
+		return Direction.West
 func _physics_process(delta):
 	sprite.frame = direction
 	if current_id_path.is_empty():
