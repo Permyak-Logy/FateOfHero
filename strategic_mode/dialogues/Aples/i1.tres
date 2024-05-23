@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Dialogue" load_steps=1 format=3]
 
 [ext_resource type="Script" path="res://strategic_mode/dialogues/dialogue.gd" id="1_3w2yq"]
-[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/Aple/f1.tscn" id="0_bbitg"]
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/Aples/f1.tscn" id="0_bbitg"]
 
 [resource]
 script = ExtResource("1_3w2yq")
