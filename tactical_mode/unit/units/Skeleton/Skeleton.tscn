@@ -41,9 +41,9 @@ characteristic = SubResource("Resource_vl6n6")
 [sub_resource type="Resource" id="Resource_6fdyb"]
 resource_local_to_scene = true
 script = ExtResource("2_cp544")
-base = 100.0
-cur = 100.0
-max_ = 100.0
+base = 99.0
+cur = 99.0
+max_ = 99.0
 
 [sub_resource type="Resource" id="Resource_8p6jf"]
 resource_local_to_scene = true
