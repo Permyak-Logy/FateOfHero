@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=1 format=3]
+
+[ext_resource type="Script" path="res://strategic_mode/dialogues/dialogue.gd" id="1_3w2yq"]
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/Beauty_Mash/f2.tscn" id="0_bbitg"]
+
+[resource]
+script = ExtResource("1_3w2yq")
+title = "Красавчик Мэш"
+msg = "Ну ты и урод?"
+options = Array[PackedScene]([ExtResource("0_bbitg")])
