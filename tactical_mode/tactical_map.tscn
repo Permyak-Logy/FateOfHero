@@ -696,7 +696,7 @@ damage = SubResource("Resource_n1trs")
 expirience = SubResource("Resource_qobx4")
 
 [node name="Vamp" parent="." instance=ExtResource("14_y1ibn")]
-position = Vector2(97, 401)
+position = Vector2(133, 426)
 inventory = SubResource("Resource_61g8m")
 health = SubResource("Resource_k1htb")
 defence = SubResource("Resource_333ue")
