@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://mlfxhosd61lj"]
 
-[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
-[ext_resource type="Resource" path="res://strategic_mode/dialogues/Dio/i2.tres" id="1_lpq1w"]
+[ext_resource type="PackedScene" uid="uid://cydllsqgilpi1" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
+[ext_resource type="Resource" uid="uid://c7768vv0osipx" path="res://strategic_mode/dialogues/Solder/i1.tres" id="2_qr5rk"]
 
 [node name="Option" instance=ExtResource("1_ae00h")]
-msg = "f1"
-next_dialogue = ExtResource("1_lpq1w")
+msg = "Не очень то учтиво"
+next_dialogue = ExtResource("2_qr5rk")
