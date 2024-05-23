@@ -31,7 +31,7 @@ var pts: = 0
 
 @onready var std_d: Dictionary = {
 	unit.health :  20,
-	unit.speed :   2,
+	unit.speed :   4,
 	unit.defence : 20,
 	unit.damage :  10,
 }
