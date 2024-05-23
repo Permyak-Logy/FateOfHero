@@ -14,6 +14,7 @@ func wasd_move(event):
 		delta[0] += 1
 	if puzzle.tilemap.get_cell_tile_data(0, pos + delta).get_custom_data("walkable"):
 		pos += delta
+		sprite.frame = get_dir_from_vect(delta)
 	
 	if pos.x == 0 or pos.x == 19 or pos.y == 0 or pos.y == 14:
 		if p.wc_reached:

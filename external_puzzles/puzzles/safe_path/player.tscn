@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://pva6nu0g0lmb"]
 
 [ext_resource type="Script" path="res://external_puzzles/puzzles/safe_path/player.gd" id="1_ovbjj"]
-[ext_resource type="Texture2D" uid="uid://bqk0byfcbhfeq" path="res://external_puzzles/puzzles/stealth_run/tpr_char.png" id="2_5xqce"]
+[ext_resource type="Texture2D" uid="uid://cdp7fc7b0xkvn" path="res://strategic_mode/tile_events/sprites/gg_fidi_directional.png" id="2_mh74l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbgoo"]
 size = Vector2(12, 16)
@@ -10,7 +10,9 @@ size = Vector2(12, 16)
 script = ExtResource("1_ovbjj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_5xqce")
+position = Vector2(0, -2)
+texture = ExtResource("2_mh74l")
+hframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_nbgoo")

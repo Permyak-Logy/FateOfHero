@@ -141,7 +141,10 @@ func set_enemies(enemies_: Array[PackedScene], level_: int):
 	enemies = enemies_
 	enemy_level = level_
 
-func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
+func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene], win: bool):
+	if not win:
+		failed.emit([])
+		return
 	inventory.characters = alive
 	solved.emit(rewards)
 	for char_p in dead:
