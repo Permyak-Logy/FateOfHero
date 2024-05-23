@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=1 format=3]
+
+[ext_resource type="Script" path="res://strategic_mode/dialogues/dialogue.gd" id="1_3w2yq"]
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/Kasandra_Reves/f3.tscn" id="0_bbitg"]
+
+[resource]
+script = ExtResource("1_3w2yq")
+title = "Касандра"
+msg = "Я ненавижу своего мужа. Мне его посватали в 12. Что я могла поделать в таком возрасте? То ли дело 14. Хотя тогда он был молодым и статный, а теперь сухой горбатый и ворчливый. Тьфу! Я надеюсь, что однажды мне из лесу выедет принц на белом ящере и увезёт далеко-далеко!"
+options = Array[PackedScene]([ExtResource("0_bbitg")])

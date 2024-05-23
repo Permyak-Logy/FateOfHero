@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=1 format=3]
+
+[ext_resource type="Script" path="res://strategic_mode/dialogues/dialogue.gd" id="1_3w2yq"]
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/Beautiful_Ily/f3.tscn" id="0_bbitg"]
+
+[resource]
+script = ExtResource("1_3w2yq")
+title = "Красивая девушка"
+msg = "Только вот он долго не возвращается. Я так волнуюсь... А что если он нашел себе другую? Или может... Нет, богиня. Пусть он лучше найдщёт другую себе... Ты же тоже странник, я права?"
+options = Array[PackedScene]([ExtResource("0_bbitg")])

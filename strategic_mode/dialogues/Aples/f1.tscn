@@ -4,4 +4,3 @@
 
 [node name="Option" instance=ExtResource("1_ae00h")]
 msg = "Что бы это могло значить?"
-next_dialogue = ExtResource("1_lpq1w")
