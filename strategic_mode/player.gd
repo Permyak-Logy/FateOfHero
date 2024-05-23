@@ -140,6 +140,8 @@ func get_dir_from_vect(vect: Vector2i) -> Direction:
 		return Direction.West
 	else:
 		return Direction.West
+
+
 func _physics_process(delta):
 	sprite.frame = direction
 	if current_id_path.is_empty():

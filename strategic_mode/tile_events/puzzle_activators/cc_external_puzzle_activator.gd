@@ -24,8 +24,8 @@ func activate():
 	game = get_tree().root.get_child(0)
 	var puzzle_scene: BasePuzzle = puzzle.instantiate()
 	assert(puzzle_scene.has_method("set_enemies"), "trying to start a non combat puzzle with CombatCapablePuzzleActivator")
-	puzzle_scene.solved.connect(on_done)
+	puzzle_scene.solved.connect(on_solved)
 	puzzle_scene.set_enemies(enemies, enemy_level)
-	remove()
+	puzzle_scene.rewards = success_rewards
 	game.external_puzzle_container.add_child(puzzle_scene)
 	game.to_puzzle_mode()
