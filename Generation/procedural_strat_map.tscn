@@ -29,6 +29,7 @@ script = ExtResource("3_q84tg")
 [node name="player" parent="." instance=ExtResource("4_4qthm")]
 
 [node name="GUI" type="CanvasLayer" parent="."]
+process_mode = 3
 script = ExtResource("5_jnebf")
 
 [node name="InventoryGUI" parent="GUI" instance=ExtResource("6_dc75d")]
@@ -37,5 +38,5 @@ visible = false
 [node name="StratMapMenu" parent="GUI" instance=ExtResource("7_3f7v3")]
 visible = false
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GUI"]
 stream = ExtResource("8_jhq8n")

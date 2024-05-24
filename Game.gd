@@ -101,5 +101,6 @@ func new_procedural_world(init_char: PackedScene):
 	var sm: ProceduralStratMap = ProceduralSMRes.instantiate()
 	add_child(sm)
 	sm.gen_world()
+	sm.player.inventory.characters = [init_char]
 	remove_child(sm)
 	strat_map = sm
