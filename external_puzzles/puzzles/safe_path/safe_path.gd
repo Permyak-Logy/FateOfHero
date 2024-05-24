@@ -128,6 +128,7 @@ func gen_field():
 				tilemap.set_cell(0, pos, 0, danger_tile_atlas_coords)
 
 func _ready():
+	assert(not enemies.is_empty(), "No enemies")
 	gen_field()
 	wc.WCReached.connect(end_successfully)
 	add_child(wc)
@@ -143,14 +144,16 @@ func set_enemies(enemies_: Array[PackedScene], level: int):
 func end_successfully():
 	solved.emit(rewards)
 
-func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
+func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene], win: bool):
 	inventory.characters = alive
-	solved.emit(rewards)
-	game.to_strat_mode()
+	if not win:
+		failed.emit()
 	for char_p in dead:
 		var char = char_p.instantiate()
 		if char.name == game.strat_map.player.mc_name:
 			game.strat_map.show_game_over()
+	solved.emit(rewards)
+	game.to_strat_mode()
 
 func spawn_visp():
 	var visp: SafePathVisp = SafePathVispRes.instantiate()  

@@ -153,6 +153,7 @@ func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene],
 			game.strat_map.show_game_over()
 
 func _ready():
+	assert(not pawns.is_empty(), "No enemies")
 	player.pos = Vector2i(1, 1)
 	player.sprite.texture = game.strat_map.player.sprite.texture
 	gen_field()
