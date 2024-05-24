@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3ocbc"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="2_7e5uy"]
-[ext_resource type="Texture2D" path="res://strategic_mode/tile_events/sprites/gg_berserk.png" id="2_i5w35"]
+[ext_resource type="Texture2D" uid="uid://x7ma4d6x4q5y" path="res://strategic_mode/tile_events/sprites/gg_berserk.png" id="2_i5w35"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_wa0qx"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="3_mx66j"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_1oxc8"]
@@ -34,9 +34,9 @@ gear_slots = {
 [sub_resource type="Resource" id="Resource_8m2c0"]
 resource_local_to_scene = true
 script = ExtResource("3_mx66j")
-base = 80.0
-cur = 80.0
-max_ = 80.0
+base = 50.0
+cur = 50.0
+max_ = 50.0
 
 [sub_resource type="Resource" id="Resource_yau65"]
 resource_local_to_scene = true
@@ -605,8 +605,7 @@ _data = {
 [node name="Berserk" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "trail_particles", "health_bar_pb", "animation_player", "for_flip_sprites")]
 editor_description = "агрессивный стиль игры
 - навыки наносят больше урона
-- атаки в основном работают в юлижнем бою
-- ярость"
+- очень мало здоровья"
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3ocbc")
