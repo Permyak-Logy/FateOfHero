@@ -128,6 +128,7 @@ func gen_field():
 				tilemap.set_cell(0, pos, 0, danger_tile_atlas_coords)
 
 func _ready():
+	assert(not enemies.is_empty(), "No enemies")
 	gen_field()
 	wc.WCReached.connect(end_successfully)
 	add_child(wc)
