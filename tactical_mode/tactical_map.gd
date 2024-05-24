@@ -154,7 +154,6 @@ func arrange_units():
 			for cell in _p_units[i].get_occupied_cells():
 				left_shift = max(left_shift, (cell - _p_units[i].get_cell())[0])
 			move_unit_to(_p_units[i], Vector2i(_astar_board.left + (y + 1) % 2 + left_shift, y))
-	
 	if _e_units:
 		var step_e = min((_astar_board.bottom - _astar_board.top) / len(_e_units), 6)
 		var start_e = center - len(_e_units) * step_e / 2 + step_e / 2
@@ -378,6 +377,7 @@ func _start_stepmove():
 		reset_outline_color(unit_data[1])
 		
 	gui.escape_ability_btn.update()
+	gui.update_queue(unit_queue)
 	
 	if acts == 0 or not active_unit:
 		acts = 0

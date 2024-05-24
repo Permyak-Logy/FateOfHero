@@ -722,4 +722,4 @@ damage = SubResource("Resource_fwfm7")
 expirience = SubResource("Resource_b0kai")
 
 [node name="BlackHole" parent="." instance=ExtResource("20_u26c1")]
-position = Vector2(449, 423)
+position = Vector2(447, 325)

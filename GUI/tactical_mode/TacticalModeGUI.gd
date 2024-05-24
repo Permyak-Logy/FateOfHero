@@ -65,3 +65,7 @@ func _on_pressed(_null=null):
 			map._prepare_ability((pressed_btn as W_BtnAbility).ability)
 	else:
 		map._cancel_ability()
+
+func update_queue(que: Array):
+	# TODO: Меняй туть
+	pass
