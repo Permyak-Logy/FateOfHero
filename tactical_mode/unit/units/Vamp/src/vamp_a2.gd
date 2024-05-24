@@ -5,7 +5,7 @@ class_name VampA2 extends AoEAbility
 
 func apply():
 	await super()
-	owner.play("idle")
+	await owner.play("idle")
 
 func find_about_cells():
 	var map = get_map()

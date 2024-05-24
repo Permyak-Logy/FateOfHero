@@ -8,7 +8,7 @@ func apply():
 	await (owner as Unit).play("preattack", unit)
 	unit.apply_damage(scale * power.mul + power.add, owner)
 	await (owner as Unit).play("postattack")
-	owner.play("idle")
+	await owner.play("idle")
 
 func can_select(node):
 	var unit = node as Unit

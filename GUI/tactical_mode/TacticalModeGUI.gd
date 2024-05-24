@@ -9,6 +9,7 @@ class_name TacticalModeGUI extends CanvasLayer
 @onready var ability_panel: Panel = $AbilityPanel
 @onready var escape_ability_btn: W_BtnAbility = $EscapeAbility
 @onready var tactical_info: TacticalInfo = $TacticalInfo
+@onready var unit_queue_panel: TMUnitQueuePanel = $UnitQueuePanel
 var selected: int = -1
 
 func _ready():
@@ -65,3 +66,7 @@ func _on_pressed(_null=null):
 			map._prepare_ability((pressed_btn as W_BtnAbility).ability)
 	else:
 		map._cancel_ability()
+
+func update_queue(que: Array):
+	#array[(initiative, unit)]
+	unit_queue_panel.set_queue(que)

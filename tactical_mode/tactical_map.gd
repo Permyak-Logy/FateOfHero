@@ -23,9 +23,10 @@ var active_unit: Unit:  # Текущий
 var acts: int  # Текущее кол-во действий
 var _p_units: Array[Unit] = []  # Список юнитов игрока
 var _e_units: Array[Unit] = []  # Список юнитов оппонента
+var _n_units: Array[Unit] = []
 var units:  # property список всех юнитов
 	get:
-		return _p_units + _e_units
+		return _p_units + _e_units + _n_units
 var _enemy_level: int = 1
 var actors:
 	get:
@@ -84,9 +85,9 @@ func _init():
 func _ready():
 	if is_instance_of($"..", Game):
 		return
-	
+	_n_units = [$BlackHole]
 	for u in get_children():
-		if is_instance_of(u, Unit):
+		if is_instance_of(u, Unit) and u not in _n_units:
 			if (u as Unit).controlled_player:
 				_p_units.append(u)
 			else:
@@ -101,7 +102,7 @@ func start_battle():
 		return
 	if is_instance_of($"..", Game):
 		arrange_units()
-		await gen_nature()
+		gen_nature()
 	else:
 		for e in _e_units:
 			if e.expirience:
@@ -153,7 +154,6 @@ func arrange_units():
 			for cell in _p_units[i].get_occupied_cells():
 				left_shift = max(left_shift, (cell - _p_units[i].get_cell())[0])
 			move_unit_to(_p_units[i], Vector2i(_astar_board.left + (y + 1) % 2 + left_shift, y))
-	
 	if _e_units:
 		var step_e = min((_astar_board.bottom - _astar_board.top) / len(_e_units), 6)
 		var start_e = center - len(_e_units) * step_e / 2 + step_e / 2
@@ -250,6 +250,7 @@ func clear():
 	
 	_p_units.clear()
 	_e_units.clear()
+	_n_units.clear()
 	
 	unit_queue.clear()
 	_block_input = false
@@ -360,7 +361,7 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	write_info("* Ходит: " + str(active_unit) + " * ")
+	write_info("* Ходит: " + active_unit.unit_name + " * ")
 	
 	cur_ability = null
 	active_unit.set_outline_color(Unit.CUR_COLOR)
@@ -376,10 +377,11 @@ func _start_stepmove():
 		reset_outline_color(unit_data[1])
 		
 	gui.escape_ability_btn.update()
+	gui.update_queue(unit_queue)
 	
 	if acts == 0 or not active_unit:
 		acts = 0
-		_update_stepmove()
+		await _update_stepmove()
 		return
 	
 	if active_unit.controlled_player:
@@ -547,7 +549,7 @@ func _move_active_unit():
 		acts = 0
 	_tile_map.clear_layer(PATH_LAYER)
 	
-	_update_stepmove()
+	await _update_stepmove()
 
 func _input(event):
 	if _block_input:
@@ -675,7 +677,7 @@ func _apply_ability(cell=Vector2i(0, 0)):
 		gui.clear_abilities()
 		await cur_ability.apply()
 		cur_ability.after_apply()
-		_update_stepmove()
+		await _update_stepmove()
 
 func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
 	"""
@@ -727,11 +729,13 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 		var unit = actor as Unit
 		if is_player(_instigator):
 			_p_units.append(unit)
-		if is_enemy(_instigator):
+		elif is_enemy(_instigator):
 			_e_units.append(unit)
 			if unit.expirience:
 				unit.expirience.level = _enemy_level
 				unit.private_passives.append(level_upscale_effect)
+		else:
+			_n_units.append(unit)
 		if running:
 			unit.prepare_fight()
 			reset_outline_color(unit)

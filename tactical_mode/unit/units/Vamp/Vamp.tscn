@@ -1,6 +1,7 @@
 [gd_scene load_steps=38 format=3 uid="uid://d1jk2a04wq33q"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3454p"]
+[ext_resource type="Texture2D" uid="uid://cu0msqj6flahl" path="res://strategic_mode/tile_events/sprites/gg_vampire.png" id="2_f07v8"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_rkmhg"]
 [ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_lkwsv"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_0f3pp"]
@@ -13,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://di4u67c7nk826" path="res://tactical_mode/unit/units/Vamp/res/VampA3.tres" id="9_nqkrh"]
 [ext_resource type="Resource" uid="uid://5d8bwek6gx45" path="res://tactical_mode/unit/units/Vamp/res/VampP1.tres" id="10_5dx63"]
 [ext_resource type="Resource" uid="uid://drtfi4k16ej2g" path="res://tactical_mode/unit/units/Vamp/res/VampP2.tres" id="11_j0kv6"]
-[ext_resource type="Resource" uid="uid://c15amtnja7fd6" path="res://tactical_mode/unit/units/Vamp/res/VAMPTP.tres" id="12_8y7ca"]
 [ext_resource type="Resource" uid="uid://chwc8kck316im" path="res://tactical_mode/effects/res/MainHeroEffect.tres" id="12_gmwrs"]
 [ext_resource type="Texture2D" uid="uid://ble3aqxqisbwg" path="res://tactical_mode/unit/units/Vamp/assets/VampRun.png" id="13_klfgo"]
 [ext_resource type="Texture2D" uid="uid://c73d0qj22co6w" path="res://tactical_mode/unit/units/Vamp/assets/spritesheet.png" id="13_yrav4"]
@@ -306,6 +306,46 @@ tracks/3/keys = {
 "values": [2, 3, 0]
 }
 
+[sub_resource type="Animation" id="Animation_dw4x1"]
+resource_name = "postteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.966672, 1, 0.999604, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_k3qcp"]
 resource_name = "preattack"
 length = 1.6
@@ -358,6 +398,46 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_qeeco"]
+resource_name = "preteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.966672, 1, 0.999604, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_fxtwy"]
 resource_name = "run"
 length = 0.1
@@ -387,86 +467,6 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_qeeco"]
-resource_name = "preteleport"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.966672, 1, 0.999604, 1), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Shadow:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_dw4x1"]
-resource_name = "postteleport"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.966672, 1, 0.999604, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Shadow:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bbjha"]
 _data = {
 "RESET": SubResource("Animation_gch17"),
@@ -489,6 +489,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3454p")
 unit_name = "Фиди (Вампир)"
+icon = ExtResource("2_f07v8")
 inventory = SubResource("Resource_jp28n")
 health = ExtResource("3_lkwsv")
 defence = ExtResource("4_0f3pp")
@@ -501,7 +502,7 @@ health_bar_pb = NodePath("StatProgressBar")
 animation_player = NodePath("AnimationPlayer")
 for_flip_sprites = [NodePath("Body"), NodePath("Body/TrailAttack")]
 acts_count = 2
-private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_1t0c8"), ExtResource("7_ax6he"), ExtResource("8_r0ub4"), ExtResource("9_nqkrh"), ExtResource("12_8y7ca")])
+private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_1t0c8"), ExtResource("7_ax6he"), ExtResource("8_r0ub4"), ExtResource("9_nqkrh")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("10_5dx63"), ExtResource("11_j0kv6"), ExtResource("12_gmwrs")])
 percent_between_target = 1.0
 
