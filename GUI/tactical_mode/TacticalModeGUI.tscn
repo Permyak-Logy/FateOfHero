@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp1h0o6i278p8"]
+[gd_scene load_steps=8 format=3 uid="uid://dp1h0o6i278p8"]
 
 [ext_resource type="Script" path="res://GUI/tactical_mode/TacticalModeGUI.gd" id="1_vx06q"]
 [ext_resource type="PackedScene" uid="uid://dly11cs48am3l" path="res://GUI/tactical_mode/TacticalInfo.tscn" id="2_kb8rs"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="3_2ifkt"]
 [ext_resource type="PackedScene" uid="uid://k1m48ayhuf51" path="res://GUI/tactical_mode/BtnAbility.tscn" id="4_dhij6"]
 [ext_resource type="Texture2D" uid="uid://c0xek0kynaf22" path="res://tactical_mode/assets/RunawayAbility.png" id="5_e8urq"]
+[ext_resource type="PackedScene" uid="uid://hhbqnqfsii4c" path="res://GUI/tactical_mode/unit_queue/unit_queue_panel.tscn" id="7_iwd7i"]
 
 [node name="TacticalModeGui" type="CanvasLayer"]
 script = ExtResource("1_vx06q")
@@ -102,3 +103,13 @@ offset_bottom = -23.0
 grow_vertical = 0
 text = ""
 icon = ExtResource("5_e8urq")
+
+[node name="UnitQueuePanel" parent="." instance=ExtResource("7_iwd7i")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 20.0
+offset_right = 160.0
+offset_bottom = 80.0
+grow_horizontal = 2

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c01joxju562mw"
-path="res://.godot/imported/Рисунок 5 (3).png-cd160e942e0ea63d6f106860c983e669.ctex"
+path="res://.godot/imported/BlackHole.png-b1c310858fbea4b4bdd9cfb673e6189f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tactical_mode/unit/units/BlackHole/Рисунок 5 (3).png"
-dest_files=["res://.godot/imported/Рисунок 5 (3).png-cd160e942e0ea63d6f106860c983e669.ctex"]
+source_file="res://tactical_mode/unit/units/BlackHole/BlackHole.png"
+dest_files=["res://.godot/imported/BlackHole.png-b1c310858fbea4b4bdd9cfb673e6189f.ctex"]
 
 [params]
 
