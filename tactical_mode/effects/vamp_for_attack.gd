@@ -13,5 +13,5 @@ func update_on_attack(_damage: float, _instigator: Node = null) -> float:
 		)
 		count -= 1
 		if count <= 0:
-			finished.emit()
+			finished.emit(self)
 	return _damage
