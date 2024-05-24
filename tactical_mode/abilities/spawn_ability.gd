@@ -2,6 +2,7 @@ class_name SpawnAbility extends AoEAbility
 
 @export var mob: PackedScene
 @export var range_apply: int = 1
+@export var as_neutral: bool = false
 @export var kill_all_mobs_on_death_owner: bool = true
 
 var plants: Array[EvilPlantUnit] = []
@@ -9,11 +10,16 @@ var plants: Array[EvilPlantUnit] = []
 func apply():
 	await owner.play("ability")
 	var map = get_map()
-	var unit = await map.spawn(mob, cell, owner)
+	var unit
+	if as_neutral:
+		unit = await map.spawn(mob, cell)
+	else:
+		unit = await map.spawn(mob, cell, owner)
+	
 	map.add_to_unit_queue(unit, true)
 	if kill_all_mobs_on_death_owner:
 		(owner as Unit).death.connect(func(u): unit.kill())
-	owner.play("idle")
+	await owner.play("idle")
 
 func can_select(_cell: Vector2i) -> bool:
 	if get_map().distance_between_cells(owner.get_cell(), _cell) > range_apply:

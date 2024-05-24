@@ -13,5 +13,5 @@ func apply():
 				get_map().unit_queue.erase(u)
 				get_map().unit_queue.insert(1, [0, unit])
 				break
-	owner.play("idle")
+	await owner.play("idle")
 	

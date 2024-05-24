@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=1 format=3]
+
+[ext_resource type="Script" path="res://strategic_mode/dialogues/dialogue.gd" id="1_3w2yq"]
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/Ved_man/f4.tscn" id="0_bbitg"]
+
+[resource]
+script = ExtResource("1_3w2yq")
+title = "Странник"
+msg = "Какое же ужастное место этот мир. Говорят, что в нём для каждого есть место. Нихрена. Так говорят только те кому было с пелёнок назначено место. Они выжили, а мертвецов то кто спросит? Вот мы и мрём в тишине, не приспособленные к этому миру. А ведь мы живыми были так же любить хотели, хотели, чтобы в животе не урчало, дети были счастливы. Потерял я надежду на этот мир. А на будущий нет надежды. Не примет меня в саду Богиня, сгнию я и удобрю собой персиковые деревья. "
+options = Array[PackedScene]([ExtResource("0_bbitg")])

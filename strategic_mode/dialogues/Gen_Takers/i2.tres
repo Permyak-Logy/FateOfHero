@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=1 format=3]
+
+[ext_resource type="Script" path="res://strategic_mode/dialogues/dialogue.gd" id="1_3w2yq"]
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/Gen_Takers/f2.tscn" id="0_bbitg"]
+
+[resource]
+script = ExtResource("1_3w2yq")
+title = "Юный Ген"
+msg = "Лугозавры! Они съели маму и папу. И оставили одиного... Ну и ладно.  Придёт день и я отомщу. Сотру тварей с лица земли. Всех до единого! "
+options = Array[PackedScene]([ExtResource("0_bbitg")])

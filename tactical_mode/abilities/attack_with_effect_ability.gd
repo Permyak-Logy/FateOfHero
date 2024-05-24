@@ -9,5 +9,5 @@ func apply():
 		var e = effect.duplicate(true)
 		e.instigator = owner
 		unit.add_effect(e)
-		owner.play("idle")
+		await owner.play("idle")
 	return true

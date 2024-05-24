@@ -8,13 +8,25 @@ It finds path among the squares on the tilemap with walkable set to true.
 
 @onready var strat_map: StratMap = $".."
 @onready var sprite: Sprite2D = $Sprite2D
-
 @onready var tilemap: StratTileMap =  $"../StratTileMap"
+
+@export var mc_name: String
 @export var inventory: Inventory
 @export var texture: Dictionary = {
-	"default" : preload("res://strategic_mode/tile_events/sprites/gg_base.png"),
-	"Vamp" : preload("res://strategic_mode/tile_events/sprites/gg_vampire.png"),
-	"Berserk" : preload("res://strategic_mode/tile_events/sprites/gg_berserk.png")
+	"default" : preload("res://strategic_mode/tile_events/sprites/gg_fidi_directional.png"),
+	"Vamp" : preload("res://strategic_mode/tile_events/sprites/gg_vampire_directional.png"),
+	"Berserk" : preload("res://strategic_mode/tile_events/sprites/gg_berserk_directional.png")
+}
+
+enum Direction {
+	North,
+	NorthEast,
+	East,
+	SouthEast,
+	South,
+	SouthWest,
+	West,
+	NorthWest
 }
 
 var astar_grid: AStarGrid2D
@@ -23,7 +35,8 @@ var target_position: Vector2
 var last_position: Vector2
 var pos: Vector2i
 var is_moving: bool = false
-@export var mc_name: String
+var direction: Direction = Direction.South
+
 
 func _init():
 	if not inventory:
@@ -61,7 +74,7 @@ func is_walkable(pos: Vector2i) -> bool:
 		res = false
 	# overwrite with terrain; so bridges and highlands are walkable
 	for i in range(1, tilemap.get_layers_count()):
-		tile_data = tilemap.get_cell_tile_data(1, pos)
+		tile_data = tilemap.get_cell_tile_data(i, pos)
 		if tile_data:
 			res = tile_data.get_custom_data("walkable")
 	return res
@@ -88,7 +101,6 @@ func _input(event):
 				tilemap.local_to_map(global_position),
 				tilemap.local_to_map(get_global_mouse_position())
 			).slice(1)
-		print("is walkable ", tilemap.get_cell_tile_data(0, tilemap.local_to_map(get_global_mouse_position())).get_custom_data("walkable"))
 		print(id_path)
 		current_id_path = id_path
 		return
@@ -111,7 +123,27 @@ func _input(event):
 		if astar_grid.is_point_solid(current_id_path.back() + delta) == false and (delta.x != 0 or delta.y != 0):
 			current_id_path.append(current_id_path.back() + delta)
 
+func get_dir_from_vect(vect: Vector2i) -> Direction:
+	if vect == Vector2i(0, -1):
+		return Direction.North
+	elif vect == Vector2i(1, -1):
+		return Direction.East
+	elif vect == Vector2i(1, 0):
+		return Direction.East
+	elif vect == Vector2i(1, 1):
+		return Direction.East
+	elif vect == Vector2i(0, 1):
+		return Direction.South
+	elif vect == Vector2i(-1, 1):
+		return Direction.West
+	elif vect == Vector2i(-1, 0):
+		return Direction.West
+	else:
+		return Direction.West
+
+
 func _physics_process(delta):
+	sprite.frame = direction
 	if current_id_path.is_empty():
 		return
 	
@@ -120,6 +152,8 @@ func _physics_process(delta):
 		target_position[0] -= 8
 		target_position[1] -= 8
 		is_moving = true
+		direction = get_dir_from_vect(current_id_path.front() - pos)
+
 	
 	var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
 	var collision = move_and_collide(movement)
@@ -135,6 +169,7 @@ func _physics_process(delta):
 		pos = tilemap.local_to_map(last_position)
 		if not current_id_path.is_empty():
 			target_position = tilemap.map_to_local(current_id_path.front())
+			direction = get_dir_from_vect(current_id_path.front() - pos)
 			target_position[0] -= 8
 			target_position[1] -= 8
 			strat_map.move_time(30)

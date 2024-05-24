@@ -1,0 +1,155 @@
+[gd_scene load_steps=31 format=3 uid="uid://b65p5vmcpiq51"]
+
+[ext_resource type="Shader" path="res://tactical_mode/unit/units/BlackHole/BlackHole.gdshader" id="1_74ubb"]
+[ext_resource type="Script" path="res://tactical_mode/unit/units/BlackHole/BlackHole.gd" id="1_115fi"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_i52ty"]
+[ext_resource type="Texture2D" uid="uid://cqfuwxii8hld8" path="res://tactical_mode/unit/units/BlackHole/effect_4.png" id="2_mcfq8"]
+[ext_resource type="Texture2D" uid="uid://c01joxju562mw" path="res://tactical_mode/unit/units/BlackHole/BlackHole.png" id="2_wki0r"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_3linm"]
+[ext_resource type="Script" path="res://tactical_mode/effects/multiply_effect.gd" id="4_43gly"]
+[ext_resource type="Script" path="res://tactical_mode/unit/units/BlackHole/very_strong_gravity_effect.gd" id="5_0x56y"]
+
+[sub_resource type="Resource" id="Resource_saeuo"]
+script = ExtResource("2_i52ty")
+base = 150.0
+cur = 150.0
+max_ = 150.0
+
+[sub_resource type="Resource" id="Resource_jutt6"]
+script = ExtResource("3_3linm")
+mod_type = 1
+characteristic = SubResource("Resource_saeuo")
+
+[sub_resource type="Resource" id="Resource_jkcep"]
+script = ExtResource("5_0x56y")
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = true
+stackable = false
+effect_name = "Притяжение Чёрной дыры"
+is_negative = true
+
+[sub_resource type="Resource" id="Resource_q12e2"]
+script = ExtResource("4_43gly")
+to_replicate_effect = SubResource("Resource_jkcep")
+apply_to = Array[int]([1, 2, 3])
+mods = Array[Resource("res://tactical_mode/unit/mod.gd")]([])
+destroy_on_death_instigator = false
+stackable = false
+effect_name = "Сингулярность"
+is_negative = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3hy6t"]
+
+[sub_resource type="Gradient" id="Gradient_ygxud"]
+offsets = PackedFloat32Array(0, 0.41453, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bn6h0"]
+gradient = SubResource("Gradient_ygxud")
+
+[sub_resource type="Curve" id="Curve_nmthq"]
+min_value = 2.0
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqo4u"]
+curve = SubResource("Curve_nmthq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mqy2s"]
+particle_flag_disable_z = true
+angular_velocity_min = -100.0
+angular_velocity_max = -100.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_qqo4u")
+color_ramp = SubResource("GradientTexture1D_bn6h0")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2s7vg"]
+
+[sub_resource type="Gradient" id="Gradient_l813g"]
+offsets = PackedFloat32Array(0, 0.484444, 0.995556)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kiox7"]
+gradient = SubResource("Gradient_l813g")
+
+[sub_resource type="Curve" id="Curve_4ntw1"]
+min_value = 1.0
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_grna0"]
+curve = SubResource("Curve_4ntw1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_liufj"]
+particle_flag_disable_z = true
+angular_velocity_min = -395.97
+angular_velocity_max = -339.05
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_grna0")
+color_ramp = SubResource("GradientTexture1D_kiox7")
+
+[sub_resource type="Gradient" id="Gradient_bwym6"]
+offsets = PackedFloat32Array(0, 0.484444, 0.995556)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c0oxg"]
+gradient = SubResource("Gradient_bwym6")
+
+[sub_resource type="Curve" id="Curve_5qr6q"]
+max_value = 2.0
+_data = [Vector2(0, 0.994531), 0.0, 0.0, 0, 0, Vector2(1, 0.974219), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mo67o"]
+curve = SubResource("Curve_5qr6q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q324l"]
+particle_flag_disable_z = true
+angular_velocity_min = -395.97
+angular_velocity_max = -339.05
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_mo67o")
+color_ramp = SubResource("GradientTexture1D_c0oxg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_si04a"]
+shader = ExtResource("1_74ubb")
+shader_parameter/strength = 0.01
+shader_parameter/black_radius = 0.65
+
+[node name="BlackHole" type="Node2D" node_paths=PackedStringArray("sprite_for_outline")]
+script = ExtResource("1_115fi")
+unit_name = "Чёрная дыра"
+icon = ExtResource("2_wki0r")
+speed = SubResource("Resource_jutt6")
+sprite_for_outline = NodePath("Sprite2D")
+controlled_player = false
+private_passives = Array[Resource("res://tactical_mode/effect.gd")]([SubResource("Resource_q12e2")])
+
+[node name="GPUParticles2D_1" type="GPUParticles2D" parent="."]
+modulate = Color(0.329412, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_3hy6t")
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_mqy2s")
+texture = ExtResource("2_mcfq8")
+
+[node name="GPUParticles2D_2" type="GPUParticles2D" parent="."]
+modulate = Color(1, 0.764706, 0, 1)
+material = SubResource("CanvasItemMaterial_2s7vg")
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_liufj")
+texture = ExtResource("2_mcfq8")
+
+[node name="GPUParticles2D_3" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_2s7vg")
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_q324l")
+texture = ExtResource("2_mcfq8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_si04a")
+position = Vector2(-4.76837e-07, 5.96046e-08)
+scale = Vector2(2, 2)
+texture = ExtResource("2_wki0r")

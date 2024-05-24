@@ -12,7 +12,7 @@ func ai(map: TacticalMap):
 		await ai_random_move(map)
 	elif a1.applied == target:
 		await a1.subapply()
-		ai_pass(map)
+		await ai_pass(map)
 	elif map.distance_between_cells(target.get_cell(), get_cell()) > 1:
 		await ai_move_to(map, target.get_cell())
 	elif a1.can_use():
@@ -23,6 +23,8 @@ func ai(map: TacticalMap):
 		map._prepare_ability(a0)
 		a0.select(target)
 		await map._apply_ability()
+	else:
+		await ai_pass(map)
 
 func assign_target():
 	var avaliable_units: Array[Unit] = []

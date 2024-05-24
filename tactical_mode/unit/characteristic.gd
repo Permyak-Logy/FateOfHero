@@ -5,7 +5,9 @@ class_name Characteristic extends Resource
 @export var max_: float = 0
 
 func percent() -> float:
-	return cur / max(max_, base) 
+	if max_ == 0:
+		return 0
+	return cur / max_
 
 func set_cur(value: float):
 	cur = max(0, min(max_, value))

@@ -1,0 +1,6 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://strategic_mode/dialogues/option.tscn" id="1_ae00h"]
+
+[node name="Option" instance=ExtResource("1_ae00h")]
+msg = "Не боись ты. Меня интересуют только те что способны держать в руках меч."

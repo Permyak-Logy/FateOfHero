@@ -1,12 +1,20 @@
-[gd_resource type="Resource" script_class="BerserkA1" load_steps=7 format=3 uid="uid://ca00njn6opt8b"]
+[gd_resource type="Resource" script_class="BerserkA1" load_steps=8 format=3 uid="uid://ca00njn6opt8b"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Berserk/src/berserk_a1.gd" id="1_01yf5"]
 [ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_m1210"]
 [ext_resource type="Script" path="res://tactical_mode/effects/temp_slowdown_effect.gd" id="1_qih0b"]
 [ext_resource type="Texture2D" uid="uid://b4sck2vjg1hwn" path="res://tactical_mode/unit/units/Berserk/assets/Berserk_n1.png" id="2_6vyjq"]
 
+[sub_resource type="Resource" id="Resource_7g3v7"]
+resource_local_to_scene = true
+script = ExtResource("1_m1210")
+add = -2.0
+mul = 0.0
+
 [sub_resource type="Resource" id="Resource_lkcx0"]
+resource_local_to_scene = true
 script = ExtResource("1_qih0b")
+mod_value = SubResource("Resource_7g3v7")
 on_stack = 1
 limit_stacks_for_sum_mods = -1
 moves = 1

@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://dh5vq12tjl11n"]
+[gd_scene load_steps=36 format=3 uid="uid://dh5vq12tjl11n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Skeleton/src/Skeleton.gd" id="1_fgkl7"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_cp544"]
+[ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://strategic_mode/tile_events/sprites/mean_skelly_boi.png" id="2_squan"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_n00ux"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_jbdcy"]
 [ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/units/Skeleton/res/SkeletonA0.tres" id="5_02wdl"]
@@ -13,50 +14,59 @@
 [ext_resource type="Texture2D" uid="uid://di8gme8ny3f43" path="res://tactical_mode/unit/units/Skeleton/assets/run.png" id="10_k3aay"]
 
 [sub_resource type="Resource" id="Resource_ws37b"]
+resource_local_to_scene = true
 script = ExtResource("2_cp544")
 base = 100.0
 cur = 100.0
 max_ = 100.0
 
 [sub_resource type="Resource" id="Resource_omiyo"]
+resource_local_to_scene = true
 script = ExtResource("3_n00ux")
 mod_type = 0
 characteristic = SubResource("Resource_ws37b")
 
 [sub_resource type="Resource" id="Resource_vl6n6"]
+resource_local_to_scene = true
 script = ExtResource("2_cp544")
 base = 0.0
 cur = 0.0
 max_ = 0.0
 
 [sub_resource type="Resource" id="Resource_11jpo"]
+resource_local_to_scene = true
 script = ExtResource("3_n00ux")
 mod_type = 3
 characteristic = SubResource("Resource_vl6n6")
 
 [sub_resource type="Resource" id="Resource_6fdyb"]
+resource_local_to_scene = true
 script = ExtResource("2_cp544")
-base = 100.0
-cur = 100.0
-max_ = 100.0
+base = 99.0
+cur = 99.0
+max_ = 99.0
 
 [sub_resource type="Resource" id="Resource_8p6jf"]
+resource_local_to_scene = true
 script = ExtResource("3_n00ux")
 mod_type = 1
 characteristic = SubResource("Resource_6fdyb")
 
 [sub_resource type="Resource" id="Resource_sfnud"]
+resource_local_to_scene = true
 script = ExtResource("2_cp544")
 base = 5.0
 cur = 5.0
 max_ = 5.0
 
 [sub_resource type="Resource" id="Resource_h68g5"]
+resource_local_to_scene = true
 script = ExtResource("3_n00ux")
 mod_type = 2
 characteristic = SubResource("Resource_sfnud")
 
 [sub_resource type="Resource" id="Resource_li378"]
+resource_local_to_scene = true
 script = ExtResource("4_jbdcy")
 level = 1
 expirience = 0
@@ -324,6 +334,46 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_cae3x"]
+resource_name = "postteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Body/Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_btx26"]
 resource_name = "preattack"
 length = 1.1
@@ -376,6 +426,46 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_2xnw2"]
+resource_name = "preteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Body/Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_4kswv"]
 resource_name = "run"
 length = 0.1
@@ -411,7 +501,9 @@ _data = {
 "death": SubResource("Animation_5ssal"),
 "idle": SubResource("Animation_22rlt"),
 "postattack": SubResource("Animation_s12ns"),
+"postteleport": SubResource("Animation_cae3x"),
 "preattack": SubResource("Animation_btx26"),
+"preteleport": SubResource("Animation_2xnw2"),
 "run": SubResource("Animation_4kswv")
 }
 
@@ -420,6 +512,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_fgkl7")
 unit_name = "Скелет"
+icon = ExtResource("2_squan")
 health = SubResource("Resource_omiyo")
 defence = SubResource("Resource_11jpo")
 speed = SubResource("Resource_8p6jf")

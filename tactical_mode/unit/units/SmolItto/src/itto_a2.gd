@@ -14,7 +14,7 @@ func apply():
 		get_map().write_info(
 			"=> " + owner.unit_name + " восстанавливает  " + str(int(diff)) + " хп у " + unit.unit_name
 		)
-	owner.play("idle")
+	await owner.play("idle")
 	return true
 	
 func unselect(_node):

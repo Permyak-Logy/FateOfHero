@@ -1,8 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://di7auu4d2dl2"]
+[gd_scene load_steps=37 format=3 uid="uid://di7auu4d2dl2"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_fkgsn"]
 [ext_resource type="Texture2D" uid="uid://cdco230sn8aw7" path="res://tactical_mode/unit/units/Naris/assets/spritesheet.png" id="1_n5uvs"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_hck5s"]
+[ext_resource type="Texture2D" uid="uid://bo1acox17wkei" path="res://strategic_mode/tile_events/sprites/beretta_naris.png" id="2_r60pi"]
 [ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_3m2ij"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_qcjbw"]
 [ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="5_e3e08"]
@@ -346,6 +347,46 @@ tracks/2/keys = {
 "values": [1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_qnlfu"]
+resource_name = "postteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_ltvki"]
 resource_name = "preattack"
 length = 1.4
@@ -410,6 +451,46 @@ tracks/4/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_g8ot5"]
+resource_name = "preteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_eeqfk"]
 resource_name = "run"
 length = 0.1
@@ -448,7 +529,9 @@ _data = {
 "death": SubResource("Animation_088ie"),
 "idle": SubResource("Animation_ewi1t"),
 "postattack": SubResource("Animation_5gq6t"),
+"postteleport": SubResource("Animation_qnlfu"),
 "preattack": SubResource("Animation_ltvki"),
+"preteleport": SubResource("Animation_g8ot5"),
 "run": SubResource("Animation_eeqfk")
 }
 
@@ -457,6 +540,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_fkgsn")
 unit_name = "Беррета Нарис"
+icon = ExtResource("2_r60pi")
 inventory = SubResource("Resource_r2drc")
 health = ExtResource("3_3m2ij")
 defence = ExtResource("4_qcjbw")
@@ -471,7 +555,6 @@ for_flip_sprites = [NodePath("Body"), NodePath("Body/AttackTrail")]
 acts_count = 2
 private_abilities = Array[Resource("res://tactical_mode/ability.gd")]([ExtResource("6_pam86"), ExtResource("7_55xdn"), ExtResource("8_yvxg7"), ExtResource("11_8jwh5")])
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([ExtResource("9_uu01e")])
-percent_between_target = 1.0
 
 [node name="Body" type="Sprite2D" parent="."]
 material = ExtResource("12_n6er6")

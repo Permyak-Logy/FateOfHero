@@ -11,7 +11,7 @@ func apply():
 	diff += unit.health.cur()
 	
 	get_map().write_info("=> Востанавливает " + str(int(diff)) + " здоровья у " + unit.unit_name)
-	owner.play("idle")
+	await owner.play("idle")
 	return true
 
 func can_select(_node):
