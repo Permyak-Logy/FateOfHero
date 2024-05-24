@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://d0inyrl8f6qwh"]
 
-[ext_resource type="Script" path="res://Generation/procedural_strat_map.gd" id="1_bxdt3"]
+[ext_resource type="Script" path="res://Generation/procedural_strat_map.gd" id="1_t15ew"]
 [ext_resource type="TileSet" uid="uid://b4qxaryuue2gl" path="res://Generation/sm_tileset.tres" id="2_ymkqo"]
 [ext_resource type="Script" path="res://strategic_mode/StratTileMap.gd" id="3_q84tg"]
 [ext_resource type="PackedScene" uid="uid://cf0rrbb0c6pik" path="res://strategic_mode/player.tscn" id="4_4qthm"]
@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dlsbppd8qggrt" path="res://strategic_mode/strategic_mode_bg_music.mp3" id="8_jhq8n"]
 
 [node name="StratMapTemplate" type="Node2D"]
-script = ExtResource("1_bxdt3")
+script = ExtResource("1_t15ew")
 
 [node name="StratTileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_ymkqo")

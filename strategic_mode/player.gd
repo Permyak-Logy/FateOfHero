@@ -45,11 +45,8 @@ func _init():
 func update_nav_map(pos: Vector2i, state: bool):
 	astar_grid.set_point_solid(pos, not state)
 
-func _ready():
+func gen_nav():
 	pos = tilemap.local_to_map(global_position)
-	if mc_name:
-		sprite.texture = texture[mc_name]
-	
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16) 
@@ -66,6 +63,11 @@ func _ready():
 			
 
 	tilemap.occupied_changed.connect(update_nav_map)
+
+func _ready():
+	if mc_name:
+		sprite.texture = texture[mc_name]
+	strat_map.strat_map_loaded.connect(gen_nav)
 
 func is_walkable(pos: Vector2i) -> bool:
 	var res = true
