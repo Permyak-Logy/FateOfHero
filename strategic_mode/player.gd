@@ -74,7 +74,7 @@ func is_walkable(pos: Vector2i) -> bool:
 		res = false
 	# overwrite with terrain; so bridges and highlands are walkable
 	for i in range(1, tilemap.get_layers_count()):
-		tile_data = tilemap.get_cell_tile_data(1, pos)
+		tile_data = tilemap.get_cell_tile_data(i, pos)
 		if tile_data:
 			res = tile_data.get_custom_data("walkable")
 	return res
