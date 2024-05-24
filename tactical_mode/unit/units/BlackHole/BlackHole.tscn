@@ -4,10 +4,10 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_d4p2g"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_i52ty"]
 [ext_resource type="Texture2D" uid="uid://cqfuwxii8hld8" path="res://tactical_mode/unit/units/BlackHole/effect_4.png" id="2_mcfq8"]
-[ext_resource type="Texture2D" uid="uid://c01joxju562mw" path="res://tactical_mode/unit/units/BlackHole/Рисунок 5 (3).png" id="2_wki0r"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_3linm"]
 [ext_resource type="Script" path="res://tactical_mode/effects/multiply_effect.gd" id="4_43gly"]
 [ext_resource type="Script" path="res://tactical_mode/unit/units/BlackHole/very_strong_gravity_effect.gd" id="5_0x56y"]
+[ext_resource type="Texture2D" uid="uid://c01joxju562mw" path="res://tactical_mode/unit/units/BlackHole/BlackHole.png" id="8_gpjoj"]
 
 [sub_resource type="Resource" id="Resource_623av"]
 script = ExtResource("2_i52ty")
@@ -118,10 +118,12 @@ shader = ExtResource("1_74ubb")
 shader_parameter/strength = 0.01
 shader_parameter/black_radius = 0.65
 
-[node name="BlackHole" type="Node2D"]
+[node name="BlackHole" type="Node2D" node_paths=PackedStringArray("sprite_for_outline")]
 script = ExtResource("1_d4p2g")
 unit_name = "Чёрная дыра"
+icon = ExtResource("8_gpjoj")
 speed = SubResource("Resource_u2qvu")
+sprite_for_outline = NodePath("Sprite2D")
 controlled_player = false
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([SubResource("Resource_q12e2")])
 
@@ -150,4 +152,4 @@ modulate = Color(0, 0, 0, 1)
 material = SubResource("ShaderMaterial_si04a")
 position = Vector2(-4.76837e-07, 5.96046e-08)
 scale = Vector2(2, 2)
-texture = ExtResource("2_wki0r")
+texture = ExtResource("8_gpjoj")

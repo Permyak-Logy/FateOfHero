@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://dh5vq12tjl11n"]
+[gd_scene load_steps=34 format=3 uid="uid://dh5vq12tjl11n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Skeleton/src/Skeleton.gd" id="1_fgkl7"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_cp544"]
+[ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://strategic_mode/tile_events/sprites/mean_skelly_boi.png" id="2_plgm2"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_n00ux"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_jbdcy"]
 [ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/units/Skeleton/res/SkeletonA0.tres" id="5_02wdl"]
@@ -429,6 +430,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_fgkl7")
 unit_name = "Скелет"
+icon = ExtResource("2_plgm2")
 health = SubResource("Resource_omiyo")
 defence = SubResource("Resource_11jpo")
 speed = SubResource("Resource_8p6jf")

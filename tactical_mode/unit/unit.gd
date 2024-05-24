@@ -3,7 +3,7 @@ class_name Unit extends Actor
 var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 
 @export var unit_name: String = "Unit"
-
+@export var icon: Texture2D = null
 @export_group("Components")
 @export var inventory: InventoryComponent = null
 @export var health: StatComponent = null:

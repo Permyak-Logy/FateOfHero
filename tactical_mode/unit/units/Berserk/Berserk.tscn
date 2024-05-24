@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://komiiv5ot43n"]
+[gd_scene load_steps=44 format=3 uid="uid://komiiv5ot43n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3ocbc"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="2_7e5uy"]
+[ext_resource type="Texture2D" uid="uid://biqe6ll5tmajy" path="res://strategic_mode/tile_events/sprites/gg_berserk.png" id="2_i5w35"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_wa0qx"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="3_mx66j"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_1oxc8"]
@@ -610,6 +611,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3ocbc")
 unit_name = "Фиди (Берсерк)"
+icon = ExtResource("2_i5w35")
 inventory = SubResource("Resource_h8xsw")
 health = SubResource("Resource_yau65")
 defence = ExtResource("4_1oxc8")

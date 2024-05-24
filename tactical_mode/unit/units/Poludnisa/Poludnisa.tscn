@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://cxvcedbc0b2ki"]
+[gd_scene load_steps=27 format=3 uid="uid://cxvcedbc0b2ki"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Poludnisa/Poludnisa.gd" id="1_854ht"]
 [ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="2_4onig"]
+[ext_resource type="Texture2D" uid="uid://ckxqdqm2yof4p" path="res://strategic_mode/tile_events/sprites/poludniza.png" id="2_fe6oj"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="2_y0bvn"]
 [ext_resource type="Texture2D" uid="uid://vy3p352yeo1p" path="res://tactical_mode/unit/units/Poludnisa/assets/spritesheet.png" id="3_c5age"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="3_yggft"]
@@ -211,6 +212,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_854ht")
 unit_name = "Полудница"
+icon = ExtResource("2_fe6oj")
 health = ExtResource("2_4onig")
 defence = ExtResource("3_yggft")
 speed = ExtResource("4_eb4lc")

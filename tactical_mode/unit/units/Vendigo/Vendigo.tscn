@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://kj8esabe8qfg"]
+[gd_scene load_steps=31 format=3 uid="uid://kj8esabe8qfg"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vendigo/src/Vendigo.gd" id="1_oj4or"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_0v47j"]
+[ext_resource type="Texture2D" uid="uid://batlyj4jlkmpy" path="res://strategic_mode/tile_events/sprites/encounter_default.png" id="2_sudbg"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_ujhj8"]
 [ext_resource type="Resource" uid="uid://crecdgxj4lurs" path="res://tactical_mode/unit/units/Vendigo/res/VendigoA0.tres" id="4_2r87o"]
 [ext_resource type="Resource" uid="uid://c4l247aylu587" path="res://tactical_mode/unit/res/Expirience.tres" id="4_ehfea"]
@@ -314,6 +315,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_oj4or")
 unit_name = "Вендиго"
+icon = ExtResource("2_sudbg")
 health = SubResource("Resource_43hfv")
 defence = SubResource("Resource_bdi2p")
 speed = SubResource("Resource_lpion")
