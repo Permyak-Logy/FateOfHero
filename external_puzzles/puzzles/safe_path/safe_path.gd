@@ -143,14 +143,16 @@ func set_enemies(enemies_: Array[PackedScene], level: int):
 func end_successfully():
 	solved.emit(rewards)
 
-func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene]):
+func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene], win: bool):
 	inventory.characters = alive
-	solved.emit(rewards)
-	game.to_strat_mode()
+	if not win:
+		failed.emit()
 	for char_p in dead:
 		var char = char_p.instantiate()
 		if char.name == game.strat_map.player.mc_name:
 			game.strat_map.show_game_over()
+	solved.emit(rewards)
+	game.to_strat_mode()
 
 func spawn_visp():
 	var visp: SafePathVisp = SafePathVispRes.instantiate()  
