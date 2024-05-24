@@ -234,7 +234,7 @@ func play(_name: String, _params=null):
 			animation_player.play("RESET")
 		else:
 			animation_player.play(_name)
-		if _name in ["idle", "run"]:
+		if _name in ["idle", "run", "idle2"]:
 			await animation_player.animation_changed
 		else:
 			await animation_player.animation_finished
@@ -364,7 +364,7 @@ func ai_move_to(map: TacticalMap, cell: Vector2i):
 
 func ai_pass(map: TacticalMap):
 	map.acts = 0
-	map._update_stepmove()
+	await map._update_stepmove()
 
 func reset_color():
 	get_map().reset_outline_color(self)

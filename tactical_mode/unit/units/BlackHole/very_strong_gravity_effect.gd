@@ -7,10 +7,9 @@ func update_on_start_stepmove():
 		await gravity_apply()
 	if randf() > dist() - 4 / 5:
 		await gravity_apply()
-	await gravity_apply()
 	await damage_apply()
 
-func update_move_distance(distance: float) -> float:
+func update_on_move(distance: float) -> float:
 	if dist() == 0:
 		return 0
 	return distance
@@ -19,7 +18,7 @@ func dist() -> int:
 	return get_map().distance_between_cells(owner.get_cell(), instigator.get_cell())
 
 func gravity_apply():
-	print("Притягивание чёрной дыры")
+	get_map().write_info("Притягивание чёрной дыры")
 	if owner.get_cell() == instigator.get_cell():
 		return
 	var d = dist()

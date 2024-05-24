@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://b65p5vmcpiq51"]
 
 [ext_resource type="Shader" path="res://tactical_mode/unit/units/BlackHole/BlackHole.gdshader" id="1_74ubb"]
-[ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_d4p2g"]
+[ext_resource type="Script" path="res://tactical_mode/unit/units/BlackHole/BlackHole.gd" id="1_115fi"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_i52ty"]
 [ext_resource type="Texture2D" uid="uid://cqfuwxii8hld8" path="res://tactical_mode/unit/units/BlackHole/effect_4.png" id="2_mcfq8"]
 [ext_resource type="Texture2D" uid="uid://c01joxju562mw" path="res://tactical_mode/unit/units/BlackHole/Рисунок 5 (3).png" id="2_wki0r"]
@@ -9,16 +9,16 @@
 [ext_resource type="Script" path="res://tactical_mode/effects/multiply_effect.gd" id="4_43gly"]
 [ext_resource type="Script" path="res://tactical_mode/unit/units/BlackHole/very_strong_gravity_effect.gd" id="5_0x56y"]
 
-[sub_resource type="Resource" id="Resource_623av"]
+[sub_resource type="Resource" id="Resource_saeuo"]
 script = ExtResource("2_i52ty")
 base = 150.0
 cur = 150.0
 max_ = 150.0
 
-[sub_resource type="Resource" id="Resource_u2qvu"]
+[sub_resource type="Resource" id="Resource_jutt6"]
 script = ExtResource("3_3linm")
 mod_type = 1
-characteristic = SubResource("Resource_623av")
+characteristic = SubResource("Resource_saeuo")
 
 [sub_resource type="Resource" id="Resource_jkcep"]
 script = ExtResource("5_0x56y")
@@ -118,10 +118,11 @@ shader = ExtResource("1_74ubb")
 shader_parameter/strength = 0.01
 shader_parameter/black_radius = 0.65
 
-[node name="BlackHole" type="Node2D"]
-script = ExtResource("1_d4p2g")
+[node name="BlackHole" type="Node2D" node_paths=PackedStringArray("sprite_for_outline")]
+script = ExtResource("1_115fi")
 unit_name = "Чёрная дыра"
-speed = SubResource("Resource_u2qvu")
+speed = SubResource("Resource_jutt6")
+sprite_for_outline = NodePath("Sprite2D")
 controlled_player = false
 private_passives = Array[Resource("res://tactical_mode/effect.gd")]([SubResource("Resource_q12e2")])
 

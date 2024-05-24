@@ -87,7 +87,7 @@ func _ready():
 		return
 	_n_units = [$BlackHole]
 	for u in get_children():
-		if is_instance_of(u, Unit):
+		if is_instance_of(u, Unit) and u not in _n_units:
 			if (u as Unit).controlled_player:
 				_p_units.append(u)
 			else:
@@ -381,7 +381,7 @@ func _start_stepmove():
 	
 	if acts == 0 or not active_unit:
 		acts = 0
-		_update_stepmove()
+		await _update_stepmove()
 		return
 	
 	if active_unit.controlled_player:
@@ -549,7 +549,7 @@ func _move_active_unit():
 		acts = 0
 	_tile_map.clear_layer(PATH_LAYER)
 	
-	_update_stepmove()
+	await _update_stepmove()
 
 func _input(event):
 	if _block_input:
@@ -677,7 +677,7 @@ func _apply_ability(cell=Vector2i(0, 0)):
 		gui.clear_abilities()
 		await cur_ability.apply()
 		cur_ability.after_apply()
-		_update_stepmove()
+		await _update_stepmove()
 
 func distance_between_cells(a: Vector2i, b: Vector2i) -> int:
 	"""

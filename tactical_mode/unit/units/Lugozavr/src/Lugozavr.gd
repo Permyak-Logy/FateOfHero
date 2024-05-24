@@ -23,7 +23,8 @@ func ai(map: TacticalMap):
 		map._prepare_ability(a0)
 		a0.select(target)
 		await map._apply_ability()
-	await ai_pass(map)
+	else:
+		await ai_pass(map)
 
 func assign_target():
 	var avaliable_units: Array[Unit] = []
