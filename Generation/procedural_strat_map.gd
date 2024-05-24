@@ -2,7 +2,7 @@ class_name ProceduralStratMap extends StratMap
 
 
 # size of the world in chunks
-const WORLD_SIZE = 4
+const WORLD_SIZE = 16
 # array[array[array[Vector2i]]] indexed as layer_id, terrain_id, tile_id
 var terrains: Array[Array]
 #array[array[chunk]]
@@ -12,8 +12,6 @@ func gen_world():
 	init_chunks()
 	gen_chunks()
 	draw_world()
-	#tilemap.set_cells_terrain_connect(1, [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)], 1, 0)
-
 
 func _ready():
 	gui.gui_opened.connect(on_gui_opened)
@@ -32,11 +30,24 @@ func init_chunks():
 
 func gen_chunks():
 	var noise_gen = FastNoiseLite.new()
-	var noise_image = noise_gen.get_image(WORLD_SIZE * 16, WORLD_SIZE * 16) 
+	var noise_image: Image = noise_gen.get_image(WORLD_SIZE * 16, WORLD_SIZE * 16)
+	var mrx = 0
+	var mry = 0
 	var noise = noise_image.get_data()
-	print(noise.slice(0,16))
-	(noise_image.crop(16, 16))
-
+	for i in range(WORLD_SIZE):
+		for j in range(WORLD_SIZE):
+			var chunk: Chunk = chunks[i][j]
+			for x in range(16):
+				for y in range(16):
+					var rx = 16 * i + x
+					var ry = 16 * j + y
+					if rx > mrx: mrx = rx 
+					if ry > mry: mry = ry 
+					var layer = noise[ry * WORLD_SIZE * 16 + rx]
+					layer = layer / 64
+					for lid in range(1, min(layer, 5)):
+						chunk.blocks[lid][x][y] = 8
+	print("reaced: ", mrx, " ", mry)
 func draw_world():
 	terrains = [
 		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
