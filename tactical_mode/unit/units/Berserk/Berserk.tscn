@@ -519,7 +519,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_d0wuv"]
 resource_name = "preteleport"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -527,7 +527,7 @@ tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.966672, 1, 0.999604, 1), Color(0, 0, 0, 1)]
@@ -539,7 +539,7 @@ tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -551,7 +551,7 @@ tracks/2/path = NodePath("Body/Shadow:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]

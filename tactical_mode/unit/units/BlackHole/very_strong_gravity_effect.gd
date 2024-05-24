@@ -7,6 +7,7 @@ func update_on_start_stepmove():
 		await gravity_apply()
 	if randf() > dist() - 4 / 5:
 		await gravity_apply()
+	await gravity_apply()
 	await damage_apply()
 
 func update_on_move(distance: float) -> float:

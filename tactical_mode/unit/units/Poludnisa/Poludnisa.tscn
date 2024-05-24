@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cxvcedbc0b2ki"]
+[gd_scene load_steps=28 format=3 uid="uid://cxvcedbc0b2ki"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Poludnisa/Poludnisa.gd" id="1_854ht"]
 [ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="2_4onig"]
@@ -197,13 +197,71 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_6bkkp"]
+resource_name = "preteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_et1us"]
+resource_name = "postteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1xtlw"]
 _data = {
 "RESET": SubResource("Animation_l8fdw"),
 "ability": SubResource("Animation_k86vy"),
 "damaged": SubResource("Animation_derru"),
 "death": SubResource("Animation_76s7l"),
-"idle": SubResource("Animation_7m2pk")
+"idle": SubResource("Animation_7m2pk"),
+"postteleport": SubResource("Animation_et1us"),
+"preteleport": SubResource("Animation_6bkkp")
 }
 
 [node name="Poludnisa" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "animation_player", "for_flip_sprites")]
