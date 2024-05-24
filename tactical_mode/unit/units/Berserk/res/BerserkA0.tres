@@ -17,7 +17,7 @@ mul = 1.0
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_1qnt3")
-distance = 1
+distance = 2
 power = SubResource("Resource_q0nyi")
 targets = 1
 max_targets = 0

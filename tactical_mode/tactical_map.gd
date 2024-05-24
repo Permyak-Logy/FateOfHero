@@ -734,7 +734,7 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 			if unit.expirience:
 				unit.expirience.level = _enemy_level
 				unit.private_passives.append(level_upscale_effect)
-		else:
+		elif running:
 			_n_units.append(unit)
 		if running:
 			unit.prepare_fight()

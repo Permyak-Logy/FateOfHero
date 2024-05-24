@@ -6,7 +6,7 @@ class_name BerserkA1 extends AoEAbility
 
 func apply():
 	await owner.play("aoe_ability")
-	super()
+	await super()
 	await owner.play("idle")
 
 func find_about_cells():
@@ -22,7 +22,7 @@ func apply_on_unit(unit: Unit):
 		return
 		
 	get_map().write_info("=> В ярости атакует " + unit.unit_name)
-	unit.apply_damage(scale * power.mul + power.add, owner)
+	await unit.apply_damage(scale * power.mul + power.add, owner)
 	var e = effect.duplicate(true)
 	e.instigator = owner
 	unit.add_effect(e)
