@@ -7,7 +7,7 @@ class_name BerserkA1 extends AoEAbility
 func apply():
 	await owner.play("aoe_ability")
 	super()
-	owner.play("idle")
+	await owner.play("idle")
 
 func find_about_cells():
 	var map = get_map()

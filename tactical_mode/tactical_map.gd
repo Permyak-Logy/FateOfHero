@@ -23,9 +23,10 @@ var active_unit: Unit:  # Текущий
 var acts: int  # Текущее кол-во действий
 var _p_units: Array[Unit] = []  # Список юнитов игрока
 var _e_units: Array[Unit] = []  # Список юнитов оппонента
+var _n_units: Array[Unit] = []
 var units:  # property список всех юнитов
 	get:
-		return _p_units + _e_units
+		return _p_units + _e_units + _n_units
 var _enemy_level: int = 1
 var actors:
 	get:
@@ -84,7 +85,7 @@ func _init():
 func _ready():
 	if is_instance_of($"..", Game):
 		return
-	
+	_n_units = [$BlackHole]
 	for u in get_children():
 		if is_instance_of(u, Unit):
 			if (u as Unit).controlled_player:
@@ -101,7 +102,7 @@ func start_battle():
 		return
 	if is_instance_of($"..", Game):
 		arrange_units()
-		await gen_nature()
+		gen_nature()
 	else:
 		for e in _e_units:
 			if e.expirience:
@@ -250,6 +251,7 @@ func clear():
 	
 	_p_units.clear()
 	_e_units.clear()
+	_n_units.clear()
 	
 	unit_queue.clear()
 	_block_input = false
@@ -360,7 +362,7 @@ func _start_stepmove():
 	Вызывается перед каждым ходом юнита (но не действием)
 	"""
 	
-	write_info("* Ходит: " + str(active_unit) + " * ")
+	write_info("* Ходит: " + active_unit.unit_name + " * ")
 	
 	cur_ability = null
 	active_unit.set_outline_color(Unit.CUR_COLOR)
@@ -727,11 +729,13 @@ func spawn(actor_ps: PackedScene, cell: Vector2i, _instigator: Unit = null) -> A
 		var unit = actor as Unit
 		if is_player(_instigator):
 			_p_units.append(unit)
-		if is_enemy(_instigator):
+		elif is_enemy(_instigator):
 			_e_units.append(unit)
 			if unit.expirience:
 				unit.expirience.level = _enemy_level
 				unit.private_passives.append(level_upscale_effect)
+		else:
+			_n_units.append(unit)
 		if running:
 			unit.prepare_fight()
 			reset_outline_color(unit)

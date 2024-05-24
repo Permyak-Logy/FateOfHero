@@ -12,7 +12,7 @@ func apply():
 	unit.add_effect(te)
 	applied = unit
 	await owner.play("postability")
-	owner.play("idle")
+	await owner.play("idle")
 
 func subapply():
 	if not applied:

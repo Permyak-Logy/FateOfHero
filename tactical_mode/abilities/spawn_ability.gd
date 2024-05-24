@@ -13,7 +13,7 @@ func apply():
 	map.add_to_unit_queue(unit, true)
 	if kill_all_mobs_on_death_owner:
 		(owner as Unit).death.connect(func(u): unit.kill())
-	owner.play("idle")
+	await owner.play("idle")
 
 func can_select(_cell: Vector2i) -> bool:
 	if get_map().distance_between_cells(owner.get_cell(), _cell) > range_apply:
