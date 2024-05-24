@@ -164,7 +164,10 @@ func get_occupied_cells() -> Array[Vector2i]:
 
 func prepare_fight():
 	toggle_preview(false)
-	death.connect(get_map().on_kill)
+	if not death.is_connected(get_map().on_kill):
+		death.connect(get_map().on_kill)
+	else:
+		print("WARN Death is already connected ", self)
 	print("=> Prepare: ", unit_name)
 	reload_all_mods()
 	for ability in get_abilities():

@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://hhbqnqfsii4c"]
+[gd_scene load_steps=3 format=3 uid="uid://hhbqnqfsii4c"]
 
 [ext_resource type="Theme" uid="uid://c3kwn6d20ipja" path="res://GUI/styles/dialogue_gui_theme.tres" id="1_hk5rv"]
 [ext_resource type="Script" path="res://GUI/tactical_mode/unit_queue/unit_queue_panel.gd" id="2_6v6ao"]
-[ext_resource type="PackedScene" uid="uid://clcs18kjikhcl" path="res://GUI/tactical_mode/unit_queue/unit_card.tscn" id="2_vgcsc"]
 
 [node name="UnitQueuePanel" type="Panel"]
-custom_minimum_size = Vector2(420, 60)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_hk5rv")
 script = ExtResource("2_6v6ao")
 
@@ -22,26 +22,5 @@ offset_right = 152.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 5
 alignment = 1
-
-[node name="UnitCard1" parent="HBoxContainer" instance=ExtResource("2_vgcsc")]
-layout_mode = 2
-
-[node name="UnitCard2" parent="HBoxContainer" instance=ExtResource("2_vgcsc")]
-layout_mode = 2
-
-[node name="UnitCard3" parent="HBoxContainer" instance=ExtResource("2_vgcsc")]
-layout_mode = 2
-
-[node name="UnitCard4" parent="HBoxContainer" instance=ExtResource("2_vgcsc")]
-layout_mode = 2
-
-[node name="UnitCard5" parent="HBoxContainer" instance=ExtResource("2_vgcsc")]
-layout_mode = 2
-
-[node name="UnitCard6" parent="HBoxContainer" instance=ExtResource("2_vgcsc")]
-layout_mode = 2
-
-[node name="UnitCard7" parent="HBoxContainer" instance=ExtResource("2_vgcsc")]
-layout_mode = 2

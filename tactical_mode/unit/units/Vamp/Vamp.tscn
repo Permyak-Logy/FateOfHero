@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://d1jk2a04wq33q"]
+[gd_scene load_steps=38 format=3 uid="uid://d1jk2a04wq33q"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3454p"]
+[ext_resource type="Texture2D" uid="uid://cu0msqj6flahl" path="res://strategic_mode/tile_events/sprites/gg_vampire.png" id="2_f07v8"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_rkmhg"]
 [ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_lkwsv"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_0f3pp"]
@@ -488,6 +489,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_3454p")
 unit_name = "Фиди (Вампир)"
+icon = ExtResource("2_f07v8")
 inventory = SubResource("Resource_jp28n")
 health = ExtResource("3_lkwsv")
 defence = ExtResource("4_0f3pp")

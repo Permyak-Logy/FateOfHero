@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://b1ley3wjjoisv"]
+[gd_scene load_steps=32 format=3 uid="uid://b1ley3wjjoisv"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/EvilPlant.gd" id="1_g78kk"]
+[ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://strategic_mode/tile_events/sprites/x_marks_the_spot.png" id="2_cytj3"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_smu40"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_1oomm"]
@@ -256,6 +257,46 @@ tracks/0/keys = {
 "values": [30, 29, 28]
 }
 
+[sub_resource type="Animation" id="Animation_ochi4"]
+resource_name = "postteleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.966672, 1, 0.999604, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_lv3bu"]
 resource_name = "preattack"
 length = 0.5
@@ -324,46 +365,6 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ochi4"]
-resource_name = "postteleport"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:material:shader_parameter/modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.966672, 1, 0.999604, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body:material:shader_parameter/opacity")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Shadow:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7mk7n"]
 _data = {
 "RESET": SubResource("Animation_14kou"),
@@ -384,6 +385,7 @@ scale = Vector2(1.4, 1.4)
 input_pickable = true
 script = ExtResource("1_g78kk")
 unit_name = "Злое растение"
+icon = ExtResource("2_cytj3")
 health = SubResource("Resource_px43a")
 defence = SubResource("Resource_aj3sk")
 speed = SubResource("Resource_cvhmw")

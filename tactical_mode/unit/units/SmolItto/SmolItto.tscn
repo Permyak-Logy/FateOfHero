@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://bjcjl3qla8b62"]
+[gd_scene load_steps=36 format=3 uid="uid://bjcjl3qla8b62"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_mm6vi"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_3pi2g"]
+[ext_resource type="Texture2D" uid="uid://bg67p8gs7anft" path="res://strategic_mode/tile_events/sprites/smol_itto.png" id="2_7274r"]
 [ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_6l5m4"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_5wldu"]
 [ext_resource type="Texture2D" uid="uid://b7oowqmoun462" path="res://tactical_mode/unit/units/SmolItto/assets/spritesheet.png" id="4_n8og0"]
@@ -474,6 +475,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_mm6vi")
 unit_name = "Смол Итто"
+icon = ExtResource("2_7274r")
 inventory = SubResource("Resource_0pw3q")
 health = ExtResource("3_6l5m4")
 defence = ExtResource("4_5wldu")

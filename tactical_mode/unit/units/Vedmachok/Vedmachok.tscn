@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://csb3ujant2uio"]
+[gd_scene load_steps=36 format=3 uid="uid://csb3ujant2uio"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/Vedmachok.gd" id="1_niktu"]
 [ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_5q3v1"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="2_fx817"]
+[ext_resource type="Texture2D" uid="uid://bnx83ikh4q52i" path="res://strategic_mode/tile_events/sprites/vedmachok_mini.png" id="2_u14ie"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_klvn2"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_udfcx"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="5_dhbj6"]
@@ -351,34 +352,6 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_er27v"]
-resource_name = "run"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_1afq7"]
 resource_name = "preteleport"
 length = 0.3
@@ -419,6 +392,34 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_er27v"]
+resource_name = "run"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gtko6"]
 _data = {
 "RESET": SubResource("Animation_7q0gn"),
@@ -437,6 +438,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_niktu")
 unit_name = "Ведьмачок"
+icon = ExtResource("2_u14ie")
 health = SubResource("Resource_txejc")
 defence = SubResource("Resource_jfvkh")
 speed = SubResource("Resource_aqp23")
