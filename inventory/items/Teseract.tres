@@ -22,5 +22,5 @@ name = "Тесеракт"
 russian_name = ""
 description = "Телепортирует персонажа в указанное место"
 texture = ExtResource("2_xi4t5")
-max_stack = 0
-price = 0
+max_stack = 1
+price = 10000
