@@ -9,7 +9,7 @@ class_name StratMap extends Node2D
 var GameOverGUIRes: PackedScene = preload("res://GUI/game_over/game_over_gui.tscn")
 var time: int = 0
 
-signal strat_map_loaded
+signal strat_map_loaded()
 signal time_changed(time: int)
 
 func pause():

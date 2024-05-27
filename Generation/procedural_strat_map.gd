@@ -1,76 +1,55 @@
-class_name ProceduralStratMap extends StratMap 
+class_name ProceduralStratMap extends Node2D
 
+@onready var noise_img: Sprite2D = $Sprite2D
+@onready var gui: StratMapGUI = $GUI
+@onready var tilemap: StratTileMap = $StratTileMap
+@onready var player: Player = $player
+@onready var game: Game = get_tree().root.get_child(0)
 
-# size of the world in chunks
-const WORLD_SIZE = 16
-# array[array[array[Vector2i]]] indexed as layer_id, terrain_id, tile_id
-var terrains: Array[Array]
-#array[array[chunk]]
-var chunks: Array[Array]
+var GameOverGUIRes: PackedScene = preload("res://GUI/game_over/game_over_gui.tscn")
+var time: int = 0
 
-func gen_world():
-	init_chunks()
-	gen_chunks()
-	draw_world()
+signal strat_map_loaded()
+signal time_changed(time: int)
+
 
 func _ready():
+	tilemap = tilemap as ProcTileMap
 	gui.gui_opened.connect(on_gui_opened)
 	gui.gui_closed.connect(on_gui_closed)
-	gen_world()
+	tilemap.gen_world()
 	strat_map_loaded.emit()
 
-func init_chunks():
-	chunks = []
-	for x in range(WORLD_SIZE):
-		chunks.append([])
-		for y in range(WORLD_SIZE):
-			var chunk = Chunk.new()
-			chunk.pos = Vector2i(x - (WORLD_SIZE / 2), y - (WORLD_SIZE / 2))
-			chunks[x].append(chunk)
+func pause():
+	get_tree().paused = true
 
-func gen_chunks():
-	var noise_gen = FastNoiseLite.new()
-	var noise_image: Image = noise_gen.get_image(WORLD_SIZE * 16, WORLD_SIZE * 16)
-	var mrx = 0
-	var mry = 0
-	var noise = noise_image.get_data()
-	for i in range(WORLD_SIZE):
-		for j in range(WORLD_SIZE):
-			var chunk: Chunk = chunks[i][j]
-			for x in range(16):
-				for y in range(16):
-					var rx = 16 * i + x
-					var ry = 16 * j + y
-					if rx > mrx: mrx = rx 
-					if ry > mry: mry = ry 
-					var layer = noise[ry * WORLD_SIZE * 16 + rx]
-					layer = layer / 64
-					for lid in range(1, min(layer, 5)):
-						chunk.blocks[lid][x][y] = 8
-	print("reaced: ", mrx, " ", mry)
-func draw_world():
-	terrains = [
-		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
-		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
-		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
-		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
-		[[], [], [], [], [], [], [], [], [], [], [], [], [], []]
-	]
-	for x in range(-16 * WORLD_SIZE/2 - 16, 16 * WORLD_SIZE / 2 + 17):
-		for y in range(-16 * WORLD_SIZE/2 - 16, 16 * WORLD_SIZE / 2 + 17):
-			tilemap.set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
-	for x in range(WORLD_SIZE):
-		for y in range(WORLD_SIZE):
-			load_chunk(chunks[x][y])
-	for layer in range(5):
-		for terrain_id in range(14):
-			tilemap.set_cells_terrain_connect(layer, terrains[layer][terrain_id], terrain_id / 8, terrain_id % 8)
+func unpause():
+	get_tree().paused = false
 
-func load_chunk(chunk: Chunk):
-	for layer in range(min(5, chunk.blocks.size())):
-		for x in range(16):
-			for y in range(16):
-				var real_pos = 16 * chunk.pos + Vector2i(x, y)
-				if chunk.blocks[layer][x][y] == -1:
-					continue
-				terrains[layer][chunk.blocks[layer][x][y]].append(real_pos)
+func move_time(delta: int):
+	time += delta
+	time = time % 1440
+	time_changed.emit(time)
+
+
+func on_gui_opened():
+	pause()
+
+func on_gui_closed():
+	unpause()
+
+func show_game_over():
+	var game_over_gui: GameOverGUI = GameOverGUIRes.instantiate() 
+	gui.add_child(game_over_gui)
+	game_over_gui.set_lose()
+	await game_over_gui.done
+	gui.remove_child(game_over_gui)
+	game.remove_save()
+	game.to_main_menu()
+
+func show_win():
+	var game_over_gui: GameOverGUI = GameOverGUIRes.instantiate() 
+	gui.add_child(game_over_gui)
+	game_over_gui.set_win()
+	await game_over_gui.done
+	gui.remove_child(game_over_gui)

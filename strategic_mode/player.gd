@@ -88,7 +88,6 @@ func backtrack():
 
 func _input(event):
 	if event.is_action_pressed("lmb"):
-		print(event)
 		var id_path
 		if is_moving:
 			print("stopping")
