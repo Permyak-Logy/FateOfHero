@@ -4,4 +4,3 @@
 
 [node name="Option" instance=ExtResource("1_ae00h")]
 msg = "Чего деревня? Тут люди живут?"
-next_dialogue = ExtResource("1_lpq1w")

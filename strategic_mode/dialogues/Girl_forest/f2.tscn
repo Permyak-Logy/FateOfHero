@@ -4,4 +4,4 @@
 
 [node name="Option" instance=ExtResource("1_ae00h")]
 msg = "Понял..."
-next_dialogue = ExtResource("1_lpq1w")
+

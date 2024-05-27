@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=105 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dq0vrkeat2qlu" path="res://tactical_mode/assets/tactical_mode_bg_music.mp3" id="15_nmmmq"]
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/units/Skeleton/Skeleton.tscn" id="17_rqd6n"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/units/Vendigo/Vendigo.tscn" id="19_t2j1s"]
+[ext_resource type="PackedScene" uid="uid://b65p5vmcpiq51" path="res://tactical_mode/unit/units/BlackHole/BlackHole.tscn" id="20_u26c1"]
 
 [sub_resource type="Resource" id="Resource_upg3w"]
 resource_local_to_scene = true
@@ -620,25 +621,25 @@ anchor_mode = 0
 [node name="TacticalModeGui" parent="." instance=ExtResource("9_kpa5w")]
 
 [node name="Rock" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(347, 354)
+position = Vector2(120, 232)
 
 [node name="Rock2" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(352, 400)
+position = Vector2(635, 181)
 
 [node name="Rock3" parent="." instance=ExtResource("10_m7p5y")]
 position = Vector2(642, 233)
 
 [node name="Rock4" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(320, 376)
+position = Vector2(573, 183)
 
 [node name="Rock5" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(453, 280)
+position = Vector2(187, 235)
 
 [node name="Rock6" parent="." instance=ExtResource("10_m7p5y")]
 position = Vector2(638, 331)
 
 [node name="Rock7" parent="." instance=ExtResource("10_m7p5y")]
-position = Vector2(350, 208)
+position = Vector2(223, 209)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_nmmmq")
@@ -646,7 +647,7 @@ volume_db = -30.555
 autoplay = true
 
 [node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
-position = Vector2(96, 210)
+position = Vector2(157, 208)
 inventory = SubResource("Resource_upg3w")
 health = SubResource("Resource_8a0qd")
 defence = SubResource("Resource_oict1")
@@ -663,7 +664,7 @@ damage = SubResource("Resource_0bt7o")
 expirience = SubResource("Resource_svgig")
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
-position = Vector2(95, 300)
+position = Vector2(320, 229)
 inventory = SubResource("Resource_2m8w8")
 health = SubResource("Resource_kidng")
 defence = SubResource("Resource_5xk4w")
@@ -687,7 +688,7 @@ damage = SubResource("Resource_qbdjy")
 expirience = SubResource("Resource_1ufwe")
 
 [node name="SmolItto" parent="." instance=ExtResource("12_e7e7b")]
-position = Vector2(94, 357)
+position = Vector2(161, 306)
 inventory = SubResource("Resource_6nqbe")
 health = SubResource("Resource_4k6o0")
 defence = SubResource("Resource_0jid2")
@@ -696,7 +697,7 @@ damage = SubResource("Resource_n1trs")
 expirience = SubResource("Resource_qobx4")
 
 [node name="Vamp" parent="." instance=ExtResource("14_y1ibn")]
-position = Vector2(133, 426)
+position = Vector2(288, 306)
 inventory = SubResource("Resource_61g8m")
 health = SubResource("Resource_k1htb")
 defence = SubResource("Resource_333ue")
@@ -719,3 +720,6 @@ defence = SubResource("Resource_h2s37")
 speed = SubResource("Resource_dp6hj")
 damage = SubResource("Resource_fwfm7")
 expirience = SubResource("Resource_b0kai")
+
+[node name="BlackHole" parent="." instance=ExtResource("20_u26c1")]
+position = Vector2(447, 325)

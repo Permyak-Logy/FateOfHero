@@ -3,7 +3,7 @@ class_name Unit extends Actor
 var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 
 @export var unit_name: String = "Unit"
-
+@export var icon: Texture2D = null
 @export_group("Components")
 @export var inventory: InventoryComponent = null
 @export var health: StatComponent = null:
@@ -90,7 +90,8 @@ func set_outline_color(color: Vector4):
 func toggle_preview(value: bool):
 	if value:
 		set_outline_color(DEFAULT_COLOR)
-	health_bar_pb.visible = not value
+	if health_bar_pb:
+		health_bar_pb.visible = not value
 
 func apply_damage(_damage: float, _instigator: Unit):
 	"""
@@ -119,7 +120,7 @@ func apply_damage(_damage: float, _instigator: Unit):
 	get_map().write_info(
 		"=> " + unit_name + " получил " + str(int(_damage)) +" урона от " + _instigator.unit_name
 	)
-	play("idle")
+	await play("idle")
 	return _damage
 
 func reload_all_mods():
@@ -163,7 +164,10 @@ func get_occupied_cells() -> Array[Vector2i]:
 
 func prepare_fight():
 	toggle_preview(false)
-	death.connect(get_map().on_kill)
+	if not death.is_connected(get_map().on_kill):
+		death.connect(get_map().on_kill)
+	else:
+		print("WARN Death is already connected ", self)
 	print("=> Prepare: ", unit_name)
 	reload_all_mods()
 	for ability in get_abilities():
@@ -206,12 +210,13 @@ func _physics_process(_delta):
 		if not current_id_path:
 			flipped = idle_direction_bool()
 			walk_finished.emit()
-			play("idle")
+			await play("idle")
 
 func idle_direction_bool():
 	return get_map().is_enemy(self)
 	
 func play(_name: String, _params=null):
+	print(self, " play ", _name, " params=", _params)
 	if is_death() and not _name.begins_with("death"):
 		return
 	if _name == "walk":
@@ -232,7 +237,10 @@ func play(_name: String, _params=null):
 			animation_player.play("RESET")
 		else:
 			animation_player.play(_name)
-		await animation_player.animation_finished
+		if _name in ["idle", "run", "idle2"]:
+			await animation_player.animation_changed
+		else:
+			await animation_player.animation_finished
 		
 		if _name.begins_with("post"):
 			flipped = idle_direction_bool()
@@ -332,7 +340,7 @@ func get_move_distance() -> int:
 	return int(distance)
 
 func ai(map: TacticalMap):
-	ai_random_move(map)
+	ai_pass(map)
 
 func ai_random_move(map: TacticalMap):
 	var distance = get_move_distance()
@@ -359,7 +367,7 @@ func ai_move_to(map: TacticalMap, cell: Vector2i):
 
 func ai_pass(map: TacticalMap):
 	map.acts = 0
-	map._update_stepmove()
+	await map._update_stepmove()
 
 func reset_color():
 	get_map().reset_outline_color(self)
