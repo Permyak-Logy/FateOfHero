@@ -1,6 +1,6 @@
 class_name Game extends Node2D
 
-@onready var strat_map: StratMap 
+@onready var strat_map: StratMap
 @onready var tactical_map: TacticalMap = load("res://tactical_mode/tactical_map.tscn").instantiate() 
 @onready var city_container: CityContainer = load("res://city_mode/city_container.tscn").instantiate()
 @onready var external_puzzle_container: ExternalPuzzleContainer = \
@@ -16,7 +16,8 @@ func _ready():
 	active_scene = main_menu
 
 func activate(scene: Node):
-	remove_child(active_scene)
+	if active_scene:
+		remove_child(active_scene)
 	active_scene = scene
 	add_child(scene)
 
@@ -101,5 +102,12 @@ func new_procedural_world(init_char: PackedScene):
 	var sm: ProceduralStratMap = ProceduralSMRes.instantiate()
 	add_child(sm)
 	sm.player.inventory.characters = [init_char]
+	var char = init_char.instantiate()
+	sm.tilemap.gen_world()
+	sm.player.sprite.texture = sm.player.texture[char.name]
+	sm.player.sprite.hframes = 8
+	sm.player.mc_name = char.name
+	sm.player.move_to(Vector2i(sm.tilemap.SUPERCHUNK_SIZE  * 16 / 2, sm.tilemap.SUPERCHUNK_SIZE  * 16 / 2))
+	sm.strat_map_loaded.emit()
 	remove_child(sm)
 	strat_map = sm
