@@ -2,7 +2,7 @@ class_name ProcTileMap extends StratTileMap
 
 @onready var sm: ProceduralStratMap = get_parent()
 # size of the world in chunks
-const GENERATION_DISTANCE = 1
+const GENERATION_DISTANCE = 3
 #@export var SEED = randi()
 @export var SEED = 3453287850
 
@@ -129,11 +129,11 @@ func draw_chunk(chunk: Chunk):
 	
 	var cp = chunk.pos * Chunk.SIZE 
 	var border: Array[Array] = [[],[],[],[]]
-	for i in range(64):
-		sm.tilemap.set_cell(0, cp + Vector2i(i, 0), 0, Vector2i(1, 1))
-		sm.tilemap.set_cell(0, cp + Vector2i(0, i), 0, Vector2i(1, 1))
-		sm.tilemap.set_cell(0, cp + Vector2i(Chunk.SIZE, i), 0, Vector2i(1, 1))
-		sm.tilemap.set_cell(0, cp + Vector2i(i, Chunk.SIZE), 0, Vector2i(1, 1))
+	for i in range(Chunk.SIZE):
+		sm.tilemap.set_cell(0, cp + Vector2i(i, 0), 0, Vector2i(randi_range(0, 2), randi_range(0, 1)))
+		sm.tilemap.set_cell(0, cp + Vector2i(0, i), 0, Vector2i(randi_range(0, 2), randi_range(0, 1)))
+		sm.tilemap.set_cell(0, cp + Vector2i(Chunk.SIZE, i), 0, Vector2i(randi_range(0, 2), randi_range(0, 1)))
+		sm.tilemap.set_cell(0, cp + Vector2i(i, Chunk.SIZE), 0, Vector2i(randi_range(0, 2), randi_range(0, 1)))
 	for t in threads:
 		t.wait_to_finish()
 	print("draw_chunk ", chunk.pos, ": ", "done drawing")
@@ -169,10 +169,10 @@ func gen_and_draw_chunk(cpos: Vector2i):
 	# we spin for 1 frame
 	while not chunk_heightmaps.has(cpos): continue
 	var chunk: Chunk = gen_chunk(cpos)
-	await draw_chunk(chunk)
+	draw_chunk(chunk)
+	call_deferred("prune_drawers")
 
 func on_player_moved(pos: Vector2i):
-	var removed_thread = false
 	for i in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
 		for j in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
 			var chunk_pos = ((pos - Vector2i(32, 32)) / Chunk.SIZE) + Vector2i(i, j)
@@ -182,24 +182,19 @@ func on_player_moved(pos: Vector2i):
 				var c = Callable(gen_and_draw_chunk)
 				dt.start(c.bind(chunk_pos), Thread.PRIORITY_LOW)
 				drawer_threads.append(dt)
-				#tilemap_mutex.lock()
+
+func prune_drawers():
+	var removed_thread = false
 	for t in drawer_threads:
 		if not t.is_alive():
 			t.wait_to_finish()
 			drawer_threads.remove_at(drawer_threads.find(t))
 			removed_thread = true
 	if drawer_threads.is_empty() and removed_thread:
-		call_deferred("regen_navmap")
-		notify_runtime_tile_data_update()
-		update_internals()
-
-func _input(event):
-	if event.is_action_pressed("rmb"):
-		var pos: Vector2i = local_to_map(get_global_mouse_position())
-		var chunk_pos = ((pos - Vector2i(32, 32)) / Chunk.SIZE)
-		drawn_chunks.remove_at(drawn_chunks.find(chunk_pos))
-		on_player_moved(pos)
-		notify_runtime_tile_data_update()
-		update_internals()
-		#force_update()
-		#force_update_transform()
+		regen_navmap()
+		for layer in range(Chunk.LAYER_COUNT):
+			set_layer_enabled(layer, false)
+			notify_runtime_tile_data_update(layer)
+			update_internals()
+			set_layer_enabled(layer, true)
+		print("reloaded layers")
