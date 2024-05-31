@@ -185,7 +185,7 @@ func _physics_process(delta):
 		direction = get_dir_from_vect(current_id_path.front() - pos)
 
 	
-	var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
+	var movement = global_position.move_toward(target_position, 8 * 16 * 20 * delta) - global_position
 	var collision = move_and_collide(movement)
 	
 	if collision:

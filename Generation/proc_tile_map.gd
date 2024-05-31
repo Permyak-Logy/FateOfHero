@@ -2,7 +2,7 @@ class_name ProcTileMap extends StratTileMap
 
 @onready var sm: ProceduralStratMap = get_parent()
 # size of the world in chunks
-const GENERATION_DISTANCE = 2
+const GENERATION_DISTANCE = 1
 #@export var SEED = randi()
 @export var SEED = 3453287850
 
@@ -32,6 +32,21 @@ func gen_world():
 	var spawn_chunk: Chunk = gen_chunk(Vector2i(0, 0))
 	draw_chunk(spawn_chunk)
 	drawn_chunks.append(Vector2i(0, 0))
+	
+	for i in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
+		for j in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
+			var chunk_pos = Vector2i(i, j)
+			if not (chunk_pos in drawn_chunks):
+				print("attemptint to draw chunk: ", chunk_pos)
+				var dt = Thread.new()
+				var c = Callable(gen_and_draw_chunk)
+				dt.start(c.bind(chunk_pos), Thread.PRIORITY_LOW)
+				drawer_threads.append(dt)
+	for t in drawer_threads:
+		t.wait_to_finish()
+	drawer_threads.clear()
+	regen_navmap()
+	notify_runtime_tile_data_update()
 
 func gen_heightmap(cpos: Vector2i):
 	var height_map:Array[Array] = []
@@ -127,7 +142,7 @@ func draw_chunk(chunk: Chunk):
 
 func draw_layer(layer: int):
 	for terrain_id in range(14):
-		set_cells_terrain_connect(layer, terrains[layer][terrain_id], terrain_id / 8, terrain_id % 8)
+		set_cells_terrain_connect(layer, terrains[layer][terrain_id], terrain_id / 8, terrain_id % 8, true)
 
 
 func press_circle(height_map: Array[Array], pos: Vector2i, radius: float) -> Array[Array]:
@@ -160,7 +175,7 @@ func on_player_moved(pos: Vector2i):
 	var removed_thread = false
 	for i in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
 		for j in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
-			var chunk_pos = ((pos - Vector2i(32, 32)) / (Chunk.SIZE * 16)) + Vector2i(i, j)
+			var chunk_pos = ((pos - Vector2i(32, 32)) / Chunk.SIZE) + Vector2i(i, j)
 			if not (chunk_pos in drawn_chunks):
 				print("attemptint to draw chunk: ", chunk_pos)
 				var dt = Thread.new()
@@ -175,3 +190,16 @@ func on_player_moved(pos: Vector2i):
 			removed_thread = true
 	if drawer_threads.is_empty() and removed_thread:
 		call_deferred("regen_navmap")
+		notify_runtime_tile_data_update()
+		update_internals()
+
+func _input(event):
+	if event.is_action_pressed("rmb"):
+		var pos: Vector2i = local_to_map(get_global_mouse_position())
+		var chunk_pos = ((pos - Vector2i(32, 32)) / Chunk.SIZE)
+		drawn_chunks.remove_at(drawn_chunks.find(chunk_pos))
+		on_player_moved(pos)
+		notify_runtime_tile_data_update()
+		update_internals()
+		#force_update()
+		#force_update_transform()
