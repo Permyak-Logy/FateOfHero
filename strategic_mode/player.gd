@@ -52,7 +52,7 @@ func update_nav_map(pos: Vector2i, state: bool):
 
 func regen_nav():
 	print("regenertion nav map")
-	tilemap.terraints_mutex.lock()
+	tilemap.tilemap_mutex.lock()
 	var astar_grid_ = AStarGrid2D.new()
 	astar_grid_.region = tilemap.get_used_rect()
 	astar_grid_.cell_size = Vector2(16, 16) 
@@ -68,10 +68,10 @@ func regen_nav():
 			astar_grid_.set_point_solid(tile_position, not is_walkable(tile_position))
 	astar_grid = astar_grid_
 	call_deferred("emit_signal", "nav_map_regenerated")
-	tilemap.terraints_mutex.unlock()
+	tilemap.tilemap_mutex.unlock()
 
 func gen_nav(_null=null):
-	tilemap.terraints_mutex.lock()
+	#tilemap.terraints_mutex.lock()
 	pos = tilemap.local_to_map(global_position)
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
@@ -87,7 +87,7 @@ func gen_nav(_null=null):
 				)
 			astar_grid.set_point_solid(tile_position, not is_walkable(tile_position))
 	nav_map_regenerated.emit()
-	tilemap.terraints_mutex.unlock()
+	#tilemap.terraints_mutex.unlock()
 
 
 func _ready():

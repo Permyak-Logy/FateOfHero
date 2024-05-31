@@ -2,19 +2,20 @@ class_name ProcTileMap extends StratTileMap
 
 @onready var sm: ProceduralStratMap = get_parent()
 # size of the world in chunks
-const SUPERCHUNK_SIZE = 4
 const GENERATION_DISTANCE = 2
 #@export var SEED = randi()
 @export var SEED = 3453287850
-# array[array[array[Vector2i]]] indexed as layer_id, terrain_id, tile_id
-var terraints_mutex: Mutex = Mutex.new()
-var player_nav_map_mutex: Mutex = Mutex.new()
+
+# you can't access the same layer from several threads
+var tilemap_mutex: Mutex = Mutex.new()
 var terrains: Array[Array]
-#array[array[chunk]]
-# superchunk pos -> superchunk height map
-# i have no idea how to deal with the negatives othervise
-var superchunks_heightmaps: Dictionary = {}
-@export var drawn_scs: Array[Vector2i] = []
+var current_terrain_slot: int = 0
+
+var hightmap_mutex: Mutex = Mutex.new()
+var chunk_heightmaps: Dictionary = {}
+@export var drawn_chunks: Array[Vector2i] = []
+
+
 
 signal superchunk_generated(cpos: Vector2i)
 
@@ -23,34 +24,16 @@ var drawer_threads: Array[Thread] = []
 
 func gen_world():
 	print(SEED)
-	var spawn_chunks_hm = gen_height_map(0, 0)
-	spawn_chunks_hm = press_circle(spawn_chunks_hm, Vector2i(
-		SUPERCHUNK_SIZE  * 16 / 2, SUPERCHUNK_SIZE  * 16 / 2), 5)
-	print(spawn_chunks_hm[32][32])
-	var spawn_chunks = gen_chunks(spawn_chunks_hm, 0, 0)
-	superchunks_heightmaps[Vector2i(0, 0)] = spawn_chunks_hm
-	draw_world(spawn_chunks)
-	drawn_scs.append(Vector2i(0, 0))
-	start_generation_job()
+	gen_heightmap(Vector2i(0, 0))
+	var spawn_chunk_hm = chunk_heightmaps[Vector2i(0, 0)]
+	spawn_chunk_hm = press_circle(
+		spawn_chunk_hm, Vector2i(Chunk.SIZE  / 2, Chunk.SIZE / 2), 5)
+	chunk_heightmaps[Vector2i(0, 0)] = spawn_chunk_hm
+	var spawn_chunk: Chunk = gen_chunk(Vector2i(0, 0))
+	draw_chunk(spawn_chunk)
+	drawn_chunks.append(Vector2i(0, 0))
 
-func start_generation_job():
-	gen_thread = Thread.new()
-	gen_thread.start(generation_job, Thread.PRIORITY_LOW)
-	
-
-func init_chunks(cx, cy) -> Array[Array]:
-	var chunks: Array[Array] = []
-	for x in range(SUPERCHUNK_SIZE):
-		chunks.append([])
-		for y in range(SUPERCHUNK_SIZE):
-			var chunk = Chunk.new()
-			var rx = x + cx * SUPERCHUNK_SIZE
-			var ry = y + cy * SUPERCHUNK_SIZE
-			chunk.pos = Vector2i(rx, ry)
-			chunks[x].append(chunk)
-	return chunks
-
-func gen_height_map(cx, cy) -> Array[Array]:
+func gen_heightmap(cpos: Vector2i):
 	var height_map:Array[Array] = []
 	var noise_gen = FastNoiseLite.new()
 	noise_gen.noise_type = FastNoiseLite.TYPE_PERLIN
@@ -64,44 +47,43 @@ func gen_height_map(cx, cy) -> Array[Array]:
 	noise_gen_2.frequency = 0.015
 	noise_gen_2.seed = SEED
 	
-	#sm.noise_img.texture = ImageTexture.create_from_image(
-		#noise_gen.get_image(SUPERCHUNK_SIZE * 16, SUPERCHUNK_SIZE * 16))
-	for i in range(SUPERCHUNK_SIZE * 16):
+	for i in range(Chunk.SIZE):
 		height_map.append([])
-		for j in range(SUPERCHUNK_SIZE * 16):
-			var rx = i +  cx * SUPERCHUNK_SIZE * 16
-			var ry = j +  cy * SUPERCHUNK_SIZE * 16
-			var v1 = noise_gen.get_noise_2d(rx, ry)
-			var v2 = noise_gen_2.get_noise_2d(rx, ry)
+		for j in range(Chunk.SIZE):
+			var x = cpos.x * Chunk.SIZE + i
+			var y = cpos.y * Chunk.SIZE + j
+			var v1 = noise_gen.get_noise_2d(x, y)
+			var v2 = noise_gen_2.get_noise_2d(x, y)
+			
 			var val = v1 * 10 + v2 * 10
 			#val = abs(val)
 			val = val + 1
 			height_map[i].append(val)
-	#print(height_map)
-	return height_map
+	hightmap_mutex.lock()
+	chunk_heightmaps[cpos] = height_map
+	hightmap_mutex.unlock()
+	
+	
 
-func gen_chunks(height_map: Array[Array], cx, cy) -> Array[Array]:
-	var chunks: Array[Array] = init_chunks(cx, cy)
-	var mrx = 0
-	var mry = 0
-	for i in range(SUPERCHUNK_SIZE):
-		for j in range(SUPERCHUNK_SIZE):
-			var chunk: Chunk = chunks[i][j]
-			for x in range(16):
-				for y in range(16):
-					var rx = 16 * i + x
-					var ry = 16 * j + y
-					#var layer = abs(noise_gen.get_noise_2d(rx, ry) * 10) 
-					var layer = int(height_map[rx][ry])
-					layer = int(layer)
-					for lid in range(1, min(layer, 5)):
-						chunk.blocks[lid][x][y] = 8
-	return chunks
+func gen_chunk(cpos: Vector2i) -> Chunk:
+	var chunk: Chunk = Chunk.create(cpos, chunk_heightmaps[cpos][cpos.x][cpos.y])
+	for x in range(Chunk.SIZE):
+		for y in range(Chunk.SIZE):
+			var layer = int(chunk_heightmaps[cpos][x][y])
+			layer = int(layer)
+			for lid in range(1, min(layer, 5)):
+				chunk.blocks[lid][x][y] = 8
+	return chunk
 
-func draw_world(chunks: Array[Array]):
-	print("starting drawing world")
-	terraints_mutex.lock()
-	print("captured terrain")
+func get_group(pos: Vector2i):
+	var p = pos.x * 2 + int(pos.x > 0) + pos.y * 2 + int(pos.y > 0)
+	return p % len(terrains)
+
+func draw_chunk(chunk: Chunk):
+	
+	print("draw_chunk ", chunk.pos, ": ", "starting drawing chunk ", chunk.pos)
+	tilemap_mutex.lock()
+	print("draw_chunk ", chunk.pos, ": ", "captured terrain")
 	terrains = [
 		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
 		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
@@ -109,121 +91,87 @@ func draw_world(chunks: Array[Array]):
 		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
 		[[], [], [], [], [], [], [], [], [], [], [], [], [], []]
 	]
-	print("initialized terrain")
-	for x in range(SUPERCHUNK_SIZE):
-		for y in range(SUPERCHUNK_SIZE):
-			load_chunk(chunks[x][y])
+	print("draw_chunk ", chunk.pos, ": ", "initialized terrain")
+	
+	for layer in range(Chunk.LAYER_COUNT):
+		for x in range(Chunk.SIZE):
+			for y in range(Chunk.SIZE):
+				if chunk.blocks[layer][x][y] == -1:
+					continue
+				var rpos = Vector2i(x + Chunk.SIZE * chunk.pos.x, y + Chunk.SIZE * chunk.pos.y) 
+				terrains[layer][chunk.blocks[layer][x][y]].append(rpos)
+	print("draw_chunk ", chunk.pos, ": ", "loaded chunk")
+	
+	
 	var threads: Array[Thread] = []
-	print("loaded chunks")
-	for layer in range(5):
+	for layer in range(Chunk.LAYER_COUNT):
 		var c = draw_layer
 		c = c.bind(layer)
 		var t: Thread = Thread.new()
 		t.start(c, Thread.PRIORITY_NORMAL)
 		threads.append(t)
-	print("dispatched threads")
-	var cp = chunks[0][0].pos * 16
+	print("draw_chunk ", chunk.pos, ": ", "dispatched threads")
+	
+	var cp = chunk.pos * Chunk.SIZE 
 	var border: Array[Array] = [[],[],[],[]]
 	for i in range(64):
 		sm.tilemap.set_cell(0, cp + Vector2i(i, 0), 0, Vector2i(1, 1))
 		sm.tilemap.set_cell(0, cp + Vector2i(0, i), 0, Vector2i(1, 1))
-		sm.tilemap.set_cell(0, cp + Vector2i(63, i), 0, Vector2i(1, 1))
-		sm.tilemap.set_cell(0, cp + Vector2i(i, 63), 0, Vector2i(1, 1))
+		sm.tilemap.set_cell(0, cp + Vector2i(Chunk.SIZE, i), 0, Vector2i(1, 1))
+		sm.tilemap.set_cell(0, cp + Vector2i(i, Chunk.SIZE), 0, Vector2i(1, 1))
 	for t in threads:
 		t.wait_to_finish()
-	print("done drawing")
-	terraints_mutex.unlock()
-
-func rpnm():
-	sm.player.regen_nav()
-	#if player_nav_map_mutex.try_lock():
-		#player_nav_map_mutex.unlock()
+	print("draw_chunk ", chunk.pos, ": ", "done drawing")
+	tilemap_mutex.unlock()
+	print("---------------------------------")
 
 func draw_layer(layer: int):
 	for terrain_id in range(14):
-		#if layer == 0:
-			#print(Vector2i(0, 0) in terrains[0][0])
-		set_cells_terrain_connect(
-			layer, terrains[layer][terrain_id], terrain_id / 8, terrain_id % 8)
+		set_cells_terrain_connect(layer, terrains[layer][terrain_id], terrain_id / 8, terrain_id % 8)
 
-func load_chunk(chunk: Chunk):
-	for layer in range(min(5, chunk.blocks.size())):
-		for x in range(16):
-			for y in range(16):
-				var real_pos = 16 * chunk.pos + Vector2i(x, y)
-				if chunk.blocks[layer][x][y] == -1:
-					continue
-				terrains[layer][chunk.blocks[layer][x][y]].append(real_pos)
 
 func press_circle(height_map: Array[Array], pos: Vector2i, radius: float) -> Array[Array]:
-	for x in range(pos.x - int(radius) - 2, pos.x + int(radius) + 2):
-		for y in range(pos.y - int(radius) - 2, pos.y + int(radius) + 2):
+	for x in range(min(0,(pos.x - int(radius) * 2)), min(16 * Chunk.SIZE, pos.x + int(radius) * 2)):
+		for y in range(pos.y - int(radius) - 5, pos.y + int(radius) + 5):
 			#var delta = 
 			if (pos - Vector2i(x, y)).length() < radius:
 				height_map[x][y] *= 0.01
+			elif (pos - Vector2i(x, y)).length() < radius * 2:
+				height_map[x][y] *= ((pos - Vector2i(x, y)).length() - radius) ** 2
 				
 	return height_map
 
-func generation_job():
-	var iter = 1
-	var cpos = Vector2i(0, 0)
-	print("Generation job started")
-	while (iter < 128):
-		for i in range(iter):
-			cpos += Vector2i(0, 1) 
-			if superchunks_heightmaps.has(cpos):
-				continue
-			var hm = gen_height_map(cpos.x, cpos.y)
-			superchunks_heightmaps[cpos] = hm
-		
-		for i in range(iter):
-			cpos += Vector2i(1, 0) 
-			if superchunks_heightmaps.has(cpos):
-				continue
-			var hm = gen_height_map(cpos.x, cpos.y)
-			superchunks_heightmaps[cpos] = hm
-		
-		for i in range(iter + 1):
-			cpos += Vector2i(0, -1) 
-			if superchunks_heightmaps.has(cpos):
-				continue
-			var hm = gen_height_map(cpos.x, cpos.y)
-			superchunks_heightmaps[cpos] = hm
-		
-		for i in range(iter + 1):
-			cpos += Vector2i(-1, 0)
-			if superchunks_heightmaps.has(cpos):
-				continue
-			var hm = gen_height_map(cpos.x, cpos.y)
-			superchunks_heightmaps[cpos] = hm
-		iter += 2
-	print("Generation job finished")
+func mark_as_genned(cpos: Vector2i):
+	drawn_chunks.append(cpos)
 
+func regen_navmap():
+	sm.player.regen_nav()
 
-func draw_sc(cpos: Vector2i):
+func gen_and_draw_chunk(cpos: Vector2i):
 	# superchunk generator job is hella fast
-	drawn_scs.append(cpos)
-	while (not superchunks_heightmaps.has(cpos)):
-		continue
-	var chunks = gen_chunks(superchunks_heightmaps[cpos], cpos.x, cpos.y)
-	await draw_world(chunks)
-	call_deferred("emit_signal", "superchunk_generated", cpos) 
+	call_deferred("mark_as_genned", cpos)
+	gen_heightmap(cpos)
+	# we spin for 1 frame
+	while not chunk_heightmaps.has(cpos): continue
+	var chunk: Chunk = gen_chunk(cpos)
+	await draw_chunk(chunk)
 
 func on_player_moved(pos: Vector2i):
 	var removed_thread = false
 	for i in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
 		for j in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
-			var sc = ((pos - Vector2i(32, 32)) / (SUPERCHUNK_SIZE * 16)) + Vector2i(i, j)
-			if not (sc in drawn_scs):
-				print("attemptint to draw superchunk: ", sc)
+			var chunk_pos = ((pos - Vector2i(32, 32)) / (Chunk.SIZE * 16)) + Vector2i(i, j)
+			if not (chunk_pos in drawn_chunks):
+				print("attemptint to draw chunk: ", chunk_pos)
 				var dt = Thread.new()
-				var c = Callable(draw_sc)
-				dt.start(c.bind(sc), Thread.PRIORITY_LOW)
+				var c = Callable(gen_and_draw_chunk)
+				dt.start(c.bind(chunk_pos), Thread.PRIORITY_LOW)
 				drawer_threads.append(dt)
+				#tilemap_mutex.lock()
 	for t in drawer_threads:
 		if not t.is_alive():
 			t.wait_to_finish()
 			drawer_threads.remove_at(drawer_threads.find(t))
 			removed_thread = true
 	if drawer_threads.is_empty() and removed_thread:
-		rpnm()
+		call_deferred("regen_navmap")

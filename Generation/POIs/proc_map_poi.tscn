@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhedfirsyqylo"]
+
+[ext_resource type="Script" path="res://Generation/POIs/proc_map_poi.gd" id="1_inmas"]
+
+[node name="ProcMapPoi" type="Node2D"]
+script = ExtResource("1_inmas")
