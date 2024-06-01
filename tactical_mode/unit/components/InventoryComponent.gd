@@ -3,79 +3,98 @@ class_name InventoryComponent extends Resource
 const DEFAULT_COUNT_SLOTS = 1
 
 @export var _gears: Dictionary # Dict[Gear.Type, [Gear]]
+@export var _abilities: Array[Ability] = []
 @export var gear_slots = { 
-	Gear.Type.Ability: 5,
 	Gear.Type.Hands: 2
 }
+@export var ability_slots: int = 5
+
 
 func use(stack: ItemStack) -> int:
-	var gear = stack.item as Gear
-	if not gear:
+	var item = stack.item as Item
+	if not item or stack.size <= 0:
 		return 0
 	
-	var count = min(stack.size, 1)
-	if is_instance_of(gear, Ability):
+	if is_instance_of(item, Ability):
 		fixup_abilities()
-		var ability = gear as Ability
+		
+		var ability = item as Ability
+		if len(_abilities) >= ability_slots:
+			return 0
+		
+		_abilities.append(ability)
+		
 		if ability.consumable:
 			ability.count = stack.size
-			count = stack.size
+			return stack.size
+		return 1
 	
-	if count <= 0:
-		return 0
+	if is_instance_of(item, Gear):
+		var gear = item as Gear
+		var count = min(stack.size, 1)
+		if count <= 0:
+			return 0
+		
+		var limit = gear_slots.get(gear.type, DEFAULT_COUNT_SLOTS)
+		if not _gears.has(gear.type):
+			_gears[gear.type] = []
 	
-	var limit = gear_slots.get(gear.type, DEFAULT_COUNT_SLOTS)
-	if not _gears.has(gear.type):
-		_gears[gear.type] = []
+		if len(_gears[gear.type]) >= limit:
+			return 0
+		_gears[gear.type].append(gear.duplicate(true))
+		return count
 	
-	if len(_gears[gear.type]) >= limit:
-		return 0
-	_gears[gear.type].append(gear.duplicate(true))
-	return count
+	return 0
 
 func unuse(stack: ItemStack) -> int:
-	var gear = stack.item as Gear
-	
-	if not gear or stack.size == 0:
+	var item = stack.item as Item
+	if not item or stack.size <= 0:
 		return 0
-	if not _gears.has(gear.type):
-		return 0
-	if not _gears[gear.type].has(gear):
-		return 0
-	
-	var count = 1
-	if is_instance_of(gear, Ability):
-		var ability = gear as Ability
+		
+	if is_instance_of(item, Ability):
+		var count = 1
+		var ability = item as Ability
+		if not _abilities.has(ability):
+			return 0
+		_abilities.erase(ability)
 		if ability.consumable:
-			count = max((gear as Ability).count, 0)
-			(gear as Ability).count = 0
-	_gears[gear.type].erase(gear)
-	return count
-
-func get_gears(gear_type: Gear.Type) -> Array[ItemStack]:
-	if gear_type == Gear.Type.Ability:
-		fixup_abilities()
+			count = max(ability.count, 0)
+			ability.count = 0
+		return count
 	
-	var res: Array[ItemStack] = []
+	if is_instance_of(item, Gear):
+		var gear = item as Gear
+		if not _gears.has(gear.type):
+			return 0
+		if not _gears[gear.type].has(gear):
+			return 0
+		_gears[gear.type].erase(gear)
+		return 1
+	return 0
+
+func get_gears(gear_type: Gear.Type) -> Array[Gear]:
+	var res: Array[Gear] = []
 	for gear in  _gears.get(gear_type, []):
-		var ability = gear as Ability
-		var stack = ItemStack.create(gear, 1 if not ability or not ability.consumable else ability.count)
-		if stack.size > 0:
-			res.append(stack)
+		res.append(gear)
+		#var ability = gear as Ability
+		#var stack = ItemStack.create(gear, 1 if not ability or not ability.consumable else ability.count)
+		#if stack.size > 0:
+		#	res.append(stack)
 	return res
 
 func fixup_abilities():
 	var to_remove: Array[Ability] = []
-	for elem in get_abilities():
+	for elem in _abilities:
 		if elem.consumable and elem.count == 0:
 			to_remove.append(elem)
 		
 	for elem in to_remove:
-		_gears[Gear.Type.Ability].erase(elem)
+		_abilities.erase(elem)
 
 func get_abilities() -> Array[Ability]:
+	fixup_abilities()
 	var res: Array[Ability] = []
-	for elem in _gears.get(Gear.Type.Ability, []):
+	for elem in _abilities:
 		res.append(elem)
 	return res
 
@@ -91,3 +110,11 @@ func get_mods() -> Dictionary:
 					all_mods[mod.type] = ModValue.new()
 				all_mods[mod.type].iadd(mod.value)
 	return all_mods
+
+func get_effects() -> Array[Effect]:
+	var effects: Array[Effect] = []
+	for gears in _gears.values():
+		for gear in gears:
+			for effect in gear.get_effects():
+				effects.append(effect)
+	return effects

@@ -1,4 +1,4 @@
-class_name Ability extends Gear
+class_name Ability extends Item
 
 @export var acts: int = 0
 @export var final_act: bool = false

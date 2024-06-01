@@ -1,13 +1,8 @@
-[gd_resource type="Resource" script_class="AttackAbility" load_steps=7 format=3 uid="uid://jmvxktk78bc6"]
+[gd_resource type="Resource" script_class="AttackAbility" load_steps=5 format=3 uid="uid://jmvxktk78bc6"]
 
 [ext_resource type="Script" path="res://tactical_mode/abilities/attack_ability.gd" id="1_1qnt3"]
 [ext_resource type="Script" path="res://tactical_mode/unit/mod_value.gd" id="1_2544i"]
-[ext_resource type="Script" path="res://tactical_mode/unit/mod.gd" id="1_ifxyi"]
 [ext_resource type="Texture2D" uid="uid://dfp6pw6jqp11v" path="res://tactical_mode/assets/AttackAbility.png" id="2_qg7dj"]
-
-[sub_resource type="Resource" id="Resource_ewhvc"]
-script = ExtResource("1_ifxyi")
-type = 4
 
 [sub_resource type="Resource" id="Resource_q0nyi"]
 script = ExtResource("1_2544i")
@@ -33,8 +28,6 @@ scaling_type = 2
 scaling_stat = 1
 overlay_atlas_coords = Vector2i(2, 0)
 only_unit_owner = true
-type = 4
-_mods = Array[ExtResource("1_ifxyi")]([SubResource("Resource_ewhvc")])
 name = "Атака"
 russian_name = ""
 description = "Атаковать выбранного противника в ближнем бою"
