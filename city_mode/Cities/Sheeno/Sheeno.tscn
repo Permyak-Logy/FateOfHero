@@ -106,10 +106,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 102.0
-offset_top = 171.0
-offset_right = 102.0
-offset_bottom = 171.0
+offset_left = 106.0
+offset_top = 142.0
+offset_right = 106.0
+offset_bottom = 142.0
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -117,10 +117,10 @@ grow_vertical = 1
 visible = false
 anchors_preset = 10
 anchor_bottom = 0.0
-offset_left = 634.0
-offset_top = 426.0
-offset_right = 888.0
-offset_bottom = 673.0
+offset_left = 17.0
+offset_top = 59.0
+offset_right = 532.0
+offset_bottom = 305.0
 grow_vertical = 1
 
 [node name="InventoryGUI" parent="." instance=ExtResource("13_yuuap")]
@@ -130,8 +130,8 @@ offset_top = 232.0
 offset_right = 481.0
 offset_bottom = 232.0
 
-[connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
 [connection signal="pressed" from="trading/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="trading/Button" to="." method="_on_button_trading_pressed"]
 [connection signal="pressed" from="trading/Button" to="Trading" method="_on_button_pressed"]
 [connection signal="pressed" from="crafting/Button" to="." method="_on_button_crafting_pressed"]
 [connection signal="pressed" from="crafting/Button" to="Crafting" method="_on_button_pressed"]

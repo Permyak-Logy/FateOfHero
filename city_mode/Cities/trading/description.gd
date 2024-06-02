@@ -1,10 +1,10 @@
 extends NinePatchRect
 
-func add_description(description, des):
-	if des:
+func open_description(description):
+	if description != "":
 		$".".visible = true
 		$Label.text = description
-	elif $Label.text != description:
-		$Label.text = description
-	else:
-		$".".visible = false
+
+func close_description():
+	$".".visible = false
+	$Label.text = ""
