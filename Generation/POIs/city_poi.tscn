@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://wxfvb18nt5u2"]
-
-[ext_resource type="PackedScene" uid="uid://dhedfirsyqylo" path="res://Generation/POIs/proc_map_poi.tscn" id="1_gtnfe"]
-[ext_resource type="Script" path="res://Generation/POIs/city_poi.gd" id="2_qpq6e"]
-
-[node name="City_POI" instance=ExtResource("1_gtnfe")]
-script = ExtResource("2_qpq6e")

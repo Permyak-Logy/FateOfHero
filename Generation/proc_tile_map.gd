@@ -2,7 +2,7 @@ class_name ProcTileMap extends StratTileMap
 
 @onready var sm: ProceduralStratMap = get_parent()
 # size of the world in chunks
-const GENERATION_DISTANCE = 3
+const GENERATION_DISTANCE = 1
 #@export var SEED = randi()
 @export var SEED = 3453287850
 
@@ -12,10 +12,14 @@ var terrains: Array[Array]
 var current_terrain_slot: int = 0
 
 var hightmap_mutex: Mutex = Mutex.new()
-var chunk_heightmaps: Dictionary = {}
+@export var chunk_heightmaps: Dictionary = {}
+@export var major_POIs: Dictionary = {}
 @export var drawn_chunks: Array[Vector2i] = []
 
-
+var major_POI_Reses: Dictionary = {
+	0 : preload("res://Generation/POIs/spawn_poi.tscn"),
+	1 : preload("res://Generation/POIs/simple_poi.tscn"),
+}
 
 signal superchunk_generated(cpos: Vector2i)
 
@@ -26,10 +30,14 @@ func gen_world():
 	print(SEED)
 	gen_heightmap(Vector2i(0, 0))
 	var spawn_chunk_hm = chunk_heightmaps[Vector2i(0, 0)]
-	spawn_chunk_hm = press_circle(
-		spawn_chunk_hm, Vector2i(Chunk.SIZE  / 2, Chunk.SIZE / 2), 5)
+	#spawn_chunk_hm = press_circle(
+		#spawn_chunk_hm, Vector2i(Chunk.SIZE  / 2, Chunk.SIZE / 2), 5)
 	chunk_heightmaps[Vector2i(0, 0)] = spawn_chunk_hm
+	var spawn_poi: SpawnPOI = major_POI_Reses[0].instantiate()
+	add_child(spawn_poi)
+	spawn_poi.place(Vector2i(0, 0))
 	var spawn_chunk: Chunk = gen_chunk(Vector2i(0, 0))
+	major_POIs[Vector2i(0, 0)] = spawn_poi
 	draw_chunk(spawn_chunk)
 	drawn_chunks.append(Vector2i(0, 0))
 	
@@ -49,6 +57,10 @@ func gen_world():
 	notify_runtime_tile_data_update()
 
 func gen_heightmap(cpos: Vector2i):
+	"""
+	generates terrain heightmap of the chunk
+	it will be modified later be gen_poi, gen_path, etc.
+	"""
 	var height_map:Array[Array] = []
 	var noise_gen = FastNoiseLite.new()
 	noise_gen.noise_type = FastNoiseLite.TYPE_PERLIN
@@ -77,14 +89,22 @@ func gen_heightmap(cpos: Vector2i):
 	hightmap_mutex.lock()
 	chunk_heightmaps[cpos] = height_map
 	hightmap_mutex.unlock()
+
+func gen_poi(cpos: Vector2i):
+	"""
+	generates major POI and adds it to major_POIs[cpos]
+	modifies chunk_heightmaps[cpos]
+	"""
+	hightmap_mutex.lock()
 	
-	
+	hightmap_mutex.unlock()
 
 func gen_chunk(cpos: Vector2i) -> Chunk:
 	var chunk: Chunk = Chunk.create(cpos, chunk_heightmaps[cpos][cpos.x][cpos.y])
+	var heightmap: Array[Array] = chunk_heightmaps[cpos]
 	for x in range(Chunk.SIZE):
 		for y in range(Chunk.SIZE):
-			var layer = int(chunk_heightmaps[cpos][x][y])
+			var layer = int(heightmap[x][y])
 			layer = int(layer)
 			for lid in range(1, min(layer, 5)):
 				chunk.blocks[lid][x][y] = 8
@@ -95,7 +115,12 @@ func get_group(pos: Vector2i):
 	return p % len(terrains)
 
 func draw_chunk(chunk: Chunk):
-	
+	"""
+	can be called assinchronously 
+	sets terrains in tilemap for given chunk
+	the slow part is set_cells_terrain_connect
+	only one thread can modify one layer at a time
+	"""
 	print("draw_chunk ", chunk.pos, ": ", "starting drawing chunk ", chunk.pos)
 	tilemap_mutex.lock()
 	print("draw_chunk ", chunk.pos, ": ", "captured terrain")
@@ -146,11 +171,13 @@ func draw_layer(layer: int):
 
 
 func press_circle(height_map: Array[Array], pos: Vector2i, radius: float) -> Array[Array]:
+	"""
+	makes a cirle of flat terrain at height 0 that gradually transitions to normal terrain
+	"""
 	for x in range(min(0,(pos.x - int(radius) * 2)), min(16 * Chunk.SIZE, pos.x + int(radius) * 2)):
 		for y in range(pos.y - int(radius) - 5, pos.y + int(radius) + 5):
-			#var delta = 
 			if (pos - Vector2i(x, y)).length() < radius:
-				height_map[x][y] *= 0.01
+				height_map[x][y] *= 0
 			elif (pos - Vector2i(x, y)).length() < radius * 2:
 				height_map[x][y] *= ((pos - Vector2i(x, y)).length() - radius) ** 2
 				
@@ -165,7 +192,22 @@ func regen_navmap():
 func gen_and_draw_chunk(cpos: Vector2i):
 	# superchunk generator job is hella fast
 	call_deferred("mark_as_genned", cpos)
-	gen_heightmap(cpos)
+	
+	for i in range(-1, 2):
+		for j in range(-1, 2):
+			if not (cpos + Vector2i(i, j)) in chunk_heightmaps.keys():
+				gen_heightmap(cpos + Vector2i(i, j))
+			if not (cpos + Vector2i(i, j)) in major_POIs.keys():
+				major_POIs[cpos] = null
+	
+	var poi_count = randi_range(1, 4)
+	for i in range(poi_count):
+		var poi_ripos = randi_range(0, 8) # relative int pos
+		if not major_POIs.get(cpos + Vector2i(poi_ripos / 3 - 1, poi_ripos % 3 - 1), null):
+			gen_poi(cpos + Vector2i(poi_ripos / 3, poi_ripos % 3))
+	
+	
+	
 	# we spin for 1 frame
 	while not chunk_heightmaps.has(cpos): continue
 	var chunk: Chunk = gen_chunk(cpos)
