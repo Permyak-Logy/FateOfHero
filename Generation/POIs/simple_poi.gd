@@ -1,17 +1,32 @@
 class_name SimplePOI extends ProcMapPOI
 
-@export var POIRes: Resource
+# position in chunks
+@export var x_range: Vector2i = Vector2i(32, 32)
+@export var y_range: Vector2i = Vector2i(32, 32)
 
+# pressed circle radius
+@export var radius: int = 5
+# the thing to spawn 
+@export var POIRes: Resource = null
+	
+var RNG = RandomNumberGenerator.new()
 func place(pos: Vector2i):
-	var c_hm = tilemap.chunk_heightmaps[pos]
-	c_hm = tilemap.press_circle(c_hm, pos, radius)
-	tilemap.chunk_heightmaps[pos] = c_hm
+	"""
+	places POI and creates a hole for it
+	DOES NOT create paths between POIs
+	CHANGES tilemap.chunk_heightmaps[pos]
+	
+	 - pos - position of the chunk to which this POI belongs
+	"""
+	assert(POIRes != null, "You forgot to define POI for " + name)
+	RNG.seed = tilemap.SEED
 	chunk_pos = pos
 	poi_pos = Vector2i(
-		randi_range(poi_range_x.x, poi_range_x.y),
-		randi_range(poi_range_y.x, poi_range_y.y))
-	var poi: TileEvent = POIRes.instantiate()
-	global_position = tilemap.local_to_map(chunk_pos * Chunk.SIZE)
-	poi.position = poi_pos
-	poi.removed.connect(queue_free)
+			randi_range(x_range.x, x_range.y), 
+			randi_range(y_range.x, y_range.y))
+	tilemap.chunk_heightmaps[pos] = tilemap.press_circle(tilemap.chunk_heightmaps[pos], poi_pos, radius)
+	var poi: TileEvent = POIRes.instantiate() 
 	add_child(poi)
+	poi.position = tilemap.local_to_map(poi_pos)
+	global_position = tilemap.local_to_map(chunk_pos)
+	

@@ -11,7 +11,7 @@ insert and remove are self explanotory
 
 # list of items and counts there of
 @export var items: Dictionary = {}
-@export var characters: Array[PackedScene]
+@export var characters: Array[PackedScene] 
 @export var recipes_known: Array[bool] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 # must be equal to number of cells
 const max_stacks_count: int = 50

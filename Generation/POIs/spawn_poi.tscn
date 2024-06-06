@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://nco4soufop0x"]
+[gd_scene load_steps=3 format=3 uid="uid://cthsywoeby05e"]
 
-[ext_resource type="PackedScene" uid="uid://wxfvb18nt5u2" path="res://Generation/POIs/simple_poi.tscn" id="1_gflp8"]
-[ext_resource type="Script" path="res://Generation/SpawnPOI.gd" id="2_3srgt"]
+[ext_resource type="PackedScene" uid="uid://dsrcx061b8k6w" path="res://Generation/POIs/simple_poi.tscn" id="1_dhsu0"]
+[ext_resource type="Script" path="res://Generation/POIs/spawn_poi.gd" id="2_ugwuj"]
 
-[node name="SpawnPOI" instance=ExtResource("1_gflp8")]
-script = ExtResource("2_3srgt")
-poi_range_x = null
-poi_range_y = null
-poi_pos = null
-chunk_pos = null
-radius = null
+[node name="SpawnPOI" instance=ExtResource("1_dhsu0")]
+script = ExtResource("2_ugwuj")
+x_range = Vector2i(24, 40)
+y_range = Vector2i(24, 40)
+radius = 10

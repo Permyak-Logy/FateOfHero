@@ -1,7 +1,7 @@
 class_name ProcTileMap extends StratTileMap
 
 @onready var sm: ProceduralStratMap = get_parent()
-# size of the world in chunks
+# Distrance in chunks at which chunks start generating
 const GENERATION_DISTANCE = 1
 #@export var SEED = randi()
 @export var SEED = 3453287850
@@ -173,6 +173,12 @@ func draw_layer(layer: int):
 func press_circle(height_map: Array[Array], pos: Vector2i, radius: float) -> Array[Array]:
 	"""
 	makes a cirle of flat terrain at height 0 that gradually transitions to normal terrain
+	works within a chunk
+	DOES NOT change `chunk_heightmaps`
+	
+	 - height_map - height map of a chunk
+	 - pos - local position
+	 - radius
 	"""
 	for x in range(min(0,(pos.x - int(radius) * 2)), min(16 * Chunk.SIZE, pos.x + int(radius) * 2)):
 		for y in range(pos.y - int(radius) - 5, pos.y + int(radius) + 5):

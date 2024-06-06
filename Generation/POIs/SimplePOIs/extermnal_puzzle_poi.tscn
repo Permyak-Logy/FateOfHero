@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpr0ym3dm16ot"]
+
+[ext_resource type="PackedScene" uid="uid://dsrcx061b8k6w" path="res://Generation/POIs/simple_poi.tscn" id="1_sgaq3"]
+
+[node name="ExtermnalPuzzlePOI" instance=ExtResource("1_sgaq3")]

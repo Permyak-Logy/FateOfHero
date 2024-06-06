@@ -103,11 +103,12 @@ func new_procedural_world(init_char: PackedScene):
 	add_child(sm)
 	sm.player.inventory.characters = [init_char]
 	var char = init_char.instantiate()
-	sm.tilemap.gen_world()
+	
 	sm.player.sprite.texture = sm.player.texture[char.name]
 	sm.player.sprite.hframes = 8
 	sm.player.mc_name = char.name
-	sm.player.move_to(Vector2i(Chunk.SIZE / 2, Chunk.SIZE / 2))
+	#sm.player.move_to(Vector2i(Chunk.SIZE / 2, Chunk.SIZE / 2))
+	sm.tilemap.gen_world()
 	sm.strat_map_loaded.emit()
 	remove_child(sm)
 	strat_map = sm
