@@ -28,7 +28,7 @@ func _on_infinite_pressed():
 	init_char_selection_panel.visible = true
 	await init_char_selection_panel.init_char_chosen
 	init_char_selection_panel.visible = false
-	game.new_procedural_world(init_char_selection_panel.chosen_char)
+	await game.new_procedural_world(init_char_selection_panel.chosen_char)
 	game.to_strat_mode()
 
 func _on_exit_pressed():

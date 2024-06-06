@@ -16,22 +16,23 @@ var hightmap_mutex: Mutex = Mutex.new()
 @export var major_POIs: Dictionary = {}
 @export var drawn_chunks: Array[Vector2i] = []
 
+var drawer_semafore: Semaphore = Semaphore.new()
+var gen_thread: Thread
+var gen_queue_mutex: Mutex = Mutex.new()
+var gen_queue: Array[Vector2i]
+
 var major_POI_Reses: Dictionary = {
 	0 : preload("res://Generation/POIs/spawn_poi.tscn"),
 	1 : preload("res://Generation/POIs/simple_poi.tscn"),
 }
 
-signal superchunk_generated(cpos: Vector2i)
+signal gen_queue_empty()
 
-var gen_thread: Thread
-var drawer_threads: Array[Thread] = []
 
 func gen_world():
 	print(SEED)
 	gen_heightmap(Vector2i(0, 0))
 	var spawn_chunk_hm = chunk_heightmaps[Vector2i(0, 0)]
-	#spawn_chunk_hm = press_circle(
-		#spawn_chunk_hm, Vector2i(Chunk.SIZE  / 2, Chunk.SIZE / 2), 5)
 	chunk_heightmaps[Vector2i(0, 0)] = spawn_chunk_hm
 	var spawn_poi: SpawnPOI = major_POI_Reses[0].instantiate()
 	add_child(spawn_poi)
@@ -41,20 +42,12 @@ func gen_world():
 	draw_chunk(spawn_chunk)
 	drawn_chunks.append(Vector2i(0, 0))
 	
-	for i in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
-		for j in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
-			var chunk_pos = Vector2i(i, j)
-			if not (chunk_pos in drawn_chunks):
-				print("attemptint to draw chunk: ", chunk_pos)
-				var dt = Thread.new()
-				var c = Callable(gen_and_draw_chunk)
-				dt.start(c.bind(chunk_pos), Thread.PRIORITY_LOW)
-				drawer_threads.append(dt)
-	for t in drawer_threads:
-		t.wait_to_finish()
-	drawer_threads.clear()
-	regen_navmap()
-	notify_runtime_tile_data_update()
+	gen_thread = Thread.new()
+	gen_thread.start(gen_job, Thread.PRIORITY_NORMAL)
+	# generate initial chunks
+	on_player_moved(Vector2i(0,  0))
+	sm.player.moved.connect(on_player_moved)
+	
 
 func gen_heightmap(cpos: Vector2i):
 	"""
@@ -114,6 +107,48 @@ func get_group(pos: Vector2i):
 	var p = pos.x * 2 + int(pos.x > 0) + pos.y * 2 + int(pos.y > 0)
 	return p % len(terrains)
 
+func gen_job():
+	while (true):
+		gen_queue_mutex.lock()
+		if gen_queue.is_empty():
+			print("gen_job: waiting at semafore")
+			gen_queue_mutex.unlock()
+			drawer_semafore.wait()
+		else:
+			gen_queue_mutex.unlock()
+			
+		print("gen_job: staring to work")
+		
+		while (gen_queue.is_empty() == false):
+			gen_queue_mutex.lock()
+			var target = gen_queue.pop_front()
+			gen_queue_mutex.unlock()
+			print("gen_job: genning chunk ", target)
+			gen_and_draw_chunk(target)
+		call_deferred("finalize_gen")
+
+func signal_queue_empty():
+	gen_queue_empty.emit()
+
+
+func gen_and_draw_chunk(cpos: Vector2i):
+	call_deferred("mark_as_genned", cpos)
+	for i in range(-1, 2):
+		for j in range(-1, 2):
+			if not (cpos + Vector2i(i, j)) in chunk_heightmaps.keys():
+				gen_heightmap(cpos + Vector2i(i, j))
+			if not (cpos + Vector2i(i, j)) in major_POIs.keys():
+				major_POIs[cpos] = null
+	
+	var poi_count = randi_range(1, 4)
+	for i in range(poi_count):
+		var poi_ripos = randi_range(0, 8) # relative int pos
+		if not major_POIs.get(cpos + Vector2i(poi_ripos / 3 - 1, poi_ripos % 3 - 1), null):
+			gen_poi(cpos + Vector2i(poi_ripos / 3, poi_ripos % 3))
+	var chunk: Chunk = gen_chunk(cpos)
+	draw_chunk(chunk)
+	
+
 func draw_chunk(chunk: Chunk):
 	"""
 	can be called assinchronously 
@@ -124,6 +159,7 @@ func draw_chunk(chunk: Chunk):
 	print("draw_chunk ", chunk.pos, ": ", "starting drawing chunk ", chunk.pos)
 	tilemap_mutex.lock()
 	print("draw_chunk ", chunk.pos, ": ", "captured terrain")
+	terrains.clear()
 	terrains = [
 		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
 		[[], [], [], [], [], [], [], [], [], [], [], [], [], []],
@@ -134,12 +170,14 @@ func draw_chunk(chunk: Chunk):
 	print("draw_chunk ", chunk.pos, ": ", "initialized terrain")
 	
 	for layer in range(Chunk.LAYER_COUNT):
+		#print("loaded layer: ", layer)
 		for x in range(Chunk.SIZE):
 			for y in range(Chunk.SIZE):
 				if chunk.blocks[layer][x][y] == -1:
 					continue
 				var rpos = Vector2i(x + Chunk.SIZE * chunk.pos.x, y + Chunk.SIZE * chunk.pos.y) 
 				terrains[layer][chunk.blocks[layer][x][y]].append(rpos)
+				
 	print("draw_chunk ", chunk.pos, ": ", "loaded chunk")
 	
 	
@@ -195,54 +233,27 @@ func mark_as_genned(cpos: Vector2i):
 func regen_navmap():
 	sm.player.regen_nav()
 
-func gen_and_draw_chunk(cpos: Vector2i):
-	# superchunk generator job is hella fast
-	call_deferred("mark_as_genned", cpos)
-	
-	for i in range(-1, 2):
-		for j in range(-1, 2):
-			if not (cpos + Vector2i(i, j)) in chunk_heightmaps.keys():
-				gen_heightmap(cpos + Vector2i(i, j))
-			if not (cpos + Vector2i(i, j)) in major_POIs.keys():
-				major_POIs[cpos] = null
-	
-	var poi_count = randi_range(1, 4)
-	for i in range(poi_count):
-		var poi_ripos = randi_range(0, 8) # relative int pos
-		if not major_POIs.get(cpos + Vector2i(poi_ripos / 3 - 1, poi_ripos % 3 - 1), null):
-			gen_poi(cpos + Vector2i(poi_ripos / 3, poi_ripos % 3))
-	
-	
-	
-	# we spin for 1 frame
-	while not chunk_heightmaps.has(cpos): continue
-	var chunk: Chunk = gen_chunk(cpos)
-	draw_chunk(chunk)
-	call_deferred("prune_drawers")
 
 func on_player_moved(pos: Vector2i):
 	for i in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
 		for j in range(-GENERATION_DISTANCE, GENERATION_DISTANCE + 1):
 			var chunk_pos = ((pos - Vector2i(32, 32)) / Chunk.SIZE) + Vector2i(i, j)
-			if not (chunk_pos in drawn_chunks):
-				print("attemptint to draw chunk: ", chunk_pos)
-				var dt = Thread.new()
-				var c = Callable(gen_and_draw_chunk)
-				dt.start(c.bind(chunk_pos), Thread.PRIORITY_LOW)
-				drawer_threads.append(dt)
-
-func prune_drawers():
-	var removed_thread = false
-	for t in drawer_threads:
-		if not t.is_alive():
-			t.wait_to_finish()
-			drawer_threads.remove_at(drawer_threads.find(t))
-			removed_thread = true
-	if drawer_threads.is_empty() and removed_thread:
-		regen_navmap()
-		for layer in range(Chunk.LAYER_COUNT):
-			set_layer_enabled(layer, false)
-			notify_runtime_tile_data_update(layer)
-			update_internals()
-			set_layer_enabled(layer, true)
-		print("reloaded layers")
+			gen_queue_mutex.lock()
+			if not (chunk_pos in drawn_chunks or chunk_pos in gen_queue):
+				print("on_player_moved: queued to draw: ", chunk_pos)
+				gen_queue.append(chunk_pos)
+				if gen_queue.size() == 1:
+					print("on_player_moved: posting to gen semafore")
+					drawer_semafore.post()
+			gen_queue_mutex.unlock()
+				
+func finalize_gen():
+	tilemap_mutex.lock()
+	regen_navmap()
+	for layer in range(Chunk.LAYER_COUNT):
+		set_layer_enabled(layer, false)
+		notify_runtime_tile_data_update(layer)
+		update_internals()
+		set_layer_enabled(layer, true)
+	print("reloaded layers")
+	tilemap_mutex.unlock()

@@ -40,7 +40,7 @@ var pos: Vector2i
 var is_moving: bool = false
 var direction: Direction = Direction.South
 
-const SPEED = 16 * 8
+const SPEED = 16 * 8 * 20
 
 func _init():
 	if not inventory:
@@ -53,7 +53,6 @@ func update_nav_map(pos: Vector2i, state: bool):
 
 func regen_nav():
 	print("regenertion nav map")
-	tilemap.tilemap_mutex.lock()
 	var astar_grid_ = AStarGrid2D.new()
 	astar_grid_.region = tilemap.get_used_rect()
 	astar_grid_.cell_size = Vector2(16, 16) 
@@ -68,8 +67,8 @@ func regen_nav():
 				)
 			astar_grid_.set_point_solid(tile_position, not is_walkable(tile_position))
 	astar_grid = astar_grid_
-	call_deferred("emit_signal", "nav_map_regenerated")
-	tilemap.tilemap_mutex.unlock()
+	#call_deferred("emit_signal", "nav_map_regenerated")
+	nav_map_regenerated.emit()
 
 func gen_nav(_null=null):
 	#tilemap.terraints_mutex.lock()
