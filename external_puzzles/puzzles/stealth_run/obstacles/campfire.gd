@@ -2,8 +2,8 @@ class_name StealthCampfire extends StealthObstacle
 
 
 # pos is center
-func place(pos: Vector2i):
-	self.pos = pos
+func place(pos_: Vector2i):
+	pos = pos_
 	for i in range(-2, 3):
 		for j in range(-2, 3):
 			set_unsafe(pos + Vector2i(i, j))

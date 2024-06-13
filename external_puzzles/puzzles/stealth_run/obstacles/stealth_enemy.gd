@@ -43,9 +43,9 @@ var is_moving: bool = false
 
 var speed = 16 * 1
 
-func place(pos: Vector2i, dir: Direction):
-	self.pos = pos
-	self.original_pos = pos
+func place(pos_: Vector2i, dir: Direction):
+	self.pos = pos_
+	self.original_pos = pos_
 	view_direction = dir
 	original_view_direction = dir
 	global_position = puzzle.tilemap.map_to_local(pos)

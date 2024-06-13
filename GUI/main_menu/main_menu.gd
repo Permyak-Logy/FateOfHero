@@ -28,11 +28,11 @@ func _on_infinite_pressed():
 	init_char_selection_panel.visible = true
 	await init_char_selection_panel.init_char_chosen
 	init_char_selection_panel.visible = false
-	await game.new_procedural_world(init_char_selection_panel.chosen_char)
-	game.to_strat_mode()
+	game.new_procedural_world(init_char_selection_panel.chosen_char)
 
 func _on_exit_pressed():
 	get_tree().quit()
+	
 
 func update():
 	continue_button.disabled = false

@@ -17,12 +17,16 @@ func _ready():
 
 func activate(scene: Node):
 	if active_scene:
-		remove_child(active_scene)
+		if active_scene == strat_map:
+			strat_map.visible = false
+			strat_map.pause()
+		else:
+			remove_child(active_scene)
 	active_scene = scene
-	add_child(scene)
-
-func deactivate(scene: Node):
-	remove_child(scene)
+	if scene == strat_map:
+		strat_map.visible = true
+	else:
+		add_child(scene)
 
 func to_tact_mode():
 	activate(tactical_map)
@@ -110,5 +114,5 @@ func new_procedural_world(init_char: PackedScene):
 	#sm.player.move_to(Vector2i(Chunk.SIZE / 2, Chunk.SIZE / 2))
 	sm.tilemap.gen_world()
 	sm.strat_map_loaded.emit()
-	remove_child(sm)
 	strat_map = sm
+	to_strat_mode()

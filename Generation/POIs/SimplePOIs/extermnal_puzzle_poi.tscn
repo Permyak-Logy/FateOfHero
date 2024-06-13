@@ -1,5 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpr0ym3dm16ot"]
+[gd_scene load_steps=3 format=3 uid="uid://dpr0ym3dm16ot"]
 
 [ext_resource type="PackedScene" uid="uid://dsrcx061b8k6w" path="res://Generation/POIs/simple_poi.tscn" id="1_sgaq3"]
+[ext_resource type="PackedScene" uid="uid://fx8448pj6dpl" path="res://strategic_mode/tile_events/puzzle_activators/randomized_external_puzzle_activator.tscn" id="2_ea5e0"]
 
 [node name="ExtermnalPuzzlePOI" instance=ExtResource("1_sgaq3")]
+x_range = Vector2i(24, 40)
+y_range = Vector2i(24, 40)
+POIRes = ExtResource("2_ea5e0")

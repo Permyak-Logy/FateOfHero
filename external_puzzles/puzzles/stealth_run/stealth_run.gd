@@ -23,7 +23,6 @@ func dist(a: Vector2i, b: Vector2i) -> int:
 	return max(abs(a.x - b.x), abs(a.y - b.y))
 
 func gen_field():
-	var rng = RandomNumberGenerator.new()
 	var campfire: StealthCampfire = CampfireRes.instantiate()
 	tilemap.add_child(campfire)
 	campfire.place(Vector2i(randi_range(8 , 12), randi_range(10 , 12)))
@@ -153,7 +152,7 @@ func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene],
 			game.strat_map.show_game_over()
 
 func _ready():
-	assert(not pawns.is_empty(), "No enemies")
+	assert(not enemies.is_empty(), "No enemies")
 	player.pos = Vector2i(1, 1)
 	player.sprite.texture = game.strat_map.player.sprite.texture
 	gen_field()

@@ -19,27 +19,33 @@ var possible_enemies: Dictionary = {
 	preload("res://tactical_mode/unit/units/Vedmachok/Vedmachok.tscn") : 3 
 }
 
-func sum(arr: Array[int]) -> int:
+func sum(arr: Array) -> int:
 	var s = 0
 	for i in arr:
 		s += i
 	return s
 
-func select_n(targets: Dictionary, n: int) -> Array:
-	var res = []
-	for i in range(n):
-		var rroll = randi_range(0, sum(targets.values() as Array[int]))
-		var rid = -1
-		while rroll > 0:
-			rid += 1
-			rroll -= targets.values()[i]
-		res.append(targets.keys()[i])
-	return res
-
 func activate():
-	puzzle = possible_puzzles[randi_range(0, possible_puzzles.size())]
-	success_rewards = select_n(possible_rewards, reward_count)
-	enemies = select_n(possible_enemies, enemy_count)
+	puzzle = possible_puzzles.pick_random()
+	success_rewards = []
+	var tc = sum(possible_rewards.values())
+	for i in range(reward_count):
+		var rroll = randi_range(0, tc)
+		var rid = -1
+		while rroll > 0 and rid == (possible_rewards.size() - 1):
+			rid += 1
+			rroll -= possible_rewards.values()[rid]
+		success_rewards.append(possible_rewards.keys()[rid] as ItemStack)
+	
+	enemies = []
+	tc = sum(possible_enemies.values())
+	for i in range(enemy_count):
+		var rroll = randi_range(0, tc)
+		var rid = -1
+		while rroll > 0 and rid == (possible_enemies.size() - 1):
+			rid += 1
+			rroll -= possible_enemies.values()[rid]
+		enemies.append(possible_enemies.keys()[rid] as PackedScene)
 	
 	# normal ep
 	game = get_tree().root.get_child(0)

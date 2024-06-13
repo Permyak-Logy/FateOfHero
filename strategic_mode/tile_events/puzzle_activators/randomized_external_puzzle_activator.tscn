@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://fx8448pj6dpl"]
 
-[ext_resource type="PackedScene" uid="uid://bgpgpnh8l6avg" path="res://strategic_mode/tile_events/puzzle_activators/external_puzzle_activator.tscn" id="1_sc1pe"]
+[ext_resource type="PackedScene" uid="uid://bgpgpnh8l6avg" path="res://strategic_mode/tile_events/cc_puzzle_activators/cc_external_puzzle_activator.tscn" id="1_sc1pe"]
 [ext_resource type="Script" path="res://strategic_mode/tile_events/puzzle_activators/randomized_external_puzzle_activator.gd" id="2_3vv60"]
 
 [node name="RandomizedCCExternalPuzzleActivator" instance=ExtResource("1_sc1pe")]

@@ -87,7 +87,6 @@ func gen_nav(_null=null):
 				)
 			astar_grid.set_point_solid(tile_position, not is_walkable(tile_position))
 	nav_map_regenerated.emit()
-	#tilemap.terraints_mutex.unlock()
 
 
 func _ready():

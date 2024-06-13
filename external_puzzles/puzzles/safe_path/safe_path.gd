@@ -1,6 +1,5 @@
-extends "res://external_puzzles/puzzles/base_puzzle.gd"
+class_name SafePath extends BasePuzzle
 
-class_name SafePath
 @onready var tilemap: TileMap = $TileMap
 @onready var player: WASDPlayer = $player
 @onready var game: Game = get_tree().root.get_child(0)
@@ -149,8 +148,8 @@ func on_finish_tactical_map(alive: Array[PackedScene], dead: Array[PackedScene],
 	if not win:
 		failed.emit()
 	for char_p in dead:
-		var char = char_p.instantiate()
-		if char.name == game.strat_map.player.mc_name:
+		var char_ = char_p.instantiate()
+		if char_.name == game.strat_map.player.mc_name:
 			game.strat_map.show_game_over()
 	solved.emit(rewards)
 	game.to_strat_mode()
