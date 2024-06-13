@@ -1,9 +1,7 @@
-extends ProgressBar
+class_name StatProgressBar extends ProgressBar
 
-class_name StatProgressBar
-
-var stat_component: StatComponent
+var min_max_stat_component: MinMaxStatComponent
 
 func _process(_delta):
-	if stat_component:
-		set_value_no_signal(stat_component.percent() * 100)
+	if min_max_stat_component:
+		set_value_no_signal(min_max_stat_component.percent() * 100)

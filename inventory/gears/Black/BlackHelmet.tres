@@ -19,6 +19,7 @@ value = SubResource("Resource_gxcic")
 script = ExtResource("1_tqms4")
 type = 0
 _mods = Array[ExtResource("1_jsb4q")]([SubResource("Resource_cyin1")])
+_effects = Array[Resource("res://tactical_mode/effect.gd")]([])
 name = "Шлем из чёрного камня"
 russian_name = ""
 description = "Увеличивает защиту на 50%"

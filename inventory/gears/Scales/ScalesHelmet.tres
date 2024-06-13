@@ -29,6 +29,7 @@ value = SubResource("Resource_gb2c6")
 script = ExtResource("1_vlwi2")
 type = 0
 _mods = Array[ExtResource("1_fpp3x")]([SubResource("Resource_ujxxu"), SubResource("Resource_hq5tx")])
+_effects = Array[Resource("res://tactical_mode/effect.gd")]([])
 name = "Чешуйчатый шлем"
 russian_name = ""
 description = "Увеличивает скорость на 10 и здоровье на 250

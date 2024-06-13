@@ -1,8 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://dh5vq12tjl11n"]
+[gd_scene load_steps=32 format=3 uid="uid://dh5vq12tjl11n"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Skeleton/src/Skeleton.gd" id="1_fgkl7"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_cp544"]
 [ext_resource type="Texture2D" uid="uid://dhv0huob0a1o1" path="res://strategic_mode/tile_events/sprites/mean_skelly_boi.png" id="2_squan"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="3_cc125"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_n00ux"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_jbdcy"]
 [ext_resource type="Resource" uid="uid://dvg0sokk1vaed" path="res://tactical_mode/unit/units/Skeleton/res/SkeletonA0.tres" id="5_02wdl"]
@@ -13,57 +13,35 @@
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="8_wv0lx"]
 [ext_resource type="Texture2D" uid="uid://di8gme8ny3f43" path="res://tactical_mode/unit/units/Skeleton/assets/run.png" id="10_k3aay"]
 
-[sub_resource type="Resource" id="Resource_ws37b"]
-resource_local_to_scene = true
-script = ExtResource("2_cp544")
-base = 100.0
-cur = 100.0
-max_ = 100.0
-
-[sub_resource type="Resource" id="Resource_omiyo"]
-resource_local_to_scene = true
-script = ExtResource("3_n00ux")
+[sub_resource type="Resource" id="Resource_1je2y"]
+script = ExtResource("3_cc125")
+_max_p = 1.0
+_min_p = 0.0
+_scaling = 1
 mod_type = 0
-characteristic = SubResource("Resource_ws37b")
-
-[sub_resource type="Resource" id="Resource_vl6n6"]
-resource_local_to_scene = true
-script = ExtResource("2_cp544")
-base = 0.0
-cur = 0.0
-max_ = 0.0
+_base = 100.0
+_cur = 100.0
 
 [sub_resource type="Resource" id="Resource_11jpo"]
 resource_local_to_scene = true
 script = ExtResource("3_n00ux")
 mod_type = 3
-characteristic = SubResource("Resource_vl6n6")
-
-[sub_resource type="Resource" id="Resource_6fdyb"]
-resource_local_to_scene = true
-script = ExtResource("2_cp544")
-base = 99.0
-cur = 99.0
-max_ = 99.0
+_base = 0.0
+_cur = 0.0
 
 [sub_resource type="Resource" id="Resource_8p6jf"]
 resource_local_to_scene = true
 script = ExtResource("3_n00ux")
 mod_type = 1
-characteristic = SubResource("Resource_6fdyb")
-
-[sub_resource type="Resource" id="Resource_sfnud"]
-resource_local_to_scene = true
-script = ExtResource("2_cp544")
-base = 5.0
-cur = 5.0
-max_ = 5.0
+_base = 99.0
+_cur = 99.0
 
 [sub_resource type="Resource" id="Resource_h68g5"]
 resource_local_to_scene = true
 script = ExtResource("3_n00ux")
 mod_type = 2
-characteristic = SubResource("Resource_sfnud")
+_base = 5.0
+_cur = 5.0
 
 [sub_resource type="Resource" id="Resource_li378"]
 resource_local_to_scene = true
@@ -513,7 +491,7 @@ input_pickable = true
 script = ExtResource("1_fgkl7")
 unit_name = "Скелет"
 icon = ExtResource("2_squan")
-health = SubResource("Resource_omiyo")
+health = SubResource("Resource_1je2y")
 defence = SubResource("Resource_11jpo")
 speed = SubResource("Resource_8p6jf")
 damage = SubResource("Resource_h68g5")

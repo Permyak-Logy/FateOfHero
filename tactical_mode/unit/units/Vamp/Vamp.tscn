@@ -1,10 +1,10 @@
-[gd_scene load_steps=38 format=3 uid="uid://d1jk2a04wq33q"]
+[gd_scene load_steps=39 format=3 uid="uid://d1jk2a04wq33q"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_3454p"]
 [ext_resource type="Texture2D" uid="uid://cu0msqj6flahl" path="res://strategic_mode/tile_events/sprites/gg_vampire.png" id="2_f07v8"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_rkmhg"]
-[ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_lkwsv"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_0f3pp"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="4_j8fcq"]
 [ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="5_eaw4v"]
 [ext_resource type="Resource" uid="uid://bhkcohkp7d0tj" path="res://tactical_mode/unit/units/Vamp/res/VampA0.tres" id="6_1t0c8"]
 [ext_resource type="Resource" uid="uid://crsva3kiqhcl" path="res://tactical_mode/unit/res/DamageStat.tres" id="6_ppntu"]
@@ -26,10 +26,21 @@
 resource_local_to_scene = true
 script = ExtResource("2_rkmhg")
 _gears = {}
+_abilities = Array[Resource("res://tactical_mode/ability.gd")]([])
 gear_slots = {
 2: 2,
 4: 5
 }
+ability_slots = 5
+
+[sub_resource type="Resource" id="Resource_0bufo"]
+script = ExtResource("4_j8fcq")
+_max_p = 1.0
+_min_p = 0.0
+_scaling = 1
+mod_type = 0
+_base = 100.0
+_cur = 100.0
 
 [sub_resource type="Gradient" id="Gradient_h44pd"]
 colors = PackedColorArray(1, 0.933333, 0.945098, 1, 0.254902, 0, 0, 0)
@@ -491,7 +502,7 @@ script = ExtResource("1_3454p")
 unit_name = "Фиди (Вампир)"
 icon = ExtResource("2_f07v8")
 inventory = SubResource("Resource_jp28n")
-health = ExtResource("3_lkwsv")
+health = SubResource("Resource_0bufo")
 defence = ExtResource("4_0f3pp")
 speed = ExtResource("5_eaw4v")
 damage = ExtResource("6_ppntu")

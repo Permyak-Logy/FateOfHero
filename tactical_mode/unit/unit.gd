@@ -6,7 +6,7 @@ var outline_shader = preload("res://tactical_mode/assets/outline_shader.tres")
 @export var icon: Texture2D = null
 @export_group("Components")
 @export var inventory: InventoryComponent = null
-@export var health: StatComponent = null:
+@export var health: MinMaxStatComponent = null:
 	set(value):
 		if health:
 			health.empty.disconnect(on_death)
@@ -71,7 +71,7 @@ var _end_pos = Vector2(0, 0)
 
 func _ready():
 	if health and health_bar_pb:
-		health_bar_pb.stat_component = health
+		health_bar_pb.min_max_stat_component = health
 	for ability in private_abilities:
 		abilities.append(ability.duplicate(true))
 	set_outline_color(DEFAULT_COLOR)

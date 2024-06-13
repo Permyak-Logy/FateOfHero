@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://dr3ohbflbwqml"]
+
+[ext_resource type="Script" path="res://tactical_mode/unit/units/Tsepish/Tsepish.gd" id="1_pdtv1"]
+[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_d8pqg"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_ycj0u"]
+
+[sub_resource type="Resource" id="Resource_1iosu"]
+script = ExtResource("2_d8pqg")
+base = 60.0
+cur = 60.0
+max_ = 60.0
+
+[sub_resource type="Resource" id="Resource_3xa31"]
+script = ExtResource("3_ycj0u")
+mod_type = 0
+characteristic = SubResource("Resource_1iosu")
+_base = 0.0
+_cur = 0.0
+
+[sub_resource type="Resource" id="Resource_f154e"]
+script = ExtResource("3_ycj0u")
+mod_type = 4
+_base = 0.0
+_cur = 0.0
+
+[node name="Tsepish" type="CharacterBody2D"]
+script = ExtResource("1_pdtv1")
+unit_name = "Цепишь"
+health = SubResource("Resource_3xa31")
+defence = SubResource("Resource_f154e")

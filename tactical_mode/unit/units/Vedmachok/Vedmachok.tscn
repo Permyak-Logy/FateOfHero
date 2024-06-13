@@ -1,9 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://csb3ujant2uio"]
+[gd_scene load_steps=32 format=3 uid="uid://csb3ujant2uio"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/Vedmachok.gd" id="1_niktu"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_5q3v1"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="2_fx817"]
 [ext_resource type="Texture2D" uid="uid://bnx83ikh4q52i" path="res://strategic_mode/tile_events/sprites/vedmachok_mini.png" id="2_u14ie"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="3_gqb15"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_klvn2"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_udfcx"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="5_dhbj6"]
@@ -13,57 +13,35 @@
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="7_f0kl4"]
 [ext_resource type="Texture2D" uid="uid://cs4b8cuqypclf" path="res://tactical_mode/unit/units/Vedmachok/assets/run.png" id="8_jdgdj"]
 
-[sub_resource type="Resource" id="Resource_xhmqf"]
-resource_local_to_scene = true
-script = ExtResource("2_5q3v1")
-base = 80.0
-cur = 80.0
-max_ = 80.0
-
-[sub_resource type="Resource" id="Resource_txejc"]
-resource_local_to_scene = true
-script = ExtResource("3_klvn2")
+[sub_resource type="Resource" id="Resource_lwwtt"]
+script = ExtResource("3_gqb15")
+_max_p = 1.0
+_min_p = 0.0
+_scaling = 1
 mod_type = 0
-characteristic = SubResource("Resource_xhmqf")
-
-[sub_resource type="Resource" id="Resource_v2qqe"]
-resource_local_to_scene = true
-script = ExtResource("2_5q3v1")
-base = 200.0
-cur = 200.0
-max_ = 200.0
+_base = 80.0
+_cur = 0.0
 
 [sub_resource type="Resource" id="Resource_jfvkh"]
 resource_local_to_scene = true
 script = ExtResource("3_klvn2")
 mod_type = 3
-characteristic = SubResource("Resource_v2qqe")
-
-[sub_resource type="Resource" id="Resource_cfuuq"]
-resource_local_to_scene = true
-script = ExtResource("2_5q3v1")
-base = 100.0
-cur = 100.0
-max_ = 100.0
+_base = 200.0
+_cur = 200.0
 
 [sub_resource type="Resource" id="Resource_aqp23"]
 resource_local_to_scene = true
 script = ExtResource("3_klvn2")
 mod_type = 1
-characteristic = SubResource("Resource_cfuuq")
-
-[sub_resource type="Resource" id="Resource_4eanr"]
-resource_local_to_scene = true
-script = ExtResource("2_5q3v1")
-base = 30.0
-cur = 30.0
-max_ = 30.0
+_base = 100.0
+_cur = 100.0
 
 [sub_resource type="Resource" id="Resource_jkeo0"]
 resource_local_to_scene = true
 script = ExtResource("3_klvn2")
 mod_type = 2
-characteristic = SubResource("Resource_4eanr")
+_base = 30.0
+_cur = 30.0
 
 [sub_resource type="Resource" id="Resource_rss36"]
 resource_local_to_scene = true
@@ -439,7 +417,7 @@ input_pickable = true
 script = ExtResource("1_niktu")
 unit_name = "Ведьмачок"
 icon = ExtResource("2_u14ie")
-health = SubResource("Resource_txejc")
+health = SubResource("Resource_lwwtt")
 defence = SubResource("Resource_jfvkh")
 speed = SubResource("Resource_aqp23")
 damage = SubResource("Resource_jkeo0")

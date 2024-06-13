@@ -19,6 +19,7 @@ value = SubResource("Resource_b0elq")
 script = ExtResource("1_vjmcm")
 type = 1
 _mods = Array[ExtResource("1_661ui")]([SubResource("Resource_30ttr")])
+_effects = Array[Resource("res://tactical_mode/effect.gd")]([])
 name = "Чешуйчатый нагрудник"
 russian_name = ""
 description = "Увеличивает здоровье на 500"

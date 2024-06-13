@@ -19,6 +19,7 @@ value = SubResource("Resource_2auo2")
 script = ExtResource("1_yev0k")
 type = 1
 _mods = Array[ExtResource("1_vta46")]([SubResource("Resource_00mgp")])
+_effects = Array[Resource("res://tactical_mode/effect.gd")]([])
 name = "Броня из чёрного камня"
 russian_name = ""
 description = "Увеличивает защиту на 50%"

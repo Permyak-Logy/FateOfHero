@@ -24,10 +24,12 @@
 resource_local_to_scene = true
 script = ExtResource("2_3pi2g")
 _gears = {}
+_abilities = Array[Resource("res://tactical_mode/ability.gd")]([])
 gear_slots = {
 2: 2,
 4: 5
 }
+ability_slots = 5
 
 [sub_resource type="Gradient" id="Gradient_ns4pf"]
 offsets = PackedFloat32Array(0, 0.992327)

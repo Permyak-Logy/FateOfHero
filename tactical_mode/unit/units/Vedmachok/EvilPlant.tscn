@@ -1,67 +1,45 @@
-[gd_scene load_steps=32 format=3 uid="uid://b1ley3wjjoisv"]
+[gd_scene load_steps=28 format=3 uid="uid://b1ley3wjjoisv"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/EvilPlant.gd" id="1_g78kk"]
 [ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://strategic_mode/tile_events/sprites/x_marks_the_spot.png" id="2_cytj3"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_smu40"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_1oomm"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="3_vmkdv"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_pjk8i"]
 [ext_resource type="Resource" uid="uid://db5vwnunv2m3b" path="res://tactical_mode/unit/units/Vedmachok/res/EvilPlantA0.tres" id="5_l7ulv"]
 [ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="6_etn73"]
 [ext_resource type="Material" uid="uid://d3khyiv2e8vo7" path="res://tactical_mode/assets/outline_shader.tres" id="6_w1513"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="8_e7cbv"]
 
-[sub_resource type="Resource" id="Resource_us7qo"]
-resource_local_to_scene = true
-script = ExtResource("2_smu40")
-base = 40.0
-cur = 40.0
-max_ = 40.0
-
-[sub_resource type="Resource" id="Resource_px43a"]
-resource_local_to_scene = true
-script = ExtResource("3_1oomm")
+[sub_resource type="Resource" id="Resource_4n2w0"]
+script = ExtResource("3_vmkdv")
+_max_p = 1.0
+_min_p = 0.0
+_scaling = 1
 mod_type = 0
-characteristic = SubResource("Resource_us7qo")
-
-[sub_resource type="Resource" id="Resource_pulf1"]
-resource_local_to_scene = true
-script = ExtResource("2_smu40")
-base = 0.0
-cur = 0.0
-max_ = 0.0
+_base = 40.0
+_cur = 40.0
 
 [sub_resource type="Resource" id="Resource_aj3sk"]
 resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 3
-characteristic = SubResource("Resource_pulf1")
-
-[sub_resource type="Resource" id="Resource_m8x7f"]
-resource_local_to_scene = true
-script = ExtResource("2_smu40")
-base = 80.0
-cur = 80.0
-max_ = 80.0
+_base = 0.0
+_cur = 0.0
 
 [sub_resource type="Resource" id="Resource_cvhmw"]
 resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 1
-characteristic = SubResource("Resource_m8x7f")
-
-[sub_resource type="Resource" id="Resource_pie3m"]
-resource_local_to_scene = true
-script = ExtResource("2_smu40")
-base = 10.0
-cur = 10.0
-max_ = 10.0
+_base = 80.0
+_cur = 80.0
 
 [sub_resource type="Resource" id="Resource_thx8n"]
 resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 2
-characteristic = SubResource("Resource_pie3m")
+_base = 10.0
+_cur = 10.0
 
 [sub_resource type="Resource" id="Resource_4wda3"]
 resource_local_to_scene = true
@@ -386,7 +364,7 @@ input_pickable = true
 script = ExtResource("1_g78kk")
 unit_name = "Злое растение"
 icon = ExtResource("2_cytj3")
-health = SubResource("Resource_px43a")
+health = SubResource("Resource_4n2w0")
 defence = SubResource("Resource_aj3sk")
 speed = SubResource("Resource_cvhmw")
 damage = SubResource("Resource_thx8n")
