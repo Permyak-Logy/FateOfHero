@@ -27,5 +27,5 @@ name = "Мини Чёрная дыра"
 russian_name = ""
 description = "Вызывает маленькую чёрную дыру. Будьте осторожны!"
 texture = ExtResource("2_oj64n")
-max_stack = 0
-price = 0
+max_stack = 1
+price = 10000

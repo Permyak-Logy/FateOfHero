@@ -8,7 +8,7 @@ It finds path among the squares on the tilemap with walkable set to true.
 
 @onready var strat_map: StratMap = $".."
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var tilemap: StratTileMap =  $"../StratTileMap"
+@onready var tilemap: StratTileMap = $"../TileMap"
 
 @export var mc_name: String
 @export var inventory: Inventory
@@ -17,6 +17,9 @@ It finds path among the squares on the tilemap with walkable set to true.
 	"Vamp" : preload("res://strategic_mode/tile_events/sprites/gg_vampire_directional.png"),
 	"Berserk" : preload("res://strategic_mode/tile_events/sprites/gg_berserk_directional.png")
 }
+
+signal moved(pos: Vector2i)
+signal nav_map_regenerated()
 
 enum Direction {
 	North,
@@ -37,19 +40,40 @@ var pos: Vector2i
 var is_moving: bool = false
 var direction: Direction = Direction.South
 
+const SPEED = 16 * 8
 
 func _init():
 	if not inventory:
 		inventory = Inventory.new()
 
 func update_nav_map(pos: Vector2i, state: bool):
+	if not astar_grid:
+		return
 	astar_grid.set_point_solid(pos, not state)
 
-func _ready():
-	pos = tilemap.local_to_map(global_position)
-	if mc_name:
-		sprite.texture = texture[mc_name]
+func regen_nav():
+	print("regenertion nav map")
+	tilemap.tilemap_mutex.lock()
+	var astar_grid_ = AStarGrid2D.new()
+	astar_grid_.region = tilemap.get_used_rect()
+	astar_grid_.cell_size = Vector2(16, 16) 
+	astar_grid_.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar_grid_.update()
 	
+	for x in tilemap.get_used_rect().size.x:
+		for y in tilemap.get_used_rect().size.y:
+			var tile_position = Vector2i(
+				x + tilemap.get_used_rect().position.x,
+				y + tilemap.get_used_rect().position.y
+				)
+			astar_grid_.set_point_solid(tile_position, not is_walkable(tile_position))
+	astar_grid = astar_grid_
+	call_deferred("emit_signal", "nav_map_regenerated")
+	tilemap.tilemap_mutex.unlock()
+
+func gen_nav(_null=null):
+	#tilemap.terraints_mutex.lock()
+	pos = tilemap.local_to_map(global_position)
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16) 
@@ -63,17 +87,30 @@ func _ready():
 				y + tilemap.get_used_rect().position.y
 				)
 			astar_grid.set_point_solid(tile_position, not is_walkable(tile_position))
-			
+	nav_map_regenerated.emit()
+	#tilemap.terraints_mutex.unlock()
 
+
+func _ready():
+	if mc_name:
+		sprite.texture = texture[mc_name]
+	strat_map.strat_map_loaded.connect(gen_nav)
 	tilemap.occupied_changed.connect(update_nav_map)
+	#tilemap.superchunk_generated.connect(gen_nav)
 
 func is_walkable(pos: Vector2i) -> bool:
 	var res = true
-	var tile_data = tilemap.get_cell_tile_data(0, pos)
-	if tile_data and tile_data.get_custom_data("walkable") == false:
-		res = false
+	var tile_data
 	# overwrite with terrain; so bridges and highlands are walkable
 	for i in range(1, tilemap.get_layers_count()):
+		if tilemap.get_cell_atlas_coords(i, pos) in [
+			Vector2i(3, 34),
+			Vector2i(1, 25),
+			Vector2i(1, 34),
+			Vector2i(21, 11),
+			Vector2i(1, 35),
+			Vector2i(2, 36),
+		]: print("layer: ", i, " pos: ",  pos, " atlas_coors: ", tilemap.get_cell_atlas_coords(i, pos), " is invalid")
 		tile_data = tilemap.get_cell_tile_data(i, pos)
 		if tile_data:
 			res = tile_data.get_custom_data("walkable")
@@ -85,11 +122,11 @@ func backtrack():
 	current_id_path = []
 
 func _input(event):
+	if not astar_grid:
+		return
 	if event.is_action_pressed("lmb"):
-		print(event)
 		var id_path
 		if is_moving:
-			print("stopping")
 			target_position = last_position
 			id_path = astar_grid.get_id_path(
 				tilemap.local_to_map(global_position),
@@ -155,7 +192,7 @@ func _physics_process(delta):
 		direction = get_dir_from_vect(current_id_path.front() - pos)
 
 	
-	var movement = global_position.move_toward(target_position, 8 * 16 * delta) - global_position
+	var movement = global_position.move_toward(target_position, SPEED  * delta) - global_position
 	var collision = move_and_collide(movement)
 	
 	if collision:
@@ -164,9 +201,11 @@ func _physics_process(delta):
 			collidor.activate()
 	
 	if global_position == target_position:
+		
 		current_id_path.pop_front()
 		last_position = target_position
 		pos = tilemap.local_to_map(last_position)
+		moved.emit(pos)
 		if not current_id_path.is_empty():
 			target_position = tilemap.map_to_local(current_id_path.front())
 			direction = get_dir_from_vect(current_id_path.front() - pos)

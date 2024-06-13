@@ -5,14 +5,13 @@ class_name GateTileEvent extends UnwalkableTileEvent
 
 func _ready():
 	strat_map.strat_map_loaded.connect(snap_to_grid)
-	strat_map.strat_map_loaded.connect(update_state)
 
 func open(_null=null):
 	collider.disabled = true
 	strat_map.tilemap.set_walkable(map_pos, true)
 	sprite.frame = 1
 
-func close():
+func close(_null=null):
 	collider.disabled = false
 	strat_map.tilemap.set_walkable(map_pos, false)
 	sprite.frame = 0

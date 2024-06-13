@@ -34,6 +34,7 @@ window/stretch/scale=2.0
 
 folder_colors={
 "res://GUI/": "green",
+"res://Generation/": "gray",
 "res://city_mode/": "blue",
 "res://external_puzzles/": "purple",
 "res://inventory/": "yellow",

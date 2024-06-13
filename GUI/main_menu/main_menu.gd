@@ -11,7 +11,7 @@ class_name MainMenu extends Control
 
 func _ready():
 	update()
-	infinite_button.disabled = true
+	#infinite_button.disabled = true
 
 func _on_continue_pressed():
 	game.load_save()
@@ -25,7 +25,11 @@ func _on_campaign_pressed():
 	game.to_strat_mode()
 
 func _on_infinite_pressed():
-	pass
+	init_char_selection_panel.visible = true
+	await init_char_selection_panel.init_char_chosen
+	init_char_selection_panel.visible = false
+	game.new_procedural_world(init_char_selection_panel.chosen_char)
+	game.to_strat_mode()
 
 func _on_exit_pressed():
 	get_tree().quit()
