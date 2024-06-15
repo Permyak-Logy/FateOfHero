@@ -12,17 +12,23 @@ signal full(comp: StatComponent)
 func percent() -> float:
 	if _max_p - _min_p == 0:
 		return 1.
-	return _cur / (get_max() - get_min())
+	return (_cur - get_min()) / (get_max() - get_min())
 
 func get_max() -> float:
 	if _scaling == ScalingType.Max:
-		return max(get_min(), _max_p * mod_value.mul + mod_value.add)
-	return _base * _min_p
+		return max(
+			get_min(),
+			_max_p * _base * (mod_value.mul + 1) + mod_value.add
+		)
+	return _base * _max_p
 
 func get_min() -> float:
 	if _scaling == ScalingType.Min:
-		return min(get_max(), _min_p * mod_value.mul + mod_value.add)
-	return _base * _max_p
+		return min(
+			get_max(),
+			_min_p * _base * (mod_value.mul + 1) + mod_value.add
+		)
+	return _base * _min_p
 
 func set_cur(value):
 	super(max(get_min(), min(get_max(), value)))

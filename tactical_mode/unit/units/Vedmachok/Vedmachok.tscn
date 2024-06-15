@@ -14,13 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://cs4b8cuqypclf" path="res://tactical_mode/unit/units/Vedmachok/assets/run.png" id="8_jdgdj"]
 
 [sub_resource type="Resource" id="Resource_lwwtt"]
+resource_local_to_scene = true
 script = ExtResource("3_gqb15")
 _max_p = 1.0
 _min_p = 0.0
 _scaling = 1
 mod_type = 0
 _base = 80.0
-_cur = 0.0
+_cur = 80.0
 
 [sub_resource type="Resource" id="Resource_jfvkh"]
 resource_local_to_scene = true

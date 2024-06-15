@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="9_vphu6"]
 
 [sub_resource type="Resource" id="Resource_mnbds"]
+resource_local_to_scene = true
 script = ExtResource("3_rqvm5")
 _max_p = 1.0
 _min_p = 0.0

@@ -1,30 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://dr3ohbflbwqml"]
+[gd_scene load_steps=12 format=3 uid="uid://dr3ohbflbwqml"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Tsepish/Tsepish.gd" id="1_pdtv1"]
-[ext_resource type="Script" path="res://tactical_mode/unit/characteristic.gd" id="2_d8pqg"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="2_jb6ig"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_ycj0u"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="4_gt0ds"]
+[ext_resource type="Texture2D" uid="uid://bj46kmpl7b6mg" path="res://tactical_mode/unit/for_future/GGStandart/GG.png" id="5_rdo72"]
+[ext_resource type="PackedScene" uid="uid://c3oc0616pppep" path="res://GUI/tactical_mode/stat_progress_bar.tscn" id="6_2ype2"]
 
-[sub_resource type="Resource" id="Resource_1iosu"]
-script = ExtResource("2_d8pqg")
-base = 60.0
-cur = 60.0
-max_ = 60.0
+[sub_resource type="Resource" id="Resource_iad1y"]
+script = ExtResource("2_jb6ig")
+_max_p = 1.0
+_min_p = 0.0
+_scaling = 1
+mod_type = 4
+_base = 50.0
+_cur = 50.0
 
-[sub_resource type="Resource" id="Resource_3xa31"]
-script = ExtResource("3_ycj0u")
-mod_type = 0
-characteristic = SubResource("Resource_1iosu")
-_base = 0.0
-_cur = 0.0
-
-[sub_resource type="Resource" id="Resource_f154e"]
+[sub_resource type="Resource" id="Resource_vqmns"]
 script = ExtResource("3_ycj0u")
 mod_type = 4
 _base = 0.0
 _cur = 0.0
 
-[node name="Tsepish" type="CharacterBody2D"]
+[sub_resource type="Resource" id="Resource_r0olu"]
+script = ExtResource("3_ycj0u")
+mod_type = 4
+_base = 0.0
+_cur = 0.0
+
+[sub_resource type="Resource" id="Resource_vjdhm"]
+script = ExtResource("3_ycj0u")
+mod_type = 4
+_base = 0.0
+_cur = 0.0
+
+[sub_resource type="Resource" id="Resource_j1tar"]
+script = ExtResource("4_gt0ds")
+level = 1
+expirience = 0
+ups = 0
+
+[node name="Tsepish" type="CharacterBody2D" node_paths=PackedStringArray("sprite_for_outline", "health_bar_pb", "for_flip_sprites")]
 script = ExtResource("1_pdtv1")
 unit_name = "Цепишь"
-health = SubResource("Resource_3xa31")
-defence = SubResource("Resource_f154e")
+health = SubResource("Resource_iad1y")
+defence = SubResource("Resource_vqmns")
+speed = SubResource("Resource_r0olu")
+damage = SubResource("Resource_vjdhm")
+expirience = SubResource("Resource_j1tar")
+sprite_for_outline = NodePath("Sprite2D")
+health_bar_pb = NodePath("StatProgressBar")
+for_flip_sprites = [NodePath("Sprite2D")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -27)
+texture = ExtResource("5_rdo72")
+
+[node name="StatProgressBar" parent="." instance=ExtResource("6_2ype2")]
+offset_top = -57.0
+offset_bottom = -55.0

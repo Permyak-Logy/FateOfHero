@@ -33,6 +33,7 @@ gear_slots = {
 ability_slots = 5
 
 [sub_resource type="Resource" id="Resource_j87xh"]
+resource_local_to_scene = true
 script = ExtResource("4_n8om3")
 _max_p = 1.0
 _min_p = 0.0

@@ -1,10 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://bjcjl3qla8b62"]
+[gd_scene load_steps=37 format=3 uid="uid://bjcjl3qla8b62"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/unit.gd" id="1_mm6vi"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="2_3pi2g"]
 [ext_resource type="Texture2D" uid="uid://bg67p8gs7anft" path="res://strategic_mode/tile_events/sprites/smol_itto.png" id="2_7274r"]
-[ext_resource type="Resource" uid="uid://bl1pu3fj7h5et" path="res://tactical_mode/unit/res/HealthStat.tres" id="3_6l5m4"]
 [ext_resource type="Resource" uid="uid://cngkkj07qgi8" path="res://tactical_mode/unit/res/DefenceStat.tres" id="4_5wldu"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="4_g61fr"]
 [ext_resource type="Texture2D" uid="uid://b7oowqmoun462" path="res://tactical_mode/unit/units/SmolItto/assets/spritesheet.png" id="4_n8og0"]
 [ext_resource type="Resource" uid="uid://dlebjqryegnht" path="res://tactical_mode/unit/res/SpeedStat.tres" id="5_11w7f"]
 [ext_resource type="Texture2D" uid="uid://bnrso7wulcsws" path="res://tactical_mode/assets/Shadow.png" id="5_th3mn"]
@@ -30,6 +30,16 @@ gear_slots = {
 4: 5
 }
 ability_slots = 5
+
+[sub_resource type="Resource" id="Resource_86imb"]
+resource_local_to_scene = true
+script = ExtResource("4_g61fr")
+_max_p = 1.0
+_min_p = 0.0
+_scaling = 1
+mod_type = 0
+_base = 100.0
+_cur = 100.0
 
 [sub_resource type="Gradient" id="Gradient_ns4pf"]
 offsets = PackedFloat32Array(0, 0.992327)
@@ -479,7 +489,7 @@ script = ExtResource("1_mm6vi")
 unit_name = "Итто"
 icon = ExtResource("2_7274r")
 inventory = SubResource("Resource_0pw3q")
-health = ExtResource("3_6l5m4")
+health = SubResource("Resource_86imb")
 defence = ExtResource("4_5wldu")
 speed = ExtResource("5_11w7f")
 damage = ExtResource("6_aepf0")
@@ -528,6 +538,7 @@ z_index = 2
 y_sort_enabled = false
 offset_top = -58.0
 offset_bottom = -56.0
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
