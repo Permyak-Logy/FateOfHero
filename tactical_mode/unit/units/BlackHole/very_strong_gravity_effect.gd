@@ -40,9 +40,7 @@ func gravity_apply():
 	if not path:
 		return
 	
-	await owner.play("preteleport")
-	map.move_unit_to(owner, astar.itm(path[1]))
-	await owner.play("postteleport")
+	await owner.play("move", [astar.itm(path[0]), astar.itm(path[1])])
 	map._update_walls()
 
 func damage_apply():

@@ -219,9 +219,10 @@ func play(_name: String, _params=null):
 	print(self, " play ", _name, " params=", _params)
 	if is_death() and not _name.begins_with("death"):
 		return
-	if _name == "walk":
+	if _name == "walk" or _name == "move":
 		current_id_path = _params
-		play("run")
+		if _name == "walk":
+			play("run")
 		await walk_finished
 	elif animation_player:
 		if not animation_player.has_animation(_name):

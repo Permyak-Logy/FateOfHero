@@ -4,7 +4,11 @@ enum ScalingType {Min, Max}
 
 @export var _max_p: float = 1
 @export var _min_p: float = 0
-@export var _cur: float = 0
+@export var _cur: float = 0:
+	set(value):
+		print("set value ", value)
+		assert(value != 1)
+		_cur = value
 @export var _scaling: ScalingType = ScalingType.Max
 
 signal change(comp: MinMaxStatComponent, old: float, new, float)
@@ -15,6 +19,9 @@ func percent() -> float:
 	if _max_p - _min_p == 0:
 		return 1.
 	return (_cur - get_min()) / (get_max() - get_min())
+
+func cur() -> float:
+	return _cur
 
 func get_max() -> float:
 	if _scaling == ScalingType.Max:
@@ -45,7 +52,7 @@ func set_cur(value):
 func rebase(value: float):
 	var p = percent()
 	super(value)
-	_cur = _cur * p - get_min()
+	_cur = _base * (mod_value.mul + 1) * p + mod_value.add - get_min()
 
 func add(value: float):
 	set_cur(_cur + value)

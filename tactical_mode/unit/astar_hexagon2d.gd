@@ -15,6 +15,7 @@ const DIRECTIONS = [
 		Vector2i(0, 1), Vector2i(1, 1)
 	]
 ]
+enum DirsE {LeftUp=0, RightUp=1, Left=2, Right=3, LeftDown=4, RightDown=5}
 
 var _cells: Array
 
