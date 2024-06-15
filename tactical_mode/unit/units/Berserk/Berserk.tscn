@@ -37,10 +37,10 @@ resource_local_to_scene = true
 script = ExtResource("4_n8om3")
 _max_p = 1.0
 _min_p = 0.0
+_cur = 50.0
 _scaling = 1
 mod_type = 0
 _base = 50.0
-_cur = 50.0
 
 [sub_resource type="Gradient" id="Gradient_vomxv"]
 colors = PackedColorArray(0.983334, 0, 1, 1, 0.983334, 0, 1, 0)
