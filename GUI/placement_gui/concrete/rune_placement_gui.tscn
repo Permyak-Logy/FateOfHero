@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq4wvugrhbf12"]
+
+[ext_resource type="PackedScene" uid="uid://ubknfwgu3xkx" path="res://GUI/placement_gui/placement_gui.tscn" id="1_t56pu"]
+
+[node name="RunePlacementGUI" instance=ExtResource("1_t56pu")]
+filter = "rune"

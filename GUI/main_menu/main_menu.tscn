@@ -54,6 +54,7 @@ text = "Новая кампания"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+disabled = true
 text = "Новый бесконечный режим"
 
 [node name="Exit" type="Button" parent="Menu"]

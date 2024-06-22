@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bqentm1x6fnaj"]
+
+[ext_resource type="Script" path="res://inventory/item.gd" id="1_3aens"]
+[ext_resource type="Texture2D" uid="uid://g134jp8mp84p" path="res://inventory/icons/Key.png" id="2_4gd0t"]
+
+[resource]
+script = ExtResource("1_3aens")
+name = "keystone"
+russian_name = "Странный камень"
+description = "Для чего он может быть нужен?"
+texture = ExtResource("2_4gd0t")
+max_stack = 1
+price = 0

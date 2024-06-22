@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj2qrc72ftoe3"
-path="res://.godot/imported/item_slot.png-afbec7fb67c3aa1a7380b85dde231ec1.ctex"
+uid="uid://bd3rpky1brt4f"
+path="res://.godot/imported/key_lock.png-c476daab3d54dffa884b294d5c0017c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GUI/rune_placement/item_slot.png"
-dest_files=["res://.godot/imported/item_slot.png-afbec7fb67c3aa1a7380b85dde231ec1.ctex"]
+source_file="res://strategic_mode/tile_events/sprites/key_lock.png"
+dest_files=["res://.godot/imported/key_lock.png-c476daab3d54dffa884b294d5c0017c4.ctex"]
 
 [params]
 

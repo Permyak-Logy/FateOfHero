@@ -32,12 +32,19 @@ func _ready():
 			node.id = i
 			node.state_changed.connect(update_state)
 			i += 1
+			
+		if is_instance_of(node, KeystoneTileEvent):
+			current_state.append(node.local_inventory.contents != null)
+			node.id = i
+			node.state_changed.connect(update_state)
+			i+=1
 
 		if is_instance_of(node, GateTileEvent):
 			prizes.append(node)
 		
 		if is_instance_of(node, TreasureChest):
 			prizes.append(node)
+		
 	game.strat_map.strat_map_loaded.connect(update)
 
 func update():

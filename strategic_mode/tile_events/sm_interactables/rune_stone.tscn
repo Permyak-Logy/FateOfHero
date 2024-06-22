@@ -7,6 +7,7 @@
 [node name="RuneStone" groups=["MicroInventoryOwner"] instance=ExtResource("1_xkns3")]
 script = ExtResource("2_qi36p")
 type = 0
+local_inventory = null
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_jukci")
