@@ -543,7 +543,7 @@ damage = SubResource("Resource_danai")
 expirience = SubResource("Resource_k00gs")
 
 [node name="BlackHole" parent="." instance=ExtResource("20_u26c1")]
-position = Vector2(449, 180)
+position = Vector2(480, 254)
 
 [node name="Tsepish" parent="." instance=ExtResource("21_fkb34")]
 position = Vector2(450, 424)
@@ -551,3 +551,15 @@ health = SubResource("Resource_ket5c")
 defence = SubResource("Resource_f4ko0")
 speed = SubResource("Resource_hgq8q")
 damage = SubResource("Resource_a2il2")
+
+[node name="BlackHole2" parent="." instance=ExtResource("20_u26c1")]
+position = Vector2(128, 376)
+
+[node name="BlackHole3" parent="." instance=ExtResource("20_u26c1")]
+position = Vector2(290, 397)
+
+[node name="BlackHole4" parent="." instance=ExtResource("20_u26c1")]
+position = Vector2(387, 180)
+
+[node name="BlackHole5" parent="." instance=ExtResource("20_u26c1")]
+position = Vector2(547, 399)
