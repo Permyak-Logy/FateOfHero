@@ -482,10 +482,10 @@ layout_mode = 2
 [node name="description" type="NinePatchRect" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 415.0
+offset_left = 272.0
 offset_top = 327.0
 offset_right = 815.0
-offset_bottom = 390.0
+offset_bottom = 393.0
 texture = ExtResource("1_g6vnm")
 patch_margin_left = 6
 patch_margin_top = 6
@@ -500,14 +500,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -185.0
-offset_top = -25.5
-offset_right = 197.0
-offset_bottom = 22.5
+offset_left = -264.5
+offset_top = -25.0
+offset_right = 267.5
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="HBoxContainer/Trade/VBoxContainer/trade/Buttonbuy" to="HBoxContainer/Trade/VBoxContainer/trade" method="_on_buttonbuy_pressed"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://dat0q4plmpv1t"]
+
+[ext_resource type="Script" path="res://city_mode/villages/craft_village/village_map.gd" id="1_s0c2q"]
+[ext_resource type="PackedScene" uid="uid://cd1lm7663kkqk" path="res://city_mode/Cities/crafting/crafting.tscn" id="2_2sxyb"]
+[ext_resource type="Texture2D" uid="uid://dhshfk2qm0b4x" path="res://city_mode/villages/trader_village/Vilage_baltinia_ bg.png" id="2_qcj4o"]
+[ext_resource type="Texture2D" uid="uid://bbj8q5108ncf5" path="res://city_mode/villages/craft_village/Vilage_baltinia_podl.png" id="3_g41cm"]
+[ext_resource type="Texture2D" uid="uid://b636brfblhg7p" path="res://GUI/inventory/new_assets/sprait.png" id="3_opaa8"]
+[ext_resource type="Texture2D" uid="uid://dwbb0a3b2sbbp" path="res://city_mode/villages/craft_village/Vilage_baltinia_table.png" id="4_seami"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktjo8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmme0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t14bi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_304hb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ja0bk"]
+
+[node name="village_map" type="Node2D"]
+script = ExtResource("1_s0c2q")
+
+[node name="backround" type="Sprite2D" parent="."]
+position = Vector2(479, 246)
+texture = ExtResource("2_qcj4o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(480, 301)
+scale = Vector2(1, 1.03519)
+texture = ExtResource("3_g41cm")
+
+[node name="table" type="Sprite2D" parent="."]
+position = Vector2(503, 323)
+scale = Vector2(3.45488, 1.61377)
+texture = ExtResource("4_seami")
+
+[node name="crafting" parent="." instance=ExtResource("2_2sxyb")]
+offset_left = 220.0
+offset_top = 219.0
+offset_right = 736.0
+offset_bottom = 463.0
+
+[node name="exit" type="Button" parent="."]
+offset_left = 816.0
+offset_top = 42.0
+offset_right = 874.0
+offset_bottom = 98.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ktjo8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dmme0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_t14bi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_304hb")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ja0bk")
+
+[node name="button_texture" type="Sprite2D" parent="exit"]
+position = Vector2(28.625, 28.125)
+scale = Vector2(2.76136, 2.71591)
+texture = ExtResource("3_opaa8")
+vframes = 2
+frame = 1
+
+[node name="Label" type="Label" parent="exit"]
+layout_mode = 0
+offset_top = -6.0
+offset_right = 57.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 40
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
