@@ -102,15 +102,15 @@ func is_walkable(pos: Vector2i) -> bool:
 	var res = true
 	var tile_data
 	# overwrite with terrain; so bridges and highlands are walkable
-	for i in range(1, tilemap.get_layers_count()):
-		if tilemap.get_cell_atlas_coords(i, pos) in [
-			Vector2i(3, 34),
-			Vector2i(1, 25),
-			Vector2i(1, 34),
-			Vector2i(21, 11),
-			Vector2i(1, 35),
-			Vector2i(2, 36),
-		]: print("layer: ", i, " pos: ",  pos, " atlas_coors: ", tilemap.get_cell_atlas_coords(i, pos), " is invalid")
+	for i in range(0, tilemap.get_layers_count()):
+		#if tilemap.get_cell_atlas_coords(i, pos) in [
+			#Vector2i(3, 34),
+			#Vector2i(1, 25),
+			#Vector2i(1, 34),
+			#Vector2i(21, 11),
+			#Vector2i(1, 35),
+			#Vector2i(2, 36),
+		#]: print("layer: ", i, " pos: ",  pos, " atlas_coors: ", tilemap.get_cell_atlas_coords(i, pos), " is invalid")
 		tile_data = tilemap.get_cell_tile_data(i, pos)
 		if tile_data:
 			res = tile_data.get_custom_data("walkable")

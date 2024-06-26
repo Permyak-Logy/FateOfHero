@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dphyb3k2ed84k"]
 
-[ext_resource type="Script" path="res://GUI/rune_placement/placement_panel.gd" id="1_ym75v"]
-[ext_resource type="Texture2D" uid="uid://dxxqoehfvjjdt" path="res://GUI/rune_placement/inventory_rect.png" id="2_mnpbg"]
+[ext_resource type="Script" path="res://GUI/placement_gui/placement_panel.gd" id="1_ym75v"]
+[ext_resource type="Texture2D" uid="uid://dxxqoehfvjjdt" path="res://GUI/placement_gui/inventory_rect.png" id="2_mnpbg"]
 [ext_resource type="PackedScene" uid="uid://1y01mp8to05i" path="res://GUI/inventory/slot.tscn" id="3_vhmcu"]
 
 [node name="PlacementPanel" type="Control"]

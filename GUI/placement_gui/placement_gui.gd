@@ -10,6 +10,8 @@ var place_inventory: MicroInventory = null
 
 @onready var inv_slots = inventory_panel.slots
 
+# start of the allowed items' names
+@export var filter: String 
 
 signal done
 
@@ -82,7 +84,7 @@ func take_item_from_inv_slot(slot: InventorySlot):
 func put_item_in_place() -> bool:
 	if placement_panel.current_rune:
 		return false
-	if not item_stack_in_hand.item_stack.item.name.begins_with("rune"):
+	if not item_stack_in_hand.item_stack.item.name.begins_with(filter):
 		return false
 	remove_child(item_stack_in_hand)
 	placement_panel.current_rune = item_stack_in_hand

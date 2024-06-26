@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxxqoehfvjjdt"
-path="res://.godot/imported/inventory_rect.png-b14add429bc9aff951241bf681ae4b7e.ctex"
+uid="uid://g134jp8mp84p"
+path="res://.godot/imported/Key.png-1677e7b4cdf13e20781369696aa6743f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GUI/rune_placement/inventory_rect.png"
-dest_files=["res://.godot/imported/inventory_rect.png-b14add429bc9aff951241bf681ae4b7e.ctex"]
+source_file="res://inventory/icons/Key.png"
+dest_files=["res://.godot/imported/Key.png-1677e7b4cdf13e20781369696aa6743f.ctex"]
 
 [params]
 

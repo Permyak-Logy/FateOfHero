@@ -11,8 +11,8 @@ var id: int
 
 var rune_inside: int = -1
 var gui: RunePlacementGUI
-var RunePlacementGUIRes: PackedScene = preload("res://GUI/rune_placement/rune_placement_gui.tscn")
-@onready var local_inventory: MicroInventory = MicroInventory.new()
+var RunePlacementGUIRes: PackedScene = preload("res://GUI/placement_gui/concrete/rune_placement_gui.tscn")
+@export var local_inventory: MicroInventory = MicroInventory.new()
 
 var rune_sprites: Array[Texture2D] = [
 	null,
@@ -23,7 +23,7 @@ var rune_sprites: Array[Texture2D] = [
 	preload("res://strategic_mode/tile_events/sprites/rune5.png"),
 	preload("res://strategic_mode/tile_events/sprites/rune6.png"),
 	preload("res://strategic_mode/tile_events/sprites/rune7.png"),
-	preload("res://strategic_mode/tile_events/sprites/rune8.png")	
+	preload("res://strategic_mode/tile_events/sprites/rune8.png")
 ]
 
 func _ready():
@@ -59,7 +59,7 @@ func update():
 	else:
 		rune_sprite.frame = 0
 
-func set_inventory(item_stack: MicroInventory):
-	local_inventory = item_stack
+func set_inventory(inventory: MicroInventory):
+	local_inventory = inventory
 	update()
 	pass
