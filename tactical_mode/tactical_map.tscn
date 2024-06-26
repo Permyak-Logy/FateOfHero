@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=74 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://tactical_mode/unit/components/InventoryComponent.gd" id="8_pun76"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="9_hanfh"]
 [ext_resource type="PackedScene" uid="uid://dp1h0o6i278p8" path="res://GUI/tactical_mode/TacticalModeGUI.tscn" id="9_kpa5w"]
+[ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="9_mq6vc"]
 [ext_resource type="PackedScene" uid="uid://komiiv5ot43n" path="res://tactical_mode/unit/units/Berserk/Berserk.tscn" id="10_h12g4"]
 [ext_resource type="PackedScene" uid="uid://cwccmvlw1ghah" path="res://tactical_mode/nature/Rock.tscn" id="10_m7p5y"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/ExpirienceComponent.gd" id="10_qqrwp"]
@@ -19,6 +20,88 @@
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/units/Skeleton/Skeleton.tscn" id="17_rqd6n"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/units/Vendigo/Vendigo.tscn" id="19_t2j1s"]
 [ext_resource type="PackedScene" uid="uid://b65p5vmcpiq51" path="res://tactical_mode/unit/units/BlackHole/BlackHole.tscn" id="20_u26c1"]
+[ext_resource type="PackedScene" uid="uid://dr3ohbflbwqml" path="res://tactical_mode/unit/units/Tsepish/Tsepish.tscn" id="21_fkb34"]
+
+[sub_resource type="Resource" id="Resource_khpkj"]
+resource_local_to_scene = true
+script = ExtResource("8_pun76")
+_gears = {}
+_abilities = Array[Resource("res://tactical_mode/ability.gd")]([])
+gear_slots = {
+2: 2,
+4: 5
+}
+ability_slots = 5
+
+[sub_resource type="Resource" id="Resource_mp0me"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 50.0
+_scaling = 1
+mod_type = 0
+_base = 50.0
+
+[sub_resource type="Resource" id="Resource_ksfo3"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 50.0
+
+[sub_resource type="Resource" id="Resource_jts04"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_oh24l"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 35.0
+
+[sub_resource type="Resource" id="Resource_karnb"]
+resource_local_to_scene = true
+script = ExtResource("10_qqrwp")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_my4mf"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 150.0
+_scaling = 1
+mod_type = 0
+_base = 150.0
+
+[sub_resource type="Resource" id="Resource_d00h7"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 50.0
+
+[sub_resource type="Resource" id="Resource_m2bij"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_116v5"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 30.0
+
+[sub_resource type="Resource" id="Resource_6w8kp"]
+resource_local_to_scene = true
+script = ExtResource("10_qqrwp")
+level = 1
+expirience = 0
+ups = 0
 
 [sub_resource type="Resource" id="Resource_ks7jf"]
 resource_local_to_scene = true
@@ -30,6 +113,16 @@ gear_slots = {
 4: 5
 }
 ability_slots = 5
+
+[sub_resource type="Resource" id="Resource_mpl6f"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 100.0
+_scaling = 1
+mod_type = 0
+_base = 100.0
 
 [sub_resource type="Resource" id="Resource_img51"]
 resource_local_to_scene = true
@@ -55,6 +148,259 @@ script = ExtResource("10_qqrwp")
 level = 1
 expirience = 0
 ups = 0
+
+[sub_resource type="Resource" id="Resource_ydmg0"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 100.0
+_scaling = 1
+mod_type = 0
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_ou40p"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 50.0
+
+[sub_resource type="Resource" id="Resource_nfn3o"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_mwmwn"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 8.0
+
+[sub_resource type="Resource" id="Resource_ilwt8"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 100.0
+_scaling = 1
+mod_type = 0
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_6glda"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 0.0
+
+[sub_resource type="Resource" id="Resource_a2mav"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 99.0
+
+[sub_resource type="Resource" id="Resource_527rv"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 5.0
+
+[sub_resource type="Resource" id="Resource_3pyak"]
+resource_local_to_scene = true
+script = ExtResource("10_qqrwp")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_kqywb"]
+resource_local_to_scene = true
+script = ExtResource("8_pun76")
+_gears = {}
+_abilities = Array[Resource("res://tactical_mode/ability.gd")]([])
+gear_slots = {
+2: 2,
+4: 5
+}
+ability_slots = 5
+
+[sub_resource type="Resource" id="Resource_1mywj"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 100.0
+_scaling = 1
+mod_type = 0
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_rgklt"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 50.0
+
+[sub_resource type="Resource" id="Resource_vbjhs"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_gwrwf"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 35.0
+
+[sub_resource type="Resource" id="Resource_qxqq8"]
+resource_local_to_scene = true
+script = ExtResource("10_qqrwp")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_k074n"]
+resource_local_to_scene = true
+script = ExtResource("8_pun76")
+_gears = {}
+_abilities = Array[Resource("res://tactical_mode/ability.gd")]([])
+gear_slots = {
+2: 2,
+4: 5
+}
+ability_slots = 5
+
+[sub_resource type="Resource" id="Resource_nmejm"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 100.0
+_scaling = 1
+mod_type = 0
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_t7kic"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 50.0
+
+[sub_resource type="Resource" id="Resource_a51w0"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_nrvds"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 35.0
+
+[sub_resource type="Resource" id="Resource_4s13a"]
+resource_local_to_scene = true
+script = ExtResource("10_qqrwp")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_03brd"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 80.0
+_scaling = 1
+mod_type = 0
+_base = 80.0
+
+[sub_resource type="Resource" id="Resource_pe84x"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 200.0
+
+[sub_resource type="Resource" id="Resource_65i1f"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_0kgll"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 30.0
+
+[sub_resource type="Resource" id="Resource_wbqqw"]
+resource_local_to_scene = true
+script = ExtResource("10_qqrwp")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_5n1wr"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 500.0
+_scaling = 1
+mod_type = 0
+_base = 500.0
+
+[sub_resource type="Resource" id="Resource_cy1mc"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 200.0
+
+[sub_resource type="Resource" id="Resource_is31j"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 100.0
+
+[sub_resource type="Resource" id="Resource_danai"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 50.0
+
+[sub_resource type="Resource" id="Resource_k00gs"]
+resource_local_to_scene = true
+script = ExtResource("10_qqrwp")
+level = 1
+expirience = 0
+ups = 0
+
+[sub_resource type="Resource" id="Resource_ket5c"]
+resource_local_to_scene = true
+script = ExtResource("9_mq6vc")
+_max_p = 1.0
+_min_p = 0.0
+_cur = 50.0
+_scaling = 1
+mod_type = 0
+_base = 50.0
+
+[sub_resource type="Resource" id="Resource_f4ko0"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 3
+_base = 10.0
+
+[sub_resource type="Resource" id="Resource_hgq8q"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 1
+_base = 140.0
+
+[sub_resource type="Resource" id="Resource_a2il2"]
+resource_local_to_scene = true
+script = ExtResource("9_hanfh")
+mod_type = 2
+_base = 35.0
 
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
@@ -123,13 +469,25 @@ autoplay = true
 
 [node name="Berserk" parent="." instance=ExtResource("10_h12g4")]
 position = Vector2(157, 208)
+inventory = SubResource("Resource_khpkj")
+health = SubResource("Resource_mp0me")
+defence = SubResource("Resource_ksfo3")
+speed = SubResource("Resource_jts04")
+damage = SubResource("Resource_oh24l")
+expirience = SubResource("Resource_karnb")
 
 [node name="Lugozavr" parent="." instance=ExtResource("12_wvrq4")]
 position = Vector2(795, 208)
+health = SubResource("Resource_my4mf")
+defence = SubResource("Resource_d00h7")
+speed = SubResource("Resource_m2bij")
+damage = SubResource("Resource_116v5")
+expirience = SubResource("Resource_6w8kp")
 
 [node name="Naris" parent="." instance=ExtResource("6_1btoa")]
 position = Vector2(320, 229)
 inventory = SubResource("Resource_ks7jf")
+health = SubResource("Resource_mpl6f")
 defence = SubResource("Resource_img51")
 speed = SubResource("Resource_5p854")
 damage = SubResource("Resource_wwgxf")
@@ -137,21 +495,59 @@ expirience = SubResource("Resource_yr1o3")
 
 [node name="Poludnisa" parent="." instance=ExtResource("14_8og3f")]
 position = Vector2(829, 275)
+health = SubResource("Resource_ydmg0")
+defence = SubResource("Resource_ou40p")
+speed = SubResource("Resource_nfn3o")
+damage = SubResource("Resource_mwmwn")
 
 [node name="Skeleton" parent="." instance=ExtResource("17_rqd6n")]
 position = Vector2(860, 353)
+health = SubResource("Resource_ilwt8")
+defence = SubResource("Resource_6glda")
+speed = SubResource("Resource_a2mav")
+damage = SubResource("Resource_527rv")
+expirience = SubResource("Resource_3pyak")
 
 [node name="SmolItto" parent="." instance=ExtResource("12_e7e7b")]
 position = Vector2(161, 306)
+inventory = SubResource("Resource_kqywb")
+health = SubResource("Resource_1mywj")
+defence = SubResource("Resource_rgklt")
+speed = SubResource("Resource_vbjhs")
+damage = SubResource("Resource_gwrwf")
+expirience = SubResource("Resource_qxqq8")
 
 [node name="Vamp" parent="." instance=ExtResource("14_y1ibn")]
 position = Vector2(288, 306)
+inventory = SubResource("Resource_k074n")
+health = SubResource("Resource_nmejm")
+defence = SubResource("Resource_t7kic")
+speed = SubResource("Resource_a51w0")
+damage = SubResource("Resource_nrvds")
+expirience = SubResource("Resource_4s13a")
 
 [node name="Vedmachok" parent="." instance=ExtResource("11_wexxj")]
 position = Vector2(734, 307)
+health = SubResource("Resource_03brd")
+defence = SubResource("Resource_pe84x")
+speed = SubResource("Resource_65i1f")
+damage = SubResource("Resource_0kgll")
+expirience = SubResource("Resource_wbqqw")
 
 [node name="Vendigo" parent="." instance=ExtResource("19_t2j1s")]
 position = Vector2(703, 423)
+health = SubResource("Resource_5n1wr")
+defence = SubResource("Resource_cy1mc")
+speed = SubResource("Resource_is31j")
+damage = SubResource("Resource_danai")
+expirience = SubResource("Resource_k00gs")
 
 [node name="BlackHole" parent="." instance=ExtResource("20_u26c1")]
-position = Vector2(447, 325)
+position = Vector2(449, 180)
+
+[node name="Tsepish" parent="." instance=ExtResource("21_fkb34")]
+position = Vector2(450, 424)
+health = SubResource("Resource_ket5c")
+defence = SubResource("Resource_f4ko0")
+speed = SubResource("Resource_hgq8q")
+damage = SubResource("Resource_a2il2")

@@ -38,10 +38,10 @@ resource_local_to_scene = true
 script = ExtResource("4_j8fcq")
 _max_p = 1.0
 _min_p = 0.0
+_cur = 100.0
 _scaling = 1
 mod_type = 0
 _base = 100.0
-_cur = 100.0
 
 [sub_resource type="Gradient" id="Gradient_h44pd"]
 colors = PackedColorArray(1, 0.933333, 0.945098, 1, 0.254902, 0, 0, 0)

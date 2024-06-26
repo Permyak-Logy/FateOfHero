@@ -38,6 +38,7 @@ signal walk_finished  # Вызывается при завершении пер�
 
 var abilities: Array[Ability] = []
 var current_id_path: Array = []  # Путь для передвижения
+var current_walk_speed: float = 3
 
 var _effects: Array[Effect] = []
 
@@ -203,7 +204,7 @@ func _physics_process(_delta):
 	else:
 		flipped = (target_position - global_position)[0] < 0
 
-	global_position = global_position.move_toward(target_position, 3)
+	global_position = global_position.move_toward(target_position, current_walk_speed)
 	
 	if global_position == target_position:    
 		current_id_path.pop_front()
@@ -220,7 +221,8 @@ func play(_name: String, _params=null):
 	if is_death() and not _name.begins_with("death"):
 		return
 	if _name == "walk" or _name == "move":
-		current_id_path = _params
+		current_walk_speed = _params.get("speed", 3)
+		current_id_path = _params["path"]
 		if _name == "walk":
 			play("run")
 		await walk_finished

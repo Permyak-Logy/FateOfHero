@@ -544,7 +544,7 @@ func _move_active_unit():
 	gui.clear_abilities()
 	if len(_current_path) > 1:
 		acts -= 1
-		await active_unit.play("walk", _current_path)
+		await active_unit.play("walk", {"path": _current_path})
 	else:
 		acts = 0
 	_tile_map.clear_layer(PATH_LAYER)
