@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://b1ley3wjjoisv"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vedmachok/src/EvilPlant.gd" id="1_g78kk"]
-[ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://strategic_mode/tile_events/sprites/x_marks_the_spot.png" id="2_cytj3"]
+[ext_resource type="Texture2D" uid="uid://dvgp3eovvjq74" path="res://tactical_mode/unit/units/Vedmachok/assets/evilplanticon.png" id="2_1b6py"]
 [ext_resource type="Texture2D" uid="uid://cap55k3ybjie3" path="res://tactical_mode/unit/units/Vedmachok/assets/spritesheet.png" id="2_fmumf"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_1oomm"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="3_vmkdv"]
@@ -16,31 +16,28 @@ resource_local_to_scene = true
 script = ExtResource("3_vmkdv")
 _max_p = 1.0
 _min_p = 0.0
+_cur = 40.0
 _scaling = 1
 mod_type = 0
 _base = 40.0
-_cur = 40.0
 
 [sub_resource type="Resource" id="Resource_aj3sk"]
 resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 3
 _base = 0.0
-_cur = 0.0
 
 [sub_resource type="Resource" id="Resource_cvhmw"]
 resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 1
 _base = 80.0
-_cur = 80.0
 
 [sub_resource type="Resource" id="Resource_thx8n"]
 resource_local_to_scene = true
 script = ExtResource("3_1oomm")
 mod_type = 2
 _base = 10.0
-_cur = 10.0
 
 [sub_resource type="Resource" id="Resource_4wda3"]
 resource_local_to_scene = true
@@ -364,7 +361,7 @@ scale = Vector2(1.4, 1.4)
 input_pickable = true
 script = ExtResource("1_g78kk")
 unit_name = "Злое растение"
-icon = ExtResource("2_cytj3")
+icon = ExtResource("2_1b6py")
 health = SubResource("Resource_4n2w0")
 defence = SubResource("Resource_aj3sk")
 speed = SubResource("Resource_cvhmw")

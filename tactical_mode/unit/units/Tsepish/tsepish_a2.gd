@@ -1,0 +1,1 @@
+class_name TsepishA2 extends AoEAbility

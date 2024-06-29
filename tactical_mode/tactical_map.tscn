@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dcvf8mp6jdjst"]
+[gd_scene load_steps=69 format=3 uid="uid://dcvf8mp6jdjst"]
 
 [ext_resource type="Script" path="res://tactical_mode/tactical_map.gd" id="1_dw5lh"]
 [ext_resource type="TileSet" uid="uid://lbr4c2x4bna0" path="res://tactical_mode/tactical_map.tres" id="2_5tyj1"]
@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://dh5vq12tjl11n" path="res://tactical_mode/unit/units/Skeleton/Skeleton.tscn" id="17_rqd6n"]
 [ext_resource type="PackedScene" uid="uid://kj8esabe8qfg" path="res://tactical_mode/unit/units/Vendigo/Vendigo.tscn" id="19_t2j1s"]
 [ext_resource type="PackedScene" uid="uid://b65p5vmcpiq51" path="res://tactical_mode/unit/units/BlackHole/BlackHole.tscn" id="20_u26c1"]
-[ext_resource type="PackedScene" uid="uid://dr3ohbflbwqml" path="res://tactical_mode/unit/units/Tsepish/Tsepish.tscn" id="21_fkb34"]
 
 [sub_resource type="Resource" id="Resource_khpkj"]
 resource_local_to_scene = true
@@ -374,34 +373,6 @@ level = 1
 expirience = 0
 ups = 0
 
-[sub_resource type="Resource" id="Resource_ket5c"]
-resource_local_to_scene = true
-script = ExtResource("9_mq6vc")
-_max_p = 1.0
-_min_p = 0.0
-_cur = 50.0
-_scaling = 1
-mod_type = 0
-_base = 50.0
-
-[sub_resource type="Resource" id="Resource_f4ko0"]
-resource_local_to_scene = true
-script = ExtResource("9_hanfh")
-mod_type = 3
-_base = 10.0
-
-[sub_resource type="Resource" id="Resource_hgq8q"]
-resource_local_to_scene = true
-script = ExtResource("9_hanfh")
-mod_type = 1
-_base = 140.0
-
-[sub_resource type="Resource" id="Resource_a2il2"]
-resource_local_to_scene = true
-script = ExtResource("9_hanfh")
-mod_type = 2
-_base = 35.0
-
 [node name="TacticalMap" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_dw5lh")
@@ -544,22 +515,3 @@ expirience = SubResource("Resource_k00gs")
 
 [node name="BlackHole" parent="." instance=ExtResource("20_u26c1")]
 position = Vector2(480, 254)
-
-[node name="Tsepish" parent="." instance=ExtResource("21_fkb34")]
-position = Vector2(450, 424)
-health = SubResource("Resource_ket5c")
-defence = SubResource("Resource_f4ko0")
-speed = SubResource("Resource_hgq8q")
-damage = SubResource("Resource_a2il2")
-
-[node name="BlackHole2" parent="." instance=ExtResource("20_u26c1")]
-position = Vector2(128, 376)
-
-[node name="BlackHole3" parent="." instance=ExtResource("20_u26c1")]
-position = Vector2(290, 397)
-
-[node name="BlackHole4" parent="." instance=ExtResource("20_u26c1")]
-position = Vector2(387, 180)
-
-[node name="BlackHole5" parent="." instance=ExtResource("20_u26c1")]
-position = Vector2(547, 399)

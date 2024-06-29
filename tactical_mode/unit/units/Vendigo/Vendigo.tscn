@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://kj8esabe8qfg"]
 
 [ext_resource type="Script" path="res://tactical_mode/unit/units/Vendigo/src/Vendigo.gd" id="1_oj4or"]
-[ext_resource type="Texture2D" uid="uid://dhfqhhdr2k0pp" path="res://strategic_mode/tile_events/sprites/x_marks_the_spot.png" id="2_3cyll"]
+[ext_resource type="Texture2D" uid="uid://ouvv3jtgtj57" path="res://tactical_mode/unit/units/Vendigo/icon.png" id="2_6tqww"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/MinMaxStatComponent.gd" id="3_rudln"]
 [ext_resource type="Script" path="res://tactical_mode/unit/components/StatComponent.gd" id="3_ujhj8"]
 [ext_resource type="Resource" uid="uid://crecdgxj4lurs" path="res://tactical_mode/unit/units/Vendigo/res/VendigoA0.tres" id="4_2r87o"]
@@ -19,31 +19,28 @@ resource_local_to_scene = true
 script = ExtResource("3_rudln")
 _max_p = 1.0
 _min_p = 0.0
+_cur = 500.0
 _scaling = 1
 mod_type = 0
 _base = 500.0
-_cur = 500.0
 
 [sub_resource type="Resource" id="Resource_bdi2p"]
 resource_local_to_scene = true
 script = ExtResource("3_ujhj8")
 mod_type = 3
 _base = 200.0
-_cur = 200.0
 
 [sub_resource type="Resource" id="Resource_lpion"]
 resource_local_to_scene = true
 script = ExtResource("3_ujhj8")
 mod_type = 1
 _base = 100.0
-_cur = 100.0
 
 [sub_resource type="Resource" id="Resource_as02u"]
 resource_local_to_scene = true
 script = ExtResource("3_ujhj8")
 mod_type = 2
 _base = 50.0
-_cur = 50.0
 
 [sub_resource type="Gradient" id="Gradient_0m171"]
 colors = PackedColorArray(0.827451, 1, 1, 1, 0, 0, 0.388235, 0)
@@ -376,7 +373,7 @@ y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_oj4or")
 unit_name = "Вендиго"
-icon = ExtResource("2_3cyll")
+icon = ExtResource("2_6tqww")
 health = SubResource("Resource_5rosn")
 defence = SubResource("Resource_bdi2p")
 speed = SubResource("Resource_lpion")
