@@ -12,7 +12,7 @@ var id: int
 var rune_inside: int = -1
 var gui: RunePlacementGUI
 var RunePlacementGUIRes: PackedScene = preload("res://GUI/placement_gui/concrete/rune_placement_gui.tscn")
-@export var local_inventory: MicroInventory = MicroInventory.new()
+@export var local_inventory: MicroInventory
 
 var rune_sprites: Array[Texture2D] = [
 	null,
@@ -27,9 +27,11 @@ var rune_sprites: Array[Texture2D] = [
 ]
 
 func _ready():
-	game = get_tree().root.get_child(0)
 	assert(type != 0, "you forgot to assign type")
 	assert(id != null, "you forgot to assign id")
+	game = get_tree().root.get_child(0)
+	if not local_inventory:
+		local_inventory = MicroInventory.new() 
 	var stone_texture: Texture2D = load("res://strategic_mode/tile_events/sprites/stone" + str(type) + ".png")
 	sprite.texture = stone_texture
 
